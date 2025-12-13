@@ -1,0 +1,153 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { setCoupon } from "@/redux/features/order/couponInfo";
+import { useGetCouponCalculationMutation } from "@/redux/features/order/getCouponCalculation";
+import { TRootState } from "@/types/rootState";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastAction } from "../ui/toast";
+import { toast } from "../ui/use-toast";
+
+type TFormValues = {
+  promoCode: string;
+};
+
+export default function PromoCode() {
+  const dispatch = useDispatch();
+  const shippingInfo = useSelector((state: TRootState) => state.shippingInfo);
+  const paymentInfo = useSelector((state: TRootState) => state.paymentInfo);
+  const shippingClass = useSelector((state: TRootState) => state.shippingClass);
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TFormValues>();
+
+  const [loading, setLoading] = useState(false);
+  const [applied, setApplied] = useState(false);
+
+  const [getCouponCalculation] = useGetCouponCalculationMutation();
+
+  const onSubmit = async (data: TFormValues) => {
+    setLoading(true);
+
+    const shippingDetails = {
+      fullName: shippingInfo?.data?.fullName,
+      phoneNumber: shippingInfo?.data?.phoneNumber,
+      fullAddress: shippingInfo?.data?.fullAddress,
+      email: shippingInfo?.data?.email || undefined,
+    };
+
+    const paymentMethod = paymentInfo?.data?.selectedPaymentMethod?._id;
+    const shippingCharge = shippingClass._id;
+
+    const requestBody = {
+      payment: {
+        paymentMethod: paymentMethod,
+      },
+      shippingCharge: shippingCharge,
+      shipping: shippingDetails,
+      coupon: data.promoCode,
+    };
+
+    try {
+      const appliedCoupon = await getCouponCalculation(requestBody).unwrap();
+      if (appliedCoupon.success) {
+        dispatch(
+          setCoupon({
+            couponDiscount: appliedCoupon?.data?.couponDiscount,
+            shippingChange: appliedCoupon?.data?.shippingChange,
+            coupon: data?.promoCode,
+            cost: appliedCoupon?.data?.cost,
+          })
+        );
+
+        setApplied(true);
+
+        toast({
+          title: "Discount Added Successfully",
+          action: <ToastAction altText="Thanks">Thanks</ToastAction>,
+          style: {
+            backgroundColor: "green",
+            color: "#fff",
+          },
+        });
+      } else {
+        const errorMessage = appliedCoupon?.errorMessages?.[0]?.message;
+
+        toast({
+          variant: "destructive",
+          title: errorMessage,
+          action: (
+            <ToastAction onClick={() => reset()} altText="Try again">
+              Try again
+            </ToastAction>
+          ),
+          style: {
+            backgroundColor: "#ff4d4f",
+            color: "#fff",
+          },
+        });
+
+        setApplied(false);
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error?.data?.errorMessages?.[0]?.message ||
+        error?.data?.message ||
+        "Something went wrong!";
+
+      setApplied(false);
+      toast({
+        variant: "destructive",
+        title: errorMessage,
+        action: (
+          <ToastAction onClick={() => reset()} altText="Try again">
+            Try again
+          </ToastAction>
+        ),
+        style: {
+          backgroundColor: "#ff4d4f",
+          color: "#fff",
+        },
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex items-center space-x-2"
+      >
+        <div className="w-full">
+          <Input
+            disabled={applied ? true : false}
+            type="text"
+            placeholder="If you have a Promo Code, Enter Here..."
+            className={`w-full ${errors.promoCode ? "border-red-500" : ""}`}
+            {...register("promoCode", { required: "Promo code is required" })}
+          />
+        </div>
+        <Button
+          type="submit"
+          className="bg-primary text-white flex items-center"
+          disabled={loading || applied}
+        >
+          {applied ? "Applied" : "Apply"}
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        </Button>
+      </form>
+      {errors.promoCode && (
+        <span className="text-red-500 text-sm">{errors.promoCode.message}</span>
+      )}
+    </div>
+  );
+}
