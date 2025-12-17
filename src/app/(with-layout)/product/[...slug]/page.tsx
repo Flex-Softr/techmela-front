@@ -80,7 +80,7 @@ const SingleProductPage = async ({ params }: TProps) => {
   const initialVariationPrice = defaultVariation
     ? defaultVariation.price
     : price;
-  const ShareUrl = "https://www.oneselfbd.com";
+  const ShareUrl = "https://www.nora.com.bd";
   return (
     <section className="my-10">
       <ContainerMax>

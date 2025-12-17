@@ -1,27 +1,35 @@
+"use client";
+
 import CategoryCard from "@/components/categoryCards/CategoryCard";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselNextPMiddle,
-  CarouselPreviousPMiddle,
-} from "@/components/ui/carousel";
-import Box from "@/components/ui/ec/Box";
+import ContainerMax from "@/components/containerMax/ContainerMax";
+import SectionSubtitle from "@/components/SectionSubtitle";
+import SectionTitle from "@/components/SectionTitle";
+import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import TCategory from "@/types/categories/categories";
+import Autoplay from "embla-carousel-autoplay";
 
 const CategorySection = ({ categories }: { categories: TCategory[] }) => {
   return (
-    <Box className="bg-white md:mt-3">
-      <h1 className="text-2xl font-bold pb-2">Categories</h1>
-      <Carousel>
-        <CarouselContent>
-          {categories.map((category) => (
-            <CategoryCard key={category._id} category={category} />
-          ))}
-        </CarouselContent>
-        <CarouselPreviousPMiddle />
-        <CarouselNextPMiddle />
-      </Carousel>
-    </Box>
+    <section className="pt-10 md:pt-12">
+      <ContainerMax>
+        <SectionTitle title="Categories" />
+        <SectionSubtitle text="Explore our wide range of products" />
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 2000,
+            }),
+          ]}
+          className="mt-5 md:mt-8"
+        >
+          <CarouselContent>
+            {categories.map((category) => (
+              <CategoryCard key={category._id} category={category} />
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </ContainerMax>
+    </section>
   );
 };
 

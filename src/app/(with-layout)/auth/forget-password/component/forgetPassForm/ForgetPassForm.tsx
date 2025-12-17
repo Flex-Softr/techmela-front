@@ -27,8 +27,9 @@ const ForgetPasswordForm = () => {
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <h4 className="text-2xl font-bold mb-4">Forgot password?</h4>
           <p className="mb-4">
-            No problem - just enter the email address associated with your
-            Oneself account and we will send you a link to reset your password.
+            No problem - just enter the email address associated with your Nora
+            life style account and we will send you a link to reset your
+            password.
           </p>
           <Controller
             name="number"

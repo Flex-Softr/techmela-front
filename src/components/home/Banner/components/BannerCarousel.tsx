@@ -1,5 +1,5 @@
 // export default BannerCarousel;
-import useQuery from "@/hooks/useQuery";
+import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
 import { TSliders } from "@/types/sliders/slider";
 import ClientBannerCarousel from "./BannerCarouselClient";
@@ -9,11 +9,13 @@ type BannerCarouselProps = {
 };
 
 const BannerCarousel = async ({ bannerSideProducts }: BannerCarouselProps) => {
-  const [{ data }] = await useQuery<TSliders[]>("/slider-banner?isActive=true");
+  const [{ data }] = await serverSideFetcher<TSliders[]>(
+    "/slider-banner?isActive=true"
+  );
   const allsliders = data || [];
 
   return (
-    <div className="md:mt-2">
+    <div className="">
       <ClientBannerCarousel
         bannerSideProducts={bannerSideProducts}
         sliders={allsliders.slice(0, 5)}

@@ -2,7 +2,7 @@ import ContainerMax from "@/components/containerMax/ContainerMax";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import ProductCardPrimary from "@/components/productCards/ProductCardPrimary";
 import CustomPagination from "@/components/ui/shared/customPagination/CustomPagination";
-import useQuery from "@/hooks/useQuery";
+import serverSideFetcher from "@/hooks/serverSideFetcher";
 import TCategory from "@/types/categories/categories";
 import { TProduct } from "@/types/products/product";
 import { TTag } from "@/types/tags/tag";
@@ -36,13 +36,13 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
 
   // Fetch flash sale products if the flash sale param is set
   const [{ data: flashSaleProducts = [], meta: flashSaleMeta }] =
-    await useQuery<ProductQueryResult>(
+    await serverSideFetcher<ProductQueryResult>(
       `/products/featured?page=${currentPage}&limit=${limit}&offset=${offset}`
     );
 
   // Fetch categories as usual
   const [{ data: categories = [] }] =
-    await useQuery<TCategory[]>("/categories");
+    await serverSideFetcher<TCategory[]>("/categories");
 
   // Fetch products based on current page, limit, and offset
   // Construct the base URL for the product query
@@ -66,13 +66,13 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
 
   // Fetch products for regular products or flash sale products
   const [{ data, meta: productMeta }] =
-    await useQuery<ProductQueryResult>(productQueryUrl);
+    await serverSideFetcher<ProductQueryResult>(productQueryUrl);
 
   // Use flash sale products if flashSaleParam is true, otherwise use regular products
-  const products = flashSaleParam ? flashSaleProducts : data ?? [];
+  const products = flashSaleParam ? flashSaleProducts : (data ?? []);
 
   // Fetch tags as usual
-  const [{ data: tags = [] }] = await useQuery<TTag[]>(`/tags`);
+  const [{ data: tags = [] }] = await serverSideFetcher<TTag[]>(`/tags`);
 
   const hasCategoryParam = !!searchParams.category;
 
@@ -104,8 +104,8 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
 
   // Ensure productMeta and flashSaleMeta are defined before accessing their properties
   const totalProducts = flashSaleParam
-    ? flashSaleMeta?.total ?? 0
-    : productMeta?.total ?? 0;
+    ? (flashSaleMeta?.total ?? 0)
+    : (productMeta?.total ?? 0);
 
   const totalPages = Math.ceil(totalProducts / limit);
 
@@ -164,7 +164,7 @@ export default ShopPage;
 // import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 // import ProductCardPrimary from "@/components/productCards/ProductCardPrimary";
 // import CustomPagination from "@/components/ui/shared/customPagination/CustomPagination";
-// import useQuery from "@/hooks/useQuery";
+// import serverSideFetcher from "@/hooks/serverSideFetcher";
 // import TCategory from "@/types/categories/categories";
 // import { TProduct } from "@/types/products/product";
 // import { TTag } from "@/types/tags/tag";
@@ -198,16 +198,16 @@ export default ShopPage;
 
 //   // Fetch flash sale products if the flash sale param is set
 //   const [{ data: flashSaleProducts = [], meta: flashSaleMeta }] =
-//     await useQuery<ProductQueryResult>(
+//     await serverSideFetcher<ProductQueryResult>(
 //       `/products/featured?page=${currentPage}&limit=${limit}&offset=${offset}`
 //     );
 
 //   // Fetch categories as usual
 //   const [{ data: categories = [] }] =
-//     await useQuery<TCategory[]>("/categories");
+//     await serverSideFetcher<TCategory[]>("/categories");
 
 //   // Fetch products based on current page, limit, and offset
-//   const [{ data, meta: productMeta }] = await useQuery<ProductQueryResult>(
+//   const [{ data, meta: productMeta }] = await serverSideFetcher<ProductQueryResult>(
 //     `/products?page=${currentPage}&limit=${limit}&offset=${offset}`,
 //     searchParams
 //   );
@@ -216,7 +216,7 @@ export default ShopPage;
 //   const products = flashSaleParam ? flashSaleProducts : data ?? []; // Safely access data.products
 
 //   // Fetch tags as usual
-//   const [{ data: tags = [] }] = await useQuery<TTag[]>(`/tags`);
+//   const [{ data: tags = [] }] = await serverSideFetcher<TTag[]>(`/tags`);
 
 //   const hasCategoryParam = !!searchParams.category;
 
@@ -308,7 +308,7 @@ export default ShopPage;
 // import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 // import ProductCardPrimary from "@/components/productCards/ProductCardPrimary";
 // import CustomPagination from "@/components/ui/shared/customPagination/CustomPagination";
-// import useQuery from "@/hooks/useQuery";
+// import serverSideFetcher from "@/hooks/serverSideFetcher";
 // import TCategory from "@/types/categories/categories";
 // import { TProduct } from "@/types/products/product";
 // import { TTag } from "@/types/tags/tag";
@@ -337,12 +337,12 @@ export default ShopPage;
 
 //   // Fetch flash sale products if the flash sale param is set
 //   const [{ data: flashSaleProducts = [] }] =
-//     await useQuery<TProduct[]>("/products/featured");
+//     await serverSideFetcher<TProduct[]>("/products/featured");
 //   // Fetch categories, products, and tags as usual
 //   const [{ data: categories = [] }] =
-//     await useQuery<TCategory[]>("/categories");
+//     await serverSideFetcher<TCategory[]>("/categories");
 
-//   const [{ data, meta: productMeta }] = await useQuery<ProductQueryResult>(
+//   const [{ data, meta: productMeta }] = await serverSideFetcher<ProductQueryResult>(
 //     `/products`,
 //     searchParams
 //   );
@@ -352,7 +352,7 @@ export default ShopPage;
 //     ? flashSaleProducts
 //     : (data as unknown as TProduct[]) || [];
 
-//   const [{ data: tags = [] }] = await useQuery<TTag[]>(`/tags`);
+//   const [{ data: tags = [] }] = await serverSideFetcher<TTag[]>(`/tags`);
 //   const hasCategoryParam = !!searchParams.category;
 
 //   const breadcrumbPaths = [

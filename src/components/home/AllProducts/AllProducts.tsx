@@ -1,23 +1,31 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import ProductCardPrimary from "@/components/productCards/ProductCardPrimary";
-// import ProductCardSecondary from "@/components/productCards/ProductCardSecondary";
-import SectionTitle from "@/components/sectionTitle/SectionTitle";
-import useQuery from "@/hooks/useQuery";
+import SectionSubtitle from "@/components/SectionSubtitle";
+import SectionTitle from "@/components/SectionTitle";
+import { Button } from "@/components/ui/button";
+// import SectionTitle from "@/components/sectionTitle/SectionTitle";
+import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
+import Link from "next/link";
 
 const AllProducts = async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [{ data }] = await useQuery<any>("/products");
+  const [{ data }] = await serverSideFetcher<any>("/products");
   const products = data as TProduct[];
   return (
-    <section className="pt-6 px-2">
+    <section className="pt-10 md:pt-12">
       <ContainerMax>
-        <SectionTitle title="All products" href="/shop" />
-        <div className="grid grid-cols-2 xls:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl: 2xl:grid-cols-5 gap-4 md:gap-7 justify-center mt-5">
+        <SectionTitle title="All products" />
+        <SectionSubtitle text="Explore our wide range of products" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 justify-between mt-5">
           {products?.map((product) => (
-            // <ProductCardSecondary key={product._id} product={product} />
             <ProductCardPrimary product={product} key={product._id} />
           ))}
+        </div>
+        <div className="flex justify-center mt-5">
+          <Button asChild size={"sm"} className="rounded-full w-[150px]">
+            <Link href={"/shop"}>See more</Link>
+          </Button>
         </div>
       </ContainerMax>
     </section>

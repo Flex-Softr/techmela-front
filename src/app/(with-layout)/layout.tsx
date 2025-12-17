@@ -8,7 +8,6 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
     <>
       <Header />
       <main className="mt-5 md:mt-0 ">{children}</main>
-
       <Footer />
       <JumpToTopBtn />
     </>

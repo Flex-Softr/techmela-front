@@ -1,9 +1,9 @@
 import config from "@/config/config";
+import { cn } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
 import Image from "next/image";
 import Link from "next/link";
-import { twMerge } from "tailwind-merge";
-import EcButton from "../EcButton/EcButton";
+import { Button } from "../ui/button";
 
 const CarousalProductsCard = ({
   product,
@@ -17,32 +17,32 @@ const CarousalProductsCard = ({
       ? "bg-red-500 text-white  md:text-xs px-2 py-1 rounded fire-animation"
       : "bg-green-500 text-white  md:text-xs px-2 py-1 rounded";
   return (
-    <Link
-      href={`/product/${product._id}/${product.slug}`}
-      className={twMerge(
-        "bg-white h-full  xls:w-[180px] xms:w-[155px] md:w-[230px] flex flex-col justify-between gap-2 group ring-1 ring-gray-100 shadow-md hover:ring-primary transition-all",
+    <div
+      // href={`/product/${product._id}/${product.slug}`}
+      className={cn(
+        "border border-border group/card w-[165px] sm:w-[300px] rounded-lg overflow-hidden bg-background flex flex-col justify-between shadow-sm mx-auto h-full",
         className
       )}
     >
-      <div className="flex flex-col gap-3 md:p-3 xms:text-[8px] xls:text-[10px] sm:text-xs md:text-sm  relative">
+      <div className="flex flex-col gap-3 md:p-3 relative">
         {product.discountPercent > 0 && (
-          <div className={`absolute top-0 left-0  ${discountBadgeClass}`}>
+          <p className={`absolute top-0 left-0  ${discountBadgeClass}`}>
             {product.discountPercent}% Off
-          </div>
+          </p>
         )}
 
-        <div className="bg-base-100 ">
+        <div className="">
           <Image
             src={`${config.base_url}/${product?.thumbnail?.src} ` || ""}
             alt={product?.thumbnail?.alt || ""}
             height={400}
             width={400}
-            className=" md:w-full min-w-[80px] aspect-square object-cover mx-auto"
+            className="w-full aspect-square object-cover mx-auto rounded-md"
             priority
           />
         </div>
         <div className="flex flex-col gap-2 xms:px-1 xls:px-1 sm:px-1 md:px-2">
-          <h2 className="font-semibold text-gray-600 xms:text-[10px] xls:text-xs sm:text-sm md:text-base">
+          <h2 className="font-semibold">
             {product?.title?.length < 40 ? (
               product?.title
             ) : (
@@ -82,10 +82,10 @@ const CarousalProductsCard = ({
           </div>
         </div>
       </div>
-      <EcButton className="flex-grow rounded-none font-semibold text-white max-h-[40px]">
-        View details
-      </EcButton>
-    </Link>
+      <Button asChild className="m-3 mt-0">
+        <Link href={`/product/${product._id}/${product.slug}`}>Buy now</Link>
+      </Button>
+    </div>
   );
 };
 

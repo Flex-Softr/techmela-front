@@ -15,9 +15,9 @@ const ClaimFormHeader = () => {
           ></Image>
         </Link>
         <div className="text-end xms:text-xs xls:text-xs sm:text-sm md:text-xl">
-          <p>Oneself</p>
-          <p>Khulna, bangladesh</p>
-          <p>+8801967214215</p>
+          <p>Nora life style</p>
+          <p>Dhaka, bangladesh</p>
+          <p>+88019xxxxxxx</p>
         </div>
       </div>
       <hr className="my-4" />

@@ -75,7 +75,7 @@ const StoreLocationPage = () => {
               </h2>
               <div className="grid grid-cols-4 md:grid-cols-4 gap-6 justify-center">
                 <a
-                  href="https://www.facebook.com/oneselfbd?mibextid=ZbWKwL"
+                  href="https://www.facebook.com/nora?mibextid=ZbWKwL"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl md:text-4xl text-blue-600 hover:text-blue-700 transition"
@@ -93,7 +93,7 @@ const StoreLocationPage = () => {
                   <FaWhatsapp title="WhatsApp" />
                 </a>
                 <a
-                  href="https://www.facebook.com/groups/1246098009387414"
+                  href="https://www.facebook.com/groups"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl md:text-4xl text-blue-600 hover:text-blue-700 transition"
@@ -102,7 +102,7 @@ const StoreLocationPage = () => {
                   <FaUsers title="Facebook Group" />
                 </a>
                 <a
-                  href="https://www.youtube.com/@oneselfbd"
+                  href="https://www.youtube.com/@nora"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl md:text-4xl text-red-600 hover:text-red-700 transition"

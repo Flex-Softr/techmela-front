@@ -55,8 +55,8 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
               <div className="space-y-4 text-gray-700">
                 <p>
                   প্রিয় গ্রাহক, <br />
-                  আমাদের পণ্যের উপর আপনার আস্থা এবং সন্তুষ্টি নিশ্চিত করাই
-                  Oneself-এর প্রধান লক্ষ্য। আমাদের প্রতিটি প্রোডাক্টে একটি
+                  আমাদের পণ্যের উপর আপনার আস্থা এবং সন্তুষ্টি নিশ্চিত করাই Nora
+                  life style-এর প্রধান লক্ষ্য। আমাদের প্রতিটি প্রোডাক্টে একটি
                   ওয়ারেন্টি কোড নম্বর রয়েছে। যার মাধ্যমে নির্দিষ্ট ওয়ারেন্টি
                   মেয়াদের ভিতরে আপনার প্রোডাক্টটি যদি নষ্ট হয়, তাহলে খুব সহজে
                   ওয়ারেন্টির সুবিধা গ্রহণ করতে নিচের নির্দেশনা অনুসরণ করুন:
@@ -109,7 +109,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
                 <p className="text-base md:text-lg">
                   আপনার সন্তুষ্টিই আমাদের অনুপ্রেরণা।
                 </p>
-                <p className="font-bold text-base">Oneself</p>
+                <p className="font-bold text-base">Nora life style</p>
                 <p className="font-semibold">"বিশ্বাসের প্রতীক"</p>
               </div>
             </div>

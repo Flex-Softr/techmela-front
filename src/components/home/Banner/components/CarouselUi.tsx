@@ -21,14 +21,14 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import config from "@/config/config";
-// import useQuery from "@/hooks/useQuery";
+// import serverSideFetcher from "@/hooks/serverSideFetcher";
 // import { TProduct } from "@/types/products/product";
 // import { TSliders } from "@/types/sliders/slider";
 // import Image from "next/image";
 // import Link from "next/link";
 
 // const CarouselUi = async ({ slider }: { slider: TSliders }) => {
-//   const [{ data }] = await useQuery<any>("/products/featured");
+//   const [{ data }] = await serverSideFetcher<any>("/products/featured");
 //   const bannerSideProducts = (data as TProduct[]) || [];
 //   return (
 //     <Link href={slider?.bannerLink || ""} className="mt-7 rounded-sm">

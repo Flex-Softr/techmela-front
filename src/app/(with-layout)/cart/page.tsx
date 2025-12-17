@@ -3,13 +3,13 @@
 // import ContainerMax from "@/components/containerMax/ContainerMax";
 // import Box from "@/components/ui/ec/Box";
 // import config from "@/config/config";
-// import useQuery from "@/hooks/useQuery";
+// import serverSideFetcher from "@/hooks/serverSideFetcher";
 // import TShippingCharges from "@/types/shippingCharge";
 // import Link from "next/link";
 // import CartCalculation from "./components/CartCalculation";
 // const CartPage = async () => {
 //   const [{ data: shippingCharges }] =
-//     await useQuery<TShippingCharges[]>("/shipping-charges");
+//     await serverSideFetcher<TShippingCharges[]>("/shipping-charges");
 
 //   // const baseUrl = `${config.base_url}/api/v1`;
 
@@ -45,12 +45,12 @@
 
 // export default CartPage;
 
-import useQuery from "@/hooks/useQuery";
+import serverSideFetcher from "@/hooks/serverSideFetcher";
 import TShippingCharges from "@/types/shippingCharge";
 import CartPageComponent from "./components/CartPageComponent";
 const CartPage = async () => {
   const [{ data: shippingCharges }] =
-    await useQuery<TShippingCharges[]>("/shipping-charges");
+    await serverSideFetcher<TShippingCharges[]>("/shipping-charges");
   return (
     <div>
       <CartPageComponent shippingCharges={shippingCharges} />

@@ -6,29 +6,28 @@ const TopHeader = () => {
     {
       href: "/store-location",
       name: "Store locator",
-      icon: <FaLocationDot className="h-5 w-5" />,
+      icon: <FaLocationDot className="size-5" />,
     },
     {
       href: "/track-your-order",
       name: "Track your order",
-      icon: <MdDeliveryDining className="h-5 w-5" />,
+      icon: <MdDeliveryDining className="size-5" />,
     },
     {
       href: "/shop",
       name: "Shop",
-      icon: <FaBagShopping className="h-5 w-5" />,
+      icon: <FaBagShopping className="size-5" />,
     },
   ];
   return (
     <>
-      <div className="hidden md:flex justify-between xl:px-10 bg-base-100 py-3">
-        <div></div>
+      <div className="hidden md:flex justify-end xl:px-10 py-3">
         <div className="flex gap-2">
           {links.map((link, index) => (
             <Link
               key={index}
               href={link.href}
-              className="flex gap-2 items-center text-sm hover:text-primary transition-all"
+              className="flex gap-2 items-center text-sm text-muted-foreground font-semibold transition-all"
             >
               <span>{link.icon}</span>
               <span>{link.name}</span>

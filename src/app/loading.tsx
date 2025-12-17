@@ -9,9 +9,9 @@ const loading = () => {
         width={100}
         height={100}
         priority={true}
-      ></Image>
+      />
       <h1 className=" xms:text-lg xls:text-xl sm:text-2xl md:text-4xl">
-        Welcome to OneSelf
+        Welcome to Nora life style
       </h1>
       <Image
         src="/images/animations/loading.gif"
@@ -20,7 +20,7 @@ const loading = () => {
         height={100}
         priority={true}
         unoptimized
-      ></Image>
+      />
     </div>
   );
 };

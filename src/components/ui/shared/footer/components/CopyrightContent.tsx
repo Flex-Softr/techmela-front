@@ -1,50 +1,29 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
-import config from "@/config/config";
-import useQuery from "@/hooks/useQuery";
-import { TPaymentMethod } from "@/types/paymentMethod";
-import Image from "next/image";
-import Link from "next/link";
 
-const CopyrightContent = async () => {
-  const [{ data: paymentMethods = [] }] =
-    await useQuery<TPaymentMethod[]>("/payment-method");
-
+const CopyrightContent = () => {
   return (
-    <div className="relative h-24 md:h-14 flex flex-col justify-center">
-      <div className="absolute top-0 z-[-2] h-24 md:h-14 w-full bg-[#283242] border-[#04070e] "></div>
+    <div className="bg-white py-2 md:py-4 border-t border-gray-300">
       <ContainerMax>
-        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center flex-wrap">
-          <div className="text-muted">
-            <p>
-              <span className="font-bold">
-                &copy; <Link href="/">Oneself</Link>,{" "}
-              </span>
-              <span>All right reserved</span>
+        <div className="flex flex-wrap justify-center md:justify-between">
+          <div>
+            <p className="text-text-muted-foreground text-sm font-medium">
+              &copy; {new Date().getFullYear()}{" "}
+              <span className="text-primary font-bold">Nora Life Style</span>.
+              All rights reserved.
             </p>
           </div>
           <div>
-            <p className="text-muted">
+            <p className="text-text-muted-foreground text-sm font-medium">
               Developed and maintained by{" "}
               <a
-                href="http://www.flexsoftr.com"
-                className="font-bold underline"
+                href="https://flexsoftr.com"
                 target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary font-bold hover:underline"
               >
-                Flexsoftr
+                Flex Softr
               </a>
             </p>
-          </div>
-          <div className="flex gap-3">
-            {paymentMethods.map((item) => (
-              <Image
-                key={item?.name}
-                src={`${config.base_url}/${item?.image?.src} ` || ""}
-                alt={item?.image?.alt || ""}
-                width={50}
-                height={50}
-                className="w-8 md:w-10 rounded-md"
-              />
-            ))}
           </div>
         </div>
       </ContainerMax>

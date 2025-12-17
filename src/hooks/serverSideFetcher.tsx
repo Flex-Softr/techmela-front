@@ -2,7 +2,7 @@ import config from "@/config/config";
 import objectToSearchParams from "@/lib/ec/objectToSearchParams";
 import TGenericResponse from "@/types/response";
 
-const useQuery = async <T,>(
+const serverSideFetcher = async <T,>(
   endPoint: string,
   searchParams?: Record<string, string | string[] | undefined>,
   reqConfig?: Record<string, unknown>
@@ -53,4 +53,4 @@ const useQuery = async <T,>(
   ];
 };
 
-export default useQuery;
+export default serverSideFetcher;

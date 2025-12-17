@@ -18,7 +18,7 @@ const AboutPage: React.FC = () => {
       <section className="py-3 md:py-12">
         <div className="container mx-auto text-center">
           <h1 className="text-2xl md:text-4xl  font-bold mb-4">
-            Welcome to oneselfbd
+            Welcome to Nora life style
           </h1>
           <p className="text-md md:text-xl text-gray-600 mx-auto">
             Your destination for high-quality, innovative, and sustainable

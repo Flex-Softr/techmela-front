@@ -4,12 +4,12 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import useQuery from "@/hooks/useQuery";
+import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
 
 const TopRated = async () => {
   const [{ data: topRatedProducts }] =
-    await useQuery<TProduct[]>("/products/featured"); // TODO:Change endpoints
+    await serverSideFetcher<TProduct[]>("/products/featured"); // TODO:Change endpoints
 
   return (
     <>
