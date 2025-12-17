@@ -15,14 +15,14 @@ type BreadcrumbProps = {
 
 const CustomBreadcrumb: React.FC<BreadcrumbProps> = ({ paths }) => {
   return (
-    <Breadcrumb className="p-2 bg-[#F2F4F5] border w-full ">
-      <BreadcrumbList className="flex items-center space-x-2 text-sm md:text-lg">
+    <Breadcrumb className="p-2 pt-0 border-b w-full ">
+      <BreadcrumbList className="flex items-center space-x-2 text-sm md:text-base">
         {paths.map((path, index) => (
           <React.Fragment key={index}>
             <BreadcrumbItem>
               <BreadcrumbLink
                 href={path.url}
-                className="flex items-center text-gray-500 hover:text-primary"
+                className="flex items-center text-muted-foreground hover:text-primary text-sm font-semibold"
               >
                 {index === 0 && <FaHome className="mr-2" />}
                 {path.name}
@@ -30,7 +30,7 @@ const CustomBreadcrumb: React.FC<BreadcrumbProps> = ({ paths }) => {
             </BreadcrumbItem>
             {index !== paths.length - 1 && (
               <BreadcrumbSeparator>
-                <FaChevronRight className="text-gray-500" />
+                <FaChevronRight className="text-muted-foreground" />
               </BreadcrumbSeparator>
             )}
           </React.Fragment>

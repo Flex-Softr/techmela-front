@@ -93,13 +93,13 @@ const GenericFilterPropsSelector = ({
   }, [searchParams, filterBy, setSelectedValues]);
 
   return (
-    <div className="p-2">
+    <div className="py-2">
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
         className="w-full space-y-2"
       >
-        <div className="flex items-center justify-between space-x-4 bg-gray-100 px-2">
+        <div className="flex items-center justify-between bg-muted text-muted-foreground py-2 px-3 mx-2 rounded-md">
           <BoxHeading className="mb-0">{title}</BoxHeading>
           <CollapsibleTrigger asChild>
             <Button variant="ghost" size="sm" className="w-9 p-0">
@@ -108,11 +108,11 @@ const GenericFilterPropsSelector = ({
             </Button>
           </CollapsibleTrigger>
         </div>
-        <CollapsibleContent className="space-y-2">
+        <CollapsibleContent className="space-y-2 ml-4">
           {items.map((category) => (
             <div key={category.slug} className="space-y-2">
               <div className="flex items-center space-x-2">
-                <label className="select-none flex gap-2">
+                <label className="select-none flex gap-2 text-sm font-semibold text-muted-foreground">
                   <input
                     type="checkbox"
                     value={category.slug}
@@ -126,7 +126,7 @@ const GenericFilterPropsSelector = ({
 
               {category.subcategories && category.subcategories.length > 0 && (
                 <div
-                  className={`ml-6 space-y-2 ${
+                  className={`ml-4 space-y-2 ${
                     expandedCategories.includes(category.slug)
                       ? "block"
                       : "hidden"

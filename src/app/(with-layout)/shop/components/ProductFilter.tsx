@@ -12,7 +12,7 @@ type ProductFilterProps = {
   searchParams: Record<string, string | string[] | undefined>;
   tags: TTag[];
   categories: TCategory[];
-  sheetCloseRef: RefObject<HTMLButtonElement>;
+  sheetCloseRef: RefObject<HTMLButtonElement | null>;
 };
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
@@ -136,7 +136,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   return (
     <Box className="bg-white space-y-3">
-      <BoxHeading className="bg-gray-100 py-1 px-2 mx-2">
+      <BoxHeading className="bg-muted text-muted-foreground py-2 px-3 mx-2 rounded-md">
         Filter by price
       </BoxHeading>
       <PriceRangeSlider
