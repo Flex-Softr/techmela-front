@@ -9,7 +9,7 @@ import { TTag } from "@/types/tags/tag";
 import { Metadata } from "next";
 import CategorySection from "./components/CategorySection";
 import ProductFilterContent from "./components/ProductFilterContent";
-import CustomBreadcrumb from "./components/customBreadcrumb/CustomBreadcrumb";
+// import CustomBreadcrumb from "./components/customBreadcrumb/CustomBreadcrumb";
 
 export const metadata: Metadata = {
   title: "Shop",
@@ -116,7 +116,7 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
     <section className="relative pt-2 mt-16 md:mt-0 px-2">
       <div className="absolute inset-0 -z-10 h-full w-full bg-base-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <ContainerMax>
-        <CustomBreadcrumb paths={breadcrumbPaths} />
+        {/* <CustomBreadcrumb paths={breadcrumbPaths} /> */}
         {!hasCategoryParam && !flashSaleParam && (
           <CategorySection categories={categories} />
         )}

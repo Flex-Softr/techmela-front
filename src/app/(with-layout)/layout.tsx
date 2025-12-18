@@ -7,7 +7,7 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main className="mt-5 md:mt-0 ">{children}</main>
+      <main>{children}</main>
       <Footer />
       <JumpToTopBtn />
     </>

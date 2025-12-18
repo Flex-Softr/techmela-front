@@ -21,13 +21,13 @@ const TopHeader = () => {
   ];
   return (
     <>
-      <div className="hidden md:flex justify-end xl:px-10 py-3">
+      <div className="hidden md:flex justify-end xl:px-10 py-2">
         <div className="flex gap-2">
           {links.map((link, index) => (
             <Link
               key={index}
               href={link.href}
-              className="flex gap-2 items-center text-sm text-muted-foreground font-semibold transition-all"
+              className="flex gap-2 items-center text-sm text-muted-foreground font-medium transition-all"
             >
               <span>{link.icon}</span>
               <span>{link.name}</span>

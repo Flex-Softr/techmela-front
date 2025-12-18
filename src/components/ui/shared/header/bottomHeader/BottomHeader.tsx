@@ -1,18 +1,11 @@
-"use client";
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import TCategory from "@/types/categories/categories";
-import { usePathname } from "next/navigation";
 import MenuBar from "../menuBar/MenuBar";
 const BottomHeader = ({ categories }: { categories?: TCategory[] }) => {
-  const pathname = usePathname();
   return (
-    <div className="py-2 border-b-[1px] hidden bg-primary md:block">
+    <div className="py-1.5 border-b-[1px] hidden bg-primary md:block mb-2">
       <ContainerMax>
-        <MenuBar
-          categories={categories}
-          activePath={pathname}
-          isVertical={false}
-        />
+        <MenuBar categories={categories} isVertical={false} />
       </ContainerMax>
     </div>
   );

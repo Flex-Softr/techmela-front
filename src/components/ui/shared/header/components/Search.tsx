@@ -54,10 +54,10 @@ const Search = () => {
 
   return (
     <form onSubmit={handleSearchSubmit} className="relative">
-      <div className="flex justify-center items-center overflow-hidden rounded-full">
+      <div className="flex justify-center items-center overflow-hidden rounded-md">
         <input
           type="search"
-          className="p-5 w-[90%] outline-none border-2 rounded-full rounded-r-none border-r-0 border-primary h-[45px]"
+          className="p-5 w-[90%] outline-none border-2 rounded-md rounded-r-none border-r-0 border-primary h-[45px]"
           placeholder="Search for products"
           name="searchValue"
           value={searchValue}

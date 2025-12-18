@@ -14,9 +14,9 @@ const MainHeader = ({ categories }: { categories?: TCategory[] }) => {
           <Image
             src="/images/logo/logo.jpg"
             alt="Company logo"
-            height={200}
-            width={400}
-            className="w-28 h-[46.67px] md:w-36 md:h-[60px] rounded-md"
+            height={150}
+            width={300}
+            className="w-20 h-auto md:w-28 rounded-md"
             priority
           />
         </Link>

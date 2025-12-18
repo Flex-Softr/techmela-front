@@ -1,4 +1,5 @@
-// MenuBar.tsx
+"use client";
+
 import {
   Menubar,
   MenubarContent,
@@ -6,143 +7,206 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import TCategory from "@/types/categories/categories";
+import type TCategory from "@/types/categories/categories";
+import { ChevronDownIcon } from "lucide-react";
 import Link from "next/link";
-import { FaCaretDown, FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-const MenuBar = ({
-  categories,
-  isVertical = false,
-  onMenuItemClick,
-  activePath,
-}: {
+type MenuBarProps = {
   categories?: TCategory[];
   isVertical?: boolean;
   onMenuItemClick?: () => void;
-  activePath?: string;
-}) => {
-  const menuLinks = [
+};
+
+type MenuLink = {
+  title: string;
+  href: string;
+  icon?: React.ReactNode;
+  displayOnSmallScreenOnly?: boolean;
+  subMenus?: { title: string; href: string }[];
+};
+
+export default function MenuBar({
+  categories = [],
+  isVertical = false,
+  onMenuItemClick,
+}: MenuBarProps) {
+  const pathname = usePathname();
+  const closeTimer = useRef<NodeJS.Timeout | null>(null);
+
+  // Controlled open menu state
+  const [openMenu, setOpenMenu] = useState<string | undefined>(undefined);
+
+  // Hover tracking for trigger + content
+  const hoverRef = useRef<{ trigger: boolean; content: boolean }>({
+    trigger: false,
+    content: false,
+  });
+
+  // Close submenu on route change
+  useEffect(() => {
+    setOpenMenu(undefined);
+  }, [pathname]);
+
+  const menuLinks: MenuLink[] = [
     {
-      title: "My-Account",
+      title: "My Account",
       href: "/my-account",
       displayOnSmallScreenOnly: true,
-      icon: <FaUserCircle className="mr-2 text-2xl" />,
+      icon: <FaUserCircle className="mr-2 text-xl" />,
     },
+    { title: "Home", href: "/" },
+    { title: "Shop", href: "/shop" },
     {
-      title: "Home",
-      href: "/",
-    },
-    {
-      title: "Shop",
-      href: "/shop",
-    },
-    {
-      title: "Track your order",
+      title: "Track Your Order",
       href: "/track-your-order",
       displayOnSmallScreenOnly: true,
     },
     {
       title: "Categories",
       href: "/category",
-      subMenus: categories?.map(({ name, slug }) => ({
+      subMenus: categories.map(({ name, slug }) => ({
         title: name,
         href: `/shop?category=${slug}`,
       })),
     },
   ];
 
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
+
+  // Hover handlers
+  const handleMouseEnterTrigger = (key: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    hoverRef.current.trigger = true;
+    setOpenMenu(key);
+  };
+
+  const handleMouseLeaveTrigger = () => {
+    hoverRef.current.trigger = false;
+    closeTimer.current = setTimeout(() => {
+      if (!hoverRef.current.trigger && !hoverRef.current.content) {
+        setOpenMenu(undefined);
+      }
+    }, 150);
+  };
+
+  const handleMouseEnterContent = (key: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    hoverRef.current.content = true;
+    setOpenMenu(key);
+  };
+
+  const handleMouseLeaveContent = () => {
+    hoverRef.current.content = false;
+    closeTimer.current = setTimeout(() => {
+      if (!hoverRef.current.trigger && !hoverRef.current.content) {
+        setOpenMenu(undefined);
+      }
+    }, 150);
+  };
+
   return (
-    <div className="w-full">
-      <Menubar
-        className={`${
-          isVertical
-            ? "flex flex-col items-start space-y-2 h-auto p-4"
-            : "flex flex-row justify-center items-center h-auto p-0"
-        } bg-primary text-primary-foreground border-none shadow-none rounded-none`}
-      >
-        {menuLinks.map((menuItem) => {
-          const visibilityClass = menuItem.displayOnSmallScreenOnly
-            ? "flex md:hidden"
-            : "flex";
+    <Menubar
+      value={openMenu}
+      onValueChange={(val) => setOpenMenu(val ?? undefined)}
+      onMouseLeave={handleMouseLeaveTrigger}
+      className={clsx(
+        "w-full bg-primary text-primary-foreground border-none shadow-none rounded-none",
+        isVertical
+          ? "flex flex-col items-start gap-4 p-4"
+          : "flex justify-center items-center gap-x-8"
+      )}
+    >
+      {menuLinks.map((menu) => {
+        const visibility = menu.displayOnSmallScreenOnly
+          ? "flex md:hidden"
+          : "flex";
 
-          const isActive = activePath === menuItem.href;
-          // Base styles for links
-          const linkBaseClass = `flex items-center text-base font-medium transition-colors duration-200 !text-primary-foreground ${
-            isActive ? "text-red-500 font-bold" : ""
-          }`;
+        const baseLinkClass = clsx(
+          "flex items-center text-sm font-medium transition-all border-b-2 border-transparent pb-1",
+          isActive(menu.href) && "border-white",
+          !isActive(menu.href) && "hover:border-white/50"
+        );
 
-          if (!menuItem.subMenus?.length) {
-            return (
-              <MenubarMenu key={menuItem.href}>
-                <MenubarTrigger
-                  asChild
-                  className={`cursor-pointer bg-transparent data-[state=open]:bg-transparent focus:bg-transparent ${visibilityClass} ${isVertical ? "w-full justify-start px-0" : ""}`}
+        // ---------- NO SUBMENU ----------
+        if (!menu.subMenus) {
+          return (
+            <MenubarMenu key={menu.href} value={menu.href}>
+              <MenubarTrigger
+                asChild
+                className={`${visibility} px-1.5 cursor-pointer`}
+              >
+                <Link
+                  href={menu.href}
+                  className={baseLinkClass}
+                  onClick={onMenuItemClick}
+                >
+                  {menu.icon}
+                  {menu.title}
+                </Link>
+              </MenubarTrigger>
+            </MenubarMenu>
+          );
+        }
+
+        // ---------- WITH SUBMENU ----------
+        const isOpen = openMenu === menu.title;
+
+        return (
+          <MenubarMenu key={menu.title} value={menu.title}>
+            <MenubarTrigger
+              onMouseEnter={() => handleMouseEnterTrigger(menu.title)}
+              onMouseLeave={handleMouseLeaveTrigger}
+              className={clsx(
+                "flex items-center gap-1 text-sm font-medium cursor-pointer px-1.5",
+                "border-b-2 pb-1 transition-all",
+                isOpen
+                  ? "border-white"
+                  : "border-transparent hover:border-white/50",
+                visibility
+              )}
+            >
+              {menu.title}
+              <ChevronDownIcon
+                className={clsx(
+                  "h-4 w-4 transition-transform duration-200",
+                  isOpen && "rotate-180"
+                )}
+              />
+            </MenubarTrigger>
+
+            <MenubarContent
+              onMouseEnter={() => handleMouseEnterContent(menu.title)}
+              onMouseLeave={handleMouseLeaveContent}
+              align="center"
+              sideOffset={6}
+              className="min-w-[220px] p-2 rounded-md bg-white shadow-lg border"
+            >
+              {menu.subMenus.map((sub) => (
+                <MenubarItem
+                  key={sub.href}
+                  className="p-0 focus:bg-transparent"
                 >
                   <Link
-                    href={menuItem.href}
-                    className={linkBaseClass}
-                    onClick={onMenuItemClick}
+                    href={sub.href}
+                    onClick={() => {
+                      setOpenMenu(undefined);
+                      onMenuItemClick?.();
+                    }}
+                    className="block w-full px-3 py-1.5 text-sm rounded-sm transition-colors text-gray-700 hover:bg-black/5"
                   >
-                    {menuItem.icon && menuItem.icon}
-                    {menuItem.title}
+                    {sub.title}
                   </Link>
-                </MenubarTrigger>
-              </MenubarMenu>
-            );
-          } else {
-            return (
-              <MenubarMenu key={menuItem.href}>
-                <MenubarTrigger
-                  className={`
-                      cursor-pointer bg-transparent data-[state=open]:bg-transparent focus:bg-transparent text-base font-medium transition-colors duration-200 hover:text-secondary whitespace-nowrap
-                       ${
-                         isActive
-                           ? "text-red-500 font-bold"
-                           : "text-primary-foreground"
-                       } ${visibilityClass} ${isVertical ? "w-full justify-between px-0" : ""}`}
-                >
-                  {menuItem.title}{" "}
-                  <FaCaretDown
-                    className={`transition-transform duration-200 ${isVertical ? "" : "ml-1"}`}
-                  />
-                </MenubarTrigger>
-
-                <MenubarContent
-                  className={`bg-white border text-primary rounded-md shadow-lg p-2 min-w-[200px] z-50 ${isVertical ? "relative left-0 top-0 border-none shadow-none bg-transparent text-primary-foreground pl-4" : "mt-2"}`}
-                  align={isVertical ? "start" : "center"}
-                  sideOffset={isVertical ? 0 : 5}
-                >
-                  {menuItem.subMenus?.map((subMenu) => {
-                    const isSubMenuActive = activePath === subMenu.href;
-                    return (
-                      <MenubarItem
-                        key={subMenu.href}
-                        className="focus:bg-transparent focus:text-secondary cursor-pointer"
-                      >
-                        <Link
-                          href={subMenu.href}
-                          className={`block w-full text-sm font-medium transition-colors hover:text-secondary ${
-                            isSubMenuActive
-                              ? "text-red-500 font-bold"
-                              : isVertical
-                                ? "text-primary-foreground"
-                                : "text-gray-700"
-                          }`}
-                          onClick={onMenuItemClick}
-                        >
-                          {subMenu.title}
-                        </Link>
-                      </MenubarItem>
-                    );
-                  })}
-                </MenubarContent>
-              </MenubarMenu>
-            );
-          }
-        })}
-      </Menubar>
-    </div>
+                </MenubarItem>
+              ))}
+            </MenubarContent>
+          </MenubarMenu>
+        );
+      })}
+    </Menubar>
   );
-};
-
-export default MenuBar;
+}
