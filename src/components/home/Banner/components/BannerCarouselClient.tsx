@@ -86,6 +86,10 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
     Autoplay({ delay: 2000, stopOnInteraction: true }) as any
   );
 
+  if (!sliders || sliders.length === 0) {
+    return null;
+  }
+
   const handleMouseEnter = () => {
     plugin.current.stop();
   };
@@ -102,7 +106,7 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       <CarouselContent>
-        {sliders.map((slider) => (
+        {sliders?.map((slider) => (
           <CarouselItem key={slider._id}>
             <CarouselUi
               bannerSideProducts={bannerSideProducts}

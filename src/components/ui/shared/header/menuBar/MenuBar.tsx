@@ -1,23 +1,30 @@
 "use client";
 
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
-import type TCategory from "@/types/categories/categories";
-import { ChevronDownIcon } from "lucide-react";
+import { clsx, type ClassValue } from "clsx";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { FaUserCircle } from "react-icons/fa";
-import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import * as React from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { twMerge } from "tailwind-merge";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import type TCategory from "@/types/categories/categories";
+
+// Utility for class merging hiding inline if not imported
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 type MenuBarProps = {
   categories?: TCategory[];
   isVertical?: boolean;
+  activePath?: string; // Accepted for compatibility with NavLinks usage
   onMenuItemClick?: () => void;
 };
 
@@ -35,21 +42,6 @@ export default function MenuBar({
   onMenuItemClick,
 }: MenuBarProps) {
   const pathname = usePathname();
-  const closeTimer = useRef<NodeJS.Timeout | null>(null);
-
-  // Controlled open menu state
-  const [openMenu, setOpenMenu] = useState<string | undefined>(undefined);
-
-  // Hover tracking for trigger + content
-  const hoverRef = useRef<{ trigger: boolean; content: boolean }>({
-    trigger: false,
-    content: false,
-  });
-
-  // Close submenu on route change
-  useEffect(() => {
-    setOpenMenu(undefined);
-  }, [pathname]);
 
   const menuLinks: MenuLink[] = [
     {
@@ -65,148 +57,159 @@ export default function MenuBar({
       href: "/track-your-order",
       displayOnSmallScreenOnly: true,
     },
+    ...categories.map(({ name, slug }) => ({
+      title: name,
+      href: `/shop?category=${slug}`,
+    })),
     {
-      title: "Categories",
+      title: "Dropdown",
       href: "/category",
       subMenus: categories.map(({ name, slug }) => ({
         title: name,
         href: `/shop?category=${slug}`,
       })),
     },
+    // The original code had a "Dropdown45" and then spread categories.
+    // Following the provided snippet, "Dropdown45" is removed and categories are only under "Dropdown".
+    // If categories should also appear as top-level links, they would be added here.
   ];
 
   const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + "/");
+    pathname === href || (href !== "/" && pathname.startsWith(href));
 
-  // Hover handlers
-  const handleMouseEnterTrigger = (key: string) => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    hoverRef.current.trigger = true;
-    setOpenMenu(key);
-  };
+  // --------------------------------------------------------------------------
+  // VERTICAL LAYOUT (Mobile / Sidebar)
+  // --------------------------------------------------------------------------
+  if (isVertical) {
+    return (
+      <div className="flex flex-col w-full">
+        {menuLinks.map((menu) => {
+          // In vertical mode, we show everything, including "displayOnSmallScreenOnly"
 
-  const handleMouseLeaveTrigger = () => {
-    hoverRef.current.trigger = false;
-    closeTimer.current = setTimeout(() => {
-      if (!hoverRef.current.trigger && !hoverRef.current.content) {
-        setOpenMenu(undefined);
-      }
-    }, 150);
-  };
-
-  const handleMouseEnterContent = (key: string) => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    hoverRef.current.content = true;
-    setOpenMenu(key);
-  };
-
-  const handleMouseLeaveContent = () => {
-    hoverRef.current.content = false;
-    closeTimer.current = setTimeout(() => {
-      if (!hoverRef.current.trigger && !hoverRef.current.content) {
-        setOpenMenu(undefined);
-      }
-    }, 150);
-  };
-
-  return (
-    <Menubar
-      value={openMenu}
-      onValueChange={(val) => setOpenMenu(val ?? undefined)}
-      onMouseLeave={handleMouseLeaveTrigger}
-      className={clsx(
-        "w-full bg-primary text-primary-foreground border-none shadow-none rounded-none",
-        isVertical
-          ? "flex flex-col items-start gap-4 p-4"
-          : "flex justify-center items-center gap-x-8"
-      )}
-    >
-      {menuLinks.map((menu) => {
-        const visibility = menu.displayOnSmallScreenOnly
-          ? "flex md:hidden"
-          : "flex";
-
-        const baseLinkClass = clsx(
-          "flex items-center text-sm font-medium transition-all border-b-2 border-transparent pb-1",
-          isActive(menu.href) && "border-white",
-          !isActive(menu.href) && "hover:border-white/50"
-        );
-
-        // ---------- NO SUBMENU ----------
-        if (!menu.subMenus) {
-          return (
-            <MenubarMenu key={menu.href} value={menu.href}>
-              <MenubarTrigger
-                asChild
-                className={`${visibility} px-1.5 cursor-pointer`}
+          // Submenus -> Accordion
+          if (menu.subMenus && menu.subMenus.length > 0) {
+            return (
+              <Accordion
+                key={menu.title}
+                type="single"
+                collapsible
+                className="w-full"
               >
-                <Link
-                  href={menu.href}
-                  className={baseLinkClass}
-                  onClick={onMenuItemClick}
-                >
-                  {menu.icon}
-                  {menu.title}
-                </Link>
-              </MenubarTrigger>
-            </MenubarMenu>
+                <AccordionItem value={menu.title} className="border-b-0">
+                  <AccordionTrigger className="py-2 font-medium hover:no-underline text-inherit transition-colors pl-3 text-sm hover:text-primary">
+                    {menu.icon} {menu.title}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col gap-2 pl-6 border-l ml-3 border-white/20">
+                      {menu.subMenus.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={onMenuItemClick}
+                          className={cn(
+                            "block text-sm text-inherit transition-colors hover:text-primary opacity-80 hover:opacity-100",
+                            isActive(sub.href) && "font-bold opacity-100"
+                          )}
+                        >
+                          {sub.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            );
+          }
+
+          // Standard Links
+          return (
+            <Link
+              key={menu.title}
+              href={menu.href}
+              onClick={onMenuItemClick}
+              className={cn(
+                "flex items-center gap-2 py-3 text-sm font-medium transition-colors border-b border-border last:border-0 pl-3 hover:text-primary",
+                isActive(menu.href) ? "font-bold opacity-100" : "opacity-90"
+              )}
+            >
+              {menu.icon}
+              {menu.title}
+            </Link>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // --------------------------------------------------------------------------
+  // HORIZONTAL LAYOUT (Desktop / BottomHeader)
+  // --------------------------------------------------------------------------
+  return (
+    <nav className="flex items-center justify-center gap-6">
+      {menuLinks.map((menu) => {
+        // Skip mobile-only items in desktop view
+        if (menu.displayOnSmallScreenOnly) return null;
+
+        // Submenus -> Custom Dropdown
+        if (menu.subMenus && menu.subMenus.length > 0) {
+          return (
+            <div key={menu.title} className="relative group z-50">
+              <span
+                className={cn(
+                  "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary py-2 cursor-pointer",
+                  isActive(menu.href)
+                    ? "text-primary font-bold"
+                    : "text-foreground"
+                )}
+                onClick={() => {
+                  if (onMenuItemClick) onMenuItemClick();
+                }}
+              >
+                {menu.title}
+                <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+              </span>
+
+              {/* Dropdown Content */}
+              <div className="absolute left-0 top-full pt-2 w-[220px] hidden group-hover:block animate-in fade-in zoom-in-95 duration-200">
+                <div className="bg-white border rounded-md shadow-lg p-2 flex flex-col gap-1">
+                  {menu.subMenus.map((sub) => (
+                    <Link
+                      key={sub.href}
+                      href={sub.href}
+                      onClick={onMenuItemClick}
+                      className={cn(
+                        "block px-3 py-2 text-sm text-gray-700 rounded-sm hover:bg-gray-100 hover:text-primary transition-colors",
+                        isActive(sub.href) &&
+                          "bg-gray-50 text-primary font-medium"
+                      )}
+                    >
+                      {sub.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           );
         }
 
-        // ---------- WITH SUBMENU ----------
-        const isOpen = openMenu === menu.title;
-
+        // Standard Links
         return (
-          <MenubarMenu key={menu.title} value={menu.title}>
-            <MenubarTrigger
-              onMouseEnter={() => handleMouseEnterTrigger(menu.title)}
-              onMouseLeave={handleMouseLeaveTrigger}
-              className={clsx(
-                "flex items-center gap-1 text-sm font-medium cursor-pointer px-1.5",
-                "border-b-2 pb-1 transition-all",
-                isOpen
-                  ? "border-white"
-                  : "border-transparent hover:border-white/50",
-                visibility
-              )}
-            >
-              {menu.title}
-              <ChevronDownIcon
-                className={clsx(
-                  "h-4 w-4 transition-transform duration-200",
-                  isOpen && "rotate-180"
-                )}
-              />
-            </MenubarTrigger>
-
-            <MenubarContent
-              onMouseEnter={() => handleMouseEnterContent(menu.title)}
-              onMouseLeave={handleMouseLeaveContent}
-              align="center"
-              sideOffset={6}
-              className="min-w-[220px] p-2 rounded-md bg-white shadow-lg border"
-            >
-              {menu.subMenus.map((sub) => (
-                <MenubarItem
-                  key={sub.href}
-                  className="p-0 focus:bg-transparent"
-                >
-                  <Link
-                    href={sub.href}
-                    onClick={() => {
-                      setOpenMenu(undefined);
-                      onMenuItemClick?.();
-                    }}
-                    className="block w-full px-3 py-1.5 text-sm rounded-sm transition-colors text-gray-700 hover:bg-black/5"
-                  >
-                    {sub.title}
-                  </Link>
-                </MenubarItem>
-              ))}
-            </MenubarContent>
-          </MenubarMenu>
+          <Link
+            key={menu.title}
+            href={menu.href}
+            onClick={onMenuItemClick}
+            className={cn(
+              "text-sm font-medium transition-all hover:text-primary py-2 border-b-2 border-transparent",
+              isActive(menu.href)
+                ? "text-primary border-primary font-bold"
+                : "text-foreground hover:border-primary/50"
+            )}
+          >
+            {menu.icon}
+            {menu.title}
+          </Link>
         );
       })}
-    </Menubar>
+    </nav>
   );
 }

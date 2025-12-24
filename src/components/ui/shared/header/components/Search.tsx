@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import config from "@/config/config";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
 import Image from "next/image";
@@ -57,19 +58,19 @@ const Search = () => {
       <div className="flex justify-center items-center overflow-hidden rounded-md">
         <input
           type="search"
-          className="p-5 w-[90%] outline-none border-2 rounded-md rounded-r-none border-r-0 border-primary h-[45px]"
+          className="py-5 px-2 w-[90%] outline-none border-2 rounded-md rounded-r-none border-r-0 border-primary h-[45px]"
           placeholder="Search for products"
           name="searchValue"
           value={searchValue}
           onChange={handleInputChange}
         />
 
-        <button
+        <Button
           type="submit"
-          className="font-bold w-[10%] flex justify-center items-center bg-primary h-[45px] text-white"
+          // className="font-bold w-[10%] flex justify-center items-center bg-primary h-[45px] text-white"
         >
-          <FaSearch className="w-6 h-6" />
-        </button>
+          <FaSearch />
+        </Button>
       </div>
 
       {showSuggestions && searchValue.trim() !== "" && (

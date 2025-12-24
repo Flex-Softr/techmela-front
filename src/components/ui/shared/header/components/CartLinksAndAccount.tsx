@@ -1,14 +1,17 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import config from "@/config/config";
+import useCart from "@/hooks/useCart";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
+import { ShoppingCart, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaRegUser, FaSearch, FaTimes } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
-import CartData from "./CartData";
 import { ApiResponse, Product } from "./searchProductType/SearchProductType";
 
 const isApiResponse = (response: unknown): response is ApiResponse => {
@@ -24,6 +27,7 @@ const CartLinksAndAccount = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
   const router = useRouter();
+  const { totalCartItem } = useCart();
   const [searchValue, setSearchValue] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [isClient, setIsClient] = useState(false);
@@ -69,10 +73,13 @@ const CartLinksAndAccount = () => {
     <>
       {isClient && isSmallScreen ? (
         <>
-          <FaSearch
-            className="w-6 h-6 cursor-pointer"
+          <Button
+            variant={"ghost"}
             onClick={toggleSearchBar}
-          />
+            className="size-8 rounded-full"
+          >
+            <FaSearch />
+          </Button>
           <form
             onSubmit={handleSearchSubmit}
             className={`fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center transition-opacity duration-300 ${
@@ -108,7 +115,7 @@ const CartLinksAndAccount = () => {
                     products.map((product: Product) => (
                       <div
                         key={product._id}
-                        className="flex items-center px-2 py-0.5 md:px-2 md:py-2 border-b border-gray-200 last:border-0  cursor-pointer  "
+                        className="flex items-center px-2 py-0.5 md:px-2 md:py-2 border-b border-gray-200 last:border-0 cursor-pointer"
                         onClick={() => handleProductClick(product._id)}
                       >
                         <Image
@@ -160,14 +167,24 @@ const CartLinksAndAccount = () => {
           </form>
         </>
       ) : (
-        <Link href="/my-account">
-          <FaRegUser className="w-6 h-6" />
-        </Link>
+        <Button asChild variant={"ghost"} className="rounded-full size-8">
+          <Link href="/my-account">
+            <UserRound className="size-6" />
+          </Link>
+        </Button>
       )}
-
-      <Link href="/cart" className="flex text-md font-bold items-center">
-        <CartData />
-      </Link>
+      <Button
+        asChild
+        variant={"ghost"}
+        className="rounded-full size-8 relative"
+      >
+        <Link href="/cart">
+          <ShoppingCart className="size-6" />
+          <Badge className="bg-primary size-4 text-xs text-white absolute -top-1 -right-1">
+            {totalCartItem ?? 0}
+          </Badge>
+        </Link>
+      </Button>
     </>
   );
 };

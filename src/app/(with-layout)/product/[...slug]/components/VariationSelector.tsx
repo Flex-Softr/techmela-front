@@ -99,22 +99,27 @@ const VariationSelector = ({
 
   return (
     <div>
-      <div className="text-2xl my-5">
+      <div className="relative inline-block">
         {displayedPrice < originalPrice ? (
           <>
-            <del className="text-muted text-xl">&#2547;{originalPrice}</del>
-            <span className="text-primary ms-1 text-3xl">
+            <del className="text-muted-foreground text-base font-semibold">
+              &#2547;{originalPrice}
+            </del>
+            <span className="text-primary ms-1 text-2xl font-semibold">
               &#2547;{displayedPrice}
             </span>
 
             {discountPercent > 0 && (
-              <span className="px-2 ms-1 mb-2 text-sm text-white bg-red-500">
-                {discountPercent}% OFF
+              <span className="absolute top-0 -right-16 px-2 py-0.5 text-xs bg-destructive rounded-full text-white">
+                {" "}
+                -{discountPercent}%{" "}
               </span>
             )}
           </>
         ) : (
-          <span>{displayedPrice}&#2547;</span>
+          <span className="text-2xl font-semibold">
+            {displayedPrice}&#2547;
+          </span>
         )}
       </div>
 
@@ -127,14 +132,14 @@ const VariationSelector = ({
                 selectedOptions[Object.keys(selectedOptions)[index - 1]]);
             if (showAttribute) {
               return (
-                <div className="mb-6" key={key}>
-                  <h3 className="text-md font-semibold">Select {key}:</h3>
+                <div className="flex gap-3 items-center" key={key}>
+                  <h3 className="text-md font-semibold">{key}:</h3>
                   <div className="flex flex-wrap my-2">
                     {uniqueValues(key).map((value) => (
                       <button
                         key={value}
                         onClick={() => handleAttributeSelection(key, value)}
-                        className={`m-1 py-1 px-2 border w-16 rounded-md text-sm uppercase cursor-pointer ${
+                        className={`m-1 py-1 px-2 border size-10 rounded-full text-sm uppercase cursor-pointer ${
                           selectedOptions[key] === value
                             ? "bg-primary text-white"
                             : "bg-gray-200"
@@ -152,7 +157,9 @@ const VariationSelector = ({
       </div>
 
       {errorMessage && (
-        <p className="text-red-500 text-sm mt-2 mb-1">{errorMessage}</p>
+        <p className="text-red-500 text-sm font-semibold mt-2 mb-1">
+          {errorMessage}
+        </p>
       )}
     </div>
   );

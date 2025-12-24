@@ -23,13 +23,13 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
         className="text-center mx-auto flex flex-col justify-center items-center"
         onClick={handleCategoryView}
       >
-        <div className="size-28 border border-border rounded-full p-2 flex justify-center items-center overflow-hidden">
+        <div className="size-28 border border-border rounded-full flex justify-center items-center overflow-hidden hover:scale-90 transition-all">
           <Image
             src={`${config.base_url}/${category?.image?.src} ` || ""}
             alt={category?.image?.alt || ""}
             width={200}
             height={200}
-            className="size-20 mx-auto hover:scale-90 transition-all object-contain rounded-full"
+            className="mx-auto transition-all object-contain rounded-full"
           />
         </div>
         <span className="mt-2 text-sm font-bold block">{category.name}</span>

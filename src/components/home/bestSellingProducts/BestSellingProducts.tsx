@@ -26,7 +26,7 @@ const BestSellingProducts = async () => {
           </div>
         </div>
         <div className="flex justify-center mt-5">
-          <Button asChild size={"sm"} className="rounded-full w-[150px]">
+          <Button asChild size={"sm"} className="w-[150px]">
             <Link href={"/shop"}>See more</Link>
           </Button>
         </div>
