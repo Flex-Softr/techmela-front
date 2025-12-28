@@ -1,4 +1,5 @@
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
+import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,14 +9,13 @@ import {
   setPaymentInfo,
   setPaymentInfoError,
 } from "@/redux/features/order/paymentInfo";
+import { useAppDispatch } from "@/redux/hooks";
 import { TPaymentInfo } from "@/types/order/paymentInfo";
 import { TPaymentMethod } from "@/types/paymentMethod";
 // import { TRootState } from "@/types/rootState";
-import Box from "@/components/ui/ec/Box";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import SelectPaymentMethod from "./SelectPaymentMethod";
 const PaymentsGateway = ({
   paymentMethods,
@@ -26,7 +26,7 @@ const PaymentsGateway = ({
   totalCost?: number;
   costLoading?: boolean;
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
     string | null
   >(paymentMethods[0]?._id);
@@ -88,12 +88,12 @@ const PaymentsGateway = ({
       />
       {selectedPaymentMethod && (
         <>
-          <div className="mt-5">
+          <div className="mt-3">
             <h2 className="font-bold">
               {findSelectedPaymentMethod?.description}
             </h2>
 
-            <div className="font-semibold flex gap-2 items-center mt-2">
+            <div className="font-semibold flex gap-2 items-center mt-1">
               You need to pay
               {costLoading ? (
                 <>
@@ -107,7 +107,7 @@ const PaymentsGateway = ({
             </div>
             <div>
               {findSelectedPaymentMethod?.isPaymentDetailsNeeded ? (
-                <div className="mt-3">
+                <div className="mt-2">
                   <div className="flex gap-2 justify-between items-center">
                     <div>
                       <p>
@@ -142,8 +142,8 @@ const PaymentsGateway = ({
                       </p>
                     </div>
                   </div>
-                  <hr className="my-5" />
-                  <form onBlur={handleSubmit(onSubmit)} className="space-y-5">
+                  <hr className="my-2" />
+                  <form onBlur={handleSubmit(onSubmit)} className="space-y-2">
                     <div>
                       <Label className="font-semibold">Phone number :</Label>
                       <Input

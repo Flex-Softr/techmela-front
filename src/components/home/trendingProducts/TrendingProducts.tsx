@@ -1,5 +1,5 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
-import ProductCardPrimary from "@/components/productCards/ProductCardPrimary";
+import ProductCard from "@/components/productCards/ProductCard";
 import SectionTitle from "@/components/sectionTitle/SectionTitle";
 import {
   Carousel,
@@ -27,7 +27,7 @@ const TrendingProducts = async () => {
                   key={product._id}
                   className="basis-1/2 sm:basis-1/3 md:basis-1/5"
                 >
-                  <ProductCardPrimary product={product} />
+                  <ProductCard product={product} />
                 </CarouselItem>
               ))}
             </CarouselContent>

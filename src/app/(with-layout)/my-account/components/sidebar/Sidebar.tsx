@@ -3,14 +3,13 @@ import NavLink from "@/components/navLink/NavLink";
 import { toast } from "@/components/ui/use-toast";
 import { useLogoutMutation } from "@/redux/features/auth/authApi";
 import { logOut } from "@/redux/features/auth/authSlice";
-import { RootState } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import TGenericResponse, { TGenericErrorResponse } from "@/types/response";
-import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [logout] = useLogoutMutation();
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
   const handleLogOut = async () => {
     try {
@@ -19,8 +18,7 @@ const Sidebar = () => {
         dispatch(logOut());
         window?.localStorage?.removeItem("persist:auth");
         toast({
-          title: "Success",
-          description: "Logout successfully",
+          title: "Logout successfully",
         });
       }
     } catch (error) {

@@ -11,7 +11,7 @@ const Checkout = async () => {
     await serverSideFetcher<TPaymentMethod[]>("/payment-method");
 
   return (
-    <section className="mt-3">
+    <section className="mt-[80px] sm:mt-3">
       <ContainerMax>
         <CheckoutPageContent
           shippingCharges={shippingCharges}

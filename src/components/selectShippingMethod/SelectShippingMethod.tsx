@@ -1,18 +1,15 @@
 import { setShipping } from "@/redux/features/shippingClasses/shippingClass";
-import { TRootState } from "@/types/rootState";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import TShippingCharges from "@/types/shippingCharge";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const SelectShippingMethod = ({
   shippingCharges,
 }: {
   shippingCharges?: TShippingCharges[];
 }) => {
-  const selectedShipping = useSelector(
-    (state: TRootState) => state.shippingClass
-  );
-  const dispatch = useDispatch();
+  const selectedShipping = useAppSelector((state) => state.shippingClass);
+  const dispatch = useAppDispatch();
 
   const handleShippingChargeChange = (id: string, amount: number) => {
     dispatch(setShipping({ _id: id, amount }));

@@ -36,7 +36,10 @@ const AddToCartAndBuyNow = ({
         <p>Quantity: </p>{" "}
         <Quantity quantity={quantity} setQuantity={setQuantity} />
       </div>
-      <div className="flex gap-3 mt-4">
+      {isDisabled && (
+        <p className="text-red-500 text-sm mt-2">Please select a variation</p>
+      )}
+      <div className="flex gap-3 mt-2">
         <div className="flex-grow flex gap-2">
           <EcButton
             className="flex-grow text-white"

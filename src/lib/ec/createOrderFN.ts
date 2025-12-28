@@ -73,9 +73,10 @@ const createOrderFN = async ({
         num_items: product?.length,
       });
       toast({
-        title: "Thank you",
-        description: "Order completed.",
+        title: "Thank you! Your order was successfully placed 🎉",
+        className: "bg-success text-white",
       });
+
       router.push(`/thank-you/${result?.data?._id}`);
     }
   } catch (error) {

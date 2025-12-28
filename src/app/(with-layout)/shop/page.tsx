@@ -1,6 +1,6 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
-import ProductCardPrimary from "@/components/productCards/ProductCardPrimary";
+import ProductCard from "@/components/productCards/ProductCard";
 import CustomPagination from "@/components/ui/shared/customPagination/CustomPagination";
 import serverSideFetcher from "@/hooks/serverSideFetcher";
 import TCategory from "@/types/categories/categories";
@@ -113,14 +113,14 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
   const shouldShowPagination = totalPages > 1;
 
   return (
-    <section className="relative pt-2 mt-16 md:mt-0 px-2">
+    <section className="relative pt-2 mt-8 md:mt-0 px-2">
       {/* <div className="absolute inset-0 -z-10 h-full w-full bg-base-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div> */}
       <ContainerMax>
         {/* <CustomBreadcrumb paths={breadcrumbPaths} /> */}
         {!hasCategoryParam && !flashSaleParam && (
           <CategorySection categories={categories} />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 my-4 md:my-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 my-4 md:my-8">
           <div className="">
             <ProductFilterContent
               searchParams={searchParams}
@@ -132,7 +132,7 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-5 justify-between">
               {Array.isArray(products) && products.length > 0 ? (
                 products.map((product: TProduct) => (
-                  <ProductCardPrimary key={product._id} product={product} />
+                  <ProductCard key={product._id} product={product} />
                 ))
               ) : (
                 <ErrorMessage message="No products found" />

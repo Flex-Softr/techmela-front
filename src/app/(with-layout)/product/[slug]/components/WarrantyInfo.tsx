@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import {
@@ -28,22 +27,21 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
   };
 
   return (
-    <div className="flex gap-2 w-[70%] md:w-full">
-      <span className="font-bold text-gray-600 text-sm md:text-xl">
-        Warranty:
-      </span>
+    <div className="flex items-center gap-3">
       {warrantyInfo?.duration ? (
-        <span className="text-gray-600">
+        <span className="text-gray-700 font-medium text-sm">
           {renderDuration(warrantyInfo.duration)}
         </span>
       ) : (
-        <span className="text-gray-600">No warranty available</span>
+        <span className="text-muted-foreground text-sm italic">
+          No warranty available
+        </span>
       )}
       <button
-        className="bg-gray-100 w-[50px] md:w-[80px] px-1 py-0.5 bg-secondary font-bold text-white outline border-primary rounded-md  cursor-pointer"
+        className="px-3 py-0.5 text-xs font-semibold text-secondary bg-transparent hover:bg-secondary hover:text-white rounded-md transition-colors border border-secondary"
         onClick={openModal}
       >
-        View
+        View Details
       </button>
 
       {/* Modal */}
@@ -84,7 +82,9 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
                     ডেলিভারি ম্যানের হাতে নষ্ট প্রোডাক্টটি দিয়ে নতুন
                     প্রোডাক্টটি রিসিভ করতে পারবেন খুব সহজেই।
                   </li>
-                  <li>এই পদ্ধতিকে কুরিয়ারের ভাষায় "এক্সেঞ্জ" বলা হয়।</li>
+                  <li>
+                    এই পদ্ধতিকে কুরিয়ারের ভাষায় &quot;এক্সেঞ্জ&quot; বলা হয়।
+                  </li>
                 </ul>
                 <p>
                   <strong>দ্রষ্টব্য:</strong> <br />
@@ -116,7 +116,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
                   আপনার সন্তুষ্টিই আমাদের অনুপ্রেরণা।
                 </p>
                 <p className="font-bold text-base">Nora life style</p>
-                <p className="font-semibold">"বিশ্বাসের প্রতীক"</p>
+                <p className="font-semibold">&quot;বিশ্বাসের প্রতীক&quot;</p>
               </div>
             </div>
           </div>
