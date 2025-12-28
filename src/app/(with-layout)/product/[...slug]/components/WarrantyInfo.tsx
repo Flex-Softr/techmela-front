@@ -12,7 +12,7 @@ import React, { useState } from "react";
 
 type WarrantyInfoProps = {
   warrantyInfo?: {
-    duration?: string;
+    duration?: { quantity: string; unit: string };
     details?: string;
   };
 };
@@ -23,13 +23,19 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
   const openModal = () => setIsOpen(true);
   // const closeModal = () => setIsOpen(false);
 
+  const renderDuration = (duration: { quantity: string; unit: string }) => {
+    return `${duration.quantity} ${duration.unit}`;
+  };
+
   return (
     <div className="flex gap-2 w-[70%] md:w-full">
       <span className="font-bold text-gray-600 text-sm md:text-xl">
         Warranty:
       </span>
       {warrantyInfo?.duration ? (
-        <span className="text-gray-600">{warrantyInfo.duration}</span>
+        <span className="text-gray-600">
+          {renderDuration(warrantyInfo.duration)}
+        </span>
       ) : (
         <span className="text-gray-600">No warranty available</span>
       )}

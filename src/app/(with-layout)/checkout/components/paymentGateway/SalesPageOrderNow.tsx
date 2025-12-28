@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import SalesPageQuantity from "@/app/sales/components/SalesPageQuantity/SalesPageQuantity";
 import config from "@/config/config";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import SalesPageQuantity from "./Quantity";
 
 const SalesPageOrderNow = ({
   setItemTotal,
@@ -267,51 +267,3 @@ const SalesPageOrderNow = ({
 };
 
 export default SalesPageOrderNow;
-
-// <div
-//             key={index}
-//             className="flex items-center gap-2 md:gap-4 p-1.5 md:p-4 bg-gray-100 rounded-xl shadow-md mt-4"
-//           >
-//             <Image
-//               src={${config.base_url}/${product?.thumbnail?.src || ""}}
-//               alt={product?.thumbnail?.alt || "Product image"}
-//               width={80}
-//               height={80}
-//               className=" xms:w-[70px] xls:w-[70px] sm:w-20 md:w-24 rounded-lg object-cover"
-//             />
-//             <div className="flex justify-start items-center">
-//               <div>
-//                 <p className="font-bold text-sm md:text-lg pt-3 text-black">
-//                   {product?.title}
-//                 </p>
-
-//                 <div className="flex space-x-3 text-sm md:text-base ">
-//                   <p className="text-gray-600 mt-1">
-//                     {Object.values(item.variation.attributes).join(", ")}
-//                   </p>
-//                   <p className="text-gray-400 mt-1">|</p>
-//                   <p className="font-semibold text-primary mt-1">
-//                     ৳{item.totalPrice}
-//                   </p>
-//                 </div>
-//               </div>
-//               <div className="space-y-3 my-auto  ml-auto">
-//                 <div className="text-end">
-//                   <button
-//                     onClick={() => removeVariation(index)}
-//                     className="text-red-500 mt-1.5 hover:text-red-700"
-//                   >
-//                     <FaTrashAlt size={23} />
-//                   </button>
-//                 </div>
-//                 <div className="mt-2">
-//                   <SalesPageQuantity
-//                     quantity={item.quantity}
-//                     setQuantity={(newQuantity: number) =>
-//                       updateQuantity(index, newQuantity)
-//                     }
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-//           </div>

@@ -1,9 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 
 type TProps = {
   quantity: number;
-  setQuantity: Dispatch<SetStateAction<number>>;
+  // eslint-disable-next-line no-unused-vars
+  setQuantity: (quantity: number) => void;
   // eslint-disable-next-line no-unused-vars
   callBack?: (num: number) => Promise<void>;
 };

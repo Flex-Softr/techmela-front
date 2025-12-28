@@ -90,7 +90,7 @@ export type TSingleProduct = {
   price: TPrice;
   warranty: boolean;
   warrantyInfo: {
-    duration: string;
+    duration: { quantity: string; unit: string };
     terms?: string;
   };
   thumbnail: TGalleryImage;
