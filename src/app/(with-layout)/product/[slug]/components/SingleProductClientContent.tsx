@@ -44,7 +44,7 @@ const SingleProductClientContent = ({
         });
         toast({
           title: result?.message,
-          className: "bg-success text-white text-2xl",
+          className: "bg-success text-white",
         });
         success = true;
       }

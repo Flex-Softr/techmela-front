@@ -1,5 +1,5 @@
 "use client";
-import Quantity from "@/app/(with-layout)/checkout/components/paymentGateway/Quantity";
+import Quantity from "@/app/(with-layout)/checkout/components/Quantity";
 import EcButton from "@/components/EcButton/EcButton";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
@@ -32,8 +32,10 @@ const AddToCartAndBuyNow = ({
 
   return (
     <>
-      <div className="flex gap-3 items-center">
-        <p>Quantity: </p>{" "}
+      <div className="flex items-center gap-4 py-2 border-y border-gray-100 mb-2">
+        <span className="text-sm font-semibold text-gray-700 min-w-[70px]">
+          Quantity
+        </span>
         <Quantity quantity={quantity} setQuantity={setQuantity} />
       </div>
       {isDisabled && (

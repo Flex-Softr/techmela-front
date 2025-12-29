@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import TShippingCharges from "@/types/shippingCharge";
 import { MdErrorOutline } from "react-icons/md";
-import PaymentsGateway from "./paymentGateway/PaymentsGateway";
+import PaymentMethods from "./PaymentMethods";
 
 const OrderNow = ({
   shippingCharges,
@@ -73,10 +73,7 @@ const OrderNow = ({
         hideSubtotal={true}
       />
       <div className="order-3 lg:order-4">
-        <PaymentsGateway
-          paymentMethods={paymentMethods}
-          totalCost={calculatedTotal}
-        />
+        <PaymentMethods paymentMethods={paymentMethods} />
       </div>
       {/* Apply Coupon Section */}
       <div className="py-2">

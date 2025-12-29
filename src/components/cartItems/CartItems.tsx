@@ -26,7 +26,7 @@ const CartItems = () => {
       if (res?.success) {
         toast({
           title: res.message,
-          className: "bg-success text-white text-2xl",
+          className: "bg-success text-white",
         });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

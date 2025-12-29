@@ -1,5 +1,5 @@
 "use client";
-import Quantity from "@/app/(with-layout)/checkout/components/paymentGateway/Quantity";
+import Quantity from "@/app/(with-layout)/checkout/components/Quantity";
 import { useToast } from "@/components/ui/use-toast";
 import { useUpdateCartQuantityMutation } from "@/redux/features/cart/cartApi";
 import { TCartItemData } from "@/types/cart";
@@ -35,7 +35,7 @@ const CartItem = ({
       setQuantity(cartItem?.quantity);
       toast({
         title: res?.message,
-        className: "bg-success text-white text-2xl",
+        className: "bg-success text-white",
       });
     }
   };

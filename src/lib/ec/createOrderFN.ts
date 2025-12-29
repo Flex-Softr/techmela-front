@@ -45,13 +45,6 @@ const createOrderFN = async ({
     return;
   }
 
-  if (paymentInfo?.data?.selectedPaymentMethod?.isPaymentDetailsNeeded) {
-    if (!paymentInfo?.data?.phoneNumber || !paymentInfo?.data?.transactionId) {
-      setErrorMessages(["Please fill out payment information."]);
-      return;
-    }
-  }
-
   try {
     const result = (await createOrder(orderData).unwrap()) as TGenericResponse<{
       _id?: string;

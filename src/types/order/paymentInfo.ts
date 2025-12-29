@@ -2,8 +2,7 @@ import { TPaymentMethod } from "../paymentMethod";
 
 export type TPaymentInfo = {
   selectedPaymentMethod: TPaymentMethod;
-  phoneNumber: string | null;
-  transactionId: string | null;
+  paymentDetails?: Record<string, string | number>;
 };
 
 export type TPaymentInfoState = {

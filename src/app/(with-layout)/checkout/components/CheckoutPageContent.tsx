@@ -13,6 +13,7 @@ import {
   setShippingInfo,
   setShippingInfoError,
 } from "@/redux/features/order/shippingInfo";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
@@ -20,7 +21,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ShippingAddress from "../components/ShippingAddress";
 import OrderNow from "./OrderNow";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const CheckoutPageContent = ({
   shippingCharges,
@@ -36,8 +36,9 @@ const CheckoutPageContent = ({
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [createOrder, { isLoading }] = useCreateOrderMutation();
+
   useEffect(() => {
-    const shippingInfo = JSON.parse(
+    const savedShippingInfo = JSON.parse(
       localStorage.getItem("shippingAddress") || "{}"
     );
 
@@ -45,7 +46,7 @@ const CheckoutPageContent = ({
     dispatch(setPaymentInfoError({ errors: null }));
 
     return () => {
-      dispatch(setShippingInfo(shippingInfo));
+      dispatch(setShippingInfo(savedShippingInfo));
       dispatch(setShippingInfoError({ errors: null }));
     };
   }, [dispatch, paymentMethods]);
@@ -60,8 +61,7 @@ const CheckoutPageContent = ({
     const orderData = {
       payment: {
         paymentMethod: paymentInfo?.data?.selectedPaymentMethod?._id,
-        phoneNumber: paymentInfo?.data?.phoneNumber || undefined,
-        transactionId: paymentInfo?.data?.transactionId || undefined,
+        paymentDetails: paymentInfo?.data?.paymentDetails,
       },
       shippingCharge: shippingClass._id,
       shipping: {
@@ -119,7 +119,7 @@ const CheckoutPageContent = ({
             errorMessages={errorMessages}
             isLoading={isLoading}
             isSuccess={isSuccess}
-            shippingCharges={shippingCharges as TShippingCharges[]}
+            shippingCharges={shippingCharges}
             totalCost={totalCost}
             handleUltimateTotalCost={handleUltimateTotalCost}
             paymentMethods={paymentMethods}
