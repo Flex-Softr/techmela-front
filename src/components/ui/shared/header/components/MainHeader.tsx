@@ -27,7 +27,7 @@ const MainHeader = ({ categories }: { categories?: TCategory[] }) => {
       <div className="flex-grow hidden lg:block lg:order-3 max-w-2xl">
         <Search />
       </div>
-      <div className="flex gap-2 items-center order-3 lg:order-4  flex-grow-0 justify-end">
+      <div className="flex items-center order-3 lg:order-4  flex-grow-0 justify-end">
         <CartLinksAndAccount />
       </div>
     </div>

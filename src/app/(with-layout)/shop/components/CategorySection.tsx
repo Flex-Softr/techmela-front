@@ -4,7 +4,13 @@ import CategoryCard from "@/components/categoryCards/CategoryCard";
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
-import { Carousel, CarouselContent } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNextPMiddle,
+  CarouselPreviousPMiddle,
+} from "@/components/ui/carousel";
 import TCategory from "@/types/categories/categories";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -24,9 +30,16 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
         >
           <CarouselContent>
             {categories.map((category) => (
-              <CategoryCard key={category._id} category={category} />
+              <CarouselItem
+                key={category._id}
+                className="basis-1/2 md:basis-1/4 lg:basis-1/6 pt-2"
+              >
+                <CategoryCard category={category} />
+              </CarouselItem>
             ))}
           </CarouselContent>
+          <CarouselPreviousPMiddle />
+          <CarouselNextPMiddle />
         </Carousel>
       </ContainerMax>
     </section>

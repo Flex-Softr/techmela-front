@@ -30,13 +30,13 @@ const CartLinksAndAccount = () => {
   const { totalCartItem } = useCart();
   const [searchValue, setSearchValue] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const [isClient, setIsClient] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const toggleSearchBar = () => {
     setIsSearchVisible(!isSearchVisible);
   };
 
   useEffect(() => {
-    setIsClient(true);
+    setIsMounted(true);
   }, []);
   const {
     data: searchResults,
@@ -69,14 +69,16 @@ const CartLinksAndAccount = () => {
     products = searchResults.data;
   }
 
+  if (!isMounted) return null;
+
   return (
     <>
-      {isClient && isSmallScreen ? (
+      {isSmallScreen ? (
         <>
           <Button
             variant={"ghost"}
             onClick={toggleSearchBar}
-            className="size-8 rounded-full"
+            className="size-8 rounded-full text-primary-foreground"
           >
             <FaSearch />
           </Button>
@@ -97,14 +99,14 @@ const CartLinksAndAccount = () => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full p-2 rounded border pr-10"
+                  className="w-full p-2 rounded-full border pr-10 outline-none focus:outline-none pl-4 placeholder:text-sm"
                   name="searchValue"
                   value={searchValue}
                   onChange={handleInputChange}
                   onFocus={() => setShowSuggestions(true)}
                 />
                 <button className="absolute right-2 top-2" type="submit">
-                  <FaSearch className="w-7 h-7 p-1 bg-primary text-white" />
+                  <FaSearch className="size-6 rounded-full p-1 bg-primary text-white" />
                 </button>
               </div>
               {showSuggestions && searchValue.trim() !== "" && (
@@ -159,15 +161,24 @@ const CartLinksAndAccount = () => {
                   )}
                 </div>
               )}
-              <FaTimes
-                className="w-6 h-6 cursor-pointer text-white ml-2"
-                onClick={toggleSearchBar}
-              />
+              <div className="">
+                <Button
+                  variant={"ghost"}
+                  className="h-6 w-6 aspect-square rounded-full hover:bg-transparent text-primary-foreground"
+                  onClick={toggleSearchBar}
+                >
+                  <FaTimes />
+                </Button>
+              </div>
             </div>
           </form>
         </>
       ) : (
-        <Button asChild variant={"ghost"} className="rounded-full size-8">
+        <Button
+          asChild
+          variant={"ghost"}
+          className="rounded-full size-8 text-primary-foreground"
+        >
           <Link href="/my-account">
             <UserRound className="size-6" />
           </Link>
@@ -176,11 +187,11 @@ const CartLinksAndAccount = () => {
       <Button
         asChild
         variant={"ghost"}
-        className="rounded-full size-8 relative"
+        className="rounded-full size-8 relative text-primary-foreground"
       >
-        <Link href="/cart">
+        <Link href="/checkout">
           <ShoppingCart className="size-6" />
-          <Badge className="bg-primary size-4 text-xs text-white absolute -top-1 -right-1">
+          <Badge className="bg-primary-foreground size-4 text-xs text-primary absolute -top-1 -right-1 pointer-events-none">
             {totalCartItem ?? 0}
           </Badge>
         </Link>

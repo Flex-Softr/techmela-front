@@ -57,21 +57,22 @@ export default function MenuBar({
       href: "/track-your-order",
       displayOnSmallScreenOnly: true,
     },
-    ...categories.map(({ name, slug }) => ({
-      title: name,
-      href: `/shop?category=${slug}`,
-    })),
-    {
-      title: "Dropdown",
-      href: "/category",
-      subMenus: categories.map(({ name, slug }) => ({
+    ...categories.map(({ name, slug, subcategories }) => {
+      if (subcategories.length > 0) {
+        return {
+          title: name,
+          href: `/shop?category=${slug}`,
+          subMenus: subcategories.map(({ name, slug }) => ({
+            title: name,
+            href: `/shop?category=${slug}`,
+          })),
+        };
+      }
+      return {
         title: name,
         href: `/shop?category=${slug}`,
-      })),
-    },
-    // The original code had a "Dropdown45" and then spread categories.
-    // Following the provided snippet, "Dropdown45" is removed and categories are only under "Dropdown".
-    // If categories should also appear as top-level links, they would be added here.
+      };
+    }),
   ];
 
   const isActive = (href: string) =>

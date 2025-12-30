@@ -12,13 +12,13 @@ const BannerCarousel = async ({ bannerSideProducts }: BannerCarouselProps) => {
   const [{ data }] = await serverSideFetcher<TSliders[]>(
     "/slider-banner?isActive=true"
   );
-  const allsliders = data || [];
+  const slides = data || [];
 
   return (
-    <div className="">
+    <div className="max-w-full overflow-hidden">
       <ClientBannerCarousel
         bannerSideProducts={bannerSideProducts}
-        sliders={allsliders.slice(0, 5)}
+        sliders={slides.slice(0, 5)}
       />
     </div>
   );

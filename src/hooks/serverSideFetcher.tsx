@@ -5,17 +5,9 @@ import TGenericResponse from "@/types/response";
 const serverSideFetcher = async <T,>(
   endPoint: string,
   searchParams?: Record<string, string | string[] | undefined>,
-  reqConfig?: Record<string, unknown>
+  reqConfig?: RequestInit
 ): Promise<[TGenericResponse<T>]> => {
   let url = `${config.base_url}/api/v1${endPoint}`;
-
-  if (!reqConfig?.cache) {
-    const newData = {
-      catch: "no-cache",
-      ...reqConfig,
-    };
-    reqConfig = newData;
-  }
 
   if (Object.keys(searchParams || {}).length) {
     const modifiedSearchParams = objectToSearchParams(
@@ -27,7 +19,7 @@ const serverSideFetcher = async <T,>(
   let data: null | TGenericResponse<T> = {};
 
   try {
-    const req = await fetch(url, { cache: "no-cache" });
+    const req = await fetch(url, reqConfig);
     const res = (await req.json()) as TGenericResponse<T>;
     if (res.success) {
       data = res;
