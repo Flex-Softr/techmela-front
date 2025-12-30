@@ -43,9 +43,8 @@ const SingleProductClientContent = ({
           num_items: quantity,
         });
         toast({
-          title: "Success",
-          description: result?.message,
-          className: "bg-success text-white text-2xl",
+          title: result?.message,
+          className: "bg-success text-white",
         });
         success = true;
       }

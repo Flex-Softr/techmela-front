@@ -86,7 +86,7 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
         </div>
       </div>
       <Button size={"sm"} asChild className="m-1 md:m-3 mt-0">
-        <Link href={`/product/${product._id}/${product.slug}`}>Buy now</Link>
+        <Link href={`/product/${product.slug}`}>Buy now</Link>
       </Button>
     </div>
   );

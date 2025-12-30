@@ -1,5 +1,7 @@
 import { TImage } from "../image";
 
+import { TVariation } from "./variableProduct";
+
 type TProductBrand = {
   _id: string;
   name: string;
@@ -24,5 +26,7 @@ export type TProduct = {
   brand?: TProductBrand[];
   image: TImage;
   totalReview: number;
+  type?: string;
+  variations?: TVariation[];
   averageRating: null | number;
 };

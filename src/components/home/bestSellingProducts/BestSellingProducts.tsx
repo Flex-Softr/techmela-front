@@ -1,5 +1,5 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
-import ProductCardPrimary from "@/components/productCards/ProductCardPrimary";
+import ProductCard from "@/components/productCards/ProductCard";
 import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ const BestSellingProducts = async () => {
           <SectionSubtitle text="Discover our most popular products" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 justify-between mt-5">
             {bestSellingProducts?.slice(0, 4)?.map((product) => (
-              <ProductCardPrimary product={product} key={product._id} />
+              <ProductCard product={product} key={product._id} />
             ))}
           </div>
         </div>

@@ -10,14 +10,13 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { useClaimRequestMutation } from "@/redux/features/warrantyApi/warrantyApiSlice";
-import { TRootState } from "@/types/rootState";
+import { useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { useSelector } from "react-redux";
 type FormData = {
   purchaseDate: string;
   validCodes: string;
@@ -30,7 +29,7 @@ type FormData = {
 };
 
 const WarrantyForm = () => {
-  const TableData = useSelector((state: TRootState) => state.tableData);
+  const TableData = useAppSelector((state) => state.tableData);
   const initialCustomerData = {
     fullName: TableData[0]?.shippingDetails?.fullName || "",
     phoneNumber: TableData[0]?.shippingDetails?.phoneNumber || "",

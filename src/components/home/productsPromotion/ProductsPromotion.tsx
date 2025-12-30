@@ -17,13 +17,27 @@ const ProductsPromotion = () => {
             shadow={false}
             className="w-full  h-56 rounded-none justify-between bg-gray-200  max-w-[52rem] flex-row"
             placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+            onResize={undefined}
+            onResizeCapture={undefined}
           >
-            <CardBody placeholder={undefined}>
+            <CardBody
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            >
               <Typography
                 variant="h4"
                 color="blue-gray"
                 className="mb-2"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Lyft launching cross-platform
               </Typography>
@@ -31,6 +45,10 @@ const ProductsPromotion = () => {
                 color="gray"
                 className="mb-8 font-normal"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Like so many organizations these days,
                 <br />
@@ -47,6 +65,10 @@ const ProductsPromotion = () => {
               floated={false}
               className="m-0 w-2/5 shrink-0 bg-gray-200"
               placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
             >
               <Image
                 width={250}
@@ -63,13 +85,27 @@ const ProductsPromotion = () => {
             shadow={false}
             className="w-full  h-56 rounded-none bg-gray-200  max-w-[38rem] flex-row"
             placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+            onResize={undefined}
+            onResizeCapture={undefined}
           >
-            <CardBody placeholder={undefined}>
+            <CardBody
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            >
               <Typography
                 variant="h4"
                 color="blue-gray"
                 className="mb-2"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Lyft launching cross-platform
               </Typography>
@@ -77,6 +113,10 @@ const ProductsPromotion = () => {
                 color="gray"
                 className="mb-8 font-normal"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Like so many organizations these days,
                 <br />
@@ -93,6 +133,10 @@ const ProductsPromotion = () => {
               floated={false}
               className="m-0 w-2/5 shrink-0 bg-gray-200"
               placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
             >
               <Image
                 width={200}
@@ -112,13 +156,27 @@ const ProductsPromotion = () => {
             shadow={false}
             className="w-full  h-56 rounded-none bg-gray-200  max-w-[38rem] flex-row"
             placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+            onResize={undefined}
+            onResizeCapture={undefined}
           >
-            <CardBody placeholder={undefined}>
+            <CardBody
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            >
               <Typography
                 variant="h4"
                 color="blue-gray"
                 className="mb-2"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Lyft launching cross-platform
               </Typography>
@@ -126,6 +184,10 @@ const ProductsPromotion = () => {
                 color="gray"
                 className="mb-8 font-normal"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Like so many organizations these days,
                 <br />
@@ -142,6 +204,10 @@ const ProductsPromotion = () => {
               floated={false}
               className="m-0 w-2/5 shrink-0 bg-gray-200"
               placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
             >
               <Image
                 width={200}
@@ -157,12 +223,20 @@ const ProductsPromotion = () => {
           <Card
             className="w-full  h-56 rounded-none bg-gray-200  max-w-[51rem] flex-row"
             placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+            onResize={undefined}
+            onResizeCapture={undefined}
           >
             <CardHeader
               shadow={false}
               floated={false}
               className="m-0 w-2/5 shrink-0 bg-gray-200 "
               placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
             >
               <Image
                 width={250}
@@ -172,12 +246,22 @@ const ProductsPromotion = () => {
                 className=" object-cover ms-5 mt-2 "
               />
             </CardHeader>
-            <CardBody placeholder={undefined}>
+            <CardBody
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            >
               <Typography
                 variant="h4"
                 color="blue-gray"
                 className="mb-2"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Lyft launching cross-platform
               </Typography>
@@ -185,6 +269,10 @@ const ProductsPromotion = () => {
                 color="gray"
                 className="mb-8 font-normal"
                 placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
               >
                 Like so many organizations these days,
                 <br />

@@ -1,6 +1,12 @@
 "use client";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
-import { CardDescription, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { Input } from "@/components/ui/input";
@@ -9,15 +15,13 @@ import {
   setShippingInfo,
   setShippingInfoError,
 } from "@/redux/features/order/shippingInfo";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { shippingInfo } from "@/schemas/shippingInfo";
 import { TShippingInfo } from "@/types/order/shippingInfo";
-import { TRootState } from "@/types/rootState";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Card, CardFooter, CardHeader } from "@material-tailwind/react";
-import { Link } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 type FormData = {
   fullName: string;
   phoneNumber: string;
@@ -31,14 +35,13 @@ const ShippingAddress = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    setFocus,
   } = useForm({
     resolver: yupResolver(shippingInfo),
     shouldFocusError: false,
   });
-  const dispatch = useDispatch();
-  const shippingInfoData = useSelector(
-    (state: TRootState) => state.shippingInfo
-  );
+  const dispatch = useAppDispatch();
+  const shippingInfoData = useAppSelector((state) => state.shippingInfo);
 
   const [customerHasAccount, setCustomerHasAccount] = useState(false);
   const [shippingAddress, setShippingAddress] = useState<TShippingInfo | null>(
@@ -49,7 +52,14 @@ const ShippingAddress = () => {
     const hasAccount = checkCustomerAccount();
     setCustomerHasAccount(hasAccount);
 
-    if (!hasAccount) {
+    if (shippingInfoData?.data) {
+      const { fullName, phoneNumber, fullAddress, notes } =
+        shippingInfoData.data;
+      setValue("fullName", fullName || "");
+      setValue("phoneNumber", phoneNumber || "");
+      setValue("fullAddress", fullAddress || "");
+      setValue("notes", notes || "");
+    } else if (!hasAccount) {
       const storedShippingAddress = localStorage.getItem("shippingAddress");
       if (storedShippingAddress) {
         const parsedAddress = JSON.parse(storedShippingAddress);
@@ -59,13 +69,37 @@ const ShippingAddress = () => {
         setValue("phoneNumber", parsedAddress.phoneNumber);
         setValue("fullAddress", parsedAddress.fullAddress);
         setValue("notes", parsedAddress.notes || "");
+
+        // Sync with Redux immediately so CheckoutPageContent sees the data
+        dispatch(setShippingInfo(parsedAddress));
       }
     }
-    //  else {
-    //   // If customer has an account, set shippingAddress to null or any default value
-    //   setShippingAddress(null);
-    // }
-  }, [setValue, shippingInfoData]);
+  }, [setValue, shippingInfoData.data, dispatch]);
+
+  useEffect(() => {
+    if (shippingInfoData?.errors && shippingInfoData.errors.length > 0) {
+      // Check which field has error and focus it
+      // Simple heuristic: check if explicit strings match, or just focus the first common field
+      // Since errors is a string array, we might not know exactly which field, but usually "Name" or "Phone" is first.
+      // We can try to map error messages to fields or just default to fullName if generic.
+      // However, usually validations are "Name is required".
+
+      const errorStrings = shippingInfoData.errors.join(" ").toLowerCase();
+      if (errorStrings.includes("name")) {
+        setFocus("fullName");
+      } else if (errorStrings.includes("phone")) {
+        setFocus("phoneNumber");
+      } else if (errorStrings.includes("address")) {
+        setFocus("fullAddress");
+      } else {
+        setFocus("fullName"); // Default to first field
+      }
+      // Scroll into view logic if needed, but setFocus usually handles it or we can do manual scroll
+      const element = document.getElementById("shipping-address-form");
+      if (element)
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [shippingInfoData.errors, setFocus]);
 
   const checkCustomerAccount = () => {
     const isLoggedIn = false;
@@ -95,19 +129,19 @@ const ShippingAddress = () => {
   }, [dispatch, errors]);
 
   return (
-    <Box className="bg-white">
+    <Box className="bg-white p-4">
       <BoxHeading>Shipping Address</BoxHeading>
       {customerHasAccount && (
-        <Card className="w-[350px]" placeholder={undefined}>
-          <CardHeader placeholder={undefined}>
-            <CardTitle className="text-1xl">Default Shipping Address</CardTitle>
+        <Card className="w-[350px]">
+          <CardHeader>
+            <CardTitle className="text-xl">Default Shipping Address</CardTitle>
             <CardDescription>
               {shippingAddress
                 ? `Full Address: ${shippingAddress?.fullAddress}`
                 : "You have not set a default shipping address."}
             </CardDescription>
           </CardHeader>
-          <CardFooter className="flex justify-between" placeholder={undefined}>
+          <CardFooter className="flex justify-between">
             <Link href="/my-account/add-shipping-address">
               <div
                 className="cursor-pointer text-blue-600"
@@ -119,47 +153,56 @@ const ShippingAddress = () => {
           </CardFooter>
         </Card>
       )}
-      <form onBlur={handleSubmit(onSubmit)} className="space-y-5">
+      <form
+        id="shipping-address-form"
+        onBlur={handleSubmit(onSubmit)}
+        className="space-y-3"
+      >
         <div>
-          <Label className="font-bold pl-2 pb-2 block">নাম*</Label>
-          <Input
-            placeholder="এখানে আপনার নাম লিখুন"
-            {...register("fullName")}
-          />
+          <Label className="font-bold pl-1 pb-1 block">Name*</Label>
+          <Input placeholder="Enter your full name" {...register("fullName")} />
           {errors.fullName && (
-            <ErrorMessage message={errors.fullName.message} />
+            <ErrorMessage message={errors.fullName.message} className="mt-1" />
           )}
         </div>
         <div>
-          <Label className="font-bold pl-2 pb-2 block">ফোন নাম্বার*</Label>
+          <Label className="font-bold pl-1 pb-1 block">Phone Number*</Label>
           <Input
-            placeholder="আপনার ফোন নাম্বারটি লিখুন"
+            placeholder="Enter your phone number"
             {...register("phoneNumber")}
           />
           {errors.phoneNumber && (
-            <ErrorMessage message={errors.phoneNumber.message} />
+            <ErrorMessage
+              message={errors.phoneNumber.message}
+              className="mt-1"
+            />
           )}
         </div>
         <div>
-          <Label className="font-bold pl-2 pb-2 block">ঠিকানা*</Label>
+          <Label className="font-bold pl-1 pb-1 block">Address*</Label>
           <Input
-            placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন"
+            placeholder="Enter your full address"
             {...register("fullAddress")}
           />
           {errors.fullAddress && (
-            <ErrorMessage message={errors.fullAddress.message} />
+            <ErrorMessage
+              message={errors.fullAddress.message}
+              className="mt-1"
+            />
           )}
         </div>
         <div>
-          <Label className="font-bold pl-2 pb-2 block">
-            অন্যান্য তথ্য (Optional)
+          <Label className="font-bold pl-1 pb-1 block">
+            Review / Notes (Optional)
           </Label>
           <textarea
-            placeholder="অন্যান্য কোন তথ্য থাকলে তা লিখুন"
+            placeholder="Any specific instructions..."
             {...register("notes")}
-            className="w-full h-28 ring-2 ring-gray-100 rounded-md p-2"
+            className="w-full h-20 ring-1 ring-gray-200 rounded-md p-2 text-sm focus:ring-2 focus:ring-primary outline-none"
           ></textarea>
-          {errors.notes && <ErrorMessage message={errors.notes.message} />}
+          {errors.notes && (
+            <ErrorMessage message={errors.notes.message} className="mt-1" />
+          )}
         </div>
       </form>
     </Box>

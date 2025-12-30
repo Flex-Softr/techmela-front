@@ -53,8 +53,6 @@
     --radius: 0.5rem;
   }
 
-
-
   .dart {
     /* Base */
     --background: 0 0% 100%;
@@ -99,9 +97,6 @@
 
     --radius: 0.5rem;
   }
-
-
-
 }
 
 @layer base {
@@ -150,4 +145,25 @@
 
 .fire-animation {
   animation: fire 1s infinite;
+}
+
+/* Base Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px; /* thinner scrollbar */
+  height: 8px; /* thinner horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5; /* very light gray track */
+  border-radius: 6px; /* slightly smaller radius */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b0b0b0; /* softer gray thumb */
+  border-radius: 6px;
+  border: 2px solid #f5f5f5; /* subtle border */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999999; /* slightly darker on hover */
 }

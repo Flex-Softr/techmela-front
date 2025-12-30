@@ -4,11 +4,12 @@ import {
   ProductToClaim,
   setTableDataToClaim,
 } from "@/redux/features/tableData/tableData";
+import { useAppDispatch } from "@/redux/hooks";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
 import { Product } from "../commonTypes/CommonTypes";
 import WarrantyClaimHistory from "./WarrantyClaimHistory";
+import { JSX } from "react";
 // type ValidCode = { code: string };
 type Props = {
   searchResult: Product[];
@@ -26,7 +27,7 @@ const ProductTable = ({
 }: Props) => {
   const productsWithWarranty: JSX.Element[] = [];
   const productsWithoutWarranty: JSX.Element[] = [];
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   if (error) {

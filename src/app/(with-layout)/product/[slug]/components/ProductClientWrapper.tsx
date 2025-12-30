@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { TSingleProduct } from "@/types/products/singleProduct";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import ProductMainInfo from "./ProductMainInfo";
 import SingleProductClientContent from "./SingleProductClientContent";
 import VariationSelector from "./VariationSelector";
 
@@ -22,6 +23,7 @@ const ProductClientWrapper = ({
   const [selectedVariation, setSelectedVariation] = useState<
     TSingleProduct["variations"][0] | undefined
   >(undefined);
+
   useEffect(() => {
     const productData = {
       content_name: product.title,
@@ -36,15 +38,24 @@ const ProductClientWrapper = ({
 
   return (
     <div>
-      <VariationSelector
-        variations={product.variations}
-        initialPrice={initialVariationPrice}
-        onVariationChange={setSelectedVariation} // Pass state update function
-      />
-      <SingleProductClientContent
+      <ProductMainInfo
         product={product}
         selectedVariation={selectedVariation}
       />
+
+      <div className="border-t border-border mt-2 pt-2">
+        {product.variations && product.variations.length > 0 && (
+          <VariationSelector
+            variations={product.variations}
+            initialPrice={initialVariationPrice}
+            onVariationChange={setSelectedVariation}
+          />
+        )}
+        <SingleProductClientContent
+          product={product}
+          selectedVariation={selectedVariation}
+        />
+      </div>
     </div>
   );
 };

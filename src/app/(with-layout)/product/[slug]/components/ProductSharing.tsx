@@ -43,14 +43,12 @@ const ProductSharing = ({ productUrl }: { productUrl: string }) => {
     try {
       await navigator.clipboard.writeText(productUrl);
       toast({
-        title: "Success",
-        description: "Link copied to clipboard!",
+        title: "Link copied to clipboard!",
         className: "bg-success text-white text-2xl",
       });
     } catch (err) {
       toast({
-        title: "Success",
-        description: "Failed to copy",
+        title: "Failed to copy",
         variant: "destructive",
       });
     }

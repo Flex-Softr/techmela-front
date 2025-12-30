@@ -1,8 +1,6 @@
 "use client";
-import CartItems from "@/components/cartItems/CartItems";
+import CheckoutCartItems from "@/components/cartItems/CheckoutCartItems";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
-import Box from "@/components/ui/ec/Box";
-import BoxHeading from "@/components/ui/ec/BoxHeading";
 import useCart from "@/hooks/useCart";
 import PEventIdGenerator from "@/lib/ec/PEventIdGenerator";
 import createOrderFN from "@/lib/ec/createOrderFN";
@@ -15,16 +13,14 @@ import {
   setShippingInfo,
   setShippingInfoError,
 } from "@/redux/features/order/shippingInfo";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
-import { TRootState } from "@/types/rootState";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ShippingAddress from "../components/ShippingAddress";
 import OrderNow from "./OrderNow";
-import PaymentsGateway from "./paymentGateway/PaymentsGateway";
 
 const CheckoutPageContent = ({
   shippingCharges,
@@ -37,12 +33,12 @@ const CheckoutPageContent = ({
   const [isSuccess, setIsSuccess] = useState(false);
   const { data: cartData, totalCost, isLoading: cartCostLoading } = useCart();
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [createOrder, { isLoading }] = useCreateOrderMutation();
-  const [ultimateCost, setUltimateCost] = useState<number>(0);
+
   useEffect(() => {
-    const shippingInfo = JSON.parse(
+    const savedShippingInfo = JSON.parse(
       localStorage.getItem("shippingAddress") || "{}"
     );
 
@@ -50,23 +46,22 @@ const CheckoutPageContent = ({
     dispatch(setPaymentInfoError({ errors: null }));
 
     return () => {
-      dispatch(setShippingInfo(shippingInfo));
+      dispatch(setShippingInfo(savedShippingInfo));
       dispatch(setShippingInfoError({ errors: null }));
     };
   }, [dispatch, paymentMethods]);
 
-  const shippingInfo = useSelector((state: TRootState) => state.shippingInfo);
-  const paymentInfo = useSelector((state: TRootState) => state.paymentInfo);
-  const shippingClass = useSelector((state: TRootState) => state.shippingClass);
-  const couponInfo = useSelector((state: TRootState) => state.coupon);
+  const shippingInfo = useAppSelector((state) => state.shippingInfo);
+  const paymentInfo = useAppSelector((state) => state.paymentInfo);
+  const shippingClass = useAppSelector((state) => state.shippingClass);
+  const couponInfo = useAppSelector((state) => state.coupon);
 
   const handleOrder = async () => {
     const eventId = PEventIdGenerator("P_");
     const orderData = {
       payment: {
         paymentMethod: paymentInfo?.data?.selectedPaymentMethod?._id,
-        phoneNumber: paymentInfo?.data?.phoneNumber || undefined,
-        transactionId: paymentInfo?.data?.transactionId || undefined,
+        paymentDetails: paymentInfo?.data?.paymentDetails,
       },
       shippingCharge: shippingClass._id,
       shipping: {
@@ -97,9 +92,11 @@ const CheckoutPageContent = ({
       setLimitModalStatus,
     });
   };
-  const handleUltimateTotalCost = (ultimateTotalCost: number) => {
-    // Log the ultimate total cost in the parent component
-    setUltimateCost(ultimateTotalCost);
+
+  const handleUltimateTotalCost = () => {
+    // This function is required by OrderNow but we don't use the value here
+    // so we do nothing. The state was removed to fix 'unused variable' error.
+    // If you need to debug, you can console.log(ultimateTotalCost);
   };
   useEffect(() => {
     gtmEventHandler("initiate_checkout", {});
@@ -107,31 +104,28 @@ const CheckoutPageContent = ({
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-        <Box className="col-span-1 lg:col-span-2 mt-10">
-          <BoxHeading>Added items</BoxHeading>
-          <CartItems />
-        </Box>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-5">
         <div>
           <ShippingAddress />
         </div>
         <div className="order-4 lg:order-3">
+          {/* <Box className="mt-4">
+          <BoxHeading>Added items</BoxHeading>
+          <CheckoutCartItems />
+        </Box> */}
           <OrderNow
             handleOrder={handleOrder}
-            isLoading={isLoading}
-            shippingCharges={shippingCharges}
-            errorMessages={errorMessages}
-            totalCost={totalCost}
             costLoading={cartCostLoading}
+            errorMessages={errorMessages}
+            isLoading={isLoading}
             isSuccess={isSuccess}
+            shippingCharges={shippingCharges}
+            totalCost={totalCost}
             handleUltimateTotalCost={handleUltimateTotalCost}
-          />
-        </div>
-        <div className="order-3 lg:order-4">
-          <PaymentsGateway
             paymentMethods={paymentMethods}
-            totalCost={ultimateCost}
-          />
+          >
+            <CheckoutCartItems />
+          </OrderNow>
         </div>
       </div>
       <OrderLimit

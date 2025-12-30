@@ -45,13 +45,6 @@ const createOrderFN = async ({
     return;
   }
 
-  if (paymentInfo?.data?.selectedPaymentMethod?.isPaymentDetailsNeeded) {
-    if (!paymentInfo?.data?.phoneNumber || !paymentInfo?.data?.transactionId) {
-      setErrorMessages(["Please fill out payment information."]);
-      return;
-    }
-  }
-
   try {
     const result = (await createOrder(orderData).unwrap()) as TGenericResponse<{
       _id?: string;
@@ -73,9 +66,10 @@ const createOrderFN = async ({
         num_items: product?.length,
       });
       toast({
-        title: "Thank you",
-        description: "Order completed.",
+        title: "Thank you! Your order was successfully placed 🎉",
+        className: "bg-success text-white",
       });
+
       router.push(`/thank-you/${result?.data?._id}`);
     }
   } catch (error) {

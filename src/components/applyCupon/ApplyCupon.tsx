@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { setCoupon } from "@/redux/features/order/couponInfo";
 import { useGetCouponCalculationMutation } from "@/redux/features/order/getCouponCalculation";
-import { TRootState } from "@/types/rootState";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { ToastAction } from "../ui/toast";
 import { toast } from "../ui/use-toast";
 
@@ -16,10 +15,10 @@ type TFormValues = {
 };
 
 export default function PromoCode() {
-  const dispatch = useDispatch();
-  const shippingInfo = useSelector((state: TRootState) => state.shippingInfo);
-  const paymentInfo = useSelector((state: TRootState) => state.paymentInfo);
-  const shippingClass = useSelector((state: TRootState) => state.shippingClass);
+  const dispatch = useAppDispatch();
+  const shippingInfo = useAppSelector((state) => state.shippingInfo);
+  const paymentInfo = useAppSelector((state) => state.paymentInfo);
+  const shippingClass = useAppSelector((state) => state.shippingClass);
 
   const {
     register,
@@ -60,10 +59,18 @@ export default function PromoCode() {
       if (appliedCoupon.success) {
         dispatch(
           setCoupon({
-            couponDiscount: appliedCoupon?.data?.couponDiscount,
+            couponDiscount:
+              typeof appliedCoupon?.data?.couponDiscount === "object"
+                ? appliedCoupon?.data?.couponDiscount?.priceSave ||
+                  appliedCoupon?.data?.couponDiscount?.discountAmount
+                : appliedCoupon?.data?.couponDiscount,
             shippingChange: appliedCoupon?.data?.shippingChange,
             coupon: data?.promoCode,
-            cost: appliedCoupon?.data?.cost,
+            cost:
+              typeof appliedCoupon?.data?.cost === "object"
+                ? appliedCoupon?.data?.cost?.regularPrice ||
+                  appliedCoupon?.data?.cost?.price
+                : appliedCoupon?.data?.cost,
           })
         );
 

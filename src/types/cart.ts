@@ -8,6 +8,8 @@ type TProduct = {
   _id: string;
   title: string;
   image: TImage;
+  salePrice?: number;
+  regularPrice?: number;
 };
 
 type TPrice = {
@@ -15,14 +17,11 @@ type TPrice = {
   salePrice: number;
 };
 
-type TAttribute = {
-  name: string;
-  value: string;
-};
-
 type TVariation = {
   _id: string;
-  attributes: TAttribute[];
+  attributes: Record<string, string>;
+  price?: number;
+  regularPrice?: number;
 };
 
 export type TCartItemData = {

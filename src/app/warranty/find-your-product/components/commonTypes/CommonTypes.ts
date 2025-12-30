@@ -60,7 +60,7 @@ export type ImageInfo = {
 
 // Type for warranty details of a product
 export type Warranty = {
-  duration: string;
+  duration: { quantity: string; unit: string };
   startDate: string;
   endsDate: string;
   warrantyCodes: { code: string }[]; // List of warranty codes

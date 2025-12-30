@@ -1,5 +1,6 @@
 "use client";
 
+import CartSidebar from "@/components/cart/CartSidebar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import config from "@/config/config";
@@ -184,18 +185,14 @@ const CartLinksAndAccount = () => {
           </Link>
         </Button>
       )}
-      <Button
-        asChild
-        variant={"ghost"}
-        className="rounded-full size-8 relative text-primary-foreground"
-      >
-        <Link href="/checkout">
+      <CartSidebar>
+        <Button variant={"ghost"} className="rounded-full size-8 relative">
           <ShoppingCart className="size-6" />
           <Badge className="bg-primary-foreground size-4 text-xs text-primary absolute -top-1 -right-1 pointer-events-none">
             {totalCartItem ?? 0}
           </Badge>
-        </Link>
-      </Button>
+        </Button>
+      </CartSidebar>
     </>
   );
 };
