@@ -6,8 +6,16 @@ import TCategory from "@/types/categories/categories";
 import CategorySection from "./shop/components/CategorySection";
 
 const Home = async () => {
-  const [{ data: categories = [] }] =
-    await serverSideFetcher<TCategory[]>("/categories");
+  const [{ data: categories = [] }] = await serverSideFetcher<TCategory[]>(
+    "/categories",
+    undefined,
+    {
+      cache: "force-cache",
+      next: {
+        tags: ["allCategories"],
+      },
+    }
+  );
 
   return (
     <>

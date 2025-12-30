@@ -21,14 +21,14 @@ const resourceLinks = [
 
 const MainFooterContent = () => {
   return (
-    <div className="bg-white py-5 md:py-7 border-t text-gray-600">
+    <div className="py-5 md:py-7 border-t">
       <ContainerMax>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1: Logo & Description */}
           <div className="space-y-2">
             <Link href="/">
               <Image
-                src="/images/logo/logo.jpg"
+                src="/images/logo/logo.png"
                 alt="Company logo"
                 width={150}
                 height={50}
@@ -36,7 +36,7 @@ const MainFooterContent = () => {
                 priority
               />
             </Link>
-            <p className="text-sm font-medium font-muted-foreground leading-relaxed">
+            <p className="text-sm font-medium leading-relaxed text-primary-foreground/80">
               Powering modern businesses with scalable cloud software and robust
               SaaS architecture built for performance and agility.
             </p>
@@ -44,13 +44,13 @@ const MainFooterContent = () => {
 
           {/* Column 2: Company */}
           <div>
-            <h3 className="text-primary font-bold text-lg mb-2.5">Company</h3>
+            <h3 className="font-bold text-lg mb-2.5">Company</h3>
             <ul className="space-y-1">
               {companyLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.url}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                    className="text-sm font-medium hover:text-primary-foreground transition-colors text-primary-foreground/80"
                   >
                     {link.name}
                   </Link>
@@ -61,13 +61,13 @@ const MainFooterContent = () => {
 
           {/* Column 3: Resources */}
           <div>
-            <h3 className="text-primary font-bold text-lg mb-2.5">Resources</h3>
+            <h3 className="font-bold text-lg mb-2.5">Resources</h3>
             <ul className="space-y-1">
               {resourceLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.url}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                    className="text-sm font-medium hover:text-primary-foreground transition-colors text-primary-foreground/80"
                   >
                     {link.name}
                   </Link>
@@ -78,18 +78,18 @@ const MainFooterContent = () => {
 
           {/* Column 4: Contact */}
           <div>
-            <h3 className="text-primary font-bold text-lg mb-2.5">Contact</h3>
+            <h3 className="font-bold text-lg mb-2.5">Contact</h3>
             <div className="space-y-2">
               <a
                 href="mailto:noralifestyle@gmail.com"
-                className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-1 text-sm font-medium text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               >
                 <Mail className="size-4" />
                 noralifestyle@gmail.com
               </a>
               <a
                 href="tel:+8801722222222"
-                className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-1 text-sm font-medium hover:text-primary-foreground transition-colors text-primary-foreground/80"
               >
                 <Phone className="size-4" />
                 +8801722222222

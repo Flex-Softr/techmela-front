@@ -55,26 +55,26 @@ const Search = () => {
 
   return (
     <form onSubmit={handleSearchSubmit} className="relative">
-      <div className="flex justify-center items-center overflow-hidden rounded-md">
+      <div className="flex items-center w-full overflow-hidden">
         <input
           type="search"
-          className="py-5 px-2 w-[90%] outline-none border-2 rounded-md rounded-r-none border-r-0 border-primary h-[45px]"
-          placeholder="Search for products"
           name="searchValue"
           value={searchValue}
           onChange={handleInputChange}
+          placeholder="Search for products"
+          className="w-full h-[44px] px-4 text-sm outline-none border border-primary rounded-full pr-10"
         />
 
         <Button
           type="submit"
-          // className="font-bold w-[10%] flex justify-center items-center bg-primary h-[45px] text-white"
+          className="-ml-10 h-9 w-9 rounded-full flex items-center justify-center bg-primary text-white hover:bg-primary/90"
         >
-          <FaSearch />
+          <FaSearch className="text-sm" />
         </Button>
       </div>
 
       {showSuggestions && searchValue.trim() !== "" && (
-        <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+        <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
           {isLoading && <p className="p-2">Loading...</p>}
 
           {!isLoading && !isError && products.length > 0 ? (

@@ -1,6 +1,5 @@
 "use client";
 
-import { CarouselItem } from "@/components/ui/carousel";
 import config from "@/config/config";
 import TCategory from "@/types/categories/categories";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
@@ -17,24 +16,22 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
   };
 
   return (
-    <CarouselItem className="basis-1/2 sm:basis-1/3 md:basis-1/6 flex justify-center items-center p-0">
-      <Link
-        href={`/shop?category=${category.slug}`}
-        className="text-center mx-auto flex flex-col justify-center items-center"
-        onClick={handleCategoryView}
-      >
-        <div className="size-28 border border-border rounded-full flex justify-center items-center overflow-hidden hover:scale-90 transition-all">
-          <Image
-            src={`${config.base_url}/${category?.image?.src} ` || ""}
-            alt={category?.image?.alt || ""}
-            width={200}
-            height={200}
-            className="mx-auto transition-all object-contain rounded-full"
-          />
-        </div>
-        <span className="mt-2 text-sm font-bold block">{category.name}</span>
-      </Link>
-    </CarouselItem>
+    <Link
+      href={`/shop?category=${category.slug}`}
+      className="text-center mx-auto flex flex-col justify-center items-center"
+      onClick={handleCategoryView}
+    >
+      <div className="size-28 border border-border rounded-md flex justify-center items-center hover:scale-105 transition-all duration-300">
+        <Image
+          src={`${config.base_url}/${category?.image?.src} ` || ""}
+          alt={category?.image?.alt || ""}
+          width={200}
+          height={200}
+          className="mx-auto transition-all object-contain rounded-md"
+        />
+      </div>
+      <span className="mt-2 text-sm font-bold block">{category.name}</span>
+    </Link>
   );
 };
 
