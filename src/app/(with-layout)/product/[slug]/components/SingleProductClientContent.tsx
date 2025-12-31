@@ -60,11 +60,24 @@ const SingleProductClientContent = ({
   };
 
   // Ensure isDisabled is a boolean value
-  const isDisabled = !!(
-    product?.variations &&
-    product.variations.length > 0 &&
-    !selectedVariation
-  );
+  const isVariableProduct =
+    product?.variations && product.variations.length > 0;
+  const isVariationSelected = !!selectedVariation;
+  const isStockAvailable = selectedVariation
+    ? (selectedVariation.inventory?.stockAvailable ?? 0) > 0
+    : !isVariableProduct
+      ? (product?.inventory?.stockAvailable ?? 0) > 0
+      : false;
+
+  const isDisabled =
+    (isVariableProduct && !isVariationSelected) || !isStockAvailable;
+
+  const disabledReason =
+    isVariableProduct && !isVariationSelected
+      ? "Please select a variation"
+      : !isStockAvailable
+        ? "Out of Stock"
+        : undefined;
 
   return (
     <div>
@@ -74,6 +87,7 @@ const SingleProductClientContent = ({
         addToCartHandler={addToCartHandler}
         isAddToCartLoading={isAddToCartLoading}
         isDisabled={isDisabled} // Pass the isDisabled prop
+        disabledReason={disabledReason}
       />
     </div>
   );

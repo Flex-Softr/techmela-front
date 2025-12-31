@@ -1,12 +1,13 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
-import config from "@/config/config";
+import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
 import { TSingleProduct } from "@/types/products/singleProduct";
-import ProductClientWrapper from "./components/ProductClientWrapper"; // Import the client-side wrapper
+import { Phone } from "lucide-react";
+import { Metadata } from "next";
+import ProductClientWrapper from "./components/ProductClientWrapper";
 import ProductDetails from "./components/ProductDetails";
-import ProductSharing from "./components/ProductSharing";
 import RelatedProduct from "./components/RelatedProduct";
 import SingleProductPageImageGallery from "./components/SingleProductPageImageGallery";
 
@@ -17,39 +18,40 @@ type TProps = {
   };
 };
 
-export async function generateMetadata({ params }: TProps) {
-  const product = await fetch(
-    `${config.base_url}/api/v1/products/${params.slug}`
-  ).then((res) => res.json());
+export async function generateMetadata({ params }: TProps): Promise<Metadata> {
+  const product = await fetchProductData(params.slug);
 
   return {
-    title: product.data?.title,
-    description: product.data?.body,
+    title: product?.seoData?.metaTitle || product?.title,
+    description: product?.seoData?.metaDescription,
+    openGraph: {
+      title: product?.seoData?.metaTitle || product?.title,
+      description: product?.seoData?.metaDescription,
+    },
   };
 }
 
 const fetchProductData = async (slug: string) => {
-  const productResponse = await fetch(
-    `${config.base_url}/api/v1/products/${slug}`,
-    { cache: "no-store" }
+  const [response] = await serverSideFetcher<TSingleProduct>(
+    `/products/${slug}`,
+    undefined,
+    { next: { tags: [`product-${slug}`] } }
   );
-  const product = await productResponse.json();
-  return product.data as TSingleProduct;
+  return response?.data;
 };
 
 const fetchRelatedProducts = async (categoryId: string) => {
-  const relatedProductsResponse = await fetch(
-    `${config.base_url}/api/v1/products?category=${categoryId}`
-  );
-  const relatedProducts = await relatedProductsResponse.json();
-  return relatedProducts.data as TProduct[];
+  const [response] = await serverSideFetcher<TProduct[]>("/products", {
+    category: categoryId,
+  });
+  return response?.data;
 };
 
 const SingleProductPage = async ({ params }: TProps) => {
   const product = await fetchProductData(params.slug);
-  const relatedProducts = await fetchRelatedProducts(
-    product?.category?._id?._id || ""
-  );
+  const relatedProducts =
+    product?.category?._id?._id &&
+    (await fetchRelatedProducts(product.category._id._id));
 
   if (!product) {
     return (
@@ -67,7 +69,7 @@ const SingleProductPage = async ({ params }: TProps) => {
   const initialVariationPrice = defaultVariation
     ? defaultVariation.price
     : price;
-  const ShareUrl = "https://www.nora.com.bd";
+
   return (
     <section className="my-10">
       <ContainerMax>
@@ -82,13 +84,25 @@ const SingleProductPage = async ({ params }: TProps) => {
               initialVariationPrice={initialVariationPrice}
             />
 
-            <ProductSharing productUrl={`${ShareUrl}/product/${product._id}`} />
+            <div className="border-2 p-4 rounded-md flex items-center gap-5">
+              <div>
+                <a href="tel:+8801973890872">
+                  <Phone className="text-primary size-10" />
+                </a>
+              </div>
+              <div>
+                <p className="font-semibold text-xl">
+                  <a href="tel:+8801973890872">+8801973890872</a>
+                </p>
+                <p className="text-xs font-semibold">Call for support</p>
+              </div>
+            </div>
           </Box>
           <div className="col-span-1 md:col-span-2 px-3 sm:mt-5 md:mt-10">
             <ProductDetails product={product} />
           </div>
           <div className="col-span-1 md:col-span-2 mt-10">
-            <RelatedProduct products={relatedProducts} />
+            {relatedProducts && <RelatedProduct products={relatedProducts} />}
           </div>
         </div>
       </ContainerMax>

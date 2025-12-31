@@ -1,40 +1,49 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TSingleProduct } from "@/types/products/singleProduct";
 
 const ProductDetails = ({ product }: { product?: TSingleProduct }) => {
   return (
-    <div>
-      <Tabs defaultValue="description">
-        <TabsList className="overflow-x-auto md:overflow-hidden pl-10 md:pl-0">
-          <TabsTrigger value="description">Description</TabsTrigger>
-          <TabsTrigger value="usageGuidelines">Usage guidelines</TabsTrigger>
-          <TabsTrigger value="additionalInfo">
+    <div className="space-y-10">
+      {product?.description && (
+        <section>
+          <h3 className="text-xl font-bold mb-4 text-foreground">
+            Description
+          </h3>
+          <div
+            className="prose max-w-none text-muted-foreground"
+            dangerouslySetInnerHTML={{
+              __html: product.description,
+            }}
+          ></div>
+        </section>
+      )}
+
+      {product?.additionalInfo && (
+        <section>
+          <h3 className="text-xl font-bold mb-4 text-foreground">
             Additional information
-          </TabsTrigger>
-        </TabsList>
-        <hr className="w-full" />
-        <TabsContent value="description">
+          </h3>
           <div
+            className="prose max-w-none text-muted-foreground"
             dangerouslySetInnerHTML={{
-              __html: (product?.description as string) || "",
+              __html: product.additionalInfo,
             }}
           ></div>
-        </TabsContent>
-        <TabsContent value="usageGuidelines">
+        </section>
+      )}
+
+      {product?.usageGuidelines && (
+        <section>
+          <h3 className="text-xl font-bold mb-4 text-foreground">
+            Usage guidelines
+          </h3>
           <div
+            className="prose max-w-none text-muted-foreground"
             dangerouslySetInnerHTML={{
-              __html: (product?.usageGuidelines as string) || "",
+              __html: product.usageGuidelines,
             }}
           ></div>
-        </TabsContent>
-        <TabsContent value="additionalInfo">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: (product?.additionalInfo as string) || "",
-            }}
-          ></div>
-        </TabsContent>
-      </Tabs>
+        </section>
+      )}
     </div>
   );
 };

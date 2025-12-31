@@ -8,6 +8,7 @@ type TProduct = {
   _id: string;
   title: string;
   image: TImage;
+  slug: string;
   salePrice?: number;
   regularPrice?: number;
 };
