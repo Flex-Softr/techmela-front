@@ -186,7 +186,10 @@ const CartLinksAndAccount = () => {
         </Button>
       )}
       <CartSidebar>
-        <Button variant={"ghost"} className="rounded-full size-8 relative">
+        <Button
+          variant={"ghost"}
+          className="rounded-full size-8 relative text-primary-foreground"
+        >
           <ShoppingCart className="size-6" />
           <Badge className="bg-primary-foreground size-4 text-xs text-primary absolute -top-1 -right-1 pointer-events-none">
             {totalCartItem ?? 0}

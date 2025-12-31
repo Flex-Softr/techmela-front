@@ -12,6 +12,7 @@ type VariationSelectorProps = {
   };
   // eslint-disable-next-line no-unused-vars
   onVariationChange: (variation: TSingleProduct["variations"][0]) => void;
+  // selectedVariation?: TSingleProduct["variations"][0];
 };
 
 const VariationSelector = ({
@@ -20,12 +21,14 @@ const VariationSelector = ({
 }: VariationSelectorProps) => {
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string | null;
-  }>({});
+  }>(() => {
+    // Default selection: Find the first variation with available stock
+    const firstInStock = variations?.find(
+      (v) => (v.inventory?.stockAvailable ?? 0) > 0
+    );
+    return firstInStock ? firstInStock.attributes : {};
+  });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  // Initialize selected options if there's only one variation or if filtering logic requires it.
-  // Ideally, we start empty to force user selection, or we can auto-select if needed.
-  // The logic below filters variations based on selection.
 
   useEffect(() => {
     const attributeKeys =
@@ -47,9 +50,7 @@ const VariationSelector = ({
       attributeKeys.length > 0 &&
       !attributeKeys.every((key) => selectedOptions[key])
     ) {
-      // Only show error or hint if user interacts? Or maybe just keep button disabled?
-      // We'll keep error for now but maybe less intrusive (managed by parent or here).
-      // setErrorMessage("Please select detailed options.");
+      // Logic for incomplete selection if needed
     } else {
       setErrorMessage(null);
     }
@@ -60,6 +61,36 @@ const VariationSelector = ({
       ...prev,
       [key]: value,
     }));
+  };
+
+  const isOptionOutOfStock = (currentKey: string, currentValue: string) => {
+    if (!variations?.length) return false;
+    const attributeKeys = Object.keys(variations[0].attributes);
+    const currentIndex = attributeKeys.indexOf(currentKey);
+
+    // Get selections for attributes that precede the current one
+    const previousSelections = attributeKeys.slice(0, currentIndex).reduce(
+      (acc, key) => {
+        if (selectedOptions[key]) {
+          acc[key] = selectedOptions[key]!;
+        }
+        return acc;
+      },
+      {} as Record<string, string>
+    );
+
+    // Check if any variation matches precedent selections, current value, and is in stock
+    const hasStock = variations.some((variation) => {
+      const matchesPrevious = Object.entries(previousSelections).every(
+        ([key, val]) => variation.attributes[key] === val
+      );
+      const matchesCurrent = variation.attributes[currentKey] === currentValue;
+      const inStock = (variation.inventory?.stockAvailable ?? 0) > 0;
+
+      return matchesPrevious && matchesCurrent && inStock;
+    });
+
+    return !hasStock;
   };
 
   const uniqueValues = (key: string) => {
@@ -73,31 +104,57 @@ const VariationSelector = ({
       <div className="my-4">
         {variations?.[0]?.attributes &&
           Object.keys(variations[0].attributes).map((key, index) => {
-            // Simplified: Always show all attribute rows to let user see options?
-            // Or keep the progressive disclosure logic. Progressive is safer for complex variations.
+            const attributeKeys = Object.keys(variations[0].attributes);
+            // Show if it's the first attribute, OR if the previous attribute has been selected
             const showAttribute =
-              index === 0 ||
-              (Object.keys(selectedOptions)[index - 1] &&
-                selectedOptions[Object.keys(selectedOptions)[index - 1]]);
+              index === 0 || selectedOptions[attributeKeys[index - 1]];
 
             if (showAttribute) {
               return (
                 <div className="flex gap-3 items-center mb-3" key={key}>
                   <h3 className="text-sm font-semibold min-w-[60px]">{key}:</h3>
                   <div className="flex flex-wrap gap-2">
-                    {uniqueValues(key).map((value) => (
-                      <button
-                        key={value}
-                        onClick={() => handleAttributeSelection(key, value)}
-                        className={`py-1 px-3 border rounded-md text-sm font-medium transition-all ${
-                          selectedOptions[key] === value
-                            ? "bg-primary text-white border-primary"
-                            : "bg-white text-gray-700 border-gray-200 hover:border-gray-400"
-                        }`}
-                      >
-                        {value}
-                      </button>
-                    ))}
+                    {uniqueValues(key).map((value) => {
+                      const outOfStock = isOptionOutOfStock(key, value);
+                      const isSelected = selectedOptions[key] === value;
+
+                      return (
+                        <button
+                          key={value}
+                          onClick={() =>
+                            !outOfStock && handleAttributeSelection(key, value)
+                          }
+                          disabled={outOfStock}
+                          className={`relative py-1 px-2.5 border rounded-md text-sm font-medium transition-all h-7 flex justify-center items-center ${
+                            isSelected
+                              ? "bg-primary text-white border-primary"
+                              : "bg-white text-gray-700 border-gray-200 hover:border-gray-400"
+                          } ${
+                            outOfStock ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
+                        >
+                          {value}
+                          {outOfStock && (
+                            <div className="absolute inset-0 flex justify-center items-center">
+                              {/* 80% transparent X mark */}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="w-5 h-5 text-black opacity-20"
+                              >
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                              </svg>
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               );

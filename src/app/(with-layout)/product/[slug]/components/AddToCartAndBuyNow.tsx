@@ -10,12 +10,14 @@ const AddToCartAndBuyNow = ({
   addToCartHandler,
   isAddToCartLoading,
   isDisabled, // Prop to control the disabled state
+  disabledReason,
 }: {
   addToCartHandler: () => Promise<boolean>;
   quantity: number;
   setQuantity: Dispatch<SetStateAction<number>>;
   isAddToCartLoading: boolean;
   isDisabled: boolean; // Prop type for disabling buttons
+  disabledReason?: string;
 }) => {
   const router = useRouter();
 
@@ -39,7 +41,9 @@ const AddToCartAndBuyNow = ({
         <Quantity quantity={quantity} setQuantity={setQuantity} />
       </div>
       {isDisabled && (
-        <p className="text-red-500 text-sm mt-2">Please select a variation</p>
+        <p className="text-red-600 text-sm font-semibold mt-2">
+          {disabledReason || "Please select a variation"}
+        </p>
       )}
       <div className="flex gap-3 mt-2">
         <div className="flex-grow flex gap-2">
