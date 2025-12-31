@@ -52,7 +52,7 @@ const CheckoutCartItem = ({
   return (
     <div className="flex items-start gap-3 py-4 border-b last:border-b-0">
       <Link
-        href={`/product/${cartItem?.product?._id}`}
+        href={`/product/${cartItem?.product?.slug}`}
         className="relative flex-shrink-0"
       >
         <Image
@@ -68,8 +68,8 @@ const CheckoutCartItem = ({
       <div className="flex-grow min-w-0 flex flex-col h-full justify-between gap-2">
         <div>
           <Link
-            href={`/product/${cartItem?.product?._id}`}
-            className="text-sm font-medium hover:text-secondary truncate block"
+            href={`/product/${cartItem?.product?.slug}`}
+            className="text-sm font-bold hover:text-secondary truncate block"
           >
             {cartItem?.product?.title}
           </Link>

@@ -53,12 +53,13 @@ const ShippingAddress = () => {
     setCustomerHasAccount(hasAccount);
 
     if (shippingInfoData?.data) {
-      const { fullName, phoneNumber, fullAddress, notes } =
+      const { fullName, phoneNumber, fullAddress, notes, email } =
         shippingInfoData.data;
       setValue("fullName", fullName || "");
       setValue("phoneNumber", phoneNumber || "");
       setValue("fullAddress", fullAddress || "");
       setValue("notes", notes || "");
+      setValue("email", email || "");
     } else if (!hasAccount) {
       const storedShippingAddress = localStorage.getItem("shippingAddress");
       if (storedShippingAddress) {
@@ -69,6 +70,7 @@ const ShippingAddress = () => {
         setValue("phoneNumber", parsedAddress.phoneNumber);
         setValue("fullAddress", parsedAddress.fullAddress);
         setValue("notes", parsedAddress.notes || "");
+        setValue("email", parsedAddress.email || "");
 
         // Sync with Redux immediately so CheckoutPageContent sees the data
         dispatch(setShippingInfo(parsedAddress));
@@ -91,6 +93,8 @@ const ShippingAddress = () => {
         setFocus("phoneNumber");
       } else if (errorStrings.includes("address")) {
         setFocus("fullAddress");
+      } else if (errorStrings.includes("email")) {
+        setFocus("email");
       } else {
         setFocus("fullName"); // Default to first field
       }
@@ -159,14 +163,19 @@ const ShippingAddress = () => {
         className="space-y-3"
       >
         <div>
-          <Label className="font-bold pl-1 pb-1 block">Name*</Label>
+          <Label className="font-bold pl-1 pb-1 block">
+            Name
+            <span className="text-red-600">*</span>
+          </Label>
           <Input placeholder="Enter your full name" {...register("fullName")} />
           {errors.fullName && (
             <ErrorMessage message={errors.fullName.message} className="mt-1" />
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 pb-1 block">Phone Number*</Label>
+          <Label className="font-bold pl-1 pb-1 block">
+            Phone Number <span className="text-red-600">*</span>
+          </Label>
           <Input
             placeholder="Enter your phone number"
             {...register("phoneNumber")}
@@ -179,7 +188,16 @@ const ShippingAddress = () => {
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 pb-1 block">Address*</Label>
+          <Label className="font-bold pl-1 pb-1 block">Email (Optional)</Label>
+          <Input placeholder="Enter your email" {...register("email")} />
+          {errors.email && (
+            <ErrorMessage message={errors.email.message} className="mt-1" />
+          )}
+        </div>
+        <div>
+          <Label className="font-bold pl-1 pb-1 block">
+            Address <span className="text-red-600">*</span>
+          </Label>
           <Input
             placeholder="Enter your full address"
             {...register("fullAddress")}
