@@ -16,30 +16,28 @@ import {
   setShippingInfoError,
 } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { shippingInfo } from "@/schemas/shippingInfo";
 import { TShippingInfo } from "@/types/order/shippingInfo";
-import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-type FormData = {
+import { useFormContext } from "react-hook-form";
+
+// Define a type for the form data we expect in the context
+type CheckoutFormData = {
   fullName: string;
   phoneNumber: string;
   fullAddress: string;
-  notes?: string | null | undefined;
+  notes?: string;
+  email?: string;
+  // Payment fields are also in here but not used in this component
 };
 
 const ShippingAddress = () => {
   const {
     register,
-    handleSubmit,
     formState: { errors },
     setValue,
-    setFocus,
-  } = useForm({
-    resolver: yupResolver(shippingInfo),
-    shouldFocusError: false,
-  });
+  } = useFormContext<CheckoutFormData>();
+
   const dispatch = useAppDispatch();
   const shippingInfoData = useAppSelector((state) => state.shippingInfo);
 
@@ -78,59 +76,19 @@ const ShippingAddress = () => {
     }
   }, [setValue, shippingInfoData.data, dispatch]);
 
-  useEffect(() => {
-    if (shippingInfoData?.errors && shippingInfoData.errors.length > 0) {
-      // Check which field has error and focus it
-      // Simple heuristic: check if explicit strings match, or just focus the first common field
-      // Since errors is a string array, we might not know exactly which field, but usually "Name" or "Phone" is first.
-      // We can try to map error messages to fields or just default to fullName if generic.
-      // However, usually validations are "Name is required".
-
-      const errorStrings = shippingInfoData.errors.join(" ").toLowerCase();
-      if (errorStrings.includes("name")) {
-        setFocus("fullName");
-      } else if (errorStrings.includes("phone")) {
-        setFocus("phoneNumber");
-      } else if (errorStrings.includes("address")) {
-        setFocus("fullAddress");
-      } else if (errorStrings.includes("email")) {
-        setFocus("email");
-      } else {
-        setFocus("fullName"); // Default to first field
-      }
-      // Scroll into view logic if needed, but setFocus usually handles it or we can do manual scroll
-      const element = document.getElementById("shipping-address-form");
-      if (element)
-        element.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [shippingInfoData.errors, setFocus]);
-
   const checkCustomerAccount = () => {
     const isLoggedIn = false;
     const hasAccountId = false;
     return isLoggedIn || hasAccountId;
   };
 
-  const onSubmit = (data: FormData) => {
-    const notes =
-      data.notes !== null && data.notes !== undefined ? data.notes : "";
-    const shippingInfo: TShippingInfo = {
-      ...data,
-      notes,
-    };
-    dispatch(setShippingInfo(shippingInfo));
-    dispatch(setShippingInfoError({ errors: null }));
-    localStorage.setItem("shippingAddress", JSON.stringify(shippingInfo));
-  };
-
   useEffect(() => {
-    if (Object.keys(errors).length) {
-      const errorMessages = Object?.keys(errors).map(
-        (item) => errors[item as keyof typeof errors]?.message
-      );
-      dispatch(setShippingInfoError({ errors: errorMessages }));
-    }
-  }, [dispatch, errors]);
+    // If Redux has errors (e.g. from backend), we might want to show them?
+    // But now validation is client-side via RHF.
+    // If we want to sync RHF errors to Redux (unlikely needed anymore), we could.
+    // We'll clear Redux errors on mount to be safe.
+    dispatch(setShippingInfoError({ errors: null }));
+  }, [dispatch]);
 
   return (
     <Box className="bg-white p-4">
@@ -157,17 +115,22 @@ const ShippingAddress = () => {
           </CardFooter>
         </Card>
       )}
-      <form
-        id="shipping-address-form"
-        onBlur={handleSubmit(onSubmit)}
-        className="space-y-3"
-      >
+      <div id="shipping-address-form" className="space-y-3">
         <div>
           <Label className="font-bold pl-1 pb-1 block">
             Name
             <span className="text-red-600">*</span>
           </Label>
-          <Input placeholder="Enter your full name" {...register("fullName")} />
+          <Input
+            placeholder="Enter your full name"
+            {...register("fullName", {
+              required: "Name is required",
+              maxLength: {
+                value: 20,
+                message: "Name can not be greater than 20 character.",
+              },
+            })}
+          />
           {errors.fullName && (
             <ErrorMessage message={errors.fullName.message} className="mt-1" />
           )}
@@ -178,7 +141,14 @@ const ShippingAddress = () => {
           </Label>
           <Input
             placeholder="Enter your phone number"
-            {...register("phoneNumber")}
+            {...register("phoneNumber", {
+              required: "Phone number is required.",
+              pattern: {
+                value: /^(?!.*[a-zA-Z])01\d{9}$/,
+                message:
+                  "Please provide a valid mobile number starting with 01 and with a total of 11 digits.",
+              },
+            })}
           />
           {errors.phoneNumber && (
             <ErrorMessage
@@ -189,7 +159,15 @@ const ShippingAddress = () => {
         </div>
         <div>
           <Label className="font-bold pl-1 pb-1 block">Email (Optional)</Label>
-          <Input placeholder="Enter your email" {...register("email")} />
+          <Input
+            placeholder="Enter your email"
+            {...register("email", {
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            })}
+          />
           {errors.email && (
             <ErrorMessage message={errors.email.message} className="mt-1" />
           )}
@@ -200,7 +178,9 @@ const ShippingAddress = () => {
           </Label>
           <Input
             placeholder="Enter your full address"
-            {...register("fullAddress")}
+            {...register("fullAddress", {
+              required: "Full address is required",
+            })}
           />
           {errors.fullAddress && (
             <ErrorMessage
@@ -222,7 +202,7 @@ const ShippingAddress = () => {
             <ErrorMessage message={errors.notes.message} className="mt-1" />
           )}
         </div>
-      </form>
+      </div>
     </Box>
   );
 };

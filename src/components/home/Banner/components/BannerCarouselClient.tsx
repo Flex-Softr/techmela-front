@@ -25,28 +25,20 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
 }) => {
   const plugin = useRef(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Autoplay({ delay: 2000, stopOnInteraction: true }) as any
+    Autoplay({
+      delay: 2000,
+      stopOnInteraction: true,
+      stopOnMouseEnter: true,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }) as any
   );
 
   if (!sliders || sliders.length === 0) {
     return null;
   }
 
-  const handleMouseEnter = () => {
-    plugin.current.stop();
-  };
-
-  const handleMouseLeave = () => {
-    plugin.current.play();
-  };
-
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      className=""
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <Carousel plugins={[plugin.current]} className="">
       <CarouselContent>
         {sliders?.map((slider) => (
           <CarouselItem key={slider._id}>

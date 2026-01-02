@@ -7,11 +7,6 @@ export type TShippingInfo = {
 };
 
 export type TShippingInfoState = {
-  fullName: string;
-  phoneNumber: string;
-  notes: string;
-  email: undefined;
-  fullAddress: string;
   data: null | TShippingInfo;
   errors: string[] | null;
 };

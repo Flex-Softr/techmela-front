@@ -86,6 +86,7 @@ const CheckoutCartItem = ({
         {/* Quantity Control */}
         <div className="flex items-center border rounded-md w-max">
           <button
+            type="button"
             onClick={() => handleUpdateQuantity(quantity - 1)}
             disabled={quantity <= 1 || isLoading}
             className="px-3 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
@@ -96,6 +97,7 @@ const CheckoutCartItem = ({
             {quantity}
           </span>
           <button
+            type="button"
             onClick={() => handleUpdateQuantity(quantity + 1)}
             disabled={isLoading}
             className="px-3 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
@@ -110,7 +112,11 @@ const CheckoutCartItem = ({
         <div className="text-sm font-bold whitespace-nowrap">
           &#2547; {(price * quantity)?.toFixed(2)}
         </div>
+        <div className="text-xs text-muted-foreground text-right">
+          {quantity} x &#2547; {price?.toFixed(2)}
+        </div>
         <button
+          type="button"
           onClick={() => handleRemoveFromCart(cartItem?._id)}
           className="text-gray-400 hover:text-red-500 transition-colors"
           title="Remove item"

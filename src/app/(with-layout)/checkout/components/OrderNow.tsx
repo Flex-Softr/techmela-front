@@ -5,8 +5,7 @@ import CartTotalCalculations from "@/components/cartTotalCalculations/CartTotalC
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
-import { resetCoupon } from "@/redux/features/order/couponInfo";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import TShippingCharges from "@/types/shippingCharge";
 import { MdErrorOutline } from "react-icons/md";
@@ -15,50 +14,29 @@ import PaymentMethods from "./PaymentMethods";
 const OrderNow = ({
   shippingCharges,
   errorMessages,
-  handleOrder,
+  // handleOrder removed
   isLoading,
   totalCost,
   costLoading,
-  handleUltimateTotalCost,
   isSuccess,
   paymentMethods,
   children,
 }: {
   shippingCharges: TShippingCharges[];
   errorMessages: string[];
-  handleOrder: () => Promise<void>;
+  handleOrder?: () => Promise<void>; // kept optional in type for now to avoid breaking parent if not updated perfectly, but unused
   isLoading?: boolean;
   totalCost?: number;
   costLoading?: boolean;
   isSuccess?: boolean;
-  handleUltimateTotalCost: (ultimateTotalCost: number) => void;
   paymentMethods: TPaymentMethod[];
   children?: React.ReactNode;
 }) => {
-  const dispatch = useAppDispatch();
-  const selectedShipping = useAppSelector((state) => state.shippingClass);
-  const couponInfo = useAppSelector((state) => state.coupon);
+  const { calculatedTotal } = useCheckoutLogic({
+    totalCost,
+  });
 
-  const { couponDiscount, cost, shippingChange } = couponInfo;
-  const totalWithoutCoupon = Math.floor(
-    (totalCost || 0) + (selectedShipping.amount || 0)
-  );
-  // Calculate coupon discount
-  const discount = couponDiscount ?? 0;
-  // const applicableDiscount =
-  //   discount > couponInfo.maxDiscountAmount
-  //     ? couponInfo.maxDiscountAmount
-  //     : discount;
-
-  const ultimateTotalCost = (cost ?? 0) - discount + (shippingChange ?? 0);
-  const calculatedTotal = couponDiscount
-    ? ultimateTotalCost
-    : totalWithoutCoupon;
-  handleUltimateTotalCost(calculatedTotal);
-  const handleOrderClick = async () => {
-    await handleOrder();
-    dispatch(resetCoupon());
-  };
+  // No local click handler needed, form submit handles it.
 
   return (
     <Box className="bg-white p-4">
@@ -99,7 +77,7 @@ const OrderNow = ({
       <EcButton
         className="w-full font-bold text-white mt-2"
         variant="secondary"
-        onClick={handleOrderClick} // Use the new handler
+        type="submit"
         loading={isLoading || isSuccess}
         disabled={isLoading || isSuccess}
         loadingText="Creating order"

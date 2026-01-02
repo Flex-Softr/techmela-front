@@ -33,6 +33,7 @@ export default function PromoCode() {
   const [getCouponCalculation] = useGetCouponCalculationMutation();
 
   const onSubmit = async (data: TFormValues) => {
+    if (!data.promoCode) return;
     setLoading(true);
 
     const shippingDetails = {
@@ -130,28 +131,32 @@ export default function PromoCode() {
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex items-center space-x-2"
-      >
+      <div className="flex items-center space-x-2">
         <div className="w-full">
           <Input
             disabled={applied ? true : false}
             type="text"
             placeholder="If you have a Promo Code, Enter Here..."
-            className={`w-full ${errors.promoCode ? "border-red-500" : ""}`}
-            {...register("promoCode", { required: "Promo code is required" })}
+            className={`w-full ${errors.promoCode ? "ring-red-500" : ""}`}
+            {...register("promoCode")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSubmit(onSubmit)();
+              }
+            }}
           />
         </div>
         <Button
-          type="submit"
+          type="button"
+          onClick={handleSubmit(onSubmit)}
           className="bg-primary text-white flex items-center"
           disabled={loading || applied}
         >
           {applied ? "Applied" : "Apply"}
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         </Button>
-      </form>
+      </div>
       {errors.promoCode && (
         <span className="text-red-500 text-sm">{errors.promoCode.message}</span>
       )}

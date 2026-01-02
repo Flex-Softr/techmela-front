@@ -4,11 +4,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState: TShippingInfoState = {
   data: null,
   errors: null,
-  fullAddress: "",
-  fullName: "",
-  phoneNumber: "",
-  notes: "",
-  email: undefined,
 };
 
 const shippingInfo = createSlice({
