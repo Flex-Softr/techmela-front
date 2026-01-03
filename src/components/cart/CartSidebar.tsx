@@ -30,9 +30,8 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
       await deleteCartItem({ itemId: id }).unwrap();
     } catch (error) {
       toast({
+        title: "Failed to remove item from cart.",
         variant: "destructive",
-        title: "Error",
-        description: "Failed to remove item from cart.",
       });
     }
   };

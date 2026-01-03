@@ -46,9 +46,9 @@ const ChangePasswordForm = () => {
         });
       } else {
         toast({
-          description:
-            " Failed to Change Password,The previous password did not match!",
-          className: "text-red-500",
+          title:
+            "Failed to Change Password,The previous password did not match!",
+          variant: "destructive",
         });
       }
     }

@@ -51,8 +51,8 @@ const SingleProductClientContent = ({
     } catch (error) {
       const sanitizedError = error as TGenericErrorResponse;
       toast({
-        title: "Failed",
-        description: sanitizedError.message,
+        title: sanitizedError.message || "Failed to add to cart",
+        variant: "destructive",
       });
       success = false;
     }

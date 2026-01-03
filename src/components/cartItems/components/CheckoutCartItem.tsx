@@ -42,8 +42,7 @@ const CheckoutCartItem = ({
     } catch (error: any) {
       setQuantity(cartItem?.quantity); // Revert on failure
       toast({
-        title: "Error",
-        description: error?.message || "Failed to update cart",
+        title: error?.message || "Failed to update cart",
         variant: "destructive",
       });
     }
