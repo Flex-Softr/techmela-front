@@ -1,5 +1,5 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
-import config from "@/config/config";
+import { getImageSrc } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,8 +30,8 @@ const HighlightAProduct = ({ product }: { product: TProduct | null }) => {
           </div>
           <div className="mx-auto col-span-2">
             <Image
-              src={`${config.base_url}/${product?.image?.src as string} ` || ""}
-              alt={(product?.image?.alt as string) || ""}
+              src={getImageSrc(product?.image?.src)}
+              alt={product?.image?.alt || ""}
               width={200}
               height={200}
               className="w-20 h-20"

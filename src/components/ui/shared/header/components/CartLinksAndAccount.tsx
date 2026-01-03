@@ -3,8 +3,8 @@
 import CartSidebar from "@/components/cart/CartSidebar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import config from "@/config/config";
 import useCart from "@/hooks/useCart";
+import { getImageSrc } from "@/lib/utils";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
 import { ShoppingCart, UserRound } from "lucide-react";
 import Image from "next/image";
@@ -124,10 +124,7 @@ const CartLinksAndAccount = () => {
                         <Image
                           width={55}
                           height={55}
-                          src={
-                            `${config.base_url}/${product.thumbnail?.src} ` ||
-                            ""
-                          }
+                          src={getImageSrc(product.thumbnail?.src)}
                           alt={product.thumbnail?.alt || ""}
                           className="suggestion-image"
                         />

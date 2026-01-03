@@ -1,6 +1,5 @@
 "use client";
-
-import config from "@/config/config";
+import { getImageSrc } from "@/lib/utils";
 import TCategory from "@/types/categories/categories";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import Image from "next/image";
@@ -23,7 +22,7 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
     >
       <div className="size-28 border border-border rounded-md flex justify-center items-center hover:scale-105 transition-all duration-300">
         <Image
-          src={`${config.base_url}/${category?.image?.src} ` || ""}
+          src={getImageSrc(category?.image?.src)}
           alt={category?.image?.alt || ""}
           width={200}
           height={200}

@@ -665,7 +665,7 @@
 //               <Image
 //                 layout="fill"
 //                 objectFit="contain"
-//                 src={`${config?.base_url}/${product?.image?.src} ` || ""}
+//                 src={`${config?.api_base_url}/${product?.image?.src} ` || ""}
 //                 alt={product?.image?.alt || ""}
 //               />
 //             </div>

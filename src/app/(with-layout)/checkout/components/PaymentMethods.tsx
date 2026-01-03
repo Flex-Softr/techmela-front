@@ -4,7 +4,7 @@ import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import config from "@/config/config";
+import { getImageSrc } from "@/lib/utils";
 import { setPaymentInfoError } from "@/redux/features/order/paymentInfo";
 import { useAppDispatch } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
@@ -92,7 +92,7 @@ const PaymentMethods = ({
                   <span className="font-semibold text-sm">{method.name}</span>
                   {method.image?.src && (
                     <Image
-                      src={`${config.base_url}/${method.image.src}`}
+                      src={getImageSrc(method.image.src)}
                       alt={method.image.alt || method.name}
                       width={40}
                       height={40}

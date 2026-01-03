@@ -1,5 +1,5 @@
 "use client";
-import config from "@/config/config";
+import { getImageSrc } from "@/lib/utils";
 import { TGalleryImage } from "@/types/products/singleProduct";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -10,8 +10,8 @@ const SingleProductPageImageGallery = ({
   gallery: TGalleryImage[];
 }) => {
   const galleryImages = gallery?.map((image) => ({
-    original: `${config.base_url}/${image?.src} `,
-    thumbnail: `${config.base_url}/${image?.src}`,
+    original: getImageSrc(image?.src),
+    thumbnail: getImageSrc(image?.src),
     crossOrigin: "anonymous",
   }));
 

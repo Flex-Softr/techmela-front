@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import config from "@/config/config";
+import { getImageSrc } from "@/lib/utils";
 import {
   ProductToClaim,
   setTableDataToClaim,
@@ -63,7 +63,7 @@ const ProductTable = ({
               <Image
                 layout="fill"
                 objectFit="contain"
-                src={`${config?.base_url}/${product?.image?.src} ` || ""}
+                src={getImageSrc(product?.image?.src)}
                 alt={product?.image?.alt || ""}
               />
             </div>
@@ -234,7 +234,7 @@ export default ProductTable;
 //               <Image
 //                 layout="fill"
 //                 objectFit="contain"
-//                 src={`${config?.base_url}/${product?.image?.src} ` || ""}
+//                 src={`${config?.api_base_url}/${product?.image?.src} ` || ""}
 //                 alt={product?.image?.alt || ""}
 //               />
 //             </div>

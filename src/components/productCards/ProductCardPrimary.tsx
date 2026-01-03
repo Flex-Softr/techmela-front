@@ -1,5 +1,4 @@
-import config from "@/config/config";
-import { cn } from "@/lib/utils";
+import { cn, getImageSrc } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +35,7 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
 
         <div className="">
           <Image
-            src={`${config.base_url}/${product?.thumbnail?.src} ` || ""}
+            src={getImageSrc(product?.thumbnail?.src)}
             alt={product?.thumbnail?.alt || ""}
             height={400}
             width={400}

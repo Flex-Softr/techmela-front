@@ -41,8 +41,9 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
     );
 
   // Fetch categories as usual
-  const [{ data: categories = [] }] =
-    await serverSideFetcher<TCategory[]>("/categories");
+  const [{ data: categories = [] }] = await serverSideFetcher<TCategory[]>(
+    "/categories?isActive=true"
+  );
 
   // Fetch products based on current page, limit, and offset
   // Construct the base URL for the product query

@@ -7,7 +7,7 @@ import CategorySection from "./shop/components/CategorySection";
 
 const Home = async () => {
   const [{ data: categories = [] }] = await serverSideFetcher<TCategory[]>(
-    "/categories",
+    "/categories?isActive=true",
     undefined,
     {
       cache: "force-cache",

@@ -7,7 +7,7 @@ const serverSideFetcher = async <T,>(
   searchParams?: Record<string, string | string[] | undefined>,
   reqConfig?: RequestInit
 ): Promise<[TGenericResponse<T>]> => {
-  let url = `${config.base_url}/api/v1${endPoint}`;
+  let url = `${config.api_base_url}/api/v1${endPoint}`;
 
   if (Object.keys(searchParams || {}).length) {
     const modifiedSearchParams = objectToSearchParams(

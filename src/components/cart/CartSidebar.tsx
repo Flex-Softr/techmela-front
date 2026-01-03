@@ -9,8 +9,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useToast } from "@/components/ui/use-toast";
-import config from "@/config/config";
 import useCart from "@/hooks/useCart";
+import { getImageSrc } from "@/lib/utils";
 import { useDeleteFromCartMutation } from "@/redux/features/cart/cartApi";
 import { TCartItemData } from "@/types/cart";
 import { X } from "lucide-react";
@@ -110,11 +110,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                   >
                     <div className="relative w-16 h-16 flex-shrink-0 border rounded-md overflow-hidden bg-gray-50">
                       <Image
-                        src={
-                          product?.image?.src?.startsWith("http")
-                            ? product.image.src
-                            : `${config.base_url}/${product?.image?.src}`
-                        }
+                        src={getImageSrc(product?.image?.src)}
                         alt={
                           product?.image?.alt ||
                           product?.title ||

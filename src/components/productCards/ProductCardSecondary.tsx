@@ -1,4 +1,4 @@
-import config from "@/config/config";
+import { getImageSrc } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,7 @@ const ProductCardSecondary = ({ product }: { product: TProduct }) => {
     <div className="grid grid-cols-4 w-80 gap-3 p-2">
       <div>
         <Image
-          src={`${config.base_url}/${product.thumbnail?.src} ` || ""}
+          src={getImageSrc(product.thumbnail?.src)}
           alt={product.thumbnail?.alt || ""}
           width={300}
           height={300}

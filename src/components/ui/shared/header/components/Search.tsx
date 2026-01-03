@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import config from "@/config/config";
+import { getImageSrc } from "@/lib/utils";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -87,7 +87,7 @@ const Search = () => {
                 <Image
                   width={55}
                   height={55}
-                  src={`${config.base_url}/${product.thumbnail?.src} ` || ""}
+                  src={getImageSrc(product.thumbnail?.src)}
                   alt={product.thumbnail?.alt || ""}
                   className="suggestion-image"
                 />

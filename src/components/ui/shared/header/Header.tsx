@@ -6,7 +6,7 @@ import TopHeader from "./components/TopHeader";
 
 const Header = async () => {
   const [{ data: categories = [] }] = await serverSideFetcher<TCategory[]>(
-    "/categories",
+    "/categories?isActive=true",
     undefined,
     { next: { tags: ["parent-category"] } }
   );
