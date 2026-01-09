@@ -1,9 +1,9 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
 import { TSingleProduct } from "@/types/products/singleProduct";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { Phone } from "lucide-react";
 import { Metadata } from "next";
 import ProductClientWrapper from "./components/ProductClientWrapper";
@@ -32,17 +32,18 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
 }
 
 const fetchProductData = async (slug: string) => {
-  const [response] = await serverSideFetcher<TSingleProduct>(
-    `/products/${slug}`,
-    undefined,
-    { next: { tags: [`product-${slug}`] } }
-  );
+  const response = await serverSideFetcher<TSingleProduct>({
+    url: `/products/${slug}`,
+    tags: [`product-${slug}`],
+  });
   return response?.data;
 };
 
 const fetchRelatedProducts = async (categoryId: string) => {
-  const [response] = await serverSideFetcher<TProduct[]>("/products", {
-    category: categoryId,
+  const response = await serverSideFetcher<TProduct[]>({
+    url: "/products",
+    params: { category: categoryId },
+    tags: ["products"],
   });
   return response?.data;
 };

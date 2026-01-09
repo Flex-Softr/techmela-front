@@ -15,7 +15,7 @@ export type TPaymentMethodRequiredInput = {
 export type TPaymentMethod = {
   _id: string;
   name: string;
-  image: TImage;
+  logo: TImage;
   description: string;
   instructions?: string;
   merchantACInfo?: TPaymentMethodMerchantACInfo;

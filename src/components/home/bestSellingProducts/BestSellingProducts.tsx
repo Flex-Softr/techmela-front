@@ -3,14 +3,16 @@ import ProductCard from "@/components/productCards/ProductCard";
 import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 import Link from "next/link";
 
 const BestSellingProducts = async () => {
-  const [{ data }] =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await serverSideFetcher<any>("/products/best-selling"); // TODO: Change endpoint
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const { data } = await serverSideFetcher<any>({
+    url: "/products/best-selling",
+    tags: ["products"],
+  });
   const bestSellingProducts = data as TProduct[];
 
   return (

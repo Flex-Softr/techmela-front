@@ -84,7 +84,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
         className="w-full h-11 text-base font-medium shadow hover:shadow-lg transition-all"
         size="lg"
       >
-        <Link href="/products">
+        <Link href="/shop">
           Continue Shopping <ArrowRight className="ml-2 w-4 h-4" />
         </Link>
       </Button>

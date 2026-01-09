@@ -9,8 +9,9 @@ import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import ShippingAddress from "../components/ShippingAddress";
 import OrderNow from "./OrderNow";
+import PaymentMethods from "./PaymentMethods";
+import ShippingAddress from "./ShippingAddress";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -22,7 +23,7 @@ type TCheckoutFormData = {
   paymentDetails?: Record<string, string | number>;
 };
 
-const CheckoutPageContent = ({
+const CheckoutForm = ({
   shippingCharges,
   paymentMethods,
 }: {
@@ -62,6 +63,12 @@ const CheckoutPageContent = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-5">
             <div>
               <ShippingAddress />
+              <div className="hidden lg:block mt-3">
+                <PaymentMethods
+                  paymentMethods={paymentMethods}
+                  idPrefix="desktop-payment"
+                />
+              </div>
             </div>
             <div className="order-4 lg:order-3">
               <OrderNow
@@ -87,4 +94,4 @@ const CheckoutPageContent = ({
   );
 };
 
-export default CheckoutPageContent;
+export default CheckoutForm;

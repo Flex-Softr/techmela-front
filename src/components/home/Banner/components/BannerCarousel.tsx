@@ -1,7 +1,7 @@
 // export default BannerCarousel;
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
 import { TSliders } from "@/types/sliders/slider";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 import ClientBannerCarousel from "./BannerCarouselClient";
 
 type BannerCarouselProps = {
@@ -9,9 +9,11 @@ type BannerCarouselProps = {
 };
 
 const BannerCarousel = async ({ bannerSideProducts }: BannerCarouselProps) => {
-  const [{ data }] = await serverSideFetcher<TSliders[]>(
-    "/slider-banner?isActive=true"
-  );
+  const { data } = await serverSideFetcher<TSliders[]>({
+    url: "/slider-banner?isActive=true",
+    cache: "force-cache",
+    tags: ["sliderBanner"],
+  });
   const slides = data || [];
 
   return (

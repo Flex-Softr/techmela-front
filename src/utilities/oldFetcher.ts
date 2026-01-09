@@ -2,7 +2,7 @@ import config from "@/config/config";
 import objectToSearchParams from "@/lib/ec/objectToSearchParams";
 import TGenericResponse from "@/types/response";
 
-const serverSideFetcher = async <T,>(
+const oldFetcher = async <T>(
   endPoint: string,
   searchParams?: Record<string, string | string[] | undefined>,
   reqConfig?: RequestInit
@@ -45,4 +45,4 @@ const serverSideFetcher = async <T,>(
   ];
 };
 
-export default serverSideFetcher;
+export default oldFetcher;
