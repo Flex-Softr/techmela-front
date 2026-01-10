@@ -9,7 +9,7 @@ const ContactUsPage = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${contact_us.src})`,
+            backgroundImage: `url(${contact_us?.src})`,
           }}
         ></div>
         <div className="bg-gray-100 flex items-center justify-center">

@@ -124,7 +124,7 @@ const CartLinksAndAccount = () => {
                         <Image
                           width={55}
                           height={55}
-                          src={getImageSrc(product.thumbnail?.src)}
+                          src={getImageSrc(product?.thumbnail?.src)}
                           alt={product.thumbnail?.alt || ""}
                           className="suggestion-image"
                         />

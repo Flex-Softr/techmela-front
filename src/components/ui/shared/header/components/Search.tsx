@@ -87,8 +87,8 @@ const Search = () => {
                 <Image
                   width={55}
                   height={55}
-                  src={getImageSrc(product.thumbnail?.src)}
-                  alt={product.thumbnail?.alt || ""}
+                  src={getImageSrc(product?.thumbnail?.src)}
+                  alt={product?.thumbnail?.alt || ""}
                   className="suggestion-image"
                 />
                 <div className="ml-2">
