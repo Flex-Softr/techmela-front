@@ -154,8 +154,8 @@ const OrderDetails = () => {
                     <Image
                       width={60}
                       height={60}
-                      src={product.image.src || ""}
-                      alt={product.image.alt}
+                      src={product?.image?.src || ""}
+                      alt={product?.image?.alt}
                     />
                   </TableCell>
                   <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">

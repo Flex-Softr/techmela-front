@@ -168,7 +168,7 @@ const PaymentMethods = ({
                   paymentMethodId === method._id
                     ? "border-secondary bg-secondary/5"
                     : "border-gray-200 hover:border-secondary/30"
-                } ${method.logo.src && "py-1 pr-1"}`}
+                } ${method?.logo?.src && "py-1 pr-1"}`}
                 onClick={() => {
                   setValue("paymentMethod", method._id, {
                     shouldValidate: true,
@@ -199,8 +199,8 @@ const PaymentMethods = ({
                   <span className="font-semibold text-sm">{method.name}</span>
                   {method.logo?.src && (
                     <Image
-                      src={getImageSrc(method.logo.src)}
-                      alt={method.logo.alt || method.name}
+                      src={getImageSrc(method?.logo?.src)}
+                      alt={method?.logo?.alt || method?.name}
                       width={40}
                       height={40}
                       className="w-10 h-10 rounded-md object-contain"

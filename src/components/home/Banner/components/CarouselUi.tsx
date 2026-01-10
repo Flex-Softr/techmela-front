@@ -15,7 +15,7 @@ const CarouselUi = ({
     <Link href={slider?.bannerLink || ""} className="mt-7 rounded-sm">
       <Image
         className={`w-full ${bannerSideProducts?.length ? "w-[100%] md:h-[440px]" : "md:h-[500px]"}`}
-        src={getImageSrc(slider.image?.src)}
+        src={getImageSrc(slider?.image?.src)}
         alt={slider?.image?.src || ""}
         height={1200}
         width={700}
