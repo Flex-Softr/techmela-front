@@ -52,7 +52,9 @@ const CheckoutPageContent = ({
   });
 
   useEffect(() => {
-    gtmEventHandler("initiate_checkout", {});
+    gtmEventHandler({
+      event: "initiate_checkout",
+    });
   }, []);
 
   return (

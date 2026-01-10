@@ -25,15 +25,11 @@ const ProductClientWrapper = ({
   >(undefined);
 
   useEffect(() => {
-    const productData = {
-      content_name: product.title,
-      content_category: product.category.name,
-      content_ids: [product._id],
+    gtmEventHandler({
+      event: "view_content",
       content_type: "product",
-      country: "Bangladesh",
-      num_items: 1,
-    };
-    gtmEventHandler("view_content", productData);
+      contents: [{ id: product._id }],
+    });
   }, [product]);
 
   return (

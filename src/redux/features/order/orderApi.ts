@@ -1,8 +1,11 @@
 import baseApi from "@/redux/baseApi/baseApi";
+import { TOrderInfo } from "@/types/order/orderInfo";
+import TGenericResponse from "@/types/response";
 
 const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createOrder: builder.mutation({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    createOrder: builder.mutation<TGenericResponse<TOrderInfo>, any>({
       query: (orderData) => ({
         url: "/orders",
         method: "POST",

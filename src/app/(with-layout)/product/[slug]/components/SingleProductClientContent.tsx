@@ -34,13 +34,10 @@ const SingleProductClientContent = ({
     try {
       const result = (await addToCart(cartInfo).unwrap()) as TGenericResponse;
       if (result.success) {
-        // Facebook Pixel event tracking
-        gtmEventHandler("add_to_cart", {
-          content_name: product?.title,
-          content_category: product?.category?.name,
-          content_ids: [product?._id || ""],
+        gtmEventHandler({
+          event: "add_to_cart",
           content_type: "product",
-          num_items: quantity,
+          contents: [{ id: product?._id, quantity }],
         });
         toast({
           title: result?.message,
