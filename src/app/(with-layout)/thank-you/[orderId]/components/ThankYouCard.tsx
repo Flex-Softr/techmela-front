@@ -29,9 +29,9 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
         <ErrorMessage
           className="text-center py-3 block text-red-500 font-medium"
-          message="No order found with this ID."
+          message="We couldn't locate the order details you're looking for. It's possible the order ID is incorrect or the order has been removed."
         />
-        <Button asChild variant="outline">
+        <Button asChild>
           <Link href="/">Back to Home</Link>
         </Button>
       </div>

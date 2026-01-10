@@ -70,6 +70,17 @@ const useOrderSubmit = ({
   const handlePlaceOrder = async (data: TCheckoutFormData) => {
     setErrorMessages([]);
 
+    // 0. Check for Empty Cart
+    if (!cartData?.data || cartData.data.length === 0) {
+      const message = "Your cart is empty. Please add items to your cart.";
+      setErrorMessages([message]);
+      toast({
+        title: "Your cart is empty",
+        className: "bg-red-500 text-white",
+      });
+      return;
+    }
+
     // 1. Construct Shipping Info
     const shippingData = {
       fullName: data.fullName,
