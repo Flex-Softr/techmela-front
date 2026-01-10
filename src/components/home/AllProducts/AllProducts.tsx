@@ -4,13 +4,16 @@ import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
 // import SectionTitle from "@/components/sectionTitle/SectionTitle";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 import Link from "next/link";
 
 const AllProducts = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [{ data }] = await serverSideFetcher<any>("/products");
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const { data } = await serverSideFetcher<any>({
+    url: "/products",
+    tags: ["products"],
+  });
   const products = data as TProduct[];
   return (
     <section className="pt-10 md:pt-12">

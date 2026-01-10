@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/redux/hooks";
 import TShippingCharges from "@/types/shippingCharge";
-import SelectShippingMethod from "../selectShippingMethod/SelectShippingMethod";
+import SelectShippingMethod from "../../app/(with-layout)/checkout/components/SelectShippingArea";
 import { Skeleton } from "../ui/skeleton";
 
 const CartTotalCalculations = ({
@@ -50,7 +50,7 @@ const CartTotalCalculations = ({
       <SelectShippingMethod shippingCharges={shippingCharges} />
 
       {/* Total Section */}
-      <div className="flex justify-between py-1 px-2">
+      <div className="flex justify-between mb-4 px-2">
         <p className="font-bold">Total</p>
         <span className="font-bold">
           {costLoading ? (

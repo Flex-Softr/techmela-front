@@ -2,10 +2,10 @@ import ContainerMax from "@/components/containerMax/ContainerMax";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import ProductCard from "@/components/productCards/ProductCard";
 import CustomPagination from "@/components/ui/shared/customPagination/CustomPagination";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import TCategory from "@/types/categories/categories";
 import { TProduct } from "@/types/products/product";
 import { TTag } from "@/types/tags/tag";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { Metadata } from "next";
 import CategorySection from "./components/CategorySection";
 import ProductFilterContent from "./components/ProductFilterContent";
@@ -35,15 +35,17 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
   const offset = (currentPage - 1) * limit;
 
   // Fetch flash sale products if the flash sale param is set
-  const [{ data: flashSaleProducts = [], meta: flashSaleMeta }] =
-    await serverSideFetcher<ProductQueryResult>(
-      `/products/featured?page=${currentPage}&limit=${limit}&offset=${offset}`
-    );
+  const { data: flashSaleProducts = [], meta: flashSaleMeta } =
+    await serverSideFetcher<ProductQueryResult>({
+      url: `/products/featured?page=${currentPage}&limit=${limit}&offset=${offset}`,
+      tags: ["products"],
+    });
 
   // Fetch categories as usual
-  const [{ data: categories = [] }] = await serverSideFetcher<TCategory[]>(
-    "/categories?isActive=true"
-  );
+  const { data: categories = [] } = await serverSideFetcher<TCategory[]>({
+    url: "/categories?isActive=true",
+    tags: ["allCategories"],
+  });
 
   // Fetch products based on current page, limit, and offset
   // Construct the base URL for the product query
@@ -66,14 +68,19 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
   }
 
   // Fetch products for regular products or flash sale products
-  const [{ data, meta: productMeta }] =
-    await serverSideFetcher<ProductQueryResult>(productQueryUrl);
+  const { data, meta: productMeta } =
+    await serverSideFetcher<ProductQueryResult>({
+      url: productQueryUrl,
+      tags: ["products"],
+    });
 
   // Use flash sale products if flashSaleParam is true, otherwise use regular products
   const products = flashSaleParam ? flashSaleProducts : (data ?? []);
 
   // Fetch tags as usual
-  const [{ data: tags = [] }] = await serverSideFetcher<TTag[]>(`/tags`);
+  const { data: tags = [] } = await serverSideFetcher<TTag[]>({
+    url: "/tags",
+  });
 
   const hasCategoryParam = !!searchParams.category;
 

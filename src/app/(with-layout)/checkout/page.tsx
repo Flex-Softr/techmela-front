@@ -1,21 +1,27 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import TShippingCharges from "@/types/shippingCharge";
-import CheckoutPageContent from "./components/CheckoutPageContent";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
+import CheckoutForm from "./components/CheckoutForm";
 
 const Checkout = async () => {
-  const [{ data: shippingCharges = [] }] = await serverSideFetcher<
+  const { data: shippingCharges = [] } = await serverSideFetcher<
     TShippingCharges[]
-  >("/shipping-charges?isActive=true");
-  const [{ data: paymentMethods = [] }] = await serverSideFetcher<
+  >({
+    url: "/shipping-charges?isActive=true",
+    tags: ["shippingCharge"],
+  });
+  const { data: paymentMethods = [] } = await serverSideFetcher<
     TPaymentMethod[]
-  >("/payment-method?isActive=true");
+  >({
+    url: "/payment-method?isActive=true",
+    tags: ["paymentMethod"],
+  });
 
   return (
     <section className="mt-[80px] sm:mt-3">
       <ContainerMax>
-        <CheckoutPageContent
+        <CheckoutForm
           shippingCharges={shippingCharges}
           paymentMethods={paymentMethods}
         />

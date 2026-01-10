@@ -7,14 +7,14 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastAction } from "../ui/toast";
-import { toast } from "../ui/use-toast";
+import { ToastAction } from "../../../../components/ui/toast";
+import { toast } from "../../../../components/ui/use-toast";
 
 type TFormValues = {
   promoCode: string;
 };
 
-export default function PromoCode() {
+export default function ApplyCupon() {
   const dispatch = useAppDispatch();
   const shippingInfo = useAppSelector((state) => state.shippingInfo);
   const paymentInfo = useAppSelector((state) => state.paymentInfo);
@@ -131,7 +131,7 @@ export default function PromoCode() {
 
   return (
     <div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 md:space-x-6">
         <div className="w-full">
           <Input
             disabled={applied ? true : false}

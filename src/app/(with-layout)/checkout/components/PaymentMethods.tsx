@@ -17,10 +17,101 @@ type TCheckoutFormData = {
   paymentDetails: Record<string, string | number>;
 };
 
+const SinglePaymentInput = ({
+  input,
+}: {
+  input: {
+    name: string;
+    type: string;
+    is_required?: boolean;
+    enums?: string; // Comma-separated options for select
+  };
+}) => {
+  const {
+    register,
+    setValue,
+    watch,
+    clearErrors,
+    unregister,
+    formState: { errors },
+  } = useFormContext<TCheckoutFormData>();
+
+  useEffect(() => {
+    register(`paymentDetails.${input.name}`, {
+      required: input.is_required ? `${input.name} is required` : false,
+      ...(input.name.toLowerCase().includes("phone")
+        ? {
+            pattern: {
+              value: /^(?!.*[a-zA-Z])01\d{9}$/,
+              message: "Please provide a valid 11-digit mobile number.",
+            },
+          }
+        : {}),
+    });
+    return () => {
+      unregister(`paymentDetails.${input.name}`);
+    };
+  }, [register, unregister, input.name, input.is_required]);
+
+  const value = watch(`paymentDetails.${input.name}`) || "";
+
+  return (
+    <div className="space-y-1">
+      <Label className="text-sm font-semibold">
+        {input.name}{" "}
+        {input.is_required && <span className="text-red-600">*</span>}
+      </Label>
+      {input.type === "select" ? (
+        <select
+          value={value}
+          onChange={(e) => {
+            setValue(`paymentDetails.${input.name}`, e.target.value, {
+              shouldValidate: true,
+            });
+            clearErrors(`paymentDetails.${input.name}`);
+          }}
+          className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-secondary text-sm"
+        >
+          <option value="">Select {input.name}</option>
+          {input.enums?.split(",").map((opt) => (
+            <option key={opt.trim()} value={opt.trim()}>
+              {opt.trim()}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <Input
+          type={input.type === "number" ? "number" : "text"}
+          value={value}
+          onChange={(e) => {
+            setValue(`paymentDetails.${input.name}`, e.target.value, {
+              shouldValidate: true,
+            });
+            clearErrors(`paymentDetails.${input.name}`);
+          }}
+          placeholder={`Enter ${input.name}`}
+          className="focus-visible:ring-secondary"
+        />
+      )}
+      {errors.paymentDetails &&
+        (errors.paymentDetails as Record<string, FieldError>)[input.name] && (
+          <ErrorMessage
+            message={
+              (errors.paymentDetails as Record<string, FieldError>)[input.name]
+                ?.message
+            }
+          />
+        )}
+    </div>
+  );
+};
+
 const PaymentMethods = ({
   paymentMethods,
+  idPrefix = "payment",
 }: {
   paymentMethods: TPaymentMethod[];
+  idPrefix?: string;
 }) => {
   const dispatch = useAppDispatch();
   const {
@@ -28,6 +119,7 @@ const PaymentMethods = ({
     watch,
     formState: { errors },
     setValue,
+    clearErrors,
   } = useFormContext<TCheckoutFormData>();
 
   // Set default payment method when data is loaded
@@ -56,12 +148,17 @@ const PaymentMethods = ({
   }, [paymentMethodId, paymentMethods]);
 
   return (
-    <Box className="px-0">
-      <BoxHeading className="text-center md:text-start">
-        Payment Method
-      </BoxHeading>
+    <Box className="px-0 md:px-4 md:py-0">
+      <BoxHeading>Payment Method</BoxHeading>
 
       <div className="mt-3">
+        {/* Hidden input for RHF registration */}
+        <input
+          type="hidden"
+          {...register("paymentMethod", {
+            required: "Please select a payment method",
+          })}
+        />
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-2">
             {paymentMethods.map((method) => (
@@ -71,29 +168,39 @@ const PaymentMethods = ({
                   paymentMethodId === method._id
                     ? "border-secondary bg-secondary/5"
                     : "border-gray-200 hover:border-secondary/30"
-                }`}
+                } ${method.logo.src && "py-1 pr-1"}`}
                 onClick={() => {
-                  setValue("paymentMethod", method._id);
+                  setValue("paymentMethod", method._id, {
+                    shouldValidate: true,
+                  });
+                  clearErrors("paymentDetails");
+                  setValue("paymentDetails", {});
                 }}
               >
                 <input
                   type="radio"
-                  id={method._id}
+                  id={`${idPrefix}-${method._id}`}
+                  name={`payment_method_${idPrefix}`}
                   value={method._id}
-                  {...register("paymentMethod", {
-                    required: "Please select a payment method",
-                  })}
+                  checked={paymentMethodId === method._id}
+                  onChange={() => {
+                    setValue("paymentMethod", method._id, {
+                      shouldValidate: true,
+                    });
+                    clearErrors("paymentDetails");
+                    setValue("paymentDetails", {});
+                  }}
                   className="w-4 h-4 text-secondary focus:ring-secondary cursor-pointer"
                 />
                 <label
-                  htmlFor={method._id}
+                  htmlFor={`${idPrefix}-${method._id}`}
                   className="ml-3 flex-grow flex justify-between items-center cursor-pointer select-none"
                 >
                   <span className="font-semibold text-sm">{method.name}</span>
-                  {method.image?.src && (
+                  {method.logo?.src && (
                     <Image
-                      src={getImageSrc(method.image.src)}
-                      alt={method.image.alt || method.name}
+                      src={getImageSrc(method.logo.src)}
+                      alt={method.logo.alt || method.name}
                       width={40}
                       height={40}
                       className="w-10 h-10 rounded-md object-contain"
@@ -149,71 +256,7 @@ const PaymentMethods = ({
                     selectedMethod.required_inputs.length > 0 && (
                       <div className="grid grid-cols-1 gap-4">
                         {selectedMethod.required_inputs.map((input, idx) => (
-                          <div key={idx} className="space-y-1">
-                            <Label className="text-sm font-semibold">
-                              {input.name}{" "}
-                              {input.is_required && (
-                                <span className="text-red-600">*</span>
-                              )}
-                            </Label>
-                            {input.type === "select" ? (
-                              <select
-                                {...register(`paymentDetails.${input.name}`, {
-                                  required: input.is_required
-                                    ? `${input.name} is required`
-                                    : false,
-                                })}
-                                className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-secondary text-sm"
-                              >
-                                <option value="">Select {input.name}</option>
-                                {input.enums?.split(",").map((opt) => (
-                                  <option key={opt.trim()} value={opt.trim()}>
-                                    {opt.trim()}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <Input
-                                type={
-                                  input.type === "number" ? "number" : "text"
-                                }
-                                {...register(`paymentDetails.${input.name}`, {
-                                  required: input.is_required
-                                    ? `${input.name} is required`
-                                    : false,
-                                  ...(input.name.toLowerCase().includes("phone")
-                                    ? {
-                                        pattern: {
-                                          value: /^(?!.*[a-zA-Z])01\d{9}$/,
-                                          message:
-                                            "Please provide a valid 11-digit mobile number.",
-                                        },
-                                      }
-                                    : {}),
-                                })}
-                                placeholder={`Enter ${input.name}`}
-                                className="focus-visible:ring-secondary"
-                              />
-                            )}
-                            {errors.paymentDetails &&
-                              (
-                                errors.paymentDetails as Record<
-                                  string,
-                                  FieldError
-                                >
-                              )[input.name] && (
-                                <ErrorMessage
-                                  message={
-                                    (
-                                      errors.paymentDetails as Record<
-                                        string,
-                                        FieldError
-                                      >
-                                    )[input.name]?.message
-                                  }
-                                />
-                              )}
-                          </div>
+                          <SinglePaymentInput key={idx} input={input} />
                         ))}
                       </div>
                     )}

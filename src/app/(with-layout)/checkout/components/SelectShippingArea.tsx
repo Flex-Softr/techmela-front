@@ -1,3 +1,5 @@
+import Box from "@/components/ui/ec/Box";
+import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { setShipping } from "@/redux/features/shippingClasses/shippingClass";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import TShippingCharges from "@/types/shippingCharge";
@@ -26,20 +28,19 @@ const SelectShippingMethod = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedShipping._id]);
   return (
-    <div className="flex justify-between items-center py-3 px-2 border-b-2">
-      <div>
-        <h2 className="font-bold">Shipping</h2>
-      </div>
-      <div className="flex flex-col items-end">
+    <Box className="px-0">
+      <BoxHeading>Shipping Area</BoxHeading>
+      <div className="space-y-2">
         {shippingCharges?.map((item) => (
-          <div key={item?._id} className="py-1">
-            <label
-              htmlFor={item?._id}
-              className="select-none px-2 font-semibold text-sm cursor-pointer"
-            >
-              {item?.name}:{" "}
-              <span className="text-secondary">{item.amount} &#2547;</span>
-            </label>
+          <div
+            key={item?._id}
+            className={`flex items-center p-3 rounded-md border transition-all cursor-pointer ${
+              selectedShipping._id === item?._id
+                ? "border-secondary bg-secondary/5"
+                : "border-gray-200 hover:border-secondary/30"
+            }`}
+            onClick={() => handleShippingChargeChange(item?._id, item?.amount)}
+          >
             <input
               type="radio"
               id={item?._id}
@@ -49,11 +50,21 @@ const SelectShippingMethod = ({
               onChange={() =>
                 handleShippingChargeChange(item?._id, item?.amount)
               }
+              className="w-4 h-4 text-secondary focus:ring-secondary cursor-pointer"
             />
+            <label
+              htmlFor={item?._id}
+              className="ml-3 flex-grow flex justify-between items-center cursor-pointer select-none"
+            >
+              <span className="font-semibold text-sm">{item?.name}</span>
+              <span className="font-bold text-sm text-secondary">
+                {item.amount} &#2547;
+              </span>
+            </label>
           </div>
         ))}
       </div>
-    </div>
+    </Box>
   );
 };
 

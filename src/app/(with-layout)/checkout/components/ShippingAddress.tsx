@@ -117,7 +117,7 @@ const ShippingAddress = () => {
       )}
       <div id="shipping-address-form" className="space-y-3">
         <div>
-          <Label className="font-bold pl-1 pb-1 block">
+          <Label className="font-bold pl-1 mb-1.5 block">
             Name
             <span className="text-red-600">*</span>
           </Label>
@@ -136,7 +136,7 @@ const ShippingAddress = () => {
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 pb-1 block">
+          <Label className="font-bold pl-1 mb-1.5 block">
             Phone Number <span className="text-red-600">*</span>
           </Label>
           <Input
@@ -158,7 +158,9 @@ const ShippingAddress = () => {
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 pb-1 block">Email (Optional)</Label>
+          <Label className="font-bold pl-1 mb-1.5 block">
+            Email (Optional)
+          </Label>
           <Input
             placeholder="Enter your email"
             {...register("email", {
@@ -173,7 +175,7 @@ const ShippingAddress = () => {
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 pb-1 block">
+          <Label className="font-bold pl-1 mb-1.5 block">
             Address <span className="text-red-600">*</span>
           </Label>
           <Input
@@ -190,7 +192,7 @@ const ShippingAddress = () => {
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 pb-1 block">
+          <Label className="font-bold pl-1 mb-1.5 block">
             Review / Notes (Optional)
           </Label>
           <textarea

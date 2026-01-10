@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
-import EcButton from "@/components/EcButton/EcButton";
-import ApplyCupon from "@/components/applyCupon/ApplyCupon";
+import ApplyCupon from "@/app/(with-layout)/checkout/components/ApplyCupon";
 import CartTotalCalculations from "@/components/cartTotalCalculations/CartTotalCalculations";
+import EcButton from "@/components/EcButton/EcButton";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import TShippingCharges from "@/types/shippingCharge";
+import { useFormContext } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
 import PaymentMethods from "./PaymentMethods";
 
@@ -36,6 +37,10 @@ const OrderNow = ({
     totalCost,
   });
 
+  const {
+    formState: { errors },
+  } = useFormContext();
+
   // No local click handler needed, form submit handles it.
 
   return (
@@ -50,8 +55,11 @@ const OrderNow = ({
         costLoading={costLoading}
         hideSubtotal={true}
       />
-      <div className="order-3 lg:order-4">
-        <PaymentMethods paymentMethods={paymentMethods} />
+      <div className="order-3 lg:order-4 lg:hidden">
+        <PaymentMethods
+          paymentMethods={paymentMethods}
+          idPrefix="mobile-payment"
+        />
       </div>
       {/* Apply Coupon Section */}
       <div className="py-2">
@@ -70,6 +78,14 @@ const OrderNow = ({
               <ErrorMessage message={message} className="!mt-0" />
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Validation Error Message */}
+      {Object.keys(errors).length > 0 && (
+        <div className="py-2 px-3 mb-2 bg-red-50 border border-red-200 rounded text-red-600 font-medium text-sm flex items-center gap-2">
+          <MdErrorOutline className="text-lg flex-shrink-0" />
+          <span>Please fill in all required fields correctly.</span>
         </div>
       )}
 

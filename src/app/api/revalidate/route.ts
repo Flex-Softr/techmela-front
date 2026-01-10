@@ -30,9 +30,16 @@ export const GET = (req: NextRequest) => {
       );
     }
 
-    revalidateTag(key);
+    const tags = key.split(",");
 
-    return NextResponse.json({ status: "OK", key, secret }, { status: 200 });
+    tags.forEach((tag) => {
+      revalidateTag(tag.trim());
+    });
+
+    return NextResponse.json(
+      { status: "OK", revalidated: tags, secret },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { status: "ERROR", message: "Internal server error." },

@@ -1,11 +1,15 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import HorizontalProductCard from "@/components/productCards/HorizontalProductCard";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 
 const HighlightTwoProducts = async () => {
-  const [{ data: highlightedTwoProducts = [] }] =
-    await serverSideFetcher<TProduct[]>("/products"); // update endpoint
+  const { data: highlightedTwoProducts = [] } = await serverSideFetcher<
+    TProduct[]
+  >({
+    url: "/products",
+    tags: ["products"],
+  });
 
   return (
     <section className="pt-20">

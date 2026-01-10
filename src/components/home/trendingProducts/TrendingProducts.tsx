@@ -8,12 +8,14 @@ import {
   CarouselNextPMiddle,
   CarouselPreviousPMiddle,
 } from "@/components/ui/carousel";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 
 const TrendingProducts = async () => {
-  const [{ data: trendingProducts = [] }] =
-    await serverSideFetcher<TProduct[]>("/products/featured"); // TODO: Change endpoint
+  const { data: trendingProducts = [] } = await serverSideFetcher<TProduct[]>({
+    url: "/products/featured",
+    tags: ["products"],
+  });
 
   return (
     <section className="pt-20">

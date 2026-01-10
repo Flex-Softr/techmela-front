@@ -4,12 +4,14 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import serverSideFetcher from "@/hooks/serverSideFetcher";
 import { TProduct } from "@/types/products/product";
+import serverSideFetcher from "@/utilities/serverSideFetcher";
 
 const OnSale = async () => {
-  const [{ data: onSaleProducts = [] }] =
-    await serverSideFetcher<TProduct[]>("/products/featured"); // TODO: Change endpoint
+  const { data: onSaleProducts = [] } = await serverSideFetcher<TProduct[]>({
+    url: "/products/featured",
+    tags: ["products"],
+  });
 
   return (
     <>
