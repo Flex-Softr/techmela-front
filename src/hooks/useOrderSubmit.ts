@@ -1,7 +1,6 @@
 "use client";
 
 import { toast } from "@/components/ui/use-toast";
-import PEventIdGenerator from "@/lib/ec/PEventIdGenerator";
 import { resetCoupon } from "@/redux/features/order/couponInfo";
 import { useCreateOrderMutation } from "@/redux/features/order/orderApi";
 import {
@@ -14,11 +13,10 @@ import {
 } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
-import TGenericResponse, { TGenericErrorResponse } from "@/types/response";
+import { TGenericErrorResponse } from "@/types/response";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useCart from "./useCart";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -40,7 +38,6 @@ const useOrderSubmit = ({
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [createOrder, { isLoading }] = useCreateOrderMutation();
-  const { data: cartData } = useCart();
 
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [limitModalStatus, setLimitModalStatus] = useState(false);
@@ -121,10 +118,6 @@ const useOrderSubmit = ({
       return;
     }
 
-    // 4. Construct Order Payload
-    const eventId = PEventIdGenerator("P_");
-    const product = cartData?.data;
-
     const orderData = {
       payment: {
         paymentMethod: selectedPaymentId,
@@ -138,7 +131,6 @@ const useOrderSubmit = ({
         email: shippingData.email || undefined,
       },
       orderNotes: shippingData.notes,
-      eventId,
       orderSource: {
         name: "Website",
         url: window?.location?.href,
@@ -148,29 +140,25 @@ const useOrderSubmit = ({
 
     // 5. Create Order Mutation
     try {
-      const result = (await createOrder(
-        orderData
-      ).unwrap()) as TGenericResponse<{
-        _id?: string;
-      }>;
-
+      const result = await createOrder(orderData).unwrap();
       if (result.success) {
         setIsSuccess(true);
 
         // GTM Event
-        gtmEventHandler("purchase", {
-          content_ids: product?.map((item: any) => item?.product?._id), // eslint-disable-line @typescript-eslint/no-explicit-any
+        gtmEventHandler({
+          event: "purchase",
           ph: shippingData.phoneNumber,
-          content_category:
-            product?.map((item: any) => item?.category?.name).join(", ") || // eslint-disable-line @typescript-eslint/no-explicit-any
-            undefined,
+          em: shippingData.email,
           value: calculatedTotal,
           currency: "BDT",
-          content_name: product
-            ?.map((item: any) => item?.product?.title) // eslint-disable-line @typescript-eslint/no-explicit-any
-            .join(", "),
-          contents: product,
-          num_items: product?.length,
+          contents: result?.data?.orderedProducts?.map((product) => ({
+            id: product.product,
+            name: product.product,
+            quantity: product.quantity,
+            price: product.unitPrice,
+          })),
+          content_type: "product",
+          order_id: result?.data?.orderId,
         });
 
         toast({

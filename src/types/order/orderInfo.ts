@@ -1,9 +1,11 @@
 import { TImage } from "../image";
-import { TSingleProduct } from "../products/singleProduct";
 import TShippingCharges from "../shippingCharge";
 
-export type orderedProductsDetails = {
-  productDetails: { product: TSingleProduct }[];
+export type TOrderedProducts = {
+  product: string;
+  unitPrice: number;
+  quantity: number;
+  total: number;
 };
 
 type TShipping = {
@@ -26,8 +28,9 @@ type TPayment = {
 };
 
 export type TOrderInfo = {
+  _id: string;
   orderId: string;
-  orderedProductsDetails: orderedProductsDetails;
+  orderedProducts: TOrderedProducts[];
   subtotal: number;
   shippingCharge: TShippingCharges;
   total: number;

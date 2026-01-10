@@ -7,10 +7,10 @@ import Link from "next/link";
 
 const CategoryCard = ({ category }: { category: TCategory }) => {
   const handleCategoryView = () => {
-    gtmEventHandler("view_category", {
-      content_name: category.name,
-      content_ids: [category._id],
-      content_type: "Product category",
+    gtmEventHandler({
+      event: "view_category",
+      content_type: "product_category",
+      contents: [{ id: category._id }],
     });
   };
 
