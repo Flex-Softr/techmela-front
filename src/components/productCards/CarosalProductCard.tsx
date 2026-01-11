@@ -1,3 +1,4 @@
+import { formatStockStatus, stockStatusColor } from "@/const/product.const";
 import { cn, getImageSrc } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
 import Image from "next/image";
@@ -72,9 +73,12 @@ const CarousalProductsCard = ({
             <div>
               {product?.stockStatus ? (
                 <span
-                  className={`${product?.stockStatus === "In stock" ? "text-green-500" : "text-red-500"} text-[10px] md:text-sm`}
+                  className={cn(
+                    "text-[10px] md:text-sm font-semibold",
+                    stockStatusColor(product.stockStatus)
+                  )}
                 >
-                  {product?.stockStatus}
+                  {formatStockStatus(product.stockStatus)}
                 </span>
               ) : null}
             </div>

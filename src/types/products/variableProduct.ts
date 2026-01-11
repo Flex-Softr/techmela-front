@@ -1,3 +1,5 @@
+import { TStockStatus } from "@/const/product.const";
+
 export type TVariation = {
   _id: string;
   serial: number;
@@ -13,7 +15,7 @@ export type TVariation = {
   inventory: {
     _id: string;
     sku: string;
-    stockStatus: string;
+    stockStatus: TStockStatus;
     stockQuantity: number;
     stockAvailable: number;
     manageStock: boolean;
@@ -47,5 +49,5 @@ export type TVariableProduct = {
   maxSalePrice: number;
   minDiscountPercent: number;
   maxDiscountPercent: number;
-  stockStatus: string;
+  stockStatus: TStockStatus;
 };

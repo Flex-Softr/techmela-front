@@ -1,3 +1,4 @@
+import { formatStockStatus, stockStatusColor } from "@/const/product.const";
 import { cn, getImageSrc } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
 import Image from "next/image";
@@ -77,18 +78,10 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
                 <span
                   className={cn(
                     "text-xs md:text-sm font-semibold",
-                    product.stockStatus === "in_stock"
-                      ? "text-green-500"
-                      : product.stockStatus === "low_stock"
-                        ? "text-yellow-600"
-                        : "text-red-500"
+                    stockStatusColor(product.stockStatus)
                   )}
                 >
-                  {product.stockStatus === "in_stock"
-                    ? "In Stock"
-                    : product.stockStatus === "low_stock"
-                      ? "Low Stock"
-                      : "Out of Stock"}
+                  {formatStockStatus(product.stockStatus)}
                 </span>
               ) : null}
             </div>

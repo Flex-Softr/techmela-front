@@ -63,36 +63,6 @@ const VariationSelector = ({
     }));
   };
 
-  const isOptionOutOfStock = (currentKey: string, currentValue: string) => {
-    if (!variations?.length) return false;
-    const attributeKeys = Object.keys(variations[0].attributes);
-    const currentIndex = attributeKeys.indexOf(currentKey);
-
-    // Get selections for attributes that precede the current one
-    const previousSelections = attributeKeys.slice(0, currentIndex).reduce(
-      (acc, key) => {
-        if (selectedOptions[key]) {
-          acc[key] = selectedOptions[key]!;
-        }
-        return acc;
-      },
-      {} as Record<string, string>
-    );
-
-    // Check if any variation matches precedent selections, current value, and is in stock
-    const hasStock = variations.some((variation) => {
-      const matchesPrevious = Object.entries(previousSelections).every(
-        ([key, val]) => variation.attributes[key] === val
-      );
-      const matchesCurrent = variation.attributes[currentKey] === currentValue;
-      const inStock = (variation.inventory?.stockAvailable ?? 0) > 0;
-
-      return matchesPrevious && matchesCurrent && inStock;
-    });
-
-    return !hasStock;
-  };
-
   const uniqueValues = (key: string) => {
     return Array.from(
       new Set(variations.map((variation) => variation.attributes[key]))
@@ -115,43 +85,19 @@ const VariationSelector = ({
                   <h3 className="text-sm font-semibold min-w-[60px]">{key}:</h3>
                   <div className="flex flex-wrap gap-2">
                     {uniqueValues(key).map((value) => {
-                      const outOfStock = isOptionOutOfStock(key, value);
                       const isSelected = selectedOptions[key] === value;
 
                       return (
                         <button
                           key={value}
-                          onClick={() =>
-                            !outOfStock && handleAttributeSelection(key, value)
-                          }
-                          disabled={outOfStock}
+                          onClick={() => handleAttributeSelection(key, value)}
                           className={`relative py-1 px-2.5 border rounded-md text-sm font-medium transition-all h-7 flex justify-center items-center ${
                             isSelected
                               ? "bg-primary text-white border-primary"
                               : "bg-white text-gray-700 border-gray-200 hover:border-gray-400"
-                          } ${
-                            outOfStock ? "opacity-50 cursor-not-allowed" : ""
                           }`}
                         >
                           {value}
-                          {outOfStock && (
-                            <div className="absolute inset-0 flex justify-center items-center">
-                              {/* 80% transparent X mark */}
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="w-5 h-5 text-black opacity-20"
-                              >
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                              </svg>
-                            </div>
-                          )}
                         </button>
                       );
                     })}

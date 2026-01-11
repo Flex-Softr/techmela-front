@@ -111,7 +111,7 @@ const OrderProductTable = () => {
                     {sortedData.length} Item(s)
                   </TableCell>
                   <TableCell className="text-right font-bold py-3 px-4">
-                    ৳ {totalAmount.toFixed(2)}
+                    &#2547; {totalAmount.toFixed(2)}
                   </TableCell>
                 </TableRow>
               </TableFooter>

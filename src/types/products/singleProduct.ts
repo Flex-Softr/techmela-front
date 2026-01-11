@@ -1,3 +1,4 @@
+import { TStockStatus } from "@/const/product.const";
 import { TImage } from "../image";
 import { TTag } from "../tags/tag";
 
@@ -11,9 +12,8 @@ export type TPrice = {
   _id: string;
   regularPrice: number;
   salePrice: number;
-
   discountPercent: number;
-  save: number;
+  priceSave: number;
 };
 
 export type TGalleryImage = {
@@ -25,7 +25,7 @@ export type TGalleryImage = {
 export type TInventory = {
   _id: string;
   sku: string;
-  stockStatus: string;
+  stockStatus: TStockStatus;
   stockQuantity: number;
   lowStockWarning: number;
   manageStock: boolean;

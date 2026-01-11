@@ -7,7 +7,7 @@ import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { Phone } from "lucide-react";
 import { Metadata } from "next";
 import ProductClientWrapper from "./components/ProductClientWrapper";
-import ProductDetails from "./components/ProductDetails";
+import ProductDescription from "./components/ProductDescription";
 import RelatedProduct from "./components/RelatedProduct";
 import SingleProductPageImageGallery from "./components/SingleProductPageImageGallery";
 
@@ -100,7 +100,7 @@ const SingleProductPage = async ({ params }: TProps) => {
             </div>
           </Box>
           <div className="col-span-1 md:col-span-2 px-3 sm:mt-5 md:mt-10">
-            <ProductDetails product={product} />
+            <ProductDescription product={product} />
           </div>
           <div className="col-span-1 md:col-span-2 mt-10">
             {relatedProducts && <RelatedProduct products={relatedProducts} />}

@@ -1,3 +1,8 @@
+import {
+  formatStockStatus,
+  STOCK_STATUS,
+  stockStatusColor,
+} from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import Link from "next/link";
 import WarrantyInfo from "./WarrantyInfo";
@@ -15,128 +20,69 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
     inventory,
     shortDescription,
     price,
-    variations = [],
     warranty,
     warrantyInfo,
   } = product;
 
-  // Determine actual display values based on selection or defaults
   const currentPrice = selectedVariation?.price || price;
   const currentInventory = selectedVariation?.inventory || inventory;
 
-  // Price Calculation Logic
-  const regularPrice = currentPrice?.regularPrice || 0;
-  const salePrice = currentPrice?.salePrice || 0;
+  const regularPrice = currentPrice?.regularPrice;
+  const salePrice = currentPrice?.salePrice;
+  const discountPercent = currentPrice?.discountPercent;
+  const priceSave = currentPrice?.priceSave;
+  const sku = currentInventory?.sku || "N/A";
+  const stockStatus = currentInventory?.stockStatus;
 
-  // Discount Calculation
-  let discountPercent = currentPrice?.discountPercent || 0;
-  if (!discountPercent && regularPrice > salePrice) {
-    discountPercent = Math.round(
-      ((regularPrice - salePrice) / regularPrice) * 100
-    );
-  }
+  const hideStock = currentInventory?.hideStock;
+  const stockAvailable = currentInventory?.stockAvailable;
 
-  // Stock Logic
-  // If distinct variation selected: use that variation's stock
-  // If variable product & no selection: sum up all variations stock
-  // If simple product: use main inventory stock
-  let stockQuantity = 0;
-  let isOutOfStock = true;
-
-  if (selectedVariation) {
-    stockQuantity = selectedVariation.inventory?.stockAvailable || 0;
-    isOutOfStock = stockQuantity <= 0;
-  } else if (variations.length > 0) {
-    // Variable product, no selection: aggregate stock
-    stockQuantity = variations.reduce(
-      (acc, v) => acc + (v.inventory?.stockAvailable || 0),
-      0
-    );
-    isOutOfStock = stockQuantity <= 0;
-  } else {
-    // Simple product
-    stockQuantity = inventory?.stockAvailable || 0;
-    isOutOfStock = stockQuantity <= 0;
-  }
-
-  // Price Display Logic
-  let priceDisplay: React.ReactNode;
-  let chipPriceDisplay: React.ReactNode;
-
-  if (!selectedVariation && variations.length > 0) {
-    const prices = variations.map(
-      (v) => v.price.salePrice || v.price.regularPrice
-    );
-    const minPrice = Math.min(...prices);
-    const maxPrice = Math.max(...prices);
-
-    if (minPrice !== maxPrice) {
-      priceDisplay = (
-        <span className="text-2xl font-extrabold text-black">
-          &#2547;{minPrice} - &#2547;{maxPrice}
-        </span>
-      );
-      chipPriceDisplay = (
-        <span className="font-extrabold text-lg text-black">
-          &#2547;{minPrice} - &#2547;{maxPrice}
-        </span>
-      );
-    } else {
-      priceDisplay = (
-        <span className="text-2xl font-extrabold text-black">
-          &#2547;{minPrice}
-        </span>
-      );
-      chipPriceDisplay = (
-        <span className="font-extrabold text-lg text-black">
-          &#2547;{minPrice}
-        </span>
-      );
-    }
-  } else {
-    // Simple product or selected variation
-    if (salePrice && salePrice < regularPrice) {
-      priceDisplay = (
+  // Price Component Helper
+  const PriceDisplay = ({ isChip = false }: { isChip?: boolean }) => {
+    if (salePrice && salePrice < (regularPrice || 0)) {
+      return (
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-extrabold text-black">
+          <span
+            className={`${
+              isChip ? "font-extrabold text-lg" : "text-2xl font-extrabold"
+            } text-black`}
+          >
             &#2547;{salePrice}
           </span>
-          <del className="text-muted-foreground text-lg">
+          <del
+            className={`${
+              isChip ? "text-gray-500 text-sm" : "text-muted-foreground text-lg"
+            }`}
+          >
             &#2547;{regularPrice}
           </del>
-          {discountPercent > 0 && (
-            <span className="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-bold">
-              {discountPercent}% OFF
+          {discountPercent && discountPercent > 0 && (
+            <span
+              className={`${
+                isChip
+                  ? "text-red-600 text-xs font-bold"
+                  : "bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-bold"
+              }`}
+            >
+              {discountPercent}% OFF {priceSave && `(Save \u09F3${priceSave})`}
             </span>
           )}
         </div>
-      );
-      chipPriceDisplay = (
-        <div className="flex items-center gap-2">
-          <span className="font-extrabold text-lg text-black">
-            &#2547;{salePrice}
-          </span>
-          <del className="text-gray-500 text-sm">&#2547;{regularPrice}</del>
-          {discountPercent > 0 && (
-            <span className="text-red-600 text-xs font-bold">
-              {discountPercent}% OFF
-            </span>
-          )}
-        </div>
-      );
-    } else {
-      priceDisplay = (
-        <span className="text-2xl font-extrabold text-black">
-          &#2547;{regularPrice}
-        </span>
-      );
-      chipPriceDisplay = (
-        <span className="font-extrabold text-lg text-black">
-          &#2547;{regularPrice}
-        </span>
       );
     }
-  }
+    return (
+      <span
+        className={`${
+          isChip ? "font-extrabold text-lg" : "text-2xl font-extrabold"
+        } text-black`}
+      >
+        &#2547;{regularPrice}
+      </span>
+    );
+  };
+
+  const priceDisplay = <PriceDisplay />;
+  const chipPriceDisplay = <PriceDisplay isChip />;
 
   // --- Chip Layout (Used when shortDescription exists) ---
   if (shortDescription) {
@@ -157,25 +103,20 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Status Chip */}
           <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium">Status:</span>
-            {isOutOfStock ? (
-              <span className="text-red-600 font-bold">Out of stock</span>
-            ) : (
-              <span className="text-green-600 font-bold">
-                {!selectedVariation && variations.length > 0
-                  ? "In Stock"
-                  : `${stockQuantity} In stock`}
-              </span>
-            )}
+
+            <span className={`${stockStatusColor(stockStatus)} font-bold`}>
+              {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
+              !hideStock &&
+              stockAvailable > 0
+                ? `${stockAvailable} ${formatStockStatus(stockStatus)}`
+                : formatStockStatus(stockStatus)}
+            </span>
           </div>
 
           {/* SKU Chip */}
           <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium">SKU:</span>
-            <span className="font-semibold text-foreground">
-              {selectedVariation
-                ? currentInventory?.sku || "N/A"
-                : inventory?.sku || "N/A"}
-            </span>
+            <span className="font-semibold text-foreground">{sku}</span>
           </div>
 
           {/* Category Chip */}
@@ -244,28 +185,22 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             Status:
           </span>
           <div className="flex-1">
-            {isOutOfStock ? (
-              <span className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded">
-                Out of stock
-              </span>
-            ) : (
-              <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">
-                {!selectedVariation && variations.length > 0
-                  ? "In Stock"
-                  : `${stockQuantity} In stock`}
-              </span>
-            )}
+            <span
+              className={`${stockStatusColor(stockStatus)} font-bold bg-red-50 px-2 py-0.5 rounded`}
+            >
+              {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
+              !hideStock &&
+              stockAvailable > 0
+                ? `${stockAvailable} ${formatStockStatus(stockStatus)}`
+                : formatStockStatus(stockStatus)}
+            </span>
           </div>
         </div>
 
         {/* SKU */}
         <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">SKU:</span>
-          <span className="font-semibold text-foreground flex-1">
-            {selectedVariation
-              ? currentInventory?.sku || "N/A"
-              : inventory?.sku || "N/A"}
-          </span>
+          <span className="font-semibold text-foreground flex-1">{sku}</span>
         </div>
 
         {/* Category */}

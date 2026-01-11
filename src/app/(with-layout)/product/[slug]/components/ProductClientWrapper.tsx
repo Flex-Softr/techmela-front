@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { TSingleProduct } from "@/types/products/singleProduct";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import { useEffect, useState } from "react";
 import ProductMainInfo from "./ProductMainInfo";
 import SingleProductClientContent from "./SingleProductClientContent";
 import VariationSelector from "./VariationSelector";
+import { PRODUCT_TYPE } from "@/const/product.const";
 
 type ProductClientWrapperProps = {
   product: TSingleProduct;
@@ -32,6 +32,8 @@ const ProductClientWrapper = ({
     });
   }, [product]);
 
+  const isVariableProduct = product.type === PRODUCT_TYPE.VARIABLE;
+
   return (
     <div>
       <ProductMainInfo
@@ -40,13 +42,14 @@ const ProductClientWrapper = ({
       />
 
       <div className="border-t border-border mt-2 pt-2">
-        {product.variations && product.variations.length > 0 && (
+        {isVariableProduct && product?.variations?.length > 0 && (
           <VariationSelector
             variations={product.variations}
             initialPrice={initialVariationPrice}
             onVariationChange={setSelectedVariation}
           />
         )}
+
         <SingleProductClientContent
           product={product}
           selectedVariation={selectedVariation}

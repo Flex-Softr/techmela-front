@@ -1,6 +1,6 @@
 import { TSingleProduct } from "@/types/products/singleProduct";
 
-const ProductDetails = ({ product }: { product?: TSingleProduct }) => {
+const ProductDescription = ({ product }: { product?: TSingleProduct }) => {
   return (
     <div className="space-y-10">
       {product?.description && (
@@ -48,4 +48,4 @@ const ProductDetails = ({ product }: { product?: TSingleProduct }) => {
   );
 };
 
-export default ProductDetails;
+export default ProductDescription;

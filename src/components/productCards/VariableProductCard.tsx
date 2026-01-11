@@ -1,3 +1,4 @@
+import { formatStockStatus, stockStatusColor } from "@/const/product.const";
 import { cn, getImageSrc } from "@/lib/utils";
 import { TVariableProduct } from "@/types/products/variableProduct";
 import Image from "next/image";
@@ -17,7 +18,7 @@ const VariableProductCard = ({ product, className }: TProps) => {
   const hasMultiplePrices = minPrice !== maxPrice;
 
   // Determine stock status
-  // const isOutOfStock = product.stockStatus === "out_of_stock";
+  // const isOutOfStock = product.stockStatus === STOCK_STATUS.OUT_OF_STOCK;
 
   // Max discount for badge
   const maxDiscount = product.maxDiscountPercent || 0;
@@ -79,18 +80,10 @@ const VariableProductCard = ({ product, className }: TProps) => {
               <span
                 className={cn(
                   "text-xs md:text-sm font-semibold",
-                  product.stockStatus === "in_stock"
-                    ? "text-green-500"
-                    : product.stockStatus === "low_stock"
-                      ? "text-yellow-600"
-                      : "text-red-500"
+                  stockStatusColor(product.stockStatus)
                 )}
               >
-                {product.stockStatus === "in_stock"
-                  ? "In Stock"
-                  : product.stockStatus === "low_stock"
-                    ? "Low Stock"
-                    : "Out of Stock"}
+                {formatStockStatus(product.stockStatus)}
               </span>
             </div>
           </div>

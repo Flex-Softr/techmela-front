@@ -3,6 +3,7 @@
 import { toast } from "@/components/ui/use-toast";
 import PEventIdGenerator from "@/lib/ec/PEventIdGenerator";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
+import { PRODUCT_TYPE, STOCK_STATUS } from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TGenericResponse, { TGenericErrorResponse } from "@/types/response";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
@@ -57,14 +58,12 @@ const SingleProductClientContent = ({
   };
 
   // Ensure isDisabled is a boolean value
-  const isVariableProduct =
-    product?.variations && product.variations.length > 0;
+  const isVariableProduct = product?.type === PRODUCT_TYPE.VARIABLE;
   const isVariationSelected = !!selectedVariation;
+
   const isStockAvailable = selectedVariation
-    ? (selectedVariation.inventory?.stockAvailable ?? 0) > 0
-    : !isVariableProduct
-      ? (product?.inventory?.stockAvailable ?? 0) > 0
-      : false;
+    ? selectedVariation.inventory?.stockStatus !== STOCK_STATUS.OUT_OF_STOCK
+    : product?.inventory?.stockStatus !== STOCK_STATUS.OUT_OF_STOCK;
 
   const isDisabled =
     (isVariableProduct && !isVariationSelected) || !isStockAvailable;

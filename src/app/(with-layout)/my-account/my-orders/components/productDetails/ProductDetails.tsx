@@ -74,7 +74,7 @@ const OrderDetails = () => {
               </p>
 
               <p className="mb-2">
-                <span className="font-semibold">Total Amount:</span> ৳
+                <span className="font-semibold">Total Amount:</span> &#2547;
                 {total?.toFixed(2)}
               </p>
 
@@ -165,10 +165,10 @@ const OrderDetails = () => {
                     {product.quantity}
                   </TableCell>
                   <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                    ৳ {product.unitPrice}
+                    &#2547; {product.unitPrice}
                   </TableCell>
                   <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                    ৳ {product.total}
+                    &#2547; {product.total}
                   </TableCell>
                   <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4 whitespace-nowrap">
                     {" "}
