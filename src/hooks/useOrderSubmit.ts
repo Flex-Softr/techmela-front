@@ -17,6 +17,7 @@ import { TGenericErrorResponse } from "@/types/response";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import useCart from "./useCart";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -38,6 +39,8 @@ const useOrderSubmit = ({
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [createOrder, { isLoading }] = useCreateOrderMutation();
+
+  const { data: cartData } = useCart();
 
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [limitModalStatus, setLimitModalStatus] = useState(false);

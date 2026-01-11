@@ -28,16 +28,24 @@ export type TVariableProduct = {
   _id: string;
   title: string;
   type: string;
-  variations: TVariation[];
-  category: {
+  variations?: TVariation[]; // Optional now as it might not be in list view
+  category?: {
     _id: string;
     name: string;
   };
-  publishedStatus: string;
   thumbnail: {
     _id: string;
     src: string;
     alt: string;
   };
-  slug?: string; // Optional as not in sample but likely needed for links
+  slug: string;
+
+  // New top-level fields for range
+  minRegularPrice: number;
+  maxRegularPrice: number;
+  minSalePrice: number;
+  maxSalePrice: number;
+  minDiscountPercent: number;
+  maxDiscountPercent: number;
+  stockStatus: string;
 };

@@ -1,7 +1,5 @@
 import { TImage } from "../image";
 
-import { TVariation } from "./variableProduct";
-
 type TProductBrand = {
   _id: string;
   name: string;
@@ -11,22 +9,23 @@ type TProductCategory = { _id: string; name: string };
 
 export type TProduct = {
   thumbnail: TImage;
-  stockStatus: string;
+  stockStatus: string; // "in_stock" | "low_stock" | "out_of_stock"
   _id: string;
   title: string;
   slug: string;
   shortDescription: string;
   regularPrice: number;
-  price: number;
   salePrice: number;
   discountPercent: number;
-  stock: "In stock" | "Out of stock" | "On backorder";
-  stockAvailable: number;
+  priceSave: number;
+  type?: string;
+  stockAvailable?: number;
   category?: TProductCategory;
   brand?: TProductBrand[];
-  image: TImage;
-  totalReview: number;
-  type?: string;
-  variations?: TVariation[];
-  averageRating: null | number;
+  image?: TImage; // Keeping for backward compatibility if needed, but API uses thumbnail
+  totalReview?: number;
+  averageRating?: number | null;
+  // Deprecated or mapped fields potentially
+  price?: number;
+  stock?: "In stock" | "Out of stock" | "On backorder";
 };

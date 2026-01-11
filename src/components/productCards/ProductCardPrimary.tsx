@@ -75,9 +75,20 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
             <div>
               {product?.stockStatus ? (
                 <span
-                  className={`${product?.stockStatus === "In stock" ? "text-green-500" : "text-red-500"} text-xs md:text-sm font-semibold`}
+                  className={cn(
+                    "text-xs md:text-sm font-semibold",
+                    product.stockStatus === "in_stock"
+                      ? "text-green-500"
+                      : product.stockStatus === "low_stock"
+                        ? "text-yellow-600"
+                        : "text-red-500"
+                  )}
                 >
-                  {product?.stockStatus}
+                  {product.stockStatus === "in_stock"
+                    ? "In Stock"
+                    : product.stockStatus === "low_stock"
+                      ? "Low Stock"
+                      : "Out of Stock"}
                 </span>
               ) : null}
             </div>

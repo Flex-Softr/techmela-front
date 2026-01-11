@@ -10,33 +10,17 @@ type TProps = {
 };
 
 const VariableProductCard = ({ product, className }: TProps) => {
-  const variationLength = product.variations?.length || 0;
+  // const variationLength = product.variations?.length || 0;
 
-  // Calculate price range safely
-  const prices =
-    variationLength > 0
-      ? product.variations.map((v) => v.price.salePrice || v.price.regularPrice)
-      : [];
-
-  const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
-  const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
+  const minPrice = product.minSalePrice || product.minRegularPrice || 0;
+  const maxPrice = product.maxSalePrice || product.maxRegularPrice || 0;
   const hasMultiplePrices = minPrice !== maxPrice;
 
   // Determine stock status
-  const totalStock =
-    variationLength > 0
-      ? product.variations.reduce(
-          (acc, v) => acc + (v.inventory?.stockAvailable || 0),
-          0
-        )
-      : 0;
-  const isOutOfStock = totalStock <= 0;
+  // const isOutOfStock = product.stockStatus === "out_of_stock";
 
   // Max discount for badge
-  const maxDiscount =
-    variationLength > 0
-      ? Math.max(...product.variations.map((v) => v.price.discountPercent || 0))
-      : 0;
+  const maxDiscount = product.maxDiscountPercent || 0;
 
   // Slug fallback
   const productSlug =
@@ -80,7 +64,7 @@ const VariableProductCard = ({ product, className }: TProps) => {
           </h2>
           <div className="flex justify-between items-center">
             <div>
-              {variationLength > 0 ? (
+              {minPrice > 0 ? (
                 <span className="font-bold text-xs md:text-sm">
                   &#2547;{minPrice}
                   {hasMultiplePrices && ` - ${maxPrice}`}
@@ -93,11 +77,20 @@ const VariableProductCard = ({ product, className }: TProps) => {
             </div>
             <div>
               <span
-                className={`${
-                  !isOutOfStock ? "text-green-500" : "text-red-500"
-                } text-xs md:text-sm font-semibold`}
+                className={cn(
+                  "text-xs md:text-sm font-semibold",
+                  product.stockStatus === "in_stock"
+                    ? "text-green-500"
+                    : product.stockStatus === "low_stock"
+                      ? "text-yellow-600"
+                      : "text-red-500"
+                )}
               >
-                {!isOutOfStock ? "In stock" : "Out of stock"}
+                {product.stockStatus === "in_stock"
+                  ? "In Stock"
+                  : product.stockStatus === "low_stock"
+                    ? "Low Stock"
+                    : "Out of Stock"}
               </span>
             </div>
           </div>
