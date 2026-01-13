@@ -10,6 +10,7 @@ type TTags =
   | "products"
   | `product-${string}`
   | `relatedProducts-${string}`
+  | `collectionProducts-${string}`
   | "bestSellingProducts"
   | "featuredProducts"
   | "allCategories"
