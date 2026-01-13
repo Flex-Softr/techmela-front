@@ -5,9 +5,13 @@ import { revalidateTag } from "next/cache";
 import TGenericResponse from "@/types/response";
 import formatParams from "./formatParams";
 
+// has been use same tag in the dashboard as well
 type TTags =
   | "products"
   | `product-${string}`
+  | `relatedProducts-${string}`
+  | "bestSellingProducts"
+  | "featuredProducts"
   | "allCategories"
   | "parentCategory"
   | "paymentMethod"
