@@ -17,6 +17,7 @@ export type TProduct = {
   shortDescription: string;
   regularPrice: number;
   salePrice: number;
+  image: TImage;
   discountPercent: number;
   priceSave: number;
   type?: string;
