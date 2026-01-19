@@ -45,11 +45,11 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "norabd.com",
+        hostname: "api.norabd.com",
       },
       {
         protocol: "https",
-        hostname: "norabd.com",
+        hostname: "api.norabd.com",
       },
     ],
   },
