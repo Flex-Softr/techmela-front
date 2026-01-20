@@ -7,8 +7,10 @@ import { useEffect } from "react";
 
 const SelectShippingMethod = ({
   shippingCharges,
+  shippingCostExceptFirst,
 }: {
   shippingCharges?: TShippingCharges[];
+  shippingCostExceptFirst: number;
 }) => {
   const selectedShipping = useAppSelector((state) => state.shippingClass);
   const dispatch = useAppDispatch();
@@ -58,7 +60,7 @@ const SelectShippingMethod = ({
             >
               <span className="font-semibold text-sm">{item?.name}</span>
               <span className="font-bold text-sm text-secondary">
-                {item.amount} &#2547;
+                {item.amount + shippingCostExceptFirst} &#2547;
               </span>
             </label>
           </div>

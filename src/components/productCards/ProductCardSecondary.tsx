@@ -5,7 +5,7 @@ import Link from "next/link";
 const ProductCardSecondary = ({ product }: { product: TProduct }) => {
   return (
     <div className="grid grid-cols-4 w-80 gap-3 p-2">
-      <div>
+      <Link href={`/product/${product.slug}`} className="block">
         <Image
           src={getImageSrc(product?.thumbnail?.src)}
           alt={product.thumbnail?.alt || ""}
@@ -13,7 +13,7 @@ const ProductCardSecondary = ({ product }: { product: TProduct }) => {
           height={300}
           className="w-20 h-20 object-cover"
         />
-      </div>
+      </Link>
       <div className="col-span-3 space-y-1">
         <Link
           href={`/product/${product._id}/${product.slug}`}

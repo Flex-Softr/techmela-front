@@ -8,11 +8,13 @@ const CartTotalCalculations = ({
   totalCost,
   costLoading = false,
   hideSubtotal = false,
+  shippingCostExceptFirst,
 }: {
   shippingCharges?: TShippingCharges[];
   totalCost?: number;
   costLoading?: boolean;
   hideSubtotal?: boolean;
+  shippingCostExceptFirst: number;
 }) => {
   const selectedShipping = useAppSelector((state) => state.shippingClass);
 
@@ -47,7 +49,10 @@ const CartTotalCalculations = ({
       )}
 
       {/* Shipping Method Selection */}
-      <SelectShippingMethod shippingCharges={shippingCharges} />
+      <SelectShippingMethod
+        shippingCharges={shippingCharges}
+        shippingCostExceptFirst={shippingCostExceptFirst}
+      />
 
       {/* Total Section */}
       <div className="flex justify-between mb-4 px-2">
@@ -56,7 +61,7 @@ const CartTotalCalculations = ({
           {costLoading ? (
             <Skeleton className="h-4 w-[100px]" />
           ) : (
-            <>{totalWithoutCoupon} &#2547;</>
+            <>{totalWithoutCoupon + shippingCostExceptFirst} &#2547;</>
           )}
         </span>
       </div>

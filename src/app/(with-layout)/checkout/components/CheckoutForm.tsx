@@ -38,6 +38,7 @@ const CheckoutForm = ({
 
   const { calculatedTotal } = useCheckoutLogic({
     totalCost,
+    shippingCostExceptFirst: 1000,
   });
 
   const {
