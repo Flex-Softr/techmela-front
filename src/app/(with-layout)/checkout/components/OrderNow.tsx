@@ -5,6 +5,8 @@ import EcButton from "@/components/EcButton/EcButton";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
+import config from "@/config/config";
+import useCart from "@/hooks/useCart";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import TShippingCharges from "@/types/shippingCharge";
@@ -33,10 +35,22 @@ const OrderNow = ({
   paymentMethods: TPaymentMethod[];
   children?: React.ReactNode;
 }) => {
+  const { data } = useCart();
+
+  const totalNumberOfItems =
+    (data?.data as { quantity: number }[])?.reduce(
+      (acc, item) => acc + (item?.quantity || 0),
+      0
+    ) || 0;
+
+  const shippingCostExceptFirst = Number(
+    (totalNumberOfItems - 1) * config.per_item_shipping_cost
+  );
+
   const { calculatedTotal } = useCheckoutLogic({
     totalCost,
+    shippingCostExceptFirst,
   });
-
   const {
     formState: { errors },
   } = useFormContext();
@@ -54,6 +68,7 @@ const OrderNow = ({
         totalCost={totalCost}
         costLoading={costLoading}
         hideSubtotal={true}
+        shippingCostExceptFirst={shippingCostExceptFirst}
       />
       <div className="order-3 lg:order-4 lg:hidden">
         <PaymentMethods
