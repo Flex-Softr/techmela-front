@@ -28,7 +28,7 @@ const MainFooterContent = () => {
           <div className="space-y-2">
             <Link href="/">
               <Image
-                src="/images/logo/logo.png"
+                src="/images/logo/Logo.png"
                 alt="Company logo"
                 width={150}
                 height={50}
