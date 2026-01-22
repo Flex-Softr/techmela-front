@@ -33,7 +33,8 @@ const serverSideFetcher = async <T>({
   // const accessToken = cookies().get("__app.ec.at")?.value;
   const reqConfig = {
     // headers: { authorization: `Bearer ${accessToken}` },
-    cache: cache || "force-cache", // ✅ "force-cache" caches forever
+    // cache: cache || "force-cache", // ✅ "force-cache" caches forever
+    cache: cache || "no-store", // TODO : enable cache
     next: { tags, revalidate },
   };
 
