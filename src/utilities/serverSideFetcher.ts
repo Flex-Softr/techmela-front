@@ -12,7 +12,9 @@ type TTags =
   | "parentCategory"
   | "paymentMethod"
   | "shippingCharge"
-  | "sliderBanner";
+  | "sliderBanner"
+  | "homepageSections"
+  | `homepageSections-${string}`;
 
 type TProps = {
   url: string;
@@ -33,8 +35,7 @@ const serverSideFetcher = async <T>({
   // const accessToken = cookies().get("__app.ec.at")?.value;
   const reqConfig = {
     // headers: { authorization: `Bearer ${accessToken}` },
-    // cache: cache || "force-cache", // ✅ "force-cache" caches forever
-    cache: cache || "no-store", // TODO : enable cache
+    cache: cache || "force-cache", // ✅ "force-cache" caches forever
     next: { tags, revalidate },
   };
 
