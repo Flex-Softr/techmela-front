@@ -92,7 +92,7 @@ const MainFooterContent = () => {
                 className="flex items-center gap-1 text-sm font-medium hover:text-primary-foreground transition-colors text-primary-foreground/80"
               >
                 <Phone className="size-4" />
-                +8801722222222
+                +8801973890872
               </a>
               <div className="flex gap-2">
                 <a

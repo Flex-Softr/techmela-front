@@ -43,24 +43,34 @@ const ContactUsPage = () => {
             <div className="bg-white shadow-lg p-8 rounded-lg">
               <FaPhoneAlt className="text-4xl text-cyan-600 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold mb-2">Phone</h3>
-              <p className="text-gray-600">+8801xxxxxxxx</p>
-              <p className="text-gray-600">24/7 service</p>
+              <p className="text-gray-600 text-sm font-semibold">
+                +8801973890872
+              </p>
+              <p className="text-gray-600 text-sm font-semibold">
+                24/7 service
+              </p>
             </div>
 
             {/* Email */}
             <div className="bg-white shadow-lg p-8 rounded-lg">
               <FaEnvelope className="text-4xl text-cyan-600 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold mb-2">Email</h3>
-              <p className="text-gray-600">noralifestyle@gmail.com</p>
-              <p className="text-gray-600">24/7 Online Support</p>
+              <p className="text-gray-600 text-sm font-semibold">
+                noralifestyle@gmail.com
+              </p>
+              <p className="text-gray-600 text-sm font-semibold">
+                24/7 Online Support
+              </p>
             </div>
 
             {/* Location */}
             <div className="bg-white shadow-lg p-8 rounded-lg">
               <FaMapMarkerAlt className="text-4xl text-cyan-600 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold mb-2">Location</h3>
-              <p className="text-gray-600">Dhaka, Bangladesh</p>
-              <p className="text-gray-600">Visit Us Anytime</p>
+              <p className="text-gray-600 text-sm font-semibold">
+                শপ নং-৪৭৯/৪২৭,৪২৮,৪২৯ ৪র্থ তলা, শ্যামলী স্কয়ার শপিংমল,
+                শ্যামলী,ঢাকা
+              </p>
             </div>
           </div>
         </div>
