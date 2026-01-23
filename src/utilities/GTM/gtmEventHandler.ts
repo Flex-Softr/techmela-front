@@ -8,7 +8,7 @@ const gtmEventHandler = (eventData: TGtmEventParameter) => {
 
   const data: TGtmEventParameter = {
     ...eventData,
-    timestamp: Date.now(),
+    timestamp: Math.floor(Date.now() / 1000),
     event_id,
     em: eventData.em ? hashUserData(eventData.em) : undefined,
     ph: eventData.ph ? hashUserData(eventData.ph) : undefined,
