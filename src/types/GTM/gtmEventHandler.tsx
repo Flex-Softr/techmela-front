@@ -3,8 +3,7 @@ export type TGtmEvents =
   | "add_to_cart"
   | "purchase"
   | "initiate_checkout"
-  | "view_category"
-  | "purchase";
+  | "view_category";
 
 export type TGtmEventParameter = {
   event: string;
