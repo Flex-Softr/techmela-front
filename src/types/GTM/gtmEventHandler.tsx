@@ -20,4 +20,5 @@ export type TGtmEventParameter = {
   }[];
   em?: string;
   ph?: string;
+  referer?: string;
 };
