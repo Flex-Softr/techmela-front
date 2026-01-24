@@ -11,11 +11,14 @@ const Header = async () => {
   });
 
   return (
-    <header className="fixed top-0 left-0 w-full mb-16 z-40 shadow-lg sm:static sm:shadow-none sm:bg-transparent sm:mb-0 bg-background">
-      <TopHeader />
-      <MainHeader categories={categories} />
-      <BottomHeader categories={categories} />
-    </header>
+    <>
+      <header className="fixed top-0 left-0 w-full mb-16 z-40 shadow-lg sm:static sm:shadow-none sm:bg-transparent sm:mb-0 bg-background">
+        <TopHeader />
+        <MainHeader categories={categories} />
+        <BottomHeader categories={categories} />
+      </header>
+      <div className="h-[60px] w-full block sm:hidden"></div>
+    </>
   );
 };
 

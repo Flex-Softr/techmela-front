@@ -34,7 +34,7 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
           </p>
         )}
 
-        <div className="">
+        <Link className="block" href={`/product/${product.slug}`}>
           <Image
             src={getImageSrc(product?.thumbnail?.src)}
             alt={product?.thumbnail?.alt || ""}
@@ -43,7 +43,7 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
             className="w-full aspect-square object-cover mx-auto rounded-md"
             priority
           />
-        </div>
+        </Link>
         <div className="flex flex-col gap-2 xms:px-1 xls:px-1 sm:px-1 md:px-2">
           <h2 className="font-semibold text-foreground text-sm md:text-base">
             {product?.title?.length < 40 ? (

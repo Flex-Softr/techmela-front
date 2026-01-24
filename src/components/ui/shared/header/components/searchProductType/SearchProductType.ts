@@ -9,6 +9,15 @@ export type Product = {
   regularPrice: number;
   price: number;
   salePrice: number;
+  // Variation fields
+  variations?: {
+    price: {
+      regularPrice: number;
+      salePrice: number;
+    };
+  }[];
+  minRegularPrice?: number;
+  minSalePrice?: number;
 };
 
 export type ApiResponse = {

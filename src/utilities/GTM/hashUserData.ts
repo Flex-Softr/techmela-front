@@ -14,6 +14,7 @@ export const hashUserData = (value?: string | null): string | undefined => {
   if (!value) return undefined;
 
   const normalized = normalize(value);
+  const hashed = crypto.createHash("sha256").update(normalized).digest("hex");
 
-  return crypto.createHash("sha256").update(normalized).digest("hex");
+  return hashed;
 };

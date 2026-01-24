@@ -17,7 +17,9 @@ type TTags =
   | "parentCategory"
   | "paymentMethod"
   | "shippingCharge"
-  | "sliderBanner";
+  | "sliderBanner"
+  | "homepageSections"
+  | `homepageSections-${string}`;
 
 type TProps = {
   url: string;

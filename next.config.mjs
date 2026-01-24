@@ -43,6 +43,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "nora.com.bd",
       },
+      {
+        protocol: "http",
+        hostname: "api.norabd.com",
+      },
+      {
+        protocol: "https",
+        hostname: "api.norabd.com",
+      },
     ],
   },
   reactStrictMode: false,

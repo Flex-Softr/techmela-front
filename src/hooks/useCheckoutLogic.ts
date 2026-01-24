@@ -3,7 +3,13 @@
 import { useAppSelector } from "@/redux/hooks";
 import { useMemo } from "react";
 
-const useCheckoutLogic = ({ totalCost }: { totalCost?: number }) => {
+const useCheckoutLogic = ({
+  totalCost,
+  shippingCostExceptFirst,
+}: {
+  totalCost?: number;
+  shippingCostExceptFirst: number;
+}) => {
   const selectedShipping = useAppSelector((state) => state.shippingClass);
   const couponInfo = useAppSelector((state) => state.coupon);
 
@@ -12,7 +18,9 @@ const useCheckoutLogic = ({ totalCost }: { totalCost?: number }) => {
   const { totalWithoutCoupon, calculatedTotal, discount, ultimateTotalCost } =
     useMemo(() => {
       const totalWithoutCoupon = Math.floor(
-        (totalCost || 0) + (selectedShipping.amount || 0)
+        (totalCost || 0) +
+          (selectedShipping.amount || 0) +
+          shippingCostExceptFirst
       );
 
       const discount = couponDiscount || 0;
