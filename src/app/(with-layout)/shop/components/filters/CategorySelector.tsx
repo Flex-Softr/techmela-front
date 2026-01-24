@@ -36,6 +36,7 @@ const CategorySelector = ({
       searchParams={searchParams}
       subcategories={subcategories}
       setSubcategories={setSubcategories}
+      headerClassName="bg-gray-50 text-gray-900 font-medium border border-gray-200 shadow-sm text-sm"
     />
   );
 };

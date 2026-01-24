@@ -10,30 +10,31 @@ import {
 import { Range, getTrackBackground } from "react-range";
 
 const STEP = 1;
-const MIN = 0;
-const MAX = 10000;
-const DEFAULT_MAX = 10000;
 
 type PriceRangeSliderProps = {
   initialState: number[];
   setInitialState: Dispatch<SetStateAction<number[]>>;
+  min: number;
+  max: number;
 };
 
 const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   initialState,
   setInitialState,
+  min,
+  max,
 }) => {
   const [inputValues, setInputValues] = useState<(number | string)[]>([
     initialState[0],
-    initialState[1] ?? DEFAULT_MAX,
+    initialState[1] ?? max,
   ]);
 
   useEffect(() => {
-    if (initialState[0] < 1 || initialState[1] === undefined) {
-      setInitialState([1, DEFAULT_MAX]);
+    if (initialState[0] < min || initialState[1] === undefined) {
+      setInitialState([min, max]);
     }
     setInputValues(initialState);
-  }, [initialState, setInitialState]);
+  }, [initialState, setInitialState, min, max]);
 
   const handleChange = (newValues: number[]) => {
     setInputValues(newValues);
@@ -53,88 +54,86 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   // Handle resetting input to min/max if empty
   const handleBlur = () => {
     const updatedValues = [
-      inputValues[0] === "" ? MIN : Number(inputValues[0]),
-      inputValues[1] === "" ? MAX : Number(inputValues[1]),
+      inputValues[0] === "" ? min : Number(inputValues[0]),
+      inputValues[1] === "" ? max : Number(inputValues[1]),
     ];
-    setInitialState(updatedValues);
     setInputValues(updatedValues);
+    setInitialState(updatedValues);
   };
 
   return (
-    <div>
-      <Range
-        values={[
-          inputValues[0] === "" ? MIN : Number(inputValues[0]),
-          inputValues[1] === "" ? MAX : Number(inputValues[1]),
-        ]}
-        step={STEP}
-        min={MIN}
-        max={MAX}
-        onChange={handleChange}
-        renderTrack={({ props, children }) => (
-          <div
-            onMouseDown={props.onMouseDown}
-            onTouchStart={props.onTouchStart}
-            style={{
-              ...props.style,
-              height: "36px",
-              display: "flex",
-              width: "80%",
-            }}
-          >
+    <div className="px-2 pt-4 pb-2">
+      <div className="mb-6 flex justify-center">
+        <Range
+          values={[
+            inputValues[0] === "" ? min : Number(inputValues[0]),
+            inputValues[1] === "" ? max : Number(inputValues[1]),
+          ]}
+          step={STEP}
+          min={min}
+          max={max}
+          onChange={handleChange}
+          renderTrack={({ props, children }) => (
             <div
-              ref={props.ref}
+              onMouseDown={props.onMouseDown}
+              onTouchStart={props.onTouchStart}
               style={{
-                height: "5px",
+                ...props.style,
+                height: "36px",
+                display: "flex",
                 width: "100%",
-                borderRadius: "4px",
-                background: getTrackBackground({
-                  values: [
-                    inputValues[0] === "" ? MIN : Number(inputValues[0]),
-                    inputValues[1] === "" ? MAX : Number(inputValues[1]),
-                  ],
-                  colors: [
-                    "hsl(var(--muted))",
-                    "hsl(var(--primary))",
-                    "hsl(var(--muted))",
-                  ],
-                  min: MIN,
-                  max: MAX,
-                }),
-                alignSelf: "center",
               }}
             >
-              {children}
+              <div
+                ref={props.ref}
+                style={{
+                  height: "4px",
+                  width: "100%",
+                  borderRadius: "4px",
+                  background: getTrackBackground({
+                    values: [
+                      inputValues[0] === "" ? min : Number(inputValues[0]),
+                      inputValues[1] === "" ? max : Number(inputValues[1]),
+                    ],
+                    colors: ["#e5e7eb", "hsl(var(--primary))", "#e5e7eb"],
+                    min: min,
+                    max: max,
+                  }),
+                  alignSelf: "center",
+                }}
+              >
+                {children}
+              </div>
             </div>
-          </div>
-        )}
-        renderThumb={({ props }) => {
-          const { key, ...restProps } = props; // Extract the key prop
-
-          return (
-            <div
-              key={key} // Pass the key prop directly
-              {...restProps} // Spread the rest of the props
-              style={{
-                ...restProps.style,
-                height: "24px",
-                width: "24px",
-                borderRadius: "50%",
-                backgroundColor: "#FFF",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                boxShadow: "0px 2px 6px #AAA",
-              }}
-              className="border-[3px] border-primary"
-            />
-          );
-        }}
-      />
-      <div className="flex gap-2">
-        <div>
+          )}
+          renderThumb={({ props }) => {
+            const { key, ...restProps } = props;
+            return (
+              <div
+                key={key}
+                {...restProps}
+                style={{
+                  ...restProps.style,
+                  height: "24px",
+                  width: "24px",
+                  borderRadius: "50%",
+                  backgroundColor: "hsl(var(--primary))",
+                  border: "4px solid white",
+                  boxShadow: "0 0 0 1px #e5e7eb",
+                }}
+              />
+            );
+          }}
+        />
+      </div>
+      <div className="flex justify-between items-center gap-4">
+        <div className="relative w-full">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+            &#2547;
+          </span>
           <Input
             type="number"
+            className="pl-6 h-9 text-sm"
             value={inputValues[0] === "" ? "" : inputValues[0]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleInputChange(0, e.target.value)
@@ -142,10 +141,14 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
             onBlur={handleBlur}
           />
         </div>
-
-        <div>
+        <span className="text-muted-foreground">-</span>
+        <div className="relative w-full">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+            &#2547;
+          </span>
           <Input
             type="number"
+            className="pl-6 h-9 text-sm"
             value={inputValues[1] === "" ? "" : inputValues[1]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleInputChange(1, e.target.value)

@@ -16,7 +16,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const CategorySection = ({ categories }: { categories: TCategory[] }) => {
   return (
-    <section className="pt-4 md:pt-6">
+    <section className="pt-2 md:pt-4">
       <ContainerMax>
         <SectionTitle title="Categories" />
         <SectionSubtitle text="Explore our wide range of products" />
@@ -26,13 +26,13 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
               delay: 2000,
             }),
           ]}
-          className="mt-4"
+          className="mt-4 px-4 md:px-12"
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-2 md:-ml-4">
             {categories.map((category) => (
               <CarouselItem
                 key={category._id}
-                className="basis-1/2 md:basis-1/4 lg:basis-1/6 pt-2"
+                className="basis-1/3 md:basis-1/4 lg:basis-1/6 pl-2 md:pl-4 pt-2"
               >
                 <CategoryCard category={category} />
               </CarouselItem>

@@ -17,19 +17,26 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
   return (
     <Link
       href={`/shop?category=${category.slug}`}
-      className="text-center mx-auto flex flex-col justify-center items-center"
+      className="text-center mx-auto flex flex-col justify-center items-center group transition-all duration-300"
       onClick={handleCategoryView}
     >
-      <div className="size-28 border border-border rounded-md flex justify-center items-center hover:scale-105 transition-all duration-300">
+      <div className="size-20 md:size-24 bg-gray-50 rounded-2xl flex justify-center items-center group-hover:bg-gray-100 group-hover:scale-105 transition-all duration-300">
         <Image
           src={getImageSrc(category?.image?.src)}
           alt={category?.image?.alt || ""}
-          width={200}
-          height={200}
-          className="mx-auto transition-all object-contain rounded-md"
+          width={80}
+          height={80}
+          className="mx-auto transition-all object-contain"
         />
       </div>
-      <span className="mt-2 text-sm font-bold block">{category.name}</span>
+      <span className="mt-2 text-xs md:text-base font-medium block text-gray-700 group-hover:text-primary transition-colors">
+        {category.name}
+      </span>
+      {category.productCount !== undefined && (
+        <span className="text-[10px] md:text-xs text-gray-400 font-normal">
+          ({category.productCount} products)
+        </span>
+      )}
     </Link>
   );
 };

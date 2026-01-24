@@ -1,7 +1,6 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
-import { TProduct } from "@/types/products/product";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { Phone } from "lucide-react";
@@ -39,20 +38,8 @@ const fetchProductData = async (slug: string) => {
   return response?.data;
 };
 
-const fetchRelatedProducts = async (categoryId: string) => {
-  const response = await serverSideFetcher<TProduct[]>({
-    url: "/products",
-    params: { category: categoryId },
-    tags: ["products"],
-  });
-  return response?.data;
-};
-
 const SingleProductPage = async ({ params }: TProps) => {
   const product = await fetchProductData(params.slug);
-  const relatedProducts =
-    product?.category?._id?._id &&
-    (await fetchRelatedProducts(product.category._id._id));
 
   if (!product) {
     return (
@@ -102,9 +89,8 @@ const SingleProductPage = async ({ params }: TProps) => {
           <div className="col-span-1 md:col-span-2 px-3 sm:mt-5 md:mt-10">
             <ProductDescription product={product} />
           </div>
-          <div className="col-span-1 md:col-span-2 mt-10">
-            {relatedProducts && <RelatedProduct products={relatedProducts} />}
-          </div>
+          {/* related product  */}
+          <RelatedProduct slug={params.slug} />
         </div>
       </ContainerMax>
     </section>

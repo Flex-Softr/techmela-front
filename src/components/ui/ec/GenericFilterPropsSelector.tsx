@@ -4,6 +4,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 import TCategory from "@/types/categories/categories";
 import { ChevronsUpDown } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -18,6 +19,7 @@ const GenericFilterPropsSelector = ({
   searchParams,
   subcategories,
   setSubcategories,
+  headerClassName,
 }: {
   filterBy: string;
   title: string;
@@ -27,6 +29,7 @@ const GenericFilterPropsSelector = ({
   searchParams: Record<string, string | string[] | undefined>;
   subcategories: Record<string, string[]>;
   setSubcategories: Dispatch<SetStateAction<Record<string, string[]>>>;
+  headerClassName?: string;
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
@@ -99,10 +102,19 @@ const GenericFilterPropsSelector = ({
         onOpenChange={setIsOpen}
         className="w-full space-y-2"
       >
-        <div className="flex items-center justify-between bg-muted text-muted-foreground py-2 px-3 mx-2 rounded-md">
+        <div
+          className={cn(
+            "flex items-center justify-between bg-muted text-muted-foreground py-2 px-3 mx-2 rounded-md",
+            headerClassName
+          )}
+        >
           <BoxHeading className="mb-0">{title}</BoxHeading>
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm" className="w-9 p-0">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-9 p-0 hover:text-[#E6D0C4]"
+            >
               <ChevronsUpDown className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
             </Button>

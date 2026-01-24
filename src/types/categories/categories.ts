@@ -26,6 +26,7 @@ export type TCategory = {
       };
     },
   ];
+  productCount?: number;
 };
 
 export default TCategory;

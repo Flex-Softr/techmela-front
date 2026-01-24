@@ -42,6 +42,7 @@ const useCheckoutLogic = ({
       couponDiscount,
       cost,
       shippingChange,
+      shippingCostExceptFirst,
     ]);
 
   return {

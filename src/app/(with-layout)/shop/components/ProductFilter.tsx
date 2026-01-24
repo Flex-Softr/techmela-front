@@ -1,6 +1,7 @@
 import EcButton from "@/components/EcButton/EcButton";
 import Box from "@/components/ui/ec/Box";
-import BoxHeading from "@/components/ui/ec/BoxHeading";
+import CollapsibleFilterSection from "@/components/ui/ec/CollapsibleFilterSection";
+import { useDebounce } from "@/hooks/useDebounce";
 import TCategory from "@/types/categories/categories";
 import { TTag } from "@/types/tags/tag";
 import { useRouter } from "next/navigation";
@@ -13,43 +14,45 @@ type ProductFilterProps = {
   tags: TTag[];
   categories: TCategory[];
   sheetCloseRef: RefObject<HTMLButtonElement | null>;
+  minPrice: number;
+  maxPrice: number;
 };
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
   searchParams,
   categories,
   sheetCloseRef,
+  minPrice,
+  maxPrice,
 }) => {
   const [csSearchParams, setCsSearchParams] =
     useState<Record<string, string | string[] | undefined>>(searchParams);
   const [filters, setFilters] = useState<string>("");
   const [priceFilterInitialState, setPriceFilterInitialState] = useState<
     number[]
-  >([Number(searchParams.minPrice) || 0, Number(searchParams.maxPrice) || 805]);
+  >([
+    Number(searchParams.minPrice) || minPrice,
+    Number(searchParams.maxPrice) || maxPrice,
+  ]);
   const [tagParams, setTagParams] = useState<string>("");
   const [categoryParams, setCategoryParams] = useState<string[]>([]); // Store multiple categories as an array
   const [subcategoryParams, setSubcategoryParams] = useState<
     Record<string, string[]>
   >({});
 
+  const debouncedPrice = useDebounce(priceFilterInitialState, 500);
+
   const router = useRouter();
 
   useEffect(() => {
     let newSearchParams = "";
 
-    // Append minPrice and maxPrice
-    if (priceFilterInitialState.length) {
-      const minPrice =
-        priceFilterInitialState[0] !== 0
-          ? `minPrice=${priceFilterInitialState[0]}`
-          : "";
-      const maxPrice =
-        priceFilterInitialState[1] !== 805
-          ? `maxPrice=${priceFilterInitialState[1]}`
-          : "";
-      newSearchParams = `${minPrice ? `&${minPrice}` : ""}${
-        maxPrice ? `&${maxPrice}` : ""
-      }`;
+    // Append minPrice and maxPrice if they differ from original defaults
+    const currentMin = priceFilterInitialState[0];
+    const currentMax = priceFilterInitialState[1];
+
+    if (currentMin !== minPrice || currentMax !== maxPrice) {
+      newSearchParams = `minPrice=${currentMin}&maxPrice=${currentMax}`;
     }
 
     // Handle subcategoryParams
@@ -80,11 +83,18 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     }
 
     setFilters(newSearchParams);
-  }, [priceFilterInitialState, tagParams, categoryParams, subcategoryParams]);
+  }, [
+    priceFilterInitialState,
+    tagParams,
+    categoryParams,
+    subcategoryParams,
+    minPrice,
+    maxPrice,
+  ]);
 
   const handleClearAllFilters = () => {
     setCsSearchParams({});
-    setPriceFilterInitialState([0, 805]);
+    setPriceFilterInitialState([minPrice, maxPrice]);
     setTagParams("");
     setCategoryParams([]); // Clear category
     setSubcategoryParams({}); // Clear all subcategories
@@ -92,15 +102,15 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     router.push("/shop"); // Reset URL to base
   };
 
-  const handleApplyFilters = () => {
+  const handleApplyFilters = (shouldClose = true) => {
     let newSearchParams = "";
 
-    // Add minPrice and maxPrice first
-    if (priceFilterInitialState[0] !== 0) {
-      newSearchParams = `minPrice=${priceFilterInitialState[0]}`;
-    }
-    if (priceFilterInitialState[1] !== 805) {
-      newSearchParams += `&maxPrice=${priceFilterInitialState[1]}`;
+    // Add minPrice and maxPrice first if they differ from original defaults
+    if (
+      priceFilterInitialState[0] !== minPrice ||
+      priceFilterInitialState[1] !== maxPrice
+    ) {
+      newSearchParams = `minPrice=${priceFilterInitialState[0]}&maxPrice=${priceFilterInitialState[1]}`;
     }
 
     // Add subcategory if present, ignoring categoryParams
@@ -131,39 +141,65 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
     // Update the URL with the filters applied
     router.push(`/shop?${newSearchParams}`);
-    sheetCloseRef?.current?.click();
+    if (shouldClose) {
+      sheetCloseRef?.current?.click();
+    }
   };
 
+  // Auto-apply filters when debounced price changes
+  useEffect(() => {
+    // Only apply if the current debounced price is different from the search params
+    const searchParamsMin = Number(searchParams.minPrice) || minPrice;
+    const searchParamsMax = Number(searchParams.maxPrice) || maxPrice;
+
+    if (
+      debouncedPrice[0] !== searchParamsMin ||
+      debouncedPrice[1] !== searchParamsMax
+    ) {
+      handleApplyFilters(false);
+    }
+  }, [debouncedPrice]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <Box className="bg-white space-y-3">
-      <BoxHeading className="bg-muted text-muted-foreground py-2 px-3 mx-2 rounded-md">
-        Filter by price
-      </BoxHeading>
-      <PriceRangeSlider
-        initialState={priceFilterInitialState}
-        setInitialState={setPriceFilterInitialState}
-      />
-      <CategorySelector
-        categories={categories}
-        searchParams={csSearchParams}
-        setCategoryParams={setCategoryParams}
-        setSubcategoryParams={setSubcategoryParams}
-      />
-      <div className="flex gap-2">
+    <Box className="bg-white p-5 space-y-8 rounded-lg shadow-sm border border-gray-100">
+      <div className="space-y-4">
+        <CollapsibleFilterSection
+          title="Filter by price"
+          headerClassName="bg-gray-50 text-gray-900 font-medium border border-gray-200 shadow-sm text-sm"
+        >
+          <PriceRangeSlider
+            initialState={priceFilterInitialState}
+            setInitialState={setPriceFilterInitialState}
+            min={minPrice}
+            max={maxPrice}
+          />
+        </CollapsibleFilterSection>
+      </div>
+
+      <div className="space-y-4">
+        <CategorySelector
+          categories={categories}
+          searchParams={csSearchParams}
+          setCategoryParams={setCategoryParams}
+          setSubcategoryParams={setSubcategoryParams}
+        />
+      </div>
+
+      <div className="flex gap-3 pt-4 border-t">
         <EcButton
-          className="px-6 font-bold text-white"
-          onClick={handleApplyFilters}
+          className="flex-1 font-bold text-white bg-primary hover:bg-primary/90"
+          onClick={() => handleApplyFilters()}
           disabled={!filters}
         >
           Find
         </EcButton>
         <EcButton
-          className="px-6 font-bold hover:text-white"
+          className="flex-1 font-bold hover:bg-gray-100 hover:text-black"
           onClick={handleClearAllFilters}
           variant="ghost"
           disabled={!Object.keys(searchParams).length}
         >
-          Clear all filters
+          Clear
         </EcButton>
       </div>
     </Box>
@@ -171,114 +207,3 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 };
 
 export default ProductFilter;
-
-// "use client";
-// import EcButton from "@/components/EcButton/EcButton";
-// import Box from "@/components/ui/ec/Box";
-// import BoxHeading from "@/components/ui/ec/BoxHeading";
-// import TCategory from "@/types/categories/categories";
-// import { TTag } from "@/types/tags/tag";
-// import { useRouter } from "next/navigation";
-// import { RefObject, useEffect, useState } from "react";
-// import PriceRangeSlider from "../components/priceRange/PriceRange";
-// import CategorySelector from "./filters/CategorySelector";
-
-// type ProductFilterProps = {
-//   searchParams: Record<string, string | string[] | undefined>;
-//   tags: TTag[];
-//   categories: TCategory[];
-//   sheetCloseRef: RefObject<HTMLButtonElement>;
-// };
-
-// const ProductFilter: React.FC<ProductFilterProps> = ({
-//   searchParams,
-
-//   categories,
-//   sheetCloseRef,
-// }) => {
-//   const [csSearchParams, setCsSearchParams] =
-//     useState<Record<string, string | string[] | undefined>>(searchParams);
-//   const [filters, setFilters] = useState<string>("");
-//   const [priceFilterInitialState, setPriceFilterInitialState] = useState<
-//     number[]
-//   >([Number(searchParams.minPrice) || 0, Number(searchParams.maxPrice) || 805]);
-//   const [tagParams, setTagParams] = useState<string>("");
-//   const [categoryParams, setCategoryParams] = useState<string>("");
-
-//   const router = useRouter();
-
-//   useEffect(() => {
-//     let newSearchParams = "";
-//     if (priceFilterInitialState.length) {
-//       const minPrice =
-//         priceFilterInitialState[0] !== 0
-//           ? `minPrice=${priceFilterInitialState[0]}`
-//           : "";
-//       const maxPrice =
-//         priceFilterInitialState[1] !== 805
-//           ? `maxPrice=${priceFilterInitialState[1]}`
-//           : "";
-//       newSearchParams = `${minPrice ? `&${minPrice}` : ""}${maxPrice ? `&${maxPrice}` : ""}`;
-//     }
-//     if (tagParams) {
-//       newSearchParams = `${newSearchParams}&${tagParams}`;
-//     }
-//     if (categoryParams) {
-//       newSearchParams = `${newSearchParams}&${categoryParams}`;
-//     }
-//     setFilters(newSearchParams);
-//   }, [priceFilterInitialState, tagParams, categoryParams]);
-
-//   const handleClearAllFilters = () => {
-//     setCsSearchParams({});
-//     setPriceFilterInitialState([0, 805]);
-//     setTagParams("");
-//     setCategoryParams("");
-//     sheetCloseRef?.current?.click();
-//     router.push(`?`);
-//   };
-
-//   return (
-//     <Box className="bg-white space-y-3">
-//       <BoxHeading className="bg-gray-100 py-1 px-2 mx-2">
-//         Filter by price
-//       </BoxHeading>
-//       <PriceRangeSlider
-//         initialState={priceFilterInitialState}
-//         setInitialState={setPriceFilterInitialState}
-//       />
-//       {/* <TagSelector
-//         tags={tags}
-//         setTagParams={setTagParams}
-//         searchParams={csSearchParams}
-//       /> */}
-//       <CategorySelector
-//         categories={categories}
-//         searchParams={csSearchParams}
-//         setCategoryParams={setCategoryParams}
-//       />
-//       <div className="flex gap-2">
-//         <EcButton
-//           className="px-6 font-bold text-white"
-//           onClick={() => {
-//             router.push(`?${filters}`);
-//             sheetCloseRef?.current?.click();
-//           }}
-//           disabled={!filters}
-//         >
-//           Find
-//         </EcButton>
-//         <EcButton
-//           className="px-6 font-bold hover:text-white"
-//           onClick={handleClearAllFilters}
-//           variant="ghost"
-//           disabled={!Object.keys(searchParams).length}
-//         >
-//           Clear all filters
-//         </EcButton>
-//       </div>
-//     </Box>
-//   );
-// };
-
-// export default ProductFilter;

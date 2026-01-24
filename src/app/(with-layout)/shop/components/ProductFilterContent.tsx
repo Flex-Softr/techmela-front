@@ -19,10 +19,14 @@ const ProductFilterContent = ({
   searchParams,
   tags,
   categories,
+  minPrice,
+  maxPrice,
 }: {
   searchParams: Record<string, string | string[] | undefined>;
   tags: TTag[];
   categories: TCategory[];
+  minPrice: number;
+  maxPrice: number;
 }) => {
   const sheetCloseRef = useRef<HTMLButtonElement>(null);
   const filterContent = (
@@ -31,6 +35,8 @@ const ProductFilterContent = ({
       tags={tags}
       categories={categories}
       sheetCloseRef={sheetCloseRef}
+      minPrice={minPrice}
+      maxPrice={maxPrice}
     />
   );
 

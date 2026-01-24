@@ -5,6 +5,7 @@ export type Product = {
   };
   stockStatus: string;
   _id: string;
+  slug: string;
   title: string;
   regularPrice: number;
   price: number;

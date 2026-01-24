@@ -93,7 +93,7 @@ const Search = () => {
                 <div
                   key={product._id}
                   className="flex items-center p-2 border-b border-gray-200 last:border-0 cursor-pointer"
-                  onClick={() => handleProductClick(product._id)}
+                  onClick={() => handleProductClick(product.slug)}
                 >
                   <Image
                     width={55}
