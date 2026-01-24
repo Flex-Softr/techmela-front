@@ -74,48 +74,60 @@ const Search = () => {
       </div>
 
       {showSuggestions && searchValue.trim() !== "" && (
-        <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+        <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-[100]">
           {isLoading && <p className="p-2">Loading...</p>}
 
           {!isLoading && !isError && products.length > 0 ? (
-            products.map((product: Product) => (
-              <div
-                key={product._id}
-                className="flex items-center p-2 border-b border-gray-200 last:border-0 cursor-pointer"
-                onClick={() => handleProductClick(product._id)}
-              >
-                <Image
-                  width={55}
-                  height={55}
-                  src={getImageSrc(product?.thumbnail?.src)}
-                  alt={product?.thumbnail?.alt || ""}
-                  className="suggestion-image"
-                />
-                <div className="ml-2">
-                  <p className="text-sm font-semibold">{product.title}</p>
-                  <div>
-                    {product.salePrice ? (
-                      <>
-                        <span className="text-muted text-xs">
-                          &#2547;
-                          <del>{product.regularPrice}</del>
-                        </span>
-                        <span className="font-bold ">
-                          {" "}
-                          &#2547;{product.salePrice}
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="font-bold">
-                          &#2547;{product.regularPrice}
-                        </span>
-                      </>
-                    )}
+            products.map((product: Product) => {
+              // Handle variation pricing
+              const regularPrice =
+                product.regularPrice ||
+                product.variations?.[0]?.price?.regularPrice ||
+                product.minRegularPrice;
+              const salePrice =
+                product.salePrice ||
+                product.variations?.[0]?.price?.salePrice ||
+                product.minSalePrice;
+
+              return (
+                <div
+                  key={product._id}
+                  className="flex items-center p-2 border-b border-gray-200 last:border-0 cursor-pointer"
+                  onClick={() => handleProductClick(product._id)}
+                >
+                  <Image
+                    width={55}
+                    height={55}
+                    src={getImageSrc(product?.thumbnail?.src)}
+                    alt={product?.thumbnail?.alt || ""}
+                    className="suggestion-image"
+                  />
+                  <div className="ml-2">
+                    <p className="text-sm font-semibold">{product.title}</p>
+                    <div>
+                      {salePrice ? (
+                        <>
+                          <span className="text-muted text-xs">
+                            &#2547;
+                            <del>{regularPrice}</del>
+                          </span>
+                          <span className="font-bold ">
+                            {" "}
+                            &#2547;{salePrice}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="font-bold">
+                            &#2547;{regularPrice}
+                          </span>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <p className="p-2">No results found.</p>
           )}

@@ -21,14 +21,21 @@ const VariationSelector = ({
 }: VariationSelectorProps) => {
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string | null;
-  }>(() => {
-    // Default selection: Find the first variation with available stock
-    const firstInStock = variations?.find(
-      (v) => (v.inventory?.stockAvailable ?? 0) > 0
-    );
-    return firstInStock ? firstInStock.attributes : {};
-  });
+  }>({});
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (variations?.length > 0 && Object.keys(selectedOptions).length === 0) {
+      // Default selection: Find the first variation with available stock, or fallback to the first one
+      const defaultVar =
+        variations.find((v) => (v.inventory?.stockAvailable ?? 0) > 0) ||
+        variations[0];
+
+      if (defaultVar?.attributes) {
+        setSelectedOptions(defaultVar.attributes);
+      }
+    }
+  }, [variations, selectedOptions]);
 
   useEffect(() => {
     const attributeKeys =
