@@ -11,7 +11,7 @@ const ProductDescription = ({ product }: { product?: TSingleProduct }) => {
   if (!hasDescription && !hasUsageGuidelines) return null;
 
   return (
-    <div className="mt-10">
+    <div>
       <Tabs defaultValue={hasDescription ? "description" : "usage"}>
         <TabsList className="bg-transparent border-b rounded-none h-auto p-0 w-full justify-start gap-8">
           {hasDescription && (

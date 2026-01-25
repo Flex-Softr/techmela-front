@@ -49,5 +49,7 @@ export type TVariableProduct = {
   maxSalePrice: number;
   minDiscountPercent: number;
   maxDiscountPercent: number;
+  minPriceSave: number;
+  maxPriceSave: number;
   stockStatus: TStockStatus;
 };

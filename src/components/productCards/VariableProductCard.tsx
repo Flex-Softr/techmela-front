@@ -11,21 +11,16 @@ type TProps = {
 };
 
 const VariableProductCard = ({ product, className }: TProps) => {
-  // const variationLength = product.variations?.length || 0;
-
   const minPrice = product.minSalePrice || product.minRegularPrice || 0;
   const maxPrice = product.maxSalePrice || product.maxRegularPrice || 0;
   const hasMultiplePrices = minPrice !== maxPrice;
 
-  // Determine stock status
-  // const isOutOfStock = product.stockStatus === STOCK_STATUS.OUT_OF_STOCK;
-
   // Max discount for badge
   const maxDiscount = product.maxDiscountPercent || 0;
+  const maxPriceSave = product.maxPriceSave || 0;
 
   // Slug fallback
-  const productSlug =
-    product.slug || product.title.toLowerCase().replace(/ /g, "-");
+  const productSlug = product.slug;
 
   return (
     <div
@@ -37,11 +32,14 @@ const VariableProductCard = ({ product, className }: TProps) => {
       <div className="flex flex-col gap-3 p-1 md:p-3 relative">
         {/* Discount Badge */}
         {maxDiscount > 0 && (
-          <p
-            className={`absolute top-2 left-2 text-xs md:text-sm bg-secondary text-secondary-foreground
-          px-2 py-1 rounded-full`}
-          >
-            Up to -{maxDiscount}%
+          <p className="absolute top-2 left-2 text-[10px] md:text-xs bg-gradient-to-r from-red-600/90 to-orange-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-semibold border border-white/20">
+            -{maxDiscount}% Off
+          </p>
+        )}
+        {/* Price Save Badge */}
+        {maxPriceSave > 0 && (
+          <p className="absolute top-2 right-2 text-[10px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-medium border border-white/20">
+            Save ৳{maxPriceSave}
           </p>
         )}
 
@@ -71,7 +69,7 @@ const VariableProductCard = ({ product, className }: TProps) => {
                   {hasMultiplePrices && ` - ${maxPrice}`}
                 </span>
               ) : (
-                <span className="font-bold text-xs md:text-sm text-muted-foreground">
+                <span className="font-bold text-xs md:text-sm text-gray-400">
                   Unavailable
                 </span>
               )}

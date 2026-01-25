@@ -26,11 +26,13 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
     >
       <div className="flex flex-col gap-3 p-1 md:p-3 relative">
         {product.discountPercent > 0 && (
-          <p
-            className={`absolute top-2 left-2 text-xs md:text-sm bg-secondary text-secondary-foreground
-          px-2 py-1 rounded-full`}
-          >
-            -{product.discountPercent}%
+          <p className="absolute top-2 left-2 text-[10px] md:text-xs bg-gradient-to-r from-red-600/90 to-orange-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-semibold border border-white/20">
+            -{product.discountPercent}% Off
+          </p>
+        )}
+        {product.priceSave > 0 && (
+          <p className="absolute top-2 right-2 text-[10px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-medium border border-white/20">
+            Save ৳{product.priceSave}
           </p>
         )}
 
