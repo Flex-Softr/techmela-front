@@ -24,14 +24,14 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
         className
       )}
     >
-      <div className="flex flex-col gap-3 p-1 md:p-3 relative">
+      <div className="flex flex-col gap-1.5 md:gap-3 p-1 md:p-3 relative">
         {product.discountPercent > 0 && (
-          <p className="absolute top-2 left-2 text-[10px] md:text-xs bg-gradient-to-r from-red-600/90 to-orange-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-semibold border border-white/20">
+          <p className="absolute md:top-2 md:left-2 top-1 left-1 z-10 text-[9px] md:text-xs bg-gradient-to-r from-red-600/90 to-orange-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-semibold md:font-medium border border-white/20">
             -{product.discountPercent}% Off
           </p>
         )}
         {product.priceSave > 0 && (
-          <p className="absolute top-2 right-2 text-[10px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-medium border border-white/20">
+          <p className="absolute md:top-2 md:right-2 top-1 right-1 z-10 text-[9px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm md:font-medium border border-white/20">
             Save ৳{product.priceSave}
           </p>
         )}

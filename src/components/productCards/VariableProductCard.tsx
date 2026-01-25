@@ -29,16 +29,16 @@ const VariableProductCard = ({ product, className }: TProps) => {
         className
       )}
     >
-      <div className="flex flex-col gap-3 p-1 md:p-3 relative">
+      <div className="flex flex-col gap-1.5 md:gap-3 p-1 md:p-3 relative">
         {/* Discount Badge */}
         {maxDiscount > 0 && (
-          <p className="absolute top-2 left-2 text-[10px] md:text-xs bg-gradient-to-r from-red-600/90 to-orange-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-semibold border border-white/20">
+          <p className="absolute md:top-2 md:left-2 top-0.5 left-0.5 z-10 text-[9px] md:text-xs bg-gradient-to-r from-red-600/90 to-orange-600/90 backdrop-blur-md text-white px-1 py-0.5 md:px-2 md:py-1 rounded-full shadow-sm font-semibold md:font-medium border border-white/20">
             -{maxDiscount}% Off
           </p>
         )}
         {/* Price Save Badge */}
         {maxPriceSave > 0 && (
-          <p className="absolute top-2 right-2 text-[10px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm font-medium border border-white/20">
+          <p className="absolute md:top-2 md:right-2 top-0.5 right-0.5 z-10 text-[9px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-1 py-0.5 md:px-2 md:py-1 rounded-full shadow-sm md:font-medium border border-white/20">
             Save ৳{maxPriceSave}
           </p>
         )}
@@ -49,7 +49,7 @@ const VariableProductCard = ({ product, className }: TProps) => {
             alt={product?.thumbnail?.alt || ""}
             height={400}
             width={400}
-            className="w-full aspect-square object-cover mx-auto rounded-md"
+            className="w-full aspect-square object-cover mx-auto rounded-md transition-transform duration-300 group-hover/card:scale-105"
             priority
           />
         </Link>

@@ -47,7 +47,7 @@ const HomepageSectionContent = async ({
         </div>
         {content?.ctaText && content?.ctaLink && (
           <div className="flex justify-center mt-5">
-            <Button asChild size={"sm"} className="w-[150px]">
+            <Button asChild size={"sm"} className="px-6">
               <Link href={content?.ctaLink}>{content?.ctaText}</Link>
             </Button>
           </div>
