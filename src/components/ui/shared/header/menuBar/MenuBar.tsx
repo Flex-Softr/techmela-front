@@ -3,7 +3,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
@@ -42,6 +42,7 @@ export default function MenuBar({
   onMenuItemClick,
 }: MenuBarProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const menuLinks: MenuLink[] = [
     {
@@ -75,8 +76,21 @@ export default function MenuBar({
     }),
   ];
 
-  const isActive = (href: string) =>
-    pathname === href || (href !== "/" && pathname.startsWith(href));
+  const isActive = (href: string) => {
+    // For exact path match (e.g., "/", "/my-account")
+    if (pathname === href) return true;
+
+    // For paths with query parameters (e.g., "/shop?category=footwear")
+    if (href.includes("?")) {
+      const [hrefPath, hrefQuery] = href.split("?");
+      const [paramKey, paramValue] = hrefQuery.split("=");
+
+      return pathname === hrefPath && searchParams.get(paramKey) === paramValue;
+    }
+
+    // For base paths (e.g., "/shop" matches "/shop/anything")
+    return href !== "/" && pathname.startsWith(href);
+  };
 
   // --------------------------------------------------------------------------
   // VERTICAL LAYOUT (Mobile / Sidebar)
