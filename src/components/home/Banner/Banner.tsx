@@ -11,7 +11,8 @@ const Banner = async () => {
   const bannerSideProducts = (data as TProduct[]) || [];
 
   return (
-    <section className="mt-[54.663px] sm:mt-0">
+    <section>
+      {/* <section className="mt-[54.663px] sm:mt-0"> */}
       <BannerCarousel bannerSideProducts={bannerSideProducts} />
     </section>
   );

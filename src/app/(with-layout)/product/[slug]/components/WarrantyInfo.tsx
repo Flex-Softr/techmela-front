@@ -1,5 +1,6 @@
 "use client";
 
+import EcButton from "@/components/EcButton/EcButton";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import Link from "next/link";
 import React, { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 type WarrantyInfoProps = {
   warrantyInfo?: {
@@ -99,9 +102,15 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
             <div>
               <p className="text-sm md:text-lg font-medium text-gray-800 mb-2">
                 এছাড়াও খুব সহজে ওয়েবসাইটের মাধ্যমে ওয়ারেন্টি সুবিধা গ্রহণ করতে
-                নিচের ভিডিওটি অনুসরণ করুন।
+                নিচের Link টি click করুন।
               </p>
-              <div className="w-full border rounded-lg overflow-hidden">
+              <Link href="/warranty/find-your-product" target="_blank">
+                <EcButton className="bg-secondary text-white flex items-center gap-2 mt-4 hover:bg-secondary/90 transition-all font-semibold px-6 py-2 h-auto text-base">
+                  ওয়ারেন্টি ক্লেইম করুন <FaArrowRight size={16} />
+                </EcButton>
+              </Link>
+              {/* video if need  */}
+              {/* <div className="w-full border rounded-lg overflow-hidden">
                 <iframe
                   className="w-full aspect-video"
                   src="https://www.youtube.com/embed/YjhiCrCmpwY"
@@ -110,7 +119,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
-              </div>
+              </div> */}
               <div className="text-center mt-7 ">
                 <p className="text-base md:text-lg">
                   আপনার সন্তুষ্টিই আমাদের অনুপ্রেরণা।

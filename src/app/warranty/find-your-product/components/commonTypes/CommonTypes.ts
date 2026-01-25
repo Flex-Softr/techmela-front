@@ -43,8 +43,6 @@
 //   warrantyCodes: { code: string }[];
 // };
 
-import { ReactNode } from "react";
-
 // Type for the shipping details of the product
 export type Shipping = {
   fullAddress: string;
@@ -68,12 +66,15 @@ export type Warranty = {
 
 // Type for each product item in the order
 export type ProductItem = {
-  adjustedQuantity: number;
-  _id: string; // Product ID
+  adjustedQuantity?: number;
+  _id: string; // Product ID in order
   productId: string; // Product's unique identifier
   title: string; // Title of the product
+  type: string;
   image: ImageInfo; // Product image details
   warranty: Warranty | null; // Warranty details (can be null if no warranty)
+  variation?: string;
+  attributes?: { [key: string]: string };
   unitPrice: number; // Unit price of the product
   quantity: number; // Quantity of the product in the order
   warrantyClaimHistory?: TWarrantyClaimHistory;
@@ -90,19 +91,10 @@ export type TWarrantyClaimHistory = {
   claims: TWarrantyClaimHistoryClaims[];
 };
 
-// Type for the product details in the order
+// Type for the order details returned by warranty check
 export type Product = {
-  total: number; // Total price for the product (quantity * unit price)
-  status: ReactNode; // The status of the product (could be JSX or plain text)
-  updatedAt: string | number | Date; // Last updated date
-  shipping: Shipping; // Shipping details of the order
-  phoneNumber: string; // Customer's phone number
-  warranty: Warranty | null; // Warranty details of the product (if any)
-  image: ImageInfo; // Image of the product
-  title: string; // Title of the product
-  unitPrice: number; // Unit price of the product
-  quantity: number; // Quantity of the product in the order
-  _id: string; // Product's unique ID
-  orderId: string; // Order ID this product belongs to
-  products: ProductItem[]; // List of product items within an order
+  _id: string;
+  orderId: string;
+  shipping: Shipping;
+  products: ProductItem[];
 };

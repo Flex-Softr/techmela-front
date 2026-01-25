@@ -24,20 +24,10 @@ const SearchProduct = () => {
   const [searched, setSearched] = useState<boolean>(false);
 
   const [validCodes, setValidCodes] = useState<string[]>([]);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewWarrantyCode(event.target.value);
-  };
-
-  const handleAddCode = () => {
-    if (newWarrantyCode?.trim() !== "") {
-      if (warrantyCodes?.includes(newWarrantyCode?.trim())) {
-        setError("দুঃখিত, এই ওয়ারেন্টি কোডটি ইতিমধ্যে যুক্ত করা হয়েছে");
-        return;
-      }
-      setWarrantyCodes([...warrantyCodes, newWarrantyCode?.trim()]);
-      setNewWarrantyCode("");
-    }
   };
 
   const handleRemoveCode = (index: number) => {
@@ -68,7 +58,23 @@ const SearchProduct = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (warrantyCodes?.length === 0) {
+    let currentCodes = [...warrantyCodes];
+
+    if (newWarrantyCode?.trim() !== "") {
+      const codesToAdd = newWarrantyCode
+        .split(",")
+        .map((code) => code.trim())
+        .filter((code) => code !== "" && !warrantyCodes.includes(code));
+
+      if (codesToAdd.length > 0) {
+        currentCodes = [...warrantyCodes, ...codesToAdd];
+        setWarrantyCodes(currentCodes);
+        setNewWarrantyCode("");
+        setError("");
+      }
+    }
+
+    if (currentCodes?.length === 0) {
       setError("পন্যের ওয়ারেন্টি কোডগুলি লিখুন");
       return;
     }
@@ -97,54 +103,63 @@ const SearchProduct = () => {
     { skip: shouldSkipApiCall }
   );
 
+  const [filteredResults, setFilteredResults] = useState<Product[]>([]);
+
   useEffect(() => {
-    if (searched && !isError && searchResultData) {
-      const foundCodes: string[] = [];
-      const invalidCodes: string[] = [];
-      if (searchResultData?.data?.length === 0) {
-        setError("কোনো তথ্য পাওয়া যায়নি");
-        setNotFoundProducts([]);
-      }
-      // Iterate through the data and match warranty codes
-      searchResultData?.data?.forEach((order: Product) => {
-        order?.products?.forEach((product: ProductItem) => {
-          if (product?.warranty) {
-            product?.warranty?.warrantyCodes?.forEach((code) => {
-              // If the warranty code is valid, add it to foundCodes
-              if (warrantyCodes.includes(code.code)) {
-                foundCodes.push(code.code);
-              } else {
-                // If it's invalid, add it to invalidCodes
-                invalidCodes.push(code.code);
-              }
-            });
+    if (searched && !isError && searchResultData?.data) {
+      const found: string[] = [];
+      const filtered: Product[] = [];
+
+      searchResultData.data.forEach((order: Product) => {
+        const orderCopy = JSON.parse(JSON.stringify(order));
+        const matchedProducts = orderCopy.products.filter(
+          (product: ProductItem) => {
+            if (!product.warranty) return false;
+
+            const hasMatch = product.warranty.warrantyCodes.some((wc) =>
+              warrantyCodes.includes(wc.code)
+            );
+
+            if (hasMatch) {
+              // Track which codes were found
+              product.warranty.warrantyCodes.forEach((wc) => {
+                if (
+                  warrantyCodes.includes(wc.code) &&
+                  !found.includes(wc.code)
+                ) {
+                  found.push(wc.code);
+                }
+              });
+              return true;
+            }
+            return false;
           }
-        });
+        );
+
+        if (matchedProducts.length > 0) {
+          orderCopy.products = matchedProducts;
+          filtered.push(orderCopy);
+        }
       });
 
-      // Update the state with all valid codes
-      setValidCodes(foundCodes);
-
-      // Set the not found products (for invalid codes)
+      setValidCodes(found);
+      setFilteredResults(filtered);
       setNotFoundProducts(
-        warrantyCodes.filter((code) => !foundCodes.includes(code))
+        warrantyCodes.filter((code) => !found.includes(code))
       );
 
-      // Handle valid and invalid codes
-      if (foundCodes.length > 0) {
-        // If valid codes are found, don't show an error message
+      if (found.length === 0) {
+        setError("কোনো তথ্য পাওয়া যায়নি");
+      } else {
         setError("");
-      } else if (invalidCodes.length > 0) {
-        // If no valid codes found, show error message
-        setError("এই কোডগুলির সাথে মিল নেই: " + invalidCodes.join(", "));
       }
     } else {
-      // Reset error and not found products if search result is empty or has an error
+      setFilteredResults([]);
+      setValidCodes([]);
       setNotFoundProducts([]);
       setError("");
     }
 
-    // Handle API error if occurs
     if (isError && apiError) {
       const errorMessage =
         (apiError as ApiError).data?.errorMessages?.[0]?.message ||
@@ -231,45 +246,46 @@ const SearchProduct = () => {
                 className="block text-gray-700 text-left text-sm font-bold mb-2"
                 htmlFor="warrantyCode"
               >
-                পন্যের ওয়ারেন্টি কোড -(ওয়ারেন্টি কোড এড করতে প্রতিটি ওয়ারেন্টি
-                কোড লিখে একবার করে "Add" বাটনে ক্লিক করুন )
+                পন্যের ওয়ারেন্টি কোড
               </label>
-              <div className="flex">
+              <div className="flex h-11 md:h-12">
                 <input
                   value={newWarrantyCode}
                   onChange={handleInputChange}
-                  className="appearance-none outline-none border border-gray-300 rounded-l-md py-2 px-3 focus:ring-0 w-full sm:h-5 md:h-12"
+                  className="appearance-none outline-none border border-gray-300 rounded-md py-2 px-3 focus:ring-0 w-full h-full"
                   id="warrantyCode"
                   type="text"
-                  placeholder="প্যাকেটের গায়ে থাকা ওয়ারেন্টি কোডটি লিখুন"
+                  placeholder="প্যাকেটের গায়ে থাকা ওয়ারেন্টি কোডটি লিখুন (যেমন: CODE1, CODE2)"
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   style={{ fontSize: "0.9rem" }}
                 />
-                <button
-                  className="bg-blue-500 text-white rounded-r-md py-2 px-4 hover:bg-blue-600"
-                  onClick={handleAddCode}
-                  type="button"
-                >
-                  Add
-                </button>
               </div>
+              {(isFocused || newWarrantyCode.trim() !== "") &&
+              warrantyCodes.length === 0 ? (
+                <p className="text-gray-500 text-[10px] md:text-sm text-left mt-1">
+                  একাধিক কোড দিতে কমা (,) ব্যবহার করুন (যেমন: CODE1, CODE2) এবং
+                  "অনুসন্ধান করুন" বাটনে ক্লিক করুন
+                </p>
+              ) : null}
               <div className="flex flex-wrap gap-2 mt-2">
                 {warrantyCodes.map((code, index) => (
                   <div
                     key={index}
-                    className="bg-blue-50 rounded-full flex items-center py-1 px-3"
+                    className="bg-primary/10 text-primary border border-primary/20 rounded-full flex items-center py-1.5 px-4"
                   >
-                    <span className="mr-2 xms:text-xs xls:text-xs sm:text-sm md:text-sm">
+                    <span className="mr-2 xms:text-xs xls:text-xs sm:text-sm md:text-sm font-medium">
                       {code}
                     </span>
                     <button
-                      className="text-red-500"
+                      className="text-destructive hover:text-destructive/80 transition-colors"
                       onClick={() => handleRemoveCode(index)}
                       aria-label={`Remove ${code}`}
                     >
                       &#10005;
                     </button>
                     {notFoundProducts.includes(code) && (
-                      <p className="text-red-500 xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
+                      <p className="text-destructive xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
                         এই ওয়ারেন্টি কোডটি সঠিক নয়
                       </p>
                     )}
@@ -287,22 +303,22 @@ const SearchProduct = () => {
               <input
                 value={orderedPhoneNumber}
                 onChange={handlePhoneNumberChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline sm:h-5 md:h-12"
+                className="appearance-none outline-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:ring-0 h-11 md:h-12"
                 id="orderedPhoneNumber"
                 type="text"
                 placeholder="অর্ডারকৃত ফোন নম্বরটি লিখুন"
                 style={{ fontSize: "0.9rem" }}
               />
               {phoneNumberError && (
-                <p className="text-red-500 text-sm">{phoneNumberError}</p>
+                <p className="text-red-500 text-sm mt-1">{phoneNumberError}</p>
               )}
             </div>
           </div>
 
-          <div className="flex items-center justify-center my-5">
+          <div className="flex items-center justify-center my-8">
             <button
               type="submit"
-              className="bg-blue-500 xls:text-xs sm:text-sm md:text-lg text-white rounded-md py-2 px-2 md:px-4 hover:bg-blue-600"
+              className="bg-primary xls:text-xs sm:text-sm md:text-lg text-white rounded-md py-3 px-8 hover:bg-primary/90 transition-colors font-bold shadow-md"
             >
               অনুসন্ধান করুন
             </button>
@@ -319,10 +335,10 @@ const SearchProduct = () => {
           )} */}
 
         {/* </div> */}
-        {error && <p className="text-red-500">{error}</p>}
-        {searched && !isLoading && !error && (
+        {error && <p className="text-red-500 mt-4">{error}</p>}
+        {searched && !isLoading && !error && filteredResults.length > 0 && (
           <ProductTable
-            searchResult={searchResultData?.data || []}
+            searchResult={filteredResults}
             notFoundProducts={notFoundProducts}
             error={error}
             validCodes={validCodes}
