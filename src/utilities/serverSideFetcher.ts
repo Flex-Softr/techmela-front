@@ -19,7 +19,8 @@ type TTags =
   | "shippingCharge"
   | "sliderBanner"
   | "homepageSections"
-  | `homepageSections-${string}`;
+  | `homepageSections-${string}`
+  | "homepageIndividualSection";
 
 type TProps = {
   url: string;
