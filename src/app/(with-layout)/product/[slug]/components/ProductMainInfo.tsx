@@ -62,9 +62,10 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
                 isChip
                   ? "text-red-600 text-xs font-bold"
                   : "bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-bold"
-              }`}
+              } flex flex-wrap items-center gap-0.5`}
             >
-              {discountPercent}% OFF {priceSave && `(Save \u09F3${priceSave})`}
+              <span>{discountPercent}% OFF</span>{" "}
+              {priceSave && <span>(Save &#2547;{priceSave})</span>}
             </span>
           )}
         </div>

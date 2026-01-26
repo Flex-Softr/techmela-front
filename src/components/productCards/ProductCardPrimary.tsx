@@ -11,11 +11,6 @@ type TProps = {
 };
 //
 const ProductCardPrimary = ({ product, className }: TProps) => {
-  // const discountBadgeClass =
-  //   product.discountPercent && Number(product.discountPercent) > 10
-  //     ? "bg-red-500 text-white  md:text-xs px-2 py-1 rounded fire-animation"
-  //     : "bg-green-500 text-white  md:text-xs px-2 py-1 rounded";
-
   return (
     <div
       // href={`/product/${product._id}/${product.slug}`}

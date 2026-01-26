@@ -23,7 +23,7 @@ const HomepageSectionContent = async ({
     url: `/homepage-sections/content/${collectionId}`,
     tags: [`homepageSections-${collectionId}`],
   });
-  const bestSellingProducts = data as TProduct[];
+  const products = data as TProduct[];
 
   return (
     <section className="pt-10 md:pt-12">
@@ -40,7 +40,7 @@ const HomepageSectionContent = async ({
             </>
           )}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 justify-between mt-5">
-            {bestSellingProducts?.slice(0, 4)?.map((product) => (
+            {products?.slice(0, 4)?.map((product) => (
               <ProductCard product={product} key={product._id} />
             ))}
           </div>

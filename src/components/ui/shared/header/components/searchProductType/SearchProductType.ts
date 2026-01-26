@@ -1,25 +1,5 @@
-export type Product = {
-  thumbnail: {
-    src: string;
-    alt: string;
-  };
-  stockStatus: string;
-  _id: string;
-  slug: string;
-  title: string;
-  regularPrice: number;
-  price: number;
-  salePrice: number;
-  // Variation fields
-  variations?: {
-    price: {
-      regularPrice: number;
-      salePrice: number;
-    };
-  }[];
-  minRegularPrice?: number;
-  minSalePrice?: number;
-};
+import { TProduct } from "@/types/products/product";
+import { TVariableProduct } from "@/types/products/variableProduct";
 
 export type ApiResponse = {
   success: boolean;
@@ -33,5 +13,5 @@ export type ApiResponse = {
     total: number;
     totalPage: number;
   };
-  data: Product[];
+  data: TProduct[] | TVariableProduct[];
 };

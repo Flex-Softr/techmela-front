@@ -13,7 +13,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
-import { ApiResponse, Product } from "./searchProductType/SearchProductType";
+import { ApiResponse } from "./searchProductType/SearchProductType";
+import { TProduct } from "@/types/products/product";
+import { TVariableProduct } from "@/types/products/variableProduct";
+import { useDebounce } from "@/hooks/useDebounce";
+
+/* -------------------- type guards -------------------- */
+const isVariableProduct = (
+  product: TProduct | TVariableProduct
+): product is TVariableProduct => product.type === "variable";
 
 const isApiResponse = (response: unknown): response is ApiResponse => {
   return (
@@ -29,9 +37,14 @@ const CartLinksAndAccount = () => {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
   const router = useRouter();
   const { totalCartItem } = useCart();
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearchValue = useDebounce(searchValue, 400);
+
+  const [showSuggestions, setShowSuggestions] = useState(true);
+
   const [isMounted, setIsMounted] = useState(false);
+
   const toggleSearchBar = () => {
     setIsSearchVisible(!isSearchVisible);
   };
@@ -39,17 +52,19 @@ const CartLinksAndAccount = () => {
   useEffect(() => {
     setIsMounted(true);
   }, []);
-  const {
-    data: searchResults,
-    isLoading,
-    isError,
-  } = useFindSearchProductQuery<ApiResponse>(searchValue, {
-    skip: !searchValue.trim(),
-  });
+
+  const { data, isLoading, isError } = useFindSearchProductQuery<ApiResponse>(
+    debouncedSearchValue.trim(),
+    {
+      skip: !debouncedSearchValue.trim(),
+    }
+  );
 
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push(`/shop?search=${encodeURIComponent(searchValue)}`);
+    router.push(
+      `/shop?search=${encodeURIComponent(debouncedSearchValue.trim())}`
+    );
     setIsSearchVisible(false);
   };
 
@@ -64,11 +79,9 @@ const CartLinksAndAccount = () => {
     setIsSearchVisible(false);
   };
 
-  let products: Product[] = [];
-
-  if (isApiResponse(searchResults)) {
-    products = searchResults.data;
-  }
+  const products: (TProduct | TVariableProduct)[] = isApiResponse(data)
+    ? data.data
+    : [];
 
   if (!isMounted) return null;
 
@@ -110,53 +123,80 @@ const CartLinksAndAccount = () => {
                   <FaSearch className="size-6 rounded-full p-1 bg-primary text-white" />
                 </button>
               </div>
-              {showSuggestions && searchValue.trim() !== "" && (
+              {showSuggestions && debouncedSearchValue.trim() !== "" && (
                 <div className="absolute mt-0.5 top-full left-1/2 transform -translate-x-1/2 w-[95%]  max-w-md bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-y-auto max-h-60">
-                  {isLoading && <p className="p-2">Loading...</p>}
+                  {isLoading && <p className="p-3 text-sm">Loading...</p>}
 
-                  {!isLoading && !isError && products.length > 0 ? (
-                    products.map((product: Product) => (
-                      <div
-                        key={product._id}
-                        className="flex items-center px-2 py-0.5 md:px-2 md:py-2 border-b border-gray-200 last:border-0 cursor-pointer"
-                        onClick={() => handleProductClick(product._id)}
-                      >
-                        <Image
-                          width={55}
-                          height={55}
-                          src={getImageSrc(product?.thumbnail?.src)}
-                          alt={product.thumbnail?.alt || ""}
-                          className="suggestion-image"
-                        />
-                        <div className="ml-2">
-                          <p className="text-sm font-semibold">
-                            {product.title}
-                          </p>
-                          <div>
-                            {product.salePrice ? (
-                              <>
-                                <span className="text-muted text-xs">
-                                  &#2547;
-                                  <del>{product.regularPrice}</del>
-                                </span>
-                                <span className="font-bold">
-                                  &#2547;{product.salePrice}
-                                </span>
-                              </>
-                            ) : (
-                              <>
-                                <span className="font-bold">
-                                  &#2547;{product.regularPrice}
-                                </span>
-                              </>
-                            )}
+                  {!isLoading && !isError && products.length > 0
+                    ? products.map((product) => {
+                        const isVariable = isVariableProduct(product);
+
+                        const regularPrice = isVariable
+                          ? product.minRegularPrice
+                          : product.regularPrice;
+
+                        const salePrice = isVariable
+                          ? product.minSalePrice || null
+                          : product.salePrice || null;
+
+                        return (
+                          <div
+                            key={product._id}
+                            className="flex items-center gap-2 p-2 border-b last:border-0 cursor-pointer hover:bg-gray-50"
+                            onClick={() => handleProductClick(product.slug)}
+                          >
+                            <Image
+                              width={55}
+                              height={55}
+                              src={getImageSrc(product.thumbnail.src)}
+                              alt={product.thumbnail.alt || ""}
+                              className="rounded"
+                            />
+
+                            <div className="flex-1">
+                              <p className="text-sm font-semibold line-clamp-1">
+                                {product.title}
+                              </p>
+
+                              <div className="text-sm">
+                                {salePrice ? (
+                                  <>
+                                    {!isVariable && (
+                                      <span className="text-xs text-gray-500 line-through mr-1">
+                                        &#2547;{regularPrice}
+                                      </span>
+                                    )}
+                                    <span className="font-bold">
+                                      &#2547;{salePrice}
+                                    </span>
+                                  </>
+                                ) : (
+                                  <span className="font-bold">
+                                    &#2547;{regularPrice}
+                                  </span>
+                                )}
+
+                                {isVariable && (
+                                  <span className="ml-1 font-bold">
+                                    – &#2547;{product.maxRegularPrice}
+                                  </span>
+                                )}
+                              </div>
+
+                              {isVariable && (
+                                <p className="text-[11px] text-blue-600">
+                                  Multiple options
+                                </p>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="p-2">No results found.</p>
-                  )}
+                        );
+                      })
+                    : !isLoading && (
+                        <p className="p-3 text-sm text-gray-500">
+                          No results found.
+                        </p>
+                      )}
                 </div>
               )}
               <div className="">
