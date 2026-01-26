@@ -17,7 +17,7 @@ const HomepageSectionContent = async ({
 
   const { data } = await serverSideFetcher<TProduct[]>({
     url: `/homepage-sections/content/${contentId}`,
-    tags: [`homepageSections-${contentId}`, "homepageIndividualSection"],
+    tags: ["homepageIndividualSection", `homepageSections-${contentId}`],
   });
   const products = data;
 
