@@ -13,17 +13,13 @@ const HomepageSectionContent = async ({
 }: {
   content: THomePageSection;
 }) => {
-  const collectionId =
-    typeof content.collectionId === "string"
-      ? content.collectionId
-      : content.collectionId._id;
+  const contentId = content?._id;
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const { data } = await serverSideFetcher<any>({
-    url: `/homepage-sections/content/${collectionId}`,
-    tags: [`homepageSections-${collectionId}`],
+  const { data } = await serverSideFetcher<TProduct[]>({
+    url: `/homepage-sections/content/${contentId}`,
+    tags: ["homepageIndividualSection", `homepageSections-${contentId}`],
   });
-  const products = data as TProduct[];
+  const products = data;
 
   return (
     <section className="pt-10 md:pt-12">
