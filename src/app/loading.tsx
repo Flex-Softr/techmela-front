@@ -1,28 +1,27 @@
 import Image from "next/image";
 
-const loading = () => {
+const Loading = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-5 h-[100vh]">
-      <Image
-        src="/images/logo/logo.jpg"
-        alt="logo"
-        width={100}
-        height={100}
-        priority={true}
-      />
-      <h1 className=" xms:text-lg xls:text-xl sm:text-2xl md:text-4xl">
+    <div className="flex h-screen flex-col items-center justify-center bg-white space-y-6">
+      {/* Logo-like Branding */}
+      <div className="flex items-center space-x-2">
+        <Image
+          src="/images/logo/logo.jpg"
+          alt="Nora logo"
+          width={100}
+          height={100}
+          priority={true}
+        />
+      </div>
+      <h1 className="xms:text-lg xls:text-xl sm:text-2xl md:text-4xl text-gray-700">
         Welcome to Nora life style
       </h1>
-      <Image
-        src="/images/animations/loading.gif"
-        alt="loading"
-        width={100}
-        height={100}
-        priority={true}
-        unoptimized
-      />
+      {/* Animated shimmer bar */}
+      <div className="relative w-64 h-2 overflow-hidden rounded bg-gray-200">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-primary to-transparent shimmer-bounce" />
+      </div>
     </div>
   );
 };
 
-export default loading;
+export default Loading;

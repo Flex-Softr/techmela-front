@@ -15,6 +15,12 @@ const VariableProductCard = ({ product, className }: TProps) => {
   const maxPrice = product.maxSalePrice || product.maxRegularPrice || 0;
   const hasMultiplePrices = minPrice !== maxPrice;
 
+  // Determine previous price for strikethrough
+  const previousPrice =
+    product.minSalePrice && product.minSalePrice < product.maxRegularPrice
+      ? product.maxRegularPrice
+      : null;
+
   // Max discount for badge
   const maxDiscount = product.maxDiscountPercent || 0;
   const maxPriceSave = product.maxPriceSave || 0;
@@ -64,10 +70,18 @@ const VariableProductCard = ({ product, className }: TProps) => {
           <div className="flex justify-between items-center">
             <div>
               {minPrice > 0 ? (
-                <span className="font-bold text-xs md:text-sm">
-                  &#2547;{minPrice}
-                  {hasMultiplePrices && ` - ${maxPrice}`}
-                </span>
+                <>
+                  {previousPrice && !hasMultiplePrices && (
+                    <span className="text-muted-foreground text-xs md:text-sm mr-1">
+                      &#2547;
+                      <del>{previousPrice}</del>
+                    </span>
+                  )}
+                  <span className="font-bold text-xs md:text-sm">
+                    &#2547;{minPrice}
+                    {hasMultiplePrices && ` - ${maxPrice}`}
+                  </span>
+                </>
               ) : (
                 <span className="font-bold text-xs md:text-sm text-gray-400">
                   Unavailable
