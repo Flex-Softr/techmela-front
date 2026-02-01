@@ -4,7 +4,6 @@
 
 * {
   scroll-behavior: smooth;
-
 }
 
 @layer base {
@@ -36,10 +35,11 @@
     /* hsl(18 39% 82%) → #DEBAB1 */
     --muted-foreground: 197 30% 30%;
 
-    /* Accent – Rose */
-    --accent: 349 47% 59%;
-    /* hsl(349 47% 59%) → #CA6378 */
-    --accent-foreground: 0 0% 100%;
+    /* Accent – Light Teal (subtle background for hovers) */
+    --accent: 180 20% 96%;
+    /* Very light teal */
+    --accent-foreground: 179.46 73.68% 29.8%;
+    /* Use Primary (Deep Teal) for text on accent background */
 
     /* Destructive */
     --destructive: 0 72% 55%;
@@ -81,10 +81,10 @@
     /* hsl(18 39% 82%) → #DEBAB1 */
     --muted-foreground: 197 30% 30%;
 
-    /* Accent – Rose */
-    --accent: 349 47% 59%;
-    /* hsl(349 47% 59%) → #CA6378 */
-    --accent-foreground: 0 0% 100%;
+    /* Accent – Light Teal */
+    --accent: 180 20% 96%;
+    /* Very light teal */
+    --accent-foreground: 179.46 73.68% 29.8%;
 
     /* Destructive */
     --destructive: 0 72% 55%;

@@ -1,0 +1,201 @@
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { getImageSrc } from "@/lib/utils";
+import {
+  ProductToClaim,
+  setTableDataToClaim,
+} from "@/redux/features/tableData/tableData";
+import { useAppDispatch } from "@/redux/hooks";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { JSX } from "react";
+import { Product } from "../commonTypes/CommonTypes";
+import WarrantyClaimHistory from "./WarrantyClaimHistory";
+// type ValidCode = { code: string };
+type Props = {
+  searchResult: Product[];
+  validCodes: string[];
+  notFoundProducts: string[] | undefined;
+
+  error: string | null;
+};
+
+const ProductTable = ({
+  searchResult,
+
+  validCodes,
+  error,
+}: Props) => {
+  const productsWithWarranty: JSX.Element[] = [];
+  const productsWithoutWarranty: JSX.Element[] = [];
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  if (error) {
+    return <div className="text-center text-red-600 font-bold">{error}</div>;
+  }
+
+  // Split products based on warranty status
+  searchResult.forEach((order, orderIndex) => {
+    order.products.forEach((product, index) => {
+      let warrantyStatus = "No Warranty";
+      let remainingDays: number = -1;
+
+      if (product.warranty) {
+        const endDate = new Date(product?.warranty?.endsDate);
+        const currentDate = new Date();
+        remainingDays = Math.ceil(
+          (endDate?.getTime() - currentDate?.getTime()) / (1000 * 3600 * 24)
+        );
+        warrantyStatus =
+          remainingDays < 0 ? "Warranty Expired" : `${remainingDays} days left`;
+      }
+
+      const warrantyStatusClass =
+        remainingDays < 0 ? "text-red-500" : "text-green-500";
+
+      const handleSingleClaimClick = () => {
+        const applicableCodes =
+          product.warranty?.warrantyCodes
+            .map((wc) => wc.code)
+            .filter((code) => validCodes.includes(code)) || [];
+
+        if (applicableCodes.length === 0) return;
+
+        const productToClaim: ProductToClaim = {
+          warrantyCodes: applicableCodes,
+          shippingDetails: order.shipping,
+        };
+
+        dispatch(setTableDataToClaim([productToClaim]));
+
+        const queryParams = new URLSearchParams();
+        queryParams.append("validCodes", JSON.stringify(applicableCodes));
+
+        router.push(`/warranty/claim-your-warranty?${queryParams.toString()}`);
+      };
+
+      const productRow = (
+        <TableRow
+          key={`${orderIndex}-${index}`}
+          className={orderIndex % 2 === 0 ? "bg-white" : "bg-gray-50"}
+        >
+          <TableCell className="px-2 md:px-4 py-3">
+            <div className="w-12 h-12 md:w-16 md:h-16 relative border border-gray-100 rounded-md overflow-hidden bg-white">
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={getImageSrc(product?.image?.src)}
+                alt={product?.image?.alt || ""}
+                className="p-1"
+              />
+            </div>
+          </TableCell>
+          <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-semibold text-gray-800">
+            {product?.title}
+            {product.attributes && (
+              <div className="text-[10px] md:text-xs text-gray-500 font-normal mt-1">
+                {Object.entries(product.attributes)
+                  .map(([key, value]) => `${key}: ${value}`)
+                  .join(", ")}
+              </div>
+            )}
+          </TableCell>
+          <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-center font-medium">
+            &#2547;{product?.unitPrice?.toLocaleString()}
+          </TableCell>
+          <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-center text-gray-600">
+            {product?.warranty
+              ? `${product?.warranty?.startDate} — ${product?.warranty?.endsDate}`
+              : "N/A"}
+          </TableCell>
+          <TableCell
+            className={`px-2 md:px-4 py-3 ${warrantyStatusClass} text-xs md:text-sm text-center font-semibold`}
+          >
+            {warrantyStatus}
+          </TableCell>
+          <TableCell className="px-2 md:px-4 py-3 text-center">
+            <WarrantyClaimHistory
+              warrantyClaimHistory={product?.warrantyClaimHistory}
+            />
+          </TableCell>
+          <TableCell className="px-2 md:px-4 py-3 text-right">
+            {remainingDays >= 0 && (
+              <button
+                onClick={handleSingleClaimClick}
+                className="bg-primary hover:bg-primary/90 text-white text-[10px] md:text-xs font-bold py-1.5 px-3 md:px-4 rounded transition-colors shadow-sm"
+              >
+                Claim
+              </button>
+            )}
+          </TableCell>
+        </TableRow>
+      );
+
+      if (remainingDays >= 0) {
+        productsWithWarranty.push(productRow);
+      } else {
+        productsWithoutWarranty.push(productRow);
+      }
+    });
+  });
+
+  // Removed handleClaimAllClick as claims are now per-item
+
+  const renderTableHeader = () => (
+    <TableRow className="bg-primary/5 font-bold text-xs md:text-sm text-primary">
+      <TableCell className="px-2 md:px-4 py-3">Image</TableCell>
+      <TableCell className="px-2 md:px-4 py-3">Product Name</TableCell>
+      <TableCell className="px-2 md:px-4 py-3 text-center">
+        Unit Price
+      </TableCell>
+      <TableCell className="px-2 md:px-4 py-3 text-center">
+        Warranty Period
+      </TableCell>
+      <TableCell className="px-2 md:px-4 py-3 text-center">Status</TableCell>
+      <TableCell className="px-2 md:px-4 py-3 text-center">
+        Claim History
+      </TableCell>
+      <TableCell className="px-2 md:px-4 py-3 text-right pr-6">
+        Action
+      </TableCell>
+    </TableRow>
+  );
+
+  return (
+    <div className="overflow-x-auto mt-10">
+      {productsWithWarranty.length > 0 ? (
+        <div className="space-y-6">
+          <div className="border border-border rounded-lg overflow-hidden shadow-sm bg-white w-full md:w-[97%] mx-auto">
+            <Table>
+              <thead>{renderTableHeader()}</thead>
+              <TableBody>{productsWithWarranty}</TableBody>
+            </Table>
+          </div>
+          {/* Claim All button removed correctly */}
+        </div>
+      ) : (
+        <p className="text-center text-red-600">
+          No products with warranty available.
+        </p>
+      )}
+
+      {productsWithoutWarranty.length > 0 ? (
+        <>
+          <Table className="w-[90%] sm:w-[85%] mx-auto border-collapse border border-gray-300 mt-8">
+            <thead>{renderTableHeader()}</thead>
+            <TableBody>{productsWithoutWarranty}</TableBody>
+          </Table>
+          <div className="w-[90%] sm:w-[85%] mx-auto">
+            <p className="w-full p-2 font-bold text-sm md:text-xl text-red-600 text-center">
+              উক্ত পন্যের ওয়ারেন্টি নেই
+            </p>
+          </div>
+        </>
+      ) : (
+        <p className="text-center ">{""}</p>
+      )}
+    </div>
+  );
+};
+
+export default ProductTable;
