@@ -27,7 +27,7 @@ const ProductCardPrimary = ({ product, className }: TProps) => {
         )}
         {product.priceSave > 0 && (
           <p className="absolute md:top-2 md:right-2 top-1 right-1 z-10 text-[9px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-2 py-1 rounded-full shadow-sm md:font-medium border border-white/20">
-            Save ৳{product.priceSave}
+            Save &#2547;{product.priceSave}
           </p>
         )}
 

@@ -102,7 +102,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     router.push("/shop"); // Reset URL to base
   };
 
-  const handleApplyFilters = (shouldClose = true) => {
+  const handleApplyFilters = () => {
     let newSearchParams = "";
 
     // Add minPrice and maxPrice first if they differ from original defaults
@@ -141,8 +141,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
     // Update the URL with the filters applied
     router.push(`/shop?${newSearchParams}`);
-    if (shouldClose) {
-      sheetCloseRef?.current?.click();
+
+    // Close the sheet/drawer if it's open
+    if (sheetCloseRef.current) {
+      sheetCloseRef.current.click();
     }
   };
 
@@ -156,12 +158,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       debouncedPrice[0] !== searchParamsMin ||
       debouncedPrice[1] !== searchParamsMax
     ) {
-      handleApplyFilters(false);
+      handleApplyFilters();
     }
   }, [debouncedPrice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Box className="bg-white p-5 space-y-8 rounded-lg shadow-sm border border-gray-100">
+    <Box className="bg-white p-0 lg:p-5 space-y-8 lg:rounded-lg lg:shadow-sm lg:border lg:border-gray-100">
       <div className="space-y-4">
         <CollapsibleFilterSection
           title="Filter by price"
@@ -194,7 +196,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           Find
         </EcButton>
         <EcButton
-          className="flex-1 font-bold hover:bg-gray-100 hover:text-black"
+          className="flex-1 font-bold bg-gray-100 hover:bg-gray-300 hover:text-black"
           onClick={handleClearAllFilters}
           variant="ghost"
           disabled={!Object.keys(searchParams).length}

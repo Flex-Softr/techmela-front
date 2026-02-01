@@ -45,7 +45,7 @@ const VariableProductCard = ({ product, className }: TProps) => {
         {/* Price Save Badge */}
         {maxPriceSave > 0 && (
           <p className="absolute md:top-2 md:right-2 top-0.5 right-0.5 z-10 text-[9px] md:text-xs bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white px-1 py-0.5 md:px-2 md:py-1 rounded-full shadow-sm md:font-medium border border-white/20">
-            Save ৳{maxPriceSave}
+            Save &#2547;{maxPriceSave}
           </p>
         )}
 

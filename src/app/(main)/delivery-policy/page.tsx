@@ -36,11 +36,11 @@ const DeliveryPolicyPage = async () => {
               shippingCharges.map((item) => (
                 <li
                   key={item._id}
-                  className="flex justify-between items-center rounded-lg border border-gray-100"
+                  className="flex justify-between items-center rounded-lg border border-gray-100 px-1"
                 >
                   <span className="font-medium">{item.name}:</span>
                   <span className="font-bold text-primary text-lg">
-                    ৳ {item.amount}
+                    &#2547; {item.amount}
                   </span>
                 </li>
               ))
@@ -48,11 +48,11 @@ const DeliveryPolicyPage = async () => {
               <>
                 <li className="flex justify-between">
                   <span>ঢাকার ভিতরে:</span>
-                  <span className="font-bold">৳ ৭০</span>
+                  <span className="font-bold">&#2547; ৭০</span>
                 </li>
                 <li className="flex justify-between">
                   <span>ঢাকার বাইরে:</span>
-                  <span className="font-bold">৳ ১৩০</span>
+                  <span className="font-bold">&#2547; ১৩০</span>
                 </li>
               </>
             )}

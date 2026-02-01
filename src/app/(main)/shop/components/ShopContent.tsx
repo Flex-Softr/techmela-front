@@ -104,8 +104,8 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
         {!searchParams.get("category") && !flashSaleParam && (
           <CategorySection categories={categories} />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 my-2 md:my-4">
-          <div className="">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 my-2 md:my-4">
+          <div className="hidden lg:block">
             <ProductFilterContent
               searchParams={searchParamsRecord}
               tags={tags}
@@ -115,6 +115,15 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
             />
           </div>
           <div className="lg:col-span-3">
+            <div className="lg:hidden mb-4">
+              <ProductFilterContent
+                searchParams={searchParamsRecord}
+                tags={tags}
+                categories={categories}
+                minPrice={priceRange?.minPrice || 0}
+                maxPrice={priceRange?.maxPrice || 10000}
+              />
+            </div>
             {isLoading ? (
               <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-5 justify-between">
                 {[...Array(6)].map((_, i) => (

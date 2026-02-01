@@ -60,16 +60,19 @@ const Paginate = ({
 
   return (
     <div
-      className={cn("mt-5 flex justify-center items-center gap-3", className)}
+      className={cn(
+        "mt-8 flex flex-col md:flex-row justify-center items-center gap-6 px-4 pb-4",
+        className
+      )}
     >
-      <div className="flex gap-2 items-center justify-center">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center w-full md:w-auto">
         <div className="flex gap-2 items-center">
-          <span>Show:</span>
+          <span className="text-sm font-medium">Show:</span>
           <CommonSelect
             size="sm"
             value={perPage.toString()}
             onChange={(val) => {
-              setParam({ limit: val, page: perPage > totalItems ? "1" : "" });
+              setParam({ limit: val, page: "1" });
             }}
             options={[
               { value: "12", label: "12" },
@@ -78,16 +81,23 @@ const Paginate = ({
               { value: "48", label: "48" },
               { value: "60", label: "60" },
             ]}
-            className="rounded-lg"
+            className="rounded-lg w-[70px]"
           />
         </div>
+        <div className="hidden sm:block h-4 w-px bg-border" />
         <div>
           <p className="text-sm text-muted-foreground whitespace-nowrap">
-            Showing {showingFrom} to {showingTo} of {totalItems}
+            Showing{" "}
+            <span className="font-medium text-foreground">{showingFrom}</span>{" "}
+            to <span className="font-medium text-foreground">{showingTo}</span>{" "}
+            of <span className="font-medium text-foreground">{totalItems}</span>
           </p>
         </div>
+      </div>
+
+      <div className="flex items-center justify-center w-full md:w-auto overflow-x-auto">
         <Pagination>
-          <PaginationContent>
+          <PaginationContent className="gap-1">
             {/* Prev button */}
             <PaginationItem>
               <PaginationPrevious
