@@ -28,7 +28,9 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
   const currentPage = searchParams.get("page")
     ? parseInt(searchParams.get("page") as string)
     : 1;
-  const limit = 12;
+  const limit = searchParams.get("limit")
+    ? parseInt(searchParams.get("limit") as string)
+    : 12;
   const offset = (currentPage - 1) * limit;
 
   // Convert searchParams to object for RTK query
