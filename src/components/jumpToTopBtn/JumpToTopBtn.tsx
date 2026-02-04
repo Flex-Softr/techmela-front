@@ -30,7 +30,7 @@ const JumpToTopBtn: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="z-50">
       {/* Sample content to scroll */}
 
       {/* "Jump to Top" button */}
@@ -59,6 +59,7 @@ const styles = {
     alignItems: "center",
     cursor: "pointer",
     boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+    zIndex: 100,
   },
 };
 

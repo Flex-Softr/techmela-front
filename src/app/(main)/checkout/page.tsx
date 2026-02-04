@@ -19,7 +19,7 @@ const Checkout = async () => {
   });
 
   return (
-    <section className="mt-[80px] sm:mt-3">
+    <section className="mt-2 sm:mt-3">
       <ContainerMax>
         <CheckoutForm
           shippingCharges={shippingCharges}

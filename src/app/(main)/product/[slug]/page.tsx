@@ -59,7 +59,7 @@ const SingleProductPage = async ({ params }: TProps) => {
     : price;
 
   return (
-    <section className="my-10">
+    <section>
       <ContainerMax>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Box className="shadow-none ring-2 mt-5 ">

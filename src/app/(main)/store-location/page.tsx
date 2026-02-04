@@ -9,7 +9,7 @@ import {
 
 const StoreLocationPage = () => {
   return (
-    <div className="min-h-screen  bg-gray-100 text-gray-900 ">
+    <div className="min-h-screen bg-gray-100 text-gray-900 ">
       {/* Hero Section */}
       {/* Store Info and Map Section */}
       <section className="py-8 md:py-12">

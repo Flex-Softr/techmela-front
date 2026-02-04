@@ -12,7 +12,7 @@ const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-primary/10">
       {/* Consolidated Hero & Story Section */}
-      <section className="pt-8 pb-16 md:pt-20 md:pb-20 border-b border-gray-50">
+      <section className="pt-8 pb-16 md:pt-16 md:pb-20 border-b border-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-5xl font-extralight tracking-tight mb-4 text-gray-900">
