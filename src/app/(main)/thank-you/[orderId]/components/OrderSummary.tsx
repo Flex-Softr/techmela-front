@@ -1,15 +1,47 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import config from "@/config/config";
 import { getImageSrc } from "@/lib/utils";
+import { refetchData } from "@/utilities/serverSideFetcher";
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
+import { useEffect } from "react";
 
 type TOrderSummaryProps = {
   orderInfo: any;
 };
 
 const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
+  useEffect(() => {
+    if (orderInfo?.products) {
+      const productTags = orderInfo.products.flatMap((product: any) => [
+        `product-${product?.slug}`,
+        `relatedProducts-${product?.slug}`,
+        `collectionProducts-${product?.slug}`,
+      ]);
+      refetchData([
+        ...productTags,
+        "featuredProducts",
+        "homepageIndividualSection",
+      ]);
+    }
+  }, [orderInfo]);
+
+  const totalNumberOfItems =
+    (orderInfo?.products as { quantity: number }[])?.reduce(
+      (acc, item) => acc + (item?.quantity || 0),
+      0
+    ) || 0;
+
+  const extraShippingCost = Number(
+    (totalNumberOfItems - 1) * config.per_item_shipping_cost
+  );
+
+  const totalShippingCost = Number(
+    orderInfo.shippingCharge?.amount + extraShippingCost
+  );
+
   return (
     <Card className="border-none shadow-sm overflow-hidden">
       <CardHeader className="bg-gray-50/50 border-b pb-3 pt-4 px-5">
@@ -71,7 +103,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
           </div>
           <div className="flex justify-between text-sm text-gray-600">
             <span>Shipping ({orderInfo.shippingCharge?.name})</span>
-            <span>&#2547;{orderInfo.shippingCharge?.amount}</span>
+            <span>&#2547;{totalShippingCost}</span>
           </div>
           {orderInfo.discount > 0 && (
             <div className="flex justify-between text-sm text-green-600">

@@ -22,7 +22,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
         <CardContent className="p-5 space-y-5 text-sm">
           <div className="flex gap-3">
             <div className="flex-shrink-0 mt-0.5">
-              <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100">
+              <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-primary border border-blue-100">
                 <span className="font-bold text-sm">
                   {orderInfo.shipping?.fullName?.charAt(0)}
                 </span>

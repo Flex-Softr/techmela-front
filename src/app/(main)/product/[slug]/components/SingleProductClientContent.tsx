@@ -5,7 +5,7 @@ import PEventIdGenerator from "@/lib/ec/PEventIdGenerator";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
 import { PRODUCT_TYPE, STOCK_STATUS } from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
-import TGenericResponse, { TGenericErrorResponse } from "@/types/response";
+import TGenericResponse from "@/types/response";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useState } from "react";
 import AddToCartAndBuyNow from "./AddToCartAndBuyNow";
@@ -47,9 +47,13 @@ const SingleProductClientContent = ({
         success = true;
       }
     } catch (error) {
-      const sanitizedError = error as TGenericErrorResponse;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const errors = (error as any).data.errorMessages.map(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (e: any) => e.message
+      );
       toast({
-        title: sanitizedError.message || "Failed to add to cart",
+        title: errors?.[0] || "Failed to add to cart",
         variant: "destructive",
       });
       success = false;

@@ -35,6 +35,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   const stockStatus = currentInventory?.stockStatus;
 
   const hideStock = currentInventory?.hideStock;
+  const manageStock = currentInventory?.manageStock;
   const stockAvailable = currentInventory?.stockAvailable;
 
   // Price Component Helper
@@ -107,6 +108,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
 
             <span className={`${stockStatusColor(stockStatus)} font-bold`}>
               {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
+              manageStock &&
               !hideStock &&
               stockAvailable > 0
                 ? `${stockAvailable} ${formatStockStatus(stockStatus)}`
@@ -190,6 +192,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
               className={`${stockStatusColor(stockStatus)} font-bold bg-red-50 px-2 py-0.5 rounded`}
             >
               {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
+              manageStock &&
               !hideStock &&
               stockAvailable > 0
                 ? `${stockAvailable} ${formatStockStatus(stockStatus)}`

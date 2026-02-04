@@ -41,8 +41,13 @@ const CheckoutCartItem = ({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setQuantity(cartItem?.quantity); // Revert on failure
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const errors = (error as any).data.errorMessages.map(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (e: any) => e.message
+      );
       toast({
-        title: error?.message || "Failed to update cart",
+        title: errors?.[0] || "Failed to update cart",
         variant: "destructive",
       });
     }

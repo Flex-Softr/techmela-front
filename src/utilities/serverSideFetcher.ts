@@ -75,6 +75,10 @@ const serverSideFetcher = async <T>({
 
 export default serverSideFetcher;
 
-export async function refetchData(tag: TTags) {
-  revalidateTag(tag);
+export async function refetchData(tag: TTags | TTags[]) {
+  if (Array.isArray(tag)) {
+    tag.forEach((t) => revalidateTag(t));
+  } else {
+    revalidateTag(tag);
+  }
 }
