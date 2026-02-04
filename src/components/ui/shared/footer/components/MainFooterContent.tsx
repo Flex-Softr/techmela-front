@@ -24,7 +24,7 @@ const MainFooterContent = () => {
   return (
     <div className="py-5 md:py-7 border-t">
       <ContainerMax>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-3">
           {/* Column 1: Logo & Description */}
           <div className="space-y-2">
             <Link href="/">

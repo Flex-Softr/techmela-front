@@ -25,8 +25,8 @@ const OrderSearchInputHandler = () => {
   };
 
   return (
-    <section className="bg-gray-100 py-5 md:py-8 flex justify-center items-center">
-      <ContainerMax className="mt-16 mb-8  ">
+    <section className="py-5 flex justify-center items-center">
+      <ContainerMax className="">
         <div className="max-w-3xl mx-auto xms:p-2 xls:p-3 sm:p-4 md:p-8 bg-white rounded-lg">
           <h2 className="text-2xl md:text-3xl text-center font-semibold text-dark-gray mb-6">
             আপনার অর্ডার ট্র্যাক করুন
