@@ -14,14 +14,14 @@ const FloatingContact = () => {
     {
       name: "WhatsApp",
       icon: "/images/social_icons/whatsapp.png",
-      link: "https://wa.me/YOUR_PHONE_NUMBER", // Replace with your WhatsApp number
+      link: "http://wa.me/8801973890872", // Replace with your WhatsApp number
       bgColor: "bg-green-500",
       hoverColor: "hover:bg-green-600",
     },
     {
-      name: "Messenger",
+      name: "Facebook",
       icon: "/images/social_icons/facebook.png",
-      link: "https://m.me/YOUR_PAGE_USERNAME", // Replace with your Facebook page username
+      link: "https://www.facebook.com/jutarhat21", // Replace with your Facebook page username
       bgColor: "bg-blue-500",
       hoverColor: "hover:bg-blue-600",
     },
