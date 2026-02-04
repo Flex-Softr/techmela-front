@@ -1,3 +1,4 @@
+import FloatingContact from "@/components/floatingContact/FloatingContact";
 import JumpToTopBtn from "@/components/jumpToTopBtn/JumpToTopBtn";
 import Footer from "@/components/ui/shared/footer/Footer";
 import Header from "@/components/ui/shared/header/Header";
@@ -10,6 +11,7 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
       <main>{children}</main>
       <Footer />
       <JumpToTopBtn />
+      <FloatingContact />
     </>
   );
 }
