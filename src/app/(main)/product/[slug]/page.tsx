@@ -61,8 +61,8 @@ const SingleProductPage = async ({ params }: TProps) => {
   return (
     <section>
       <ContainerMax>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <Box className="shadow-none ring-2 mt-5 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
+          <Box className="shadow-none ring-2 md:mt-5">
             <SingleProductPageImageGallery gallery={gallery} />
           </Box>
           <Box className="space-y-4 shadow-none ring-0">
@@ -86,7 +86,7 @@ const SingleProductPage = async ({ params }: TProps) => {
               </div>
             </div>
           </Box>
-          <div className="col-span-1 md:col-span-2 px-3 sm:mt-5 md:mt-10">
+          <div className="col-span-1 md:col-span-2 px-3 md:mt-5">
             <ProductDescription product={product} />
           </div>
           {/* related product  */}

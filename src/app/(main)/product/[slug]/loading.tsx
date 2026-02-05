@@ -4,11 +4,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
-    <section className="my-10">
+    <section>
       <ContainerMax>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Image Gallery Skeleton */}
-          <Box className="shadow-none ring-2 mt-5 p-4">
+          <Box className="shadow-none ring-2 md:mt-5 p-4">
             <Skeleton className="w-full aspect-square rounded-xl" />
             <div className="flex gap-2 mt-4 overflow-hidden">
               {[1, 2, 3, 4].map((i) => (
@@ -57,7 +57,7 @@ export default function Loading() {
           </Box>
 
           {/* Details Section Skeleton */}
-          <div className="col-span-1 md:col-span-2 px-3 sm:mt-5 md:mt-10 space-y-8">
+          <div className="col-span-1 md:col-span-2 px-3 md:mt-5 space-y-8">
             {[1, 2, 3].map((section) => (
               <div key={section} className="space-y-4">
                 <Skeleton className="h-6 w-48" />
@@ -71,7 +71,7 @@ export default function Loading() {
           </div>
 
           {/* Related Products Skeleton */}
-          <div className="col-span-1 md:col-span-2 mt-10">
+          <div className="col-span-1 md:col-span-2 mt-5">
             <Skeleton className="h-8 w-48 mb-6 mx-auto" />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[1, 2, 3, 4].map((i) => (

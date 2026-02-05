@@ -19,10 +19,7 @@ const SectionTitle = ({
         </h2>
         {href ? (
           <>
-            <Link
-              href={href}
-              className="hover:text-primary flex gap-2 font-semibold"
-            >
+            <Link href={href} className="text-primary flex gap-2 font-semibold">
               {linkText ?? "See all"}{" "}
               <span>
                 <IoIosArrowDroprightCircle className="w-6 h-6" />

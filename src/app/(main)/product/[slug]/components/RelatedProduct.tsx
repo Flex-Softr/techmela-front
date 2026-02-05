@@ -20,7 +20,7 @@ const RelatedProduct = async ({ slug }: TRelatedProductProps) => {
   }
 
   return (
-    <div className="col-span-1 md:col-span-2 mt-10">
+    <div className="col-span-1 md:col-span-2 mt-5">
       <SectionTitle title="You may also like" href="/shop" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 justify-between mt-5">
         {products?.map((product) => (
