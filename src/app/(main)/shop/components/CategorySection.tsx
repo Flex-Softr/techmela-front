@@ -32,7 +32,7 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
             {categories.map((category) => (
               <CarouselItem
                 key={category._id}
-                className="basis-1/3 md:basis-1/4 lg:basis-1/6 pl-2 md:pl-4 pt-2"
+                className="basis-1/3 md:basis-1/4 lg:basis-1/5 pl-2 md:pl-4 pt-2"
               >
                 <CategoryCard category={category} />
               </CarouselItem>
