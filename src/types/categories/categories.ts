@@ -2,6 +2,7 @@ export type TSubCategory = {
   _id: string;
   slug: string;
   name: string;
+  productCount: number;
   hasProducts: boolean;
 };
 
@@ -21,6 +22,7 @@ export type TCategory = {
     {
       name: string;
       slug: string;
+      productCount: number;
       image: {
         src: string;
       };

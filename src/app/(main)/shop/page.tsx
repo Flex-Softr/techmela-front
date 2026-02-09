@@ -1,4 +1,5 @@
 import TCategory from "@/types/categories/categories";
+import { TPaginatedData } from "@/types/response";
 import { TTag } from "@/types/tags/tag";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { Metadata } from "next";
@@ -12,15 +13,23 @@ export const metadata: Metadata = {
 
 const ShopPage = async () => {
   // Fetch categories as usual
-  const { data: categories = [] } = await serverSideFetcher<TCategory[]>({
+  const { data: categoryResponse } = await serverSideFetcher<
+    TPaginatedData<TCategory[]>
+  >({
     url: "/categories?isActive=true",
     tags: ["allCategories"],
   });
 
+  const categories = categoryResponse?.data || [];
+
   // Fetch tags as usual
-  const { data: tags = [] } = await serverSideFetcher<TTag[]>({
-    url: "/tags",
-  });
+  const { data: tagResponse } = await serverSideFetcher<TPaginatedData<TTag[]>>(
+    {
+      url: "/tags",
+    }
+  );
+
+  const tags = tagResponse?.data || [];
 
   // Fetch price range
   const { data: priceRange } = await serverSideFetcher<{

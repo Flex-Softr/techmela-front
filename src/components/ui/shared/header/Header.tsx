@@ -1,14 +1,19 @@
-import TCategory from "@/types/categories/categories";
+import { TPaginatedData } from "@/types/response";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 import BottomHeader from "./bottomHeader/BottomHeader";
 import MainHeader from "./components/MainHeader";
 import TopHeader from "./components/TopHeader";
+import TCategory from "@/types/categories/categories";
 
 const Header = async () => {
-  const { data: categories = [] } = await serverSideFetcher<TCategory[]>({
+  const { data: categoryResponse } = await serverSideFetcher<
+    TPaginatedData<TCategory[]>
+  >({
     url: "/categories?isActive=true",
     tags: ["parentCategory"],
   });
+
+  const categories = categoryResponse?.data || [];
 
   return (
     <>

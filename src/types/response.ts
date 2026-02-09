@@ -12,6 +12,11 @@ type TGenericResponse<T = unknown> = {
   meta?: TMeta;
 };
 
+export type TPaginatedData<T> = {
+  data: T;
+  meta: TMeta;
+};
+
 export type TErrorMessages = {
   path: string;
   message: string;

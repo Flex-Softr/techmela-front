@@ -1,41 +1,46 @@
 import GenericFilterPropsSelector from "@/components/ui/ec/GenericFilterPropsSelector";
 import TCategory from "@/types/categories/categories";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 const CategorySelector = ({
   categories,
   searchParams,
-  setCategoryParams,
-  setSubcategoryParams,
+  selectedCategories,
+  setSelectedCategories,
 }: {
   categories: TCategory[];
   searchParams: Record<string, string | string[] | undefined>;
-  setCategoryParams: Dispatch<SetStateAction<string[]>>;
-  setSubcategoryParams: Dispatch<SetStateAction<Record<string, string[]>>>;
+  selectedCategories: string[];
+  setSelectedCategories: Dispatch<SetStateAction<string[]>>;
 }) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
-  const [subcategories, setSubcategories] = useState<Record<string, string[]>>(
-    {}
-  );
-
+  // Initialize selected values from searchParams if internal state is empty (first load)
   useEffect(() => {
-    setCategoryParams(selectedValues);
-  }, [selectedValues, setCategoryParams]);
+    const categoryParam = searchParams["category"];
+    let initialSelected: string[] = [];
 
-  useEffect(() => {
-    setSubcategoryParams(subcategories);
-  }, [subcategories, setSubcategoryParams]);
+    if (categoryParam) {
+      if (Array.isArray(categoryParam)) {
+        initialSelected = categoryParam;
+      } else {
+        initialSelected = categoryParam.split(",");
+      }
+    }
+
+    // Only set if we have values and current state is empty to avoid overwriting ongoing user input
+    // But since we want URL to be source of truth on load...
+    if (initialSelected.length > 0 && selectedCategories.length === 0) {
+      setSelectedCategories(initialSelected);
+    }
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <GenericFilterPropsSelector
       filterBy="category"
       title="Filter by category"
-      selectedValues={selectedValues}
-      setSelectedValues={setSelectedValues}
+      selectedValues={selectedCategories}
+      setSelectedValues={setSelectedCategories}
       items={categories}
       searchParams={searchParams}
-      subcategories={subcategories}
-      setSubcategories={setSubcategories}
       headerClassName="bg-gray-50 text-gray-900 font-medium border border-gray-200 shadow-sm text-sm"
     />
   );

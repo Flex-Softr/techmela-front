@@ -86,13 +86,16 @@ const ProductFilterContent = ({
             side="left"
             className="w-[85%] sm:w-[400px] p-0 flex flex-col"
           >
-            <SheetHeader className="p-6 border-b shrink-0">
+            <SheetHeader
+              className="px-6 py-3 border-b shrink-0 cursor-pointer"
+              onClick={() => sheetCloseRef.current?.click()}
+            >
               <SheetTitle className="text-xl font-bold flex items-center gap-2">
                 <FaBarsStaggered className="text-primary" />
                 Filters
               </SheetTitle>
             </SheetHeader>
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto px-6 py-3">
               {filterContent}
               <SheetClose asChild>
                 <button ref={sheetCloseRef} className="hidden" />
