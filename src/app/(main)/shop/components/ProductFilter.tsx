@@ -4,8 +4,8 @@ import CollapsibleFilterSection from "@/components/ui/ec/CollapsibleFilterSectio
 import { useDebounce } from "@/hooks/useDebounce";
 import TCategory from "@/types/categories/categories";
 import { TTag } from "@/types/tags/tag";
-import { useRouter } from "next/navigation";
-import { RefObject, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { RefObject, useEffect, useRef, useState } from "react";
 import CategorySelector from "./filters/CategorySelector";
 import PriceRangeSlider from "./priceRange/PriceRange";
 
@@ -41,31 +41,54 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   const router = useRouter();
 
+  const searchParamsHook = useSearchParams();
+  const isClearingRef = useRef<boolean>(false);
+
   const handleApplyFilters = () => {
-    let newSearchParams = "";
+    const params = new URLSearchParams();
+
+    // Preserve existing params, consolidating multiples to comma-separated
+    // We use a Set to get unique keys to iterate over
+    const currentKeys = Array.from(new Set(searchParamsHook.keys()));
+
+    currentKeys.forEach((key) => {
+      // Skip managed keys that we will set explicitly below
+      if (["minPrice", "maxPrice", "category", "page", "offset"].includes(key))
+        return;
+
+      const values = searchParamsHook.getAll(key);
+      const uniqueValues = Array.from(new Set(values));
+      if (uniqueValues.length > 0) {
+        params.set(key, uniqueValues.join(","));
+      }
+    });
 
     // Add minPrice and maxPrice first if they differ from original defaults
     if (
       priceFilterInitialState[0] !== minPrice ||
       priceFilterInitialState[1] !== maxPrice
     ) {
-      newSearchParams = `minPrice=${priceFilterInitialState[0]}&maxPrice=${priceFilterInitialState[1]}`;
+      params.set("minPrice", priceFilterInitialState[0].toString());
+      params.set("maxPrice", priceFilterInitialState[1].toString());
     }
 
     // Append all categories as a single comma-separated parameter
     if (selectedCategories.length) {
       // Use Set to ensure uniqueness just in case
       const uniqueCategories = Array.from(new Set(selectedCategories));
-      newSearchParams = `${newSearchParams}&category=${uniqueCategories.join(",")}`;
+      params.set("category", uniqueCategories.join(","));
     }
 
     // Add tags if available
     if (tagParams) {
-      newSearchParams = `${newSearchParams}&${tagParams}`;
+      const parts = tagParams.split("=");
+      if (parts.length === 2) {
+        params.set(parts[0], parts[1]);
+      }
     }
 
     // Update the URL with the filters applied
-    router.push(`/shop?${newSearchParams}`);
+    router.push(`/shop?${params.toString()}`);
 
     // Close the sheet/drawer if it's open
     // if (sheetCloseRef.current) {
@@ -74,6 +97,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   const handleClearAllFilters = () => {
+    isClearingRef.current = true;
     setCsSearchParams({});
     setPriceFilterInitialState([minPrice, maxPrice]);
     setTagParams("");
@@ -84,6 +108,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   // Auto-apply filters when any filter state changes
   useEffect(() => {
+    if (isClearingRef.current) {
+      isClearingRef.current = false;
+      return;
+    }
     handleApplyFilters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedPrice, selectedCategories, tagParams]);
