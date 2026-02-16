@@ -28,7 +28,7 @@ const FloatingContact = () => {
   ];
 
   return (
-    <div className="fixed bottom-5 right-5 flex flex-col-reverse items-end gap-3">
+    <div className="fixed bottom-5 right-5 flex flex-col-reverse items-end gap-3 z-40">
       {/* Main Toggle Button */}
       <button
         onClick={toggleExpand}
