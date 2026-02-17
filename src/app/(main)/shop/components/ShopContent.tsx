@@ -35,7 +35,7 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
 
   // Convert searchParams to object for RTK query
   const queryParams: Record<string, string | string[]> = {};
-
+  queryParams["sortBy"] = "updatedAt";
   if (!flashSaleParam) {
     searchParams.forEach((value, key) => {
       // Handle multiple values for same key if necessary, though useSearchParams mostly gives single or getAll
