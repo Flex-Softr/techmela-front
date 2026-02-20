@@ -129,10 +129,10 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
                 Category:
               </span>
               <Link
-                href={`/shop?category=${category.slug}`}
+                href={`/shop?category=${category?.[0]?.slug}`}
                 className="font-semibold text-foreground hover:text-primary hover:underline"
               >
-                {category.name}
+                {category?.[0]?.name}
               </Link>
             </div>
           )}
@@ -216,9 +216,9 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             <span className="font-semibold text-foreground flex-1">
               <Link
                 className="hover:text-primary hover:underline"
-                href={`/shop?category=${category.slug}`}
+                href={`/shop?category=${category?.[0]?.slug}`}
               >
-                {category.name}
+                {category?.[0]?.name}
               </Link>
             </span>
           </div>

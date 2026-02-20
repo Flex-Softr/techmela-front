@@ -99,7 +99,7 @@ export type TSingleProduct = {
   inventory: TInventory;
   attribute: TAttribute[];
   brand: TBrand;
-  category: TCategory;
+  category: TCategory[];
   tag: TTag[];
   publishedStatus: TPublishedStatus;
   seoData: TSeoData;

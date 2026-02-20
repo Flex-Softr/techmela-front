@@ -44,6 +44,39 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   const searchParamsHook = useSearchParams();
   const isClearingRef = useRef<boolean>(false);
 
+  // Sync state with URL params when they change externally (e.g. Navbar)
+  useEffect(() => {
+    if (isClearingRef.current) return;
+
+    // Sync Categories
+    const categoryParam = searchParams["category"];
+    let initialSelected: string[] = [];
+    if (categoryParam) {
+      initialSelected = Array.isArray(categoryParam)
+        ? categoryParam
+        : categoryParam.split(",");
+    }
+    setSelectedCategories((prev) => {
+      if (JSON.stringify(prev) !== JSON.stringify(initialSelected)) {
+        return initialSelected;
+      }
+      return prev;
+    });
+
+    // Sync Price
+    const minP = Number(searchParams.minPrice) || minPrice;
+    const maxP = Number(searchParams.maxPrice) || maxPrice;
+    setPriceFilterInitialState((prev) => {
+      if (prev[0] !== minP || prev[1] !== maxP) {
+        return [minP, maxP];
+      }
+      return prev;
+    });
+
+    // Sync csSearchParams
+    setCsSearchParams(searchParams);
+  }, [searchParams, minPrice, maxPrice]);
+
   const handleApplyFilters = () => {
     const params = new URLSearchParams();
 

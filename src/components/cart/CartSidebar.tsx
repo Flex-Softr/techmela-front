@@ -16,12 +16,14 @@ import { TCartItemData } from "@/types/cart";
 import { X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 const CartSidebar = ({ children }: { children: ReactNode }) => {
   const { data: cartData, totalCost, isLoading } = useCart();
   const [deleteCartItem] = useDeleteFromCartMutation();
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const cartItems = cartData?.data as TCartItemData[];
 
@@ -58,9 +60,12 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-4">
               <p className="text-gray-500">Your cart is empty</p>
               <Button
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  router.push("/shop");
+                }}
                 variant="outline"
-                className="text-white bg-primary hover:bg-primary"
+                className="text-white hover:text-white bg-primary hover:bg-primary"
               >
                 Continue Shopping
               </Button>

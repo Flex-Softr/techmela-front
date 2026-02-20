@@ -37,6 +37,7 @@ const ShopPage = async () => {
     maxPrice: number;
   }>({
     url: "/products/price-range",
+    tags: ["priceRange"],
   });
 
   return (
