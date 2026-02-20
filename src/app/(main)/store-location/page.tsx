@@ -1,11 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import {
-  FaFacebook,
-  FaHeadset,
-  FaUsers,
-  FaWhatsapp,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaFacebook, FaHeadset, FaUsers, FaWhatsapp } from "react-icons/fa";
 
 const StoreLocationPage = () => {
   return (
@@ -65,7 +59,7 @@ const StoreLocationPage = () => {
               </h2>
               <div className="grid grid-cols-4 md:grid-cols-4 gap-6 justify-center">
                 <a
-                  href="https://www.facebook.com/nora?mibextid=ZbWKwL"
+                  href="https://www.facebook.com/noralifestylbd"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl md:text-4xl text-blue-600 hover:text-blue-700 transition"
@@ -90,15 +84,6 @@ const StoreLocationPage = () => {
                   aria-label="Facebook Group"
                 >
                   <FaUsers title="Facebook Group" />
-                </a>
-                <a
-                  href="https://www.youtube.com/@nora"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-2xl md:text-4xl text-red-600 hover:text-red-700 transition"
-                  aria-label="YouTube"
-                >
-                  <FaYoutube title="YouTube" />
                 </a>
               </div>
             </div>
