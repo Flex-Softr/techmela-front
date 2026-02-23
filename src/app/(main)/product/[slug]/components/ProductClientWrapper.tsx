@@ -1,12 +1,12 @@
 "use client";
 
+import { PRODUCT_TYPE } from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useEffect, useState } from "react";
 import ProductMainInfo from "./ProductMainInfo";
 import SingleProductClientContent from "./SingleProductClientContent";
 import VariationSelector from "./VariationSelector";
-import { PRODUCT_TYPE } from "@/const/product.const";
 
 type ProductClientWrapperProps = {
   product: TSingleProduct;
@@ -29,6 +29,12 @@ const ProductClientWrapper = ({
       event: "view_content",
       content_type: "product",
       contents: [{ id: product._id }],
+      currency: "BDT",
+      value: Number(
+        product?.variations?.length > 0
+          ? product?.variations[0]?.price?.regularPrice
+          : (product?.price?.regularPrice ?? 0)
+      ),
     });
   }, [product]);
 

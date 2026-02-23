@@ -1,9 +1,9 @@
 "use client";
 
 import { toast } from "@/components/ui/use-toast";
+import { PRODUCT_TYPE, STOCK_STATUS } from "@/const/product.const";
 import PEventIdGenerator from "@/lib/ec/PEventIdGenerator";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
-import { PRODUCT_TYPE, STOCK_STATUS } from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TGenericResponse from "@/types/response";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
@@ -39,6 +39,12 @@ const SingleProductClientContent = ({
           event: "add_to_cart",
           content_type: "product",
           contents: [{ id: product?._id, quantity }],
+          currency: "BDT",
+          value: Number(
+            (product?.variations?.length ?? 0 > 0)
+              ? product?.variations[0]?.price?.regularPrice
+              : (product?.price?.regularPrice ?? 0) * quantity
+          ),
         });
         toast({
           title: result?.message,
