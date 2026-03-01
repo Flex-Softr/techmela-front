@@ -38,7 +38,14 @@ const SingleProductClientContent = ({
         gtmEventHandler({
           event: "add_to_cart",
           content_type: "product",
-          contents: [{ id: product?._id, quantity }],
+          contents: [
+            {
+              id: selectedVariation?._id
+                ? `${product?._id}-${selectedVariation?._id}`
+                : product?._id,
+              quantity,
+            },
+          ],
           currency: "BDT",
           value: Number(
             (product?.variations?.length ?? 0 > 0)

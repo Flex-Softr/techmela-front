@@ -1,7 +1,7 @@
 "use client";
 
 import { PRODUCT_TYPE } from "@/const/product.const";
-import { TSingleProduct } from "@/types/products/singleProduct";
+import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useEffect, useState } from "react";
 import ProductMainInfo from "./ProductMainInfo";
@@ -14,11 +14,13 @@ type ProductClientWrapperProps = {
     regularPrice: number;
     salePrice: number;
   };
+  defaultVariation: Tvariations;
 };
 
 const ProductClientWrapper = ({
   product,
   initialVariationPrice,
+  defaultVariation,
 }: ProductClientWrapperProps) => {
   const [selectedVariation, setSelectedVariation] = useState<
     TSingleProduct["variations"][0] | undefined
@@ -28,7 +30,13 @@ const ProductClientWrapper = ({
     gtmEventHandler({
       event: "view_content",
       content_type: "product",
-      contents: [{ id: product._id }],
+      contents: [
+        {
+          id: defaultVariation?._id
+            ? `${product._id}-${defaultVariation?._id}`
+            : product._id,
+        },
+      ],
       currency: "BDT",
       value: Number(
         product?.variations?.length > 0
@@ -36,6 +44,7 @@ const ProductClientWrapper = ({
           : (product?.price?.regularPrice ?? 0)
       ),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   const isVariableProduct = product.type === PRODUCT_TYPE.VARIABLE;

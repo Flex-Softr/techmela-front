@@ -155,7 +155,9 @@ const useOrderSubmit = ({
           value: calculatedTotal,
           currency: "BDT",
           contents: result?.data?.orderedProducts?.map((product) => ({
-            id: product.product,
+            id: product?.variation
+              ? `${product.product}-${product.variation}`
+              : product.product,
             name: product.product,
             quantity: product.quantity,
             price: product.unitPrice,
