@@ -70,6 +70,7 @@ const SingleProductPage = async ({ params }: TProps) => {
             <ProductClientWrapper
               product={product}
               initialVariationPrice={initialVariationPrice}
+              defaultVariation={defaultVariation}
             />
 
             <div className="border-2 p-4 rounded-md flex items-center gap-5">

@@ -6,6 +6,7 @@ export type TOrderedProducts = {
   unitPrice: number;
   quantity: number;
   total: number;
+  variation?: string;
 };
 
 type TShipping = {
