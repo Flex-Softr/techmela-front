@@ -111,6 +111,12 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
               <span>-&#2547;{orderInfo.discount}</span>
             </div>
           )}
+          {orderInfo?.couponDiscount > 0 && (
+            <div className="flex justify-between text-sm text-green-600">
+              <span>Coupon discount</span>
+              <span>-&#2547;{orderInfo?.couponDiscount}</span>
+            </div>
+          )}
           <Separator className="my-2" />
           <div className="flex justify-between text-base font-bold text-gray-900">
             <span>Total</span>
