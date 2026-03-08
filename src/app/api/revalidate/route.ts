@@ -11,14 +11,14 @@ export const GET = (req: NextRequest) => {
 
     if (!secret) {
       return NextResponse.json(
-        { status: "ERROR", message: "Authentication failed." },
+        { status: "ERROR", message: "Revalidate secret is required." },
         { status: 401 }
       );
     }
 
     if (secret !== config.revalidate_secret) {
       return NextResponse.json(
-        { status: "ERROR", message: "Authentication failed." },
+        { status: "ERROR", message: "Revalidate secret doesn't match." },
         { status: 401 }
       );
     }
@@ -33,7 +33,7 @@ export const GET = (req: NextRequest) => {
     const tags = key.split(",");
 
     tags.forEach((tag) => {
-      revalidateTag(tag.trim());
+      revalidateTag(encodeURIComponent(tag.trim()));
     });
 
     return NextResponse.json(

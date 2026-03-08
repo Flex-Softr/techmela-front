@@ -6,7 +6,7 @@ import { useFindSearchProductQuery } from "@/redux/features/searchProduct/search
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
 import { ApiResponse } from "./searchProductType/SearchProductType";
 import { TProduct } from "@/types/products/product";
 import { TVariableProduct } from "@/types/products/variableProduct";
@@ -56,6 +56,11 @@ const Search = () => {
     setShowSuggestions(false);
   };
 
+  const handleClearSearch = () => {
+    setSearchValue("");
+    setShowSuggestions(false);
+  };
+
   const products: (TProduct | TVariableProduct)[] = isApiResponse(data)
     ? data.data
     : [];
@@ -64,12 +69,22 @@ const Search = () => {
     <form onSubmit={handleSearchSubmit} className="relative">
       <div className="flex items-center w-full overflow-hidden">
         <input
-          type="search"
+          type="text"
           value={searchValue}
           onChange={handleInputChange}
-          placeholder="Search for products"
-          className="w-full h-[44px] px-4 text-sm outline-none border border-primary rounded-full pr-10"
+          placeholder="পছন্দের বই খুঁজুন..."
+          className="w-full h-[44px] px-4 text-sm outline-none border border-primary rounded-full pr-16"
         />
+
+        {searchValue && (
+          <button
+            type="button"
+            onClick={handleClearSearch}
+            className="absolute right-12 text-gray-400 hover:text-primary transition-colors"
+          >
+            <FaTimes />
+          </button>
+        )}
 
         <Button
           type="submit"
@@ -80,7 +95,7 @@ const Search = () => {
       </div>
 
       {showSuggestions && debouncedSearchValue.trim() !== "" && (
-        <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-[100]">
+        <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-[100] max-h-[400px] overflow-y-auto">
           {isLoading && <p className="p-3 text-sm">Loading...</p>}
 
           {!isLoading && !isError && products.length > 0

@@ -36,7 +36,8 @@ const JumpToTopBtn: React.FC = () => {
       {/* "Jump to Top" button */}
       {isVisible && (
         <div style={styles.jumpButton} onClick={scrollToTop}>
-          <ChevronUp size={24} /> {/* Using the Lucide ChevronUp icon */}
+          <ChevronUp size={24} className="text-primary" />{" "}
+          {/* Using the Lucide ChevronUp icon */}
           {/* Up arrow icon, can be replaced with an actual icon */}
         </div>
       )}
@@ -48,9 +49,10 @@ const JumpToTopBtn: React.FC = () => {
 const styles = {
   jumpButton: {
     position: "fixed" as const,
-    bottom: "80px",
+    bottom: "60px",
     right: "20px",
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    backdropFilter: "blur(4px)",
     borderRadius: "50%",
     width: "50px",
     height: "50px",
@@ -58,8 +60,8 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-    zIndex: 100,
+    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    zIndex: 900,
   },
 };
 

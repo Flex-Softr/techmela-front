@@ -1,19 +1,12 @@
-import { TProduct } from "@/types/products/product";
-import serverSideFetcher from "@/utilities/serverSideFetcher";
-import BannerCarousel from "./components/BannerCarousel";
+import ContainerMax from "@/components/containerMax/ContainerMax";
+import BannerCarousel from "./BannerCarousel";
 
 const Banner = async () => {
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const { data } = await serverSideFetcher<any>({
-    url: "/products/featured",
-    tags: ["products"],
-  });
-  const bannerSideProducts = (data as TProduct[]) || [];
-
   return (
-    <section>
-      {/* <section className="mt-[54.663px] sm:mt-0"> */}
-      <BannerCarousel bannerSideProducts={bannerSideProducts} />
+    <section className="mt-2 md:mt-4">
+      <ContainerMax>
+        <BannerCarousel />
+      </ContainerMax>
     </section>
   );
 };

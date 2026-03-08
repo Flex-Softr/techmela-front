@@ -9,21 +9,21 @@ const CopyrightContent = () => {
             <p className="text-text-muted-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
               &copy; {new Date().getFullYear()}{" "}
               <span className="text-primary-foreground font-bold">
-                Nora Life Style
+                সিদ্দীকিয়া প্রকাশনী
               </span>
               . All rights reserved.
             </p>
           </div>
-          <div>
+          <div className="md:pr-16">
             <p className="text-text-muted-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
               Developed and maintained with ❤️ by{" "}
               <a
-                href="https://flexsoftr.com"
+                href="https://mustaqimkhan.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-foreground font-bold hover:underline transition-colors"
+                className="text-primary-foreground font-bold hover:underline transition-colors relative z-[60]"
               >
-                Flex Softr
+                Md. Mustaqim Khan
               </a>
             </p>
           </div>

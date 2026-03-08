@@ -23,6 +23,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
       refetchData([
         ...productTags,
         "featuredProducts",
+        "bestSellingProducts",
         "homepageIndividualSection",
       ]);
     }

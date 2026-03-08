@@ -1,11 +1,12 @@
 {
-  "name": "electro-commerce-client-side",
+  "name": "siddikiaprokashoni-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 8000",
+    "start": "next start",
+    "dev:lan": "next dev -H 0.0.0.0 -p 3000",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },

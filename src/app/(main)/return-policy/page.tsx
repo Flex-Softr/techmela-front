@@ -14,7 +14,7 @@ const ReturnPolicyPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 pb-12 mt-14">
       <h1 className="text-3xl font-bold mb-8 text-center text-primary">
-        Nora Life Style রিটার্ন পলিসি
+        সিদ্দীকিয়া প্রকাশনী রিটার্ন পলিসি
       </h1>
 
       <section className="mb-8 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
@@ -22,10 +22,10 @@ const ReturnPolicyPage: React.FC = () => {
           ভূমিকা:
         </h2>
         <p className="text-gray-600 leading-relaxed">
-          প্রিয় গ্রাহক! Nora life style গ্রাহকদের সর্বোত্তম সেবা নিশ্চিত করার
-          জন্য প্রতিশ্রুতিবদ্ধ। আমরা চাই আপনি আমাদের পণ্য কিনে সন্তুষ্ট হোন। তবে
-          কোনো কারণে যদি আপনাকে পণ্য ফেরত দিতে হয়, তাহলে এই নীতিমালা আপনাকে
-          সঠিক পদ্ধতি সম্পর্কে জানাবে।
+          প্রিয় গ্রাহক! সিদ্দীকিয়া প্রকাশনী গ্রাহকদের সর্বোত্তম সেবা নিশ্চিত
+          করার জন্য প্রতিশ্রুতিবদ্ধ। আমরা চাই আপনি আমাদের পণ্য কিনে সন্তুষ্ট
+          হোন। তবে কোনো কারণে যদি আপনাকে পণ্য ফেরত দিতে হয়, তাহলে এই নীতিমালা
+          আপনাকে সঠিক পদ্ধতি সম্পর্কে জানাবে।
         </p>
       </section>
 

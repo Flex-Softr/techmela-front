@@ -6,7 +6,7 @@ const Loading = () => {
       {/* Logo-like Branding */}
       <div className="flex items-center space-x-2">
         <Image
-          src="/images/logo/logo.jpg"
+          src="/images/logo/logo.png"
           alt="Nora logo"
           width={100}
           height={100}
@@ -14,7 +14,7 @@ const Loading = () => {
         />
       </div>
       <h1 className="xms:text-lg xls:text-xl sm:text-2xl md:text-4xl text-gray-700">
-        Welcome to Nora life style
+        সিদ্দীকিয়া প্রকাশনীতে স্বাগতম
       </h1>
       {/* Animated shimmer bar */}
       <div className="relative w-64 h-2 overflow-hidden rounded bg-gray-200">

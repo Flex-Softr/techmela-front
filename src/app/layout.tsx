@@ -9,8 +9,8 @@ import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["bengali"],
-  weight: "400",
-  variable: "--font-hind-siliguri",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-bengali",
 });
 
 const inter = Inter({
@@ -21,10 +21,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nora life style",
-    template: "%s | Nora life style",
+    default: "সিদ্দীকিয়া প্রকাশনী",
+    template: "%s - সিদ্দীকিয়া প্রকাশনী",
   },
-  description: "Nora life style",
+  description:
+    "❝সিদ্দীকিয়া প্রকাশনী❞ ঐতিহ্যবাহী দারুননাজাত মাদরাসা কিতাব বিভাগের একটি প্রকাশনা প্রতিষ্ঠান। আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক গবেষণামূলক ও মানসম্পন্ন গ্রন্থ প্রকাশে আমরা নিবেদিত। ❝সততার পথে, দক্ষতার সাথে❞ 📞 01602-431167 (হোয়াটসঅ্যাপ বা সরাসরি)",
+  keywords: "সিদ্দীকিয়া প্রকাশনী, সিদ্দীকিয়া প্রকাশনী, সিদ্দীকিয়া প্রকাশনী",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

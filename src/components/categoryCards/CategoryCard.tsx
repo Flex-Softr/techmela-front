@@ -20,21 +20,21 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
       className="text-center mx-auto flex flex-col justify-center items-center group transition-all duration-300"
       onClick={handleCategoryView}
     >
-      <div className="size-20 md:size-44 rounded-md flex justify-center items-center group-hover:bg-gray-100 group-hover:scale-105 transition-all duration-300 overflow-hidden">
+      <div className="size-20 sm:size-24 md:size-32 rounded-full flex justify-center items-center bg-gray-50 border border-gray-100 group-hover:bg-primary/5 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-300 overflow-hidden shadow-sm">
         <Image
           src={getImageSrc(category?.image?.src)}
           alt={category?.image?.alt || ""}
           width={80}
           height={80}
-          className="mx-auto transition-all object-cover w-full"
+          className="mx-auto transition-all object-contain p-3 w-full h-full"
         />
       </div>
-      <span className="mt-2 text-xs md:text-base font-medium block text-gray-700 group-hover:text-primary transition-colors">
+      <span className="mt-2 text-xs md:text-sm font-bold block text-gray-800 group-hover:text-primary transition-colors line-clamp-1 px-1">
         {category.name}
       </span>
       {category.productCount !== undefined && (
-        <span className="text-[10px] md:text-xs text-gray-400 font-normal">
-          ({category.productCount} products)
+        <span className="text-[10px] md:text-xs text-gray-500 font-medium bg-gray-100 px-2 py-0.5 rounded-full mt-1">
+          {category.productCount} টি বই
         </span>
       )}
     </Link>

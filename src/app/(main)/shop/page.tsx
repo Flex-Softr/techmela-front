@@ -7,8 +7,7 @@ import ShopContent from "./components/ShopContent";
 // import CustomBreadcrumb from "./components/customBreadcrumb/CustomBreadcrumb";
 
 export const metadata: Metadata = {
-  title: "Shop",
-  description: "Buy now",
+  title: "শপ",
 };
 
 const ShopPage = async () => {

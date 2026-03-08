@@ -1,10 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const FloatingContact = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showJumpBtn, setShowJumpBtn] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowJumpBtn(window.pageYOffset > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -14,25 +24,29 @@ const FloatingContact = () => {
     {
       name: "WhatsApp",
       icon: "/images/social_icons/whatsapp.png",
-      link: "http://wa.me/8801973890872", // Replace with your WhatsApp number
+      link: "http://wa.me/8801602431167", // Replace with your WhatsApp number
       bgColor: "bg-green-500",
       hoverColor: "hover:bg-green-600",
     },
     {
       name: "Facebook",
       icon: "/images/social_icons/facebook.png",
-      link: "https://www.facebook.com/jutarhat21", // Replace with your Facebook page username
+      link: "https://www.facebook.com/siddikiyaprokashoni", // Replace with your Facebook page username
       bgColor: "bg-blue-500",
       hoverColor: "hover:bg-blue-600",
     },
   ];
 
   return (
-    <div className="fixed bottom-5 right-5 flex flex-col-reverse items-end gap-3 z-40">
+    <div
+      className={`fixed bottom-[60px] flex flex-col-reverse items-end gap-3 z-[1000] pointer-events-none transition-all duration-300 ${
+        showJumpBtn ? "right-[80px]" : "right-[20px]"
+      }`}
+    >
       {/* Main Toggle Button */}
       <button
         onClick={toggleExpand}
-        className={`size-[50px] rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 flex items-center justify-center z-50 ${
+        className={`size-[50px] rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 flex items-center justify-center pointer-events-auto z-50 ${
           isExpanded
             ? "bg-red-500 hover:bg-red-600 rotate-45"
             : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
@@ -65,7 +79,7 @@ const FloatingContact = () => {
 
       {/* Contact Options - Appear when expanded */}
       <div
-        className={`flex flex-col gap-3 transition-all duration-300 z-50 ${
+        className={`flex flex-col gap-3 transition-all duration-300 z-50 pointer-events-auto ${
           isExpanded
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-4 pointer-events-none"

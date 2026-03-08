@@ -9,14 +9,14 @@ import Search from "./Search";
 const MainHeader = ({ categories }: { categories?: TCategory[] }) => {
   return (
     <div className="flex gap-5 justify-between lg:justify-evenly items-center px-2 lg:px-10 py-2 bg-primary">
-      <div className="order-2 lg:order-1">
+      <div className="order-2 lg:order-1 bg-white rounded-md">
         <Link href="/">
           <Image
             src="/images/logo/Logo.png"
             alt="Company logo"
-            height={150}
-            width={300}
-            className="w-20 h-auto md:w-28 rounded-md"
+            height={100}
+            width={200}
+            className="w-16 h-12 md:w-24 md:h-12 rounded-md"
             priority
           />
         </Link>

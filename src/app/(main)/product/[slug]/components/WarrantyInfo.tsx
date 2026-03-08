@@ -124,7 +124,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
                 <p className="text-base md:text-lg">
                   আপনার সন্তুষ্টিই আমাদের অনুপ্রেরণা।
                 </p>
-                <p className="font-bold text-base">Nora life style</p>
+                <p className="font-bold text-base">সিদ্দীকিয়া প্রকাশনী</p>
                 <p className="font-semibold">&quot;বিশ্বাসের প্রতীক&quot;</p>
               </div>
             </div>

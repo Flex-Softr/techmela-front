@@ -12,7 +12,7 @@ const DeliveryPolicyPage = async () => {
   return (
     <div className="max-w-4xl mx-auto px-4 pb-12 mt-14">
       <h1 className="text-3xl font-bold mb-8 text-center text-primary">
-        Nora Life Style ডেলিভারি পলিসি
+        সিদ্দীকিয়া প্রকাশনী ডেলিভারি পলিসি
       </h1>
 
       <section className="mb-8 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
@@ -20,7 +20,7 @@ const DeliveryPolicyPage = async () => {
           ডেলিভারি এলাকা:
         </h2>
         <p className="text-gray-600 leading-relaxed">
-          Nora Life Style বর্তমানে সমগ্র বাংলাদেশে হোম ডেলিভারি সেবা প্রদান
+          সিদ্দীকিয়া প্রকাশনী বর্তমানে সমগ্র বাংলাদেশে হোম ডেলিভারি সেবা প্রদান
           করছে। ঢাকার ভিতরে এবং ঢাকার বাইরে যেকোনো প্রান্তে আমরা আমাদের পণ্য
           পৌঁছে দিতে প্রতিশ্রুতিবদ্ধ।
         </p>

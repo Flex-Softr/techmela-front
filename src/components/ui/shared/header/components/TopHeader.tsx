@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { FaBagShopping, FaLocationDot } from "react-icons/fa6";
 import { MdDeliveryDining } from "react-icons/md";
@@ -5,38 +6,41 @@ const TopHeader = () => {
   const links = [
     {
       href: "/store-location",
-      name: "Store locator",
-      icon: <FaLocationDot className="size-5" />,
+      name: "আউটলেটসমূহ",
+      icon: <FaLocationDot className="size-4 text-primary" />,
     },
     {
       href: "/track-your-order",
-      name: "Track your order",
-      icon: <MdDeliveryDining className="size-5" />,
+      name: "অর্ডার ট্র্যাক করুন",
+      icon: <MdDeliveryDining className="size-5 text-primary" />,
     },
     {
       href: "/shop",
-      name: "Shop",
-      icon: <FaBagShopping className="size-5" />,
+      name: "শপ",
+      icon: <FaBagShopping className="size-4 text-primary" />,
     },
   ];
   return (
     <>
-      <div className="hidden md:flex justify-end xl:px-10 py-2">
-        <div className="flex gap-2">
+      <div className="hidden md:flex justify-end xl:px-10 py-1.5 bg-gray-50/50">
+        <div className="flex gap-4 items-center">
           {links.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className="flex gap-2 items-center text-sm text-muted-foreground font-medium transition-all"
-            >
-              <span>{link.icon}</span>
-              <span>{link.name}</span>
-              {index !== links.length - 1 ? "|" : null}
-            </Link>
+            <Fragment key={index}>
+              <Link
+                href={link.href}
+                className="flex gap-1.5 items-center text-[13px] text-muted-foreground font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
+              >
+                <span>{link.icon}</span>
+                <span>{link.name}</span>
+              </Link>
+              {index !== links.length - 1 ? (
+                <span className="text-gray-300">|</span>
+              ) : null}
+            </Fragment>
           ))}
         </div>
       </div>
-      <hr />
+      <hr className="border-gray-100" />
     </>
   );
 };

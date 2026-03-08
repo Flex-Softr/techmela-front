@@ -20,26 +20,21 @@
     --popover: 0 0% 100%;
     --popover-foreground: 197 67% 15%;
 
-    /* Primary – Deep teal */
-    --primary: 179.46 73.68% 29.8%;
-    /* hsl(197 98% 23%) → #015B76 */
+    /* Primary – Deep Forest Green (from logo) */
+    --primary: 150 100% 18%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary – Deep green */
-    --secondary: 158 62% 24%;
-    /* hsl(158 62% 24%) → #186447 */
+    /* Secondary – Olive Green (from logo) */
+    --secondary: 79 31% 33%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted – Soft peach */
-    --muted: 18 39% 82%;
-    /* hsl(18 39% 82%) → #DEBAB1 */
-    --muted-foreground: 197 30% 30%;
+    /* Muted – Soft olive tint */
+    --muted: 79 20% 90%;
+    --muted-foreground: 150 30% 15%;
 
-    /* Accent – Light Teal (subtle background for hovers) */
-    --accent: 180 20% 96%;
-    /* Very light teal */
-    --accent-foreground: 179.46 73.68% 29.8%;
-    /* Use Primary (Deep Teal) for text on accent background */
+    /* Accent – Bright Forest Green tint */
+    --accent: 150 20% 96%;
+    --accent-foreground: 150 100% 18%;
 
     /* Destructive */
     --destructive: 0 72% 55%;
@@ -66,25 +61,21 @@
     --popover: 0 0% 100%;
     --popover-foreground: 197 67% 15%;
 
-    /* Primary – Deep teal */
-    --primary: 179.46 73.68% 29.8%;
-    /* hsl(197 98% 23%) → #015B76 */
+    /* Primary – Deep Forest Green (from logo) */
+    --primary: 150 100% 18%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary – Deep green */
-    --secondary: 158 62% 24%;
-    /* hsl(158 62% 24%) → #186447 */
+    /* Secondary – Olive Green (from logo) */
+    --secondary: 79 31% 33%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted – Soft peach */
-    --muted: 18 39% 82%;
-    /* hsl(18 39% 82%) → #DEBAB1 */
-    --muted-foreground: 197 30% 30%;
+    /* Muted – Soft olive tint */
+    --muted: 79 20% 90%;
+    --muted-foreground: 150 30% 15%;
 
-    /* Accent – Light Teal */
-    --accent: 180 20% 96%;
-    /* Very light teal */
-    --accent-foreground: 179.46 73.68% 29.8%;
+    /* Accent – Bright Forest Green tint */
+    --accent: 150 20% 96%;
+    --accent-foreground: 150 100% 18%;
 
     /* Destructive */
     --destructive: 0 72% 55%;
@@ -147,6 +138,22 @@
   animation: fire 1s infinite;
 }
 
+@keyframes shimmer-bounce {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.shimmer-bounce {
+  animation: shimmer-bounce 2s ease-in-out infinite;
+}
+
 /* Base Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px; /* thinner scrollbar */
@@ -166,4 +173,15 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #999999; /* slightly darker on hover */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

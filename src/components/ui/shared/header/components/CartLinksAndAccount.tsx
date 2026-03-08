@@ -4,8 +4,11 @@ import CartSidebar from "@/components/cart/CartSidebar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
+import { useDebounce } from "@/hooks/useDebounce";
 import { getImageSrc } from "@/lib/utils";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
+import { TProduct } from "@/types/products/product";
+import { TVariableProduct } from "@/types/products/variableProduct";
 import { ShoppingCart, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,9 +17,6 @@ import { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
 import { ApiResponse } from "./searchProductType/SearchProductType";
-import { TProduct } from "@/types/products/product";
-import { TVariableProduct } from "@/types/products/variableProduct";
-import { useDebounce } from "@/hooks/useDebounce";
 
 /* -------------------- type guards -------------------- */
 const isVariableProduct = (
@@ -98,33 +98,36 @@ const CartLinksAndAccount = () => {
           </Button>
           <form
             onSubmit={handleSearchSubmit}
-            className={`fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center transition-opacity duration-300 ${
+            className={`fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-2 px-2 transition-opacity duration-300 ${
               isSearchVisible
                 ? "opacity-100 pointer-events-auto"
                 : "opacity-0 pointer-events-none"
             }`}
           >
             <div
-              className={`bg-primary p-4 rounded-md flex items-center w-full max-w-md mx-auto transition-transform duration-300 transform ${
+              className={`bg-primary p-3.5 rounded-md flex items-center w-full max-w-md mx-auto transition-transform duration-300 transform ${
                 isSearchVisible ? "translate-y-0" : "-translate-y-full"
               }`}
             >
-              <div className="relative flex-1">
+              <div className="relative flex-1 h-9">
                 <input
                   type="text"
-                  placeholder="Search..."
-                  className="w-full p-2 rounded-full border pr-10 outline-none focus:outline-none pl-4 placeholder:text-sm"
+                  placeholder="পছন্দের বই খুঁজুন..."
+                  className="w-full h-full rounded-full border pr-10 outline-none focus:outline-none pl-4 placeholder:text-sm"
                   name="searchValue"
                   value={searchValue}
                   onChange={handleInputChange}
                   onFocus={() => setShowSuggestions(true)}
                 />
-                <button className="absolute right-2 top-2" type="submit">
-                  <FaSearch className="size-6 rounded-full p-1 bg-primary text-white" />
+                <button
+                  className="absolute right-1 top-1/2 -translate-y-1/2"
+                  type="submit"
+                >
+                  <FaSearch className="size-7 rounded-full p-1.5 bg-primary text-white" />
                 </button>
               </div>
               {showSuggestions && debouncedSearchValue.trim() !== "" && (
-                <div className="absolute mt-0.5 top-full left-1/2 transform -translate-x-1/2 w-[95%]  max-w-md bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-y-auto max-h-60">
+                <div className="absolute mt-0.5 top-full left-1/2 transform -translate-x-1/2 w-[95%]  max-w-md bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-y-auto max-h-80">
                   {isLoading && <p className="p-3 text-sm">Loading...</p>}
 
                   {!isLoading && !isError && products.length > 0
@@ -201,6 +204,7 @@ const CartLinksAndAccount = () => {
               )}
               <div className="">
                 <Button
+                  type="button"
                   variant={"ghost"}
                   className="h-6 w-6 aspect-square rounded-full hover:bg-transparent text-primary-foreground"
                   onClick={toggleSearchBar}
@@ -218,7 +222,7 @@ const CartLinksAndAccount = () => {
           className="rounded-full size-8 text-primary-foreground"
         >
           <Link href="/my-account">
-            <UserRound className="size-6" />
+            <UserRound className="size-8" />
           </Link>
         </Button>
       )}
@@ -227,7 +231,7 @@ const CartLinksAndAccount = () => {
           variant={"ghost"}
           className="rounded-full size-8 relative text-primary-foreground"
         >
-          <ShoppingCart className="size-6" />
+          <ShoppingCart className="size-8" />
           <Badge className="bg-primary-foreground size-4 text-xs text-primary absolute -top-1 -right-1 pointer-events-none">
             {totalCartItem ?? 0}
           </Badge>

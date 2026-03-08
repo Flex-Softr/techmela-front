@@ -31,7 +31,7 @@ export const productApi = baseApi.injectEndpoints({
       },
       providesTags: ["products"],
     }),
-    getFeaturedProducts: builder.query<
+    getBestSellingProducts: builder.query<
       ProductQueryResult,
       Record<string, unknown>
     >({
@@ -43,14 +43,14 @@ export const productApi = baseApi.injectEndpoints({
           }
         });
         return {
-          url: `/products/featured?${queryParams.toString()}`,
+          url: `/products/best-selling?${queryParams.toString()}`,
           method: "GET",
         };
       },
-      providesTags: ["products"],
+      providesTags: ["bestSellingProducts"],
     }),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetFeaturedProductsQuery } =
+export const { useGetAllProductsQuery, useGetBestSellingProductsQuery } =
   productApi;

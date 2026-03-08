@@ -6,18 +6,18 @@ import Link from "next/link";
 import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 const companyLinks = [
-  { name: "Shop", url: "/shop" },
-  { name: "About us", url: "/about-us" },
-  { name: "Contact us", url: "/contact-us" },
-  { name: "Store Location", url: "/store-location" },
+  { name: "শপ", url: "/shop" },
+  { name: "আমাদের সম্পর্কে", url: "/about-us" },
+  { name: "যোগাযোগ করুন", url: "/contact-us" },
+  { name: "বিপণন কেন্দ্র", url: "/store-location" },
 ];
 
 const customerCareLinks = [
-  { name: "Track Your Order", url: "/track-your-order" },
-  // { name: "Warranty Claim", url: "/warranty/claim-your-warranty" },
-  { name: "Warranty Claim", url: "/warranty/find-your-product" },
-  { name: "Delivery Policy", url: "/delivery-policy" },
-  { name: "Return Policy", url: "/return-policy" },
+  { name: "অর্ডার ট্র্যাকিং", url: "/track-your-order" },
+  // { name: "warranty claim", url: "/warranty/claim-your-warranty" },
+  { name: "ওয়ারেন্টি ক্লেম", url: "/warranty/find-your-product" },
+  { name: "ডেলিভারি পলিসি", url: "/delivery-policy" },
+  { name: "রিটার্ন পলিসি", url: "/return-policy" },
 ];
 
 const MainFooterContent = () => {
@@ -27,26 +27,28 @@ const MainFooterContent = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-3">
           {/* Column 1: Logo & Description */}
           <div className="space-y-2">
-            <Link href="/">
-              <Image
-                src="/images/logo/Logo.png"
-                alt="Company logo"
-                width={150}
-                height={50}
-                className="w-28 h-[46.67px] md:w-36 md:h-[60px] rounded-md"
-                priority
-              />
+            <Link href="/" className="flex">
+              <div className="bg-white rounded-md">
+                <Image
+                  src="/images/logo/Logo.png"
+                  alt="কোম্পানি লোগো"
+                  width={150}
+                  height={50}
+                  className="w-28 h-[46.67px] md:w-36 md:h-[60px] rounded-md"
+                  priority
+                />
+              </div>
             </Link>
             <p className="text-sm font-medium leading-relaxed text-primary-foreground/80">
-              Nora Lifestyle – Where style meets comfort. Discover our premium
-              collection of footwear and accessories designed to elevate your
-              everyday look.
+              ❝সিদ্দীকিয়া প্রকাশনী❞ ঐতিহ্যবাহী দারুননাজাত মাদরাসা কিতাব বিভাগের
+              একটি প্রকাশনা প্রতিষ্ঠান। আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক
+              গবেষণামূলক ও মানসম্পন্ন গ্রন্থ প্রকাশে আমরা নিবেদিত।
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-2.5">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-2.5">প্রয়োজনীয় লিঙ্ক</h3>
             <ul className="space-y-1">
               {companyLinks.map((link) => (
                 <li key={link.name}>
@@ -63,7 +65,7 @@ const MainFooterContent = () => {
 
           {/* Column 3: Customer Care */}
           <div>
-            <h3 className="font-bold text-lg mb-2.5">Customer Care</h3>
+            <h3 className="font-bold text-lg mb-2.5">কাস্টমার কেয়ার</h3>
             <ul className="space-y-1">
               {customerCareLinks.map((link) => (
                 <li key={link.name}>
@@ -80,27 +82,26 @@ const MainFooterContent = () => {
 
           {/* Column 4: Contact */}
           <div>
-            <h3 className="font-bold text-lg mb-2.5">Contact</h3>
+            <h3 className="font-bold text-lg mb-2.5">যোগাযোগ</h3>
             <div className="space-y-2">
               <a
-                href="tel:+8801722222222"
+                href="tel:+8801602431167"
                 className="flex items-center gap-1 text-sm font-medium hover:text-primary-foreground transition-colors text-primary-foreground/80"
               >
                 <Phone className="size-4" />
-                +8801973890872
+                +8801602-431167
               </a>
               <a
-                href="mailto:noralifestyle@gmail.com"
+                href="mailto:md.faridhanafi@gmail.com"
                 className="flex items-center gap-1 text-sm font-medium text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               >
                 <Mail className="size-4" />
-                noralifestyle@gmail.com
+                md.faridhanafi@gmail.com
               </a>
               <div className="flex items-start gap-1 text-sm font-medium text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 <MapPin className="size-4 mt-1 shrink-0" />
                 <span>
-                  Shop No-479 & 427-429, 4th Floor, Shyamoli Square Shopping
-                  Mall, Shyamoli, Dhaka
+                  সুরমেলা গলি, পূর্ব বক্সনগর, সারুলিয়া, ডেমরা, ঢাকা-১৩৬১
                 </span>
               </div>
               <div className="flex gap-2">

@@ -6,13 +6,14 @@ import Box from "@/components/ui/ec/Box";
 import Paginate from "@/components/ui/shared/paginate/Paginate";
 import {
   useGetAllProductsQuery,
-  useGetFeaturedProductsQuery,
+  useGetBestSellingProductsQuery,
 } from "@/redux/features/products/productApi";
 import TCategory from "@/types/categories/categories";
 import { TProduct } from "@/types/products/product";
 import { TTag } from "@/types/tags/tag";
-import { useSearchParams } from "next/navigation";
-import CategorySection from "./CategorySection";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+// import CategorySection from "./CategorySection";
 import NoProductsFound from "./NoProductsFound";
 import ProductFilterContent from "./ProductFilterContent";
 
@@ -24,7 +25,8 @@ type ShopContentProps = {
 
 const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
   const searchParams = useSearchParams();
-  const flashSaleParam = searchParams.get("flashSale") === "true";
+  const router = useRouter();
+  const bestSellingParam = searchParams.get("best-selling") === "true";
   const currentPage = searchParams.get("page")
     ? parseInt(searchParams.get("page") as string)
     : 1;
@@ -33,54 +35,68 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
     : 12;
   const offset = (currentPage - 1) * limit;
 
+  // Check if any meaningful filters (besides best-selling/page/limit/offset) are active
+  const UI_ONLY_KEYS = new Set(["best-selling", "page", "limit", "offset"]);
+  const hasOtherFilters = Array.from(searchParams.keys()).some(
+    (key) => !UI_ONLY_KEYS.has(key)
+  );
+
+  // Use best-selling endpoint ONLY when best-selling=true and NO other filters are active.
+  // If the user has also applied e.g. a category, treat it as a regular filtered query.
+  const useBestSelling = bestSellingParam && !hasOtherFilters;
+
+  // Auto-clean the URL: remove best-selling=true when other filters are active
+  useEffect(() => {
+    if (bestSellingParam && hasOtherFilters) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("best-selling");
+      router.replace(`/shop?${params.toString()}`, { scroll: false });
+    }
+  }, [bestSellingParam, hasOtherFilters, router, searchParams]);
+
   // Convert searchParams to object for RTK query
   const queryParams: Record<string, string | string[]> = {};
   queryParams["sort"] = "-updatedAt";
-  if (!flashSaleParam) {
-    searchParams.forEach((value, key) => {
-      // Handle multiple values for same key if necessary, though useSearchParams mostly gives single or getAll
-      // For simplicity with RTK, we pass what we have.
-      // Our API handles arrays if passed.
-      // If there are multiple values (e.g. category=A&category=B), searchParams.getAll('category') gives array.
-      const allValues = searchParams.getAll(key);
-      if (allValues.length > 1) {
-        queryParams[key] = allValues;
-      } else {
-        queryParams[key] = value;
-      }
-    });
 
-    // Ensure page/limit/offset are correct
-    queryParams.page = currentPage.toString();
-    queryParams.limit = limit.toString();
-    queryParams.offset = offset.toString();
-  } else {
-    // For flash sale, we might only need page/limit/offset
-    queryParams.page = currentPage.toString();
-    queryParams.limit = limit.toString();
-    queryParams.offset = offset.toString();
-  }
+  // Always forward all meaningful search params to the API (excluding UI-only flags).
+  searchParams.forEach((value, key) => {
+    if (key === "best-selling") return; // UI-only flag, skip
+    const allValues = searchParams.getAll(key);
+    if (allValues.length > 1) {
+      queryParams[key] = allValues;
+    } else {
+      queryParams[key] = value;
+    }
+  });
 
-  // Choose hook based on flashSale param
+  // Ensure page/limit/offset are always set correctly
+  queryParams.page = currentPage.toString();
+  queryParams.limit = limit.toString();
+  queryParams.offset = offset.toString();
+
+  // Choose hook based on useBestSelling
   const {
     data: regularData,
     isLoading: isRegularLoading,
     isFetching: isRegularFetching,
   } = useGetAllProductsQuery(queryParams, {
-    skip: flashSaleParam,
+    skip: useBestSelling,
   });
 
   const {
-    data: flashSaleData,
-    isLoading: isFlashLoading,
-    isFetching: isFlashFetching,
-  } = useGetFeaturedProductsQuery(queryParams, {
-    skip: !flashSaleParam,
+    data: bestSellingData,
+    isLoading: isBestSellingLoading,
+    isFetching: isBestSellingFetching,
+  } = useGetBestSellingProductsQuery(queryParams, {
+    skip: !useBestSelling,
   });
 
   const isLoading =
-    isRegularLoading || isFlashLoading || isRegularFetching || isFlashFetching;
-  const productData = flashSaleParam ? flashSaleData : regularData;
+    isRegularLoading ||
+    isBestSellingLoading ||
+    isRegularFetching ||
+    isBestSellingFetching;
+  const productData = useBestSelling ? bestSellingData : regularData;
   const products = productData?.data || [];
   const meta = productData?.meta;
 
@@ -103,9 +119,9 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
   return (
     <section className="relative pt-0 md:pt-2 px-2 h-full">
       <ContainerMax>
-        {!searchParams.get("category") && !flashSaleParam && (
+        {/* {!searchParams.get("category") && !flashSaleParam && (
           <CategorySection categories={categories} />
-        )}
+        )} */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 my-2 md:my-4">
           <div className="hidden lg:block">
             <ProductFilterContent
