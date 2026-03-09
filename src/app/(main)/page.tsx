@@ -4,9 +4,10 @@ import TCategory from "@/types/categories/categories";
 import { THomePageSection } from "@/types/homepageSection";
 import { TPaginatedData } from "@/types/response";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
-import CategorySection from "./shop/components/CategorySection";
+import CategorySection from "../../components/home/category/CategorySection";
 import FeaturedProducts from "@/components/home/featuredProducts/FeaturedProducts";
 import BestSellingProducts from "@/components/home/bestSellingProducts/BestSellingProducts";
+import Facilities from "@/components/home/facilities/Facilities";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ const Home = async () => {
   return (
     <>
       <Banner />
+      <Facilities />
       <CategorySection categories={categories} />
       <FeaturedProducts />
       {homePageSection?.map((section) => (

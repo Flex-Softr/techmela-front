@@ -3,7 +3,7 @@ import ContainerMax from "@/components/containerMax/ContainerMax";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
 const companyLinks = [
   { name: "শপ", url: "/shop" },
@@ -104,24 +104,38 @@ const MainFooterContent = () => {
                   সুরমেলা গলি, পূর্ব বক্সনগর, সারুলিয়া, ডেমরা, ঢাকা-১৩৬১
                 </span>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-4">
                 <a
-                  href="#"
-                  className="text-primary hover:scale-110 transition-transform"
+                  href="https://www.facebook.com/siddikiyaprokashoni"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 p-2 rounded-full text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all font-bold"
                 >
                   <FaFacebookF size={20} />
                 </a>
                 <a
-                  href="#"
-                  className="text-primary hover:scale-110 transition-transform"
+                  href="https://www.facebook.com/groups/548576081614946"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 p-2 rounded-full text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all font-bold"
                 >
-                  <FaLinkedinIn size={20} />
+                  <FaUsers size={20} />
                 </a>
                 <a
-                  href="#"
-                  className="text-primary hover:scale-110 transition-transform"
+                  href="http://wa.me/8801602431167"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 p-2 rounded-full text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all font-bold"
                 >
-                  <FaGithub size={20} />
+                  <FaWhatsapp size={20} />
+                </a>
+                <a
+                  href="https://youtube.com/@dmkbofficial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 p-2 rounded-full text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all font-bold"
+                >
+                  <FaYoutube size={20} />
                 </a>
               </div>
             </div>

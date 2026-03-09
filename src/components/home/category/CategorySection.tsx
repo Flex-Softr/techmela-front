@@ -1,6 +1,6 @@
 "use client";
 
-import CategoryCard from "@/components/categoryCards/CategoryCard";
+import CategoryCard from "@/components/home/category/CategoryCard";
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
@@ -40,7 +40,7 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
   }, [api]);
 
   return (
-    <section className="pt-10 md:pt-12">
+    <section className="pt-4 md:pt-6">
       <div className="bg-primary/5 py-2 md:py-3 px-4 md:mb-4 text-center border border-primary/10 shadow-sm">
         <SectionTitle
           title="আমাদের গ্রন্থ বিভাগ"
@@ -56,11 +56,11 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
         <div
           className="relative group/category px-1 md:px-0"
           onMouseEnter={() => {
-            if (plugin.current) plugin.current?.stop();
+            if (plugin?.current) plugin?.current?.stop?.();
           }}
           onMouseLeave={() => {
-            if (plugin.current) {
-              plugin.current?.play();
+            if (plugin && plugin?.current) {
+              plugin?.current?.play?.();
             }
           }}
         >
