@@ -225,12 +225,16 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         )}
 
         {/* Brand */}
-        <div className="flex justify-between items-center text-sm">
-          <span className="text-muted-foreground font-medium w-24">Brand:</span>
-          <span className="font-semibold text-foreground flex-1">
-            {brand?.name || "N/A"}
-          </span>
-        </div>
+        {brand?.name && (
+          <div className="flex justify-between items-center text-sm">
+            <span className="text-muted-foreground font-medium w-24">
+              Prokashoni:
+            </span>
+            <span className="font-semibold text-foreground flex-1">
+              {brand?.name || "N/A"}
+            </span>
+          </div>
+        )}
 
         {/* Warranty Info (Moved here for better context) */}
         {warranty && warrantyInfo && (

@@ -30,7 +30,7 @@
 
     /* Muted – Soft olive tint */
     --muted: 79 20% 90%;
-    --muted-foreground: 150 30% 15%;
+    --muted-foreground: 150 5% 45%;
 
     /* Accent – Bright Forest Green tint */
     --accent: 150 20% 96%;
@@ -71,7 +71,7 @@
 
     /* Muted – Soft olive tint */
     --muted: 79 20% 90%;
-    --muted-foreground: 150 30% 15%;
+    --muted-foreground: 150 5% 45%;
 
     /* Accent – Bright Forest Green tint */
     --accent: 150 20% 96%;

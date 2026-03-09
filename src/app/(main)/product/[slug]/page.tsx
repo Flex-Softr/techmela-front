@@ -75,13 +75,13 @@ const SingleProductPage = async ({ params }: TProps) => {
 
             <div className="border-2 p-4 rounded-md flex items-center gap-5">
               <div>
-                <a href="tel:+8801973890872">
+                <a href="tel:+8801602431167">
                   <Phone className="text-primary size-10" />
                 </a>
               </div>
               <div>
                 <p className="font-semibold text-xl">
-                  <a href="tel:+8801973890872">+8801973890872</a>
+                  <a href="tel:+8801602431167">01602431167</a>
                 </p>
                 <p className="text-xs font-semibold">Call for support</p>
               </div>

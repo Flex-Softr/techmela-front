@@ -44,7 +44,7 @@ const ContactUsPage = () => {
               <FaPhoneAlt className="text-4xl text-cyan-600 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold mb-2">Phone</h3>
               <p className="text-gray-600 text-sm font-semibold">
-                +8801973890872
+                01602-431167
               </p>
               <p className="text-gray-600 text-sm font-semibold">
                 24/7 service

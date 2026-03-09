@@ -107,7 +107,6 @@ const OrderNow = ({
       {/* Order Now Button with ultimateTotalCost */}
       <EcButton
         className="w-full font-bold text-white mt-2"
-        variant="secondary"
         type="submit"
         loading={isLoading || isSuccess}
         disabled={isLoading || isSuccess}

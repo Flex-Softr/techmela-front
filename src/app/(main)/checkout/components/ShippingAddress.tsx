@@ -157,7 +157,7 @@ const ShippingAddress = () => {
             />
           )}
         </div>
-        <div>
+        {/* <div>
           <Label className="font-bold pl-1 mb-1.5 block">
             Email (Optional)
           </Label>
@@ -173,7 +173,7 @@ const ShippingAddress = () => {
           {errors.email && (
             <ErrorMessage message={errors.email.message} className="mt-1" />
           )}
-        </div>
+        </div> */}
         <div>
           <Label className="font-bold pl-1 mb-1.5 block">
             Address <span className="text-red-600">*</span>
@@ -193,7 +193,7 @@ const ShippingAddress = () => {
         </div>
         <div>
           <Label className="font-bold pl-1 mb-1.5 block">
-            Review / Notes (Optional)
+            Notes (Optional)
           </Label>
           <textarea
             placeholder="Any specific instructions..."
