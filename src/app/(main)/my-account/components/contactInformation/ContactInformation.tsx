@@ -1,6 +1,14 @@
 "use client";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
 import { useGetUserDataQuery } from "@/redux/features/user/userApi";
+import { Edit, KeyRound } from "lucide-react";
 import Link from "next/link";
 
 const ContactInformation = () => {
@@ -8,49 +16,53 @@ const ContactInformation = () => {
 
   const { email, fullName, phoneNumber } = data?.data || {};
   return (
-    <div className="flex justify-center px-4">
-      <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-        <CardHeader>
-          <CardTitle className=" xms:text-sm text-gray-800 xls:text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold mb-4">
-            Contact Information
-          </CardTitle>
+    <Card className="w-full h-full flex flex-col shadow-sm border-gray-200/60">
+      <CardHeader className="pb-4 border-b border-gray-100">
+        <CardTitle className="text-xl md:text-2xl font-bold text-gray-800">
+          Contact Information
+        </CardTitle>
+      </CardHeader>
 
-          <div className="xms:text-xs xls:text-xs sm:text-sm md:text-base lg:text-lg">
-            <div>
-              <span className="font-bold text-gray-800">Name: </span>
-              <span className="text-gray-600">{fullName || "N/A"}</span>
-            </div>
-            <div>
-              <span className="font-bold text-gray-800">E-mail: </span>
-              <span className="text-gray-600">{email || "N/A"}</span>
-            </div>
-            <div>
-              <span className="font-bold text-gray-800">Phone Number: </span>
-              <span className="text-gray-600">{phoneNumber || "N/A"}</span>
-            </div>
+      <CardContent className="pt-6 flex-1">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4 gap-x-2 text-sm md:text-base">
+          <div className="text-gray-500 font-medium">Name</div>
+          <div className="sm:col-span-2 text-gray-900 font-medium">
+            {fullName || "Not provided"}
           </div>
-        </CardHeader>
 
-        <CardFooter className="flex justify-between items-center text-blue-600">
-          <Link href="/my-account/edit-account">
-            <p
-              className="cursor-pointer xms:text-xs xls:text-sm sm:text-sm md:text-base lg:text-lg"
-              title="Edit your account"
-            >
-              Edit
-            </p>
+          <div className="text-gray-500 font-medium">E-mail</div>
+          <div className="sm:col-span-2 text-gray-900 font-medium">
+            {email || "Not provided"}
+          </div>
+
+          <div className="text-gray-500 font-medium">Phone number</div>
+          <div className="sm:col-span-2 text-gray-900 font-medium">
+            {phoneNumber || "Not provided"}
+          </div>
+        </div>
+      </CardContent>
+
+      <CardFooter className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-100 bg-gray-50/50 rounded-b-xl">
+        <Button asChild variant="default" className="w-full sm:w-auto">
+          <Link
+            href="/my-account/edit-account"
+            className="flex items-center gap-2"
+          >
+            <Edit className="w-4 h-4" />
+            Edit Profile
           </Link>
-          <Link href="/auth/change-password">
-            <p
-              className="cursor-pointer xms:text-xs xls:text-sm sm:text-sm md:text-base lg:text-lg"
-              title="Change Your Password"
-            >
-              Change Password
-            </p>
+        </Button>
+        <Button asChild variant="outline" className="w-full sm:w-auto">
+          <Link
+            href="/auth/change-password"
+            className="flex items-center gap-2"
+          >
+            <KeyRound className="w-4 h-4" />
+            Change Password
           </Link>
-        </CardFooter>
-      </Card>
-    </div>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

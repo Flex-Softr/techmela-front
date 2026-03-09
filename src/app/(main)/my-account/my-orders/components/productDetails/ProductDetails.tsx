@@ -1,4 +1,6 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -8,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useGetOrderProductByIdQuery } from "@/redux/features/user/userApi";
+import { ArrowLeft, MapPin, Package, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -20,14 +23,6 @@ const OrderDetails = () => {
   const { _id } = params;
   const { data, isLoading, isError } = useGetOrderProductByIdQuery(_id);
 
-  const LoadingSpinner = () => (
-    <div className="text-center py-4">Loading...</div>
-  );
-
-  const ErrorDisplay = () => (
-    <div className="text-center py-4">Error fetching data</div>
-  );
-
   useEffect(() => {
     if (!_id) {
       router.push("/my-account/my-orders");
@@ -35,164 +30,188 @@ const OrderDetails = () => {
   }, [_id, router]);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="flex items-center justify-center py-20 text-gray-500">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-lg font-medium">Loading order details...</span>
+        </div>
+      </div>
+    );
   }
 
   if (isError || !data) {
-    return <ErrorDisplay />;
+    return (
+      <div className="text-center py-20">
+        <h2 className="text-xl font-bold text-gray-800">Error fetching data</h2>
+        <p className="text-gray-500 mt-2">
+          We couldn&apos;t load the order details. Please try again later.
+        </p>
+        <Button
+          onClick={() => router.back()}
+          variant="outline"
+          className="mt-6"
+        >
+          Go Back
+        </Button>
+      </div>
+    );
   }
 
-  const {
-    orderId,
-
-    total,
-
-    payment,
-    shipping,
-
-    products,
-  } = data.data || {};
-
-  const goBack = () => {
-    router.back();
-  };
+  const { orderId, total, payment, shipping, products } = data.data || {};
 
   return (
-    <div className="max-w-4xl mx-auto ">
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <div className="flex flex-col lg:flex-row mb-6">
-          {/* Left side: Order details */}
-          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            <h1 className="text-xl lg:text-2xl font-bold mb-4">
-              Order Details
-              <hr className="w-72 mt-1" />
-            </h1>
+    <div className="max-w-5xl mx-auto space-y-6">
+      <div className="flex items-center justify-between">
+        <Button
+          variant="ghost"
+          onClick={() => router.back()}
+          className="group flex items-center gap-2 text-gray-600 hover:text-primary transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Orders
+        </Button>
+        <div className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+          Order ID: #{orderId}
+        </div>
+      </div>
 
-            <div className="mb-4">
-              <p className="mb-2">
-                <span className="font-semibold">Order ID:</span> {orderId}
-              </p>
-
-              <p className="mb-2">
-                <span className="font-semibold">Total Amount:</span> &#2547;
-                {total?.toFixed(2)}
-              </p>
-
-              <p className="mb-2">
-                <span className="font-semibold">Payment Method:</span>{" "}
-                {payment?.paymentMethod?.name}
-              </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Order Summary */}
+        <Card className="shadow-sm border-gray-200/60">
+          <CardHeader className="pb-4 border-b border-gray-100">
+            <CardTitle className="text-lg font-bold text-gray-800 flex items-center gap-2">
+              <Package className="w-5 h-5 text-primary" />
+              Order Summary
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-5 space-y-3">
+            <div className="flex justify-between py-1">
+              <span className="text-gray-500">Payment Method</span>
+              <span className="font-semibold text-gray-800">
+                {payment?.paymentMethod?.name || "N/A"}
+              </span>
             </div>
-          </div>
+            <div className="flex justify-between py-1 border-t border-gray-50 pt-3">
+              <span className="text-gray-700 font-bold text-lg">
+                Total Amount
+              </span>
+              <span className="text-primary font-bold text-xl">
+                &#2547;{total?.toFixed(2)}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Right side: Shipping information */}
-          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            <h1 className="text-xl lg:text-2xl font-bold mb-4">
+        {/* Shipping Address */}
+        <Card className="shadow-sm border-gray-200/60">
+          <CardHeader className="pb-4 border-b border-gray-100">
+            <CardTitle className="text-lg font-bold text-gray-800 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-primary" />
               Shipping Address
-              <hr className="w-72 mt-1" />
-            </h1>
-            <div className="mb-4">
-              <p className="mb-2">
-                <span className="font-semibold">Ship To:</span>{" "}
-                {shipping?.fullName}
-              </p>
-              <p className="mb-2">
-                <span className="font-semibold">Address:</span>{" "}
-                {shipping?.fullAddress}
-              </p>
-              <p className="mb-2">
-                <span className="font-semibold">Phone Number:</span>{" "}
-                {shipping?.phoneNumber}
-              </p>
-              {/* <p className="mb-2">
-                <span className="font-semibold">Shipping:</span>{" "}
-                {shippingCharge?.name}
-              </p>
-              <p className="mb-2">
-                <span className="font-semibold">Charge:</span>{" "}
-                {shippingCharge?.amount} Taka
-              </p> */}
-            </div>
-          </div>
-        </div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-5 space-y-2">
+            <p className="font-bold text-gray-900">{shipping?.fullName}</p>
+            <p className="text-gray-600 leading-relaxed">
+              {shipping?.fullAddress}
+            </p>
+            <p className="text-gray-600 font-medium">
+              Phone: {shipping?.phoneNumber}
+            </p>
+          </CardContent>
+        </Card>
+      </div>
 
-        {/* Product information table */}
-        <div className="overflow-x-auto ">
-          <h3 className="text-xl lg:text-2xl font-bold mb-4 text-center">
-            Product Information
-          </h3>
-          <Table className="min-w-full border-collapse">
-            <TableHeader>
-              <TableRow className="bg-gray-200 xms:text-[8px] xls:text-[10px] sm:text-xs md:text-base">
-                <TableHead className="w-1/6 lg:w-1/5 font-bold text-black  xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                  Image
-                </TableHead>
-                <TableHead className="w-1/6 lg:w-1/5 font-bold text-black  xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                  Title
-                </TableHead>
-                <TableHead className="w-1/6 lg:w-1/5 font-bold text-black  xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                  Quantity
-                </TableHead>
-                <TableHead className="w-1/6 lg:w-1/5 font-bold text-black  xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                  Unit Price
-                </TableHead>
-                <TableHead className="w-1/6 lg:w-1/5 font-bold text-black  xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                  Total
-                </TableHead>
-                <TableHead className="w-1/6 lg:w-1/5 font-bold text-black  xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                  Action
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {products?.map((product: Product) => (
-                <TableRow
-                  key={product._id}
-                  className="hover:bg-gray-100 xms:text-[8px] xls:text-[10px] sm:text-sm md:text-base"
-                >
-                  <TableCell className="font-medium  xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                    <Image
-                      width={60}
-                      height={60}
-                      src={product?.image?.src || ""}
-                      alt={product?.image?.alt}
-                    />
-                  </TableCell>
-                  <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                    {product.title}
-                  </TableCell>
-                  <TableCell className="xms:ps-1 xls:ps-1 sm:ps-2 md:py-3 md:px-4">
-                    {product.quantity}
-                  </TableCell>
-                  <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                    &#2547; {product.unitPrice}
-                  </TableCell>
-                  <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4">
-                    &#2547; {product.total}
-                  </TableCell>
-                  <TableCell className="xms:p-1 xls:p-1 sm:p-2 md:py-3 md:px-4 whitespace-nowrap">
-                    {" "}
-                    <Link href={`/track-your-order/${orderId}`}>
-                      <span className="text-blue-500 hover:underline">
-                        Track Order
-                      </span>
-                    </Link>
-                  </TableCell>
+      {/* Product Information */}
+      <Card className="shadow-sm border-gray-200/60 overflow-hidden">
+        <CardHeader className="pb-4 border-b border-gray-100 bg-gray-50/30">
+          <CardTitle className="text-lg font-bold text-gray-800 flex items-center gap-2">
+            <ShoppingBag className="w-5 h-5 text-primary" />
+            Products in this Order
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-gray-50/50 hover:bg-gray-50/50">
+                  <TableHead className="font-bold text-gray-900 py-4 px-6">
+                    Product
+                  </TableHead>
+                  <TableHead className="font-bold text-gray-900 py-4 px-6">
+                    Quantity
+                  </TableHead>
+                  <TableHead className="font-bold text-gray-900 py-4 px-6 text-right">
+                    Unit Price
+                  </TableHead>
+                  <TableHead className="font-bold text-gray-900 py-4 px-6 text-right">
+                    Subtotal
+                  </TableHead>
+                  <TableHead className="font-bold text-gray-900 py-4 px-6 text-right">
+                    Action
+                  </TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+              </TableHeader>
+              <TableBody>
+                {products?.map((product: Product) => (
+                  <TableRow
+                    key={product._id}
+                    className="border-gray-100 transition-colors"
+                  >
+                    <TableCell className="py-4 px-6">
+                      <div className="flex items-center gap-4">
+                        <div className="relative w-14 h-14 rounded-lg overflow-hidden border border-gray-100 bg-gray-50 shrink-0">
+                          <Image
+                            fill
+                            src={product?.image?.src || ""}
+                            alt={product?.image?.alt || product.title}
+                            className="object-cover"
+                          />
+                        </div>
+                        <span className="font-medium text-gray-900 line-clamp-2">
+                          {product.title}
+                        </span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-4 px-6 text-gray-600 font-medium text-center">
+                      {product.quantity}
+                    </TableCell>
+                    <TableCell className="py-4 px-6 text-right text-gray-600">
+                      &#2547;{product.unitPrice}
+                    </TableCell>
+                    <TableCell className="py-4 px-6 text-right font-bold text-gray-900">
+                      &#2547;{product.total}
+                    </TableCell>
+                    <TableCell className="py-4 px-6 text-right">
+                      <Button
+                        asChild
+                        variant="ghost"
+                        size="sm"
+                        className="text-primary hover:text-primary hover:bg-primary/10 gap-2"
+                      >
+                        <Link href={`/track-your-order/${orderId}`}>
+                          <Truck className="w-4 h-4" />
+                          Track
+                        </Link>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
 
-        {/* Button to go back */}
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={goBack}
-            className="px-2 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none"
-          >
-            Go Back
-          </button>
-        </div>
+      <div className="flex justify-center pt-4">
+        <Button
+          onClick={() => router.back()}
+          variant="outline"
+          className="px-8 border-gray-300"
+        >
+          Go Back
+        </Button>
       </div>
     </div>
   );

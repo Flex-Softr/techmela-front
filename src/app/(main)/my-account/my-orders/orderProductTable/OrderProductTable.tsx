@@ -1,8 +1,9 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -10,9 +11,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useGetOrderedProductsQuery } from "@/redux/features/user/userApi";
+import { Eye, Package, ShoppingBag } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Product } from "../components/productType/ProductType";
+
 const OrderProductTable = () => {
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const { data, isLoading } = useGetOrderedProductsQuery(undefined);
@@ -41,85 +44,116 @@ const OrderProductTable = () => {
   };
 
   return (
-    <div className="overflow-x-auto p-2">
-      <div className="align-middle border rounded-lg shadow-md max-w-4xl mx-auto lg:max-w-5xl">
-        {isLoading ? (
-          <div className="text-center py-4">Loading...</div>
-        ) : (
-          <Table className="min-w-full border-collapse">
-            <TableCaption className="sm:text-base md:text-lg font-semibold mb-4">
-              A list of your recent invoices.
-            </TableCaption>
-            <TableHeader>
-              <TableRow className="bg-gray-200 xms:text-[8px] xls:text-[10px] sm:text-sm md:text-base">
-                <TableHead className=" xms:w-[90px] xls:w-[100px] sm:w-[120px] md:w-[150px] font-bold text-black py-3 px-4">
-                  Order ID
-                </TableHead>
-                <TableHead className=" xms:w-[90px] xls:w-[100px] sm:w-[120px] md:w-[150px] font-bold text-black py-3 px-4">
-                  Order Date
-                </TableHead>
-                <TableHead className=" xms:w-[90px] xls:w-[100px] sm:w-[120px] md:w-[150px] font-bold text-black py-3 px-4">
-                  Order Total
-                </TableHead>
+    <Card className="w-full shadow-sm border-gray-200/60 overflow-hidden">
+      <CardHeader className="pb-4 border-b border-gray-100">
+        <CardTitle className="text-xl md:text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Package className="w-6 h-6 text-primary" />
+          Order History
+        </CardTitle>
+      </CardHeader>
 
-                <TableHead className="w-[100px] lg:w-[120px] text-right font-bold text-black py-3 px-4">
-                  Action
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {sortedData?.length > 0 ? (
-                sortedData.map((product: Product) => (
+      <CardContent className="p-0">
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12 text-gray-500">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+              <span>Loading orders...</span>
+            </div>
+          </div>
+        ) : !sortedData || sortedData.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-4">
+              <ShoppingBag className="w-8 h-8 text-gray-300" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-800 mb-1">
+              No orders found
+            </h3>
+            <p className="text-gray-500 max-w-xs">
+              You haven&apos;t placed any orders yet. Start shopping to see your
+              history here.
+            </p>
+            <Button className="mt-6" onClick={() => router.push("/shop")}>
+              Start Shopping
+            </Button>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-gray-50/50 hover:bg-gray-50/50">
+                  <TableHead className="font-bold text-gray-900 py-4 px-6 min-w-[120px]">
+                    Order ID
+                  </TableHead>
+                  <TableHead className="font-bold text-gray-900 py-4 px-6 min-w-[120px]">
+                    Date
+                  </TableHead>
+                  <TableHead className="font-bold text-gray-900 py-4 px-6 min-w-[120px]">
+                    Total Amount
+                  </TableHead>
+                  <TableHead className="text-right font-bold text-gray-900 py-4 px-6">
+                    Action
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sortedData.map((order: Product) => (
                   <TableRow
-                    key={product._id}
-                    className="hover:bg-gray-100 xms:text-[8px] xls:text-[10px] sm:text-xs md:text-sm"
+                    key={order._id}
+                    className="group border-gray-100 transition-colors"
                   >
-                    <TableCell className="font-medium py-3 px-4">
-                      {product.orderId}
+                    <TableCell className="py-4 px-6 font-medium text-gray-900">
+                      #{order.orderId}
                     </TableCell>
-                    <TableCell className="py-3 px-4">
-                      {product.createdAt
-                        ? new Date(product.createdAt).toLocaleDateString()
+                    <TableCell className="py-4 px-6 text-gray-600">
+                      {order.createdAt
+                        ? new Date(order.createdAt).toLocaleDateString(
+                            undefined,
+                            {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            }
+                          )
                         : "-"}
                     </TableCell>
-                    <TableCell className="py-3 px-4">
-                      &#2547; {product.total.toFixed(2)}
+                    <TableCell className="py-4 px-6 font-bold text-gray-900">
+                      &#2547; {order.total.toFixed(2)}
                     </TableCell>
-
-                    <TableCell className="text-right py-3 px-2">
-                      <button
-                        className="text-blue-500 hover:text-blue-700"
-                        onClick={() => handleViewOrder(product._id)}
+                    <TableCell className="py-4 px-6 text-right">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-primary hover:text-primary hover:bg-primary/10 gap-2 font-semibold"
+                        onClick={() => handleViewOrder(order._id)}
                       >
-                        View Order
-                      </button>
+                        <Eye className="w-4 h-4" />
+                        <span className="hidden sm:inline">View Details</span>
+                      </Button>
                     </TableCell>
                   </TableRow>
-                ))
-              ) : (
+                ))}
+              </TableBody>
+              <TableFooter className="bg-gray-50/80 border-t border-gray-100">
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-3 px-4">
-                    No Orders found
+                  <TableCell
+                    className="py-4 px-6 font-bold text-gray-900"
+                    colSpan={2}
+                  >
+                    Total ({sortedData.length} items)
                   </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-            {sortedData?.length > 0 && (
-              <TableFooter>
-                <TableRow className="bg-gray-200">
-                  <TableCell className="font-bold py-3 px-4" colSpan={3}>
-                    {sortedData.length} Item(s)
-                  </TableCell>
-                  <TableCell className="text-right font-bold py-3 px-4">
+                  <TableCell
+                    className="py-4 px-6 text-right font-extrabold text-lg text-primary"
+                    colSpan={2}
+                  >
                     &#2547; {totalAmount.toFixed(2)}
                   </TableCell>
                 </TableRow>
               </TableFooter>
-            )}
-          </Table>
+            </Table>
+          </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

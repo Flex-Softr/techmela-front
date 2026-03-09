@@ -1,13 +1,15 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardDescription,
+  CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { useGetUserDataQuery } from "@/redux/features/user/userApi";
+import { MapPin } from "lucide-react";
 import Link from "next/link";
 
 const DefaultShippingAddress = () => {
@@ -16,37 +18,55 @@ const DefaultShippingAddress = () => {
   const address = data?.data?.address;
 
   return (
-    <div>
-      <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-        <CardHeader>
-          <CardTitle className="xms:text-sm text-gray-800 xls:text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold mb-4">
-            Default Shipping Address
-          </CardTitle>
-          <CardDescription>
-            {address ? (
-              <div>
-                <p>{address.fullAddress}</p>
-                <p>{address.city}</p>
-                <p>{address.country}</p>
-              </div>
-            ) : (
-              "You have not set a default shipping address."
-            )}
-          </CardDescription>
-        </CardHeader>
+    <Card className="w-full h-full flex flex-col shadow-sm border-gray-200/60">
+      <CardHeader className="pb-4 border-b border-gray-100">
+        <CardTitle className="text-xl md:text-2xl font-bold text-gray-800">
+          Default Shipping Address
+        </CardTitle>
+      </CardHeader>
 
-        <CardFooter className="flex justify-between">
-          <Link href="/my-account/edit-account">
-            <div
-              className="cursor-pointer xms:text-xs xls:text-sm sm:text-sm md:text-base lg:text-lg text-blue-600"
-              title="Edit Shipping Address"
-            >
-              Edit Address
+      <CardContent className="pt-6 flex-1">
+        {address ? (
+          <div className="space-y-4 text-sm md:text-base">
+            <div>
+              <div className="text-gray-500 font-medium mb-1">Full Address</div>
+              <div className="text-gray-900">{address.fullAddress}</div>
             </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-gray-500 font-medium mb-1">City</div>
+                <div className="text-gray-900">{address.city}</div>
+              </div>
+              <div>
+                <div className="text-gray-500 font-medium mb-1">Country</div>
+                <div className="text-gray-900">{address.country}</div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="h-full flex flex-col items-center justify-center text-center py-6">
+            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3">
+              <MapPin className="w-6 h-6 text-gray-400" />
+            </div>
+            <p className="text-gray-500">
+              You have no default shipping address set.
+            </p>
+          </div>
+        )}
+      </CardContent>
+
+      <CardFooter className="flex pt-6 border-t border-gray-100 bg-gray-50/50 rounded-b-xl">
+        <Button asChild variant="default" className="w-full sm:w-auto">
+          <Link
+            href="/my-account/edit-account"
+            className="flex items-center justify-center gap-2"
+          >
+            <MapPin className="w-4 h-4" />
+            {address ? "Edit Address" : "Add Address"}
           </Link>
-        </CardFooter>
-      </Card>
-    </div>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

@@ -1,11 +1,19 @@
 "use client";
-import EcButton from "@/components/EcButton/EcButton";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   useGetUserDataQuery,
   useUpdateUserDataMutation,
 } from "@/redux/features/user/userApi";
+import { User, Save } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -105,79 +113,103 @@ const EditAccountForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto border p-5">
-      <div className="form-container">
-        <h2 className="text-2xl font-bold mb-4">Edit Account Information</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label
-              htmlFor="fullName"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Full Name
-            </label>
-            <Input
-              type="text"
-              id="fullName"
-              {...register("fullName")}
-              placeholder="Enter your full name"
-              className="mt-1 block w-full max-w-lg shadow-sm sm:text-sm border-gray-300 rounded-md outline-none"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="phoneNumber"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Phone Number
-            </label>
-            <Input
-              type="tel"
-              id="phoneNumber"
-              {...register("phoneNumber")}
-              placeholder="Enter your phone number"
-              className="mt-1 block w-full max-w-lg shadow-sm sm:text-sm border-gray-300 rounded-md outline-none"
-            />
-          </div>
+    <Card className="w-full shadow-sm border-gray-200/60 max-w-4xl mx-auto">
+      <CardHeader className="pb-4 border-b border-gray-100">
+        <CardTitle className="text-xl md:text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <User className="w-6 h-6 text-primary" />
+          Edit Account Information
+        </CardTitle>
+      </CardHeader>
 
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
-            <Input
-              type="email"
-              id="email"
-              {...register("email")}
-              placeholder="example@example.com"
-              className="mt-1 block w-full max-w-lg shadow-sm sm:text-sm border-gray-300 rounded-md outline-none"
-            />
-          </div>
+      <CardContent className="pt-8">
+        <form id="edit-account-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="space-y-2">
+              <label
+                htmlFor="fullName"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Full Name
+              </label>
+              <Input
+                type="text"
+                id="fullName"
+                {...register("fullName")}
+                placeholder="Enter your full name"
+                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
+              />
+            </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="fullAddress"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Add New Address
-            </label>
-            <Input
-              type="text"
-              id="fullAddress"
-              {...register("fullAddress")}
-              placeholder="Enter a new address"
-              className="mt-1 block w-full max-w-lg shadow-sm sm:text-sm border-gray-300 rounded-md outline-none"
-            />
-          </div>
+            <div className="space-y-2">
+              <label
+                htmlFor="phoneNumber"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Phone Number
+              </label>
+              <Input
+                type="tel"
+                id="phoneNumber"
+                {...register("phoneNumber")}
+                placeholder="Enter your phone number"
+                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
+              />
+            </div>
 
-          <EcButton type="submit" className="px-4 py-2" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Save"}
-          </EcButton>
+            <div className="space-y-2">
+              <label
+                htmlFor="email"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Email
+              </label>
+              <Input
+                type="email"
+                id="email"
+                {...register("email")}
+                placeholder="example@example.com"
+                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="fullAddress"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Home Address
+              </label>
+              <Input
+                type="text"
+                id="fullAddress"
+                {...register("fullAddress")}
+                placeholder="Enter your address"
+                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
+              />
+            </div>
+          </div>
         </form>
-      </div>
-    </div>
+      </CardContent>
+
+      <CardFooter className="pt-6 pb-8 border-t border-gray-100 bg-gray-50/50 rounded-b-xl flex justify-end">
+        <Button
+          form="edit-account-form"
+          type="submit"
+          size="lg"
+          disabled={isSubmitting}
+          className="w-full sm:w-auto min-w-[140px] flex items-center gap-2"
+        >
+          {isSubmitting ? (
+            "Saving..."
+          ) : (
+            <>
+              <Save className="w-5 h-5" />
+              Save Changes
+            </>
+          )}
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

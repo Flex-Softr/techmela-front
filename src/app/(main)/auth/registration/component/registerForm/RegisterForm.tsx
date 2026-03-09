@@ -1,14 +1,28 @@
 "use client";
-import EcButton from "@/components/EcButton/EcButton";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { TUser } from "@/redux/features/auth/interface";
 import { useCreateCustomerMutation } from "@/redux/features/user/userApi";
 import { useAppDispatch } from "@/redux/hooks";
 import decodeJWT from "@/utilities/decodeJWT";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Eye, EyeOff, UserPlus } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -24,7 +38,7 @@ const schema = yup.object().shape({
     .min(6, "Password must be at least 6 characters")
     .matches(
       /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
-      "Password must contain at least one uppercase letter and one special character"
+      "Must have one uppercase & one special char"
     ),
   address: yup
     .object()
@@ -41,10 +55,12 @@ const schema = yup.object().shape({
 });
 
 const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
-  const [createCustomer] = useCreateCustomerMutation();
+  const [createCustomer, { isLoading }] = useCreateCustomerMutation();
   const router = useRouter();
   const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
@@ -59,117 +75,182 @@ const RegisterForm = () => {
       const user = decodeJWT(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast({
-        className: "bg-success text-white text-2xl",
-        title: res.message,
+        className: "bg-green-500 text-white",
+        title: "Registration Successful",
+        description: res.message,
       });
       router.push("/");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { data?: { message?: string } };
       toast({
         variant: "destructive",
-        title: error?.data?.message,
-        className: "bg-gray-300 text-red-500 text-2xl",
+        title: "Registration Failed",
+        description:
+          err?.data?.message || "Please check your details and try again.",
       });
     }
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto border-none mb-6 mt-16 px-4 sm:px-0">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-md rounded px-4 sm:px-8 pt-6 pb-8 mb-4"
-      >
-        <div>
-          <h4 className="text-center my-3 font-bold sm:text-xl md:text-2xl">
-            Registration Page
-          </h4>
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="fullName"
+    <div className="min-h-screen flex items-center justify-center px-4 py-16 bg-gray-50/50">
+      <Card className="max-w-[500px] w-full shadow-md border-gray-200/60 overflow-hidden bg-white">
+        <CardHeader className="space-y-4 pb-6 border-b border-gray-50 bg-gray-50/30">
+          <div className="flex justify-center mb-2">
+            <Link href="/">
+              <Image
+                src="/images/logo/Logo.png"
+                alt="Siddikiaprokashoni Logo"
+                width={160}
+                height={45}
+                className="h-auto w-auto object-contain transition-transform hover:scale-105 duration-300"
+                priority
+              />
+            </Link>
+          </div>
+          <div className="text-center space-y-1">
+            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2">
+              <UserPlus className="w-6 h-6 text-primary" />
+              Create Account
+            </CardTitle>
+            <CardDescription className="text-gray-500">
+              Join us to start your literary journey
+            </CardDescription>
+          </div>
+        </CardHeader>
+
+        <CardContent className="pt-8 px-8">
+          <form
+            id="register-form"
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-5"
           >
-            Full Name
-          </label>
-          <Input
-            className={`shadow appearance-none border ${errors.personalInfo?.fullName ? "border-red-500" : "border-gray-200"} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="text"
-            placeholder="Enter Your Full Name"
-            id="fullName"
-            {...register("personalInfo.fullName")}
-          />
-          {errors.personalInfo?.fullName && (
-            <p className="text-red-500 text-xs italic">
-              {errors.personalInfo.fullName.message}
-            </p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="fullAddress"
-          >
-            Full Address
-          </label>
-          <Input
-            className={`shadow appearance-none border ${errors.address?.fullAddress ? "border-red-500" : "border-gray-200"} rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
-            type="text"
-            id="fullAddress"
-            placeholder="Enter Your Full Address"
-            {...register("address.fullAddress")}
-          />
-          {errors.address?.fullAddress && (
-            <p className="text-red-500 text-xs italic">
-              {errors.address.fullAddress.message}
-            </p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="phoneNumber"
-          >
-            Phone Number
-          </label>
-          <Input
-            className={`shadow appearance-none border ${errors.phoneNumber ? "border-red-500" : "border-gray-200"} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="tel"
-            placeholder="Enter Your Phone Number"
-            id="phoneNumber"
-            {...register("phoneNumber")}
-          />
-          {errors.phoneNumber && (
-            <p className="text-red-500 text-xs italic">
-              {errors.phoneNumber.message}
-            </p>
-          )}
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <Input
-            className={`shadow appearance-none border ${errors.password ? "border-red-500" : "border-gray-200"} rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
-            type="password"
-            id="password"
-            placeholder="Enter a Password"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className="text-red-500 text-xs italic">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
-        <div className="flex items-center justify-between">
-          <EcButton className="w-full py-2 px-4" type="submit">
-            Registration
-          </EcButton>
-        </div>
-      </form>
+            <div className="space-y-2">
+              <Label
+                htmlFor="fullName"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Full Name
+              </Label>
+              <Input
+                id="fullName"
+                type="text"
+                placeholder="Enter your full name"
+                className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.fullName ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                {...register("personalInfo.fullName")}
+              />
+              {errors.personalInfo?.fullName && (
+                <p className="text-xs text-red-500 font-medium">
+                  {errors.personalInfo.fullName.message as string}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label
+                htmlFor="phoneNumber"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Phone Number
+              </Label>
+              <Input
+                id="phoneNumber"
+                type="tel"
+                placeholder="01XXXXXXXXX"
+                className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.phoneNumber ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                {...register("phoneNumber")}
+              />
+              {errors.phoneNumber && (
+                <p className="text-xs text-red-500 font-medium">
+                  {errors.phoneNumber.message as string}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label
+                htmlFor="fullAddress"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Full Address
+              </Label>
+              <Input
+                id="fullAddress"
+                type="text"
+                placeholder="City, Area, Road..."
+                className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.address?.fullAddress ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                {...register("address.fullAddress")}
+              />
+              {errors.address?.fullAddress && (
+                <p className="text-xs text-red-500 font-medium">
+                  {errors.address.fullAddress.message as string}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label
+                htmlFor="password"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Password
+              </Label>
+              <div className="relative group">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="At least 6 characters"
+                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  {...register("password")}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 group-hover:text-gray-600 transition-colors"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+              {errors.password && (
+                <p className="text-xs text-red-500 font-medium line-clamp-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full h-11 text-base font-bold transition-all shadow-md hover:shadow-lg active:scale-[0.98] mt-4"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  Registering...
+                </div>
+              ) : (
+                "Create Account"
+              )}
+            </Button>
+          </form>
+        </CardContent>
+
+        <CardFooter className="pb-10 pt-4 flex flex-col items-center gap-4 bg-gray-50/30 border-t border-gray-50">
+          <p className="text-sm text-gray-600">
+            Already have an account?{" "}
+            <Link
+              href="/auth/login"
+              className="font-bold text-primary hover:underline transition-all"
+            >
+              Sign In
+            </Link>
+          </p>
+        </CardFooter>
+      </Card>
     </div>
   );
 };
