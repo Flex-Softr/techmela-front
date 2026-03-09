@@ -13,11 +13,11 @@ const StoreLocationPage = () => {
       {/* Hero Section */}
       {/* Store Info and Map Section */}
       <section className="pt-8 pb-2 md:pt-12 md:pb-4">
-        <div className="container mx-auto flex flex-col md:flex-row gap-12">
+        <div className="container mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* Map Section */}
-          <div className="md:w-1/2 relative mb-8 md:mb-0">
+          <div className="lg:w-1/2 relative mb-6 lg:mb-0">
             <div className="bg-white rounded-2xl shadow border border-border/40 overflow-hidden">
-              <div className=" h-96 min-h-[200px] md:min-h-[425px] relative">
+              <div className="h-64 sm:h-80 lg:h-96 min-h-[250px] lg:min-h-[425px] relative">
                 <iframe
                   className="w-full h-full rounded-t-lg"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.9931714529966!2d90.48777747362271!3d23.711937890255083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b70009c04db1%3A0x814b3a09778a03cf!2sSurmela%20bari!5e0!3m2!1sen!2sbd!4v1773033356114!5m2!1sen!2sbd"
@@ -58,10 +58,10 @@ const StoreLocationPage = () => {
                 </div>
               </a>
 
-              <h2 className="text-md md:text-xl font-semibold mt-8 mb-4 text-center">
+              <h2 className="text-sm md:text-lg font-semibold mt-6 mb-4 text-center">
                 সোশ্যাল মিডিয়ায় আমাদের সাথে যুক্ত হোন
               </h2>
-              <div className="grid grid-cols-4 md:grid-cols-4 gap-6 justify-center">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
                 <a
                   href="https://www.facebook.com/siddikiyaprokashoni"
                   target="_blank"

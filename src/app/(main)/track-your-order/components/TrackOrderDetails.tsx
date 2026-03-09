@@ -4,9 +4,9 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import EcButton from "@/components/EcButton/EcButton";
 import { useOderTrackerQuery } from "@/redux/features/trackOrder/TrackOrder";
-import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { MapPin, Phone, User, Package, Truck, ArrowLeft } from "lucide-react";
 import Timeline from "./Timeline";
+import { useParams, useRouter } from "next/navigation";
 
 // type Shipping = {
 //   fullAddress: string;
@@ -41,30 +41,18 @@ const capitalizeStatus = (status: string) => {
     .join(" ");
 };
 const TrackOrderDetails = () => {
-  const params = useParams();
+  const params = useParams<{ orderId: string }>();
   const router = useRouter();
   const { orderId } = params;
 
   const { data, error, isLoading } = useOderTrackerQuery(orderId);
 
   const LoadingSpinner = () => (
-    <div className="flex flex-col items-center justify-center gap-5 h-[100vh]">
-      <Image
-        src="/images/logo/logo.png"
-        alt="logo"
-        width={100}
-        height={100}
-        priority={true}
-      />
-      <h1 className="text-4xl">Loading... Please wait.</h1>
-      <Image
-        src="/images/animations/loading.gif"
-        alt="loading"
-        width={100}
-        height={100}
-        priority={true}
-        unoptimized
-      />
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+      <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+      <p className="text-lg text-muted-foreground animate-pulse">
+        অর্ডার তথ্য লোড হচ্ছে...
+      </p>
     </div>
   );
 
@@ -113,79 +101,147 @@ const TrackOrderDetails = () => {
   const parcelTrackingLink = orderData.parcelTrackingLink;
 
   return (
-    <section className="py-8 flex justify-center items-center">
+    <section className="pb-12 pt-6 bg-gray-50/50 min-h-screen">
       <ContainerMax>
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Order Summary */}
-          <div className="lg:col-span-1 bg-gray-100 p-6 rounded-lg shadow-md">
-            <h3 className="xms:text-xs xls:text-sm sm:text-md md:text-lg  font-bold mb-4 text-dark-gray">
-              Order Summary
-            </h3>
-            <hr className="border-t-4 border-gray-300 h-4" />
-            <div className="xms:text-[10px] xls:text-[12px] sm:text-md md:text-lg  space-y-2">
-              <p>
-                <strong>Order ID: </strong> {orderId}
-              </p>
-              <p>
-                <strong>Current status: </strong> {latestStatus}
-              </p>
-            </div>
-            {/* Shipping Information */}
-            <div className="mt-6 md:mt-16">
-              <h3 className="xms:text-xs xls:text-sm sm:text-md md:text-lg font-semibold mb-4 text-dark-gray">
-                Shipping Information
-              </h3>
-              <hr className="border-t-4 border-gray-300 h-4" />
-              <div className="xms:text-[10px] xls:text-[12px] sm:text-md md:text-lg  text-gray-700 space-y-2">
-                <p>
-                  <strong>Name: </strong> {orderData?.shipping?.fullName}
-                </p>
-                <p>
-                  <strong>Address: </strong> {orderData?.shipping?.fullAddress}
-                </p>
-                <p>
-                  <strong>Phone: </strong> {orderData?.shipping?.phoneNumber}
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span>পেছনে ফিরে যান</span>
+          </button>
 
-          {/* Timeline and Tracking Info */}
-          <div className="lg:col-span-2">
-            <div className="xms:p-0 xls:p-1 sm:p-3 md:p-6 bg-white shadow-md rounded-lg">
-              <h2 className="xms:text-xs xls:text-sm sm:text-md md:text-xl  font-bold text-center text-dark-gray mb-4">
-                Order Status History
-              </h2>
-              <hr className="border-t-4 border-gray-300 h-4" />
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Left Column: Order & Shipping Summary */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* Order Info Card */}
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-border/50">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                    <Package className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">
+                    অর্ডার সামারি
+                  </h3>
+                </div>
 
-              {/* Timeline */}
-              <Timeline statuses={statuses} latestStatus={latestStatus} />
-
-              {/* Parcel Tracking */}
-              {parcelTrackingLink ? (
-                <div className="mt-6 text-center">
-                  <div className="my-2">
-                    <p className="xms:text-[10px] xls:text-[12px] sm:text-md md:text-lg ">
-                      নিচের বাটন ক্লিক করে কুরিয়ারে লাইভ ট্রেকিং করতে পারবেন...
+                <div className="space-y-4">
+                  <div className="pb-3 border-b border-border/40">
+                    <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">
+                      অর্ডার নম্বর
+                    </p>
+                    <p className="font-mono font-bold text-foreground">
+                      #{orderId}
                     </p>
                   </div>
-                  <br />
-                  <a
-                    href={parcelTrackingLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-lg transition"
-                  >
-                    Live Track Parcel
-                  </a>
+                  <div>
+                    <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">
+                      বর্তমান অবস্থা
+                    </p>
+                    <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                      {latestStatus}
+                    </div>
+                  </div>
                 </div>
-              ) : (
-                <div className="mt-6 xms:text-[10px] xls:text-[12px] px-2 sm:text-md md:text-lg  text-center text-gray-600">
-                  আপনার পন্য কুরিয়ার এ পাঠানোর পর আপনি এখানে "Live Track Parcel"
-                  বাটন দেখতে পাবেন। বাটন এ ক্লিক করে কুরিয়ারে ট্রেকিং করতে
-                  পারবেন। অনুগ্রহ করে অপেক্ষা করুন, ধন্যবাদ !
+              </div>
+
+              {/* Shipping Info Card */}
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-border/50">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">
+                    শিপিং ইনফরমেশন
+                  </h3>
                 </div>
-              )}
+
+                <div className="space-y-5">
+                  <div className="flex items-start gap-3">
+                    <User className="w-4 h-4 text-muted-foreground mt-1" />
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                        নাম
+                      </p>
+                      <p className="text-sm font-medium">
+                        {orderData?.shipping?.fullName}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-4 h-4 text-muted-foreground mt-1" />
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                        ঠিকানা
+                      </p>
+                      <p className="text-sm font-medium">
+                        {orderData?.shipping?.fullAddress}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Phone className="w-4 h-4 text-muted-foreground mt-1" />
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                        ফোন নম্বর
+                      </p>
+                      <p className="text-sm font-medium font-mono">
+                        {orderData?.shipping?.phoneNumber}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Timeline */}
+            <div className="lg:col-span-2">
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-border/50">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                    <Truck className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">
+                    অর্ডার ট্র্যাকিং হিস্টোরি
+                  </h3>
+                </div>
+
+                {/* Timeline */}
+                <div className="relative">
+                  <Timeline statuses={statuses} latestStatus={latestStatus} />
+                </div>
+
+                {/* Parcel Tracking Footer */}
+                <div className="mt-10 pt-8 border-t border-border/40">
+                  {parcelTrackingLink ? (
+                    <div className="text-center">
+                      <p className="text-sm text-muted-foreground mb-4">
+                        নিচের বাটনে ক্লিক করে কুরিয়ারে লাইভ ট্র্যাকিং করতে
+                        পারবেন
+                      </p>
+                      <a
+                        href={parcelTrackingLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                      >
+                        Live Track Parcel
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="text-center bg-gray-50/50 p-6 rounded-xl border border-dashed border-border">
+                      <p className="text-sm text-muted-foreground max-w-sm mx-auto">
+                        আপনার পণ্য কুরিয়ারে পাঠানোর পর এখানে{" "}
+                        <span className="text-primary font-bold">
+                          "Live Track Parcel"
+                        </span>{" "}
+                        বাটনটি দেখতে পাবেন। অনুগ্রহ করে অপেক্ষা করুন।
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

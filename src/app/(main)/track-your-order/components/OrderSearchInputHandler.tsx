@@ -25,44 +25,51 @@ const OrderSearchInputHandler = () => {
   };
 
   return (
-    <section className="py-5 flex justify-center items-center">
-      <ContainerMax className="">
-        <div className="max-w-3xl mx-auto xms:p-2 xls:p-3 sm:p-4 md:p-8 bg-white rounded-lg">
-          <h2 className="text-2xl md:text-3xl text-center font-semibold text-dark-gray mb-6">
-            আপনার অর্ডার ট্র্যাক করুন
-          </h2>
-          <p className="text-center text-base md:text-xl text-gray-600 mb-6">
-            আপনার অর্ডার ট্র্যাক করতে অর্ডার আইডি নিচে লিখুন ।
-          </p>
-          <form
-            className="text-sm md:text-lg"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className="grid grid-cols-1 ">
-              <div>
-                <label htmlFor="orderId" className="block font-semibold mb-2">
-                  অর্ডার আইডি
-                </label>
-                <Input
-                  {...register("orderId", { required: true })}
-                  id="orderId"
-                  className="w-full rounded border p-2"
-                  type="text"
-                  placeholder="আপনার অর্ডার নিশ্চিতকরণ মেসেজের সাথে পাঠানো হয়েছে"
-                />
-                {errors.orderId && (
-                  <span className="text-red-500 text-sm">
-                    অর্ডার আইডি প্রয়োজন
-                  </span>
-                )}
-              </div>
+    <section className="py-6 bg-gray-50/50 min-h-[80vh] flex items-center">
+      <ContainerMax>
+        <div className="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-border/50">
+          <div className="text-center mb-7">
+            <h2 className="text-3xl font-bold text-foreground mb-3">
+              অর্ডার ট্র্যাক করুন
+            </h2>
+            <p className="text-muted-foreground">
+              অর্ডার আইডি ব্যবহার করে আপনার পার্সেলের সর্বশেষ অবস্থা জানুন
+            </p>
+          </div>
+
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="space-y-2">
+              <label
+                htmlFor="orderId"
+                className="block text-sm font-medium text-foreground px-1"
+              >
+                অর্ডার আইডি
+              </label>
+              <Input
+                {...register("orderId", { required: true })}
+                id="orderId"
+                className="w-full h-12 rounded-xl border-border/60 bg-gray-50/30 focus:bg-white transition-all text-lg font-mono placeholder:font-sans"
+                type="text"
+                placeholder="অর্ডার নিশ্চিতকরণ মেসেজ থেকে আইডিটি দিন"
+              />
+              {errors.orderId && (
+                <span className="text-destructive text-xs font-medium px-1">
+                  একটি বৈধ অর্ডার আইডি দিন
+                </span>
+              )}
             </div>
-            <div className="mt-8 flex justify-center">
-              <EcButton className="text-white" type="submit">
-                অর্ডার ট্র্যাক করুন
-              </EcButton>
-            </div>
+
+            <EcButton
+              className="w-full h-12 text-white text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
+              type="submit"
+            >
+              ট্র্যাকিং শুরু করুন
+            </EcButton>
           </form>
+
+          <p className="mt-10 text-center text-xs text-muted-foreground">
+            আইডি খুঁজে পাচ্ছেন না? অনুগ্রহ করে আমাদের হেল্পলাইনে যোগাযোগ করুন।
+          </p>
         </div>
       </ContainerMax>
     </section>
