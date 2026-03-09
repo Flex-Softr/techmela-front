@@ -150,39 +150,50 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   }, [debouncedPrice, selectedCategories, tagParams]);
 
   return (
-    <Box className="bg-white p-0 lg:p-5 space-y-8 lg:rounded-lg lg:shadow-sm lg:border lg:border-gray-100">
-      <div className="space-y-4">
-        <CollapsibleFilterSection
-          title="Filter by price"
-          headerClassName="bg-gray-50 text-gray-900 font-medium border border-gray-200 shadow-sm text-sm"
+    <Box className="bg-white lg:rounded-xl lg:shadow-sm lg:border lg:border-border/50 p-0 lg:p-3 space-y-1">
+      {/* Header with title + clear button */}
+      <div className="hidden lg:flex items-center justify-between px-3 pt-2 pb-3 border-b border-border/40 mb-2">
+        <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+          ফিল্টার করুন
+        </p>
+        <button
+          onClick={handleClearAllFilters}
+          disabled={!Object.keys(searchParams).length}
+          className="text-xs text-red-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed font-medium transition-colors"
         >
+          সব মুছুন
+        </button>
+      </div>
+
+      <CollapsibleFilterSection title="মূল্য পরিসীমা">
+        <div className="px-1">
           <PriceRangeSlider
             initialState={priceFilterInitialState}
             setInitialState={setPriceFilterInitialState}
             min={minPrice}
             max={maxPrice}
           />
-        </CollapsibleFilterSection>
-      </div>
+        </div>
+      </CollapsibleFilterSection>
 
-      <div className="space-y-4">
-        <CategorySelector
-          categories={categories}
-          searchParams={csSearchParams}
-          selectedCategories={selectedCategories}
-          setSelectedCategories={setSelectedCategories}
-        />
-      </div>
+      <div className="h-px bg-border/40 mx-2" />
 
-      <div className="flex gap-3 pt-4 border-t">
-        {/* Find button removed for auto-apply */}
+      <CategorySelector
+        categories={categories}
+        searchParams={csSearchParams}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+      />
+
+      {/* Mobile-only clear button at bottom */}
+      <div className="lg:hidden px-2 pt-3 pb-1 border-t border-border/40 mt-2">
         <EcButton
-          className="flex-1 font-bold bg-white border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+          className="w-full font-bold bg-white border border-red-200 text-red-500 hover:bg-red-50 hover:border-red-400 transition-colors text-sm"
           onClick={handleClearAllFilters}
           variant="outline"
           disabled={!Object.keys(searchParams).length}
         >
-          Clear
+          সব ফিল্টার মুছুন
         </EcButton>
       </div>
     </Box>

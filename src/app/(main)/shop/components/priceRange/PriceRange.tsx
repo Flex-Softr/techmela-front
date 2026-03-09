@@ -62,8 +62,8 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   };
 
   return (
-    <div className="px-2 pt-4 pb-2">
-      <div className="mb-6 flex justify-center">
+    <div className="px-2 pb-2">
+      <div className="mb-3 flex justify-center">
         <Range
           values={[
             inputValues[0] === "" ? min : Number(inputValues[0]),

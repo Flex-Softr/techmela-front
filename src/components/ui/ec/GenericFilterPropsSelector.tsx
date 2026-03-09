@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Collapsible,
@@ -7,18 +6,14 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import TCategory from "@/types/categories/categories";
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
-import BoxHeading from "./BoxHeading";
 
 const GenericFilterPropsSelector = ({
   title,
   selectedValues,
   setSelectedValues,
   items,
-  // searchParams,
-  // subcategories,
-  // setSubcategories,
   headerClassName,
 }: {
   filterBy?: string;
@@ -27,8 +22,6 @@ const GenericFilterPropsSelector = ({
   setSelectedValues: Dispatch<SetStateAction<string[]>>;
   items: TCategory[];
   searchParams?: Record<string, string | string[] | undefined>;
-  // subcategories: Record<string, string[]>;
-  // setSubcategories: Dispatch<SetStateAction<Record<string, string[]>>>;
   headerClassName?: string;
 }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -50,14 +43,12 @@ const GenericFilterPropsSelector = ({
 
     if (checked) {
       updated.push(slug);
-      // If selecting a parent, auto-select its children
       if (category && category.subcategories?.length) {
         const childSlugs = getAllChildIds(category);
         updated = Array.from(new Set([...updated, ...childSlugs]));
       }
     } else {
       updated = updated.filter((s) => s !== slug);
-      // If unchecking a parent, also uncheck all children
       if (category && category.subcategories?.length) {
         const childSlugs = getAllChildIds(category);
         updated = updated.filter((id) => !childSlugs.includes(id));
@@ -67,28 +58,43 @@ const GenericFilterPropsSelector = ({
     setSelectedValues(updated);
   };
 
-  /**
-   * Recursive render of category tree
-   */
   const renderCategories = (categories: TCategory[], level = 0) => {
     return (
-      <div className={cn("flex flex-col gap-2", level > 0 && "ml-6")}>
+      <div className={cn("flex flex-col gap-0.5", level > 0 && "ml-5 mt-0.5")}>
         {categories.map((cat) => {
           const isChecked = selectedValues.includes(cat.slug);
 
           return (
-            <div key={cat.slug} className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
+            <div key={cat.slug} className="flex flex-col">
+              <label
+                className={cn(
+                  "flex items-center gap-2.5 px-2 py-1.5 rounded-md cursor-pointer transition-colors group",
+                  "hover:bg-primary/5",
+                  isChecked && "bg-primary/5"
+                )}
+              >
                 <Checkbox
                   checked={isChecked}
                   onCheckedChange={(checked) =>
                     toggle(cat.slug, Boolean(checked), cat)
                   }
+                  className="shrink-0"
                 />
-                <span className={cn("text-sm", level === 0 && "font-medium")}>
-                  {cat.name} ({cat.productCount || 0})
+                <span
+                  className={cn(
+                    "text-sm leading-snug transition-colors",
+                    level === 0
+                      ? "font-medium"
+                      : "font-normal text-muted-foreground",
+                    isChecked && "text-primary font-semibold"
+                  )}
+                >
+                  {cat.name}
+                  <span className="ml-1 text-[10px] text-muted-foreground font-normal">
+                    ({cat.productCount || 0})
+                  </span>
                 </span>
-              </div>
+              </label>
 
               {cat.subcategories &&
                 cat.subcategories.length > 0 &&
@@ -104,31 +110,28 @@ const GenericFilterPropsSelector = ({
   };
 
   return (
-    <div className="py-2">
-      <Collapsible
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        className="w-full space-y-2"
-      >
-        <div
-          className={cn(
-            "flex items-center justify-between bg-muted text-muted-foreground py-2 px-3 mx-2 rounded-md",
-            headerClassName
-          )}
-        >
-          <BoxHeading className="mb-0">{title}</BoxHeading>
-          <CollapsibleTrigger asChild>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-9 p-0 hover:text-[#E6D0C4]"
-            >
-              <ChevronsUpDown className="h-4 w-4" />
-              <span className="sr-only">Toggle</span>
-            </Button>
-          </CollapsibleTrigger>
-        </div>
-        <CollapsibleContent className="ml-4 space-y-2">
+    <div className="">
+      <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full">
+        <CollapsibleTrigger asChild>
+          <button
+            className={cn(
+              "w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors",
+              "hover:bg-primary/5 text-left",
+              headerClassName
+            )}
+          >
+            <span className="text-sm font-semibold text-foreground">
+              {title}
+            </span>
+            <ChevronDown
+              className={cn(
+                "h-4 w-4 text-muted-foreground transition-transform duration-200",
+                isOpen && "rotate-180"
+              )}
+            />
+          </button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="pt-1 pb-1">
           {renderCategories(items)}
         </CollapsibleContent>
       </Collapsible>

@@ -18,12 +18,11 @@ const CategorySelector = ({
   return (
     <GenericFilterPropsSelector
       filterBy="category"
-      title="Filter by category"
+      title="বই বিভাগ"
       selectedValues={selectedCategories}
       setSelectedValues={setSelectedCategories}
       items={categories}
       searchParams={searchParams}
-      headerClassName="bg-gray-50 text-gray-900 font-medium border border-gray-200 shadow-sm text-sm"
     />
   );
 };

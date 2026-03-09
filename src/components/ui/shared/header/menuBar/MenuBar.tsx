@@ -49,7 +49,7 @@ export default function MenuBar({
       title: "আমার অ্যাকাউন্ট",
       href: "/my-account",
       displayOnSmallScreenOnly: true,
-      icon: <FaUserCircle className="mr-2 text-xl" />,
+      icon: <FaUserCircle className="text-xl" />,
     },
     { title: "হোম", href: "/" },
     { title: "শপ", href: "/shop" },
@@ -105,18 +105,19 @@ export default function MenuBar({
           <AccordionItem value={menu.title} className="border-b-0">
             <AccordionTrigger
               className={cn(
-                "py-2 font-medium hover:no-underline text-inherit transition-colors text-sm hover:text-primary",
-                depth > 0 ? "pl-0" : "pl-3"
+                "py-2.5 font-medium hover:no-underline text-inherit transition-colors text-sm hover:text-primary",
+                depth > 0 ? "pl-0" : "px-4 border-b border-border/50"
               )}
             >
               <span className="flex items-center gap-2">
-                {menu.icon} {menu.title}
+                {menu.icon}
+                {menu.title}
               </span>
             </AccordionTrigger>
             <AccordionContent>
               <div
                 className={cn(
-                  "flex flex-col gap-1 border-l border-primary/10 ml-3",
+                  "flex flex-col gap-1 border-l-2 border-primary/10 ml-4 my-1",
                   depth === 0 ? "pl-4" : "pl-3"
                 )}
               >
@@ -134,14 +135,16 @@ export default function MenuBar({
         href={menu.href}
         onClick={onMenuItemClick}
         className={cn(
-          "flex items-center gap-2 py-3 text-sm transition-colors hover:text-primary",
+          "flex items-center gap-2 py-2.5 text-sm transition-colors hover:text-primary",
           depth === 0
-            ? "font-medium border-b border-border pl-3"
-            : "text-[13px] py-1.5 opacity-80 hover:opacity-100",
+            ? "font-medium border-b border-border/50 px-4"
+            : "text-[14px] py-2 opacity-80 hover:opacity-100",
           isActive(menu.href) && "font-bold text-primary opacity-100"
         )}
       >
-        {menu.icon}
+        {menu.icon && (
+          <span className="text-muted-foreground">{menu.icon}</span>
+        )}
         {menu.title}
       </Link>
     );
