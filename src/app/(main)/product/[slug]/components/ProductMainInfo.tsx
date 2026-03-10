@@ -39,52 +39,43 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   const stockAvailable = currentInventory?.stockAvailable;
 
   // Price Component Helper
-  const PriceDisplay = ({ isChip = false }: { isChip?: boolean }) => {
+  const PriceDisplay = () => {
     if (salePrice && salePrice < (regularPrice || 0)) {
       return (
-        <div className="flex items-center gap-2">
-          <span
-            className={`${
-              isChip ? "font-extrabold text-lg" : "text-2xl font-extrabold"
-            } text-black`}
-          >
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="text-2xl font-extrabold text-black">
             &#2547;{salePrice}
           </span>
-          <del
-            className={`${
-              isChip ? "text-gray-500 text-sm" : "text-muted-foreground text-lg"
-            }`}
-          >
+          <del className="text-muted-foreground text-lg">
             &#2547;{regularPrice}
           </del>
           {discountPercent && discountPercent > 0 && (
-            <span
-              className={`${
-                isChip
-                  ? "text-red-600 text-xs font-bold"
-                  : "bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-bold"
-              } flex flex-wrap items-center gap-0.5`}
-            >
-              <span>{discountPercent}% OFF</span>{" "}
-              {priceSave && <span>(Save &#2547;{priceSave})</span>}
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Percentage Badge */}
+              <span className="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-extrabold shadow-sm whitespace-nowrap uppercase tracking-wider">
+                {discountPercent}% OFF
+              </span>
+
+              {/* Savings Information */}
+              {priceSave && (
+                <span className="bg-green-100 text-green-700 text-xs px-2.5 py-1 rounded-full font-bold border border-green-200 flex items-center gap-1 whitespace-nowrap">
+                  <span className="opacity-70 font-medium">Save</span>
+                  <span>&#2547;{priceSave}</span>
+                </span>
+              )}
+            </div>
           )}
         </div>
       );
     }
     return (
-      <span
-        className={`${
-          isChip ? "font-extrabold text-lg" : "text-2xl font-extrabold"
-        } text-black`}
-      >
+      <span className="text-2xl font-extrabold text-black">
         &#2547;{regularPrice}
       </span>
     );
   };
 
   const priceDisplay = <PriceDisplay />;
-  const chipPriceDisplay = <PriceDisplay isChip />;
 
   // --- Chip Layout (Used when shortDescription exists) ---
   if (shortDescription) {
@@ -94,18 +85,21 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {title}
         </h2>
 
-        {/* Chips Container */}
-        <div className="flex flex-wrap gap-3 items-center">
-          {/* Price Chip */}
-          <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
-            <span className="text-muted-foreground font-medium">Price:</span>
-            <span className="font-semibold text-black">{chipPriceDisplay}</span>
+        {/* Unified Info Flow (Flattened for better space usage) */}
+        <div className="flex flex-wrap gap-x-6 gap-y-3 items-center pt-2">
+          {/* Price Section */}
+          <div className="flex items-center gap-3">
+            <span className="text-muted-foreground font-medium shrink-0">
+              Price:
+            </span>
+            {priceDisplay}
           </div>
 
           {/* Status Chip */}
           <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
-            <span className="text-muted-foreground font-medium">Status:</span>
-
+            <span className="text-muted-foreground font-medium shrink-0">
+              Status:
+            </span>
             <span className={`${stockStatusColor(stockStatus)} font-bold`}>
               {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
               manageStock &&
@@ -118,29 +112,33 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
 
           {/* SKU Chip */}
           <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
-            <span className="text-muted-foreground font-medium">SKU:</span>
-            <span className="font-semibold text-foreground">{sku}</span>
+            <span className="text-muted-foreground font-medium shrink-0">
+              SKU:
+            </span>
+            <span className="font-semibold text-foreground truncate">
+              {sku}
+            </span>
           </div>
 
           {/* Category Chip */}
-          {category && (
-            <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
-              <span className="text-muted-foreground font-medium">
-                Category:
-              </span>
-              <Link
-                href={`/shop?category=${category?.[0]?.slug}`}
-                className="font-semibold text-foreground hover:text-primary hover:underline"
-              >
-                {category?.[0]?.name}
-              </Link>
-            </div>
-          )}
+          <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+            <span className="text-muted-foreground font-medium shrink-0">
+              Category:
+            </span>
+            <Link
+              href={`/shop?category=${category?.[0]?.slug}`}
+              className="font-semibold text-foreground hover:text-primary hover:underline truncate"
+            >
+              {category?.[0]?.name}
+            </Link>
+          </div>
 
           {/* Brand Chip */}
           <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
-            <span className="text-muted-foreground font-medium">Brand:</span>
-            <span className="font-semibold text-foreground">
+            <span className="text-muted-foreground font-medium shrink-0">
+              Prokashoni:
+            </span>
+            <span className="font-semibold text-foreground truncate">
               {brand?.name || "N/A"}
             </span>
           </div>
@@ -225,16 +223,14 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         )}
 
         {/* Brand */}
-        {brand?.name && (
-          <div className="flex justify-between items-center text-sm">
-            <span className="text-muted-foreground font-medium w-24">
-              Prokashoni:
-            </span>
-            <span className="font-semibold text-foreground flex-1">
-              {brand?.name || "N/A"}
-            </span>
-          </div>
-        )}
+        <div className="flex justify-between items-center text-sm">
+          <span className="text-muted-foreground font-medium w-24">
+            Prokashoni:
+          </span>
+          <span className="font-semibold text-foreground flex-1">
+            {brand?.name || "N/A"}
+          </span>
+        </div>
 
         {/* Warranty Info (Moved here for better context) */}
         {warranty && warrantyInfo && (

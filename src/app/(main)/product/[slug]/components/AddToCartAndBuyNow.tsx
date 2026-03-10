@@ -46,7 +46,7 @@ const AddToCartAndBuyNow = ({
         </p>
       )}
       <div className="flex gap-3 mt-2">
-        <div className="flex-grow flex gap-2">
+        <div className="flex-grow flex gap-4">
           <EcButton
             className="flex-grow text-white"
             onClick={handleAddToCart}

@@ -9,6 +9,7 @@ import ProductClientWrapper from "./components/ProductClientWrapper";
 import ProductDescription from "./components/ProductDescription";
 import RelatedProduct from "./components/RelatedProduct";
 import SingleProductPageImageGallery from "./components/SingleProductPageImageGallery";
+import ProductSharing from "./components/ProductSharing";
 
 type TProps = {
   params: {
@@ -61,8 +62,8 @@ const SingleProductPage = async ({ params }: TProps) => {
   return (
     <section>
       <ContainerMax>
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
-          <Box className="shadow-none ring-2 md:mt-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
+          <Box className="shadow-none ring-2 lg:mt-5">
             <SingleProductPageImageGallery gallery={gallery} />
           </Box>
           <Box className="space-y-4 shadow-none ring-0">
@@ -73,21 +74,25 @@ const SingleProductPage = async ({ params }: TProps) => {
               defaultVariation={defaultVariation}
             />
 
-            <div className="border-2 p-4 rounded-md flex items-center gap-5">
-              <div>
-                <a href="tel:+8801602431167">
-                  <Phone className="text-primary size-10" />
-                </a>
+            <ProductSharing />
+
+            {!product?.shortDescription && (
+              <div className="border-2 p-4 rounded-md flex items-center gap-5">
+                <div>
+                  <a href="tel:+8801602431167">
+                    <Phone className="text-primary size-10" />
+                  </a>
+                </div>
+                <div>
+                  <p className="font-semibold text-xl">
+                    <a href="tel:+8801602431167">01602431167</a>
+                  </p>
+                  <p className="text-xs font-semibold">Call for support</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-xl">
-                  <a href="tel:+8801602431167">01602431167</a>
-                </p>
-                <p className="text-xs font-semibold">Call for support</p>
-              </div>
-            </div>
+            )}
           </Box>
-          <div className="col-span-1 md:col-span-2 px-3 md:mt-5">
+          <div className="col-span-1 lg:col-span-2 px-3 lg:mt-5">
             <ProductDescription product={product} />
           </div>
           {/* related product  */}
