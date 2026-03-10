@@ -169,9 +169,25 @@ const OrderDetails = () => {
                             className="object-cover"
                           />
                         </div>
-                        <span className="font-medium text-gray-900 line-clamp-2">
-                          {product.title}
-                        </span>
+                        <div className="flex flex-col min-w-0">
+                          <span className="font-medium text-gray-900 line-clamp-2">
+                            {product.title}
+                          </span>
+                          {product.variation && (
+                            <div className="mt-1.5 flex flex-wrap gap-1.5">
+                              {Object.entries(
+                                product.variation.attributes || {}
+                              ).map(([key, value]) => (
+                                <span
+                                  key={key}
+                                  className="inline-flex items-center rounded-md bg-gray-50 px-2 py-0.5 text-[10px] font-bold text-gray-600 ring-1 ring-inset ring-gray-500/10 capitalize"
+                                >
+                                  {key}: {value}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </TableCell>
                     <TableCell className="py-4 px-6 text-gray-600 font-medium text-center">

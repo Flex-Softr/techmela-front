@@ -52,7 +52,7 @@ const FloatingContact = () => {
   return (
     <div
       className={`fixed ${isAtBottom ? "bottom-[60px]" : "bottom-[20px]"} flex flex-col-reverse items-end gap-3 z-[1000] pointer-events-none transition-all duration-300 ${
-        showJumpBtn ? "right-[80px]" : "right-[20px]"
+        showJumpBtn ? "right-[90px]" : "right-[20px]"
       }`}
     >
       {/* Main Toggle Button */}
@@ -91,10 +91,10 @@ const FloatingContact = () => {
 
       {/* Contact Options - Appear when expanded */}
       <div
-        className={`flex flex-col gap-3 transition-all duration-300 z-50 pointer-events-auto ${
+        className={`flex flex-col gap-3 transition-all duration-300 z-50 ${
           isExpanded
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-4 pointer-events-none"
+            ? "opacity-100 translate-y-0 pointer-events-auto visible"
+            : "opacity-0 translate-y-10 pointer-events-none invisible"
         }`}
       >
         {contactOptions.map((option, index) => (

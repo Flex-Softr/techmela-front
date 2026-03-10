@@ -16,4 +16,7 @@ export type Product = {
     src: string;
     alt: string;
   };
+  variation?: {
+    attributes: Record<string, string>;
+  };
 };

@@ -116,7 +116,7 @@ const OrderProductTable = () => {
                           )
                         : "-"}
                     </TableCell>
-                    <TableCell className="py-4 px-6 font-bold text-gray-900">
+                    <TableCell className="whitespace-nowrap py-4 px-6 font-bold text-gray-900">
                       &#2547; {order.total.toFixed(2)}
                     </TableCell>
                     <TableCell className="py-4 px-6 text-right">

@@ -124,6 +124,7 @@ export type Tvariations = {
   };
   price: TPrice;
   inventory: TInventory;
+  image?: TGalleryImage;
 };
 
 export type VariationSelectorProps = {

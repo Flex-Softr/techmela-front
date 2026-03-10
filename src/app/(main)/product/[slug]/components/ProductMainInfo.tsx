@@ -80,7 +80,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   // --- Chip Layout (Used when shortDescription exists) ---
   if (shortDescription) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 pt-2">
         <h2 className="font-semibold text-xl lg:text-2xl text-foreground">
           {title}
         </h2>
