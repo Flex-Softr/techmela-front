@@ -12,20 +12,23 @@ const SectionTitle = ({
   return (
     <div className="px-2">
       <div
-        className={`${href ? "flex justify-between items-center" : "block"}`}
+        className={`flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 pb-1 ${
+          href ? "" : "block"
+        }`}
       >
-        <h2 className="text-secondary font-semibold border-b-2 border-primary py-3 -pb-1">
+        <h2 className="text-secondary font-semibold border-b-2 border-primary py-2 sm:py-3 whitespace-nowrap overflow-hidden text-ellipsis">
           {title}
         </h2>
         {href ? (
-          <>
-            <Link href={href} className="text-primary flex gap-2 font-semibold">
-              {linkText ?? "See all"}{" "}
-              <span>
-                <IoIosArrowDroprightCircle className="w-6 h-6" />
-              </span>
+          <div className="flex justify-end">
+            <Link
+              href={href}
+              className="text-primary flex items-center gap-2 font-semibold text-sm sm:text-base hover:underline transition-all"
+            >
+              {linkText ?? "See all"}
+              <IoIosArrowDroprightCircle className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
             </Link>
-          </>
+          </div>
         ) : null}
       </div>
       <hr />

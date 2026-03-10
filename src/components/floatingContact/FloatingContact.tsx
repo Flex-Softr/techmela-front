@@ -6,10 +6,22 @@ import { useEffect, useState } from "react";
 const FloatingContact = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showJumpBtn, setShowJumpBtn] = useState(false);
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowJumpBtn(window.pageYOffset > 300);
+      const scrollPos =
+        window.pageYOffset || document.documentElement.scrollTop;
+      setShowJumpBtn(scrollPos > 300);
+
+      // Bottom position detection
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      if (windowHeight + scrollPos >= documentHeight - 120) {
+        setIsAtBottom(true);
+      } else {
+        setIsAtBottom(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -39,7 +51,7 @@ const FloatingContact = () => {
 
   return (
     <div
-      className={`fixed bottom-[60px] flex flex-col-reverse items-end gap-3 z-[1000] pointer-events-none transition-all duration-300 ${
+      className={`fixed ${isAtBottom ? "bottom-[60px]" : "bottom-[20px]"} flex flex-col-reverse items-end gap-3 z-[1000] pointer-events-none transition-all duration-300 ${
         showJumpBtn ? "right-[80px]" : "right-[20px]"
       }`}
     >

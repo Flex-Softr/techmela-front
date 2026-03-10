@@ -92,7 +92,7 @@ const SingleProductPage = async ({ params }: TProps) => {
               </div>
             )}
           </Box>
-          <div className="col-span-1 lg:col-span-2 px-3 lg:mt-5">
+          <div className="col-span-1 lg:col-span-2 px-3">
             <ProductDescription product={product} />
           </div>
           {/* related product  */}

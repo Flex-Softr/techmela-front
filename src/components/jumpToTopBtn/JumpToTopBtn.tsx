@@ -4,13 +4,26 @@ import { useEffect, useState } from "react";
 
 const JumpToTopBtn: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isAtBottom, setIsAtBottom] = useState<boolean>(false);
 
-  // Function to toggle visibility of the button based on scroll position
-  const toggleVisibility = (): void => {
+  // Function to toggle visibility and bottom position based on scroll
+  const handleScroll = (): void => {
+    // Visibility
     if (window.pageYOffset > 300) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
+    }
+
+    // Bottom position (detected when near the end of the page)
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (windowHeight + scrollTop >= documentHeight - 120) {
+      setIsAtBottom(true);
+    } else {
+      setIsAtBottom(false);
     }
   };
 
@@ -23,22 +36,24 @@ const JumpToTopBtn: React.FC = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", toggleVisibility);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
     <div className="z-50">
-      {/* Sample content to scroll */}
-
       {/* "Jump to Top" button */}
       {isVisible && (
-        <div style={styles.jumpButton} onClick={scrollToTop}>
-          <ChevronUp size={24} className="text-primary" />{" "}
-          {/* Using the Lucide ChevronUp icon */}
-          {/* Up arrow icon, can be replaced with an actual icon */}
+        <div
+          style={{
+            ...styles.jumpButton,
+            bottom: isAtBottom ? "60px" : "20px",
+          }}
+          onClick={scrollToTop}
+        >
+          <ChevronUp size={24} className="text-primary" />
         </div>
       )}
     </div>
@@ -49,7 +64,6 @@ const JumpToTopBtn: React.FC = () => {
 const styles = {
   jumpButton: {
     position: "fixed" as const,
-    bottom: "60px",
     right: "20px",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     backdropFilter: "blur(4px)",
@@ -62,6 +76,7 @@ const styles = {
     cursor: "pointer",
     boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
     zIndex: 900,
+    transition: "bottom 0.3s ease-in-out",
   },
 };
 
