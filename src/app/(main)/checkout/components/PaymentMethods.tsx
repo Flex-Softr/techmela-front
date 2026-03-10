@@ -148,7 +148,7 @@ const PaymentMethods = ({
   }, [paymentMethodId, paymentMethods]);
 
   return (
-    <Box className="px-0 md:px-4 md:py-0">
+    <Box className="px-0 md:px-4 md:py-2">
       <BoxHeading>Payment Method</BoxHeading>
 
       <div className="mt-3">

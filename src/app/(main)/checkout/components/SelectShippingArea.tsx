@@ -30,7 +30,7 @@ const SelectShippingMethod = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedShipping._id]);
   return (
-    <Box className="px-0">
+    <Box className="px-2 md:py-2">
       <BoxHeading>Shipping Area</BoxHeading>
       <div className="space-y-2">
         {shippingCharges?.map((item) => (

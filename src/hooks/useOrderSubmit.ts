@@ -32,9 +32,11 @@ type TCheckoutFormData = {
 const useOrderSubmit = ({
   paymentMethods,
   calculatedTotal,
+  orderSource,
 }: {
   paymentMethods: TPaymentMethod[];
   calculatedTotal: number;
+  orderSource?: { name: string; url?: string };
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -135,8 +137,8 @@ const useOrderSubmit = ({
       },
       orderNotes: shippingData.notes,
       orderSource: {
-        name: "Website",
-        url: window?.location?.href,
+        name: orderSource?.name || "Website",
+        url: orderSource?.url || window?.location?.href,
       },
       coupon: couponInfo.coupon === null ? undefined : couponInfo.coupon,
     };

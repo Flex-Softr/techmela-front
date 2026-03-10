@@ -91,7 +91,7 @@ const ShippingAddress = () => {
   }, [dispatch]);
 
   return (
-    <Box className="bg-white p-4">
+    <Box className="bg-white px-4 py-2">
       <BoxHeading>Shipping Address</BoxHeading>
       {customerHasAccount && (
         <Card className="w-[350px]">

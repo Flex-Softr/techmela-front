@@ -13,6 +13,8 @@ export type TGtmEventParameter = {
   value?: number | string;
   order_id?: string;
   content_type?: string;
+  content_name?: string;
+  content_ids?: string[];
   contents?: {
     id?: string;
     quantity?: number;
