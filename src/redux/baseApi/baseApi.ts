@@ -35,7 +35,7 @@ const customBaseQueryWithRefreshToken: BaseQueryFn = async (
   // Check for 401 Unauthorized response
   if (result?.error?.status === 401) {
     // Request for getting access token
-    const res = await fetch(`${baseUrl}/auth/refresh-token`, {
+    const res = await fetch(`${baseUrl}/auth/access-token`, {
       method: "POST",
       credentials: "include",
     });
