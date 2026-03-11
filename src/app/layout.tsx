@@ -31,16 +31,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body
-          className={`${hindSiliguri.variable} ${inter.className} ${inter.variable} antialiased`}
-        >
+    <html lang="en">
+      <body
+        className={`${hindSiliguri.variable} ${inter.className} ${inter.variable} antialiased`}
+      >
+        <StoreProvider>
           <InitGTM />
           {children}
           <Toaster />
-        </body>
-      </html>
-    </StoreProvider>
+        </StoreProvider>
+      </body>
+    </html>
   );
 }
