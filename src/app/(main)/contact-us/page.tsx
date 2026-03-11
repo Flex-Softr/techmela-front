@@ -42,7 +42,7 @@ const ContactUsPage = () => {
       </section>
 
       {/* Contact Content */}
-      <section className="py-16 md:py-24">
+      <section className="py-8 md:py-16">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             {/* Left Side: Contact Info */}
@@ -87,7 +87,7 @@ const ContactUsPage = () => {
                       ইমেল
                     </h4>
                     <p className="text-lg font-bold text-gray-800 break-all">
-                      saddikiaprokashoni2026@gmail.com
+                      saddikiaprokashoni@gmail.com
                     </p>
                     <p className="text-sm text-gray-500 mt-1">অনলাইন সাপোর্ট</p>
                   </div>

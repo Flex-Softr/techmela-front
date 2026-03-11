@@ -50,7 +50,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-gray-100">
+    <div className="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-200">
       <h3 className="text-2xl font-bold text-gray-900 mb-6 font-hind-siliguri">
         আমাদের মেসেজ দিন
       </h3>
