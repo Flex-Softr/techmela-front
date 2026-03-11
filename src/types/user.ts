@@ -9,13 +9,14 @@ type TStaff = TUserCommon;
 type TAdmin = TUserCommon;
 type TAddress = {
   fullAddress: string;
-  city: string;
-  state: string;
-  country: string;
+  city?: string;
+  state?: string;
+  country?: string;
 };
 
 export type TUserProfile = {
   _id?: string | null;
+  fullName?: string | null;
   role?: TRoles | null;
   phoneNumber?: string | null;
   email?: string | null;
