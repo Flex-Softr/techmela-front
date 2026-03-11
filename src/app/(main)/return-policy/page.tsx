@@ -103,7 +103,7 @@ const ReturnPolicyPage: React.FC = () => {
 
       <div className="mt-12 text-center">
         <p className="text-gray-500 mb-1 text-sm">যোগাযোগ:</p>
-        <p className="text-xl font-bold text-gray-800">01973-890872</p>
+        <p className="text-xl font-bold text-gray-800">01602431167</p>
       </div>
     </div>
   );

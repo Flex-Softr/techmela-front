@@ -1,5 +1,6 @@
 import TShippingCharges from "@/types/shippingCharge";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
+import Link from "next/link";
 
 const DeliveryPolicyPage = async () => {
   const { data: shippingCharges = [] } = await serverSideFetcher<
@@ -101,16 +102,16 @@ const DeliveryPolicyPage = async () => {
         </h2>
         <p className="text-gray-700">
           আপনার অর্ডারটি কোথায় আছে তা জানতে আমাদের{" "}
-          <a href="/track-your-order" className="font-bold underline">
+          <Link href="/track-your-order" className="font-bold underline">
             ট্র্যাকিং পেইজ
-          </a>{" "}
+          </Link>{" "}
           ভিজিট করুন অথবা আমাদের হেল্পলাইনে যোগাযোগ করুন।
         </p>
       </section>
 
       <div className="mt-12 text-center border-t pt-6">
         <p className="text-gray-500 mb-2">যেকোনো জিজ্ঞাসায় কল করুন:</p>
-        <p className="text-2xl font-bold text-primary">01973-890872</p>
+        <p className="text-2xl font-bold text-primary">01602431167</p>
       </div>
     </div>
   );
