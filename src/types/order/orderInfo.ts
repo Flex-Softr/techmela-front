@@ -1,8 +1,8 @@
 import { TImage } from "../image";
-import { TVariation } from "../products/variableProduct";
 import TShippingCharges from "../shippingCharge";
 
 export type TOrderedProducts = {
+  product: string;
   productId: string;
   title: string;
   slug: string;
@@ -10,7 +10,7 @@ export type TOrderedProducts = {
   unitPrice: number;
   quantity: number;
   total: number;
-  variation?: TVariation;
+  variation?: string;
 };
 
 type TShipping = {
