@@ -56,7 +56,7 @@ const CartTotalCalculations = ({
 
       {/* Total Section */}
       <div className="flex justify-between mb-4 px-2">
-        <p className="font-bold">Total</p>
+        <p className="font-bold text-lg">Total</p>
         <span className="font-bold">
           {costLoading ? (
             <Skeleton className="h-4 w-[100px]" />

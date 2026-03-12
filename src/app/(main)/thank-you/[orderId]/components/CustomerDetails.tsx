@@ -15,9 +15,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
     <div className="space-y-4">
       <Card className="border-none shadow-sm h-fit">
         <CardHeader className="bg-gray-50/50 border-b pb-3 pt-4 px-5">
-          <CardTitle className="text-lg font-semibold">
-            Customer Details
-          </CardTitle>
+          <CardTitle className="text-lg font-semibold">গ্রাহকের তথ্য</CardTitle>
         </CardHeader>
         <CardContent className="p-5 space-y-5 text-sm">
           <div className="flex gap-3">
@@ -43,7 +41,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           <div className="flex gap-3">
             <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-gray-900">Shipping Address</p>
+              <p className="font-medium text-gray-900">ডেলিভারি ঠিকানা</p>
               <p className="text-gray-500 mt-0.5 text-xs leading-relaxed">
                 {orderInfo.shipping?.fullAddress}
               </p>
@@ -53,11 +51,11 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           <div className="flex gap-3">
             <CreditCard className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-gray-900">Payment Method</p>
+              <p className="font-medium text-gray-900">পেমেন্ট পদ্ধতি</p>
               <p className="text-gray-500 mt-0.5 text-xs">
-                {orderInfo.payment?.paymentMethod?.name || "Cash On Delivery"}
+                {orderInfo.payment?.paymentMethod?.name || "ক্যাশ অন ডেলিভারি"}
                 {orderInfo.payment?.transactionId &&
-                  ` (TrxID: ${orderInfo.payment.transactionId})`}
+                  `(TrxID: ${orderInfo.payment.transactionId})`}
               </p>
             </div>
           </div>
@@ -65,7 +63,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           <div className="flex gap-3">
             <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-gray-900">Order Date</p>
+              <p className="font-medium text-gray-900">অর্ডারের তারিখ</p>
               <p className="text-gray-500 mt-0.5 text-xs">
                 {orderInfo.createdAt
                   ? format(
@@ -85,7 +83,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
         size="lg"
       >
         <Link href="/shop">
-          Continue Shopping <ArrowRight className="ml-2 w-4 h-4" />
+          শপিং চালিয়ে যান <ArrowRight className="ml-2 w-4 h-4" />
         </Link>
       </Button>
     </div>

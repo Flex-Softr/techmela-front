@@ -1,18 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
-
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import EcButton from "@/components/EcButton/EcButton";
 import { useOderTrackerQuery } from "@/redux/features/trackOrder/TrackOrder";
 import { MapPin, Phone, User, Package, Truck, ArrowLeft } from "lucide-react";
 import Timeline from "./Timeline";
 import { useParams, useRouter } from "next/navigation";
-
-// type Shipping = {
-//   fullAddress: string;
-//   fullName: string;
-//   phoneNumber: string;
-// }
 
 type StatusEvent = {
   createdAt: string;
@@ -23,16 +15,6 @@ type StatusEvent = {
   status: string;
 };
 
-// type OrderData = {
-//   _id: string;
-//   parcelTrackingLink: string | null;
-//   shipping: Shipping;
-//   status: string;
-//   statusHistory: StatusEvent[];
-//   message: string;
-//   statusCode: number;
-//   success: boolean;
-// }
 // Utility function to capitalize each word in the status
 const capitalizeStatus = (status: string) => {
   return status
@@ -232,10 +214,10 @@ const TrackOrderDetails = () => {
                   ) : (
                     <div className="text-center bg-gray-50/50 p-6 rounded-xl border border-dashed border-border">
                       <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-                        আপনার পণ্য কুরিয়ারে পাঠানোর পর এখানে{" "}
+                        আপনার পণ্য কুরিয়ারে পাঠানোর পর এখানে
                         <span className="text-primary font-bold">
-                          "Live Track Parcel"
-                        </span>{" "}
+                          &quot;Live Track Parcel&quot;
+                        </span>
                         বাটনটি দেখতে পাবেন। অনুগ্রহ করে অপেক্ষা করুন।
                       </p>
                     </div>

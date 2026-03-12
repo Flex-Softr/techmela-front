@@ -1,25 +1,7 @@
 "use client";
-import {
-  useGetOrderedProductsQuery,
-  useLazyGetGuestOrderHistoryQuery,
-} from "@/redux/features/user/userApi";
-import {
-  ShoppingBag,
-  Eye,
-  Calendar,
-  Tag,
-  Search,
-  Phone,
-  X,
-} from "lucide-react";
-import { getStatusDisplay } from "@/const/orderStatus";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { TOrderInfo } from "@/types/order/orderInfo";
-import { useCallback, useEffect, useState } from "react";
-import { useAppSelector } from "@/redux/hooks";
-import { toast } from "@/components/ui/use-toast";
 import {
   Table,
   TableBody,
@@ -28,8 +10,26 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+import { toast } from "@/components/ui/use-toast";
+import { getStatusDisplay } from "@/const/orderStatus";
+import {
+  useGetOrderedProductsQuery,
+  useLazyGetGuestOrderHistoryQuery,
+} from "@/redux/features/user/userApi";
+import { useAppSelector } from "@/redux/hooks";
+import { TOrderInfo } from "@/types/order/orderInfo";
 import TGenericResponse from "@/types/response";
+import {
+  Calendar,
+  Eye,
+  Phone,
+  Search,
+  ShoppingBag,
+  Tag,
+  X,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 const OrdersClient = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -285,7 +285,7 @@ const OrdersClient = () => {
                       </TableCell>
                       <TableCell className="py-4 px-4">
                         <span className="font-bold text-primary text-base">
-                          ৳ {order.total}
+                          &#2547; {order.total}
                         </span>
                       </TableCell>
                       <TableCell className="py-4 px-4 text-right">

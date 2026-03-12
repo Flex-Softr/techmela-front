@@ -53,13 +53,13 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             <div className="flex flex-wrap items-center gap-2">
               {/* Percentage Badge */}
               <span className="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-extrabold shadow-sm whitespace-nowrap uppercase tracking-wider">
-                {discountPercent}% OFF
+                {discountPercent}% ছাড়
               </span>
 
               {/* Savings Information */}
               {priceSave && (
                 <span className="bg-green-100 text-green-700 text-xs px-2.5 py-1 rounded-full font-bold border border-green-200 flex items-center gap-1 whitespace-nowrap">
-                  <span className="opacity-70 font-medium">Save</span>
+                  <span className="opacity-70 font-medium">সাশ্রয়</span>
                   <span>&#2547;{priceSave}</span>
                 </span>
               )}
@@ -90,7 +90,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Price Section */}
           <div className="flex items-center gap-3">
             <span className="text-muted-foreground font-medium shrink-0">
-              Price:
+              মূল্য:
             </span>
             {priceDisplay}
           </div>
@@ -173,7 +173,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
       {/* Price Section */}
       <div className="flex items-center gap-2">
         <span className="text-muted-foreground font-medium text-lg">
-          Price:
+          মূল্য:
         </span>
         {priceDisplay}
       </div>

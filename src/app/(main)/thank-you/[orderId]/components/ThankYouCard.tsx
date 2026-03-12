@@ -29,7 +29,7 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
         <div className="lg:col-span-2 space-y-5">
           <OrderSummary orderInfo={orderInfo} />
         </div>
-        <div className="">
+        <div>
           <CustomerDetails orderInfo={orderInfo} />
         </div>
       </div>

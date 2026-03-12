@@ -53,7 +53,7 @@ const AddToCartAndBuyNow = ({
             disabled={isDisabled || isAddToCartLoading} // Disable if no variation is selected or loading
             id="addToCart"
           >
-            Add to cart
+            কার্টে যোগ করুন
           </EcButton>
           <EcButton
             className="flex-grow text-white"
@@ -61,7 +61,7 @@ const AddToCartAndBuyNow = ({
             disabled={isDisabled || isAddToCartLoading} // Disable if no variation is selected or loading
             variant="secondary"
           >
-            Buy now
+            এখনই কিনুন
           </EcButton>
         </div>
       </div>

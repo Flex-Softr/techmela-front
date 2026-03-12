@@ -17,6 +17,7 @@ import {
 } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TShippingInfo } from "@/types/order/shippingInfo";
+import { Truck } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -91,25 +92,28 @@ const ShippingAddress = () => {
   }, [dispatch]);
 
   return (
-    <Box className="bg-white px-4 py-2">
-      <BoxHeading>Shipping Address</BoxHeading>
+    <Box className="bg-white px-4 py-2 border">
+      <BoxHeading className="flex items-center gap-2">
+        <Truck className="text-lg text-primary" />
+        <span className="text-lg">ডেলিভারি ঠিকানা</span>
+      </BoxHeading>
       {customerHasAccount && (
         <Card className="w-[350px]">
           <CardHeader>
-            <CardTitle className="text-xl">Default Shipping Address</CardTitle>
+            <CardTitle className="text-xl">ডিফল্ট শিপিং ঠিকানা</CardTitle>
             <CardDescription>
               {shippingAddress
-                ? `Full Address: ${shippingAddress?.fullAddress}`
-                : "You have not set a default shipping address."}
+                ? `ঠিকানা: ${shippingAddress?.fullAddress}`
+                : "আপনি কোনো ডিফল্ট শিপিং ঠিকানা সেট করেননি।"}
             </CardDescription>
           </CardHeader>
           <CardFooter className="flex justify-between">
             <Link href="/my-account/add-shipping-address">
               <div
                 className="cursor-pointer text-blue-600"
-                title="Edit Shipping Address"
+                title="শিপিং ঠিকানা সম্পাদনা করুন"
               >
-                Edit Address
+                ঠিকানা সম্পাদনা করুন
               </div>
             </Link>
           </CardFooter>
@@ -118,16 +122,16 @@ const ShippingAddress = () => {
       <div id="shipping-address-form" className="space-y-3">
         <div>
           <Label className="font-bold pl-1 mb-1.5 block">
-            Name
+            নাম
             <span className="text-red-600">*</span>
           </Label>
           <Input
-            placeholder="Enter your full name"
+            placeholder="আপনার নাম লিখুন"
             {...register("fullName", {
-              required: "Name is required",
+              required: "নাম আবশ্যক।",
               maxLength: {
-                value: 20,
-                message: "Name can not be greater than 20 character.",
+                value: 30,
+                message: "নাম ৩০ অক্ষরের বেশি হতে পারবে না।",
               },
             })}
           />
@@ -137,16 +141,15 @@ const ShippingAddress = () => {
         </div>
         <div>
           <Label className="font-bold pl-1 mb-1.5 block">
-            Phone Number <span className="text-red-600">*</span>
+            মোবাইল নম্বর <span className="text-red-600">*</span>
           </Label>
           <Input
-            placeholder="Enter your phone number"
+            placeholder="আপনার মোবাইল নম্বর লিখুন"
             {...register("phoneNumber", {
-              required: "Phone number is required.",
+              required: "মোবাইল নম্বর আবশ্যক।",
               pattern: {
-                value: /^(?!.*[a-zA-Z])01\d{9}$/,
-                message:
-                  "Please provide a valid mobile number starting with 01 and with a total of 11 digits.",
+                value: /^(?:\+88)?01[3-9]\d{8}$/,
+                message: "সঠিক মোবাইল নম্বর দিন।",
               },
             })}
           />
@@ -176,12 +179,12 @@ const ShippingAddress = () => {
         </div> */}
         <div>
           <Label className="font-bold pl-1 mb-1.5 block">
-            Address <span className="text-red-600">*</span>
+            ঠিকানা <span className="text-red-600">*</span>
           </Label>
           <Input
-            placeholder="Enter your full address"
+            placeholder="আপনার ঠিকানা লিখুন"
             {...register("fullAddress", {
-              required: "Full address is required",
+              required: "ঠিকানা আবশ্যক।",
             })}
           />
           {errors.fullAddress && (
@@ -192,11 +195,9 @@ const ShippingAddress = () => {
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 mb-1.5 block">
-            Notes (Optional)
-          </Label>
+          <Label className="font-bold pl-1 mb-1.5 block">নোট (ঐচ্ছিক)</Label>
           <textarea
-            placeholder="Any specific instructions..."
+            placeholder="কোনো নির্দিষ্ট নির্দেশনা থাকলে লিখুন..."
             {...register("notes")}
             className="w-full h-20 ring-1 ring-gray-200 rounded-md p-2 text-sm focus:ring-2 focus:ring-primary outline-none"
           ></textarea>

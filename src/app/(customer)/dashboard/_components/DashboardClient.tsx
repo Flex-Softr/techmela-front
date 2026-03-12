@@ -1,17 +1,19 @@
 "use client";
-import { useGetUserDataQuery } from "@/redux/features/user/userApi";
-import { useGetOrderedProductsQuery } from "@/redux/features/user/userApi";
+import { getStatusDisplay } from "@/const/orderStatus";
 import {
-  ShoppingBag,
-  Package,
-  User,
-  MapPin,
+  useGetOrderedProductsQuery,
+  useGetUserDataQuery,
+} from "@/redux/features/user/userApi";
+import { TOrderInfo } from "@/types/order/orderInfo";
+import {
   CheckCircle,
   Clock,
+  MapPin,
+  Package,
+  ShoppingBag,
+  User,
 } from "lucide-react";
-import { getStatusDisplay } from "@/const/orderStatus";
 import Link from "next/link";
-import { TOrderInfo } from "@/types/order/orderInfo";
 import { useEffect, useState } from "react";
 
 const DashboardClient = () => {
@@ -253,7 +255,7 @@ const DashboardClient = () => {
                       })()}
                     </td>
                     <td className="px-4 py-3 text-right font-bold text-primary text-base">
-                      ৳ {order.total}
+                      &#2547; {order.total}
                     </td>
                   </tr>
                 ))}

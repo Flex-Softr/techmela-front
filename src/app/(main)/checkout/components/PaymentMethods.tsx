@@ -8,6 +8,7 @@ import { getImageSrc } from "@/lib/utils";
 import { setPaymentInfoError } from "@/redux/features/order/paymentInfo";
 import { useAppDispatch } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
+import { Banknote } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo } from "react";
 import { FieldError, useFormContext } from "react-hook-form";
@@ -70,7 +71,7 @@ const SinglePaymentInput = ({
             });
             clearErrors(`paymentDetails.${input.name}`);
           }}
-          className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-secondary text-sm"
+          className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary text-sm"
         >
           <option value="">Select {input.name}</option>
           {input.enums?.split(",").map((opt) => (
@@ -90,7 +91,7 @@ const SinglePaymentInput = ({
             clearErrors(`paymentDetails.${input.name}`);
           }}
           placeholder={`Enter ${input.name}`}
-          className="focus-visible:ring-secondary"
+          className="focus-visible:ring-primary"
         />
       )}
       {errors.paymentDetails &&
@@ -149,14 +150,17 @@ const PaymentMethods = ({
 
   return (
     <Box className="px-0 md:px-4 md:py-2">
-      <BoxHeading>Payment Method</BoxHeading>
+      <BoxHeading className="flex items-center gap-2">
+        <Banknote className="text-lg text-primary" />
+        <span className="text-lg">পেমেন্ট পদ্ধতি</span>
+      </BoxHeading>
 
       <div className="mt-3">
         {/* Hidden input for RHF registration */}
         <input
           type="hidden"
           {...register("paymentMethod", {
-            required: "Please select a payment method",
+            required: "অনুগ্রহ করে একটি পেমেন্ট পদ্ধতি নির্বাচন করুন",
           })}
         />
         <div className="space-y-4">
@@ -166,8 +170,8 @@ const PaymentMethods = ({
                 key={method._id}
                 className={`flex items-center p-3 rounded-md border transition-all cursor-pointer ${
                   paymentMethodId === method._id
-                    ? "border-secondary bg-secondary/5"
-                    : "border-gray-200 hover:border-secondary/30"
+                    ? "border-primary bg-primary/5"
+                    : "border-gray-200 hover:border-primary/30"
                 } ${method?.logo?.src && "py-1 pr-1"}`}
                 onClick={() => {
                   setValue("paymentMethod", method._id, {
@@ -190,7 +194,7 @@ const PaymentMethods = ({
                     clearErrors("paymentDetails");
                     setValue("paymentDetails", {});
                   }}
-                  className="w-4 h-4 text-secondary focus:ring-secondary cursor-pointer"
+                  className="w-4 h-4 text-primary focus:ring-primary cursor-pointer"
                 />
                 <label
                   htmlFor={`${idPrefix}-${method._id}`}

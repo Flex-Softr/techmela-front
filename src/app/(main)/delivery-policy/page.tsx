@@ -3,12 +3,12 @@ import serverSideFetcher from "@/utilities/serverSideFetcher";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  FaTruck,
-  FaMapMarkedAlt,
   FaBoxOpen,
-  FaClock,
   FaCheckCircle,
+  FaClock,
+  FaMapMarkedAlt,
   FaSearchLocation,
+  FaTruck,
 } from "react-icons/fa";
 
 const DeliveryPolicyPage = async () => {
@@ -81,40 +81,21 @@ const DeliveryPolicyPage = async () => {
               </h3>
             </div>
             <ul className="space-y-4">
-              {shippingCharges.length > 0 ? (
-                shippingCharges.map((item) => (
-                  <li
-                    key={item._id}
-                    className="flex justify-between items-center bg-gray-50/50 p-3 rounded-xl border border-gray-100"
-                  >
-                    <span className="font-medium text-gray-700">
-                      {item.name}:
-                    </span>
-                    <span className="font-black text-primary text-xl">
-                      ৳ {item.amount}
-                    </span>
-                  </li>
-                ))
-              ) : (
-                <>
-                  <li className="flex justify-between items-center bg-gray-50/50 p-3 rounded-xl border border-gray-100">
-                    <span className="font-medium text-gray-700">
-                      ঢাকার ভিতরে:
-                    </span>
-                    <span className="font-black text-primary text-xl">
-                      ৳ ৬০
-                    </span>
-                  </li>
-                  <li className="flex justify-between items-center bg-gray-50/50 p-3 rounded-xl border border-gray-100">
-                    <span className="font-medium text-gray-700">
-                      ঢাকার বাইরে:
-                    </span>
-                    <span className="font-black text-primary text-xl">
-                      ৳ ১২০
-                    </span>
-                  </li>
-                </>
-              )}
+              {shippingCharges.length > 0
+                ? shippingCharges.map((item) => (
+                    <li
+                      key={item._id}
+                      className="flex justify-between items-center bg-gray-50/50 p-3 rounded-xl border border-gray-100"
+                    >
+                      <span className="font-medium text-gray-700">
+                        {item.name}:
+                      </span>
+                      <span className="font-black text-primary text-xl">
+                        &#2547; {item.amount}
+                      </span>
+                    </li>
+                  ))
+                : null}
             </ul>
             <p className="mt-4 text-xs text-gray-400 italic flex items-center gap-2">
               <FaCheckCircle className="text-primary/40 shrink-0" />

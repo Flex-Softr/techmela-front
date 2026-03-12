@@ -48,7 +48,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
       <CardHeader className="bg-gray-50/50 border-b pb-3 pt-4 px-5">
         <CardTitle className="flex items-center gap-2 text-lg">
           <ShoppingBag className="w-5 h-5 text-primary" />
-          Order Summary
+          অর্ডারের সারসংক্ষেপ
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
@@ -85,7 +85,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
                   </div>
                 )}
                 <div className="mt-1 flex items-center text-sm text-gray-500">
-                  Qty: {item.quantity} × &#2547;{item.unitPrice}
+                  পরিমাণ: {item.quantity} × &#2547;{item.unitPrice}
                 </div>
               </div>
               <div className="text-right">
@@ -99,28 +99,28 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
 
         <div className="bg-gray-50/30 p-5 space-y-2">
           <div className="flex justify-between text-sm text-gray-600">
-            <span>Subtotal</span>
+            <span>মোট মূল্য</span>
             <span>&#2547;{orderInfo.subtotal}</span>
           </div>
           <div className="flex justify-between text-sm text-gray-600">
-            <span>Shipping ({orderInfo.shippingCharge?.name})</span>
+            <span>ডেলিভারি চার্জ ({orderInfo.shippingCharge?.name})</span>
             <span>&#2547;{totalShippingCost}</span>
           </div>
           {orderInfo.discount > 0 && (
             <div className="flex justify-between text-sm text-green-600">
-              <span>Discount</span>
+              <span>ডিসকাউন্ট</span>
               <span>-&#2547;{orderInfo.discount}</span>
             </div>
           )}
           {orderInfo?.couponDiscount > 0 && (
             <div className="flex justify-between text-sm text-green-600">
-              <span>Coupon discount</span>
+              <span>কুপন ডিসকাউন্ট</span>
               <span>-&#2547;{orderInfo?.couponDiscount}</span>
             </div>
           )}
           <Separator className="my-2" />
           <div className="flex justify-between text-base font-bold text-gray-900">
-            <span>Total</span>
+            <span>সর্বমোট মূল্য</span>
             <span>&#2547;{orderInfo.total}</span>
           </div>
         </div>

@@ -63,10 +63,10 @@ const CheckoutForm = ({
     <>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(handlePlaceOrder)}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
             <div>
               <ShippingAddress />
-              <div className="hidden lg:block mt-3">
+              <div className="hidden lg:block mt-3 lg:mt-5 lg:border lg:rounded-md">
                 <PaymentMethods
                   paymentMethods={paymentMethods}
                   idPrefix="desktop-payment"

@@ -30,16 +30,16 @@ const SelectShippingMethod = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedShipping._id]);
   return (
-    <Box className="px-2 md:py-2">
-      <BoxHeading>Shipping Area</BoxHeading>
+    <Box className="px-0 md:py-2 lg:pb-6">
+      <BoxHeading>ডেলিভারি এলাকা</BoxHeading>
       <div className="space-y-2">
         {shippingCharges?.map((item) => (
           <div
             key={item?._id}
             className={`flex items-center p-3 rounded-md border transition-all cursor-pointer ${
               selectedShipping._id === item?._id
-                ? "border-secondary bg-secondary/5"
-                : "border-gray-200 hover:border-secondary/30"
+                ? "border-primary bg-primary/5"
+                : "border-gray-200 hover:border-primary/30"
             }`}
             onClick={() => handleShippingChargeChange(item?._id, item?.amount)}
           >
@@ -52,14 +52,14 @@ const SelectShippingMethod = ({
               onChange={() =>
                 handleShippingChargeChange(item?._id, item?.amount)
               }
-              className="w-4 h-4 text-secondary focus:ring-secondary cursor-pointer"
+              className="w-4 h-4 text-primary focus:ring-primary cursor-pointer"
             />
             <label
               htmlFor={item?._id}
               className="ml-3 flex-grow flex justify-between items-center cursor-pointer select-none"
             >
               <span className="font-semibold text-sm">{item?.name}</span>
-              <span className="font-bold text-sm text-secondary">
+              <span className="font-bold text-sm text-primary">
                 {item.amount + shippingCostExceptFirst} &#2547;
               </span>
             </label>

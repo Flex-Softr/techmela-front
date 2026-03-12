@@ -58,8 +58,8 @@ const OrderNow = ({
   // No local click handler needed, form submit handles it.
 
   return (
-    <Box className="bg-white p-4">
-      <BoxHeading>Product Details</BoxHeading>
+    <Box className="bg-white px-4 pt-2 pb-4 border">
+      <BoxHeading>অর্ডারের সারসংক্ষেপ</BoxHeading>
 
       {children}
 
@@ -100,19 +100,20 @@ const OrderNow = ({
       {Object.keys(errors).length > 0 && (
         <div className="py-2 px-3 mb-2 bg-red-50 border border-red-200 rounded text-red-600 font-medium text-sm flex items-center gap-2">
           <MdErrorOutline className="text-lg flex-shrink-0" />
-          <span>Please fill in all required fields correctly.</span>
+          <span>প্রয়োজনীয় তথ্যগুলো সঠিকভাবে পূরণ করুন।</span>
         </div>
       )}
 
       {/* Order Now Button with ultimateTotalCost */}
       <EcButton
-        className="w-full font-bold text-white mt-2"
+        className="w-full font-bold text-white mt-2 flex items-center gap-2 lg:gap-4"
         type="submit"
         loading={isLoading || isSuccess}
         disabled={isLoading || isSuccess}
-        loadingText="Creating order"
+        loadingText="অর্ডার করা হচ্ছে..."
       >
-        ORDER NOW Tk. {calculatedTotal}
+        <span className="text-lg">অর্ডার করুন </span>
+        <span className="text-lg">{calculatedTotal} Tk.</span>
       </EcButton>
     </Box>
   );

@@ -1,5 +1,4 @@
 "use client";
-
 import Facilities from "@/components/home/facilities/Facilities";
 import config from "@/config/config";
 import { TPaymentMethod } from "@/types/paymentMethod";
@@ -20,6 +19,7 @@ import {
   MdStar,
   MdVerified,
 } from "react-icons/md";
+import logo from "../../../../../../public/images/logo/Logo.png";
 import SalesOrderForm from "./SalesOrderForm";
 
 type Props = {
@@ -476,7 +476,7 @@ const SalesPageClient = ({
       <header className="bg-white py-3 shadow-sm flex items-center justify-between sticky top-0 z-50 border-b border-gray-100 px-4 lg:px-10">
         <Link href="/">
           <Image
-            src="/images/logo/logo.png"
+            src={logo}
             alt="Siddikia Prokashoni"
             width={160}
             height={44}
@@ -798,8 +798,8 @@ const SalesPageClient = ({
               বইটি সংগ্রহ করতে চান?
             </h3>
             <p className="text-lg text-gray-600 font-medium">
-              মাত্র ৳{salePrice}-এ এখনই অর্ডার করুন! স্টক শেষ হওয়ার আগেই সংগ্রহ
-              করুন।
+              মাত্র &#2547;{salePrice}-এ এখনই অর্ডার করুন! স্টক শেষ হওয়ার আগেই
+              সংগ্রহ করুন।
             </p>
           </div>
           <button

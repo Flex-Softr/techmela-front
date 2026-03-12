@@ -1,9 +1,9 @@
-// ! footer-1
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import logo from "../../../../../../public/images/logo/Logo.png";
 
 const companyLinks = [
   { name: "শপ", url: "/shop" },
@@ -30,7 +30,7 @@ const MainFooterContent = () => {
             <Link href="/" className="flex">
               <div className="bg-white rounded-md">
                 <Image
-                  src="/images/logo/Logo.png"
+                  src={logo}
                   alt="কোম্পানি লোগো"
                   width={150}
                   height={50}
