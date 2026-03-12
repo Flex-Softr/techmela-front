@@ -50,19 +50,35 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "nora.com.bd",
+        hostname: "siddikiaprokashoni.cloud",
       },
       {
         protocol: "https",
-        hostname: "nora.com.bd",
+        hostname: "siddikiaprokashoni.cloud",
       },
       {
         protocol: "http",
-        hostname: "api.norabd.com",
+        hostname: "api.siddikiaprokashoni.cloud",
       },
       {
         protocol: "https",
-        hostname: "api.norabd.com",
+        hostname: "api.siddikiaprokashoni.cloud",
+      },
+      {
+        protocol: "http",
+        hostname: "siddikiaprokashoni.com",
+      },
+      {
+        protocol: "https",
+        hostname: "siddikiaprokashoni.com",
+      },
+      {
+        protocol: "http",
+        hostname: "api.siddikiaprokashoni.com",
+      },
+      {
+        protocol: "https",
+        hostname: "api.siddikiaprokashoni.com",
       },
     ],
   },
