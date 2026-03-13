@@ -20,7 +20,7 @@ const facilities = [
   {
     icon: <RotateCcw className="w-8 h-8 text-primary" />,
     title: "সহজ রিটার্ন পলিসি",
-    description: "৭ দিনের মধ্যে পণ্য পরিবর্তনের নিশ্চয়তা।",
+    description: "৩ দিনের মধ্যে পণ্য পরিবর্তনের নিশ্চয়তা।",
   },
 ];
 

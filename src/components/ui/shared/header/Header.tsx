@@ -10,7 +10,7 @@ const Header = async () => {
     TPaginatedData<TCategory[]>
   >({
     url: "/categories?isActive=true",
-    tags: ["parentCategory"],
+    tags: ["categories"],
   });
 
   const categories = categoryResponse?.data || [];

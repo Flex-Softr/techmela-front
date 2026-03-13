@@ -18,7 +18,7 @@ const Home = async () => {
   const [categoryRes, sectionRes] = await Promise.all([
     serverSideFetcher<TPaginatedData<TCategory[]>>({
       url: "/categories?isActive=true",
-      tags: ["allCategories"],
+      tags: ["categories"],
     }),
     serverSideFetcher<THomePageSection[]>({
       url: "/homepage-sections?isActive=true",

@@ -11,39 +11,32 @@ export const metadata: Metadata = {
 };
 
 const ShopPage = async () => {
-  // Fetch categories as usual
-  const { data: categoryResponse } = await serverSideFetcher<
-    TPaginatedData<TCategory[]>
-  >({
-    url: "/categories?isActive=true",
-    tags: ["allCategories"],
-  });
+  // fetch concurently
+  const [categoriesResponse, tagsResponse, priceRangeResponse] =
+    await Promise.all([
+      serverSideFetcher<TPaginatedData<TCategory[]>>({
+        url: "/categories?isActive=true",
+        tags: ["categories"],
+      }),
+      serverSideFetcher<TTag[]>({
+        url: "/tags",
+        tags: ["tags"],
+      }),
+      serverSideFetcher<{ minPrice: number; maxPrice: number }>({
+        url: "/products/price-range",
+        tags: ["priceRange"],
+      }),
+    ]);
 
-  const categories = categoryResponse?.data || [];
-
-  // Fetch tags as usual
-  const { data: tagResponse } = await serverSideFetcher<TPaginatedData<TTag[]>>(
-    {
-      url: "/tags",
-    }
-  );
-
-  const tags = tagResponse?.data || [];
-
-  // Fetch price range
-  const { data: priceRange } = await serverSideFetcher<{
-    minPrice: number;
-    maxPrice: number;
-  }>({
-    url: "/products/price-range",
-    tags: ["priceRange"],
-  });
+  const categories = categoriesResponse?.data?.data || ([] as TCategory[]);
+  const tags = tagsResponse?.data || ([] as TTag[]);
+  const priceRange = priceRangeResponse?.data;
 
   return (
     <ShopContent
       categories={categories}
       tags={tags}
-      priceRange={priceRange || { minPrice: 0, maxPrice: 10000 }}
+      priceRange={priceRange || { minPrice: 0, maxPrice: 0 }}
     />
   );
 };

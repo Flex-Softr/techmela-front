@@ -38,11 +38,13 @@ const BestSellingProducts = async () => {
                 ))}
               </div>
             </div>
-            <div className="flex justify-center mt-5">
-              <Button asChild size={"sm"} className="px-6">
-                <Link href={"/shop?best-selling=true"}>সবগুলো দেখুন</Link>
-              </Button>
-            </div>
+            {bestSellingProducts.length > 4 && (
+              <div className="flex justify-center mt-5">
+                <Button asChild size={"sm"} className="px-6">
+                  <Link href={"/shop?best-selling=true"}>সবগুলো দেখুন</Link>
+                </Button>
+              </div>
+            )}
           </ContainerMax>
         </section>
       )}

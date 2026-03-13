@@ -1,5 +1,4 @@
 "use client";
-
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import ProductCard from "@/components/productCards/ProductCard";
 import Box from "@/components/ui/ec/Box";
@@ -13,7 +12,6 @@ import { TProduct } from "@/types/products/product";
 import { TTag } from "@/types/tags/tag";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-// import CategorySection from "./CategorySection";
 import NoProductsFound from "./NoProductsFound";
 import ProductFilterContent from "./ProductFilterContent";
 import ShopBanner from "./ShopBanner";
@@ -122,9 +120,6 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
       <ShopBanner />
       <section className="relative pt-0 md:pt-2 px-2 h-full">
         <ContainerMax>
-          {/* {!searchParams.get("category") && !flashSaleParam && (
-          <CategorySection categories={categories} />
-        )} */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 my-2 md:mb-4">
             <div className="hidden lg:block">
               <ProductFilterContent
