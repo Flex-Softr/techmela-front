@@ -57,13 +57,19 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
   return (
     <div
       className="relative group/banner px-1 md:px-0"
-      onMouseEnter={() => plugin.current.stop()}
-      onMouseLeave={() => plugin.current.play()}
+      onMouseEnter={() => {
+        if (plugin.current) plugin.current?.stop();
+      }}
+      onMouseLeave={() => {
+        if (plugin.current) {
+          plugin.current?.play();
+        }
+      }}
     >
       <Carousel
         setApi={setApi}
         plugins={[plugin.current]}
-        opts={{ loop: true }}
+        opts={{ loop: true, duration: 40 }}
         className="w-full relative"
       >
         <CarouselContent className="-ml-0">
