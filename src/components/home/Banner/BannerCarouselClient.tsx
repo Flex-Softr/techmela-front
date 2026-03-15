@@ -69,6 +69,7 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
       <Carousel
         setApi={setApi}
         plugins={[plugin.current]}
+        opts={{ loop: true }}
         className="w-full relative"
       >
         <CarouselContent className="-ml-0">
