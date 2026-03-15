@@ -4,8 +4,16 @@ import { Metadata } from "next";
 import BestSellingContent from "./components/BestSellingContent";
 
 export const metadata: Metadata = {
-  title: "বেস্ট সেলিং বইসমূহ | সিদ্দিকীয়া প্রকাশনী",
-  description: "আমাদের সবথেকে জনপ্রিয় এবং বেস্ট সেলিং বইগুলো দেখে নিন।",
+  title: "বেস্ট সেলিং বইসমূহ | সিদ্দীকিয়া প্রকাশনী",
+  description:
+    "অগণিত পাঠকের পছন্দের সেরা ইসলামিক বইগুলোর তালিকা থেকে আপনার প্রয়োজনীয় বইটি বেছে নিন। সিদ্দীকিয়া প্রকাশনীর বেস্ট সেলিং কালেকশন।",
+  keywords: [
+    "বেস্ট সেলিং ইসলামিক বই",
+    "জনপ্রিয় ইসলামিক বই",
+    "Best Selling Islamic Books",
+    "Islamic Book Recommendation",
+    "সিদ্দীকিয়া প্রকাশনী বই",
+  ].join(", "),
 };
 
 const BestSellingPage = () => {

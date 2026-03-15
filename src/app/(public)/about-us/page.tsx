@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -8,6 +9,19 @@ import {
   FaHandsHelping,
   FaLightbulb,
 } from "react-icons/fa";
+
+export const metadata: Metadata = {
+  title: "আমাদের সম্পর্কে | সিদ্দীকিয়া প্রকাশনী",
+  description:
+    "সিদ্দীকিয়া প্রকাশনী ঐতিহ্যবাহী দারুননাজাত মাদরাসা কিতাব বিভাগের একটি প্রকাশনা প্রতিষ্ঠান। আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন গ্রন্থ প্রকাশে আমরা নিবেদিত।",
+  keywords: [
+    "সিদ্দীকিয়া প্রকাশনী",
+    "দারুননাজাত মাদ্রাসা",
+    "ইসলামিক প্রকাশনী",
+    "About Siddikia Prokashoni",
+    "Islamic Publisher Bangladesh",
+  ].join(", "),
+};
 
 const AboutPage: React.FC = () => {
   return (
