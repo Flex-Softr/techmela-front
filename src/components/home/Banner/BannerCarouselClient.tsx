@@ -57,14 +57,8 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
   return (
     <div
       className="relative group/banner px-1 md:px-0"
-      onMouseEnter={() => {
-        if (plugin.current) plugin.current?.stop();
-      }}
-      onMouseLeave={() => {
-        if (plugin.current) {
-          plugin.current?.play();
-        }
-      }}
+      onMouseEnter={() => plugin.current.stop()}
+      onMouseLeave={() => plugin.current.play()}
     >
       <Carousel
         setApi={setApi}
