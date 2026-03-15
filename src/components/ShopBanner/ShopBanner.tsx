@@ -1,5 +1,3 @@
-"use client";
-
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import { BookOpen, Search } from "lucide-react";
 

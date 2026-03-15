@@ -1,14 +1,22 @@
+import CategoryMenuBarFetcher from "./CategoryMenuBarFetcher";
+import { Suspense } from "react";
 import ContainerMax from "@/components/containerMax/ContainerMax";
-import TCategory from "@/types/categories/categories";
-import CategoryMenuBar from "../menuBar/CategoryMenuBar";
-// import MenuBar from "../menuBar/MenuBar";
 
-const BottomHeader = ({ categories }: { categories?: TCategory[] }) => {
+const BottomHeader = () => {
   return (
     <div className="py-1 border-b-[1px] hidden md:block mb-2 md:mb-0">
       <ContainerMax>
-        {/* <MenuBar categories={categories} /> */}
-        <CategoryMenuBar categories={categories} />
+        <Suspense
+          fallback={
+            <div className="flex justify-center gap-4 py-2 animate-pulse">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="h-4 w-20 bg-gray-100 rounded" />
+              ))}
+            </div>
+          }
+        >
+          <CategoryMenuBarFetcher />
+        </Suspense>
       </ContainerMax>
     </div>
   );

@@ -1,12 +1,14 @@
-import TCategory from "@/types/categories/categories";
+import MobileMenuFetcher from "./MobileMenuFetcher";
+import { Suspense } from "react";
+import { Button } from "@/components/ui/button";
+import { FaBars } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import CartLinksAndAccount from "./CartLinksAndAccount";
-import NavLinks from "./NavLinks";
 import Search from "./Search";
 import logo from "../../../../../../public/images/logo/Logo.png";
 
-const MainHeader = ({ categories }: { categories?: TCategory[] }) => {
+const MainHeader = () => {
   return (
     <div className="flex gap-5 justify-between lg:justify-evenly items-center px-2 lg:px-10 py-2 bg-primary">
       <div className="order-2 lg:order-1 bg-white rounded-md">
@@ -22,7 +24,15 @@ const MainHeader = ({ categories }: { categories?: TCategory[] }) => {
         </Link>
       </div>
       <div className="block md:hidden">
-        <NavLinks categories={categories} />
+        <Suspense
+          fallback={
+            <Button variant={"outline"} className="size-10 rounded-full">
+              <FaBars className="animate-pulse opacity-50" />
+            </Button>
+          }
+        >
+          <MobileMenuFetcher />
+        </Suspense>
       </div>
       <div className="flex-grow hidden lg:block lg:order-3 max-w-2xl">
         <Search />
