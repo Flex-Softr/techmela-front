@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import ApplyCupon from "@/app/(main)/checkout/components/ApplyCupon";
+import ApplyCupon from "@/app/(public)/checkout/components/ApplyCupon";
 import CartTotalCalculations from "@/components/cartTotalCalculations/CartTotalCalculations";
 import EcButton from "@/components/EcButton/EcButton";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";

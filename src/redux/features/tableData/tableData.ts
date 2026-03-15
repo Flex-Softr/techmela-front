@@ -1,6 +1,6 @@
 // tableDataSlice.ts
 
-import { Shipping } from "@/app/(main)/warranty/find-your-product/components/commonTypes/CommonTypes";
+import { Shipping } from "@/app/(public)/warranty/find-your-product/components/commonTypes/CommonTypes";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export type ProductToClaim = {

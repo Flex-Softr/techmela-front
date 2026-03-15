@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/redux/hooks";
 import TShippingCharges from "@/types/shippingCharge";
-import SelectShippingMethod from "../../app/(main)/checkout/components/SelectShippingArea";
+import SelectShippingMethod from "../../app/(public)/checkout/components/SelectShippingArea";
 import { Skeleton } from "../ui/skeleton";
 
 const CartTotalCalculations = ({

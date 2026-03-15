@@ -1,5 +1,5 @@
 "use client";
-import Quantity from "@/app/(main)/checkout/components/Quantity";
+import Quantity from "@/app/(public)/checkout/components/Quantity";
 import EcButton from "@/components/EcButton/EcButton";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";

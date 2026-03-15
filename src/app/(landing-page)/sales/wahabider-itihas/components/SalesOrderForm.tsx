@@ -1,8 +1,8 @@
 "use client";
 
-import PaymentMethods from "@/app/(main)/checkout/components/PaymentMethods";
-import SelectShippingArea from "@/app/(main)/checkout/components/SelectShippingArea";
-import ShippingAddress from "@/app/(main)/checkout/components/ShippingAddress";
+import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
+import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
+import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
 import EcButton from "@/components/EcButton/EcButton";
 import ErrorMessage from "@/components/errorMessage/ErrorMessage";
 import OrderLimit from "@/components/orderLimit/OrderLimit";

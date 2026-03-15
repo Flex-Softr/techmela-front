@@ -1,5 +1,5 @@
 "use client";
-import Quantity from "@/app/(main)/checkout/components/Quantity";
+import Quantity from "@/app/(public)/checkout/components/Quantity";
 import { useToast } from "@/components/ui/use-toast";
 import { useUpdateCartQuantityMutation } from "@/redux/features/cart/cartApi";
 import { TCartItemData } from "@/types/cart";
