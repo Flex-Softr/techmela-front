@@ -1,8 +1,11 @@
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
+import JsonLd from "@/components/shared/JsonLd";
 import Box from "@/components/ui/ec/Box";
+import { STOCK_STATUS } from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
+import { getImageSrc } from "@/lib/utils";
 import { Phone } from "lucide-react";
 import { Metadata } from "next";
 import ProductClientWrapper from "./components/ProductClientWrapper";
@@ -59,8 +62,40 @@ const SingleProductPage = async ({ params }: TProps) => {
     ? defaultVariation.price
     : price;
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": ["Product", "Book"],
+    name: product.title,
+    description: product.seoData?.metaDescription || product.shortDescription,
+    image: getImageSrc(product.image?.src),
+    sku: product.inventory?.sku,
+    offers: {
+      "@type": "Offer",
+      url: `https://siddikiaprokashoni.com/product/${product.slug}`,
+      priceCurrency: "BDT",
+      price: product.price?.salePrice || product.price?.regularPrice,
+      itemCondition: "https://schema.org/NewCondition",
+      availability:
+        product.inventory?.stockStatus === STOCK_STATUS.IN_STOCK
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      seller: {
+        "@type": "Organization",
+        name: "সিদ্দীকিয়া প্রকাশনী",
+      },
+    },
+    author: product.brand?.name
+      ? { "@type": "Person", name: product.brand.name }
+      : undefined,
+    publisher: {
+      "@type": "Organization",
+      name: "সিদ্দীকিয়া প্রকাশনী",
+    },
+  };
+
   return (
     <section>
+      <JsonLd data={productJsonLd} />
       <ContainerMax>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
           <Box className="shadow-none ring-2 lg:mt-5">

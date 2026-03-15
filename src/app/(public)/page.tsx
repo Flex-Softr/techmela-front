@@ -10,7 +10,9 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "হোম",
+  title: "সেরা ইসলামিক বইয়ের সমাহার | সিদ্দীকিয়া প্রকাশনী",
+  description:
+    "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
 };
 
 const Home = async () => {
