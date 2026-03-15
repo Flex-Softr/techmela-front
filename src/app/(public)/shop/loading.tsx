@@ -1,6 +1,7 @@
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import Box from "@/components/ui/ec/Box";
 import ShopBanner from "./components/ShopBanner";
+import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
 
 export default function ShopLoading() {
   return (
@@ -37,15 +38,11 @@ export default function ShopLoading() {
                 </div>
               </div>
 
-              {/* Product Grid Skeleton */}
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-5 justify-between mt-5 lg:mt-0">
-                {[...Array(12)].map((_, i) => (
-                  <Box
-                    key={i}
-                    className="h-80 w-full animate-pulse bg-gray-100 rounded-lg border border-gray-200"
-                  />
-                ))}
-              </div>
+              <ProductGridSkeleton
+                count={12}
+                className="lg:grid-cols-3 mt-5 lg:mt-0"
+                itemClassName="h-80"
+              />
             </div>
           </div>
         </ContainerMax>

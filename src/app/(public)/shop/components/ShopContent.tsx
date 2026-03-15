@@ -1,7 +1,6 @@
 "use client";
 import ContainerMax from "@/components/containerMax/ContainerMax";
 import ProductCard from "@/components/productCards/ProductCard";
-import Box from "@/components/ui/ec/Box";
 import Paginate from "@/components/ui/shared/paginate/Paginate";
 import {
   useGetAllProductsQuery,
@@ -15,6 +14,7 @@ import { useEffect } from "react";
 import NoProductsFound from "./NoProductsFound";
 import ProductFilterContent from "./ProductFilterContent";
 import ShopBanner from "./ShopBanner";
+import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
 
 type ShopContentProps = {
   categories: TCategory[];
@@ -141,14 +141,11 @@ const ShopContent = ({ categories, tags, priceRange }: ShopContentProps) => {
                 />
               </div>
               {isLoading ? (
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-5 justify-between">
-                  {[...Array(6)].map((_, i) => (
-                    <Box
-                      key={i}
-                      className="h-80 w-full animate-pulse bg-gray-100 rounded-lg"
-                    />
-                  ))}
-                </div>
+                <ProductGridSkeleton
+                  count={6}
+                  className="lg:grid-cols-3"
+                  itemClassName="h-80"
+                />
               ) : (
                 <>
                   <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-5 justify-between mt-5">

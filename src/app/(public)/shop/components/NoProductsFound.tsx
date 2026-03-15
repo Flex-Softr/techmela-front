@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { SearchX } from "lucide-react";
+import { BookX, RotateCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const NoProductsFound = () => {
@@ -12,23 +12,29 @@ const NoProductsFound = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-gray-50/50 rounded-2xl border-2 border-dashed border-gray-200">
-      <div className="bg-white p-4 rounded-full shadow-sm mb-6">
-        <SearchX className="w-12 h-12 text-gray-400" />
+    <div className="flex flex-col items-center justify-center py-24 px-6 text-center bg-gradient-to-b from-gray-50/80 to-transparent rounded-3xl border border-dashed border-gray-200/60 shadow-inner">
+      <div className="relative mb-8 group">
+        <div className="absolute inset-0 bg-primary/5 rounded-full scale-150 blur-2xl group-hover:bg-primary/10 transition-colors duration-500" />
+        <div className="relative bg-white p-6 rounded-2xl shadow-xl transform rotate-1 border border-primary/5 group-hover:rotate-0 transition-transform duration-300">
+          <BookX className="w-16 h-16 text-primary/40" />
+        </div>
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-2">
-        No products found
+
+      <h3 className="text-2xl font-bold text-gray-900 mb-3 font-secondary">
+        কোনো বই পাওয়া যায়নি
       </h3>
-      <p className="text-gray-500 max-w-xs mx-auto mb-8">
-        We couldn&apos;t find any products matching your current filters. Try
-        adjusting your price range or clearing all filters.
+
+      <p className="text-gray-500 max-w-sm mx-auto mb-10 leading-relaxed">
+        দুঃখিত, আপনার পছন্দের ফিল্টার অনুযায়ী কোনো বই আমাদের সংগ্রহে পাওয়া
+        যায়নি। ভিন্ন ক্যাটাগরি বা প্রাইস রেঞ্জ চেষ্টা করে দেখুন।
       </p>
+
       <Button
         onClick={handleClearFilters}
-        variant="outline"
-        className="font-semibold border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+        className="group px-8 py-6 rounded-xl font-bold gap-3 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 active:scale-95 transition-all duration-300"
       >
-        Clear All Filters
+        <RotateCcw className="w-5 h-5 group-hover:rotate-[-45deg] transition-transform duration-300" />
+        <span>সব ফিল্টার মুছে ফেলুন</span>
       </Button>
     </div>
   );
