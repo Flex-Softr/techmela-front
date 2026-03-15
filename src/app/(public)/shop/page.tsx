@@ -1,5 +1,5 @@
+import ShopBanner from "@/app/(public)/shop/components/ShopBanner";
 import { Metadata } from "next";
-import ShopBanner from "@/components/ShopBanner/ShopBanner";
 import ShopContent from "./components/ShopContent";
 import ShopFiltersFetcher from "./components/ShopFiltersFetcher";
 

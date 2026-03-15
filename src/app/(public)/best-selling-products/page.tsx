@@ -1,4 +1,4 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { BookOpen, Star } from "lucide-react";
 import { Metadata } from "next";
 import BestSellingContent from "./components/BestSellingContent";

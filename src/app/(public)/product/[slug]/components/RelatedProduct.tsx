@@ -1,5 +1,5 @@
 import ProductCard from "@/components/productCards/ProductCard";
-import SectionTitle from "@/components/sectionTitle/SectionTitle";
+import SectionTitle from "@/components/shared/sectionTitle/SectionTitle";
 import { TProduct } from "@/types/products/product";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 

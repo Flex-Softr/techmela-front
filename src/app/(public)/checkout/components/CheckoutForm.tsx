@@ -1,16 +1,13 @@
 "use client";
-import CheckoutCartItems from "@/components/cartItems/CheckoutCartItems";
+import CheckoutCartItems from "@/components/cart/CheckoutCartItems";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCart from "@/hooks/useCart";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import useOrderSubmit from "@/hooks/useOrderSubmit";
-import { TPaymentMethod } from "@/types/paymentMethod";
-import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import OrderNow from "./OrderNow";
-import PaymentMethods from "./PaymentMethods";
 import ShippingAddress from "./ShippingAddress";
 
 type TCheckoutFormData = {
@@ -23,12 +20,16 @@ type TCheckoutFormData = {
   paymentDetails?: Record<string, string | number>;
 };
 
+import { ReactNode } from "react";
+
 const CheckoutForm = ({
-  shippingCharges,
-  paymentMethods,
+  shippingAreaSlot,
+  paymentMethodsDesktopSlot,
+  paymentMethodsMobileSlot,
 }: {
-  shippingCharges: TShippingCharges[];
-  paymentMethods: TPaymentMethod[];
+  shippingAreaSlot: ReactNode;
+  paymentMethodsDesktopSlot: ReactNode;
+  paymentMethodsMobileSlot: ReactNode;
 }) => {
   const { totalCost, isLoading: cartCostLoading } = useCart();
 
@@ -49,7 +50,6 @@ const CheckoutForm = ({
     limitModalStatus,
     setLimitModalStatus,
   } = useOrderSubmit({
-    paymentMethods,
     calculatedTotal,
   });
 
@@ -67,10 +67,7 @@ const CheckoutForm = ({
             <div>
               <ShippingAddress />
               <div className="hidden lg:block mt-3 lg:mt-5 lg:border lg:rounded-md">
-                <PaymentMethods
-                  paymentMethods={paymentMethods}
-                  idPrefix="desktop-payment"
-                />
+                {paymentMethodsDesktopSlot}
               </div>
             </div>
             <div className="order-4 lg:order-3">
@@ -79,9 +76,9 @@ const CheckoutForm = ({
                 errorMessages={errorMessages}
                 isLoading={isLoading}
                 isSuccess={isSuccess}
-                shippingCharges={shippingCharges}
                 totalCost={totalCost}
-                paymentMethods={paymentMethods}
+                paymentMethodsMobileSlot={paymentMethodsMobileSlot}
+                shippingAreaSlot={shippingAreaSlot}
               >
                 <CheckoutCartItems />
               </OrderNow>

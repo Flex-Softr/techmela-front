@@ -1,5 +1,5 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
-import { Truck, Banknote, Headphones, RotateCcw } from "lucide-react";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import { Banknote, Headphones, RotateCcw, Truck } from "lucide-react";
 
 const facilities = [
   {

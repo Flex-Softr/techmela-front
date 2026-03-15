@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type TInitialState = {
   _id: string;
-  amount: 0;
+  amount: number;
 };
 
 const initialState: TInitialState = {

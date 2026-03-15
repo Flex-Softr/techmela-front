@@ -1,11 +1,14 @@
 "use client";
-import ErrorMessage from "@/components/errorMessage/ErrorMessage";
+import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getImageSrc } from "@/lib/utils";
-import { setPaymentInfoError } from "@/redux/features/order/paymentInfo";
+import {
+  setPaymentInfo,
+  setPaymentInfoError,
+} from "@/redux/features/order/paymentInfo";
 import { useAppDispatch } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { Banknote } from "lucide-react";
@@ -127,8 +130,9 @@ const PaymentMethods = ({
   useEffect(() => {
     if (paymentMethods.length > 0) {
       setValue("paymentMethod", paymentMethods[0]._id);
+      dispatch(setPaymentInfo({ selectedPaymentMethod: paymentMethods[0] }));
     }
-  }, [paymentMethods, setValue]);
+  }, [paymentMethods, setValue, dispatch]);
 
   const paymentMethodId = watch("paymentMethod");
 
@@ -147,6 +151,13 @@ const PaymentMethods = ({
   const selectedMethod = useMemo(() => {
     return paymentMethods?.find((m) => m._id === paymentMethodId);
   }, [paymentMethodId, paymentMethods]);
+
+  // Sync selected method object to Redux whenever it changes
+  useEffect(() => {
+    if (selectedMethod) {
+      dispatch(setPaymentInfo({ selectedPaymentMethod: selectedMethod }));
+    }
+  }, [selectedMethod, dispatch]);
 
   return (
     <Box className="px-0 md:px-4 md:py-2">

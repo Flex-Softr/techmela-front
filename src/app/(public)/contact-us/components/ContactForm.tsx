@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, useForm } from "react-hook-form";
 import { FaPaperPlane } from "react-icons/fa";
 import * as yup from "yup";
-import { useSendContactMessageMutation } from "@/redux/features/contactApi/contactApiSlice";
+import { useSendContactMessageMutation } from "@/redux/features/contactApi/contactApi";
 import { useToast } from "@/components/ui/use-toast";
 
 const schema = yup.object().shape({

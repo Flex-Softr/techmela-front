@@ -1,4 +1,4 @@
-import EcButton from "@/components/EcButton/EcButton";
+import EcButton from "@/components/shared/EcButton/EcButton";
 import Link from "next/link";
 
 /* eslint-disable react/no-unescaped-entities */

@@ -3,8 +3,8 @@
 import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
 import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
 import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
-import EcButton from "@/components/EcButton/EcButton";
-import ErrorMessage from "@/components/errorMessage/ErrorMessage";
+import EcButton from "@/components/shared/EcButton/EcButton";
+import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 

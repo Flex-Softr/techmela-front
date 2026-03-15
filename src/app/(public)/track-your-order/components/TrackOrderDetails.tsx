@@ -1,10 +1,10 @@
 "use client";
-import ContainerMax from "@/components/containerMax/ContainerMax";
-import EcButton from "@/components/EcButton/EcButton";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import EcButton from "@/components/shared/EcButton/EcButton";
 import { useOderTrackerQuery } from "@/redux/features/trackOrder/TrackOrder";
-import { MapPin, Phone, User, Package, Truck, ArrowLeft } from "lucide-react";
-import Timeline from "./Timeline";
+import { ArrowLeft, MapPin, Package, Phone, Truck, User } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import Timeline from "./Timeline";
 
 type StatusEvent = {
   createdAt: string;

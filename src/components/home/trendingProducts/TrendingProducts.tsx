@@ -1,6 +1,6 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
 import ProductCard from "@/components/productCards/ProductCard";
-import SectionTitle from "@/components/sectionTitle/SectionTitle";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import SectionTitle from "@/components/shared/sectionTitle/SectionTitle";
 import {
   Carousel,
   CarouselContent,

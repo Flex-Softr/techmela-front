@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import CommonModal from "../commonModal/CommonModal";
+import CommonModal from "../shared/commonModal/CommonModal";
 
 const OrderLimit = ({
   limitModalStatus,

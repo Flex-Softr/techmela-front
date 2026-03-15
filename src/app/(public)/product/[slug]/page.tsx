@@ -1,5 +1,5 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
-import ErrorMessage from "@/components/errorMessage/ErrorMessage";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import serverSideFetcher from "@/utilities/serverSideFetcher";

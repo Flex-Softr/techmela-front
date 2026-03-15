@@ -1,29 +1,25 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
-import { TPaymentMethod } from "@/types/paymentMethod";
-import TShippingCharges from "@/types/shippingCharge";
-import serverSideFetcher from "@/utilities/serverSideFetcher";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import config from "@/config/config";
 import CheckoutForm from "./components/CheckoutForm";
+import PaymentMethodsFetcher from "./components/PaymentMethodsFetcher";
+import SelectShippingAreaFetcher from "./components/SelectShippingAreaFetcher";
 
 const Checkout = async () => {
-  const { data: shippingCharges = [] } = await serverSideFetcher<
-    TShippingCharges[]
-  >({
-    url: "/shipping-charges?isActive=true",
-    tags: ["shippingCharge"],
-  });
-  const { data: paymentMethods = [] } = await serverSideFetcher<
-    TPaymentMethod[]
-  >({
-    url: "/payment-method?isActive=true",
-    tags: ["paymentMethod"],
-  });
-
   return (
     <section className="my-8">
       <ContainerMax>
         <CheckoutForm
-          shippingCharges={shippingCharges}
-          paymentMethods={paymentMethods}
+          shippingAreaSlot={
+            <SelectShippingAreaFetcher
+              shippingCostExceptFirst={config.per_item_shipping_cost}
+            />
+          }
+          paymentMethodsDesktopSlot={
+            <PaymentMethodsFetcher idPrefix="desktop-payment" />
+          }
+          paymentMethodsMobileSlot={
+            <PaymentMethodsFetcher idPrefix="mobile-payment" />
+          }
         />
       </ContainerMax>
     </section>

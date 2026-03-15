@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { setCoupon } from "@/redux/features/order/couponInfo";
@@ -104,6 +104,7 @@ export default function ApplyCupon() {
 
         setApplied(false);
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorMessage =
         error?.data?.errorMessages?.[0]?.message ||

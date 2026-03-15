@@ -1,4 +1,4 @@
-import CommonModal from "@/components/commonModal/CommonModal";
+import CommonModal from "@/components/shared/commonModal/CommonModal";
 import React from "react";
 import { TWarrantyClaimHistory } from "../commonTypes/CommonTypes";
 

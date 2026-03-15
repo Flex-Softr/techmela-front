@@ -1,3 +1,4 @@
+"use client";
 import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { setShipping } from "@/redux/features/shippingClasses/shippingClass";
@@ -18,17 +19,22 @@ const SelectShippingMethod = ({
   const handleShippingChargeChange = (id: string, amount: number) => {
     dispatch(setShipping({ _id: id, amount }));
   };
+
   useEffect(() => {
-    if (!selectedShipping._id) {
+    if (
+      !selectedShipping._id &&
+      shippingCharges &&
+      shippingCharges.length > 0
+    ) {
       dispatch(
         setShipping({
-          _id: shippingCharges![0]?._id,
-          amount: shippingCharges![0]?.amount,
+          _id: shippingCharges[0]?._id,
+          amount: shippingCharges[0]?.amount,
         })
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedShipping._id]);
+  }, [selectedShipping._id, shippingCharges]);
   return (
     <Box className="px-0 md:py-2 lg:pb-6">
       <BoxHeading>ডেলিভারি এলাকা</BoxHeading>

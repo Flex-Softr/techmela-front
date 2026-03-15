@@ -1,4 +1,4 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 
 const HomepageSectionSkeleton = () => {
   return (

@@ -1,4 +1,4 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import Box from "@/components/ui/ec/Box";
 import { Skeleton } from "@/components/ui/skeleton";
 

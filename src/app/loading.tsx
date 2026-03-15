@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../../public/images/logo/Logo.png";
+import logo from "../../public/images/logo/logo.png";
 
 const Loading = () => {
   return (

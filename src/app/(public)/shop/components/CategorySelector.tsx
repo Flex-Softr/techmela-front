@@ -1,4 +1,4 @@
-import GenericFilterPropsSelector from "@/components/ui/ec/GenericFilterPropsSelector";
+import GenericFilterPropsSelector from "./GenericFilterPropsSelector";
 import TCategory from "@/types/categories/categories";
 import { Dispatch, SetStateAction } from "react";
 

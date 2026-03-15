@@ -45,8 +45,8 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
 
   return (
     <Card className="border-none shadow-sm overflow-hidden">
-      <CardHeader className="bg-gray-50/50 border-b pb-3 pt-4 px-5">
-        <CardTitle className="flex items-center gap-2 text-lg">
+      <CardHeader className="bg-gray-50/50 border-b !pb-0 pt-4 px-5">
+        <CardTitle className="flex items-center gap-2 text-lg mb-0">
           <ShoppingBag className="w-5 h-5 text-primary" />
           অর্ডারের সারসংক্ষেপ
         </CardTitle>

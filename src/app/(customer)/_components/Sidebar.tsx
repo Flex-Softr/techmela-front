@@ -1,5 +1,5 @@
 "use client";
-import NavLink from "@/components/navLink/NavLink";
+import NavLink from "@/components/shared/navLink/NavLink";
 import { toast } from "@/components/ui/use-toast";
 import { useLogoutMutation } from "@/redux/features/auth/authApi";
 import { logOut } from "@/redux/features/auth/authSlice";

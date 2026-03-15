@@ -1,39 +1,36 @@
-/* eslint-disable no-unused-vars */
+"use client";
 import ApplyCupon from "@/app/(public)/checkout/components/ApplyCupon";
-import CartTotalCalculations from "@/components/cartTotalCalculations/CartTotalCalculations";
-import EcButton from "@/components/EcButton/EcButton";
-import ErrorMessage from "@/components/errorMessage/ErrorMessage";
+import CartTotalCalculations from "@/components/cart/CartTotalCalculations";
+import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import Box from "@/components/ui/ec/Box";
 import BoxHeading from "@/components/ui/ec/BoxHeading";
 import config from "@/config/config";
 import useCart from "@/hooks/useCart";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
-import { TPaymentMethod } from "@/types/paymentMethod";
-import TShippingCharges from "@/types/shippingCharge";
 import { useFormContext } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
-import PaymentMethods from "./PaymentMethods";
+import { ShoppingBag } from "lucide-react";
+import { ReactNode } from "react";
+import EcButton from "@/components/shared/EcButton/EcButton";
 
 const OrderNow = ({
-  shippingCharges,
   errorMessages,
-  // handleOrder removed
   isLoading,
   totalCost,
   costLoading,
   isSuccess,
-  paymentMethods,
   children,
+  paymentMethodsMobileSlot,
+  shippingAreaSlot,
 }: {
-  shippingCharges: TShippingCharges[];
   errorMessages: string[];
-  handleOrder?: () => Promise<void>; // kept optional in type for now to avoid breaking parent if not updated perfectly, but unused
   isLoading?: boolean;
   totalCost?: number;
   costLoading?: boolean;
   isSuccess?: boolean;
-  paymentMethods: TPaymentMethod[];
   children?: React.ReactNode;
+  paymentMethodsMobileSlot: ReactNode;
+  shippingAreaSlot: ReactNode;
 }) => {
   const { data } = useCart();
 
@@ -58,23 +55,23 @@ const OrderNow = ({
   // No local click handler needed, form submit handles it.
 
   return (
-    <Box className="bg-white px-4 pt-2 pb-4 border">
-      <BoxHeading>অর্ডারের সারসংক্ষেপ</BoxHeading>
+    <Box className="bg-white px-4 py-2 border">
+      <BoxHeading className="flex items-center gap-2">
+        <ShoppingBag className="text-lg text-primary" />
+        <span className="text-lg">অর্ডারের সারসংক্ষেপ</span>
+      </BoxHeading>
 
       {children}
 
       <CartTotalCalculations
-        shippingCharges={shippingCharges}
         totalCost={totalCost}
         costLoading={costLoading}
         hideSubtotal={true}
         shippingCostExceptFirst={shippingCostExceptFirst}
+        shippingAreaSlot={shippingAreaSlot}
       />
       <div className="order-3 lg:order-4 lg:hidden">
-        <PaymentMethods
-          paymentMethods={paymentMethods}
-          idPrefix="mobile-payment"
-        />
+        {paymentMethodsMobileSlot}
       </div>
       {/* Apply Coupon Section */}
       <div className="py-2">

@@ -1,11 +1,11 @@
 "use client";
 
-import ContainerMax from "@/components/containerMax/ContainerMax";
-import Paginate from "@/components/ui/shared/paginate/Paginate";
-import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import Paginate from "@/components/shared/paginate/Paginate";
 import { useQueryParams } from "@/hooks/useQueryParams";
-import FilterSkeleton from "./FilterSkeleton";
+import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
 import { Suspense } from "react";
+import FilterSkeleton from "./FilterSkeleton";
 import ProductGrid from "./ProductGrid";
 
 type ShopContentProps = {

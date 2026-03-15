@@ -1,6 +1,6 @@
 "use client";
-import EcButton from "@/components/EcButton/EcButton";
-import ContainerMax from "@/components/containerMax/ContainerMax";
+import EcButton from "@/components/shared/EcButton/EcButton";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";

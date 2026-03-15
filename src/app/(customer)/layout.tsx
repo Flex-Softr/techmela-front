@@ -1,11 +1,11 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
 import FloatingContact from "@/components/floatingContact/FloatingContact";
 import JumpToTopBtn from "@/components/jumpToTopBtn/JumpToTopBtn";
-import Footer from "@/components/ui/shared/footer/Footer";
-import Header from "@/components/ui/shared/header/Header";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import Footer from "@/components/shared/footer/Footer";
+import Header from "@/components/shared/header/Header";
 import { ReactNode } from "react";
-import Sidebar from "./_components/Sidebar";
 import CustomerProtection from "./_components/CustomerProtection";
+import Sidebar from "./_components/Sidebar";
 
 type Props = {
   children: ReactNode;

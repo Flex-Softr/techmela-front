@@ -1,6 +1,6 @@
 "use client";
 
-import EcButton from "@/components/EcButton/EcButton";
+import EcButton from "@/components/shared/EcButton/EcButton";
 import {
   Dialog,
   DialogContent,

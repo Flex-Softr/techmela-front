@@ -1,10 +1,10 @@
 "use client";
 
 import NoProductsFound from "@/app/(public)/shop/components/NoProductsFound";
-import ContainerMax from "@/components/containerMax/ContainerMax";
 import ProductCard from "@/components/productCards/ProductCard";
 import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
-import Paginate from "@/components/ui/shared/paginate/Paginate";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import Paginate from "@/components/shared/paginate/Paginate";
 import { useGetBestSellingProductsQuery } from "@/redux/features/products/productApi";
 import { TProduct } from "@/types/products/product";
 import { useSearchParams } from "next/navigation";

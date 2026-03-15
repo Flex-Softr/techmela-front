@@ -3,20 +3,12 @@
 import { toast } from "@/components/ui/use-toast";
 import { resetCoupon } from "@/redux/features/order/couponInfo";
 import { useCreateOrderMutation } from "@/redux/features/order/orderApi";
-import {
-  setPaymentInfo,
-  setPaymentInfoError,
-} from "@/redux/features/order/paymentInfo";
-import {
-  setShippingInfo,
-  setShippingInfoError,
-} from "@/redux/features/order/shippingInfo";
+import { setShippingInfo } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { TPaymentMethod } from "@/types/paymentMethod";
 import { TGenericErrorResponse } from "@/types/response";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useCart from "./useCart";
 
 type TCheckoutFormData = {
@@ -30,11 +22,9 @@ type TCheckoutFormData = {
 };
 
 const useOrderSubmit = ({
-  paymentMethods,
   calculatedTotal,
   orderSource,
 }: {
-  paymentMethods: TPaymentMethod[];
   calculatedTotal: number;
   orderSource?: { name: string; url?: string };
 }) => {
@@ -48,26 +38,8 @@ const useOrderSubmit = ({
   const [limitModalStatus, setLimitModalStatus] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Redux Selectors
-  // const shippingInfo = useAppSelector((state) => state.shippingInfo);
-  // const paymentInfo = useAppSelector((state) => state.paymentInfo);
   const shippingClass = useAppSelector((state) => state.shippingClass);
   const couponInfo = useAppSelector((state) => state.coupon);
-
-  // Initial Setup
-  useEffect(() => {
-    const savedShippingInfo = JSON.parse(
-      localStorage.getItem("shippingAddress") || "{}"
-    );
-
-    dispatch(setPaymentInfo({ selectedPaymentMethod: paymentMethods[0] }));
-    dispatch(setPaymentInfoError({ errors: null }));
-
-    return () => {
-      dispatch(setShippingInfo(savedShippingInfo));
-      dispatch(setShippingInfoError({ errors: null }));
-    };
-  }, [dispatch, paymentMethods]);
 
   const handlePlaceOrder = async (data: TCheckoutFormData) => {
     setErrorMessages([]);
@@ -96,21 +68,8 @@ const useOrderSubmit = ({
     dispatch(setShippingInfo(shippingData));
     localStorage.setItem("shippingAddress", JSON.stringify(shippingData));
 
-    // 2. Construct Payment Info
+    // 2. Construct Order Info
     const selectedPaymentId = data.paymentMethod;
-    const selectedPaymentMethod = paymentMethods.find(
-      (p) => p._id === selectedPaymentId
-    );
-
-    if (selectedPaymentMethod) {
-      const paymentDetails = data.paymentDetails || {};
-      dispatch(
-        setPaymentInfo({
-          selectedPaymentMethod,
-          paymentDetails,
-        })
-      );
-    }
 
     // 3. Validation Check (Redux State based)
     // Note: React Hook Form handles field validation before this function is called.

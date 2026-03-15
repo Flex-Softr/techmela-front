@@ -1,9 +1,9 @@
 "use client";
 
-import EcButton from "@/components/EcButton/EcButton";
+import EcButton from "@/components/shared/EcButton/EcButton";
 import { Button } from "@/components/ui/button";
 import Box from "@/components/ui/ec/Box";
-import CollapsibleFilterSection from "@/components/ui/ec/CollapsibleFilterSection";
+import CollapsibleFilterSection from "./CollapsibleFilterSection";
 import {
   Sheet,
   SheetClose,

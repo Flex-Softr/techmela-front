@@ -19,7 +19,7 @@ import {
   MdStar,
   MdVerified,
 } from "react-icons/md";
-import logo from "../../../../../../public/images/logo/Logo.png";
+import logo from "../../../../../../public/images/logo/logo.png";
 import SalesOrderForm from "./SalesOrderForm";
 
 type Props = {

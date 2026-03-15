@@ -1,6 +1,6 @@
 "use client";
 
-import ErrorMessage from "@/components/errorMessage/ErrorMessage";
+import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import { Button } from "@/components/ui/button";
 import { useSingleOrderQuery } from "@/redux/features/order/orderApi";
 import { Loader2 } from "lucide-react";
@@ -97,7 +97,7 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
           </a>
         </div>
 
-        <Button asChild variant="outline" className="mt-4">
+        <Button asChild className="mt-4">
           <Link href="/">হোম পেজে ফিরে যান</Link>
         </Button>
       </div>

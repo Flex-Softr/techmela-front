@@ -1,9 +1,9 @@
 "use client";
 
-import ContainerMax from "@/components/containerMax/ContainerMax";
 import CategoryCard from "@/components/home/category/CategoryCard";
 import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import {
   Carousel,
   CarouselApi,

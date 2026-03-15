@@ -1,5 +1,5 @@
 "use client";
-import ErrorMessage from "@/components/errorMessage/ErrorMessage";
+import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import {
   Card,
   CardDescription,

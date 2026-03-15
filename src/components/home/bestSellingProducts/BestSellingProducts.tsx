@@ -1,7 +1,7 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
 import ProductCard from "@/components/productCards/ProductCard";
 import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { Button } from "@/components/ui/button";
 import { TProduct } from "@/types/products/product";
 import serverSideFetcher from "@/utilities/serverSideFetcher";

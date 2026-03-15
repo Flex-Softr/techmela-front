@@ -1,7 +1,7 @@
-import ContainerMax from "@/components/containerMax/ContainerMax";
-import Box from "@/components/ui/ec/Box";
+import ShopBanner from "@/app/(public)/shop/components/ShopBanner";
 import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
-import ShopBanner from "@/components/ShopBanner/ShopBanner";
+import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import Box from "@/components/ui/ec/Box";
 
 export default function ShopLoading() {
   return (
