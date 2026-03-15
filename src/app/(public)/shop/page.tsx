@@ -4,7 +4,16 @@ import ShopContent from "./components/ShopContent";
 import ShopFiltersFetcher from "./components/ShopFiltersFetcher";
 
 export const metadata: Metadata = {
-  title: "শপ",
+  title: "ইসলামিক বইয়ের বিশাল সংগ্রহ | সিদ্দীকিয়া প্রকাশনী",
+  description:
+    "সিদ্দীকিয়া প্রকাশনীর অনলাইন শপে আপনাকে স্বাগতম। এখানে পাবেন দেশি-বিদেশি লেখকের কয়েক হাজার ইসলামিক বই, মাদরাসার কিতাব এবং গবেষণামূলক কিতাবসমূহ।",
+  keywords: [
+    "অনলাইন ইসলামিক শপ",
+    "ইসলামিক বই সংগ্রহ",
+    "মাদরাসার কিতাব কিনুন",
+    "Islamic Book Shop Bangladesh",
+    "Buy Islamic Books Online",
+  ].join(", "),
 };
 
 const ShopPage = async ({

@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import {
   FaFacebook,
@@ -7,6 +8,18 @@ import {
   FaYoutube,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+
+export const metadata: Metadata = {
+  title: "স্টোর লোকেশন | সিদ্দীকিয়া প্রকাশনী",
+  description:
+    "সিদ্দীকিয়া প্রকাশনীর শোরুমের ঠিকানা এবং ম্যাপ লোকেশন। সরাসরি আমাদের শোরুম থেকে প্রিয় ইসলামিক বইগুলো সংগ্রহ করতে ডেমরা, ঢাকাস্থ আমাদের লোকেশনে চলে আসুন।",
+  keywords: [
+    "সিদ্দীকিয়া প্রকাশনী শোরুম",
+    "Store Location Siddikia Prokashoni",
+    "Demra Islamic Book Shop",
+    "বক্সনগর সারুলিয়া ডেমরা ঢাকা",
+  ].join(", "),
+};
 
 const StoreLocationPage = () => {
   return (
