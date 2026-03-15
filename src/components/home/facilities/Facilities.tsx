@@ -26,21 +26,22 @@ const facilities = [
 
 const Facilities = () => {
   return (
-    <section className="py-4 md:py-6 bg-accent/30">
+    <section className="py-2 md:py-6 bg-accent/30">
       <ContainerMax>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
           {facilities.map((item, index) => (
             <div
               key={index}
-              className="group p-4 bg-white rounded-xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/20 transition-all duration-300 flex flex-col items-center text-center"
+              className="group p-3 md:p-4 bg-white rounded-xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/20 transition-all duration-300 flex flex-col items-center text-center"
             >
-              <div className="mb-2 p-2 bg-primary/5 rounded-full group-hover:scale-110 transition-transform duration-300">
-                {item.icon}
+              <div className="mb-1 md:mb-2 p-1.5 md:p-2 bg-primary/5 rounded-full group-hover:scale-110 transition-transform duration-300">
+                {/* Scale icon down slightly for mobile */}
+                <div className="scale-75 md:scale-100">{item.icon}</div>
               </div>
-              <h3 className="text-lg font-bold text-foreground mb-2">
+              <h3 className="text-xs md:text-lg font-bold text-foreground mb-1 md:mb-2 line-clamp-1 md:line-clamp-none">
                 {item.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-[10px] md:text-sm text-muted-foreground leading-tight md:leading-relaxed line-clamp-2 md:line-clamp-none">
                 {item.description}
               </p>
             </div>

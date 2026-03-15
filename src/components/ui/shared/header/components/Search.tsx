@@ -1,16 +1,17 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useDebounce } from "@/hooks/useDebounce";
+import useTypingPlaceholder from "@/hooks/useTypingPlaceholder";
 import { getImageSrc } from "@/lib/utils";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
+import { TProduct } from "@/types/products/product";
+import { TVariableProduct } from "@/types/products/variableProduct";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { ApiResponse } from "./searchProductType/SearchProductType";
-import { TProduct } from "@/types/products/product";
-import { TVariableProduct } from "@/types/products/variableProduct";
-import { useDebounce } from "@/hooks/useDebounce";
 
 /* -------------------- type guards -------------------- */
 const isVariableProduct = (
@@ -32,6 +33,10 @@ const Search = () => {
   const debouncedSearchValue = useDebounce(searchValue, 400);
 
   const [showSuggestions, setShowSuggestions] = useState(true);
+
+  const placeholders = ["পছন্দের বই খুঁজুন...", "বইয়ের নাম দিয়ে সার্চ করুন..."];
+
+  const typingPlaceholder = useTypingPlaceholder(placeholders);
 
   const { data, isLoading, isError } = useFindSearchProductQuery<ApiResponse>(
     debouncedSearchValue,
@@ -72,7 +77,7 @@ const Search = () => {
           type="text"
           value={searchValue}
           onChange={handleInputChange}
-          placeholder="পছন্দের বই খুঁজুন..."
+          placeholder={typingPlaceholder}
           className="w-full h-[44px] px-4 text-sm outline-none border border-primary rounded-full pr-16"
         />
 

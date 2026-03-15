@@ -9,7 +9,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import TCategory from "@/types/categories/categories";
-import { TTag } from "@/types/tags/tag";
 import { X } from "lucide-react";
 import { useRef } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
@@ -17,13 +16,11 @@ import ProductFilter from "./ProductFilter";
 
 const ProductFilterContent = ({
   searchParams,
-  tags,
   categories,
   minPrice,
   maxPrice,
 }: {
   searchParams: Record<string, string | string[] | undefined>;
-  tags: TTag[];
   categories: TCategory[];
   minPrice: number;
   maxPrice: number;
@@ -54,7 +51,6 @@ const ProductFilterContent = ({
   const filterContent = (
     <ProductFilter
       searchParams={searchParams}
-      tags={tags}
       categories={categories}
       sheetCloseRef={sheetCloseRef}
       minPrice={minPrice}

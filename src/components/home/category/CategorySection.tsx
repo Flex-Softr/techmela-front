@@ -69,7 +69,14 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
             plugins={[plugin.current]}
             className="w-full relative"
           >
-            <CarouselContent className="-ml-2 md:-ml-3 py-4">
+            <CarouselContent
+              className={cn(
+                "-ml-2 md:-ml-3 py-4",
+                categories.length < 4 && "justify-center",
+                categories.length < 6 && "md:justify-center",
+                categories.length < 8 && "lg:justify-center"
+              )}
+            >
               {categories.map((category) => (
                 <CarouselItem
                   key={category._id}

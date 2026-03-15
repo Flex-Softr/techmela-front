@@ -3,7 +3,7 @@ import BannerCarousel from "./BannerCarousel";
 
 const Banner = async () => {
   return (
-    <section className="mt-2 md:mt-4">
+    <section className="mt-4">
       <ContainerMax>
         <BannerCarousel />
       </ContainerMax>

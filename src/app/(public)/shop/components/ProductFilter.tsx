@@ -3,7 +3,6 @@ import Box from "@/components/ui/ec/Box";
 import CollapsibleFilterSection from "@/components/ui/ec/CollapsibleFilterSection";
 import { useDebounce } from "@/hooks/useDebounce";
 import TCategory from "@/types/categories/categories";
-import { TTag } from "@/types/tags/tag";
 import { useRouter, useSearchParams } from "next/navigation";
 import { RefObject, useEffect, useRef, useState } from "react";
 import CategorySelector from "./filters/CategorySelector";
@@ -11,7 +10,6 @@ import PriceRangeSlider from "./priceRange/PriceRange";
 
 type ProductFilterProps = {
   searchParams: Record<string, string | string[] | undefined>;
-  tags: TTag[];
   categories: TCategory[];
   sheetCloseRef: RefObject<HTMLButtonElement | null>;
   minPrice: number;
@@ -34,7 +32,6 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     Number(searchParams.minPrice) || minPrice,
     Number(searchParams.maxPrice) || maxPrice,
   ]);
-  const [tagParams, setTagParams] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const debouncedPrice = useDebounce(priceFilterInitialState, 500);
@@ -112,14 +109,6 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       params.set("category", uniqueCategories.join(","));
     }
 
-    // Add tags if available
-    if (tagParams) {
-      const parts = tagParams.split("=");
-      if (parts.length === 2) {
-        params.set(parts[0], parts[1]);
-      }
-    }
-
     // Update the URL with the filters applied
     router.push(`/shop?${params.toString()}`);
 
@@ -133,13 +122,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     isClearingRef.current = true;
     setCsSearchParams({});
     setPriceFilterInitialState([minPrice, maxPrice]);
-    setTagParams("");
     setSelectedCategories([]); // Clear all categories
     sheetCloseRef?.current?.click();
     router.push("/shop"); // Reset URL to base
   };
 
-  // Auto-apply filters when any filter state changes
+  // Auto-apply filters
   useEffect(() => {
     if (isClearingRef.current) {
       isClearingRef.current = false;
@@ -147,7 +135,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     }
     handleApplyFilters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedPrice, selectedCategories, tagParams]);
+  }, [debouncedPrice, selectedCategories]);
 
   return (
     <Box className="bg-white lg:rounded-xl lg:shadow-sm lg:border lg:border-border/50 p-0 lg:p-3 space-y-1">
