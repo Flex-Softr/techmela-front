@@ -23,7 +23,7 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
       <div className="size-20 sm:size-24 md:size-32 rounded-full flex justify-center items-center bg-gray-50 border border-gray-100 group-hover:bg-primary/5 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-300 overflow-hidden shadow-sm">
         <Image
           src={getImageSrc(category?.image?.src)}
-          alt={category?.image?.alt || ""}
+          alt={category?.image?.alt || category.name}
           width={80}
           height={80}
           className="mx-auto transition-all object-contain p-3 w-full h-full"

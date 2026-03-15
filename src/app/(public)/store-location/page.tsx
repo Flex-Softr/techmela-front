@@ -1,3 +1,4 @@
+import JsonLd from "@/components/shared/JsonLd";
 import { Metadata } from "next";
 import Image from "next/image";
 import {
@@ -19,11 +20,34 @@ export const metadata: Metadata = {
     "Demra Islamic Book Shop",
     "বক্সনগর সারুলিয়া ডেমরা ঢাকা",
   ].join(", "),
+  alternates: {
+    canonical: "https://siddikiaprokashoni.com/store-location",
+  },
 };
 
 const StoreLocationPage = () => {
   return (
     <div className="min-h-screen bg-gray-50/30 font-hind-siliguri">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "হোম",
+              item: "https://siddikiaprokashoni.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "স্টোর লোকেশন",
+              item: "https://siddikiaprokashoni.com/store-location",
+            },
+          ],
+        }}
+      />
       {/* Premium Hero Section */}
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary">
         {/* Custom Brand Image with Overlay */}

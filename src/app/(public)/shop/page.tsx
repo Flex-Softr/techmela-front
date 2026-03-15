@@ -1,4 +1,5 @@
 import ShopBanner from "@/app/(public)/shop/components/ShopBanner";
+import JsonLd from "@/components/shared/JsonLd";
 import { Metadata } from "next";
 import ShopContent from "./components/ShopContent";
 import ShopFiltersFetcher from "./components/ShopFiltersFetcher";
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
     "Islamic Book Shop Bangladesh",
     "Buy Islamic Books Online",
   ].join(", "),
+  alternates: {
+    canonical: "https://siddikiaprokashoni.com/shop",
+  },
 };
 
 const ShopPage = async ({
@@ -23,6 +27,26 @@ const ShopPage = async ({
 }) => {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "হোম",
+              item: "https://siddikiaprokashoni.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "শপ",
+              item: "https://siddikiaprokashoni.com/shop",
+            },
+          ],
+        }}
+      />
       <ShopBanner />
       <ShopContent>
         <ShopFiltersFetcher searchParams={searchParams} />

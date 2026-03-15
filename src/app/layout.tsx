@@ -57,6 +57,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: "https://siddikiaprokashoni.com",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -95,6 +98,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 "https://siddikiaprokashoni.com/shop?searchTerm={search_term_string}",
               "query-input": "required name=search_term_string",
             },
+          }}
+        />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "হোম",
+                item: "https://siddikiaprokashoni.com",
+              },
+            ],
           }}
         />
         <StoreProvider>

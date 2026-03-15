@@ -1,3 +1,4 @@
+import JsonLd from "@/components/shared/JsonLd";
 import { Metadata } from "next";
 import Image from "next/image";
 import {
@@ -21,11 +22,58 @@ export const metadata: Metadata = {
     "Islamic Publisher Phone Number",
     "Siddikia Prokashoni Address",
   ].join(", "),
+  alternates: {
+    canonical: "https://siddikiaprokashoni.com/contact-us",
+  },
 };
 
 const ContactUsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50/50 font-hind-siliguri">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "হোম",
+              item: "https://siddikiaprokashoni.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "যোগাযোগ",
+              item: "https://siddikiaprokashoni.com/contact-us",
+            },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "সরাসরি বই কেনার জন্য শো-রুম কোথায়?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "আমাদের শো-রুম ঢাকার বক্সনগর, সারুলিয়া, ডেমরা এলাকায় অবস্থিত। বিস্তারিত ঠিকানার জন্য স্টোর লোকেশন পেজ দেখুন।",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "আপনাদের হেল্পলাইন নম্বর কত?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "আমাদের হেল্পলাইন নম্বর হলো ০১৬০২-৪৩১১৬৭। যেকোনো প্রয়োজনে আমাদের কল করতে পারেন।",
+              },
+            },
+          ],
+        }}
+      />
       {/* Hero Section */}
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary font-hind-siliguri">
         {/* New Generated Brand Image with Overlay */}

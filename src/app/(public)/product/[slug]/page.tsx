@@ -31,6 +31,9 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
       title: product?.seoData?.metaTitle || product?.title,
       description: product?.seoData?.metaDescription,
     },
+    alternates: {
+      canonical: `https://siddikiaprokashoni.com/product/${params.slug}`,
+    },
   };
 }
 
@@ -93,9 +96,35 @@ const SingleProductPage = async ({ params }: TProps) => {
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "হোম",
+        item: "https://siddikiaprokashoni.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "শপ",
+        item: "https://siddikiaprokashoni.com/shop",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.title,
+        item: `https://siddikiaprokashoni.com/product/${product.slug}`,
+      },
+    ],
+  };
+
   return (
     <section>
       <JsonLd data={productJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <ContainerMax>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
           <Box className="shadow-none ring-2 lg:mt-5">

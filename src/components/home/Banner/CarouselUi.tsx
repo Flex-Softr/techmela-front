@@ -16,7 +16,7 @@ const CarouselUi = ({ slider }: { slider: TSliders }) => {
       <Image
         className="w-full h-full object-fill transition-transform duration-700"
         src={getImageSrc(image?.src)}
-        alt={image?.src || "Book Store Banner"}
+        alt={image?.alt || "সিদ্দীকিয়া প্রকাশনী ইসলামিক বই ব্যানার"}
         height={1200}
         width={1920}
         priority

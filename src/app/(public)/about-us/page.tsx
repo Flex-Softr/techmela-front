@@ -1,3 +1,4 @@
+import JsonLd from "@/components/shared/JsonLd";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,11 +22,58 @@ export const metadata: Metadata = {
     "About Siddikia Prokashoni",
     "Islamic Publisher Bangladesh",
   ].join(", "),
+  alternates: {
+    canonical: "https://siddikiaprokashoni.com/about-us",
+  },
 };
 
 const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-primary/10 font-hind-siliguri">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "হোম",
+              item: "https://siddikiaprokashoni.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "আমাদের সম্পর্কে",
+              item: "https://siddikiaprokashoni.com/about-us",
+            },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "সিদ্দীকিয়া প্রকাশনী কোন ধরনের বই প্রকাশ করে?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "সিদ্দীকিয়া প্রকাশনী আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক গবেষণামূলক ইসলামিক বই, মাদরাসার কিতাব এবং দ্বীনি সাহিত্যের কিতাব প্রকাশ করে।",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "দারুননাজাত মাদরাসার সাথে সিদ্দীকিয়া প্রকাশনীর সম্পর্ক কী?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "সিদ্দীকিয়া প্রকাশনী ঐতিহ্যবাহী দারুননাজাত মাদরাসা কিতাব বিভাগের একটি প্রকাশনা প্রতিষ্ঠান।",
+              },
+            },
+          ],
+        }}
+      />
       {/* Premium Hero Section */}
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary mb-12">
         {/* Bespoke Brand Image with Overlay */}
