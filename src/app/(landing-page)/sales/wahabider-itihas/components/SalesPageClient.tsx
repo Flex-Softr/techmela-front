@@ -20,7 +20,7 @@ import {
   MdVerified,
 } from "react-icons/md";
 import SalesOrderForm from "./SalesOrderForm";
-
+import logo from "../../../../../../public/logo/logo.png";
 type Props = {
   product: TSingleProduct | undefined;
   shippingCharges: TShippingCharges[];
@@ -475,7 +475,7 @@ const SalesPageClient = ({
       <header className="bg-white py-3 shadow-sm flex items-center justify-between sticky top-0 z-50 border-b border-gray-100 px-4 lg:px-10">
         <Link href="/">
           <Image
-            src="/images/logo/logo.png"
+            src={logo}
             alt="Siddikia Prokashoni"
             width={160}
             height={44}

@@ -2,6 +2,7 @@ import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import logo from "../../../../public/logo/logo.png";
 import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
 const companyLinks = [
@@ -29,8 +30,8 @@ const MainFooterContent = () => {
             <Link href="/" className="flex">
               <div className="bg-white rounded-md">
                 <Image
-                  src="/images/logo/logo.png"
-                  alt="কোম্পানি লোগো"
+                  src={logo}
+                  alt="Siddikiya Prokashoni Logo"
                   width={150}
                   height={50}
                   className="w-28 h-[46.67px] md:w-36 md:h-[60px] rounded-md"

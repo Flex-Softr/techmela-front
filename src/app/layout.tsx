@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             "@type": "Organization",
             name: "সিদ্দীকিয়া প্রকাশনী",
             url: "https://siddikiaprokashoni.com",
-            logo: "https://siddikiaprokashoni.com/images/logo/logo.png",
+            logo: "https://siddikiaprokashoni.com/logo/logo.png",
             contactPoint: {
               "@type": "ContactPoint",
               telephone: "+8801602431167",
