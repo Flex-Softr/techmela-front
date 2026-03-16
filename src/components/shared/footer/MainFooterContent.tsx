@@ -3,7 +3,6 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
-import logo from "../../../../public/images/logo/logo.png";
 
 const companyLinks = [
   { name: "শপ", url: "/shop" },
@@ -30,7 +29,7 @@ const MainFooterContent = () => {
             <Link href="/" className="flex">
               <div className="bg-white rounded-md">
                 <Image
-                  src={logo}
+                  src="/images/logo/logo.png"
                   alt="কোম্পানি লোগো"
                   width={150}
                   height={50}

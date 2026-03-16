@@ -15,7 +15,6 @@ import { usePathname } from "next/navigation"; // Import usePathname to get the 
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import MenuBar from "./MenuBar";
-import logo from "../../../../../public/images/logo/logo.png";
 
 const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +44,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
             <Link href="/" onClick={() => setIsOpen(false)}>
               <div className="bg-primary/5 rounded flex items-center justify-center p-1">
                 <Image
-                  src={logo}
+                  src="/images/logo/logo.png"
                   alt="Company logo"
                   height={40}
                   width={100}

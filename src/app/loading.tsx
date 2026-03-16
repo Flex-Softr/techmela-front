@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logo from "../../public/images/logo/logo.png";
 
 const Loading = () => {
   return (
@@ -7,7 +6,7 @@ const Loading = () => {
       {/* Logo-like Branding */}
       <div className="flex items-center space-x-2">
         <Image
-          src={logo}
+          src="/images/logo/logo.png"
           alt="Nora logo"
           width={100}
           height={100}

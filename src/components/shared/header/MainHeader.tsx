@@ -6,15 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import CartLinksAndAccount from "./components/CartLinksAndAccount";
 import Search from "./components/Search";
-import logo from "../../../../public/images/logo/logo.png";
-
 const MainHeader = () => {
   return (
     <div className="flex gap-5 justify-between lg:justify-evenly items-center px-2 lg:px-10 py-2 bg-primary">
       <div className="order-2 lg:order-1 bg-white rounded-md">
         <Link href="/">
           <Image
-            src={logo}
+            src="/images/logo/logo.png"
             alt="Company logo"
             height={100}
             width={200}
