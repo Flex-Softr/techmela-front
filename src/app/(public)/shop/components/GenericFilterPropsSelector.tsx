@@ -5,9 +5,16 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
-import TCategory from "@/types/categories/categories";
 import { ChevronDown } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
+
+export type TGenericItem = {
+  slug: string;
+  name: string;
+  productCount?: number;
+  subcategories?: TGenericItem[];
+  [key: string]: unknown; // Allow any extra fields (e.g. isActive, _id)
+};
 
 const GenericFilterPropsSelector = ({
   title,
@@ -16,41 +23,39 @@ const GenericFilterPropsSelector = ({
   items,
   headerClassName,
 }: {
-  filterBy?: string;
   title: string;
   selectedValues: string[];
   setSelectedValues: Dispatch<SetStateAction<string[]>>;
-  items: TCategory[];
-  searchParams?: Record<string, string | string[] | undefined>;
+  items: TGenericItem[];
   headerClassName?: string;
 }) => {
   const [isOpen, setIsOpen] = useState(true);
 
-  /** Helper to collect all nested child IDs recursively */
-  const getAllChildIds = (category: TCategory): string[] => {
-    const ids: string[] = [];
-    if (category.subcategories?.length) {
-      for (const child of category.subcategories) {
-        ids.push(child.slug, ...getAllChildIds(child as unknown as TCategory));
+  /** Helper to collect all nested child slugs recursively */
+  const getAllChildSlugs = (item: TGenericItem): string[] => {
+    const slugs: string[] = [];
+    if (item.subcategories?.length) {
+      for (const child of item.subcategories) {
+        slugs.push(child.slug, ...getAllChildSlugs(child));
       }
     }
-    return ids;
+    return slugs;
   };
 
-  /** Toggle single category id */
-  const toggle = (slug: string, checked: boolean, category?: TCategory) => {
+  /** Toggle single item slug */
+  const toggle = (slug: string, checked: boolean, item?: TGenericItem) => {
     let updated = [...selectedValues];
 
     if (checked) {
       updated.push(slug);
-      if (category && category.subcategories?.length) {
-        const childSlugs = getAllChildIds(category);
+      if (item && item.subcategories?.length) {
+        const childSlugs = getAllChildSlugs(item);
         updated = Array.from(new Set([...updated, ...childSlugs]));
       }
     } else {
       updated = updated.filter((s) => s !== slug);
-      if (category && category.subcategories?.length) {
-        const childSlugs = getAllChildIds(category);
+      if (item && item.subcategories?.length) {
+        const childSlugs = getAllChildSlugs(item);
         updated = updated.filter((id) => !childSlugs.includes(id));
       }
     }
@@ -58,17 +63,17 @@ const GenericFilterPropsSelector = ({
     setSelectedValues(updated);
   };
 
-  const renderCategories = (categories: TCategory[], level = 0) => {
+  const renderItems = (items: TGenericItem[], level = 0) => {
     return (
       <div className={cn("flex flex-col gap-0.5", level > 0 && "ml-5 mt-0.5")}>
-        {categories.map((cat) => {
-          const isChecked = selectedValues.includes(cat.slug);
+        {items.map((item) => {
+          const isChecked = selectedValues.includes(item.slug);
 
           return (
-            <div key={cat.slug} className="flex flex-col">
+            <div key={item.slug} className="flex flex-col">
               <label
                 className={cn(
-                  "flex items-center gap-2.5 px-2 py-1.5 rounded-md cursor-pointer transition-colors group",
+                  "flex items-center gap-2.5 px-2 py-2 rounded-md cursor-pointer transition-colors group",
                   "hover:bg-primary/5",
                   isChecked && "bg-primary/5"
                 )}
@@ -76,7 +81,7 @@ const GenericFilterPropsSelector = ({
                 <Checkbox
                   checked={isChecked}
                   onCheckedChange={(checked) =>
-                    toggle(cat.slug, Boolean(checked), cat)
+                    toggle(item.slug, Boolean(checked), item)
                   }
                   className="shrink-0"
                 />
@@ -89,19 +94,18 @@ const GenericFilterPropsSelector = ({
                     isChecked && "text-primary font-semibold"
                   )}
                 >
-                  {cat.name}
-                  <span className="ml-1 text-[10px] text-muted-foreground font-normal">
-                    ({cat.productCount || 0})
-                  </span>
+                  {item.name}
+                  {(item.productCount !== undefined) && (
+                    <span className="ml-1 text-[10px] text-muted-foreground font-normal">
+                      ({item.productCount})
+                    </span>
+                  )}
                 </span>
               </label>
 
-              {cat.subcategories &&
-                cat.subcategories.length > 0 &&
-                renderCategories(
-                  cat.subcategories as unknown as TCategory[],
-                  level + 1
-                )}
+              {item.subcategories &&
+                item.subcategories.length > 0 &&
+                renderItems(item.subcategories, level + 1)}
             </div>
           );
         })}
@@ -132,7 +136,7 @@ const GenericFilterPropsSelector = ({
           </button>
         </CollapsibleTrigger>
         <CollapsibleContent className="pt-1 pb-1">
-          {renderCategories(items)}
+          {renderItems(items)}
         </CollapsibleContent>
       </Collapsible>
     </div>

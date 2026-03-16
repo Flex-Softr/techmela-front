@@ -42,19 +42,19 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="flex flex-col h-full sm:max-w-sm p-0">
-        <SheetHeader className="border-b px-4 py-2 flex flex-row items-center justify-between space-y-0">
-          <SheetTitle className="text-xl font-medium">Shopping Cart</SheetTitle>
+      <SheetContent className="flex flex-col h-full sm:max-w-md p-0">
+        <SheetHeader className="border-b px-5 py-3 flex flex-row items-center justify-between space-y-0 bg-white">
+          <SheetTitle className="text-lg font-bold">আমার কার্ট</SheetTitle>
           <button
             onClick={() => setOpen(false)}
-            className="rounded-full hover:bg-transparent h-10 w-10 text-gray-500 hover:text-gray-900"
+            className="rounded-full hover:bg-gray-100 h-8 w-8 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
             aria-label="Close cart"
           >
-            <X size={24} />
+            <X size={18} />
           </button>
         </SheetHeader>
 
-        <div className="flex-1 overflow-y-auto px-2 bg-gray-50/50">
+        <div className="flex-1 overflow-y-auto px-5 bg-white">
           {isLoading ? (
             <div className="space-y-3">
               {[1, 2, 3, 4].map((i) => (
@@ -76,7 +76,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
               </Button>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div>
               {cartItems.map((item) => {
                 const product = item.product;
                 const variation = item.variation;
@@ -115,9 +115,9 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                 return (
                   <div
                     key={item._id}
-                    className="flex gap-3 relative group py-3 px-2 bg-white rounded-xl shadow-sm border border-gray-100"
+                    className="flex items-center gap-3 py-2 relative group border-b border-gray-200 last:border-b-0"
                   >
-                    <div className="relative w-16 h-16 flex-shrink-0 border rounded-md overflow-hidden bg-gray-50">
+                    <div className="relative size-16 flex-shrink-0 border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
                       <Image
                         src={getImageSrc(product?.image?.src)}
                         alt={
@@ -130,42 +130,46 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                       />
                     </div>
 
-                    <div className="flex-1 flex flex-col justify-center min-w-0">
-                      <h4 className="text-sm font-medium text-gray-900 leading-tight w-full pr-6">
-                        {product?.title}
-                      </h4>
+                    <div className="flex-1 flex flex-col min-w-0 py-1">
+                      <div className="flex justify-between items-start gap-2">
+                        <h4 className="text-base font-bold text-gray-900 leading-tight line-clamp-2">
+                          {product?.title}
+                        </h4>
+                        <button
+                          onClick={() => handleRemoveFromCart(item._id)}
+                          className="p-1 -mr-1 transition-colors text-red-400 hover:text-red-600"
+                          aria-label="Remove item"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
 
                       {variation && variation.attributes && (
-                        <div className="text-sm text-gray-700 mt-1">
+                        <div className="text-xs text-gray-500 mt-1">
                           {Object.entries(variation.attributes)
                             .map(([key, val]) => `${key}: ${val}`)
                             .join(" | ")}
                         </div>
                       )}
 
-                      <div className="flex items-center gap-2 mt-1.5 text-sm">
-                        <div className="flex items-center gap-1 font-bold text-gray-900">
-                          <span>&#2547;{price}</span>
-                          <span className="text-gray-700 font-normal">
-                            x {item.quantity}
+                      <div className="flex items-center justify-between mt-auto pt-1">
+                        <div className="flex items-center gap-1.5 text-sm font-medium text-gray-700">
+                          <span>
+                            ৳{price} x {item.quantity}
+                          </span>
+                          <span className="text-gray-400">=</span>
+                          <span className="font-bold text-gray-900">
+                            ৳{price * item.quantity}
                           </span>
                         </div>
 
                         {originalPrice && originalPrice > price && (
-                          <div className="text-gray-400 line-through text-sm">
-                            &#2547;{originalPrice}
+                          <div className="text-gray-600 line-through text-sm">
+                            ৳{originalPrice}
                           </div>
                         )}
                       </div>
                     </div>
-
-                    <button
-                      onClick={() => handleRemoveFromCart(item._id)}
-                      className="absolute right-2 bottom-3 p-1.5 transition-colors text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full"
-                      aria-label="Remove item"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
                   </div>
                 );
               })}
@@ -174,18 +178,21 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
         </div>
 
         {cartItems && cartItems.length > 0 && (
-          <div className="border-t pt-3 mt-auto space-y-3 bg-white px-4 pb-4">
-            <div className="flex justify-between items-center text-lg font-bold">
-              <span>Subtotal:</span>
-              <span>&#2547;{totalCost}</span>
+          <div className="border-t pt-4 mt-auto space-y-4 bg-white px-5 pb-6">
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+                সাবটোটাল
+              </span>
+              <span className="text-xl font-bold text-primary">
+                ৳{totalCost}
+              </span>
             </div>
             <Button
-              className="w-full"
-              size="lg"
+              className="w-full h-12 rounded-xl text-base font-bold shadow-none"
               asChild
               onClick={() => setOpen(false)}
             >
-              <Link href="/checkout">Checkout</Link>
+              <Link href="/checkout">চেকআউট করুন</Link>
             </Button>
           </div>
         )}

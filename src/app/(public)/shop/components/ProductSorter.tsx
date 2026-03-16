@@ -1,0 +1,54 @@
+"use client";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useQueryParams } from "@/hooks/useQueryParams";
+import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
+
+const SORT_OPTIONS = [
+  { value: "-updatedAt", label: "Sort by default" },
+  { value: "price", label: "মূল্য: কম → বেশি" },
+  { value: "-price", label: "মূল্য: বেশি → কম" },
+];
+
+const ProductSorter = () => {
+  const { setParam, queryParams } = useQueryParams();
+  const { data: productData } = useGetAllProductsQuery(queryParams);
+
+  const totalProducts = productData?.meta?.total ?? 0;
+  const currentSort = (queryParams.sort as string) || "-updatedAt";
+
+  const handleSortChange = (value: string) => {
+    setParam({ sort: value, page: "1" });
+  };
+
+  return (
+    <div className="flex items-center justify-between gap-3 mb-5 px-1 font-hind-siliguri">
+      <p className="text-sm text-muted-foreground">
+        <span className="font-bold text-gray-800">{totalProducts}</span> টি বই
+      </p>
+
+      <div className="ml-auto">
+        <Select value={currentSort} onValueChange={handleSortChange}>
+          <SelectTrigger className="w-[170px] h-9 bg-white border border-border rounded-lg text-sm font-medium focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-primary/50 focus:outline-none transition-all hover:border-primary/30">
+            <SelectValue placeholder="সাজান" />
+          </SelectTrigger>
+          <SelectContent className="rounded-xl font-hind-siliguri">
+            {SORT_OPTIONS.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  );
+};
+
+export default ProductSorter;

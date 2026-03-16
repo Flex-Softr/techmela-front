@@ -1,12 +1,9 @@
-"use server";
 import config from "@/config/config";
-import { revalidateTag } from "next/cache";
-// import { cookies } from "next/headers";
 import TGenericResponse from "@/types/response";
 import formatParams from "./formatParams";
 
 // has been use same tag in the dashboard as well
-type TTags =
+export type TTags =
   | "products"
   | `product-${string}`
   | `relatedProducts-${string}`
@@ -15,7 +12,8 @@ type TTags =
   | "featuredProducts"
   | "priceRange"
   | "categories"
-  | "tags"
+  | "brands"
+  | "collections"
   | "paymentMethod"
   | "shippingCharge"
   | "sliderBanner"
@@ -39,10 +37,8 @@ const serverSideFetcher = async <T>({
   revalidate,
 }: TProps): Promise<TGenericResponse<T>> => {
   let apiUrl = `${config.api_base_url}/api/v1${url}`;
-  // const accessToken = cookies().get("__app.ec.at")?.value;
   const reqConfig = {
-    // headers: { authorization: `Bearer ${accessToken}` },
-    cache: cache || "force-cache", // ✅ "force-cache" caches forever
+    cache: cache || "force-cache",
     next: { tags, revalidate },
   };
 
@@ -54,8 +50,7 @@ const serverSideFetcher = async <T>({
   const res = await fetch(apiUrl, reqConfig);
 
   if (!res.ok) {
-    // Attempt to extract error message from the response body
-    const errorData = await res.json().catch(() => null); // Prevent JSON parse errors
+    const errorData = await res.json().catch(() => null);
     const errorMessage =
       errorData?.message ||
       errorData?.error ||
@@ -75,11 +70,3 @@ const serverSideFetcher = async <T>({
 };
 
 export default serverSideFetcher;
-
-export async function refetchData(tag: TTags | TTags[]) {
-  if (Array.isArray(tag)) {
-    tag.forEach((t) => revalidateTag(t));
-  } else {
-    revalidateTag(tag);
-  }
-}

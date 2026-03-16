@@ -2,24 +2,21 @@
 
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import Paginate from "@/components/shared/paginate/Paginate";
-import { useQueryParams } from "@/hooks/useQueryParams";
 import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
-import { Suspense } from "react";
-import FilterSkeleton from "./FilterSkeleton";
 import ProductGrid from "./ProductGrid";
+import ProductSorter from "./ProductSorter";
+import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
+import { ShopFiltersProvider, useShopFilters } from "./ShopFiltersContext";
 
 type ShopContentProps = {
   children: React.ReactNode;
+  minPrice?: number;
+  maxPrice?: number;
 };
 
-const ShopContent = ({ children }: ShopContentProps) => {
-  const { queryParams, currentPage, limit } = useQueryParams();
-
-  const {
-    data: productData,
-    isLoading,
-    isFetching,
-  } = useGetAllProductsQuery(queryParams);
+const ShopContentInner = ({ children }: { children: React.ReactNode }) => {
+  const { queryParams, currentPage, limit } = useShopFilters();
+  const { data: productData, isLoading } = useGetAllProductsQuery(queryParams);
 
   const products = productData?.data || [];
   const meta = productData?.meta;
@@ -31,25 +28,26 @@ const ShopContent = ({ children }: ShopContentProps) => {
     <section className="relative pt-0 md:pt-2 px-2 h-full">
       <ContainerMax>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 my-2 md:mb-4">
-          {/* Sidebar Filter */}
-          <div className="hidden lg:block">
-            <Suspense fallback={<FilterSkeleton />}>{children}</Suspense>
-          </div>
+          {/* Sidebar Filter – desktop only */}
+          <div className="hidden lg:block">{children}</div>
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            {/* Mobile Filter */}
-            <div className="lg:hidden mb-4">
-              <Suspense fallback={<FilterSkeleton />}>{children}</Suspense>
-            </div>
+            {/* Filter trigger shows above content on mobile */}
+            <div className="lg:hidden mb-4">{children}</div>
 
-            <ProductGrid
-              products={products}
-              isLoading={isLoading}
-              isFetching={isFetching}
-            />
+            <ProductSorter />
+            {isLoading ? (
+              <ProductGridSkeleton
+                count={6}
+                className="lg:grid-cols-3"
+                itemClassName="h-80"
+              />
+            ) : (
+              <ProductGrid products={products} />
+            )}
 
-            {!isLoading && !isFetching && shouldShowPagination && (
+            {!isLoading && shouldShowPagination && (
               <Paginate
                 totalItems={totalProducts}
                 currentPage={currentPage}
@@ -60,6 +58,14 @@ const ShopContent = ({ children }: ShopContentProps) => {
         </div>
       </ContainerMax>
     </section>
+  );
+};
+
+const ShopContent = ({ children, minPrice, maxPrice }: ShopContentProps) => {
+  return (
+    <ShopFiltersProvider minPrice={minPrice} maxPrice={maxPrice}>
+      <ShopContentInner>{children}</ShopContentInner>
+    </ShopFiltersProvider>
   );
 };
 

@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import BestSellingContent from "./components/BestSellingContent";
 
 export const metadata: Metadata = {
-  title: "সেরা বিক্রিত বইসমূহ | সিদ্দীকিয়া প্রকাশনী",
+  title: "সেরা বিক্রিত বইসমূহ",
   description:
     "সিদ্দীকিয়া প্রকাশনীর সবচেয়ে জনপ্রিয় ও সেরা বিক্রিত ইসলামিক বইগুলোর তালিকা। পাঠকদের পছন্দের শীর্ষে থাকা বইগুলো এখান থেকে সংগ্রহ করুন।",
   keywords: [

@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/dashboard/", "/orders/", "/track-your-order/"],
+      disallow: ["/api/", "/dashboard/", "/orders/", "/_next/", "/public/"],
     },
     sitemap: "https://siddikiaprokashoni.com/sitemap.xml",
   };

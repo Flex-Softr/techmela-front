@@ -13,7 +13,7 @@ import {
 import ContactForm from "./components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "যোগাযোগ করুন | সিদ্দীকিয়া প্রকাশনী",
+  title: "যোগাযোগ করুন",
   description:
     "সিদ্দীকিয়া প্রকাশনীর সাথে যোগাযোগ করুন। আপনার যেকোনো জিজ্ঞাসা, পরামর্শ বা সহায়তার জন্য আমরা সর্বদা প্রস্তুত। আমাদের ঠিকানা, ফোন নম্বর এবং ইমেল এখানে পাবেন।",
   keywords: [

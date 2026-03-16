@@ -6,6 +6,9 @@ import { useCallback, useMemo } from "react";
 
 export type QueryKeys =
   | "category"
+  | "brand"
+  | "collection"
+  | "stock"
   | "status"
   | "search"
   | "sort"
@@ -30,6 +33,9 @@ export const useQueryParams = () => {
 
     const allowedKeys: QueryKeys[] = [
       "category",
+      "brand",
+      "collection",
+      "stock",
       "status",
       "search",
       "sort",

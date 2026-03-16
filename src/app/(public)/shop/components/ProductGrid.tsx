@@ -1,25 +1,12 @@
 import ProductCard from "@/components/productCards/ProductCard";
-import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
 import { TProduct } from "@/types/products/product";
 import NoProductsFound from "./NoProductsFound";
 
 type ProductGridProps = {
   products: TProduct[];
-  isLoading: boolean;
-  isFetching: boolean;
 };
 
-const ProductGrid = ({ products, isLoading, isFetching }: ProductGridProps) => {
-  if (isLoading || isFetching) {
-    return (
-      <ProductGridSkeleton
-        count={6}
-        className="lg:grid-cols-3"
-        itemClassName="h-80"
-      />
-    );
-  }
-
+const ProductGrid = ({ products }: ProductGridProps) => {
   if (!Array.isArray(products) || products.length === 0) {
     return <NoProductsFound />;
   }

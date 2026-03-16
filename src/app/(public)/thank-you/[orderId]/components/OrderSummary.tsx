@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import config from "@/config/config";
 import { getImageSrc } from "@/lib/utils";
-import { refetchData } from "@/utilities/serverSideFetcher";
+import { refetchData } from "@/utilities/actions";
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { useEffect } from "react";

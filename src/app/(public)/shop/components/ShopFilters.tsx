@@ -3,7 +3,6 @@
 import EcButton from "@/components/shared/EcButton/EcButton";
 import { Button } from "@/components/ui/button";
 import Box from "@/components/ui/ec/Box";
-import CollapsibleFilterSection from "./CollapsibleFilterSection";
 import {
   Sheet,
   SheetClose,
@@ -12,159 +11,130 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useDebounce } from "@/hooks/useDebounce";
-import { useQueryParams, type QueryKeys } from "@/hooks/useQueryParams";
-import TCategory from "@/types/categories/categories";
+import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useRef } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
-import CategorySelector from "./CategorySelector";
-import PriceRangeSlider from "./PriceRange";
+import { useShopFilters } from "./ShopFiltersContext";
+import CollapsibleFilterSection from "./CollapsibleFilterSection";
+import TCategory from "@/types/categories/categories";
+import TBrand from "@/types/brands/brands";
+import TCollection from "@/types/collections/collections";
+import CategorySelector from "./categories/CategorySelector";
+import BrandSelectorWrapper from "./brands/BrandSelectorWrapper";
+import CollectionSelectorWrapper from "./collections/CollectionSelectorWrapper";
+import PriceRangeSliderWrapper from "./price-range/PriceRangeSliderWrapper";
+import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
 
 type ShopFiltersProps = {
-  searchParams: Record<string, string | string[] | undefined>;
   categories: TCategory[];
-  minPrice: number;
-  maxPrice: number;
+  brands: TBrand[];
+  collections: TCollection[];
+  priceRange: { minPrice: number; maxPrice: number };
 };
 
 const ShopFilters = ({
-  searchParams,
   categories,
-  minPrice,
-  maxPrice,
+  brands,
+  collections,
+  priceRange,
 }: ShopFiltersProps) => {
   const sheetCloseRef = useRef<HTMLButtonElement>(null);
-  const { setParam, resetParams } = useQueryParams();
-  const isClearingRef = useRef<boolean>(false);
+  const {
+    stockStatus,
+    setStockStatus,
+    clearAllFilters,
+    activeFilterCount,
+    queryParams,
+  } = useShopFilters();
 
-  // Local state for UI components initialized from props to prevent mount-time sync transitions
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
-    const categoryParam = searchParams["category"];
-    if (!categoryParam) return [];
-    return Array.isArray(categoryParam)
-      ? categoryParam
-      : categoryParam.split(",");
-  });
-
-  const [priceFilterState, setPriceFilterState] = useState<number[]>(() => [
-    Number(searchParams.minPrice) || minPrice,
-    Number(searchParams.maxPrice) || maxPrice,
-  ]);
-  const debouncedPrice = useDebounce(priceFilterState, 500);
-
-  // Sync state with URL params
-  useEffect(() => {
-    if (isClearingRef.current) return;
-
-    // Sync Categories
-    const categoryParam = searchParams["category"];
-    let initialSelected: string[] = [];
-    if (categoryParam) {
-      initialSelected = Array.isArray(categoryParam)
-        ? categoryParam
-        : categoryParam.split(",");
-    }
-
-    // Only update if actually different to prevent circular updates
-    setSelectedCategories((prev) => {
-      const sortedPrev = [...prev].sort();
-      const sortedNew = [...initialSelected].sort();
-      if (JSON.stringify(sortedPrev) === JSON.stringify(sortedNew)) return prev;
-      return initialSelected;
-    });
-
-    // Sync Price
-    const minParam = Number(searchParams.minPrice) || minPrice;
-    const maxParam = Number(searchParams.maxPrice) || maxPrice;
-
-    setPriceFilterState((prev) => {
-      if (prev[0] === minParam && prev[1] === maxParam) return prev;
-      return [minParam, maxParam];
-    });
-  }, [searchParams, minPrice, maxPrice]);
-
-  // Handle filter application
-  useEffect(() => {
-    if (isClearingRef.current) {
-      isClearingRef.current = false;
-      return;
-    }
-
-    const isPriceDefault =
-      debouncedPrice[0] === minPrice && debouncedPrice[1] === maxPrice;
-    const isCategoryEmpty = selectedCategories.length === 0;
-
-    const newParams: Partial<Record<QueryKeys, string>> = {
-      minPrice: isPriceDefault ? "" : debouncedPrice[0].toString(),
-      maxPrice: isPriceDefault ? "" : debouncedPrice[1].toString(),
-      category: isCategoryEmpty
-        ? ""
-        : Array.from(new Set(selectedCategories)).join(","),
-    };
-
-    setParam(newParams);
-  }, [debouncedPrice, selectedCategories, minPrice, maxPrice, setParam]);
-
-  const handleClearAllFilters = () => {
-    isClearingRef.current = true;
-    setPriceFilterState([minPrice, maxPrice]);
-    setSelectedCategories([]);
-    sheetCloseRef?.current?.click();
-    resetParams();
-  };
-
-  // Count active filters for mobile badge
-  const activeFilterCount = useMemo(() => {
-    let count = 0;
-    if (searchParams.category) count += 1;
-    if (searchParams.minPrice || searchParams.maxPrice) count += 1;
-    return count;
-  }, [searchParams]);
+  const { data: productData } = useGetAllProductsQuery(queryParams);
+  const totalProducts = productData?.meta?.total ?? 0;
 
   const filterContent = (
-    <Box className="bg-white lg:rounded-xl lg:shadow-sm lg:border lg:border-border/50 p-0 lg:p-3 space-y-1">
+    <Box className="bg-white lg:rounded-xl lg:border lg:border-border/50 p-0 lg:p-3 space-y-1 font-hind-siliguri">
       {/* Header with title + clear button (Desktop Only) */}
-      <div className="hidden lg:flex items-center justify-between px-3 pt-2 pb-3 border-b border-border/40 mb-2">
+      <div className="hidden lg:flex items-center justify-between px-3 pt-2 pb-2.5 border-b border-border/40">
         <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
           ফিল্টার করুন
         </p>
         <button
-          onClick={handleClearAllFilters}
-          disabled={!Object.keys(searchParams).length}
+          onClick={clearAllFilters}
+          disabled={activeFilterCount === 0}
           className="text-xs text-red-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed font-medium transition-colors"
         >
           সব মুছুন
         </button>
       </div>
 
-      <CollapsibleFilterSection title="মূল্য পরিসীমা">
-        <div className="px-1">
-          <PriceRangeSlider
-            initialState={priceFilterState}
-            setInitialState={setPriceFilterState}
-            min={minPrice}
-            max={maxPrice}
-          />
+      <div className="pt-0 lg:pt-2">
+        <CollapsibleFilterSection title="মূল্য পরিসীমা">
+          <div className="px-1">
+            <PriceRangeSliderWrapper
+              min={priceRange.minPrice}
+              max={priceRange.maxPrice}
+            />
+          </div>
+        </CollapsibleFilterSection>
+      </div>
+
+      <CategorySelector categories={categories} />
+
+      <BrandSelectorWrapper brands={brands} />
+
+      <CollectionSelectorWrapper collections={collections} />
+
+      <CollapsibleFilterSection title="স্টক স্ট্যাটাস">
+        <div className="px-2 py-1 space-y-2">
+          {[
+            { label: "স্টকে আছে", value: "in_stock" },
+            { label: "স্টক শেষ", value: "out_of_stock" },
+            { label: "অল্প আছে", value: "low_stock" },
+          ].map((status) => (
+            <label
+              key={status.value}
+              className="flex items-center gap-3 cursor-pointer group px-2 py-2 rounded-md hover:bg-primary/5 transition-all"
+              onClick={() => {
+                if (stockStatus === status.value) {
+                  setStockStatus("");
+                } else {
+                  setStockStatus(status.value);
+                }
+              }}
+            >
+              <div className="relative flex items-center justify-center">
+                <div className={cn(
+                  "size-5 rounded-full border-2 transition-all flex items-center justify-center",
+                  stockStatus === status.value 
+                    ? "border-primary bg-primary/5" 
+                    : "border-gray-300 group-hover:border-primary/50"
+                )}>
+                  {stockStatus === status.value && (
+                    <div className="size-2.5 rounded-full bg-primary animate-in zoom-in duration-200" />
+                  )}
+                </div>
+              </div>
+              <span className={cn(
+                "text-sm font-medium text-gray-700 transition-colors",
+                stockStatus === status.value && "text-primary font-semibold"
+              )}>
+                {status.label}
+              </span>
+            </label>
+          ))}
         </div>
       </CollapsibleFilterSection>
-
-      <div className="h-px bg-border/40 mx-2" />
-
-      <CategorySelector
-        categories={categories}
-        searchParams={searchParams}
-        selectedCategories={selectedCategories}
-        setSelectedCategories={setSelectedCategories}
-      />
 
       {/* Mobile-only clear button at bottom */}
       <div className="lg:hidden px-2 pt-3 pb-1 border-t border-border/40 mt-2">
         <EcButton
           className="w-full font-bold bg-white border border-red-200 text-red-500 hover:bg-red-50 hover:border-red-400 transition-colors text-sm"
-          onClick={handleClearAllFilters}
+          onClick={() => {
+            clearAllFilters();
+            sheetCloseRef.current?.click();
+          }}
           variant="outline"
-          disabled={!Object.keys(searchParams).length}
+          disabled={activeFilterCount === 0}
         >
           সব ফিল্টার মুছুন
         </EcButton>
@@ -174,12 +144,12 @@ const ShopFilters = ({
 
   return (
     <>
-      <div className="block lg:hidden">
+      <div className="block lg:hidden font-hind-siliguri">
         <Sheet>
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="w-full flex justify-between items-center px-4 py-5 border-2 border-primary/10 hover:border-primary/30 transition-all rounded-xl shadow-sm bg-white"
+              className="w-full flex justify-between items-center px-4 py-5 border-2 border-primary/10 hover:border-primary/30 transition-all rounded-xl bg-white"
             >
               <div className="flex items-center gap-2.5">
                 <FaBarsStaggered className="text-primary w-4 h-4" />
@@ -196,7 +166,7 @@ const ShopFilters = ({
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="w-[85%] sm:w-[360px] p-0 flex flex-col"
+            className="w-[85%] sm:w-[360px] p-0 flex flex-col font-hind-siliguri"
           >
             <SheetHeader className="px-4 py-3 border-b shrink-0">
               <div className="flex items-center justify-between">
@@ -215,8 +185,21 @@ const ShopFilters = ({
                 </SheetClose>
               </div>
             </SheetHeader>
-            <div className="flex-1 overflow-y-auto px-3 py-2">
+            <div className="flex-1 overflow-y-auto scrollbar-hide">
               {filterContent}
+            </div>
+
+            {/* Mobile Sticky Footer */}
+            <div className="p-4 border-t bg-white shrink-0">
+              <Button
+                className="w-full h-12 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl flex justify-between items-center px-6"
+                onClick={() => sheetCloseRef.current?.click()}
+              >
+                <span>ফলাফল দেখুন</span>
+                <span className="bg-white/20 px-2 py-0.5 rounded-lg text-xs">
+                  {totalProducts} টি বই
+                </span>
+              </Button>
             </div>
           </SheetContent>
         </Sheet>
