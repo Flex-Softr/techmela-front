@@ -63,7 +63,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
             </div>
           ) : !cartItems || cartItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-4">
-              <p className="text-gray-500">Your cart is empty</p>
+              <p className="text-gray-500">আপনার কার্ট খালি</p>
               <Button
                 onClick={() => {
                   setOpen(false);
@@ -72,7 +72,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                 variant="outline"
                 className="text-white hover:text-white bg-primary hover:bg-primary"
               >
-                Continue Shopping
+                শপিং চালিয়ে যান
               </Button>
             </div>
           ) : (
@@ -155,17 +155,17 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                       <div className="flex items-center justify-between mt-auto pt-1">
                         <div className="flex items-center gap-1.5 text-sm font-medium text-gray-700">
                           <span>
-                            ৳{price} x {item.quantity}
+                            &#2547;{price} x {item.quantity}
                           </span>
                           <span className="text-gray-400">=</span>
                           <span className="font-bold text-gray-900">
-                            ৳{price * item.quantity}
+                            &#2547;{price * item.quantity}
                           </span>
                         </div>
 
                         {originalPrice && originalPrice > price && (
                           <div className="text-gray-600 line-through text-sm">
-                            ৳{originalPrice}
+                            &#2547;{originalPrice}
                           </div>
                         )}
                       </div>
@@ -184,7 +184,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                 সাবটোটাল
               </span>
               <span className="text-xl font-bold text-primary">
-                ৳{totalCost}
+                &#2547;{totalCost}
               </span>
             </div>
             <Button
