@@ -27,6 +27,7 @@ type ShopFiltersContextType = {
   setPriceFilterState: Dispatch<SetStateAction<number[]>>;
   absMinPrice: number;
   absMaxPrice: number;
+  // eslint-disable-next-line no-unused-vars
   setAbsPriceRange: (_min: number, _max: number) => void;
   clearAllFilters: () => void;
   activeFilterCount: number;
