@@ -109,8 +109,16 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                       (variation?.price as any)?.regularPrice
                     : variation?.regularPrice;
 
+                const itemRegularPrice =
+                  typeof item.price === "object"
+                    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      (item.price as any)?.regularPrice
+                    : undefined;
+
                 const originalPrice =
-                  variationRegularPrice ?? product?.regularPrice;
+                  variationRegularPrice ??
+                  itemRegularPrice ??
+                  product?.regularPrice;
 
                 return (
                   <div
@@ -132,7 +140,10 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
 
                     <div className="flex-1 flex flex-col min-w-0 py-1">
                       <div className="flex justify-between items-start gap-2">
-                        <h4 className="text-base font-bold text-gray-900 leading-tight line-clamp-2">
+                        <h4
+                          className="text-base font-bold text-gray-900 leading-tight line-clamp-2"
+                          title={product?.title}
+                        >
                           {product?.title}
                         </h4>
                         <button

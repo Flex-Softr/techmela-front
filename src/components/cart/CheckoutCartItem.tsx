@@ -74,50 +74,87 @@ const CheckoutCartItem = ({
           <Link
             href={`/product/${cartItem?.product?.slug}`}
             className="text-sm font-bold hover:text-secondary truncate block"
+            title={cartItem?.product?.title}
           >
             {cartItem?.product?.title}
           </Link>
-          {cartItem?.variation && cartItem?.variation?.attributes && (
-            <div className="text-sm text-muted-foreground truncate">
-              {Object.entries(cartItem.variation.attributes)
-                // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-                .map(([key, value]) => `${value}`)
-                .join(" / ")}
+          {cartItem?.variation && cartItem?.variation?.attributes ? (
+            <div className="text-sm text-muted-foreground flex items-center w-full min-h-[1.25rem] mt-0.5">
+              <div className="truncate min-w-0 flex-1">
+                {Object.entries(cartItem.variation.attributes)
+                  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+                  .map(([key, value]) => `${value}`)
+                  .join(" / ")}
+              </div>
+            </div>
+          ) : (
+            <div className="mt-2">
+              <div className="flex items-center border rounded-md w-max bg-white">
+                <button
+                  type="button"
+                  onClick={() => handleUpdateQuantity(quantity - 1)}
+                  disabled={quantity <= 1 || isLoading}
+                  className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+                <span className="text-xs px-2 min-w-[20px] text-center font-medium">
+                  {quantity}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleUpdateQuantity(quantity + 1)}
+                  disabled={isLoading}
+                  className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           )}
         </div>
 
-        {/* Quantity Control */}
-        <div className="flex items-center border rounded-md w-max">
-          <button
-            type="button"
-            onClick={() => handleUpdateQuantity(quantity - 1)}
-            disabled={quantity <= 1 || isLoading}
-            className="px-3 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
-          >
-            <Minus className="w-5 h-5" />
-          </button>
-          <span className="text-sm px-2 min-w-[24px] text-center font-medium">
-            {quantity}
-          </span>
-          <button
-            type="button"
-            onClick={() => handleUpdateQuantity(quantity + 1)}
-            disabled={isLoading}
-            className="px-3 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
-          >
-            <Plus className="w-5 h-5" />
-          </button>
-        </div>
+        {/* Bottom Quantity Control (for Variable Products only) */}
+        {cartItem?.variation && (
+          <div className="flex items-center border rounded-md w-max bg-white">
+            <button
+              type="button"
+              onClick={() => handleUpdateQuantity(quantity - 1)}
+              disabled={quantity <= 1 || isLoading}
+              className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+            >
+              <Minus className="w-4 h-4" />
+            </button>
+            <span className="text-xs px-2 min-w-[20px] text-center font-medium">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              onClick={() => handleUpdateQuantity(quantity + 1)}
+              disabled={isLoading}
+              className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Right Column: Price & Remove */}
-      <div className="flex flex-col justify-between items-end h-full gap-2 min-w-[80px]">
-        <div className="text-sm font-bold whitespace-nowrap">
-          &#2547; {(price * quantity)?.toFixed(2)}
-        </div>
-        <div className="text-xs text-muted-foreground text-right">
-          {quantity} x &#2547; {price?.toFixed(2)}
+      <div className="flex flex-col justify-between items-end h-full gap-2 min-w-[100px]">
+        <div className="text-right">
+          <div className="text-base font-bold whitespace-nowrap text-gray-900">
+            &#2547;{(price * quantity)?.toFixed(2)}
+          </div>
+          <div className="text-[11px] text-muted-foreground whitespace-nowrap mt-0.5 font-medium">
+            {quantity} x{" "}
+            {cartItem?.price?.regularPrice > cartItem?.price?.salePrice && (
+              <span className="line-through mr-1 opacity-70">
+                &#2547;{cartItem.price.regularPrice.toFixed(2)}
+              </span>
+            )}
+            <span className="text-gray-600">&#2547;{price?.toFixed(2)}</span>
+          </div>
         </div>
         <button
           type="button"

@@ -68,7 +68,10 @@ const CartItem = ({
             className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0"
           />
           <div className="flex flex-col">
-            <span className="text-xs md:text-sm">
+            <span
+              className="text-xs md:text-sm"
+              title={cartItem?.product?.title}
+            >
               {cartItem?.product?.title}
             </span>
             {cartItem?.variation && cartItem?.variation?.attributes && (
@@ -86,7 +89,16 @@ const CartItem = ({
           </div>
         </Link>
       </TableCell>
-      <TableCell className="min-w-24">&#2547; {price}</TableCell>
+      <TableCell className="min-w-24">
+        <div className="flex items-center gap-2">
+          <span>&#2547; {price}</span>
+          {cartItem?.price?.regularPrice > cartItem?.price?.salePrice && (
+            <span className="text-[10px] text-muted-foreground line-through">
+              &#2547; {cartItem.price.regularPrice}
+            </span>
+          )}
+        </div>
+      </TableCell>
       <TableCell className="flex justify-center items-center">
         <Quantity
           quantity={quantity}
