@@ -76,6 +76,7 @@ export type TSeoData = {
 export type TSingleProduct = {
   _id: string;
   id: string;
+  author?: string;
   title: string;
   permalink: string;
   type: string;

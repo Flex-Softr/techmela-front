@@ -29,6 +29,7 @@ const ProductClientWrapper = ({
   useEffect(() => {
     gtmEventHandler({
       event: "view_content",
+      content_name: product.title,
       content_type: "product",
       contents: [
         {
@@ -40,12 +41,13 @@ const ProductClientWrapper = ({
       currency: "BDT",
       value: Number(
         product?.variations?.length > 0
-          ? product?.variations[0]?.price?.regularPrice
-          : (product?.price?.regularPrice ?? 0)
+          ? ((product?.variations[0]?.price?.salePrice ||
+              product?.variations[0]?.price?.regularPrice) ??
+              0)
+          : ((product?.price?.salePrice || product?.price?.regularPrice) ?? 0)
       ),
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product]);
+  }, [product, defaultVariation]);
 
   const isVariableProduct = product.type === PRODUCT_TYPE.VARIABLE;
 
