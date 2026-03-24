@@ -19,10 +19,10 @@ const StickyOrderButton = ({
   if (isVisible) return null;
 
   return (
-    <div className="lg:hidden fixed bottom-12 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-gray-100 z-[45] flex flex-col gap-3">
+    <div className="lg:hidden fixed bottom-12 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-gray-100 z-[45] flex flex-col gap-3 font-bengali">
       <div className="flex justify-between items-center px-2">
         <span className="text-gray-500 font-bold">
-          মোট: &#2547;{salePrice * quantity}
+          মোট: ৳{salePrice * quantity}
         </span>
         <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden bg-white">
           <button

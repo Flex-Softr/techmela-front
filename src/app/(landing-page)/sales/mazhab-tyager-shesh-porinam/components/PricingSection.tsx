@@ -1,7 +1,7 @@
 "use client";
-import { FiCheck, FiTruck, FiShield } from "react-icons/fi";
-import PricingDisplay from "./PricingDisplay";
-import CTAButtonGroup from "./CTAButtonGroup";
+import { FiCheck, FiShield, FiTruck } from "react-icons/fi";
+import CTAButtonGroup from "../../../_components/CTAButtonGroup";
+import PricingDisplay from "../../../_components/PricingDisplay";
 
 type Props = {
   regularPrice: number;

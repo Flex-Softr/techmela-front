@@ -1,15 +1,15 @@
 "use client";
+import Facilities from "@/components/home/facilities/Facilities";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useEffect, useRef, useState } from "react";
-import Facilities from "@/components/home/facilities/Facilities";
 
 // Import Client sub-components
-import SalesHeader from "./SalesHeader";
+import SalesHeader from "../../../_components/SalesHeader";
+import StickyOrderButton from "../../../_components/StickyOrderButton";
 import HeroSection from "./HeroSection";
-import StickyOrderButton from "./StickyOrderButton";
 import SalesOrderForm from "./SalesOrderForm";
 
 type Props = {

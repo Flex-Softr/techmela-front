@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import SalesPageClient from "./components/SalesPageClient";
 
 // Sub-components
-import AnnouncementBar from "./components/AnnouncementBar";
+import AnnouncementBar from "../../_components/AnnouncementBar";
 
 export const metadata: Metadata = {
   title:

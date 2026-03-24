@@ -1,25 +1,26 @@
 "use client";
+import config from "@/config/config";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useEffect, useRef, useState } from "react";
-import config from "@/config/config";
 
 // Import Client sub-components
-import SalesHeader from "./SalesHeader";
+import SalesHeader from "../../../_components/SalesHeader";
+import StickyOrderButton from "../../../_components/StickyOrderButton";
 import SalesOrderForm from "./SalesOrderForm";
 
 // New Redesign Components
-import PsychologicalHero from "./PsychologicalHero";
-import PsychologicalDisruption from "./PsychologicalDisruption";
-import SolutionAuthority from "./SolutionAuthority";
+import BookHighlights from "./BookHighlights";
+import FAQSection from "./FAQSection";
 import FearResponsibility from "./FearResponsibility";
 import FinalPsychologicalClose from "./FinalPsychologicalClose";
-import BookHighlights from "./BookHighlights";
-import Testimonials from "./Testimonials";
 import PricingSection from "./PricingSection";
-import FAQSection from "./FAQSection";
+import PsychologicalDisruption from "./PsychologicalDisruption";
+import PsychologicalHero from "./PsychologicalHero";
+import SolutionAuthority from "./SolutionAuthority";
+import Testimonials from "./Testimonials";
 
 type Props = {
   product: TSingleProduct | undefined;
@@ -44,6 +45,7 @@ const SalesPageClient = ({
 }: Props) => {
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const [lastTrackedCart, setLastTrackedCart] = useState<string>("");
 
   useEffect(() => {
@@ -86,6 +88,17 @@ const SalesPageClient = ({
     }
     scrollToOrder();
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFormVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    if (orderFormRef.current) observer.observe(orderFormRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handlePreviewClick = () => {
     if (config.mazhab_tyager_porinam_preview_link) {
@@ -186,6 +199,14 @@ const SalesPageClient = ({
       </section>
 
       <FinalPsychologicalClose onOrderClick={handleOrderNow} />
+
+      <StickyOrderButton
+        isVisible={isFormVisible}
+        salePrice={salePrice}
+        quantity={quantity}
+        setQuantity={setQuantity}
+        scrollToOrder={scrollToOrder}
+      />
     </div>
   );
 };

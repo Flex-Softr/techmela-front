@@ -1,4 +1,4 @@
-import CTAButtonGroup from "./CTAButtonGroup";
+import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick?: () => void;

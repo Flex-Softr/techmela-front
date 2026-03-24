@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
-import CTAButtonGroup from "./CTAButtonGroup";
-import PricingDisplay from "./PricingDisplay";
+import CTAButtonGroup from "../../../_components/CTAButtonGroup";
+import PricingDisplay from "../../../_components/PricingDisplay";
 
 type Props = {
   onOrderClick: () => void;
@@ -39,7 +39,7 @@ const PsychologicalHero = ({
               </div>
 
               <h1 className="text-2xl lg:text-3xl xl:text-4xl font-black text-gray-900">
-                আপনি কি ১০০% নিশ্চিত— <br />
+                আপনি কি ১০০% নিশ্চিত যে...<br />
                 আপনি যে ইসলাম পালন করছেন, সেটাই সঠিক ইসলাম?
               </h1>
 

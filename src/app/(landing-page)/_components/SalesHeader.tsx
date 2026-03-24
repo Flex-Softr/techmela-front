@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MdCall } from "react-icons/md";
-import logo from "../../../../../../public/logo/logo.png";
+import logo from "@/../public/logo/logo.png";
 
 type Props = {
   onOrderClick: () => void;
@@ -10,7 +10,7 @@ type Props = {
 
 const SalesHeader = ({ onOrderClick }: Props) => {
   return (
-    <header className="bg-white py-2 shadow-sm flex items-center justify-between sticky top-0 z-50 border-b border-gray-100 px-4 lg:px-10">
+    <header className="bg-white py-2 shadow-sm flex items-center justify-between sticky top-0 z-50 border-b border-gray-100 px-4 lg:px-10 font-bengali">
       <Link href="/">
         <Image
           src={logo}
