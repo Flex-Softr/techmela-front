@@ -1,5 +1,5 @@
 "use client";
-import Facilities from "@/components/home/facilities/Facilities";
+import config from "@/config/config";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
@@ -9,8 +9,16 @@ import { useEffect, useRef, useState } from "react";
 // Import Client sub-components
 import SalesHeader from "../../../_components/SalesHeader";
 import StickyOrderButton from "../../../_components/StickyOrderButton";
-import HeroSection from "./HeroSection";
 import SalesOrderForm from "./SalesOrderForm";
+
+// Redesigned Components
+import BookHighlights from "./BookHighlights";
+import FinalPsychologicalClose from "./FinalPsychologicalClose";
+import PricingSection from "./PricingSection";
+import PsychologicalDisruption from "./PsychologicalDisruption";
+import PsychologicalHero from "./PsychologicalHero";
+import Testimonials from "./Testimonials";
+import FAQSection from "./FAQSection";
 
 type Props = {
   product: TSingleProduct | undefined;
@@ -21,12 +29,10 @@ type Props = {
     highlights: { icon: string; title: string; description: string }[];
     pages: number | string;
     scholars: number | string;
-    testimonials: unknown[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    testimonials: any[];
   };
   announcementBar: React.ReactNode;
-  highlights: React.ReactNode;
-  stats: React.ReactNode;
-  testimonials: React.ReactNode;
 };
 
 const SalesPageClient = ({
@@ -35,9 +41,6 @@ const SalesPageClient = ({
   paymentMethods,
   bookDetails,
   announcementBar,
-  highlights,
-  stats,
-  testimonials,
 }: Props) => {
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);
@@ -96,6 +99,12 @@ const SalesPageClient = ({
     return () => observer.disconnect();
   }, []);
 
+  const handlePreviewClick = () => {
+    if (config.milad_kiyam_preview_link) {
+      window.open(config.milad_kiyam_preview_link, "_blank");
+    }
+  };
+
   const scrollToOrder = () => {
     orderFormRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -105,10 +114,6 @@ const SalesPageClient = ({
 
   const regularPrice = product?.price?.regularPrice ?? 0;
   const salePrice = product?.price?.salePrice ?? regularPrice;
-  const discount =
-    regularPrice > salePrice
-      ? Math.round(((regularPrice - salePrice) / regularPrice) * 100)
-      : 0;
 
   const thumbnailSrc = product?.thumbnail?.src?.replace(/\\/g, "/");
 
@@ -128,36 +133,37 @@ const SalesPageClient = ({
 
       {announcementBar}
 
-      <HeroSection
-        productTitle={product?.title || bookDetails.title}
-        author={
-          product?.author ||
-          (typeof bookDetails.scholars === "string"
-            ? bookDetails.scholars
-            : "সিদ্দীকিয়া প্রকাশনী")
-        }
-        shortDescription={product?.shortDescription}
+      {/* ───── NEW PSYCHOLOGICAL FLOW ───── */}
+
+      <PsychologicalHero
+        onOrderClick={handleOrderNow}
         thumbnailSrc={thumbnailSrc}
         regularPrice={regularPrice}
         salePrice={salePrice}
-        discount={discount}
-        quantity={quantity}
-        setQuantity={setQuantity}
-        onOrderNow={handleOrderNow}
-        stockStatus={product?.inventory?.stockStatus}
+        onPreviewClick={handlePreviewClick}
       />
 
-      <Facilities />
+      <PsychologicalDisruption />
 
-      {highlights}
+      <BookHighlights
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      />
 
-      {stats}
+      <Testimonials />
 
-      {testimonials}
+      <PricingSection
+        regularPrice={regularPrice}
+        salePrice={salePrice}
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      />
+
+      <FAQSection />
 
       {/* ───── ORDER FORM SECTION ───── */}
-      <section className="bg-gray-50 py-20" ref={orderFormRef}>
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="bg-gray-50 py-6 lg:py-12" ref={orderFormRef}>
+        <div className="max-w-screen-2xl mx-auto px-4">
           <SalesOrderForm
             shippingCharges={shippingCharges}
             paymentMethods={paymentMethods}
@@ -169,9 +175,12 @@ const SalesPageClient = ({
             bookDetails={bookDetails}
             product={product ?? null}
             salePrice={salePrice}
+            regularPrice={regularPrice}
           />
         </div>
       </section>
+
+      <FinalPsychologicalClose onOrderClick={handleOrderNow} />
 
       <StickyOrderButton
         isVisible={isFormVisible}

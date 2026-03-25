@@ -18,12 +18,12 @@ const CopyrightContent = () => {
             <p className="text-text-muted-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
               Developed and maintained with ❤️ by{" "}
               <a
-                href="https://mustaqimkhan.com"
+                href="https://www.facebook.com/mustaqimkhanbd"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary-foreground font-bold hover:underline transition-colors relative z-[60]"
               >
-                Md. Mustaqim Khan
+                Mustakim Khan
               </a>
             </p>
           </div>

@@ -53,10 +53,10 @@ const FAQSection = () => {
               <div key={idx} className="border-b border-gray-100">
                 <button
                   onClick={() => toggleFAQ(idx)}
-                  className="w-full flex items-center justify-between py-3 lg:py-4 text-left focus:outline-none group"
+                  className="w-full flex items-center justify-between py-2.5 lg:py-4 text-left focus:outline-none group"
                 >
                   <span
-                    className={`text-base lg:text-lg font-black pr-4 transition-colors ${isOpen ? "text-gray-900" : "text-gray-700 group-hover:text-gray-900"}`}
+                    className={`text-[14px] lg:text-lg font-black pr-4 transition-colors leading-snug ${isOpen ? "text-gray-900" : "text-gray-700 group-hover:text-gray-900"}`}
                   >
                     {faq.q}
                   </span>
@@ -70,11 +70,11 @@ const FAQSection = () => {
                 <div
                   className={`transition-all duration-300 ease-in-out overflow-hidden ${
                     isOpen
-                      ? "max-h-[500px] opacity-100 mb-4"
+                      ? "max-h-[500px] opacity-100 mb-3"
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="text-gray-600 font-bold leading-relaxed whitespace-pre-wrap pr-6 lg:pr-10 text-sm">
+                  <div className="text-gray-600 font-bold leading-relaxed whitespace-pre-wrap pr-6 lg:pr-10 text-[13px] lg:text-sm">
                     {faq.a}
                   </div>
                 </div>

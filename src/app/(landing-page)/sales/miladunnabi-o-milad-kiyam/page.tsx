@@ -8,9 +8,6 @@ import SalesPageClient from "./components/SalesPageClient";
 
 // Sub-components
 import AnnouncementBar from "../../_components/AnnouncementBar";
-import BookHighlights from "./components/BookHighlights";
-import BookStats from "./components/BookStats";
-import Testimonials from "./components/Testimonials";
 
 export const metadata: Metadata = {
   title:
@@ -26,33 +23,8 @@ const BOOK_DETAILS = {
   author: "জুবাইর আহমাদ",
   pages: "৪৪৯",
   publisher: "সিদ্দীকিয়া প্রকাশনী",
-  scholars: "বরেন্য ইমাম ও মনীষী",
-  highlights: [
-    {
-      icon: "📖",
-      title: "দালিলিক আলোচনা",
-      description:
-        "মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম সম্পর্কে কুরআন, সুন্নাহ ও আকাবিরদের বক্তব্যের আলোকে গবেষণামূলক আলোচনা।",
-    },
-    {
-      icon: "🕌",
-      title: "ইমামদের অভিমত",
-      description:
-        "বিখ্যাত মুজতাহিদ ইমাম এবং মনীষীদের দৃষ্টিতে মিলাদুন্নবী ও মিলাদ-কিয়ামের শরয়ী অবস্থান ব্যাখ্যা।",
-    },
-    {
-      icon: "✅",
-      title: "সংশয় নিরসন",
-      description:
-        "মিলাদুন্নবী ও মিলাদ-কিয়াম নিয়ে প্রচলিত বিভিন্ন সংশয় ও আপত্তির দালিলিক খণ্ডন।",
-    },
-    {
-      icon: "🌍",
-      title: "ঐতিহাসিক প্রেক্ষাপট",
-      description:
-        "মুসলিম উম্মাহর ইতিহাসে মিলাদুন্নবী উদযাপনের প্রাচীনতা ও ঐতিহ্য নিয়ে আলোচনা।",
-    },
-  ],
+  scholars: "বরেণ্য ইমাম ও মনীষী",
+  highlights: [],
   testimonials: [],
 };
 
@@ -83,14 +55,6 @@ const MiladunnabiPage = async () => {
       paymentMethods={paymentMethods}
       bookDetails={BOOK_DETAILS}
       announcementBar={<AnnouncementBar />}
-      highlights={<BookHighlights highlights={BOOK_DETAILS.highlights} />}
-      stats={
-        <BookStats
-          pages={BOOK_DETAILS.pages}
-          scholars={BOOK_DETAILS.scholars}
-        />
-      }
-      testimonials={<Testimonials testimonials={BOOK_DETAILS.testimonials} />}
     />
   );
 };

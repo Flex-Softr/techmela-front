@@ -3,21 +3,20 @@
 import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
 import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
 import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
+import OrderLimit from "@/components/orderLimit/OrderLimit";
 import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
-import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
 import { TPaymentMethod } from "@/types/paymentMethod";
-import { Tvariations } from "@/types/products/singleProduct";
+import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import Image from "next/image";
 import { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
-import Image from "next/image";
-import { FaPlus, FaMinus } from "react-icons/fa";
-import { TSingleProduct } from "@/types/products/singleProduct";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -127,7 +126,8 @@ const SalesOrderForm = ({
     return () => subscription.unsubscribe();
   }, [methods, productTitle, cartItems, calculatedTotal]);
 
-  const actualThumbnail = thumbnailSrc || product?.thumbnail?.src?.replace(/\\/g, "/");
+  const actualThumbnail =
+    thumbnailSrc || product?.thumbnail?.src?.replace(/\\/g, "/");
 
   return (
     <>
@@ -179,11 +179,8 @@ const SalesOrderForm = ({
                     {product?.title || bookDetails.title}
                   </h4>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-black bg-primary/10 text-primary px-2 py-0.5 rounded-full uppercase tracking-tighter">
-                      স্টক আছে
-                    </span>
                     <p className="text-xs text-primary font-bold italic">
-                      সীমিত অফার চলছে!
+                      বিশাল ছাড় চলছে!
                     </p>
                   </div>
                   <div className="flex items-center gap-3">

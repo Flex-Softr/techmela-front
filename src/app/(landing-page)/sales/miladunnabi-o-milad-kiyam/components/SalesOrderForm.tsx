@@ -3,22 +3,20 @@
 import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
 import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
 import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
+import OrderLimit from "@/components/orderLimit/OrderLimit";
 import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
-import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
-
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
 import { TPaymentMethod } from "@/types/paymentMethod";
-import { Tvariations } from "@/types/products/singleProduct";
+import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import Image from "next/image";
 import { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
-import Image from "next/image";
-import { FaPlus, FaMinus } from "react-icons/fa";
-import { TSingleProduct } from "@/types/products/singleProduct";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -128,7 +126,8 @@ const SalesOrderForm = ({
     return () => subscription.unsubscribe();
   }, [methods, productTitle, cartItems, calculatedTotal]);
 
-  const actualThumbnail = thumbnailSrc || product?.thumbnail?.src?.replace(/\\/g, "/");
+  const actualThumbnail =
+    thumbnailSrc || product?.thumbnail?.src?.replace(/\\/g, "/");
 
   return (
     <>
@@ -154,17 +153,17 @@ const SalesOrderForm = ({
 
           {/* Right Column: Summary & Final Action */}
           <div className="space-y-4 lg:sticky lg:top-24">
-            <div className="bg-white p-5 lg:p-6 rounded-[2rem] border border-emerald-100 shadow-xl shadow-emerald-900/5 relative overflow-hidden group">
+            <div className="bg-white p-4 lg:p-5 rounded-[2rem] border border-emerald-100 shadow-xl shadow-emerald-900/5 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 blur-2xl group-hover:bg-primary/10 transition-colors"></div>
 
-              <h3 className="text-lg lg:text-xl font-black mb-4 flex items-center gap-3 text-gray-900 relative z-10">
+              <h3 className="text-lg lg:text-xl font-black mb-3 flex items-center gap-3 text-gray-900 relative z-10">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                   <MdShoppingBag className="text-primary text-xl" />
                 </div>
                 আপনার অর্ডার
               </h3>
 
-              <div className="flex gap-5 mb-6 relative z-10">
+              <div className="flex gap-4 mb-4 relative z-10">
                 <div className="w-20 h-28 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0 shadow-md border border-gray-100 p-0.5">
                   <Image
                     src={actualThumbnail ?? "/placeholder.jpg"}
@@ -176,15 +175,12 @@ const SalesOrderForm = ({
                   />
                 </div>
                 <div className="flex-grow py-1 space-y-2">
-                  <h4 className="font-black text-gray-900 text-sm lg:text-base leading-tight">
+                  <h4 className="font-black text-gray-900 text-sm lg:text-base leading-[1.3] lg:leading-tight">
                     {product?.title || bookDetails.title}
                   </h4>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-black bg-primary/10 text-primary px-2 py-0.5 rounded-full uppercase tracking-tighter">
-                      স্টক আছে
-                    </span>
                     <p className="text-xs text-primary font-bold italic">
-                      সীমিত অফার চলছে!
+                      বিশাল ছাড় চলছে!
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
@@ -272,11 +268,11 @@ const SalesOrderForm = ({
             </div>
 
             {/* Help Box */}
-            <div className="bg-primary/5 border border-primary/10 p-5 rounded-[2rem] text-primary relative overflow-hidden group">
+            <div className="bg-primary/5 border border-primary/10 p-4 rounded-[2rem] text-primary relative overflow-hidden group">
               <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors"></div>
 
               <div className="relative z-10 text-center">
-                <h4 className="font-black text-lg mb-1 flex items-center justify-center gap-2 text-primary">
+                <h4 className="font-black text-lg mb-0.5 flex items-center justify-center gap-2 text-primary">
                   <MdCall /> সরাসরি কথা বলুন
                 </h4>
                 <p className="text-sm font-bold text-gray-500 mb-4 px-4 leading-relaxed">

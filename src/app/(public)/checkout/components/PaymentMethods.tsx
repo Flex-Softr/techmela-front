@@ -160,7 +160,7 @@ const PaymentMethods = ({
   }, [selectedMethod, dispatch]);
 
   return (
-    <Box className="px-0 md:px-4 md:py-2">
+    <Box className="px-4 md:py-2">
       <BoxHeading className="flex items-center gap-2">
         <Banknote className="text-lg text-primary" />
         <span className="text-lg">পেমেন্ট পদ্ধতি</span>
