@@ -3,22 +3,21 @@
 import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
 import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
 import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
+import OrderLimit from "@/components/orderLimit/OrderLimit";
 import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
-import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
 import { TPaymentMethod } from "@/types/paymentMethod";
-import { Tvariations } from "@/types/products/singleProduct";
+import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import Image from "next/image";
 import { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
-import Image from "next/image";
-import { FaPlus, FaMinus } from "react-icons/fa";
-import { TSingleProduct } from "@/types/products/singleProduct";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -206,11 +205,11 @@ const SalesOrderForm = ({
                   </div>
                   <div className="flex items-center gap-3">
                     <p className="text-primary font-black text-2xl lg:text-3xl">
-                      ৳{salePrice * quantity}
+                      &#2547;{salePrice * quantity}
                     </p>
                     {regularPrice > salePrice && (
                       <span className="text-base text-gray-400 line-through font-bold">
-                        ৳{regularPrice * quantity}
+                        &#2547;{regularPrice * quantity}
                       </span>
                     )}
                   </div>
@@ -258,7 +257,7 @@ const SalesOrderForm = ({
                 loadingText="অর্ডার প্রক্রিয়া হচ্ছে..."
               >
                 <span className="relative z-10">
-                  অর্ডার কনফার্ম করুন — ৳{calculatedTotal}
+                  অর্ডার কনফার্ম করুন — &#2547;{calculatedTotal}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
               </EcButton>

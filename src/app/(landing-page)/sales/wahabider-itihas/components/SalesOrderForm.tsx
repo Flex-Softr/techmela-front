@@ -209,11 +209,11 @@ const SalesOrderForm = ({
                   </div>
                   <div className="flex items-center gap-3">
                     <p className="text-primary font-black text-2xl lg:text-3xl">
-                      ৳{salePrice * quantity}
+                      &#2547;{salePrice * quantity}
                     </p>
                     {regularPrice > salePrice && (
                       <span className="text-base text-gray-400 line-through font-bold">
-                        ৳{regularPrice * quantity}
+                        &#2547;{regularPrice * quantity}
                       </span>
                     )}
                   </div>
@@ -261,7 +261,7 @@ const SalesOrderForm = ({
                 loadingText="অর্ডার প্রক্রিয়া হচ্ছে..."
               >
                 <span className="relative z-10">
-                  অর্ডার কনফার্ম করুন — ৳{calculatedTotal}
+                  অর্ডার কনফার্ম করুন — &#2547;{calculatedTotal}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
               </EcButton>

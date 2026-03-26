@@ -18,7 +18,7 @@ const PricingSection = ({ onOrderClick, regularPrice, salePrice }: Props) => {
       <div className="max-w-4xl mx-auto space-y-5 relative z-10">
         <div className="text-center space-y-2">
           <div className="inline-flex items-center gap-1.5 bg-emerald-100/50 text-emerald-700 px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase border border-emerald-200 mb-1">
-            <FiClock className="animate-pulse size-3" /> আজকের জন্য বিশেষ অফার!
+            <FiClock className="animate-pulse size-3" /> সীমিত সময়ের বিশেষ অফার!
           </div>
           <h2 className="text-lg lg:text-2xl font-black text-gray-900 leading-[1.3] lg:leading-tight">
             সঠিক জ্ঞান অর্জন করার জন্য— দেরি করাটাই সবচেয়ে বড় ক্ষতি!
@@ -37,7 +37,7 @@ const PricingSection = ({ onOrderClick, regularPrice, salePrice }: Props) => {
             </h3>
             <ul className="grid grid-cols-1 gap-2.5">
               {[
-                "বর্তমানে ৩৮% বিশাল ছাড় চলছে।",
+                "বর্তমানে বিশাল ছাড় চলছে।",
                 "স্টক শেষ হওয়ার আগেই অর্ডার করুন।",
                 "সারাদেশে ক্যাশ অন ডেলিভারি সুবিধা।",
                 "বই হাতে পেয়ে মূল্য পরিশোধের সুযোগ।",

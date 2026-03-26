@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 
 // Import Client sub-components
 import SalesHeader from "../../../_components/SalesHeader";
-import StickyOrderButton from "../../../_components/StickyOrderButton";
 import SalesOrderForm from "./SalesOrderForm";
 
 // New Redesign Components
@@ -45,7 +44,6 @@ const SalesPageClient = ({
 }: Props) => {
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);
-  const [isFormVisible, setIsFormVisible] = useState(false);
   const [lastTrackedCart, setLastTrackedCart] = useState<string>("");
 
   useEffect(() => {
@@ -88,17 +86,6 @@ const SalesPageClient = ({
     }
     scrollToOrder();
   };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsFormVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-    if (orderFormRef.current) observer.observe(orderFormRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const handlePreviewClick = () => {
     if (config.wahabider_itihas_preview_link) {
@@ -186,14 +173,6 @@ const SalesPageClient = ({
       </section>
 
       <FinalPsychologicalClose onOrderClick={handleOrderNow} />
-
-      <StickyOrderButton
-        isVisible={isFormVisible}
-        salePrice={salePrice}
-        quantity={quantity}
-        setQuantity={setQuantity}
-        scrollToOrder={scrollToOrder}
-      />
     </div>
   );
 };

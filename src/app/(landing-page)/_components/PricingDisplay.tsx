@@ -1,5 +1,3 @@
-"use client";
-
 type Props = {
   regularPrice: number;
   salePrice: number;
@@ -27,7 +25,7 @@ const PricingDisplay = ({
         <span
           className={`${isLarge ? "text-5xl lg:text-7xl" : "text-4xl lg:text-5xl"} font-black text-primary`}
         >
-          ৳{salePrice}
+          &#2547;{salePrice}
         </span>
 
         {/* Regular Price */}
@@ -35,7 +33,7 @@ const PricingDisplay = ({
           <span
             className={`${isLarge ? "text-2xl lg:text-3xl" : "text-xl lg:text-2xl"} text-slate-400 line-through decoration-2`}
           >
-            ৳{regularPrice}
+            &#2547;{regularPrice}
           </span>
         )}
       </div>
@@ -45,7 +43,7 @@ const PricingDisplay = ({
         <div
           className={`mt-1 font-bold text-primary ${isLarge ? "text-lg lg:text-xl" : "text-sm lg:text-base"} animate-pulse`}
         >
-          আপনি পাচ্ছেন {discount}% ছাড়!
+          আপনি পাচ্ছেন {discount}% ডিসকাউন্ট!
         </div>
       )}
     </div>
