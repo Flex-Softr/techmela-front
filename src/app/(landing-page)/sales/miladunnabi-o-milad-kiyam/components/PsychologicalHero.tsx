@@ -95,6 +95,38 @@ const PsychologicalHero = ({
             )}
           </div>
 
+          {/* Mobile CTA (Immediately after Image on Mobile) */}
+          <div className="lg:hidden w-full">
+            <div className="bg-gradient-to-r from-primary/5 to-emerald-50/50 p-4 rounded-2xl border border-primary/10">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  {(salePrice || regularPrice) && (
+                    <PricingDisplay
+                      regularPrice={regularPrice || 0}
+                      salePrice={salePrice || regularPrice || 0}
+                      isLarge={false}
+                    />
+                  )}
+                </div>
+                <CTAButtonGroup
+                  onOrderClick={onOrderClick}
+                  onPreviewClick={onPreviewClick}
+                  className="w-full sm:w-auto"
+                />
+              </div>
+              <div className="flex items-center justify-center gap-4 flex-wrap mt-2 border-t border-primary/10 pt-3">
+                {["ক্যাশ অন ডেলিভারি", "সারাদেশে ডেলিভারি"].map((t, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-1.5 text-[10px] font-black text-gray-400"
+                  >
+                    <BadgeCheck size={12} className="text-emerald-500" /> {t}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Content */}
           <div className="lg:col-span-7 space-y-5">
             <div className="flex items-center gap-2 flex-wrap">
@@ -170,38 +202,6 @@ const PsychologicalHero = ({
                   <BadgeCheck size={14} className="text-emerald-500" /> {t}
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Mobile CTA */}
-          <div className="lg:hidden order-3 w-full">
-            <div className="bg-gradient-to-r from-primary/5 to-emerald-50/50 p-4 rounded-2xl border border-primary/10">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
-                  {(salePrice || regularPrice) && (
-                    <PricingDisplay
-                      regularPrice={regularPrice || 0}
-                      salePrice={salePrice || regularPrice || 0}
-                      isLarge={false}
-                    />
-                  )}
-                </div>
-                <CTAButtonGroup
-                  onOrderClick={onOrderClick}
-                  onPreviewClick={onPreviewClick}
-                  className="w-full sm:w-auto"
-                />
-              </div>
-              <div className="flex items-center justify-center gap-4 flex-wrap mt-2 border-t border-primary/10 pt-3">
-                {["ক্যাশ অন ডেলিভারি", "সারাদেশে ডেলিভারি"].map((t, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-1.5 text-[10px] font-black text-gray-400"
-                  >
-                    <BadgeCheck size={12} className="text-emerald-500" /> {t}
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>

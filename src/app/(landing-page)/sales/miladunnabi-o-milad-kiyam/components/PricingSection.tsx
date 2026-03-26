@@ -21,7 +21,7 @@ const PricingSection = ({ onOrderClick, regularPrice, salePrice }: Props) => {
             <FiClock className="animate-pulse size-3" /> সীমিত সময়ের বিশেষ অফার!
           </div>
           <h2 className="text-lg lg:text-2xl font-black text-gray-900 leading-[1.3] lg:leading-tight">
-            সঠিক জ্ঞান অর্জন করার জন্য— দেরি করাটাই সবচেয়ে বড় ক্ষতি!
+            সঠিক জ্ঞান অর্জন করার জন্য: দেরি করাটাই সবচেয়ে বড় ক্ষতি!
             <br className="hidden sm:block" />
             <span className="text-emerald-600">
               সাশ্রয়ী মূল্যে এখনই অকাট্য দলিল সংগ্রহ করুন।

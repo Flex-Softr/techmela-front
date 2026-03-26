@@ -62,7 +62,7 @@ const PsychologicalDisruption = () => {
           </h3>
           <p className="text-[13px] lg:text-base font-bold text-gray-600 leading-relaxed px-4">
             কে কী বললো—শুধু সেই শোনা কথা দিয়ে বিশ্বাস গড়া কি নিরাপদ? কিয়ামতের
-            কঠিন ময়দানে এর জবাবদিহিতা কিভাবে করবেন? সঠিক পথ পেতে হলে—
+            কঠিন ময়দানে এর জবাবদিহিতা কিভাবে করবেন? সঠিক পথ পেতে হলে-
           </p>
           <div className="inline-block bg-red-50 px-4 py-2 lg:px-6 lg:py-3 rounded-2xl border border-red-100 shadow-sm mt-1 lg:mt-4">
             <p className="font-black text-red-600 text-[14px] lg:text-xl uppercase tracking-wider">
