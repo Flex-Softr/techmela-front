@@ -4,7 +4,7 @@ import {
   stockStatusColor,
 } from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
-import Link from "next/link";
+// import Link from "next/link";
 import WarrantyInfo from "./WarrantyInfo";
 
 type TProps = {
@@ -15,8 +15,8 @@ type TProps = {
 const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   const {
     title,
-    category,
-    brand,
+    // category,
+    // brand,
     inventory,
     shortDescription,
     price,
@@ -30,8 +30,8 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   const regularPrice = currentPrice?.regularPrice;
   const salePrice = currentPrice?.salePrice;
   const discountPercent = currentPrice?.discountPercent;
-  const priceSave = currentPrice?.priceSave;
-  const sku = currentInventory?.sku || "N/A";
+  // const priceSave = currentPrice?.priceSave;
+  // const sku = currentInventory?.sku || "N/A";
   const stockStatus = currentInventory?.stockStatus;
 
   const hideStock = currentInventory?.hideStock;
@@ -53,16 +53,16 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             <div className="flex flex-wrap items-center gap-2">
               {/* Percentage Badge */}
               <span className="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-extrabold shadow-sm whitespace-nowrap uppercase tracking-wider">
-                {discountPercent}% ছাড়
+                {Math.round(discountPercent)}% ছাড়
               </span>
 
               {/* Savings Information */}
-              {priceSave && (
+              {/* {priceSave && (
                 <span className="bg-green-100 text-green-700 text-xs px-2.5 py-1 rounded-full font-bold border border-green-200 flex items-center gap-1 whitespace-nowrap">
                   <span className="opacity-70 font-medium">সাশ্রয়</span>
                   <span>&#2547;{priceSave}</span>
                 </span>
-              )}
+              )} */}
             </div>
           )}
         </div>
@@ -98,7 +98,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Status Chip */}
           <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
-              Status:
+              স্ট্যাটাস:
             </span>
             <span className={`${stockStatusColor(stockStatus)} font-bold`}>
               {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
@@ -111,17 +111,17 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           </div>
 
           {/* SKU Chip */}
-          <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+          {/* <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
               SKU:
             </span>
             <span className="font-semibold text-foreground truncate">
               {sku}
             </span>
-          </div>
+          </div> */}
 
           {/* Category Chip */}
-          <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+          {/* <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
               Category:
             </span>
@@ -131,17 +131,17 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             >
               {category?.[0]?.name}
             </Link>
-          </div>
+          </div> */}
 
           {/* Brand Chip */}
-          <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+          {/* <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
               Prokashoni:
             </span>
             <span className="font-semibold text-foreground truncate">
               {brand?.name || "N/A"}
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* Short Description */}
@@ -183,7 +183,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         {/* Status */}
         <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">
-            Status:
+            স্ট্যাটাস:
           </span>
           <div className="flex-1">
             <span
@@ -200,13 +200,13 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         </div>
 
         {/* SKU */}
-        <div className="flex justify-between items-center text-sm">
+        {/* <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">SKU:</span>
           <span className="font-semibold text-foreground flex-1">{sku}</span>
-        </div>
+        </div> */}
 
         {/* Category */}
-        {category && (
+        {/* {category && (
           <div className="flex justify-between items-center text-sm">
             <span className="text-muted-foreground font-medium w-24">
               Category:
@@ -220,27 +220,27 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
               </Link>
             </span>
           </div>
-        )}
+        )} */}
 
         {/* Brand */}
-        <div className="flex justify-between items-center text-sm">
+        {/* <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">
             Prokashoni:
           </span>
           <span className="font-semibold text-foreground flex-1">
             {brand?.name || "N/A"}
           </span>
-        </div>
+        </div> */}
 
         {/* Warranty Info (Moved here for better context) */}
-        {warranty && warrantyInfo && (
+        {/* {warranty && warrantyInfo && (
           <div className="flex items-center gap-2 text-sm pt-2 border-t border-dashed border-gray-200 mt-2">
             <span className="text-black font-bold w-24">Warranty:</span>
             <div className="flex-1">
               <WarrantyInfo warrantyInfo={warrantyInfo} />
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Short Description (Should be null here logically, but kept safe) */}

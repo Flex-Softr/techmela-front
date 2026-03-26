@@ -20,13 +20,13 @@ const ProductCardPrimary = ({
     <div
       // href={`/product/${product._id}/${product.slug}`}
       className={cn(
-        "border border-border group/card sm:w-[300px] rounded-lg overflow-hidden bg-background flex flex-col justify-between shadow-sm mx-auto h-full",
+        "border border-border group/card sm:w-[300px] rounded-lg bg-background flex flex-col justify-between shadow-sm mx-auto h-full relative",
         className
       )}
     >
       <div className="flex flex-col gap-1.5 md:gap-3 p-1 md:p-3 relative">
         {product.discountPercent > 0 && (
-          <div className="absolute -top-0.5 -left-0.5 md:top-0.5 md:left-0.5 z-10 w-9 h-9 md:w-14 md:h-14 flex items-center justify-center pointer-events-none drop-shadow-sm transition-transform duration-300 group-hover/card:rotate-12">
+          <div className="absolute -top-1.5 -left-1.5 md:-top-1 md:-left-1 z-20 w-9 h-9 md:w-14 md:h-14 flex items-center justify-center pointer-events-none drop-shadow-sm transition-transform duration-300 group-hover/card:rotate-12">
             <svg
               viewBox="0 0 100 100"
               className="absolute inset-0 w-full h-full"
@@ -55,11 +55,11 @@ const ProductCardPrimary = ({
             </div>
           </div>
         )}
-        {product.priceSave > 0 && (
+        {/* {product.priceSave > 0 && (
           <div className="absolute rounded-full top-1 right-1 md:top-2 md:right-2 z-10 bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur-md text-white text-[8px] md:text-[11px] font-bold px-1.5 py-0.5 md:px-2 md:py-1 shadow-md flex items-center justify-center border border-white/20 uppercase tracking-tighter">
             সাশ্রয় &#2547;{product.priceSave}
           </div>
-        )}
+        )} */}
 
         <Link className="block" href={`/product/${product.slug}`}>
           <Image

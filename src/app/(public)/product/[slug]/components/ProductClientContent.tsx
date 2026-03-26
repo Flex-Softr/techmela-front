@@ -10,7 +10,7 @@ import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useState } from "react";
 import AddToCartAndBuyNow from "./AddToCartAndBuyNow";
 
-const SingleProductClientContent = ({
+const ProductClientContent = ({
   product,
   selectedVariation,
 }: {
@@ -106,4 +106,4 @@ const SingleProductClientContent = ({
   );
 };
 
-export default SingleProductClientContent;
+export default ProductClientContent;

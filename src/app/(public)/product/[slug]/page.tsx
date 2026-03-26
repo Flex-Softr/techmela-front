@@ -11,7 +11,7 @@ import { Metadata } from "next";
 import ProductClientWrapper from "./components/ProductClientWrapper";
 import ProductDescription from "./components/ProductDescription";
 import RelatedProduct from "./components/RelatedProduct";
-import SingleProductPageImageGallery from "./components/SingleProductPageImageGallery";
+import ProductImageGallery from "./components/ProductImageGallery";
 import ProductSharing from "./components/ProductSharing";
 
 type TProps = {
@@ -45,7 +45,7 @@ const fetchProductData = async (slug: string) => {
   return response?.data;
 };
 
-const SingleProductPage = async ({ params }: TProps) => {
+const ProductDetailsPage = async ({ params }: TProps) => {
   const product = await fetchProductData(params.slug);
 
   if (!product) {
@@ -64,6 +64,8 @@ const SingleProductPage = async ({ params }: TProps) => {
   const initialVariationPrice = defaultVariation
     ? defaultVariation.price
     : price;
+
+  const discount = price?.discountPercent || 0;
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -128,7 +130,7 @@ const SingleProductPage = async ({ params }: TProps) => {
       <ContainerMax>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
           <Box className="shadow-none ring-2 lg:mt-5">
-            <SingleProductPageImageGallery gallery={gallery} />
+            <ProductImageGallery gallery={gallery} discount={discount} />
           </Box>
           <Box className="space-y-4 shadow-none ring-0">
             {/* Use the client-side wrapper component */}
@@ -149,9 +151,11 @@ const SingleProductPage = async ({ params }: TProps) => {
                 </div>
                 <div>
                   <p className="font-semibold text-xl">
-                    <a href="tel:+8801602431167">01602431167</a>
+                    <a href="tel:+8801602431167">০১৬০২-৪৩১১৬৭</a>
                   </p>
-                  <p className="text-xs font-semibold">Call for support</p>
+                  <p className="text-xs font-semibold">
+                    যেকোনো প্রয়োজনে কল করুন
+                  </p>
                 </div>
               </div>
             )}
@@ -167,4 +171,4 @@ const SingleProductPage = async ({ params }: TProps) => {
   );
 };
 
-export default SingleProductPage;
+export default ProductDetailsPage;

@@ -62,7 +62,7 @@ const ProductSharing = () => {
   return (
     <div className="flex gap-3 items-center py-3">
       <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider flex items-center gap-2">
-        <FaShareAlt className="text-primary" /> Share:
+        <FaShareAlt className="text-primary" /> শেয়ার করুন:
       </span>
 
       <div className="flex items-center gap-3">

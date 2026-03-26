@@ -5,7 +5,7 @@ import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import { useEffect, useState } from "react";
 import ProductMainInfo from "./ProductMainInfo";
-import SingleProductClientContent from "./SingleProductClientContent";
+import ProductClientContent from "./ProductClientContent";
 import VariationSelector from "./VariationSelector";
 
 type ProductClientWrapperProps = {
@@ -67,7 +67,7 @@ const ProductClientWrapper = ({
           />
         )}
 
-        <SingleProductClientContent
+        <ProductClientContent
           product={product}
           selectedVariation={selectedVariation}
         />

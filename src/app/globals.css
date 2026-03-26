@@ -24,8 +24,8 @@
     --primary: 150 100% 18%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary – Olive Green (from logo) */
-    --secondary: 79 31% 33%;
+    /* Secondary – Emerald 600 */
+    --secondary: 161 94% 30%;
     --secondary-foreground: 0 0% 100%;
 
     /* Muted – Soft olive tint */
@@ -48,25 +48,23 @@
     --radius: 0.5rem;
   }
 
-  .dart {
+  .dark {
     /* Base */
-    --background: 0 0% 100%;
-    /* hsl(0 0% 100%) → white */
-    --foreground: 197 67% 15%;
-    /* derived dark teal */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 197 67% 15%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 197 67% 15%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    /* Primary – Deep Forest Green (from logo) */
+    /* Primary */
     --primary: 150 100% 18%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary – Olive Green (from logo) */
-    --secondary: 79 31% 33%;
+    /* Secondary – Emerald 600 */
+    --secondary: 161 94% 30%;
     --secondary-foreground: 0 0% 100%;
 
     /* Muted – Soft olive tint */
@@ -184,4 +182,9 @@
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* Fix for react-image-gallery mobile vertical scroll issue */
+.image-gallery-swipe {
+  touch-action: pan-y !important;
 }

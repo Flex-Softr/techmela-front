@@ -36,7 +36,7 @@ const AddToCartAndBuyNow = ({
     <>
       <div className="flex items-center gap-4 py-2 border-y border-gray-100 mb-2">
         <span className="text-sm font-semibold text-gray-700 min-w-[70px]">
-          Quantity
+          পরিমাণ:
         </span>
         <Quantity quantity={quantity} setQuantity={setQuantity} />
       </div>
