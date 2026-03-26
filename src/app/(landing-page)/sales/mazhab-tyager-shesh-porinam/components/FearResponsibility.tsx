@@ -24,7 +24,7 @@ const FearResponsibility = ({ onOrderClick, onPreviewClick }: Props) => {
     {
       title: "৩. দলিলভিত্তিক আত্মবিশ্বাস",
       points: [
-        "শুধু “বিশ্বাস” করবেন না, বরং জানবেন—কেন বিশ্বাস করছেন",
+        "শুধু “বিশ্বাস” করবেন না, বরং জানবেন, কেন বিশ্বাস করছেন",
         "কুরআন, হাদীস, ইজমা ও যুক্তি মিলে একটি দৃঢ় ভিত্তি",
       ],
     },
@@ -82,19 +82,19 @@ const FearResponsibility = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-5 lg:p-6 rounded-2xl border border-gray-200">
           <div className="space-y-3">
             <h4 className="text-2xl font-black text-red-800">
-              আপনি যদি এটি না পড়েন—
+              আপনি যদি এটি না পড়েন:
             </h4>
             <ul className="space-y-2.5 text-sm font-bold text-gray-800 pb-3 border-b md:border-b-0 border-gray-200">
               <li className="leading-tight">
-                — আপনি হয়ত অজান্তেই এমন কোনো পথে চলছেন যা কুরআন-হাদীসের প্রকৃত
+                • আপনি হয়ত অজান্তেই এমন কোনো পথে চলছেন যা কুরআন-হাদীসের প্রকৃত
                 চেতনার পরিপন্থী।
               </li>
               <li className="leading-tight">
-                — বিশেষজ্ঞ ইমামদের পথ বর্জন করে নিজের খেয়াল-খুশির অনুসরণে পড়ার
+                • বিশেষজ্ঞ ইমামদের পথ বর্জন করে নিজের খেয়াল-খুশির অনুসরণে পড়ার
                 ঝুঁকি থেকে যাবে।
               </li>
               <li className="leading-tight">
-                — আধুনিক চটকদার স্লোগানের আড়ালে থাকা বিভ্রান্তি আপনার ঈমানের
+                • আধুনিক চটকদার স্লোগানের আড়ালে থাকা বিভ্রান্তি আপনার ঈমানের
                 ভিত্তি নড়বড়ে করতে পারে।
               </li>
             </ul>
@@ -102,25 +102,25 @@ const FearResponsibility = ({ onOrderClick, onPreviewClick }: Props) => {
 
           <div className="space-y-3 md:pl-5 md:border-l border-gray-200">
             <h4 className="text-2xl font-black text-emerald-800">
-              আর যদি পড়েন—
+              আর যদি পড়েন:
             </h4>
             <div className="space-y-2.5">
               <ul className="space-y-2.5 text-sm font-bold text-gray-800">
                 <li className="leading-tight">
-                  — ১৪০০ বছরের সোনালী ইতিহাস ও ইমামদের সুশৃঙ্খল পদ্ধতির উপর
+                  • ১৪০০ বছরের সোনালী ইতিহাস ও ইমামদের সুশৃঙ্খল পদ্ধতির উপর
                   আপনার আস্থা মজবুত হবে।
                 </li>
                 <li className="leading-tight">
-                  — দলিল ও যুক্তির আলোকে ‘বিরাজমান ফেতনা’ ও ‘ভুল পথ’ চেনার মতো
+                  • দলিল ও যুক্তির আলোকে ‘বিরাজমান ফেতনা’ ও ‘ভুল পথ’ চেনার মতো
                   বিচক্ষণতা অর্জন করবেন।
                 </li>
                 <li className="leading-tight">
-                  — নিজের ঈমান ও আমলকে বিচ্যুতি থেকে বাঁচিয়ে সঠিক গন্তব্যে
+                  • নিজের ঈমান ও আমলকে বিচ্যুতি থেকে বাঁচিয়ে সঠিক গন্তব্যে
                   পৌঁছানোর পরিষ্কার রোডম্যাপ পাবেন।
                 </li>
               </ul>
               <p className="text-sm font-black text-emerald-600 pt-1">
-                সিদ্ধান্ত নিতে পারবেন— চোখ বন্ধ করে না, চোখ খুলে।
+                সিদ্ধান্ত নিতে পারবেন, চোখ বন্ধ করে না, চোখ খুলে।
               </p>
             </div>
           </div>

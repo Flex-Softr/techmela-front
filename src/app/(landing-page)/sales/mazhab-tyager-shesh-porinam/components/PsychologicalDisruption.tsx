@@ -1,14 +1,19 @@
-"use client";
 import { FiAlertCircle } from "react-icons/fi";
+import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
-const PsychologicalDisruption = () => {
+type Props = {
+  onOrderClick: () => void;
+  onPreviewClick?: () => void;
+};
+
+const PsychologicalDisruption = ({ onOrderClick, onPreviewClick }: Props) => {
   return (
     <section className="bg-white py-6 lg:py-6 px-4 overflow-hidden relative">
       <div className="max-w-5xl mx-auto space-y-6 lg:space-y-6">
         {/* Section Header */}
         <div className="text-center space-y-3">
           <h2 className="text-2xl lg:text-3xl font-black text-gray-900 leading-tight">
-            সমস্যা শুরু হয় তখন—
+            সমস্যা শুরু হয় তখন:
             <br />
             <span className="text-red-600 block mt-1 leading-snug">
               যখন মানুষ মনে করে তার নিজের সীমিত জ্ঞানই ইসলামের গভীর সত্য
@@ -16,9 +21,9 @@ const PsychologicalDisruption = () => {
             </span>
           </h2>
           <p className="font-bold text-gray-600 max-w-4xl mx-auto leading-relaxed text-sm lg:text-base">
-            আজকের যুগে “মাজহাব বা বিশেষজ্ঞ ইমামের প্রয়োজন নেই, আমি সরাসরি
-            কুরআন-হাদীস বুঝব”—এমন চটকদার স্লোগান আপাতদৃষ্টিতে ভালো মনে হলেও,
-            এটিই মানুষকে চূড়ান্ত বিভ্রান্তির দিকে নিয়ে যায়। ইতিহাস সাক্ষী—
+            আজকের যুগে “মাযহাব বা বিশেষজ্ঞ ইমামের প্রয়োজন নেই, আমি সরাসরি
+            কুরআন-হাদীস বুঝব” - এমন চটকদার স্লোগান আপাতদৃষ্টিতে ভালো মনে হলেও,
+            এটিই মানুষকে চূড়ান্ত বিভ্রান্তির দিকে নিয়ে যায়। ইতিহাস সাক্ষী,
             বিশেষজ্ঞহীন এই পথ মানুষকে ঈমানি বিচ্যুতি ও আকিদাগত দুর্বলতার দিকে
             ধাবিত করে।
           </p>
@@ -57,7 +62,7 @@ const PsychologicalDisruption = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {[
                 {
-                  t: "“মাজহাব মানবো না, শুধু কুরআন-হাদীস মানবো”",
+                  t: "“মাযহাব মানবো না, শুধু কুরআন-হাদীস মানবো”",
                   d: "আপাতদৃষ্টিতে এটি চমৎকার স্লোগান মনে হলেও, উসূল ও নীতিমালা ছাড়া সরাসরি কুরআন-হাদীস থেকে বিধান বের করতে গিয়ে মানুষ নিজের অজান্তেই মারাত্মক বিভ্রান্তির জালে জড়িয়ে পড়ে। এটিই বিচ্যুতির প্রথম ধাপ।",
                 },
                 {
@@ -95,7 +100,7 @@ const PsychologicalDisruption = () => {
             <span className="text-emerald-400 font-black">
               গভীর জ্ঞান ও পদ্ধতির বিষয়।
             </span>{" "}
-            এ পথ ছেড়ে দিলে তৈরি হয়—
+            এ পথ ছেড়ে দিলে তৈরি হয়:
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {["তীব্র মতভেদ", "উম্মাহর বিভক্তি", "আকীদায় সন্দেহ"].map(
@@ -114,14 +119,21 @@ const PsychologicalDisruption = () => {
         {/* Transition (Tight) */}
         <div className="text-center space-y-2">
           <div className="space-y-1 text-base lg:text-lg font-black text-gray-900 leading-tight">
-            <p>— তাহলে নিরাপদ পথ কী?</p>
+            <p>তাহলে নিরাপদ পথ কী?</p>
             <p className="text-emerald-600">
-              — কীভাবে নিশ্চিত হবেন আপনি সঠিক পথে আছেন?
+              কীভাবে নিশ্চিত হবেন আপনি সঠিক পথে আছেন?
             </p>
           </div>
           <p className="font-bold text-gray-400">
             বইটি আপনাকে সেই পথের সন্ধান দেবে…
           </p>
+        </div>
+
+        <div className="flex justify-center pt-2">
+          <CTAButtonGroup
+            onOrderClick={onOrderClick}
+            onPreviewClick={onPreviewClick}
+          />
         </div>
       </div>
     </section>

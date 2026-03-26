@@ -131,7 +131,10 @@ const SalesPageClient = ({
         onPreviewClick={handlePreviewClick}
       />
 
-      <PsychologicalDisruption />
+      <PsychologicalDisruption
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      />
 
       <SolutionAuthority
         thumbnailSrc={thumbnailSrc}
@@ -152,10 +155,8 @@ const SalesPageClient = ({
       />
 
       <Testimonials
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      // testimonials={bookDetails.testimonials as any}
-      // onOrderClick={handleOrderNow}
-      // onPreviewClick={handlePreviewClick}
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
       />
 
       <PricingSection
@@ -164,7 +165,10 @@ const SalesPageClient = ({
         onOrderClick={handleOrderNow}
       />
 
-      <FAQSection />
+      <FAQSection
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      />
 
       {/* ───── ORDER FORM SECTION ───── */}
       <section className="bg-gray-50 py-8" ref={orderFormRef}>

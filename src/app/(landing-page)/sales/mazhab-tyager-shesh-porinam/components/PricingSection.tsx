@@ -22,7 +22,7 @@ const PricingSection = ({
         {/* Core Message / Urgency */}
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <h2 className="text-2xl lg:text-3xl font-black text-gray-900 leading-tight">
-            জ্ঞান অর্জন করার জন্য—
+            জ্ঞান অর্জন করার জন্য:
             <br />
             <span className="text-primary mt-1 block">
               দেরি করাটাই সবচেয়ে বড় ক্ষতি
@@ -53,7 +53,7 @@ const PricingSection = ({
               <ul className="space-y-4">
                 {[
                   "সীমিত সময়ের জন্য বিশেষ ডিসকাউন্ট",
-                  "সারা বাংলাদেশে কুরিয়ার চার্জ প্রযোজ্য",
+                  "সারা বাংলাদেশে ক্যাশ অন ডেলিভারি সুবিধা",
                   "বই হাতে পেয়ে মূল্য পরিশোধের সুযোগ",
                 ].map((text, i) => (
                   <li key={i} className="flex flex-col gap-1">
@@ -114,12 +114,12 @@ const PricingSection = ({
         {/* Psychological Reassurance */}
         <div className="text-center space-y-3 bg-gray-900 text-white p-7 rounded-3xl shadow-xl border border-gray-800">
           <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">
-            সিদ্ধান্ত আপনার—
+            সিদ্ধান্ত আপনার:
           </p>
           <div className="space-y-1 text-base lg:text-lg font-black leading-tight">
-            <p>— কিছু টাকা হয়তো আপনি এমনিতেই খরচ করেন?</p>
+            <p>• কিছু টাকা হয়তো আপনি এমনিতেই খরচ করেন?</p>
             <p className="text-emerald-400">
-              — নাকি এই টাকা আপনার ঈমান ও নাজাতের পাথেয় হবে?
+              • নাকি এই টাকা আপনার ঈমান ও নাজাতের পাথেয় হবে?
             </p>
           </div>
         </div>

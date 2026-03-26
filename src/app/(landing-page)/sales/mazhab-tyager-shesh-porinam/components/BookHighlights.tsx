@@ -9,13 +9,13 @@ type Props = {
 const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
   const highlights = [
     {
-      title: "১. মাজহাবের স্বরূপ ও আবশ্যকতা",
+      title: "১. মাযহাবের স্বরূপ ও আবশ্যকতা",
       questions: [
-        "মাজহাব কি নিছক ব্যক্তিগত মত, নাকি সুসংগঠিত ফিকহি পদ্ধতি?",
+        "মাযহাব কি নিছক ব্যক্তিগত মত, নাকি সুসংগঠিত ফিকহি পদ্ধতি?",
         "দলিল ও যুক্তির আলোকে এর তাত্ত্বিক ও ব্যবহারিক প্রয়োজনীয়তা কী?",
       ],
       conclusion:
-        "মাজহাবের প্রকৃত পরিচয় ও দ্বীনের ওপর টিকে থাকতে এর অপরিহার্য ভূমিকা এখানে সুনিপুণভাবে ব্যাখ্যা করা হয়েছে।",
+        "মাযহাবের প্রকৃত পরিচয় ও দ্বীনের ওপর টিকে থাকতে এর অপরিহার্য ভূমিকা এখানে সুনিপুণভাবে ব্যাখ্যা করা হয়েছে।",
     },
     {
       title: "২. নস ও ইজতিহাদের সঠিক নীতিমালা",
@@ -33,12 +33,12 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
         "কেন উম্মাহর চার সোনালী ধারাকে আঁকড়ে ধরা নিরাপদ?",
       ],
       conclusion:
-        "ইমামদের সুশৃঙ্খল পদ্ধতির অনুসরণ যে মূলত সুন্নাহরই অনুসরণ—তা এখানে অকাট্য দলিলে প্রমাণিত হয়েছে।",
+        "ইমামদের সুশৃঙ্খল পদ্ধতির অনুসরণ যে মূলত সুন্নাহরই অনুসরণ, তা এখানে অকাট্য দলিলে প্রমাণিত হয়েছে।",
     },
     {
       title: "৪. লা-মাযহাব চিন্তার সূক্ষ্ম ব্যবচ্ছেদ",
       questions: [
-        "“মাজহাব ছাড়ো” স্লোগানের পেছনের আসল উদ্দেশ্য ও ইতিহাস কী?",
+        "“মাযহাব ছাড়ো” স্লোগানের পেছনের আসল উদ্দেশ্য ও ইতিহাস কী?",
         "এই ভ্রান্ত চিন্তার তাত্ত্বিক অসারতা ও দলিলগুলো কতটা দুর্বল?",
       ],
       conclusion:
@@ -48,7 +48,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
       title: "৫. বিচ্যুতি ও ইতিহাসের অমোঘ শিক্ষা",
       questions: [
         "সালাফে সালেহীন ও সোনালী যুগ থেকে বিচ্যুত হওয়ার ঐতিহাসিক পরিণতি কী?",
-        "অতীতে যখনই মানুষ মাজহাব ছেড়েছে, সমাজে কি কি সংকট তৈরি হয়েছে?",
+        "অতীতে যখনই মানুষ মাযহাব ছেড়েছে, সমাজে কি কি সংকট তৈরি হয়েছে?",
       ],
       conclusion:
         "বাস্তব ইতিহাস ও দৃষ্টান্ত দিয়ে দেখানো হয়েছে— বিশেষজ্ঞরা রাস্তা না মানলে আধ্যাত্মিক ও সামাজিক বিপর্যয় অনিবার্য।",
@@ -73,7 +73,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
         {/* Header Section */}
         <div className="text-center space-y-5">
           <h2 className="text-2xl lg:text-4xl font-black text-gray-900 leading-tight">
-            এই বই শুধু একটি মতামত নয়—
+            এই বই শুধু একটি মতামত নয়:
             <br />
             <span className="text-primary mt-2 block">
               এটি একটি পূর্ণাঙ্গ বিশ্লেষণ
@@ -81,7 +81,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
           </h2>
           <div className="pt-4 flex flex-col md:flex-row items-center justify-center">
             <p className="text-lg font-bold text-gray-500 mb-1">
-              আপনি হয়তো ভাবছেন—
+              আপনি হয়তো ভাবছেন:
             </p>
             <p className="text-xl font-black text-gray-800 bg-gray-50 inline-block px-6 py-2 rounded-xl border border-gray-100">
               “এই বইয়ে নতুন কী আছে?”
@@ -114,7 +114,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
                         key={qIndex}
                         className="text-sm font-black text-gray-700"
                       >
-                        — {q}
+                        • {q}
                       </p>
                     ))}
                   </div>
@@ -184,7 +184,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
                   <span className="text-gray-900 block font-black">
                     বিশ্বস্ত পাথেয়:
                   </span>
-                  উম্মাহর শ্রেষ্ঠ মুহাক্কিক ইমাম জাহিদ আল-কাউসারী (রহ.)-এর
+                  উম্মাহর শ্রেষ্ঠ মুহাক্কিক ইমাম যাহিদ আল-কাউসারী (রহ.)-এর
                   গবেষণালব্ধ শক্তিশালী লেখনী।
                 </div>
               </li>
@@ -193,7 +193,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
 
           <div className="bg-gray-900 text-white p-8 rounded-2xl text-center shadow-lg relative overflow-hidden">
             <h3 className="text-xl font-black leading-tight">
-              এই বই পড়ার পর—
+              এই বই পড়ার পর:
               <br />
               <span className="text-primary mt-2 block">
                 আপনি আর আগের মতো চিন্তা করতে পারবেন না
@@ -202,7 +202,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
             <p className="text-sm font-bold text-gray-400 mt-4 border-t border-gray-800 pt-4">
               কারণ এটি কেবল আপনার তথ্যের ভাণ্ডার বাড়াবে না, বরং আপনার লালিত
               বিশ্বাসের ভিত্তি ও চিন্তার পদ্ধতিকেই আমূল বদলে দেবে। আপনি বুঝতে
-              পারবেন— তথাকথিত “নিজে সরাসরি বুঝার” পদ্ধতিটি আসলে কতটা ঝুঁকিপূর্ণ
+              পারবেন: তথাকথিত “নিজে সরাসরি বুঝার” পদ্ধতিটি আসলে কতটা ঝুঁকিপূর্ণ
               ও বিভ্রান্তিকর হতে পারে।
             </p>
           </div>

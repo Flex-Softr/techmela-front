@@ -28,7 +28,7 @@ const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
           <div className="relative z-10">
             <div className="space-y-3 border-l-2 border-gray-700 pl-4 lg:pl-5">
               <p className="text-lg lg:text-xl font-bold text-gray-300 leading-relaxed">
-                যে বিষয়ে আপনার জীবনের সবচেয়ে বড় গন্তব্য (আখিরাত) নির্ভর করছে—
+                যে বিষয়ে আপনার জীবনের সবচেয়ে বড় গন্তব্য (আখিরাত) নির্ভর করছে,
                 সেই বিষয়ে কি আপনি কোনো ঝুঁকি নিতে পারেন?
               </p>
               <p className="text-lg lg:text-xl font-bold text-gray-300 leading-relaxed">
@@ -36,7 +36,7 @@ const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
                 পড়েন, মানুষের অভিজ্ঞতা শোনেন।
               </p>
               <p className="text-lg lg:text-xl font-black text-white leading-relaxed">
-                কিন্তু দ্বীনের বিষয়ে— আপনি কি যাচাই করেছেন আপনি যে পথে আছেন তা
+                কিন্তু দ্বীনের বিষয়ে, আপনি কি যাচাই করেছেন আপনি যে পথে আছেন তা
                 নিরাপদ কিনা?
               </p>
             </div>
@@ -45,7 +45,7 @@ const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
             <div className="bg-white/5 border border-white/10 p-6 rounded-2xl space-y-3">
               <h4 className="text-lg font-black text-red-400">
-                যদি আপনি বইটি না পড়েন—
+                যদি আপনি বইটি না পড়েন:
               </h4>
               <p className="text-base font-bold text-gray-400">
                 আপনার বর্তমান অবস্থায় কোনো পরিবর্তন হবে না। আপনি হয়তো ভাবতেই
@@ -54,7 +54,7 @@ const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
             </div>
             <div className="bg-emerald-900/20 border border-emerald-500/30 p-6 rounded-2xl space-y-3">
               <h4 className="text-lg font-black text-emerald-400">
-                আর যদি পড়েন—
+                আর যদি পড়েন:
               </h4>
               <p className="text-base font-bold text-emerald-100/70">
                 হয়তো এই বইটি সেই দিকনির্দেশনা হবে, যা আপনাকে আজীবনের বিভ্রান্তি

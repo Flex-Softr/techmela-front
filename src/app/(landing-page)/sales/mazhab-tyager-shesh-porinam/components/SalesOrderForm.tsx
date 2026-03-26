@@ -257,7 +257,7 @@ const SalesOrderForm = ({
                 loadingText="অর্ডার প্রক্রিয়া হচ্ছে..."
               >
                 <span className="relative z-10">
-                  অর্ডার কনফার্ম করুন — &#2547;{calculatedTotal}
+                  অর্ডার কনফার্ম করুন: &#2547;{calculatedTotal}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
               </EcButton>
