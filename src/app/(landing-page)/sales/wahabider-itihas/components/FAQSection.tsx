@@ -1,8 +1,13 @@
-"use client";
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
-const FAQSection = () => {
+type Props = {
+  onOrderClick: () => void;
+  onPreviewClick?: () => void;
+};
+
+const FAQSection = ({ onOrderClick, onPreviewClick }: Props) => {
   const [openIndices, setOpenIndices] = useState<number[]>([0]);
 
   const toggleFAQ = (idx: number) => {
@@ -35,9 +40,9 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="bg-white py-6 lg:py-6 px-4 overflow-hidden relative">
-      <div className="max-w-3xl mx-auto space-y-4 lg:space-y-6 relative z-10">
-        <div className="text-center space-y-1">
+    <section className="bg-white py-4 lg:py-6 px-4 overflow-hidden relative">
+      <div className="max-w-3xl mx-auto space-y-3 lg:space-y-4 relative z-10">
+        <div className="text-center space-y-0.5">
           <h2 className="text-xl lg:text-2xl font-black text-gray-900">
             সাধারণ জিজ্ঞাসাসমূহ
           </h2>
@@ -81,6 +86,13 @@ const FAQSection = () => {
               </div>
             );
           })}
+        </div>
+
+        <div className="flex justify-center pt-2">
+          <CTAButtonGroup
+            onOrderClick={onOrderClick}
+            onPreviewClick={onPreviewClick}
+          />
         </div>
       </div>
     </section>

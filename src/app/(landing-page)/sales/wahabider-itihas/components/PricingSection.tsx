@@ -10,19 +10,14 @@ type Props = {
   onPreviewClick?: () => void;
 };
 
-const PricingSection = ({
-  regularPrice,
-  salePrice,
-  onOrderClick,
-  onPreviewClick,
-}: Props) => {
+const PricingSection = ({ regularPrice, salePrice, onOrderClick }: Props) => {
   return (
     <section className="bg-[#FAFAFA] py-6 lg:py-10 px-4 overflow-hidden relative">
       <div className="max-w-4xl mx-auto relative z-10 space-y-8 lg:space-y-8">
         {/* Core Message / Urgency */}
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <h2 className="text-2xl lg:text-3xl font-black text-gray-900 leading-tight">
-            সঠিক ইতিহাস জানার জন্য—
+            সঠিক ইতিহাস জানার জন্য-
             <br />
             <span className="text-primary mt-1 block">
               দেরি করাটাই সবচেয়ে বড় ক্ষতি
@@ -52,9 +47,9 @@ const PricingSection = ({
 
               <ul className="space-y-4">
                 {[
-                  "প্রথম ১০০ জনের জন্য বিশেষ ডিসকাউন্ট প্রযোজ্য",
+                  "বিশেষ ডিসকাউন্ট চলছে",
                   "সারা বাংলাদেশে ক্যাশ অন ডেলিভারি সুবিধা",
-                  "বই হাতে পেয়ে গুণগত মান যাচাই করে মূল্য পরিশোধ",
+                  "বই হাতে পেয়ে মূল্য পরিশোধের সুবিধা",
                 ].map((text, i) => (
                   <li key={i} className="flex flex-col gap-1">
                     <div className="flex items-center gap-3">
@@ -99,7 +94,6 @@ const PricingSection = ({
               <div className="w-full space-y-4">
                 <CTAButtonGroup
                   onOrderClick={onOrderClick}
-                  onPreviewClick={onPreviewClick}
                   className="w-full justify-center"
                 />
 
@@ -114,13 +108,13 @@ const PricingSection = ({
         {/* Psychological Reassurance */}
         <div className="text-center space-y-3 bg-gray-900 text-white p-7 rounded-3xl shadow-xl border border-gray-800">
           <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">
-            সিদ্ধান্ত আপনার—
+            সিদ্ধান্ত আপনার!
           </p>
           <div className="space-y-1 text-base lg:text-lg font-black leading-tight">
-            <p>— দু-এক বেলার নাস্তার টাকা আমরা এমনিতেই খরচ করি।</p>
+            <p>দু-এক বেলার নাস্তার টাকা আমরা এমনিতেই খরচ করি।</p>
             <p className="text-emerald-400">
-              — কিন্তু এই সামান্য বিনিয়োগ কি আপনার ইতিহাসের জ্ঞান ও ঈমানি
-              সচেতনতার পাথেয় হবে না?
+              কিন্তু এই সামান্য বিনিয়োগ কি আপনার ইতিহাসের জ্ঞান ও ঈমানি সচেতনতার
+              পাথেয় হবে না?
             </p>
           </div>
         </div>

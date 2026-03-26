@@ -20,7 +20,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
       title: "১. নজদ ও রাসূল (সা.)-এর ভবিষ্যৎবাণী",
       questions: [
         "রাসূল (সা.)-এর সেই নজদ বিষয়ক ভবিষ্যৎবাণীগুলোর সঠিক দালিলিক ব্যবচ্ছেদ কী?",
-        "ইমাম ইবনে আবিদিন শামী রহ. কেন এই মতবাদকে ‘খারেজী’ বলেছেন? [৭৮৩]",
+        "ইমাম ইবনে আবিদিন শামী রহ. কেন এই মতবাদকে ‘খারেজী’ বলেছেন?",
       ],
       conclusion:
         "নজদ অঞ্চলের ভৌগোলিক প্রেক্ষাপট এবং হাদীস ও ইমামদের ফতোয়ার আলোকে এর ভয়াবহতা এখানে ফুটে উঠেছে।",
@@ -37,8 +37,8 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
     {
       title: "৩. ব্রিটিশ ও ইবনে সৌদ: গোপন চুক্তির রহস্য",
       questions: [
-        "১৯১৫ সালের ‘দারিন চুক্তি’ ও ব্রিটিশদের থেকে মাসোহারা প্রাপ্তির নেপথ্য কাহিনী কী? [৩১০]",
-        "ফিলিস্তিন রাষ্ট্রটি ইহুদিদের হাতে তুলে দেওয়ার পেছনে তৎকালীন শাসকদের গোপন চিঠি ও ২০ মিলিয়ন পাউন্ডের প্রস্তাব। [৩৭৭, ৩৮১]",
+        "১৯১৫ সালের ‘দারিন চুক্তি’ ও ব্রিটিশদের থেকে মাসোহারা প্রাপ্তির নেপথ্য কাহিনী কী?",
+        "ফিলিস্তিন রাষ্ট্রটি ইহুদিদের হাতে তুলে দেওয়ার পেছনে তৎকালীন শাসকদের গোপন চিঠি ও ২০ মিলিয়ন পাউন্ডের প্রস্তাব।",
       ],
       conclusion:
         "ব্রিটিশ গোয়েন্দা জন ফিলবি ও লরেন্স অফ অ্যারাবিয়ার মরণফাঁদে পা দিয়ে খিলাফত ধ্বংসের নীল নকশা এখানে উন্মোচিত।",
@@ -73,8 +73,8 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
   ];
 
   return (
-    <section className="bg-white py-10 lg:py-16 px-4 overflow-hidden relative border-t border-gray-50">
-      <div className="max-w-6xl mx-auto space-y-10 lg:space-y-16 relative z-10">
+    <section className="bg-white py-10 px-4 overflow-hidden relative border-t border-gray-50">
+      <div className="max-w-6xl mx-auto space-y-10 relative z-10">
         {/* Header with Authority Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-5">
@@ -83,7 +83,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
               অকাট্য প্রামাণ্য দলিল
             </div>
             <h2 className="text-2xl lg:text-4xl font-black text-gray-900 leading-tight">
-              এই বই শুধু ইতিহাস নয়—এটি{" "}
+              এই বই শুধু ইতিহাস নয়, এটি{" "}
               <span className="text-emerald-600 underline decoration-wavy decoration-emerald-200 underline-offset-4">
                 বিস্মৃত সত্যের
               </span>{" "}
@@ -118,7 +118,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
             </div>
             <div className="relative z-10 space-y-4">
               <h3 className="text-xl lg:text-2xl font-black leading-tight">
-                পড়ার পর আপনার সামনে—
+                পড়ার পর আপনার সামনে:
                 <br />
                 <span className="text-emerald-400">
                   ইতিহাস হবে আয়নার মতো পরিষ্কার
@@ -149,8 +149,8 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
         {/* 6-Point Investigative Grid */}
         <div className="space-y-6">
           <div className="text-center">
-            <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
-              ইনভেস্টিগেটিভ চ্যাপ্টারসমূহ—
+            <p className="text-lg font-black text-gray-900 uppercase mb-2">
+              ইনভেস্টিগেটিভ চ্যাপ্টারসমূহ:
             </p>
             <div className="h-1 w-20 bg-emerald-500/20 mx-auto rounded-full" />
           </div>
@@ -175,7 +175,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
                         key={qIndex}
                         className="text-sm font-black text-gray-700"
                       >
-                        — {q}
+                        • {q}
                       </p>
                     ))}
                   </div>
@@ -193,7 +193,7 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
         </div>
 
         {/* Book Features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-6">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-6">
           <div className="space-y-4">
             <h3 className="text-xl font-black text-gray-900 border-b border-gray-100 pb-2">
               এই বইয়ের বিশেষ বৈশিষ্ট্য
@@ -251,14 +251,12 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
 
-        <div className="mt-12 flex justify-center">
-          <CTAButtonGroup
-            onOrderClick={onOrderClick!}
-            onPreviewClick={onPreviewClick}
-          />
-        </div>
+        <CTAButtonGroup
+          onOrderClick={onOrderClick!}
+          onPreviewClick={onPreviewClick}
+        />
       </div>
     </section>
   );

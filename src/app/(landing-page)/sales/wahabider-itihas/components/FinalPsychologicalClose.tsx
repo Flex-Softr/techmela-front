@@ -8,16 +8,16 @@ type Props = {
 
 const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
   return (
-    <section className="relative py-8 lg:py-12 px-4 overflow-hidden bg-gray-950">
+    <section className="relative py-4 lg:py-8 px-4 overflow-hidden bg-gray-950">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[350px] bg-red-900/30 blur-[100px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/10 blur-[80px] rounded-full pointer-events-none" />
 
-      <div className="max-w-3xl mx-auto relative z-10 space-y-8">
+      <div className="max-w-3xl mx-auto relative z-10 space-y-5">
         {/* Badge */}
         <div className="text-center">
           <span className="inline-flex items-center gap-1.5 text-xs font-black text-red-400 uppercase tracking-widest bg-red-900/40 px-5 py-2 rounded-full border border-red-800/50">
             <AlertCircle size={12} />
-            শেষ কথা — সিদ্ধান্ত আপনার
+            শেষ কথা: সিদ্ধান্ত আপনার
           </span>
         </div>
 
@@ -29,7 +29,7 @@ const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
             <span className="text-red-500">অজুহাত হতে পারে না</span>
           </h2>
           <p className="text-gray-400 font-bold text-base max-w-xl mx-auto leading-relaxed">
-            যে ইতিহাস আপনার ঈমান ও উম্মাহর ঐক্যের উপর সরাসরি প্রভাব ফেলছে—তা কি
+            যে ইতিহাস আপনার ঈমান ও উম্মাহর ঐক্যের উপর সরাসরি প্রভাব ফেলছে, তা কি
             আপনি অবহেলা করতে পারেন?
           </p>
         </div>
@@ -39,7 +39,7 @@ const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
           <div className="bg-red-950/60 border border-red-800/50 rounded-3xl p-5 space-y-3 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1 h-full bg-red-600 rounded-l-3xl" />
             <h4 className="font-black text-red-400 text-lg pl-3">
-              আজ না নিলে—
+              আজ না নিলে:
             </h4>
             <ul className="space-y-2 pl-3">
               {[
@@ -60,7 +60,7 @@ const FinalPsychologicalClose = ({ onOrderClick }: Props) => {
           <div className="bg-emerald-950/60 border border-emerald-700/50 rounded-3xl p-5 space-y-3 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500 rounded-l-3xl" />
             <h4 className="font-black text-emerald-400 text-lg pl-3">
-              আজ নিলে—
+              আজ নিলে:
             </h4>
             <ul className="space-y-2 pl-3">
               {[

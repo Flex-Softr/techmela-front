@@ -1,12 +1,17 @@
-"use client";
 import { FiStar } from "react-icons/fi";
+import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
-const Testimonials = () => {
+type Props = {
+  onOrderClick: () => void;
+  onPreviewClick?: () => void;
+};
+
+const Testimonials = ({ onOrderClick, onPreviewClick }: Props) => {
   const reviews = [
     {
       title: "ইতিহাসের এই গোপন অধ্যায় আগে জানতাম না",
       content:
-        "আমি আগে ভাবতাম—ইউটিউবে যা শুনি তাই সত্য। কিন্তু এই বইয়ের ৩১০ পৃষ্ঠায় ব্রিটিশ গোয়েন্দা ‘জন ফিলবি’ ও ইবনে সৌদের সেই গোপন ‘দারিন চুক্তি’র দালিলিক প্রমাণ পড়ার পর আমার চোখ খুলে গেছে। আমরা আসলে ভুল ইতিহাসে বাস করছি।",
+        "আমি আগে ভাবতাম, ইউটিউবে যা শুনি তাই সত্য। কিন্তু এই বইয়ের ৩১০ পৃষ্ঠায় ব্রিটিশ গোয়েন্দা ‘জন ফিলবি’ ও ইবনে সৌদের সেই গোপন ‘দারিন চুক্তি’র দালিলিক প্রমাণ পড়ার পর আমার চোখ খুলে গেছে। আমরা আসলে ভুল ইতিহাসে বাস করছি।",
       rating: 5,
     },
     {
@@ -30,12 +35,12 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="bg-gray-50 py-6 lg:py-10 px-4 overflow-hidden relative border-t border-gray-100">
-      <div className="max-w-6xl mx-auto relative z-10 space-y-6 lg:space-y-8">
+    <section className="bg-gray-50 py-4 lg:py-8 px-4 overflow-hidden relative border-t border-gray-100">
+      <div className="max-w-6xl mx-auto relative z-10 space-y-4 lg:space-y-6">
         {/* Header */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <h2 className="text-2xl lg:text-3xl font-black text-gray-900 leading-tight">
-            সত্যিকারের পরিবর্তন বোঝা যায়—
+            সত্যিকারের পরিবর্তন বোঝা যায়:
             <br />
             <span className="text-emerald-600 mt-1 block">
               যখন মানুষ নিজের অভিজ্ঞতা শেয়ার করে
@@ -69,6 +74,13 @@ const Testimonials = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="flex justify-center pt-2">
+          <CTAButtonGroup
+            onOrderClick={onOrderClick}
+            onPreviewClick={onPreviewClick}
+          />
         </div>
       </div>
     </section>

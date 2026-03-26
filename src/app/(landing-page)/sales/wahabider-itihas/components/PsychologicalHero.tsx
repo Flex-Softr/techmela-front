@@ -14,6 +14,7 @@ type Props = {
 
 const PsychologicalHero = ({
   onOrderClick,
+  onPreviewClick,
   thumbnailSrc,
   regularPrice,
   salePrice,
@@ -37,7 +38,7 @@ const PsychologicalHero = ({
   ];
 
   return (
-    <section className="relative overflow-hidden bg-white py-6 lg:py-10 px-4">
+    <section className="relative overflow-hidden bg-white lg:py-8 py-12 px-4">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[500px] bg-gradient-to-bl from-primary/8 via-emerald-50/40 to-transparent rounded-full -mr-40 -mt-20 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-gradient-to-tr from-amber-50/60 to-transparent blur-3xl" />
@@ -45,8 +46,8 @@ const PsychologicalHero = ({
 
       <div className="max-w-screen-2xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
-          {/* Book Image (Left on Desktop, Right of Content on Mobile - though Mobile uses separate order) */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-start order-2 lg:order-1">
+          {/* Book Image (Top on Mobile, Left on Desktop) */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-start">
             {thumbnailSrc && (
               <div className="relative group w-full max-w-[300px] lg:max-w-none">
                 <div className="absolute -inset-4 bg-gradient-to-tr from-primary/10 to-transparent rounded-[2.5rem] blur-2xl opacity-60"></div>
@@ -99,8 +100,40 @@ const PsychologicalHero = ({
             )}
           </div>
 
-          {/* Content (Right on Desktop, First on Mobile) */}
-          <div className="lg:col-span-7 space-y-5 order-1 lg:order-2">
+          {/* Mobile CTA (Immediately after Image on Mobile) */}
+          <div className="lg:hidden w-full">
+            <div className="bg-gradient-to-r from-primary/5 to-emerald-50/50 p-4 rounded-2xl border border-primary/10">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  {(salePrice || regularPrice) && (
+                    <PricingDisplay
+                      regularPrice={regularPrice || 0}
+                      salePrice={salePrice || regularPrice || 0}
+                      isLarge={false}
+                    />
+                  )}
+                </div>
+                <CTAButtonGroup
+                  onOrderClick={onOrderClick}
+                  onPreviewClick={onPreviewClick}
+                  className="w-full sm:w-auto"
+                />
+              </div>
+              <div className="flex items-center justify-center gap-4 flex-wrap mt-3 border-t border-primary/10 pt-3">
+                {["ক্যাশ অন ডেলিভারি", "সারাদেশে ডেলিভারি"].map((t, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-1 text-[11px] font-bold text-gray-500"
+                  >
+                    <CheckCircle size={11} className="text-primary" /> {t}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Content (Bottom on Mobile, Right on Desktop) */}
+          <div className="lg:col-span-7 space-y-5">
             {/* Tags */}
             <div className="flex items-center gap-2 flex-wrap">
               <div className="inline-flex items-center gap-1.5 bg-red-50 text-red-700 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest border border-red-100">
@@ -111,12 +144,10 @@ const PsychologicalHero = ({
 
             {/* Headline */}
             <div className="space-y-4">
-              <h1 className="text-2xl lg:text-4xl xl:text-[2.6rem] font-black text-gray-900 leading-[1.15]">
-                ইসলামী বিশ্বের ৩০০ বছরের অজানা ও{" "}
-                <span className="text-red-600 underline decoration-wavy decoration-red-200">
-                  রক্তক্ষয়ী ইতিহাস
-                </span>{" "}
-                উন্মোচন
+              <h1 className="text-2xl lg:text-4xl xl:text-[2.2rem] font-black text-gray-900 leading-[1.3] lg:leading-[1.1] tracking-normal lg:tracking-tight">
+                ইসলামী বিশ্বের ৩০০ বছরের{" "}
+                <span className="text-emerald-700">অজানা</span> ও{" "}
+                <span className="text-red-600">রক্তক্ষয়ী ইতিহাস</span> উন্মোচন
               </h1>
               <p className="text-sm lg:text-lg font-bold text-gray-600 leading-relaxed max-w-2xl">
                 কেন উসমানীয় খিলাফতের পতন হলো? আরব ভূখণ্ডে ব্রিটিশ ষড়যন্ত্রের
@@ -139,7 +170,7 @@ const PsychologicalHero = ({
                     size={14}
                     className="text-red-500 shrink-0 mt-0.5"
                   />
-                  <p className="font-black text-gray-900 text-sm lg:text-base leading-tight">
+                  <p className="font-black text-gray-900 text-sm leading-tight">
                     {q}
                   </p>
                 </div>
@@ -166,20 +197,23 @@ const PsychologicalHero = ({
             </ul>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-6 pt-2">
+            <div className="hidden lg:block">
               {(salePrice || regularPrice) && (
                 <PricingDisplay
                   regularPrice={regularPrice || 0}
                   salePrice={salePrice || regularPrice || 0}
                   isLarge={false}
+                  className="lg:flex-row lg:gap-6 lg:items-center"
                 />
               )}
+            </div>
+            <div className="hidden lg:flex items-center gap-6 pt-2">
               <CTAButtonGroup
                 onOrderClick={onOrderClick}
+                onPreviewClick={onPreviewClick}
                 className="scale-105 origin-left"
               />
             </div>
-
             {/* Trust strip */}
             <div className="hidden lg:flex items-center gap-4 flex-wrap">
               {[
@@ -194,37 +228,6 @@ const PsychologicalHero = ({
                   <CheckCircle size={12} className="text-primary" /> {t}
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Mobile CTA */}
-          <div className="lg:hidden order-3 w-full">
-            <div className="bg-gradient-to-r from-primary/5 to-emerald-50/50 p-4 rounded-2xl border border-primary/10">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
-                  {(salePrice || regularPrice) && (
-                    <PricingDisplay
-                      regularPrice={regularPrice || 0}
-                      salePrice={salePrice || regularPrice || 0}
-                      isLarge={false}
-                    />
-                  )}
-                </div>
-                <CTAButtonGroup
-                  onOrderClick={onOrderClick}
-                  className="w-full sm:w-auto"
-                />
-              </div>
-              <div className="flex items-center justify-center gap-4 flex-wrap mt-3 border-t border-primary/10 pt-3">
-                {["ক্যাশ অন ডেলিভারি", "সারাদেশে ডেলিভারি"].map((t, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-1 text-[11px] font-bold text-gray-500"
-                  >
-                    <CheckCircle size={11} className="text-primary" /> {t}
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>

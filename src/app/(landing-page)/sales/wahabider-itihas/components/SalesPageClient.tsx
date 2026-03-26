@@ -13,12 +13,15 @@ import SalesOrderForm from "./SalesOrderForm";
 // New Redesign Components
 import BookHighlights from "./BookHighlights";
 import FAQSection from "./FAQSection";
-import FearResponsibility from "./FearResponsibility";
+// import FearResponsibility from "./FearResponsibility";
 import FinalPsychologicalClose from "./FinalPsychologicalClose";
 import PricingSection from "./PricingSection";
 import PsychologicalDisruption from "./PsychologicalDisruption";
 import PsychologicalHero from "./PsychologicalHero";
+// import ScholarContext from "./ScholarContext";
+// import SolutionAuthority from "./SolutionAuthority";
 import Testimonials from "./Testimonials";
+import WhoIsThisFor from "./WhoIsThisFor";
 
 type Props = {
   product: TSingleProduct | undefined;
@@ -131,27 +134,50 @@ const SalesPageClient = ({
         onPreviewClick={handlePreviewClick}
       />
 
-      <PsychologicalDisruption />
-
-      <FearResponsibility
+      <PsychologicalDisruption
         onOrderClick={handleOrderNow}
         onPreviewClick={handlePreviewClick}
       />
+
+      <WhoIsThisFor
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      />
+
+      {/* <FearResponsibility
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      /> */}
+
+      {/* <SolutionAuthority
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+        thumbnailSrc={thumbnailSrc}
+      /> */}
 
       <BookHighlights
         onOrderClick={handleOrderNow}
         onPreviewClick={handlePreviewClick}
       />
 
-      <Testimonials />
+      {/* <ScholarContext /> */}
+
+      <Testimonials
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      />
 
       <PricingSection
         regularPrice={regularPrice}
         salePrice={salePrice}
         onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
       />
 
-      <FAQSection />
+      <FAQSection
+        onOrderClick={handleOrderNow}
+        onPreviewClick={handlePreviewClick}
+      />
 
       {/* ───── ORDER FORM SECTION ───── */}
       <section className="bg-gray-50 py-8" ref={orderFormRef}>
