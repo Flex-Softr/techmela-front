@@ -7,13 +7,11 @@ const CartTotalCalculations = ({
   totalCost,
   costLoading = false,
   hideSubtotal = false,
-  shippingCostExceptFirst,
   shippingAreaSlot,
 }: {
   totalCost?: number;
   costLoading?: boolean;
   hideSubtotal?: boolean;
-  shippingCostExceptFirst: number;
   shippingAreaSlot: ReactNode;
 }) => {
   const selectedShipping = useAppSelector((state) => state.shippingClass);
@@ -58,7 +56,7 @@ const CartTotalCalculations = ({
           {costLoading ? (
             <Skeleton className="h-4 w-[100px]" />
           ) : (
-            <>{totalWithoutCoupon + shippingCostExceptFirst} &#2547;</>
+            <>{totalWithoutCoupon} &#2547;</>
           )}
         </span>
       </div>

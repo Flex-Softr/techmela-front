@@ -35,23 +35,33 @@ const ProductClientContent = ({
     try {
       const result = (await addToCart(cartInfo).unwrap()) as TGenericResponse;
       if (result.success) {
+        const regularPrice = product?.price?.regularPrice ?? 0;
+        const salePrice = product?.price?.salePrice ?? regularPrice;
+        const currentItemPrice = selectedVariation
+          ? (selectedVariation.price?.salePrice ??
+            selectedVariation.price?.regularPrice ??
+            salePrice)
+          : salePrice;
+
+        const currentId = selectedVariation?._id
+          ? `${product?._id}-${selectedVariation?._id}`
+          : product?._id;
+
         gtmEventHandler({
           event: "add_to_cart",
+          content_name: product?.title,
+          content_ids: currentId ? [currentId] : [],
           content_type: "product",
+          currency: "BDT",
+          value: currentItemPrice * quantity,
           contents: [
             {
-              id: selectedVariation?._id
-                ? `${product?._id}-${selectedVariation?._id}`
-                : product?._id,
+              id: currentId,
               quantity,
+              item_price: currentItemPrice,
+              name: product?.title,
             },
           ],
-          currency: "BDT",
-          value: Number(
-            (product?.variations?.length ?? 0 > 0)
-              ? product?.variations[0]?.price?.regularPrice
-              : (product?.price?.regularPrice ?? 0) * quantity
-          ),
         });
         toast({
           title: result?.message,

@@ -2,11 +2,7 @@ import TShippingCharges from "@/types/shippingCharge";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 import SelectShippingArea from "./SelectShippingArea";
 
-const SelectShippingAreaFetcher = async ({
-  shippingCostExceptFirst,
-}: {
-  shippingCostExceptFirst: number;
-}) => {
+const SelectShippingAreaFetcher = async () => {
   const { data: shippingCharges = [] } = await serverSideFetcher<
     TShippingCharges[]
   >({
@@ -14,12 +10,7 @@ const SelectShippingAreaFetcher = async ({
     tags: ["shippingCharge"],
   });
 
-  return (
-    <SelectShippingArea
-      shippingCharges={shippingCharges}
-      shippingCostExceptFirst={shippingCostExceptFirst}
-    />
-  );
+  return <SelectShippingArea shippingCharges={shippingCharges} />;
 };
 
 export default SelectShippingAreaFetcher;

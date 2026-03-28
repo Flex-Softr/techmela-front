@@ -1,11 +1,11 @@
 "use client";
 import CheckoutCartItems from "@/components/cart/CheckoutCartItems";
+import { TCartItemData } from "@/types/cart";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCart from "@/hooks/useCart";
-import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import useOrderSubmit from "@/hooks/useOrderSubmit";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import OrderNow from "./OrderNow";
 import ShippingAddress from "./ShippingAddress";
@@ -37,11 +37,6 @@ const CheckoutForm = ({
     mode: "all",
   });
 
-  const { calculatedTotal } = useCheckoutLogic({
-    totalCost,
-    shippingCostExceptFirst: 1000,
-  });
-
   const {
     handlePlaceOrder,
     isLoading,
@@ -50,14 +45,40 @@ const CheckoutForm = ({
     limitModalStatus,
     setLimitModalStatus,
   } = useOrderSubmit({
-    calculatedTotal,
+    totalCost,
   });
 
+  const { data: cartData } = useCart();
+  const initiateCheckoutTracked = useRef(false);
+
   useEffect(() => {
-    gtmEventHandler({
-      event: "initiate_checkout",
-    });
-  }, []);
+    if (
+      cartData?.data &&
+      Array.isArray(cartData.data) &&
+      !initiateCheckoutTracked.current
+    ) {
+      initiateCheckoutTracked.current = true;
+      gtmEventHandler({
+        event: "initiate_checkout",
+        content_ids: cartData.data.map((item: TCartItemData) =>
+          item.variation?._id
+            ? `${item.product?._id}-${item.variation._id}`
+            : item.product?._id
+        ),
+        content_type: "product",
+        value: totalCost,
+        currency: "BDT",
+        contents: cartData.data.map((item: TCartItemData) => ({
+          id: item.variation?._id
+            ? `${item.product?._id}-${item.variation._id}`
+            : item.product?._id,
+          quantity: item.quantity,
+          item_price: item.price?.salePrice || item.price?.regularPrice,
+          name: item.product?.title,
+        })),
+      });
+    }
+  }, [cartData?.data, totalCost]);
 
   return (
     <>

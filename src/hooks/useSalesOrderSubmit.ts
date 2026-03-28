@@ -56,12 +56,12 @@ type TOrderData = {
 
 const useSalesOrderSubmit = ({
   paymentMethods,
-  calculatedTotal,
+  totalCost,
   orderedProducts,
   lpNo,
 }: {
   paymentMethods: TPaymentMethod[];
-  calculatedTotal: number;
+  totalCost: number;
   orderedProducts: TOrderItem[];
   lpNo: string;
 }) => {
@@ -147,7 +147,7 @@ const useSalesOrderSubmit = ({
           event: "purchase",
           ph: shippingData.phoneNumber,
           em: shippingData.email,
-          value: calculatedTotal,
+          value: totalCost,
           currency: "BDT",
           contents: result?.data?.orderedProducts?.map(
             (product: {

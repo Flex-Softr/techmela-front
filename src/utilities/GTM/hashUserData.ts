@@ -1,5 +1,3 @@
-import crypto from "crypto";
-
 /**
  * Normalize value before hashing (Meta requirement)
  */
@@ -8,13 +6,18 @@ const normalize = (value: string): string => {
 };
 
 /**
- * SHA-256 hash (hex)
+ * SHA-256 hash (hex) - Browser compatible
  */
-export const hashUserData = (value?: string | null): string | undefined => {
+export const hashUserData = async (
+  value?: string | null
+): Promise<string | undefined> => {
   if (!value) return undefined;
 
   const normalized = normalize(value);
-  const hashed = crypto.createHash("sha256").update(normalized).digest("hex");
+  const msgBuffer = new TextEncoder().encode(normalized);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashed = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 
   return hashed;
 };

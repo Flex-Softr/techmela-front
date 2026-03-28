@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import config from "@/config/config";
 import { getImageSrc } from "@/lib/utils";
 import { refetchData } from "@/utilities/actions";
 import { ShoppingBag } from "lucide-react";
@@ -29,19 +28,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
     }
   }, [orderInfo]);
 
-  const totalNumberOfItems =
-    (orderInfo?.products as { quantity: number }[])?.reduce(
-      (acc, item) => acc + (item?.quantity || 0),
-      0
-    ) || 0;
-
-  const extraShippingCost = Number(
-    (totalNumberOfItems - 1) * config.per_item_shipping_cost
-  );
-
-  const totalShippingCost = Number(
-    orderInfo.shippingCharge?.amount + extraShippingCost
-  );
+  const totalShippingCost = Number(orderInfo.shippingCharge?.amount || 0);
 
   return (
     <Card className="border-none shadow-sm overflow-hidden">

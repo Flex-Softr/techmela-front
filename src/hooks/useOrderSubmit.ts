@@ -22,10 +22,10 @@ type TCheckoutFormData = {
 };
 
 const useOrderSubmit = ({
-  calculatedTotal,
+  totalCost,
   orderSource,
 }: {
-  calculatedTotal: number;
+  totalCost: number;
   orderSource?: { name: string; url?: string };
 }) => {
   const dispatch = useAppDispatch();
@@ -113,7 +113,7 @@ const useOrderSubmit = ({
           event: "purchase",
           ph: shippingData.phoneNumber,
           em: shippingData.email,
-          value: calculatedTotal,
+          value: totalCost,
           currency: "BDT",
           contents: result?.data?.orderedProducts?.map((product) => ({
             id: product?.variation

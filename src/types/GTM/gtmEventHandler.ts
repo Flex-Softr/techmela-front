@@ -19,6 +19,8 @@ export type TGtmEventParameter = {
     id?: string;
     quantity?: number;
     item_price?: number;
+    name?: string;
+    price?: number;
   }[];
   em?: string;
   ph?: string;

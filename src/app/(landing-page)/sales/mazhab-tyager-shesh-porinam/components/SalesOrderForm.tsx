@@ -7,14 +7,13 @@ import OrderLimit from "@/components/orderLimit/OrderLimit";
 import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
-
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import Image from "next/image";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
@@ -85,7 +84,6 @@ const SalesOrderForm = ({
 
   const { calculatedTotal } = useCheckoutLogic({
     totalCost,
-    shippingCostExceptFirst: 0,
   });
 
   const orderedProducts = useMemo(() => {
@@ -105,27 +103,39 @@ const SalesOrderForm = ({
     setLimitModalStatus,
   } = useSalesOrderSubmit({
     paymentMethods,
-    calculatedTotal,
+    totalCost,
     orderedProducts,
     lpNo: "LP-MTP-01",
   });
 
+  const initiateCheckoutTracked = useRef(false);
+
   // Fire InitiateCheckout when user starts filling the form
   useEffect(() => {
     const subscription = methods.watch((_, { name }) => {
-      if (name === "fullName" && methods.getValues("fullName")?.length === 1) {
+      if (
+        name === "fullName" &&
+        methods.getValues("fullName")?.length === 1 &&
+        !initiateCheckoutTracked.current
+      ) {
+        initiateCheckoutTracked.current = true;
         gtmEventHandler({
           event: "initiate_checkout",
           content_name: productTitle,
           content_ids: cartItems.map((item) => item.productId),
           content_type: "product",
-          value: calculatedTotal,
+          value: totalCost,
           currency: "BDT",
+          contents: cartItems.map((item) => ({
+            id: item.productId,
+            quantity: item.quantity,
+            item_price: salePrice || fallbackPrice,
+          })),
         });
       }
     });
     return () => subscription.unsubscribe();
-  }, [methods, productTitle, cartItems, calculatedTotal]);
+  }, [methods, productTitle, cartItems, totalCost, salePrice, fallbackPrice]);
 
   return (
     <>
@@ -216,10 +226,7 @@ const SalesOrderForm = ({
                 </div>
               </div>
               {/* Shipping Area */}
-              <SelectShippingArea
-                shippingCharges={shippingCharges}
-                shippingCostExceptFirst={0}
-              />
+              <SelectShippingArea shippingCharges={shippingCharges} />
             </div>
 
             {/* Errors */}
@@ -277,6 +284,13 @@ const SalesOrderForm = ({
                 <a
                   href="tel:+8801602431167"
                   className="inline-flex items-center justify-center gap-3 bg-white text-primary font-black px-8 py-3 rounded-xl border border-primary/10 shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all text-lg lg:text-xl"
+                  onClick={() => {
+                    gtmEventHandler({
+                      event: "contact",
+                      content_name: "Support Call",
+                      content_type: "phone",
+                    });
+                  }}
                 >
                   ০১৬০২-৪৩১১৬৭
                 </a>
