@@ -3,7 +3,7 @@ import config from "@/config/config";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import { gtmEventHandler } from "@/utilities/GTM";
 import { useEffect, useRef, useState } from "react";
 
 // Import Client sub-components
@@ -12,12 +12,12 @@ import SalesOrderForm from "./SalesOrderForm";
 
 // Redesigned Components
 import BookHighlights from "./BookHighlights";
+import FAQSection from "./FAQSection";
 import FinalPsychologicalClose from "./FinalPsychologicalClose";
 import PricingSection from "./PricingSection";
 import PsychologicalDisruption from "./PsychologicalDisruption";
 import PsychologicalHero from "./PsychologicalHero";
 import Testimonials from "./Testimonials";
-import FAQSection from "./FAQSection";
 
 type Props = {
   product: TSingleProduct | undefined;
@@ -44,19 +44,27 @@ const SalesPageClient = ({
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);
   const [lastTrackedCart, setLastTrackedCart] = useState<string>("");
+  const price = product?.price?.salePrice || product?.price?.regularPrice || 0;
 
   useEffect(() => {
     if (product) {
       gtmEventHandler({
-        event: "view_content",
+        event_name: "view_content",
         content_name: product.title,
         content_ids: [product._id],
         content_type: "product",
-        value: product.price?.salePrice || product.price?.regularPrice,
-        currency: "BDT",
+        content_category: product.category?.[0]?.name,
+        contents: [
+          {
+            id: product._id,
+            quantity: 1,
+            item_price: price,
+          },
+        ],
+        value: price,
       });
     }
-  }, [product]);
+  }, [price, product]);
 
   const handleOrderNow = () => {
     if (!product) return;
@@ -64,22 +72,19 @@ const SalesPageClient = ({
     const currentKey = `${product._id}-simple-${quantity}`;
     if (currentKey !== lastTrackedCart) {
       gtmEventHandler({
-        event: "add_to_cart",
+        event_name: "add_to_cart",
         content_name: product.title,
         content_ids: [product._id],
         content_type: "product",
-        value:
-          (product.price?.salePrice || product.price?.regularPrice || 0) *
-          quantity,
-        currency: "BDT",
+        content_category: product.category?.[0]?.name,
         contents: [
           {
             id: product._id,
             quantity,
-            item_price:
-              product.price?.salePrice || product.price?.regularPrice || 0,
+            item_price: price,
           },
         ],
+        value: price * quantity,
       });
       setLastTrackedCart(currentKey);
     }

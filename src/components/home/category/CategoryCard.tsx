@@ -1,24 +1,14 @@
 "use client";
 import { getImageSrc } from "@/lib/utils";
 import TCategory from "@/types/categories/categories";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
 import Image from "next/image";
 import Link from "next/link";
 
 const CategoryCard = ({ category }: { category: TCategory }) => {
-  const handleCategoryView = () => {
-    gtmEventHandler({
-      event: "view_category",
-      content_type: "product_category",
-      contents: [{ id: category._id }],
-    });
-  };
-
   return (
     <Link
       href={`/shop?category=${category.slug}`}
       className="text-center mx-auto flex flex-col justify-center items-center group transition-all duration-300"
-      onClick={handleCategoryView}
     >
       <div className="size-20 sm:size-24 md:size-32 rounded-full flex justify-center items-center bg-gray-50 border border-gray-100 group-hover:bg-primary/5 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-300 overflow-hidden shadow-sm">
         <Image

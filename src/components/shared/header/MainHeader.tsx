@@ -16,8 +16,8 @@ const MainHeader = () => {
           <Image
             src={logo}
             alt="Siddikiya Prokashoni Logo"
-            height={100}
-            width={200}
+            width={96}
+            height={48}
             className="w-16 h-12 md:w-24 md:h-12 rounded-md"
             priority
           />

@@ -11,12 +11,12 @@ const CopyrightContent = () => {
               <span className="text-primary-foreground font-bold">
                 সিদ্দীকিয়া প্রকাশনী
               </span>
-              . All rights reserved.
+              . সর্বস্বত্ব সংরক্ষিত।
             </p>
           </div>
-          <div className="md:pr-16">
+          <div>
             <p className="text-text-muted-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
-              Developed and maintained with ❤️ by{" "}
+              Developed and maintained by{" "}
               <a
                 href="https://www.facebook.com/mustaqimkhanbd"
                 target="_blank"

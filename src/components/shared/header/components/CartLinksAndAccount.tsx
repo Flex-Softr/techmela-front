@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
 import { useDebounce } from "@/hooks/useDebounce";
 import { getImageSrc } from "@/lib/utils";
+import { ApiResponse } from "@/redux/features/searchProduct/interface";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
 import { TProduct } from "@/types/products/product";
 import { TVariableProduct } from "@/types/products/variableProduct";
@@ -16,7 +17,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
-import { ApiResponse } from "@/redux/features/searchProduct/interface";
 
 /* -------------------- type guards -------------------- */
 const isVariableProduct = (

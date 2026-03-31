@@ -2,10 +2,10 @@
 
 import { PRODUCT_TYPE } from "@/const/product.const";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import { gtmEventHandler } from "@/utilities/GTM";
 import { useEffect, useState } from "react";
-import ProductMainInfo from "./ProductMainInfo";
 import ProductClientContent from "./ProductClientContent";
+import ProductMainInfo from "./ProductMainInfo";
 import VariationSelector from "./VariationSelector";
 
 type ProductClientWrapperProps = {
@@ -25,29 +25,33 @@ const ProductClientWrapper = ({
   const [selectedVariation, setSelectedVariation] = useState<
     TSingleProduct["variations"][0] | undefined
   >(undefined);
+  const price = Number(
+    product?.variations?.length > 0
+      ? ((product?.variations[0]?.price?.salePrice ||
+          product?.variations[0]?.price?.regularPrice) ??
+          0)
+      : ((product?.price?.salePrice || product?.price?.regularPrice) ?? 0)
+  );
 
   useEffect(() => {
     gtmEventHandler({
-      event: "view_content",
+      event_name: "view_content",
       content_name: product.title,
+      content_ids: [product._id],
       content_type: "product",
+      content_category: product.category?.[0]?.name,
       contents: [
         {
           id: defaultVariation?._id
             ? `${product._id}-${defaultVariation?._id}`
             : product._id,
+          quantity: 1,
+          item_price: price,
         },
       ],
-      currency: "BDT",
-      value: Number(
-        product?.variations?.length > 0
-          ? ((product?.variations[0]?.price?.salePrice ||
-              product?.variations[0]?.price?.regularPrice) ??
-              0)
-          : ((product?.price?.salePrice || product?.price?.regularPrice) ?? 0)
-      ),
+      value: price,
     });
-  }, [product, defaultVariation]);
+  }, [product, defaultVariation, price]);
 
   const isVariableProduct = product.type === PRODUCT_TYPE.VARIABLE;
 

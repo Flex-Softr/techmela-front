@@ -37,7 +37,7 @@ const useCheckoutLogic = ({ totalCost }: { totalCost?: number }) => {
     ]);
 
   return {
-    shippingClass: selectedShipping,
+    shippingChange: selectedShipping?.amount,
     couponInfo,
     totalWithoutCoupon,
     calculatedTotal,

@@ -6,7 +6,7 @@ import { useCreateOrderMutation } from "@/redux/features/order/orderApi";
 import { setShippingInfo } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TGenericErrorResponse } from "@/types/response";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import { gtmEventHandler } from "@/utilities/GTM";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import useCart from "./useCart";
@@ -24,9 +24,13 @@ type TCheckoutFormData = {
 const useOrderSubmit = ({
   totalCost,
   orderSource,
+  productName,
+  productCategory,
 }: {
   totalCost: number;
   orderSource?: { name: string; url?: string };
+  productName?: string;
+  productCategory?: string;
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -40,6 +44,7 @@ const useOrderSubmit = ({
 
   const shippingClass = useAppSelector((state) => state.shippingClass);
   const couponInfo = useAppSelector((state) => state.coupon);
+  const auth = useAppSelector((state) => state.auth);
 
   const handlePlaceOrder = async (data: TCheckoutFormData) => {
     setErrorMessages([]);
@@ -110,21 +115,34 @@ const useOrderSubmit = ({
 
         // GTM Event
         gtmEventHandler({
-          event: "purchase",
+          event_name: "purchase",
+          fn: shippingData.fullName,
           ph: shippingData.phoneNumber,
           em: shippingData.email,
-          value: totalCost,
-          currency: "BDT",
+          order_id: result?.data?.orderId,
+          content_name:
+            productName || result?.data?.orderedProducts?.[0]?.product,
+          content_category: productCategory,
+          content_ids: result?.data?.orderedProducts?.map((product) => {
+            return product?.variation
+              ? `${product.product}-${product.variation}`
+              : product.product;
+          }),
           contents: result?.data?.orderedProducts?.map((product) => ({
             id: product?.variation
               ? `${product.product}-${product.variation}`
               : product.product,
             name: product.product,
             quantity: product.quantity,
-            price: product.unitPrice,
+            item_price: product.unitPrice,
           })),
-          content_type: "product",
-          order_id: result?.data?.orderId,
+          value: result?.data?.total || totalCost,
+          num_items: result?.data?.orderedProducts?.length,
+          shipping: shippingClass.amount,
+          discount_value: result?.data?.discount,
+          coupon: couponInfo.coupon ?? undefined,
+          status: result?.data?.status,
+          external_id: auth.user?.userId,
         });
 
         toast({

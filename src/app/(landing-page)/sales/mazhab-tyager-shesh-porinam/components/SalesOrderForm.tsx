@@ -1,5 +1,9 @@
 "use client";
-
+import Image from "next/image";
+import { useEffect, useMemo, useRef } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
 import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
 import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
 import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
@@ -11,12 +15,7 @@ import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
-import Image from "next/image";
-import { useEffect, useMemo, useRef } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
+import { gtmEventHandler } from "@/utilities/GTM";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -82,7 +81,7 @@ const SalesOrderForm = ({
     }, 0);
   }, [cartItems, fallbackPrice, salePrice]);
 
-  const { calculatedTotal } = useCheckoutLogic({
+  const { calculatedTotal, shippingChange } = useCheckoutLogic({
     totalCost,
   });
 
@@ -106,6 +105,8 @@ const SalesOrderForm = ({
     totalCost,
     orderedProducts,
     lpNo: "LP-MTP-01",
+    productName: product?.title || productTitle,
+    productCategory: product?.category?.[0]?.name,
   });
 
   const initiateCheckoutTracked = useRef(false);
@@ -114,28 +115,38 @@ const SalesOrderForm = ({
   useEffect(() => {
     const subscription = methods.watch((_, { name }) => {
       if (
-        name === "fullName" &&
-        methods.getValues("fullName")?.length === 1 &&
+        name === "phoneNumber" &&
+        methods.getValues("phoneNumber")?.length === 1 &&
         !initiateCheckoutTracked.current
       ) {
         initiateCheckoutTracked.current = true;
         gtmEventHandler({
-          event: "initiate_checkout",
+          event_name: "initiate_checkout",
           content_name: productTitle,
           content_ids: cartItems.map((item) => item.productId),
           content_type: "product",
-          value: totalCost,
-          currency: "BDT",
+          content_category: product?.category?.[0]?.name,
+          shipping: shippingChange ?? undefined,
           contents: cartItems.map((item) => ({
             id: item.productId,
             quantity: item.quantity,
             item_price: salePrice || fallbackPrice,
           })),
+          value: calculatedTotal,
         });
       }
     });
     return () => subscription.unsubscribe();
-  }, [methods, productTitle, cartItems, totalCost, salePrice, fallbackPrice]);
+  }, [
+    methods,
+    productTitle,
+    cartItems,
+    calculatedTotal,
+    salePrice,
+    fallbackPrice,
+    shippingChange,
+    product?.category,
+  ]);
 
   return (
     <>
@@ -148,7 +159,7 @@ const SalesOrderForm = ({
           <div className="space-y-2">
             {/* Shipping Info */}
             <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
-              <ShippingAddress />
+              <ShippingAddress disablePhoneAutoFill={true} />
             </div>
             {/* Payment Methods */}
             <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
@@ -284,13 +295,6 @@ const SalesOrderForm = ({
                 <a
                   href="tel:+8801602431167"
                   className="inline-flex items-center justify-center gap-3 bg-white text-primary font-black px-8 py-3 rounded-xl border border-primary/10 shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all text-lg lg:text-xl"
-                  onClick={() => {
-                    gtmEventHandler({
-                      event: "contact",
-                      content_name: "Support Call",
-                      content_type: "phone",
-                    });
-                  }}
                 >
                   ০১৬০২-৪৩১১৬৭
                 </a>

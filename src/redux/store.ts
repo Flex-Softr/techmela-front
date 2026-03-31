@@ -1,6 +1,7 @@
 "use client";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./features/auth/authSlice";
+import { TInitialState } from "./features/auth/interface";
 
 import {
   FLUSH,
@@ -29,7 +30,10 @@ const persistConfig = {
   storage,
 };
 
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistedAuthReducer = persistReducer<TInitialState>(
+  persistConfig,
+  authReducer
+);
 
 export const store = configureStore({
   reducer: {

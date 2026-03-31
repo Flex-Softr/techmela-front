@@ -21,7 +21,7 @@
 //   const [notFoundProducts, setNotFoundProducts] = useState<string[]>([]);
 //   const [searched, setSearched] = useState<boolean>(false);
 
-//   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//   const handleInputChange = (event_name: React.ChangeEvent<HTMLInputElement>) => {
 //     setNewWarrantyCode(event.target.value);
 //   };
 
@@ -293,7 +293,7 @@
 
 //   const [validCodes, setValidCodes] = useState<string[]>([]);
 
-//   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//   const handleInputChange = (event_name: React.ChangeEvent<HTMLInputElement>) => {
 //     setNewWarrantyCode(event.target.value);
 //   };
 

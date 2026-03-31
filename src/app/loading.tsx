@@ -11,7 +11,6 @@ const Loading = () => {
           alt="Siddikiya Prokashoni Logo"
           width={100}
           height={100}
-          priority={true}
         />
       </div>
       <h1 className="xms:text-lg xls:text-xl sm:text-2xl md:text-4xl text-gray-700">

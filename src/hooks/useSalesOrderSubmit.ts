@@ -11,7 +11,7 @@ import { setShippingInfo } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TGenericErrorResponse } from "@/types/response";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import { gtmEventHandler } from "@/utilities/GTM";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -59,11 +59,15 @@ const useSalesOrderSubmit = ({
   totalCost,
   orderedProducts,
   lpNo,
+  productName,
+  productCategory,
 }: {
   paymentMethods: TPaymentMethod[];
   totalCost: number;
   orderedProducts: TOrderItem[];
   lpNo: string;
+  productName: string;
+  productCategory?: string;
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -75,6 +79,7 @@ const useSalesOrderSubmit = ({
 
   const shippingClass = useAppSelector((state) => state.shippingClass);
   const couponInfo = useAppSelector((state) => state.coupon);
+  const auth = useAppSelector((state) => state.auth);
 
   // Initial Setup: Set default payment method
   useEffect(() => {
@@ -141,31 +146,37 @@ const useSalesOrderSubmit = ({
       const result = await createOrder(orderData).unwrap();
       if (result.success) {
         setIsSuccess(true);
-
+        // eslint-disable-next-line no-console
+        console.log("order result", result);
         // GTM Event
         gtmEventHandler({
-          event: "purchase",
+          event_name: "purchase",
+          fn: shippingData.fullName,
           ph: shippingData.phoneNumber,
           em: shippingData.email,
-          value: totalCost,
-          currency: "BDT",
-          contents: result?.data?.orderedProducts?.map(
-            (product: {
-              product: string;
-              variation?: string;
-              quantity: number;
-              unitPrice: number;
-            }) => ({
-              id: product?.variation
-                ? `${product.product}-${product.variation}`
-                : product.product,
-              name: product.product,
-              quantity: product.quantity,
-              price: product.unitPrice,
-            })
-          ),
-          content_type: "product",
           order_id: result?.data?.orderId,
+          content_name: productName,
+          content_category: productCategory,
+          content_ids: result?.data?.orderedProducts?.map((product) => {
+            return product?.variation
+              ? `${product.product}-${product.variation}`
+              : product.product;
+          }),
+          contents: result?.data?.orderedProducts?.map((product) => ({
+            id: product?.variation
+              ? `${product.product}-${product.variation}`
+              : product.product,
+            // name: product.product,
+            quantity: product.quantity,
+            item_price: product.unitPrice,
+          })),
+          value: result?.data?.total || totalCost,
+          num_items: result?.data?.orderedProducts?.length,
+          shipping: shippingClass.amount,
+          discount_value: result?.data?.discount,
+          coupon: couponInfo.coupon ?? undefined,
+          status: result?.data?.status,
+          external_id: auth.user?.userId,
         });
 
         toast({

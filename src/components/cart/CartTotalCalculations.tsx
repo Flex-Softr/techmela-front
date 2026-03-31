@@ -1,6 +1,5 @@
 import { useAppSelector } from "@/redux/hooks";
 import { Skeleton } from "../ui/skeleton";
-
 import { ReactNode } from "react";
 
 const CartTotalCalculations = ({

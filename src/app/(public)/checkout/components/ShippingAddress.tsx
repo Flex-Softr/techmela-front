@@ -32,7 +32,11 @@ type CheckoutFormData = {
   // Payment fields are also in here but not used in this component
 };
 
-const ShippingAddress = () => {
+const ShippingAddress = ({
+  disablePhoneAutoFill = false,
+}: {
+  disablePhoneAutoFill?: boolean;
+}) => {
   const {
     register,
     formState: { errors },
@@ -55,7 +59,9 @@ const ShippingAddress = () => {
       const { fullName, phoneNumber, fullAddress, notes, email } =
         shippingInfoData.data;
       setValue("fullName", fullName || "");
-      setValue("phoneNumber", phoneNumber || "");
+      if (!disablePhoneAutoFill) {
+        setValue("phoneNumber", phoneNumber || "");
+      }
       setValue("fullAddress", fullAddress || "");
       setValue("notes", notes || "");
       setValue("email", email || "");
@@ -66,7 +72,9 @@ const ShippingAddress = () => {
         setShippingAddress(parsedAddress);
         // Set form field values using setValue
         setValue("fullName", parsedAddress.fullName);
-        setValue("phoneNumber", parsedAddress.phoneNumber);
+        if (!disablePhoneAutoFill) {
+          setValue("phoneNumber", parsedAddress.phoneNumber);
+        }
         setValue("fullAddress", parsedAddress.fullAddress);
         setValue("notes", parsedAddress.notes || "");
         setValue("email", parsedAddress.email || "");
@@ -75,7 +83,7 @@ const ShippingAddress = () => {
         dispatch(setShippingInfo(parsedAddress));
       }
     }
-  }, [setValue, shippingInfoData.data, dispatch]);
+  }, [setValue, shippingInfoData.data, dispatch, disablePhoneAutoFill]);
 
   const checkCustomerAccount = () => {
     const isLoggedIn = false;

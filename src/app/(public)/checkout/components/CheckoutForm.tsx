@@ -1,14 +1,15 @@
 "use client";
 import CheckoutCartItems from "@/components/cart/CheckoutCartItems";
-import { TCartItemData } from "@/types/cart";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCart from "@/hooks/useCart";
 import useOrderSubmit from "@/hooks/useOrderSubmit";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import { TCartItemData } from "@/types/cart";
+import { gtmEventHandler } from "@/utilities/GTM";
 import { useEffect, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import OrderNow from "./OrderNow";
 import ShippingAddress from "./ShippingAddress";
+import { ReactNode } from "react";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -19,8 +20,6 @@ type TCheckoutFormData = {
   paymentMethod: string; // ID of the payment method
   paymentDetails?: Record<string, string | number>;
 };
-
-import { ReactNode } from "react";
 
 const CheckoutForm = ({
   shippingAreaSlot,
@@ -37,6 +36,7 @@ const CheckoutForm = ({
     mode: "all",
   });
 
+  const { data: cartData } = useCart();
   const {
     handlePlaceOrder,
     isLoading,
@@ -46,9 +46,10 @@ const CheckoutForm = ({
     setLimitModalStatus,
   } = useOrderSubmit({
     totalCost,
+    productName: cartData?.data?.[0]?.product?.title,
+    productCategory: cartData?.data?.[0]?.product?.category?.[0]?.name,
   });
 
-  const { data: cartData } = useCart();
   const initiateCheckoutTracked = useRef(false);
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const CheckoutForm = ({
     ) {
       initiateCheckoutTracked.current = true;
       gtmEventHandler({
-        event: "initiate_checkout",
+        event_name: "initiate_checkout",
         content_ids: cartData.data.map((item: TCartItemData) =>
           item.variation?._id
             ? `${item.product?._id}-${item.variation._id}`
@@ -67,7 +68,6 @@ const CheckoutForm = ({
         ),
         content_type: "product",
         value: totalCost,
-        currency: "BDT",
         contents: cartData.data.map((item: TCartItemData) => ({
           id: item.variation?._id
             ? `${item.product?._id}-${item.variation._id}`
@@ -76,6 +76,9 @@ const CheckoutForm = ({
           item_price: item.price?.salePrice || item.price?.regularPrice,
           name: item.product?.title,
         })),
+        //  content_name: productTitle,
+        //   content_category: product?.category?.[0]?.name,
+        //   shipping: shippingChange ?? undefined,
       });
     }
   }, [cartData?.data, totalCost]);

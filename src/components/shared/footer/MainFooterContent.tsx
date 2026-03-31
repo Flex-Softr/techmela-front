@@ -15,7 +15,8 @@ const companyLinks = [
 const customerCareLinks = [
   { name: "অর্ডার ট্র্যাকিং", url: "/track-your-order" },
   // { name: "warranty claim", url: "/warranty/claim-your-warranty" },
-  { name: "ওয়ারেন্টি ক্লেম", url: "/warranty/find-your-product" },
+  // { name: "ওয়ারেন্টি ক্লেম", url: "/warranty/find-your-product" },
+  { name: "আমার অ্যাকাউন্ট", url: "/my-account" },
   { name: "ডেলিভারি পলিসি", url: "/delivery-policy" },
   { name: "রিটার্ন পলিসি", url: "/return-policy" },
 ];

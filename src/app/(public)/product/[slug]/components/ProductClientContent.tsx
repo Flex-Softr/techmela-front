@@ -6,7 +6,7 @@ import PEventIdGenerator from "@/lib/ec/PEventIdGenerator";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TGenericResponse from "@/types/response";
-import gtmEventHandler from "@/utilities/GTM/gtmEventHandler";
+import { gtmEventHandler } from "@/utilities/GTM";
 import { useState } from "react";
 import AddToCartAndBuyNow from "./AddToCartAndBuyNow";
 
@@ -48,18 +48,17 @@ const ProductClientContent = ({
           : product?._id;
 
         gtmEventHandler({
-          event: "add_to_cart",
+          event_name: "add_to_cart",
           content_name: product?.title,
           content_ids: currentId ? [currentId] : [],
           content_type: "product",
-          currency: "BDT",
+          content_category: product?.category?.[0]?.name,
           value: currentItemPrice * quantity,
           contents: [
             {
               id: currentId,
               quantity,
               item_price: currentItemPrice,
-              name: product?.title,
             },
           ],
         });
