@@ -20,6 +20,7 @@ import {
 import { EventParameter } from "./event.types";
 import { buildGTMEventPayload } from "./gtm/gtm.builder";
 import { GTMEventPayload } from "./gtm/gtm.types";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 /**
  * The main handler for processing and dispatching GTM and Meta Conversions API (CAPI) events.
@@ -203,11 +204,8 @@ const eventHandler = async (eventData: EventParameter) => {
   // 4. Construct GTM-specific payload (GA4 Ecommerce Format using UNHASHED data)
   const gtmPayload: GTMEventPayload = buildGTMEventPayload(payload, eventData);
 
-  // eslint-disable-next-line no-console
-  console.log("gtm payload", gtmPayload);
-
   // 5. Send to Google Tag Manager
-  // sendGTMEvent(gtmPayload);
+  sendGTMEvent(gtmPayload);
 
   // 5. Send to the server-side tracking endpoint for Meta CAPI
   try {
