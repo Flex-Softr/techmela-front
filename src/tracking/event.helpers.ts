@@ -3,7 +3,7 @@
  * @param value The string value to normalize
  * @returns Normalized string
  */
-const normalize = (value: string): string => {
+export const normalize = (value: string): string => {
   return value.trim().toLowerCase();
 };
 
@@ -35,6 +35,18 @@ export const getCookie = (name: string): string | undefined => {
   if (typeof document === "undefined") return undefined;
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
   return match ? match[2] : undefined;
+};
+
+/**
+ * Sets a cookie with a given name, value, and expiration in days.
+ */
+export const setCookie = (name: string, value: string, days: number = 730) => {
+  if (typeof document === "undefined") return;
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  const expires = "; expires=" + date.toUTCString();
+  document.cookie =
+    name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
 };
 
 /**
@@ -120,18 +132,6 @@ export const generateEventId = (prefix: string): string => {
 };
 
 /**
- * Sets a cookie with a given name, value, and expiration in days.
- */
-export const setCookie = (name: string, value: string, days: number = 730) => {
-  if (typeof document === "undefined") return;
-  const date = new Date();
-  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-  const expires = "; expires=" + date.toUTCString();
-  document.cookie =
-    name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
-};
-
-/**
  * Retrieves or generates a persistent visitor ID for anonymous tracking.
  * @returns A unique visitor ID string
  */
@@ -160,4 +160,24 @@ export const getIP = async (): Promise<string | undefined> => {
   } catch (_error) {
     return undefined;
   }
+};
+
+/**
+ * Removes all properties with undefined values from an object.
+ * Useful for keeping tracking payloads clean and reducing weight.
+ * @param obj The object to clean
+ * @returns A new object with only defined properties
+ */
+export const cleanObj = <T extends Record<string, unknown>>(obj: T): T => {
+  return Object.fromEntries(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+    Object.entries(obj).filter(([_, v]) => v !== undefined)
+  ) as T;
+};
+
+export const splitFullName = (fullName?: string) => {
+  const nameParts = fullName?.trim().split(/\s+/) || [];
+  const fn = nameParts[0];
+  const ln = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
+  return { fn, ln };
 };

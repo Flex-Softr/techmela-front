@@ -1,11 +1,12 @@
 import InitGTM from "@/components/GTM/InitGTM";
+import PageTracking from "@/components/GTM/PageTracking";
 import JsonLd from "@/components/shared/JsonLd";
 import { Toaster } from "@/components/ui/toaster";
 import StoreProvider from "@/redux/StoreProvider";
 import "@smastrom/react-rating/style.css";
 import { Metadata } from "next";
 import { Hind_Siliguri, Inter } from "next/font/google";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -116,6 +117,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <StoreProvider>
           <InitGTM />
+          <Suspense fallback={null}>
+            <PageTracking />
+          </Suspense>
           {children}
           <Toaster />
         </StoreProvider>

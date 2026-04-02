@@ -33,7 +33,7 @@ export const GET = (req: NextRequest) => {
     const tags = key.split(",");
 
     tags.forEach((tag) => {
-      revalidateTag(encodeURIComponent(tag.trim()));
+      revalidateTag(decodeURIComponent(tag.trim()));
     });
 
     return NextResponse.json(

@@ -87,7 +87,7 @@ const MazhabTyagerPorinamPage = async () => {
   const [productRes, shippingRes, paymentRes] = await Promise.all([
     serverSideFetcher<TSingleProduct>({
       url: `/products/${MAZHAB_TYAGER_PORINAM_SLUG}`,
-      tags: [`product-${MAZHAB_TYAGER_PORINAM_SLUG}`],
+      tags: [`product-${decodeURIComponent(MAZHAB_TYAGER_PORINAM_SLUG || "")}`],
     }),
     serverSideFetcher<TShippingCharges[]>({
       url: "/shipping-charges?isActive=true",

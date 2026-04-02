@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
 const fetchProductData = async (slug: string) => {
   const response = await serverSideFetcher<TSingleProduct>({
     url: `/products/${slug}`,
-    tags: [`product-${slug}`],
+    tags: [`product-${decodeURIComponent(slug)}`],
   });
   return response?.data;
 };

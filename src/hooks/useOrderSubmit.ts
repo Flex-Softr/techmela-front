@@ -6,9 +6,10 @@ import { useCreateOrderMutation } from "@/redux/features/order/orderApi";
 import { setShippingInfo } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TGenericErrorResponse } from "@/types/response";
-import { gtmEventHandler } from "@/utilities/GTM";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import eventHandler from "@/tracking/eventHandler";
+import { TCartItemData } from "@/types/cart";
 import useCart from "./useCart";
 
 type TCheckoutFormData = {
@@ -24,7 +25,6 @@ type TCheckoutFormData = {
 const useOrderSubmit = ({
   totalCost,
   orderSource,
-  productName,
   productCategory,
 }: {
   totalCost: number;
@@ -114,30 +114,47 @@ const useOrderSubmit = ({
         setIsSuccess(true);
 
         // GTM Event
-        gtmEventHandler({
+        eventHandler({
           event_name: "purchase",
-          fn: shippingData.fullName,
+          fullName: shippingData.fullName,
           ph: shippingData.phoneNumber,
           em: shippingData.email,
           order_id: result?.data?.orderId,
-          content_name:
-            productName || result?.data?.orderedProducts?.[0]?.product,
+          content_type: "product",
           content_category: productCategory,
-          content_ids: result?.data?.orderedProducts?.map((product) => {
-            return product?.variation
-              ? `${product.product}-${product.variation}`
-              : product.product;
-          }),
-          contents: result?.data?.orderedProducts?.map((product) => ({
-            id: product?.variation
-              ? `${product.product}-${product.variation}`
-              : product.product,
-            name: product.product,
-            quantity: product.quantity,
-            item_price: product.unitPrice,
-          })),
+          contents:
+            cartData?.data && Array.isArray(cartData.data)
+              ? cartData.data.map((item: TCartItemData) => ({
+                  id: item.variation?._id
+                    ? `${item.product?._id}-${item.variation._id}`
+                    : item.product?._id,
+                  quantity: item.quantity,
+                  item_price: item.price?.salePrice || item.price?.regularPrice,
+                  name: item.product?.title,
+                  brand: item.product?.brand?.name,
+                  category: item.product?.category?.[0]?.name,
+                  variant: item.variation?.attributes
+                    ? Object.entries(item.variation.attributes)
+                        .map(([name, value]) => `${name}: ${value}`)
+                        .join(", ")
+                    : undefined,
+                }))
+              : result?.data?.orderedProducts?.map(
+                  (product: {
+                    product: string;
+                    variation?: string;
+                    quantity: number;
+                    unitPrice: number;
+                  }) => ({
+                    id: product?.variation
+                      ? `${product.product}-${product.variation}`
+                      : product.product,
+                    name: product.product,
+                    quantity: product.quantity,
+                    item_price: product.unitPrice,
+                  })
+                ),
           value: result?.data?.total || totalCost,
-          num_items: result?.data?.orderedProducts?.length,
           shipping: shippingClass.amount,
           discount_value: result?.data?.discount,
           coupon: couponInfo.coupon ?? undefined,

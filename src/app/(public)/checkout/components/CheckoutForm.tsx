@@ -4,12 +4,11 @@ import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCart from "@/hooks/useCart";
 import useOrderSubmit from "@/hooks/useOrderSubmit";
 import { TCartItemData } from "@/types/cart";
-import { gtmEventHandler } from "@/utilities/GTM";
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import eventHandler from "@/tracking/eventHandler";
 import OrderNow from "./OrderNow";
 import ShippingAddress from "./ShippingAddress";
-import { ReactNode } from "react";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -59,8 +58,11 @@ const CheckoutForm = ({
       !initiateCheckoutTracked.current
     ) {
       initiateCheckoutTracked.current = true;
-      gtmEventHandler({
+      eventHandler({
         event_name: "initiate_checkout",
+        fn: methods.getValues("fullName") || undefined,
+        ph: methods.getValues("phoneNumber") || undefined,
+        em: methods.getValues("email") || undefined,
         content_ids: cartData.data.map((item: TCartItemData) =>
           item.variation?._id
             ? `${item.product?._id}-${item.variation._id}`
@@ -75,13 +77,20 @@ const CheckoutForm = ({
           quantity: item.quantity,
           item_price: item.price?.salePrice || item.price?.regularPrice,
           name: item.product?.title,
+          brand: item.product?.brand?.name,
+          category: item.product?.category?.[0]?.name,
+          variant: item.variation?.attributes
+            ? Object.entries(item.variation.attributes)
+                .map(([name, value]) => `${name}: ${value}`)
+                .join(", ")
+            : undefined,
         })),
         //  content_name: productTitle,
         //   content_category: product?.category?.[0]?.name,
         //   shipping: shippingChange ?? undefined,
       });
     }
-  }, [cartData?.data, totalCost]);
+  }, [cartData?.data, totalCost, methods]);
 
   return (
     <>

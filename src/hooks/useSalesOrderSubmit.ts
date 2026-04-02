@@ -11,9 +11,9 @@ import { setShippingInfo } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TGenericErrorResponse } from "@/types/response";
-import { gtmEventHandler } from "@/utilities/GTM";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import eventHandler from "@/tracking/eventHandler";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -146,32 +146,32 @@ const useSalesOrderSubmit = ({
       const result = await createOrder(orderData).unwrap();
       if (result.success) {
         setIsSuccess(true);
-        // eslint-disable-next-line no-console
-        console.log("order result", result);
         // GTM Event
-        gtmEventHandler({
+        eventHandler({
           event_name: "purchase",
-          fn: shippingData.fullName,
+          fullName: shippingData.fullName,
           ph: shippingData.phoneNumber,
           em: shippingData.email,
           order_id: result?.data?.orderId,
-          content_name: productName,
+          content_type: "product",
           content_category: productCategory,
-          content_ids: result?.data?.orderedProducts?.map((product) => {
-            return product?.variation
-              ? `${product.product}-${product.variation}`
-              : product.product;
-          }),
-          contents: result?.data?.orderedProducts?.map((product) => ({
-            id: product?.variation
-              ? `${product.product}-${product.variation}`
-              : product.product,
-            // name: product.product,
-            quantity: product.quantity,
-            item_price: product.unitPrice,
-          })),
+          contents: result?.data?.orderedProducts?.map(
+            (product: {
+              product: string;
+              variation?: string;
+              quantity: number;
+              unitPrice: number;
+            }) => ({
+              id: product?.variation
+                ? `${product.product}-${product.variation}`
+                : product.product,
+              name: productName,
+              category: productCategory,
+              quantity: product.quantity,
+              item_price: product.unitPrice,
+            })
+          ),
           value: result?.data?.total || totalCost,
-          num_items: result?.data?.orderedProducts?.length,
           shipping: shippingClass.amount,
           discount_value: result?.data?.discount,
           coupon: couponInfo.coupon ?? undefined,

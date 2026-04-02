@@ -1,5 +1,5 @@
-// import config from "@/config/config";
-// import { sendGTMEvent } from "@next/third-parties/google";
+import config from "@/config/config";
+import { CustomData, MetaCAPIEventPayload, UserData } from "./capi/capi.types";
 import {
   generateEventId,
   getCookie,
@@ -14,13 +14,12 @@ import {
   normalizePhone,
   normalizeState,
   normalizeZip,
-} from "./gtm.helpers";
-import {
-  CustomData,
-  GTMEventPayload,
-  TGtmEventParameter,
-  UserData,
-} from "./gtm.types";
+  cleanObj,
+  splitFullName,
+} from "./event.helpers";
+import { EventParameter } from "./event.types";
+import { buildGTMEventPayload } from "./gtm/gtm.builder";
+import { GTMEventPayload } from "./gtm/gtm.types";
 
 /**
  * The main handler for processing and dispatching GTM and Meta Conversions API (CAPI) events.
@@ -34,7 +33,7 @@ import {
 // eslint-disable-next-line no-unused-vars
 type Normalizer = (v: string) => string;
 
-const gtmEventHandler = async (eventData: TGtmEventParameter) => {
+const eventHandler = async (eventData: EventParameter) => {
   if (typeof window === "undefined") return;
 
   const event_name = eventData.event_name;
@@ -42,8 +41,20 @@ const gtmEventHandler = async (eventData: TGtmEventParameter) => {
   const event_source_url = window.location.href;
   const client_user_agent = navigator.userAgent;
   const client_ip_address = await getIP();
-  eventData.currency = eventData.currency || "BDT";
-  eventData.content_type = eventData.content_type || "product";
+  const isCommerceEvent = [
+    "view_content",
+    "add_to_cart",
+    "add_to_wishlist",
+    "initiate_checkout",
+    "add_payment_info",
+    "purchase",
+    "refund",
+  ].includes(event_name);
+
+  if (isCommerceEvent) {
+    eventData.currency = eventData.currency || "BDT";
+    eventData.content_type = eventData.content_type || "product";
+  }
 
   // 1. Process and Hash User Data for Meta Match Quality
   const processedUserData: UserData = {
@@ -69,8 +80,17 @@ const gtmEventHandler = async (eventData: TGtmEventParameter) => {
   await hashAndAssign("ph", eventData.ph, normalizePhone);
 
   // Names
-  await hashAndAssign("fn", eventData.fn);
-  await hashAndAssign("ln", eventData.ln);
+  let fn = eventData.fn;
+  let ln = eventData.ln;
+
+  if (!fn && !ln && eventData.fullName) {
+    const split = splitFullName(eventData.fullName);
+    fn = split.fn;
+    ln = split.ln;
+  }
+
+  await hashAndAssign("fn", fn);
+  await hashAndAssign("ln", ln);
 
   // Demographic (Tiebreakers for shared IPs)
   if (eventData.db) await hashAndAssign("db", eventData.db, normalizeDOB);
@@ -87,8 +107,18 @@ const gtmEventHandler = async (eventData: TGtmEventParameter) => {
   await hashAndAssign("external_id", externalId);
 
   // Facebook IDs
-  processedUserData.fbp = getCookie("_fbp");
-  processedUserData.fbc = eventData.fbc || getFbc();
+  const fbp = getCookie("_fbp") || undefined;
+  const fbc = eventData.fbc || getFbc();
+  processedUserData.fbp = fbp;
+  processedUserData.fbc = fbc;
+  processedUserData.fb_login_id = eventData.fb_login_id;
+
+  // Update raw eventData with resolved values for GTM consistency
+  eventData.external_id = externalId;
+  eventData.fbp = fbp;
+  eventData.fbc = fbc;
+  eventData.fn = fn;
+  eventData.ln = ln;
 
   // Client context
   processedUserData.client_user_agent = client_user_agent;
@@ -120,46 +150,78 @@ const gtmEventHandler = async (eventData: TGtmEventParameter) => {
   const custom_data: Record<string, unknown> = {};
   customDataKeys.forEach((key) => {
     if (key in eventData) {
-      custom_data[key] = (eventData as Record<string, unknown>)[key];
+      const value = (eventData as Record<string, unknown>)[key];
+
+      // Only include these fields if they have a non-zero value
+      const fieldsToSkipIfZero = ["shipping", "tax", "discount_value"];
+      if (fieldsToSkipIfZero.includes(key) && value === 0) {
+        return;
+      }
+
+      custom_data[key] = value;
     }
   });
 
+  // Auto-calculate num_items and content_ids if not provided but contents exist
+  const contents = eventData.contents;
+  if (contents && contents.length > 0) {
+    if (!custom_data.num_items) {
+      custom_data.num_items = contents.reduce(
+        (sum, item) => sum + (item.quantity || 1),
+        0
+      );
+    }
+    if (!custom_data.content_ids) {
+      custom_data.content_ids = contents.map((item) => item.id || "");
+    }
+    if (!custom_data.content_name) {
+      custom_data.content_name = contents
+        .map((item) => item.title || item.name)
+        .filter(Boolean)
+        .join(", ");
+    }
+  }
+
   // 3. Construct the strictly typed GTMEventPayload for both GTM and CAPI
-  const finalUserData = { ...processedUserData };
+  const finalUserData = cleanObj({ ...processedUserData });
   const event_time = Math.floor(Date.now() / 1000);
 
-  const payload: GTMEventPayload = {
+  const payload: MetaCAPIEventPayload = cleanObj({
     event_name,
     event_time,
     event_id,
     user_data: finalUserData,
     custom_data:
       Object.keys(custom_data).length > 0
-        ? (custom_data as CustomData)
+        ? (cleanObj(custom_data) as CustomData)
         : undefined,
     action_source: "website",
     event_source_url,
     referrer_url: eventData.referrer_url || document.referrer || "",
-  };
+  });
+
+  // 4. Construct GTM-specific payload (GA4 Ecommerce Format using UNHASHED data)
+  const gtmPayload: GTMEventPayload = buildGTMEventPayload(payload, eventData);
+
   // eslint-disable-next-line no-console
-  console.log("gtm payload", payload);
-  // 4. Send to Google Tag Manager (Client-side)
-  // sendGTMEvent(payload);
+  console.log("gtm payload", gtmPayload);
+
+  // 5. Send to Google Tag Manager
+  // sendGTMEvent(gtmPayload);
 
   // 5. Send to the server-side tracking endpoint for Meta CAPI
   try {
-    // fetch(`${config.tracking_base_url}/track`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(payload),
-    // }).catch(() => {
-    //   // Fail silently to avoid interrupting user experience
-    // });
+    await fetch(`${config.tracking_base_url}/track`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
   } catch (error) {
-    // Fail silently
+    // eslint-disable-next-line no-console
+    console.log("CAPI error", error);
   }
 };
 
-export default gtmEventHandler;
+export default eventHandler;

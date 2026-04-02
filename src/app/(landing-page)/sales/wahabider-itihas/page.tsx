@@ -87,7 +87,7 @@ const WahabiderItihasPage = async () => {
   const [productRes, shippingRes, paymentRes] = await Promise.all([
     serverSideFetcher<TSingleProduct>({
       url: `/products/${WAHA_BITHER_ITIHAS_SLUG}`,
-      tags: [`product-${WAHA_BITHER_ITIHAS_SLUG}`],
+      tags: [`product-${decodeURIComponent(WAHA_BITHER_ITIHAS_SLUG || "")}`],
     }),
     serverSideFetcher<TShippingCharges[]>({
       url: "/shipping-charges?isActive=true",

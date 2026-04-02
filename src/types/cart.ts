@@ -11,6 +11,8 @@ type TProduct = {
   slug: string;
   salePrice?: number;
   regularPrice?: number;
+  brand?: { name: string };
+  category?: Array<{ name: string }>;
 };
 
 type TPrice = {

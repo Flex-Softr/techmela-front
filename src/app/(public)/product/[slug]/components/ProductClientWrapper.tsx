@@ -2,7 +2,7 @@
 
 import { PRODUCT_TYPE } from "@/const/product.const";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
-import { gtmEventHandler } from "@/utilities/GTM";
+import eventHandler from "@/tracking/eventHandler";
 import { useEffect, useState } from "react";
 import ProductClientContent from "./ProductClientContent";
 import ProductMainInfo from "./ProductMainInfo";
@@ -34,7 +34,7 @@ const ProductClientWrapper = ({
   );
 
   useEffect(() => {
-    gtmEventHandler({
+    eventHandler({
       event_name: "view_content",
       content_name: product.title,
       content_ids: [product._id],
@@ -47,6 +47,14 @@ const ProductClientWrapper = ({
             : product._id,
           quantity: 1,
           item_price: price,
+          name: product.title,
+          brand: product.brand?.name,
+          category: product.category?.[0]?.name,
+          variant: defaultVariation?.attributes
+            ? Object.entries(defaultVariation.attributes)
+                .map(([name, value]) => `${name}: ${value}`)
+                .join(", ")
+            : undefined,
         },
       ],
       value: price,

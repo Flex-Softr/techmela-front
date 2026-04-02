@@ -1,9 +1,4 @@
 "use client";
-import Image from "next/image";
-import { useEffect, useMemo, useRef } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
 import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
 import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
 import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
@@ -12,10 +7,15 @@ import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
+import eventHandler from "@/tracking/eventHandler";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
-import { gtmEventHandler } from "@/utilities/GTM";
+import Image from "next/image";
+import { useEffect, useMemo, useRef } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -114,14 +114,19 @@ const SalesOrderForm = ({
   // Fire InitiateCheckout when user starts filling the form
   useEffect(() => {
     const subscription = methods.watch((_, { name }) => {
-      if (
-        name === "phoneNumber" &&
-        methods.getValues("phoneNumber")?.length === 1 &&
-        !initiateCheckoutTracked.current
-      ) {
+      const values = methods.getValues();
+      const hasInitialData =
+        (name === "phoneNumber" && values.phoneNumber?.length === 11) ||
+        (name === "fullName" && values.fullName?.length === 3);
+
+      if (hasInitialData && !initiateCheckoutTracked.current) {
         initiateCheckoutTracked.current = true;
-        gtmEventHandler({
+
+        eventHandler({
           event_name: "initiate_checkout",
+          fullName: values.fullName,
+          ph: values.phoneNumber,
+          em: values.email,
           content_name: productTitle,
           content_ids: cartItems.map((item) => item.productId),
           content_type: "product",
@@ -131,6 +136,9 @@ const SalesOrderForm = ({
             id: item.productId,
             quantity: item.quantity,
             item_price: salePrice || fallbackPrice,
+            name: product?.title,
+            brand: product?.brand?.name,
+            category: product?.category?.[0]?.name,
           })),
           value: calculatedTotal,
         });
@@ -146,6 +154,8 @@ const SalesOrderForm = ({
     fallbackPrice,
     shippingChange,
     product?.category,
+    product?.title,
+    product?.brand?.name,
   ]);
 
   return (

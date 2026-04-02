@@ -32,7 +32,7 @@ const MiladunnabiPage = async () => {
   const [productRes, shippingRes, paymentRes] = await Promise.all([
     serverSideFetcher<TSingleProduct>({
       url: `/products/${MILAD_KIYAM_SLUG}`,
-      tags: [`product-${MILAD_KIYAM_SLUG}`],
+      tags: [`product-${decodeURIComponent(MILAD_KIYAM_SLUG || "")}`],
     }),
     serverSideFetcher<TShippingCharges[]>({
       url: "/shipping-charges?isActive=true",

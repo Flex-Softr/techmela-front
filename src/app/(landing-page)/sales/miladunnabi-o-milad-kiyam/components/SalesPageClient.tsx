@@ -3,7 +3,7 @@ import config from "@/config/config";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
-import { gtmEventHandler } from "@/utilities/GTM";
+import eventHandler from "@/tracking/eventHandler";
 import { useEffect, useRef, useState } from "react";
 
 // Import Client sub-components
@@ -48,7 +48,7 @@ const SalesPageClient = ({
 
   useEffect(() => {
     if (product) {
-      gtmEventHandler({
+      eventHandler({
         event_name: "view_content",
         content_name: product.title,
         content_ids: [product._id],
@@ -59,6 +59,10 @@ const SalesPageClient = ({
             id: product._id,
             quantity: 1,
             item_price: price,
+            name: product.title,
+            brand: product.brand?.name,
+            category: product.category?.[0]?.name,
+            // item_variant:"size,color"
           },
         ],
         value: price,
@@ -71,7 +75,7 @@ const SalesPageClient = ({
 
     const currentKey = `${product._id}-simple-${quantity}`;
     if (currentKey !== lastTrackedCart) {
-      gtmEventHandler({
+      eventHandler({
         event_name: "add_to_cart",
         content_name: product.title,
         content_ids: [product._id],
@@ -82,6 +86,12 @@ const SalesPageClient = ({
             id: product._id,
             quantity,
             item_price: price,
+            name: product.title,
+            brand: product.brand?.name,
+            category: product.category?.[0]?.name,
+            // variant: product.variations?.[0]?.attributes
+            //   ?.map((attr) => `${attr.name}: ${attr.value}`)
+            //   .join(", "),
           },
         ],
         value: price * quantity,
