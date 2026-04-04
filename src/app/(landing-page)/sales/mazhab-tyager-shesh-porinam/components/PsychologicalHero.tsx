@@ -107,7 +107,11 @@ const PsychologicalHero = ({
                 />
               </div>
               <div className="flex items-center justify-center gap-4 flex-wrap mt-2 border-t border-primary/10 pt-3">
-                {["ক্যাশ অন ডেলিভারি", "সারাদেশে ডেলিভারি"].map((t, i) => (
+                {[
+                  "ক্যাশ অন ডেলিভারি সুবিধা",
+                  "সারাদেশে ৩ দিনে ডেলিভারি ইনশাআল্লাহ",
+                  "একদম সহজ রিটার্ন পলিসি",
+                ].map((t, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-1.5 text-[10px] font-black text-gray-400"
@@ -127,7 +131,7 @@ const PsychologicalHero = ({
               </div>
 
               <h1 className="text-2xl lg:text-4xl xl:text-[2.2rem] font-black text-gray-900 leading-[1.3] lg:leading-[1.1] tracking-normal lg:tracking-tight">
-                আপনি কি <span className="text-red-600">১০০% নিশ্চিত</span> যে,
+                আপনি কি <span className="text-red-600">১০০% নিশ্চিত!</span>
                 <br />
                 আপনি যে ইসলাম পালন করছেন, সেটাই{" "}
                 <span className="text-emerald-700">সঠিক ইসলাম?</span>
@@ -136,14 +140,14 @@ const PsychologicalHero = ({
               {/* Dangerous Trends (Compact) */}
               <div className="p-4 lg:p-5 rounded-2xl space-y-3 text-center relative overflow-hidden bg-gradient-to-r from-primary/5 to-emerald-50/50 border border-primary/10">
                 <p className="text-sm font-black text-red-600 tracking-widest mb-0.5">
-                  আজকের যুগের কিছু বিপজ্জনক প্রবণতা!
+                  আজকের যুগের সবচেয়ে বিপজ্জনক প্রবণতা!
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-2">
                   {[
                     "“মাযহাব মানার দরকার নেই”",
-                    "“নিজেই কুরআন-হাদীস বুঝবো”",
-                    "“ইমামদের অনুসরণ করা ভুল!”",
+                    // "“নিজেই কুরআন-হাদীস বুঝবো”",
+                    // "“ইমামদের অনুসরণ করা ভুল!”",
                   ].map((quote, i) => (
                     <div
                       key={i}
@@ -158,7 +162,7 @@ const PsychologicalHero = ({
                 </div>
 
                 <p className="font-bold text-gray-700 text-xs md:text-sm max-w-xl mx-auto leading-tight">
-                  কিন্তু আপনি কি জানেন! এই ভুল পথের শেষ পরিণাম আসলে কোথায়?
+                  কিন্তু আপনি কি জানেন! এই ধারণার শেষ পরিণাম আসলে কোথায়?
                 </p>
               </div>
 
@@ -176,9 +180,10 @@ const PsychologicalHero = ({
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
                 {[
                   "৫০০+ পৃষ্ঠার অকাট্য গবেষণাধর্মী দলিল: কুরআন ও সুন্নাহর আলোকে মাযহাবের সত্যতা ও আবশ্যকতা।",
-                  "বিভ্রান্তিকর আধুনিক চিন্তা থেকে মুক্তি: সমকালীন ‘লা-মাযহাব’ ফেতনা ও ভুল ধারণার শক্তিশালী খণ্ডন।",
-                  "শ্রেষ্ঠ মুহাক্কিক আলিমের নির্ভরযোগ্য গাইড: ইমাম যাহিদ আল-কাউসারী (রহ.)-এর গবেষণালব্ধ প্রজ্ঞা।",
-                  "শুদ্ধ আকীদা ও আমলের নিরেট সুরক্ষা: আপনার ঈমানকে বিচ্যুতি থেকে বাঁচিয়ে সঠিক গন্তব্যে পৌঁছানোর পাথেয়।",
+                  // "বিভ্রান্তিকর আধুনিক চিন্তা থেকে মুক্তি: সমকালীন ‘লা-মাযহাব’ ফেতনা ও ভুল ধারণার শক্তিশালী খণ্ডন।",
+                  "উম্মাহর স্বীকৃত ইমাম, শাইখুল ইসলাম আল্লামা যাহিদ আল-কাউসারী (রহ.) এর গবেষণালব্ধ সংকলন।",
+                  // "শ্রেষ্ঠ মুহাক্কিক আলিমের নির্ভরযোগ্য গাইড: গত শতাব্দীর শ্রেষ্ঠ মুজতাহিদ শাইখুল ইসলাম ইমাম যাহিদ আল-কাউসারী (রহ.) এর গবেষণালব্ধ সংকলন।",
+                  // "শুদ্ধ আকীদা ও আমলের নিরেট সুরক্ষা: আপনার ঈমানকে বিচ্যুতি থেকে বাঁচিয়ে সঠিক গন্তব্যে পৌঁছানোর পাথেয়।",
                 ].map((text, i) => (
                   <li key={i} className="flex items-center gap-2">
                     <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">

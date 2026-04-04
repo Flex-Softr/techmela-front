@@ -9,11 +9,10 @@ import { useEffect, useRef, useState } from "react";
 // Import Client sub-components
 import SalesHeader from "../../../_components/SalesHeader";
 import SalesOrderForm from "./SalesOrderForm";
-
 // New Redesign Components
 import BookHighlights from "./BookHighlights";
 import FAQSection from "./FAQSection";
-import FearResponsibility from "./FearResponsibility";
+// import FearResponsibility from "./FearResponsibility";
 import FinalPsychologicalClose from "./FinalPsychologicalClose";
 import PricingSection from "./PricingSection";
 import PsychologicalDisruption from "./PsychologicalDisruption";
@@ -157,10 +156,10 @@ const SalesPageClient = ({
         onPreviewClick={handlePreviewClick}
       />
 
-      <FearResponsibility
+      {/* <FearResponsibility
         onOrderClick={handleOrderNow}
         onPreviewClick={handlePreviewClick}
-      />
+      /> */}
 
       <BookHighlights
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -6,8 +6,9 @@ const AnnouncementBar = () => {
       <div className="animate-marquee-slow flex gap-8 whitespace-nowrap w-min">
         {[...Array(10)].map((_, i) => (
           <span key={i} className="flex items-center gap-2">
-            <MdCampaign className="text-lg" /> বিশাল ডিসকাউন্ট চলছে — স্টক শেষ
-            হওয়ার আগেই এখনই অর্ডার করুন!
+            <MdCampaign className="text-lg" />
+            সর্বোচ্চ ডিসকাউন্ট মিস করতে না চাইলে এখনই অর্ডার করুন - একদম সহজ
+            রিটার্ন পলিসি - ২ হাজার টাকার বেশি অর্ডারে ডেলিভারি চার্জ ফ্রি
           </span>
         ))}
       </div>
@@ -17,7 +18,7 @@ const AnnouncementBar = () => {
           100% { transform: translateX(-50%); }
         }
         .animate-marquee-slow {
-          animation: marquee 50s linear infinite;
+          animation: marquee 70s linear infinite;
         }
       `}</style>
     </div>

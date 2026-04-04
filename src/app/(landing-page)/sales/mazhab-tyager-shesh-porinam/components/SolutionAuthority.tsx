@@ -96,7 +96,7 @@ const SolutionAuthority = ({ onOrderClick, onPreviewClick }: Props) => {
           <div className="bg-blue-50/50 p-4 rounded-2xl border border-blue-100 flex flex-col md:flex-row gap-4 items-center">
             <div className="shrink-0 text-center md:text-left">
               <p className="text-sm font-bold text-blue-500 uppercase tracking-widest mb-1">
-                প্রামাণিকতা নিশ্চিত করেছেন:
+                প্রামাণ নিশ্চিত করেছেন:
               </p>
               <h3 className="text-base font-black text-blue-900">
                 ইমাম যাহিদ আল-কাউসারী (রহ.)

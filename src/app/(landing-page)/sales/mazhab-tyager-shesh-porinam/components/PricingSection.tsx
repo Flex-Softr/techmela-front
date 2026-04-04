@@ -43,7 +43,7 @@ const PricingSection = ({
             <div className="space-y-6 lg:border-r border-gray-100 lg:pr-10">
               <div className="bg-emerald-50 text-emerald-800 text-sm font-black px-4 py-2 rounded-full inline-flex items-center gap-2 border border-emerald-100">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                স্পেশাল অফার চলছে
+                সর্বোচ্চ ডিসকাউন্ট চলছে
               </div>
 
               <h3 className="text-2xl font-black text-gray-900">
@@ -55,6 +55,7 @@ const PricingSection = ({
                   "সীমিত সময়ের জন্য বিশেষ ডিসকাউন্ট",
                   "সারা বাংলাদেশে ক্যাশ অন ডেলিভারি সুবিধা",
                   "বই হাতে পেয়ে মূল্য পরিশোধের সুযোগ",
+                  "একদম সহজ রিটার্ন পলিসি",
                 ].map((text, i) => (
                   <li key={i} className="flex flex-col gap-1">
                     <div className="flex items-center gap-3">

@@ -64,67 +64,73 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   return (
     <div className="px-2 pb-2">
       <div className="mb-3 flex justify-center">
-        <Range
-          values={[
-            inputValues[0] === "" ? min : Number(inputValues[0]),
-            inputValues[1] === "" ? max : Number(inputValues[1]),
-          ]}
-          step={STEP}
-          min={min}
-          max={max}
-          onChange={handleChange}
-          renderTrack={({ props, children }) => (
-            <div
-              onMouseDown={props.onMouseDown}
-              onTouchStart={props.onTouchStart}
-              style={{
-                ...props.style,
-                height: "36px",
-                display: "flex",
-                width: "100%",
-              }}
-            >
+        {min < max ? (
+          <Range
+            values={[
+              inputValues[0] === "" ? min : Number(inputValues[0]),
+              inputValues[1] === "" ? max : Number(inputValues[1]),
+            ]}
+            step={STEP}
+            min={min}
+            max={max}
+            onChange={handleChange}
+            renderTrack={({ props, children }) => (
               <div
-                ref={props.ref}
+                onMouseDown={props.onMouseDown}
+                onTouchStart={props.onTouchStart}
                 style={{
-                  height: "4px",
+                  ...props.style,
+                  height: "36px",
+                  display: "flex",
                   width: "100%",
-                  borderRadius: "4px",
-                  background: getTrackBackground({
-                    values: [
-                      inputValues[0] === "" ? min : Number(inputValues[0]),
-                      inputValues[1] === "" ? max : Number(inputValues[1]),
-                    ],
-                    colors: ["#e5e7eb", "hsl(var(--primary))", "#e5e7eb"],
-                    min: min,
-                    max: max,
-                  }),
-                  alignSelf: "center",
                 }}
               >
-                {children}
+                <div
+                  ref={props.ref}
+                  style={{
+                    height: "4px",
+                    width: "100%",
+                    borderRadius: "4px",
+                    background: getTrackBackground({
+                      values: [
+                        inputValues[0] === "" ? min : Number(inputValues[0]),
+                        inputValues[1] === "" ? max : Number(inputValues[1]),
+                      ],
+                      colors: ["#e5e7eb", "hsl(var(--primary))", "#e5e7eb"],
+                      min: min,
+                      max: max,
+                    }),
+                    alignSelf: "center",
+                  }}
+                >
+                  {children}
+                </div>
               </div>
-            </div>
-          )}
-          renderThumb={({ props }) => {
-            const { key, ...restProps } = props;
-            return (
-              <div
-                key={key}
-                {...restProps}
-                style={{
-                  ...restProps.style,
-                  height: "24px",
-                  width: "24px",
-                  borderRadius: "50%",
-                  backgroundColor: "hsl(var(--primary))",
-                  border: "4px solid white",
-                  boxShadow: "0 0 0 1px #e5e7eb",
-                }}
-              />
-            );
-          }}
-        />
+            )}
+            renderThumb={({ props }) => {
+              const { key, ...restProps } = props;
+              return (
+                <div
+                  key={key}
+                  {...restProps}
+                  style={{
+                    ...restProps.style,
+                    height: "24px",
+                    width: "24px",
+                    borderRadius: "50%",
+                    backgroundColor: "hsl(var(--primary))",
+                    border: "4px solid white",
+                    boxShadow: "0 0 0 1px #e5e7eb",
+                  }}
+                />
+              );
+            }}
+          />
+        ) : (
+          <div className="h-[36px] flex items-center w-full">
+            <div className="h-1 w-full bg-gray-200 rounded-full" />
+          </div>
+        )}
       </div>
       <div className="flex justify-between items-center gap-4">
         <div className="relative w-full">
