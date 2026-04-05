@@ -1,17 +1,34 @@
 "use client";
+import { useState } from "react";
 import { FiArrowDown } from "react-icons/fi";
+import BookPreviewModal from "@/components/shared/BookPreviewModal/BookPreviewModal";
 
 type Props = {
   onOrderClick: () => void;
   onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
   className?: string;
 };
 
 const CTAButtonGroup = ({
   onOrderClick,
   onPreviewClick,
+  previewLink,
+  bookTitle,
   className = "",
 }: Props) => {
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+
+  const handlePreviewClick = () => {
+    if (onPreviewClick) {
+      onPreviewClick();
+    }
+    if (previewLink) {
+      setIsPreviewOpen(true);
+    }
+  };
+
   return (
     <div
       className={`flex flex-col sm:flex-row items-center justify-center gap-4 ${className}`}
@@ -25,16 +42,25 @@ const CTAButtonGroup = ({
         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:animate-shimmer"></div>
       </button>
 
-      {onPreviewClick && (
+      {(onPreviewClick || previewLink) && (
         <button
-          onClick={onPreviewClick}
+          onClick={handlePreviewClick}
           className="w-full sm:w-auto px-7 py-3 bg-white text-primary border-2 border-primary/20 text-base font-black rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-3 group/preview shadow-sm tracking-wide"
         >
           <span className="text-xl group-hover/preview:animate-bounce-subtle">
             📖
           </span>
-          একটু পড়ে দেখুন
+          একটু পড়ে দেখুন
         </button>
+      )}
+
+      {previewLink && (
+        <BookPreviewModal
+          isOpen={isPreviewOpen}
+          onOpenChange={setIsPreviewOpen}
+          previewLink={previewLink}
+          title={bookTitle || ""}
+        />
       )}
 
       <style jsx>{`

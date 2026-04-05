@@ -1,12 +1,10 @@
 "use client";
-import config from "@/config/config";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import eventHandler from "@/tracking/eventHandler";
 import { useEffect, useRef, useState } from "react";
 
-// Import Client sub-components
 import SalesHeader from "../../../_components/SalesHeader";
 import SalesOrderForm from "./SalesOrderForm";
 
@@ -101,12 +99,6 @@ const SalesPageClient = ({
     scrollToOrder();
   };
 
-  const handlePreviewClick = () => {
-    if (config.milad_kiyam_preview_link) {
-      window.open(config.milad_kiyam_preview_link, "_blank");
-    }
-  };
-
   const scrollToOrder = () => {
     orderFormRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -142,14 +134,16 @@ const SalesPageClient = ({
         thumbnailSrc={thumbnailSrc}
         regularPrice={regularPrice}
         salePrice={salePrice}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       <PsychologicalDisruption />
 
       <BookHighlights
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       <Testimonials />
@@ -158,7 +152,6 @@ const SalesPageClient = ({
         regularPrice={regularPrice}
         salePrice={salePrice}
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
       />
 
       <FAQSection />

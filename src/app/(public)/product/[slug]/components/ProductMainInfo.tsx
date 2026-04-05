@@ -171,7 +171,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
       </h2>
 
       {/* Price Section */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 flex-wrap">
         <span className="text-muted-foreground font-medium text-lg">
           মূল্য:
         </span>

@@ -7,14 +7,16 @@ type Props = {
   regularPrice: number;
   salePrice: number;
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
 };
 
 const PricingSection = ({
   regularPrice,
   salePrice,
   onOrderClick,
-  onPreviewClick,
+  previewLink,
+  bookTitle,
 }: Props) => {
   return (
     <section className="bg-[#FAFAFA] py-8 lg:py-8 px-4 overflow-hidden relative">
@@ -100,7 +102,8 @@ const PricingSection = ({
               <div className="w-full space-y-4">
                 <CTAButtonGroup
                   onOrderClick={onOrderClick}
-                  onPreviewClick={onPreviewClick}
+                  previewLink={previewLink}
+                  bookTitle={bookTitle}
                   className="w-full justify-center"
                 />
 

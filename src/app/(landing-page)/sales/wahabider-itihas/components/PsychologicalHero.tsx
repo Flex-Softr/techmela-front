@@ -6,7 +6,8 @@ import PricingDisplay from "../../../_components/PricingDisplay";
 
 type Props = {
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
   thumbnailSrc?: string;
   regularPrice?: number;
   salePrice?: number;
@@ -14,7 +15,8 @@ type Props = {
 
 const PsychologicalHero = ({
   onOrderClick,
-  onPreviewClick,
+  previewLink,
+  bookTitle,
   thumbnailSrc,
   regularPrice,
   salePrice,
@@ -115,7 +117,8 @@ const PsychologicalHero = ({
                 </div>
                 <CTAButtonGroup
                   onOrderClick={onOrderClick}
-                  onPreviewClick={onPreviewClick}
+                  previewLink={previewLink}
+                  bookTitle={bookTitle}
                   className="w-full sm:w-auto"
                 />
               </div>
@@ -210,7 +213,8 @@ const PsychologicalHero = ({
             <div className="hidden lg:flex items-center gap-6 pt-2">
               <CTAButtonGroup
                 onOrderClick={onOrderClick}
-                onPreviewClick={onPreviewClick}
+                previewLink={previewLink}
+                bookTitle={bookTitle}
                 className="scale-105 origin-left"
               />
             </div>

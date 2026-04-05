@@ -1,12 +1,10 @@
 "use client";
-import config from "@/config/config";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import { useEffect, useRef, useState } from "react";
 import eventHandler from "@/tracking/eventHandler";
 
-// Import Client sub-components
 import SalesHeader from "../../../_components/SalesHeader";
 import SalesOrderForm from "./SalesOrderForm";
 
@@ -105,12 +103,6 @@ const SalesPageClient = ({
     scrollToOrder();
   };
 
-  const handlePreviewClick = () => {
-    if (config.wahabider_itihas_preview_link) {
-      window.open(config.wahabider_itihas_preview_link, "_blank");
-    }
-  };
-
   const scrollToOrder = () => {
     orderFormRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -146,17 +138,20 @@ const SalesPageClient = ({
         thumbnailSrc={thumbnailSrc}
         regularPrice={regularPrice}
         salePrice={salePrice}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       <PsychologicalDisruption
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       <WhoIsThisFor
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       {/* <FearResponsibility
@@ -172,26 +167,28 @@ const SalesPageClient = ({
 
       <BookHighlights
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       {/* <ScholarContext /> */}
 
       <Testimonials
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       <PricingSection
         regularPrice={regularPrice}
         salePrice={salePrice}
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
       />
 
       <FAQSection
         onOrderClick={handleOrderNow}
-        onPreviewClick={handlePreviewClick}
+        previewLink={product?.previewLink}
+        bookTitle={product?.title || bookDetails.title}
       />
 
       {/* ───── ORDER FORM SECTION ───── */}

@@ -3,11 +3,12 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick?: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
   thumbnailSrc?: string;
 };
 
-const SolutionAuthority = ({ onOrderClick, onPreviewClick }: Props) => {
+const SolutionAuthority = ({ onOrderClick, previewLink, bookTitle }: Props) => {
   return (
     <section className="bg-[#FAFAFA] py-6 lg:py-6 px-4 overflow-hidden relative">
       <div className="max-w-5xl mx-auto space-y-6 lg:space-y-8 relative z-10">
@@ -137,7 +138,8 @@ const SolutionAuthority = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="mt-6 flex justify-center">
           <CTAButtonGroup
             onOrderClick={onOrderClick!}
-            onPreviewClick={onPreviewClick}
+            previewLink={previewLink}
+            bookTitle={bookTitle}
           />
         </div>
       </div>

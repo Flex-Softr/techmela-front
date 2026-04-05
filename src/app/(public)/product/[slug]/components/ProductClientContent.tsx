@@ -9,15 +9,21 @@ import TGenericResponse from "@/types/response";
 import { useState } from "react";
 import eventHandler from "@/tracking/eventHandler";
 import AddToCartAndBuyNow from "./AddToCartAndBuyNow";
+import ProductSharing from "./ProductSharing";
+import { BookOpen, Phone, HelpCircle } from "lucide-react";
+import HowToOrderModal from "./HowToOrderModal";
 
 const ProductClientContent = ({
   product,
   selectedVariation,
+  onPreviewClick,
 }: {
   product?: TSingleProduct;
   selectedVariation?: TSingleProduct["variations"][0];
+  onPreviewClick?: () => void;
 }) => {
   const [quantity, setQuantity] = useState(1);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [addToCart, { isLoading: isAddToCartLoading }] = useAddToCartMutation();
 
   const addToCartHandler = async (): Promise<boolean> => {
@@ -118,6 +124,57 @@ const ProductClientContent = ({
         isAddToCartLoading={isAddToCartLoading}
         isDisabled={isDisabled} // Pass the isDisabled prop
         disabledReason={disabledReason}
+      />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mt-4 sm:mt-6">
+        {/* Large, Eye-catching Preview Button */}
+        {onPreviewClick && (
+          <button
+            onClick={onPreviewClick}
+            className="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3 bg-white text-primary border-2 border-primary/20 text-sm sm:text-base font-black rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-2 sm:gap-3 group/preview shadow-sm tracking-wide shrink-0"
+            id="bookPreview"
+          >
+            <span className="text-lg sm:text-xl group-hover/preview:animate-bounce-subtle">
+              <BookOpen className="mr-0.5 sm:mr-1 h-5 w-5 sm:h-6 sm:w-6" />
+            </span>
+            একটু পড়ে দেখুন
+          </button>
+        )}
+        <div className="flex justify-center sm:justify-end w-full sm:w-auto">
+          <ProductSharing />
+        </div>
+      </div>
+
+      <div className="mt-4 sm:mt-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border-2 border-primary/10 bg-primary/5">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="bg-primary/10 p-2 sm:p-3 rounded-full">
+              <a href="tel:+8801602431167">
+                <Phone className="text-primary h-5 w-5 sm:h-6 sm:w-6" />
+              </a>
+            </div>
+            <div>
+              <p className="font-bold text-base sm:text-lg text-primary leading-tight">
+                <a href="tel:+8801602431167">০১৬০২-৪৩১১৬৭</a>
+              </p>
+              <p className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                যেকোনো প্রয়োজনে কল করুন
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setIsOrderModalOpen(true)}
+            className="flex items-center gap-2 bg-white text-primary border border-primary/20 hover:border-primary/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 whitespace-nowrap"
+          >
+            <HelpCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            অর্ডার কীভাবে করবেন?
+          </button>
+        </div>
+      </div>
+
+      <HowToOrderModal
+        isOpen={isOrderModalOpen}
+        onOpenChange={setIsOrderModalOpen}
       />
     </div>
   );

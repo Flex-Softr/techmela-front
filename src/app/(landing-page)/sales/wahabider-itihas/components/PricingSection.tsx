@@ -7,7 +7,6 @@ type Props = {
   regularPrice: number;
   salePrice: number;
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
 };
 
 const PricingSection = ({ regularPrice, salePrice, onOrderClick }: Props) => {

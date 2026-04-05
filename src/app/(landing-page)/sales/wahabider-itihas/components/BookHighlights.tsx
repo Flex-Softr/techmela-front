@@ -4,10 +4,11 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick?: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
 };
 
-const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
+const BookHighlights = ({ onOrderClick, previewLink, bookTitle }: Props) => {
   const trustStats = [
     { num: "৩৩৫", label: "পৃষ্ঠার দালিলিক ইতিহাস" },
     { num: "৮৫+", label: "শীর্ষ উলামার ফতোয়া" },
@@ -255,7 +256,8 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
 
         <CTAButtonGroup
           onOrderClick={onOrderClick!}
-          onPreviewClick={onPreviewClick}
+          previewLink={previewLink}
+          bookTitle={bookTitle}
         />
       </div>
     </section>

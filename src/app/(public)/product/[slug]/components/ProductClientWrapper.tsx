@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import ProductClientContent from "./ProductClientContent";
 import ProductMainInfo from "./ProductMainInfo";
 import VariationSelector from "./VariationSelector";
+import BookPreviewModal from "@/components/shared/BookPreviewModal/BookPreviewModal";
 
 type ProductClientWrapperProps = {
   product: TSingleProduct;
@@ -25,6 +26,7 @@ const ProductClientWrapper = ({
   const [selectedVariation, setSelectedVariation] = useState<
     TSingleProduct["variations"][0] | undefined
   >(undefined);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const price = Number(
     product?.variations?.length > 0
       ? ((product?.variations[0]?.price?.salePrice ||
@@ -82,8 +84,18 @@ const ProductClientWrapper = ({
         <ProductClientContent
           product={product}
           selectedVariation={selectedVariation}
+          onPreviewClick={
+            product.previewLink ? () => setIsPreviewOpen(true) : undefined
+          }
         />
       </div>
+
+      <BookPreviewModal
+        isOpen={isPreviewOpen}
+        onOpenChange={setIsPreviewOpen}
+        previewLink={product.previewLink || ""}
+        title={product.title}
+      />
     </div>
   );
 };

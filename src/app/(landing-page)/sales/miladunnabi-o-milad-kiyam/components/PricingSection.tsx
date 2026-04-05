@@ -4,7 +4,6 @@ import PricingDisplay from "../../../_components/PricingDisplay";
 
 type Props = {
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
   regularPrice: number;
   salePrice: number;
 };

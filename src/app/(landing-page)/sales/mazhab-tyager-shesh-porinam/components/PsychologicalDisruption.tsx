@@ -3,10 +3,15 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
 };
 
-const PsychologicalDisruption = ({ onOrderClick, onPreviewClick }: Props) => {
+const PsychologicalDisruption = ({
+  onOrderClick,
+  previewLink,
+  bookTitle,
+}: Props) => {
   return (
     <section className="bg-white py-6 lg:py-6 px-4 overflow-hidden relative">
       <div className="max-w-5xl mx-auto space-y-6 lg:space-y-6">
@@ -204,7 +209,8 @@ const PsychologicalDisruption = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="flex justify-center pt-2">
           <CTAButtonGroup
             onOrderClick={onOrderClick}
-            onPreviewClick={onPreviewClick}
+            previewLink={previewLink}
+            bookTitle={bookTitle}
           />
         </div>
       </div>

@@ -4,10 +4,11 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
 };
 
-const FAQSection = ({ onOrderClick, onPreviewClick }: Props) => {
+const FAQSection = ({ onOrderClick, previewLink, bookTitle }: Props) => {
   const [openIndices, setOpenIndices] = useState<number[]>([0]);
 
   const toggleFAQ = (idx: number) => {
@@ -91,7 +92,8 @@ const FAQSection = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="flex justify-center pt-2">
           <CTAButtonGroup
             onOrderClick={onOrderClick}
-            onPreviewClick={onPreviewClick}
+            previewLink={previewLink}
+            bookTitle={bookTitle}
           />
         </div>
       </div>

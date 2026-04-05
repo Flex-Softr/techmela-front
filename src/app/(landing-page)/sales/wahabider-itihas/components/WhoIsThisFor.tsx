@@ -3,10 +3,11 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
 };
 
-const WhoIsThisFor = ({ onOrderClick, onPreviewClick }: Props) => {
+const WhoIsThisFor = ({ onOrderClick, previewLink, bookTitle }: Props) => {
   const isFor = [
     "যারা উম্মাহর বর্তমান বিভক্তির প্রকৃত কারণ জানতে চান।",
     "যারা ইসলামের ইতিহাসের দালিলিক ও প্রামাণ্য বিশ্লেষণে আগ্রহী।",
@@ -81,7 +82,8 @@ const WhoIsThisFor = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="flex justify-center">
           <CTAButtonGroup
             onOrderClick={onOrderClick}
-            onPreviewClick={onPreviewClick}
+            previewLink={previewLink}
+            bookTitle={bookTitle}
           />
         </div>
       </div>

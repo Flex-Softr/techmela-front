@@ -3,10 +3,11 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 type Props = {
   highlights?: { icon: string; title: string; description: string }[];
   onOrderClick?: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
 };
 
-const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
+const BookHighlights = ({ onOrderClick, previewLink, bookTitle }: Props) => {
   const highlights = [
     {
       title: "১. মাযহাবের স্বরূপ ও আবশ্যকতা",
@@ -211,7 +212,8 @@ const BookHighlights = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="mt-12 flex justify-center">
           <CTAButtonGroup
             onOrderClick={onOrderClick!}
-            onPreviewClick={onPreviewClick}
+            previewLink={previewLink}
+            bookTitle={bookTitle}
           />
         </div>
       </div>

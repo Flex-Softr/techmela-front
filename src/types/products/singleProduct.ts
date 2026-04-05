@@ -82,6 +82,7 @@ export type TSingleProduct = {
   type: string;
   slug: string;
   description?: string;
+  previewLink?: string;
   shortDescription?: string;
   usageGuidelines?: string;
   additionalInfo?: string;

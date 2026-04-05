@@ -24,7 +24,7 @@ const CommonModal = ({
     <div>
       <Dialog onOpenChange={handleOpen} open={open}>
         <DialogContent className={`${className}`}>
-          <DialogHeader>
+          <DialogHeader className="pr-10">
             <DialogTitle>{modalTitle}</DialogTitle>
           </DialogHeader>
           {children}

@@ -3,10 +3,15 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
 };
 
-const PsychologicalDisruption = ({ onOrderClick, onPreviewClick }: Props) => {
+const PsychologicalDisruption = ({
+  onOrderClick,
+  previewLink,
+  bookTitle,
+}: Props) => {
   const spiralSteps = [
     {
       step: "১",
@@ -121,7 +126,8 @@ const PsychologicalDisruption = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="flex justify-center pt-2">
           <CTAButtonGroup
             onOrderClick={onOrderClick}
-            onPreviewClick={onPreviewClick}
+            previewLink={previewLink}
+            bookTitle={bookTitle}
           />
         </div>
       </div>

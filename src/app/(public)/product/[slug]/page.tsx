@@ -6,13 +6,11 @@ import { STOCK_STATUS } from "@/const/product.const";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { getImageSrc } from "@/lib/utils";
-import { Phone } from "lucide-react";
 import { Metadata } from "next";
 import ProductClientWrapper from "./components/ProductClientWrapper";
 import ProductDescription from "./components/ProductDescription";
 import RelatedProduct from "./components/RelatedProduct";
 import ProductImageGallery from "./components/ProductImageGallery";
-import ProductSharing from "./components/ProductSharing";
 
 type TProps = {
   params: {
@@ -139,28 +137,8 @@ const ProductDetailsPage = async ({ params }: TProps) => {
               initialVariationPrice={initialVariationPrice}
               defaultVariation={defaultVariation}
             />
-
-            <ProductSharing />
-
-            {!product?.shortDescription && (
-              <div className="border-2 p-4 rounded-md flex items-center gap-5">
-                <div>
-                  <a href="tel:+8801602431167">
-                    <Phone className="text-primary size-10" />
-                  </a>
-                </div>
-                <div>
-                  <p className="font-semibold text-xl">
-                    <a href="tel:+8801602431167">০১৬০২-৪৩১১৬৭</a>
-                  </p>
-                  <p className="text-xs font-semibold">
-                    যেকোনো প্রয়োজনে কল করুন
-                  </p>
-                </div>
-              </div>
-            )}
           </Box>
-          <div className="col-span-1 lg:col-span-2 px-3">
+          <div className="col-span-1 lg:col-span-2 px-3 mt-8">
             <ProductDescription product={product} />
           </div>
           {/* related product  */}

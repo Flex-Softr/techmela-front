@@ -4,11 +4,12 @@ import CTAButtonGroup from "../../../_components/CTAButtonGroup";
 
 type Props = {
   onOrderClick?: () => void;
-  onPreviewClick?: () => void;
+  previewLink?: string;
+  bookTitle?: string;
   thumbnailSrc?: string;
 };
 
-const SolutionAuthority = ({ onOrderClick, onPreviewClick }: Props) => {
+const SolutionAuthority = ({ onOrderClick, previewLink, bookTitle }: Props) => {
   const chapters = [
     {
       num: "০১",
@@ -164,7 +165,8 @@ const SolutionAuthority = ({ onOrderClick, onPreviewClick }: Props) => {
         <div className="flex justify-center">
           <CTAButtonGroup
             onOrderClick={onOrderClick!}
-            onPreviewClick={onPreviewClick}
+            previewLink={previewLink}
+            bookTitle={bookTitle}
           />
         </div>
       </div>
