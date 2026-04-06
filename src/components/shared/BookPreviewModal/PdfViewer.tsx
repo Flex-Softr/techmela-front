@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Props = {
   url: string;
@@ -9,10 +9,28 @@ type Props = {
 
 export default function PdfViewer({ url }: Props) {
   const [isLoading, setIsLoading] = useState(true);
+  const [pdfUrl, setPdfUrl] = useState<string>("");
 
-  // Append toolbar control parameters to the URL
-  // #toolbar=0&navpanes=0&scrollbar=0 is a common way to suggest the PDF viewer hide controls
-  const pdfUrl = url.includes("#") ? url : `${url}#toolbar=0`;
+  useEffect(() => {
+    // Append toolbar control parameters to the URL natively
+    let finalUrl = url.includes("#") ? url : `${url}#toolbar=0`;
+
+    // Detect mobile browser since they don't have native PDF viewers for iframes
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+
+    // If mobile, wrap the URL with Google Docs Viewer to force inline display
+    if (isMobile) {
+      // NOTE: This requires 'url' to be publicly accessible over the internet
+      finalUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(
+        url
+      )}&embedded=true`;
+    }
+
+    setPdfUrl(finalUrl);
+  }, [url]);
 
   return (
     <div className="flex w-full h-full flex-col bg-gray-100 relative overflow-hidden">
@@ -23,17 +41,14 @@ export default function PdfViewer({ url }: Props) {
         </div>
       )}
 
-      {/* 
-          Using an iframe is a much more robust approach for modern browsers 
-          compared to react-pdf for simple viewing, as it leverages the 
-          browser's native PDF viewing engine without complex JS workers.
-      */}
-      <iframe
-        src={pdfUrl}
-        className="w-full h-full border-none z-10"
-        onLoad={() => setIsLoading(false)}
-        title="PDF Preview"
-      />
+      {pdfUrl && (
+        <iframe
+          src={pdfUrl}
+          className="w-full h-full border-none z-10"
+          onLoad={() => setIsLoading(false)}
+          title="PDF Preview"
+        />
+      )}
 
       {/* Overlay to disable right-click and some interactions for protection if needed */}
       <div className="absolute inset-0 z-0 pointer-events-none" />
