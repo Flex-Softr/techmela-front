@@ -209,7 +209,7 @@ const eventHandler = async (eventData: EventParameter) => {
 
   // 5. Send to the server-side tracking endpoint for Meta CAPI
   try {
-    await fetch(`${config.tracking_base_url}/track`, {
+    await fetch(`${config.tracking_api_url}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
