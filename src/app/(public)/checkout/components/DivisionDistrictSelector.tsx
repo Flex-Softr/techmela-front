@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect } from "react";
@@ -36,13 +37,13 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
   // Register fields for validation
   useEffect(() => {
     register("shipping.division" as Path<T>, {
-      required: "বিভাগ নির্বাচন করুন",
+      required: "বিভাগ সিলেক্ট করুন",
     });
     register("shipping.district" as Path<T>, {
-      required: "জেলা নির্বাচন করুন",
+      required: "জেলা সিলেক্ট করুন",
     });
     register("shipping.upazila" as Path<T>, {
-      required: "উপজেলা নির্বাচন করুন",
+      required: "উপজেলা সিলেক্ট করুন",
     });
   }, [register]);
   const division =
@@ -60,11 +61,11 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
 
   useEffect(() => {
     if (shipping?.division)
-      setValue("shipping.division" as Path<T>, shipping.division);
+      setValue("shipping.division" as Path<T>, shipping.division as any);
     if (shipping?.district)
-      setValue("shipping.district" as Path<T>, shipping.district);
+      setValue("shipping.district" as Path<T>, shipping.district as any);
     if (shipping?.upazila)
-      setValue("shipping.upazila" as Path<T>, shipping.upazila);
+      setValue("shipping.upazila" as Path<T>, shipping.upazila as any);
   }, [shipping, setValue]);
 
   return (
@@ -80,9 +81,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             id="division"
             value={division}
             onChange={(e) => {
-              setValue("shipping.division" as Path<T>, e.target.value);
-              setValue("shipping.district" as Path<T>, ""); // Reset dependent
-              setValue("shipping.upazila" as Path<T>, "");
+              setValue("shipping.division" as Path<T>, e.target.value as any);
+              setValue("shipping.district" as Path<T>, "" as any); // Reset dependent
+              setValue("shipping.upazila" as Path<T>, "" as any);
             }}
             className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm"
           >
@@ -93,9 +94,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
               </option>
             ))}
           </select>
-          {errors?.shipping?.division && (
+          {(errors.shipping as any)?.division && (
             <span className="text-red-500 text-xs">
-              {(errors.shipping.division.message as string) ||
+              {((errors.shipping as any).division.message as string) ||
                 "বিভাগ সিলেক্ট করুন"}
             </span>
           )}
@@ -109,8 +110,8 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           id="district"
           value={district}
           onChange={(e) => {
-            setValue("shipping.district" as Path<T>, e.target.value);
-            setValue("shipping.upazila" as Path<T>, "");
+            setValue("shipping.district" as Path<T>, e.target.value as any);
+            setValue("shipping.upazila" as Path<T>, "" as any);
           }}
           disabled={showDivision && !division}
           className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-gray-50 disabled:cursor-not-allowed"
@@ -126,9 +127,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             </option>
           ))}
         </select>
-        {errors?.shipping?.district && (
+        {(errors.shipping as any)?.district && (
           <span className="text-red-500 text-xs">
-            {(errors.shipping.district.message as string) ||
+            {((errors.shipping as any).district.message as string) ||
               "জেলা সিলেক্ট করুন"}
           </span>
         )}
@@ -141,7 +142,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           id="upazila"
           value={upazila}
           onChange={(e) =>
-            setValue("shipping.upazila" as Path<T>, e.target.value)
+            setValue("shipping.upazila" as Path<T>, e.target.value as any)
           }
           disabled={!district}
           className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-gray-50 disabled:cursor-not-allowed"
@@ -155,9 +156,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             </option>
           ))}
         </select>
-        {errors?.shipping?.upazila && (
+        {(errors.shipping as any)?.upazila && (
           <span className="text-red-500 text-xs">
-            {(errors.shipping.upazila.message as string) ||
+            {((errors.shipping as any).upazila.message as string) ||
               "উপজেলা সিলেক্ট করুন"}
           </span>
         )}
