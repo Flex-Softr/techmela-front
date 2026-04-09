@@ -1,7 +1,7 @@
 import config from "@/config/config";
 import { CustomData, MetaCAPIEventPayload, UserData } from "./capi/capi.types";
 import {
-  generateEventId,
+  cleanObj,
   getFbc,
   getFbp,
   getIP,
@@ -13,7 +13,7 @@ import {
   normalizeEmail,
   normalizeGender,
   normalizePhone,
-  cleanObj,
+  resolveEventId,
   splitFullName,
 } from "./event.helpers";
 import { EventParameter } from "./event.types";
@@ -37,7 +37,7 @@ const eventHandler = async (eventData: EventParameter) => {
   if (typeof window === "undefined") return;
 
   const event_name = eventData.event_name;
-  const event_id = eventData.event_id || generateEventId(event_name);
+  const event_id = resolveEventId(event_name, eventData);
   const event_source_url = window.location.href;
   const client_user_agent = navigator.userAgent;
   const client_ip_address = await getIP();
@@ -54,8 +54,10 @@ const eventHandler = async (eventData: EventParameter) => {
   if (isCommerceEvent) {
     eventData.currency = eventData.currency || "BDT";
     eventData.content_type = eventData.content_type || "product";
-    eventData.country = eventData.country || "Bangladesh";
   }
+  eventData.country = eventData.country || "Bangladesh";
+  //Todo enable later
+  delete eventData.zp;
 
   // 0. Pre-normalize sensitive user data for consistency between GTM (unhashed) and CAPI (hashed)
   if (eventData.em) eventData.em = normalizeEmail(eventData.em);
@@ -91,17 +93,28 @@ const eventHandler = async (eventData: EventParameter) => {
   await hashAndAssign("em", eventData.em);
   await hashAndAssign("ph", eventData.ph);
 
-  // Names
+  // Names — three possible input patterns:
+  // 1. Caller passes fn/ln directly
+  // 2. Caller passes full name in fn field (with spaces)
+  // 3. Caller passes fullName (most common — both hooks use this)
   let fn = eventData.fn;
   let ln = eventData.ln;
 
+  // If fn has spaces, a full name was put in the fn field — split it first
+  if (fn && fn.trim().includes(" ")) {
+    const split = splitFullName(fn);
+    fn = split.fn;
+    ln = ln || split.ln;
+  }
+
+  // Fallback: derive fn/ln from fullName if not already set
   if (!fn && !ln && eventData.fullName) {
     const split = splitFullName(eventData.fullName);
     fn = split.fn;
     ln = split.ln;
   }
 
-  // Normalize derived parts
+  // Normalize AFTER splitting (normalizeAlpha strips spaces)
   if (fn) fn = normalizeAlpha(fn);
   if (ln) ln = normalizeAlpha(ln);
 

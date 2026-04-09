@@ -207,6 +207,33 @@ export const generateEventId = (prefix: string): string => {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 };
 
+export const generatePurchaseEventId = (order_id: string): string => {
+  return `purchase_${order_id}`;
+};
+
+/**
+ * Resolves the final event ID based on priority:
+ * 1. Manual event_id if provided.
+ * 2. Deterministic purchase ID if event_name is "purchase" and order_id exists.
+ * 3. Default random event ID for all other cases.
+ *
+ * @param event_name - The name of the event
+ * @param eventData - The event parameters containing potential order_id or manual event_id
+ * @returns A unique or deterministic event ID
+ */
+export const resolveEventId = (
+  event_name: string,
+  eventData: { event_id?: string; order_id?: string }
+): string => {
+  if (eventData.event_id) return eventData.event_id;
+
+  if (event_name.toLowerCase() === "purchase" && eventData.order_id) {
+    return generatePurchaseEventId(eventData.order_id);
+  }
+
+  return generateEventId(event_name);
+};
+
 /**
  * Retrieves or generates a persistent visitor ID for anonymous tracking.
  * @returns A unique visitor ID string
@@ -252,8 +279,28 @@ export const cleanObj = <T extends Record<string, unknown>>(obj: T): T => {
 };
 
 export const splitFullName = (fullName?: string) => {
-  const nameParts = fullName?.trim().split(/\s+/) || [];
+  const trimmed = fullName?.trim();
+  if (!trimmed) return { fn: undefined, ln: undefined };
+
+  const nameParts = trimmed.split(/\s+/);
+
+  // Single word — no last name
+  if (nameParts.length === 1) {
+    return { fn: nameParts[0], ln: undefined };
+  }
+
+  // If the first word is a prefix ending with "." (e.g. "Md.", "Dr.", "Sheikh."),
+  // group it together with the next word to form the first name.
+  // e.g. "Md. Mustaqim Khan" → fn: "Md. Mustaqim", ln: "Khan"
+  if (nameParts[0].endsWith(".")) {
+    const fn = `${nameParts[0]} ${nameParts[1]}`;
+    const ln = nameParts.length > 2 ? nameParts.slice(2).join(" ") : undefined;
+    return { fn, ln };
+  }
+
+  // Default: first word = fn, everything else = ln
+  // e.g. "Mustaqim Khan" → fn: "Mustaqim", ln: "Khan"
   const fn = nameParts[0];
-  const ln = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
+  const ln = nameParts.slice(1).join(" ");
   return { fn, ln };
 };

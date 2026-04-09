@@ -50,31 +50,36 @@ const CheckoutForm = ({
   const initiateCheckoutTracked = useRef(false);
 
   useEffect(() => {
-    if (
-      cartData?.data &&
-      Array.isArray(cartData.data) &&
-      !initiateCheckoutTracked.current
-    ) {
+    const shipping = methods.getValues("shipping");
+    const isCheckTracked =
+      cartData?.data?.length > 0 &&
+      !initiateCheckoutTracked.current &&
+      shipping?.fullName &&
+      shipping?.phoneNumber &&
+      shipping?.division &&
+      shipping?.district &&
+      shipping?.upazila;
+    if (isCheckTracked) {
       initiateCheckoutTracked.current = true;
-      const shippingValues = methods.getValues("shipping");
+
       const divisionName = BdAddress.divisionNameById(
-        shippingValues?.division,
+        shipping?.division,
         "en"
       ).name;
       const districtName = BdAddress.districtNameById(
-        shippingValues?.district,
+        shipping?.district,
         "en"
       ).name;
       const upazilaName = BdAddress.upazilaNameById(
-        shippingValues?.upazila,
+        shipping?.upazila,
         "en"
       ).name;
 
       eventHandler({
         event_name: "initiate_checkout",
-        fn: shippingValues?.fullName || undefined,
-        ph: shippingValues?.phoneNumber || undefined,
-        em: shippingValues?.email || undefined,
+        fn: shipping?.fullName || undefined,
+        ph: shipping?.phoneNumber || undefined,
+        em: shipping?.email || undefined,
         st: divisionName || undefined,
         ct: districtName || undefined,
         zp: upazilaName || undefined,

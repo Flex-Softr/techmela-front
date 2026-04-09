@@ -14,6 +14,7 @@ import { TGenericErrorResponse } from "@/types/response";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import eventHandler from "@/tracking/eventHandler";
+import BdAddress from "@/utilities/bdAddress/bdAddress";
 
 type TCheckoutFormData = {
   fullName: string;
@@ -21,6 +22,9 @@ type TCheckoutFormData = {
   fullAddress: string;
   email?: string;
   notes?: string;
+  division?: string;
+  district?: string;
+  upazila?: string;
   paymentMethod: string;
   paymentDetails?: Record<string, string | number>;
 };
@@ -101,6 +105,9 @@ const useSalesOrderSubmit = ({
       fullAddress: data.fullAddress,
       email: data.email,
       notes: data.notes,
+      division: data.division,
+      district: data.district,
+      upazila: data.upazila,
     };
 
     // Update Redux & LocalStorage (for persistence in future visits)
@@ -147,11 +154,24 @@ const useSalesOrderSubmit = ({
       if (result.success) {
         setIsSuccess(true);
         // GTM Event
+        const divisionName = shippingData.division
+          ? BdAddress.divisionNameById(shippingData.division, "en").name
+          : undefined;
+        const districtName = shippingData.district
+          ? BdAddress.districtNameById(shippingData.district, "en").name
+          : undefined;
+        const upazilaName = shippingData.upazila
+          ? BdAddress.upazilaNameById(shippingData.upazila, "en").name
+          : undefined;
+
         eventHandler({
           event_name: "purchase",
           fullName: shippingData.fullName,
           ph: shippingData.phoneNumber,
           em: shippingData.email,
+          st: divisionName,
+          ct: districtName,
+          zp: upazilaName,
           order_id: result?.data?.orderId,
           content_type: "product",
           content_category: productCategory,
