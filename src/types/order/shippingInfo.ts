@@ -1,8 +1,11 @@
 export type TShippingInfo = {
   fullName: string;
   phoneNumber: string;
-  fullAddress: string;
   email?: string;
+  division: string; // state id
+  district: string; // city
+  upazila: string; // upazila id
+  fullAddress: string;
   notes?: string;
 };
 

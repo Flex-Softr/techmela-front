@@ -1,24 +1,40 @@
 /**
- * Normalizes a value by trimming and converting to lowercase before hashing (Meta requirement).
- * @param value The string value to normalize
- * @returns Normalized string
+ * Normalizes an email address (Meta requirement: trim and lowercase).
  */
-export const normalize = (value: string): string => {
+export const normalizeEmail = (value: string): string => {
   return value.trim().toLowerCase();
 };
 
 /**
- * SHA-256 hashes a string value using the browser's crypto API.
- * @param value The string to hash
- * @returns A promise that resolves to the hex-encoded SHA-256 hash
+ * Normalizes a string to contain only Roman alphabet a-z characters.
+ * Recommended by Meta for Names, Cities, and States.
  */
+export const normalizeAlpha = (value: string): string => {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z]/g, "");
+};
+
+/**
+ * Normalizes a string to contain only alphanumeric characters.
+ * Used for Zip codes and generic identifiers.
+ */
+export const normalizeAlphaNumeric = (value: string): string => {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+};
+
 export const hashUserData = async (
   value?: string | null
 ): Promise<string | undefined> => {
   if (!value) return undefined;
 
-  const normalized = normalize(value);
-  const msgBuffer = new TextEncoder().encode(normalized);
+  // Note: Value should ideally be normalized BEFORE calling this function
+  // to ensure consistency between GTM and CAPI.
+  const msgBuffer = new TextEncoder().encode(value);
   const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const hashed = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -50,8 +66,22 @@ export const setCookie = (name: string, value: string, days: number = 730) => {
 };
 
 /**
+ * Returns the Meta subdomain index based on the current hostname.
+ * 'com' = 0, 'example.com' = 1, 'www.example.com' = 2.
+ */
+const getSubdomainIndex = (): number => {
+  if (typeof window === "undefined") return 1;
+  const hostname = window.location.hostname;
+  const parts = hostname.split(".");
+  if (parts.length >= 3 && parts[0] === "www") return 2;
+  if (parts.length >= 2) return 1;
+  return 1;
+};
+
+/**
  * Extracts the Facebook Click ID (fbclid) from the URL, formats it, and persists it in a cookie.
  * This ensures the click ID is available for attribution even if the user navigates away or returns later.
+ * Following Meta best practices, it only updates if the fbclid is new.
  * @returns The formatted FBC string or the existing cookie value
  */
 export const getFbc = (): string | undefined => {
@@ -60,58 +90,104 @@ export const getFbc = (): string | undefined => {
   // 1. Check URL for new click ID
   const params = new URLSearchParams(window.location.search);
   const fbclid = params.get("fbclid");
+  const existingFbc = getCookie("_fbc");
 
   if (fbclid) {
-    const fbc = `fb.1.${Date.now()}.${fbclid}`;
-    setCookie("_fbc", fbc, 90); // Persist for 90 days
-    return fbc;
+    // Check if the current fbclid is different from the one in the cookie
+    const existingFbclid = existingFbc?.split(".").pop();
+
+    if (!existingFbc || existingFbclid !== fbclid) {
+      const fbc = `fb.${getSubdomainIndex()}.${Date.now()}.${fbclid}`;
+      setCookie("_fbc", fbc, 90); // Persist for 90 days
+      return fbc;
+    }
   }
 
   // 2. Fallback to existing cookie
-  return getCookie("_fbc");
+  return existingFbc;
+};
+
+/**
+ * Retrieves the Meta Browser ID (_fbp). If missing, generates a new one to ensure
+ * CAPI events always have a browser identifier.
+ * @returns The FBP string
+ */
+export const getFbp = (): string | undefined => {
+  if (typeof window === "undefined") return undefined;
+
+  const existingFbp = getCookie("_fbp");
+  if (existingFbp) return existingFbp;
+
+  // Generate new fbp if missing (e.g. ad blockers blocking Meta Pixel)
+  const fbp = `fb.${getSubdomainIndex()}.${Date.now()}.${Math.floor(
+    Math.random() * 2147483647
+  )}`;
+  setCookie("_fbp", fbp, 730); // Meta Pixel sets it for 2 years
+  return fbp;
 };
 
 /**
  * Normalizes a phone number by removing non-digits and ensuring it starts with a country code.
  */
 export const normalizePhone = (phone: string): string => {
+  if (!phone) return "";
   const digits = phone.replace(/\D/g, "");
   return digits.startsWith("0") ? "88" + digits : digits;
 };
 
 /**
- * Normalizes a city name (lowercase, no spaces, no punctuation).
+ * Normalizes a string to contain only Roman alphabet a-z characters (Meta recommendation).
+ * Preserved for backward compatibility or direct calls.
  */
-export const normalizeCity = (city: string): string => {
-  return city.toLowerCase().replace(/[^a-z]/g, "");
-};
-
-/**
- * Normalizes a state (lowercase, trim).
- */
-export const normalizeState = (state: string): string => {
-  return state.trim().toLowerCase();
-};
-
-/**
- * Normalizes a zip code (lowercase, no spaces, no dashes).
- */
-export const normalizeZip = (zip: string): string => {
-  return zip.toLowerCase().replace(/[^a-z0-9]/g, "");
-};
-
-/**
- * Normalizes a country code (lowercase, trim).
- */
-export const normalizeCountry = (country: string): string => {
-  return country.trim().toLowerCase();
-};
+export { normalizeAlpha as normalizeCity };
 
 /**
  * Normalizes a date of birth to YYYYMMDD format (Meta requirement).
  */
 export const normalizeDOB = (dob: string): string => {
-  return dob.replace(/[^0-9]/g, ""); // Keep only digits
+  if (!dob) return "";
+
+  // 1. Handle common separators (-, /, ., _, space)
+  const parts = dob.split(/[-/._ ]/);
+
+  if (parts.length === 3) {
+    let day = parts[0];
+    let month = parts[1];
+    let year = parts[2];
+
+    // Format: YYYY-MM-DD
+    if (parts[0].length === 4) {
+      year = parts[0];
+      month = parts[1];
+      day = parts[2];
+    }
+    // Format: DD/MM/YYYY
+    else if (parts[2].length === 4) {
+      day = parts[0];
+      month = parts[1];
+      year = parts[2];
+    }
+
+    // Ensure they are padded correctly
+    const mm = month.padStart(2, "0");
+    const dd = day.padStart(2, "0");
+
+    if (year.length === 4 && mm.length === 2 && dd.length === 2) {
+      return `${year}${mm}${dd}`;
+    }
+  }
+
+  // 2. Fallback: just strip everything and keep digits
+  const clean = dob.replace(/[^0-9]/g, "");
+
+  // If already 8 digits, ensure it's in a reasonable year range before returning
+  if (clean.length === 8) {
+    const yearPrefix = clean.substring(0, 2);
+    const validPrefixes = ["19", "20"];
+    if (validPrefixes.includes(yearPrefix)) return clean;
+  }
+
+  return clean;
 };
 
 /**

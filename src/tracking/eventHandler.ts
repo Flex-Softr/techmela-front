@@ -2,18 +2,17 @@ import config from "@/config/config";
 import { CustomData, MetaCAPIEventPayload, UserData } from "./capi/capi.types";
 import {
   generateEventId,
-  getCookie,
   getFbc,
+  getFbp,
   getIP,
   getVisitorId,
   hashUserData,
-  normalizeCity,
-  normalizeCountry,
+  normalizeAlpha,
+  normalizeAlphaNumeric,
   normalizeDOB,
+  normalizeEmail,
   normalizeGender,
   normalizePhone,
-  normalizeState,
-  normalizeZip,
   cleanObj,
   splitFullName,
 } from "./event.helpers";
@@ -55,7 +54,19 @@ const eventHandler = async (eventData: EventParameter) => {
   if (isCommerceEvent) {
     eventData.currency = eventData.currency || "BDT";
     eventData.content_type = eventData.content_type || "product";
+    eventData.country = eventData.country || "Bangladesh";
   }
+
+  // 0. Pre-normalize sensitive user data for consistency between GTM (unhashed) and CAPI (hashed)
+  if (eventData.em) eventData.em = normalizeEmail(eventData.em);
+  if (eventData.ph) eventData.ph = normalizePhone(eventData.ph);
+  if (eventData.db) eventData.db = normalizeDOB(eventData.db);
+  if (eventData.ge) eventData.ge = normalizeGender(eventData.ge);
+  if (eventData.ct) eventData.ct = normalizeAlpha(eventData.ct);
+  if (eventData.st) eventData.st = normalizeAlpha(eventData.st);
+  if (eventData.zp) eventData.zp = normalizeAlphaNumeric(eventData.zp);
+  if (eventData.country)
+    eventData.country = normalizeAlphaNumeric(eventData.country);
 
   // 1. Process and Hash User Data for Meta Match Quality
   const processedUserData: UserData = {
@@ -78,7 +89,7 @@ const eventHandler = async (eventData: EventParameter) => {
 
   // Email & Phone
   await hashAndAssign("em", eventData.em);
-  await hashAndAssign("ph", eventData.ph, normalizePhone);
+  await hashAndAssign("ph", eventData.ph);
 
   // Names
   let fn = eventData.fn;
@@ -90,25 +101,29 @@ const eventHandler = async (eventData: EventParameter) => {
     ln = split.ln;
   }
 
+  // Normalize derived parts
+  if (fn) fn = normalizeAlpha(fn);
+  if (ln) ln = normalizeAlpha(ln);
+
   await hashAndAssign("fn", fn);
   await hashAndAssign("ln", ln);
 
   // Demographic (Tiebreakers for shared IPs)
-  if (eventData.db) await hashAndAssign("db", eventData.db, normalizeDOB);
-  if (eventData.ge) await hashAndAssign("ge", eventData.ge, normalizeGender);
+  await hashAndAssign("db", eventData.db);
+  await hashAndAssign("ge", eventData.ge);
 
   // Location
-  await hashAndAssign("ct", eventData.ct, normalizeCity);
-  await hashAndAssign("st", eventData.st, normalizeState);
-  await hashAndAssign("zp", eventData.zp, normalizeZip);
-  await hashAndAssign("country", eventData.country, normalizeCountry);
+  await hashAndAssign("ct", eventData.ct);
+  await hashAndAssign("st", eventData.st);
+  await hashAndAssign("zp", eventData.zp);
+  await hashAndAssign("country", eventData.country);
 
   // Identifiers
   const externalId = eventData.external_id || getVisitorId();
   await hashAndAssign("external_id", externalId);
 
   // Facebook IDs
-  const fbp = getCookie("_fbp") || undefined;
+  const fbp = getFbp();
   const fbc = eventData.fbc || getFbc();
   processedUserData.fbp = fbp;
   processedUserData.fbc = fbc;
@@ -121,8 +136,7 @@ const eventHandler = async (eventData: EventParameter) => {
   eventData.fn = fn;
   eventData.ln = ln;
 
-  // Client context
-  processedUserData.client_user_agent = client_user_agent;
+  // Identifiers
 
   // 2. Extract CustomData for Meta CAPI
   const customDataKeys = [

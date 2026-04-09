@@ -9,13 +9,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import eventHandler from "@/tracking/eventHandler";
 import OrderNow from "./OrderNow";
 import ShippingAddress from "./ShippingAddress";
+import { TShippingInfo } from "@/types/order/shippingInfo";
+import BdAddress from "@/utilities/bdAddress/bdAddress";
 
 type TCheckoutFormData = {
-  fullName: string;
-  phoneNumber: string;
-  fullAddress: string;
-  email?: string;
-  notes?: string;
+  shipping: TShippingInfo;
   paymentMethod: string; // ID of the payment method
   paymentDetails?: Record<string, string | number>;
 };
@@ -58,11 +56,28 @@ const CheckoutForm = ({
       !initiateCheckoutTracked.current
     ) {
       initiateCheckoutTracked.current = true;
+      const shippingValues = methods.getValues("shipping");
+      const divisionName = BdAddress.divisionNameById(
+        shippingValues?.division,
+        "en"
+      ).name;
+      const districtName = BdAddress.districtNameById(
+        shippingValues?.district,
+        "en"
+      ).name;
+      const upazilaName = BdAddress.upazilaNameById(
+        shippingValues?.upazila,
+        "en"
+      ).name;
+
       eventHandler({
         event_name: "initiate_checkout",
-        fn: methods.getValues("fullName") || undefined,
-        ph: methods.getValues("phoneNumber") || undefined,
-        em: methods.getValues("email") || undefined,
+        fn: shippingValues?.fullName || undefined,
+        ph: shippingValues?.phoneNumber || undefined,
+        em: shippingValues?.email || undefined,
+        st: divisionName || undefined,
+        ct: districtName || undefined,
+        zp: upazilaName || undefined,
         content_ids: cartData.data.map((item: TCartItemData) =>
           item.variation?._id
             ? `${item.product?._id}-${item.variation._id}`

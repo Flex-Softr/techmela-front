@@ -39,6 +39,9 @@ export default function ApplyCupon() {
     const shippingDetails = {
       fullName: shippingInfo?.data?.fullName,
       phoneNumber: shippingInfo?.data?.phoneNumber,
+      division: shippingInfo?.data?.division,
+      district: shippingInfo?.data?.district,
+      upazila: shippingInfo?.data?.upazila,
       fullAddress: shippingInfo?.data?.fullAddress,
       email: shippingInfo?.data?.email || undefined,
     };

@@ -21,15 +21,13 @@ import { Truck } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import DivisionDistrictUpazilaSelector from "./DivisionDistrictSelector";
 
 // Define a type for the form data we expect in the context
 type CheckoutFormData = {
-  fullName: string;
-  phoneNumber: string;
-  fullAddress: string;
-  notes?: string;
-  email?: string;
-  // Payment fields are also in here but not used in this component
+  shipping: TShippingInfo;
+  paymentMethod: string;
+  paymentDetails?: Record<string, string | number>;
 };
 
 const ShippingAddress = ({
@@ -41,6 +39,7 @@ const ShippingAddress = ({
     register,
     formState: { errors },
     setValue,
+    control,
   } = useFormContext<CheckoutFormData>();
 
   const dispatch = useAppDispatch();
@@ -56,28 +55,42 @@ const ShippingAddress = ({
     setCustomerHasAccount(hasAccount);
 
     if (shippingInfoData?.data) {
-      const { fullName, phoneNumber, fullAddress, notes, email } =
-        shippingInfoData.data;
-      setValue("fullName", fullName || "");
+      const {
+        fullName,
+        phoneNumber,
+        fullAddress,
+        notes,
+        email,
+        division,
+        district,
+        upazila,
+      } = shippingInfoData.data;
+      setValue("shipping.fullName", fullName || "");
       if (!disablePhoneAutoFill) {
-        setValue("phoneNumber", phoneNumber || "");
+        setValue("shipping.phoneNumber", phoneNumber || "");
       }
-      setValue("fullAddress", fullAddress || "");
-      setValue("notes", notes || "");
-      setValue("email", email || "");
+      setValue("shipping.fullAddress", fullAddress || "");
+      setValue("shipping.notes", notes || "");
+      setValue("shipping.email", email || "");
+      setValue("shipping.division", division || "");
+      setValue("shipping.district", district || "");
+      setValue("shipping.upazila", upazila || "");
     } else if (!hasAccount) {
       const storedShippingAddress = localStorage.getItem("shippingAddress");
       if (storedShippingAddress) {
         const parsedAddress = JSON.parse(storedShippingAddress);
         setShippingAddress(parsedAddress);
         // Set form field values using setValue
-        setValue("fullName", parsedAddress.fullName);
+        setValue("shipping.fullName", parsedAddress.fullName);
         if (!disablePhoneAutoFill) {
-          setValue("phoneNumber", parsedAddress.phoneNumber);
+          setValue("shipping.phoneNumber", parsedAddress.phoneNumber);
         }
-        setValue("fullAddress", parsedAddress.fullAddress);
-        setValue("notes", parsedAddress.notes || "");
-        setValue("email", parsedAddress.email || "");
+        setValue("shipping.fullAddress", parsedAddress.fullAddress);
+        setValue("shipping.notes", parsedAddress.notes || "");
+        setValue("shipping.email", parsedAddress.email || "");
+        setValue("shipping.division", parsedAddress.division || "");
+        setValue("shipping.district", parsedAddress.district || "");
+        setValue("shipping.upazila", parsedAddress.upazila || "");
 
         // Sync with Redux immediately so CheckoutPageContent sees the data
         dispatch(setShippingInfo(parsedAddress));
@@ -135,7 +148,7 @@ const ShippingAddress = ({
           </Label>
           <Input
             placeholder="আপনার নাম লিখুন"
-            {...register("fullName", {
+            {...register("shipping.fullName", {
               required: "নাম আবশ্যক।",
               maxLength: {
                 value: 30,
@@ -143,8 +156,11 @@ const ShippingAddress = ({
               },
             })}
           />
-          {errors.fullName && (
-            <ErrorMessage message={errors.fullName.message} className="mt-1" />
+          {errors.shipping?.fullName && (
+            <ErrorMessage
+              message={errors.shipping.fullName.message}
+              className="mt-1"
+            />
           )}
         </div>
         <div>
@@ -153,7 +169,7 @@ const ShippingAddress = ({
           </Label>
           <Input
             placeholder="আপনার মোবাইল নম্বর লিখুন"
-            {...register("phoneNumber", {
+            {...register("shipping.phoneNumber", {
               required: "মোবাইল নম্বর আবশ্যক।",
               pattern: {
                 value: /^(?:\+88)?01[3-9]\d{8}$/,
@@ -161,43 +177,35 @@ const ShippingAddress = ({
               },
             })}
           />
-          {errors.phoneNumber && (
+          {errors.shipping?.phoneNumber && (
             <ErrorMessage
-              message={errors.phoneNumber.message}
+              message={errors.shipping.phoneNumber.message}
               className="mt-1"
             />
           )}
         </div>
-        {/* <div>
-          <Label className="font-bold pl-1 mb-1.5 block">
-            Email (Optional)
-          </Label>
-          <Input
-            placeholder="Enter your email"
-            {...register("email", {
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            })}
+        <div>
+          <DivisionDistrictUpazilaSelector
+            control={control}
+            register={register}
+            setValue={setValue}
+            errors={errors}
+            shipping={shippingAddress || undefined}
           />
-          {errors.email && (
-            <ErrorMessage message={errors.email.message} className="mt-1" />
-          )}
-        </div> */}
+        </div>
         <div>
           <Label className="font-bold pl-1 mb-1.5 block">
             ঠিকানা <span className="text-red-600">*</span>
           </Label>
           <Input
             placeholder="আপনার ঠিকানা লিখুন"
-            {...register("fullAddress", {
+            {...register("shipping.fullAddress", {
               required: "ঠিকানা আবশ্যক।",
             })}
           />
-          {errors.fullAddress && (
+          {errors.shipping?.fullAddress && (
             <ErrorMessage
-              message={errors.fullAddress.message}
+              message={errors.shipping.fullAddress.message}
               className="mt-1"
             />
           )}
@@ -206,11 +214,14 @@ const ShippingAddress = ({
           <Label className="font-bold pl-1 mb-1.5 block">নোট (ঐচ্ছিক)</Label>
           <textarea
             placeholder="কোনো নির্দিষ্ট নির্দেশনা থাকলে লিখুন..."
-            {...register("notes")}
+            {...register("shipping.notes")}
             className="w-full h-20 ring-1 ring-gray-200 rounded-md p-2 text-sm focus:ring-2 focus:ring-primary outline-none"
           ></textarea>
-          {errors.notes && (
-            <ErrorMessage message={errors.notes.message} className="mt-1" />
+          {errors.shipping?.notes && (
+            <ErrorMessage
+              message={errors.shipping.notes.message}
+              className="mt-1"
+            />
           )}
         </div>
       </div>

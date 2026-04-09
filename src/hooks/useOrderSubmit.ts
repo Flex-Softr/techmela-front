@@ -11,13 +11,11 @@ import { useState } from "react";
 import eventHandler from "@/tracking/eventHandler";
 import { TCartItemData } from "@/types/cart";
 import useCart from "./useCart";
+import { TShippingInfo } from "@/types/order/shippingInfo";
+import BdAddress from "@/utilities/bdAddress/bdAddress";
 
 type TCheckoutFormData = {
-  fullName: string;
-  phoneNumber: string;
-  fullAddress: string;
-  email?: string;
-  notes?: string;
+  shipping: TShippingInfo;
   paymentMethod: string;
   paymentDetails?: Record<string, string | number>;
 };
@@ -61,13 +59,7 @@ const useOrderSubmit = ({
     }
 
     // 1. Construct Shipping Info
-    const shippingData = {
-      fullName: data.fullName,
-      phoneNumber: data.phoneNumber,
-      fullAddress: data.fullAddress,
-      email: data.email,
-      notes: data.notes,
-    };
+    const shippingData = data.shipping;
 
     // Update Redux & LocalStorage for Shipping
     dispatch(setShippingInfo(shippingData));
@@ -96,6 +88,9 @@ const useOrderSubmit = ({
       shipping: {
         fullName: shippingData.fullName,
         phoneNumber: shippingData.phoneNumber,
+        division: shippingData.division,
+        district: shippingData.district,
+        upazila: shippingData.upazila,
         fullAddress: shippingData.fullAddress,
         email: shippingData.email || undefined,
       },
@@ -114,11 +109,27 @@ const useOrderSubmit = ({
         setIsSuccess(true);
 
         // GTM Event
+        const divisionName = BdAddress.divisionNameById(
+          shippingData.division,
+          "en"
+        ).name;
+        const districtName = BdAddress.districtNameById(
+          shippingData.district,
+          "en"
+        ).name;
+        const upazilaName = BdAddress.upazilaNameById(
+          shippingData.upazila,
+          "en"
+        ).name;
+
         eventHandler({
           event_name: "purchase",
           fullName: shippingData.fullName,
           ph: shippingData.phoneNumber,
           em: shippingData.email,
+          st: divisionName,
+          ct: districtName,
+          zp: upazilaName,
           order_id: result?.data?.orderId,
           content_type: "product",
           content_category: productCategory,
