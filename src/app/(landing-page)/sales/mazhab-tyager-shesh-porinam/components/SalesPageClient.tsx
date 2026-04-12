@@ -7,7 +7,7 @@ import eventHandler from "@/tracking/eventHandler";
 import { useEffect, useRef, useState } from "react";
 
 import SalesHeader from "../../../_components/SalesHeader";
-import SalesOrderForm from "./SalesOrderForm";
+import SalesOrderForm from "../../../_components/SalesOrderForm";
 // New Redesign Components
 import BookHighlights from "./BookHighlights";
 import FAQSection from "./FAQSection";
@@ -189,6 +189,7 @@ const SalesPageClient = ({
       <section className="bg-gray-50 py-8" ref={orderFormRef}>
         <div className="max-w-screen-2xl mx-auto px-4">
           <SalesOrderForm
+            lpNo="LP-MTP-01"
             shippingCharges={shippingCharges}
             paymentMethods={paymentMethods}
             productTitle={product?.title || bookDetails.title}

@@ -15,16 +15,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import eventHandler from "@/tracking/eventHandler";
 import BdAddress from "@/utilities/bdAddress/bdAddress";
+import { TShippingInfo } from "@/types/order/shippingInfo";
 
 type TCheckoutFormData = {
-  fullName: string;
-  phoneNumber: string;
-  fullAddress: string;
-  email?: string;
-  notes?: string;
-  division?: string;
-  district?: string;
-  upazila?: string;
+  shipping: TShippingInfo;
   paymentMethod: string;
   paymentDetails?: Record<string, string | number>;
 };
@@ -99,15 +93,16 @@ const useSalesOrderSubmit = ({
     setErrorMessages([]);
 
     // 1. Construct Shipping Data
+    // 1. Construct Shipping Data
     const shippingData = {
-      fullName: data.fullName,
-      phoneNumber: data.phoneNumber,
-      fullAddress: data.fullAddress,
-      email: data.email,
-      notes: data.notes,
-      division: data.division,
-      district: data.district,
-      upazila: data.upazila,
+      fullName: data.shipping.fullName,
+      phoneNumber: data.shipping.phoneNumber,
+      fullAddress: data.shipping.fullAddress,
+      email: data.shipping.email,
+      notes: data.shipping.notes,
+      division: data.shipping.division,
+      district: data.shipping.district,
+      upazila: data.shipping.upazila,
     };
 
     // Update Redux & LocalStorage (for persistence in future visits)

@@ -12,6 +12,8 @@ import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import eventHandler from "@/tracking/eventHandler";
+import BdAddress from "@/utilities/bdAddress/bdAddress";
+import { TShippingInfo } from "@/types/order/shippingInfo";
 import Image from "next/image";
 import { useEffect, useMemo, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -19,11 +21,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
 
 type TCheckoutFormData = {
-  fullName: string;
-  phoneNumber: string;
-  fullAddress: string;
-  email?: string;
-  notes?: string;
+  shipping: TShippingInfo;
   paymentMethod: string;
   paymentDetails?: Record<string, string | number>;
 };
@@ -35,6 +33,7 @@ type TCartItem = {
 };
 
 type Props = {
+  lpNo: string;
   shippingCharges: TShippingCharges[];
   paymentMethods: TPaymentMethod[];
   productTitle: string;
@@ -56,6 +55,7 @@ type Props = {
 };
 
 const SalesOrderForm = ({
+  lpNo,
   shippingCharges,
   paymentMethods,
   productTitle,
@@ -105,7 +105,7 @@ const SalesOrderForm = ({
     paymentMethods,
     totalCost,
     orderedProducts,
-    lpNo: "LP-MNK-01",
+    lpNo: lpNo,
     productName: product?.title || productTitle,
     productCategory: product?.category?.[0]?.name,
   });
@@ -114,20 +114,42 @@ const SalesOrderForm = ({
 
   // Fire InitiateCheckout when user starts filling the form
   useEffect(() => {
-    const subscription = methods.watch((_, { name }) => {
-      const values = methods.getValues();
-      const hasInitialData =
-        (name === "phoneNumber" && values.phoneNumber?.length === 11) ||
-        (name === "fullName" && values.fullName?.length === 3);
+    const subscription = methods.watch(() => {
+      const shipping = methods.getValues("shipping");
 
-      if (hasInitialData && !initiateCheckoutTracked.current) {
+      const isCheckTracked =
+        cartItems.length > 0 &&
+        !initiateCheckoutTracked.current &&
+        shipping?.fullName &&
+        shipping?.phoneNumber &&
+        shipping?.division &&
+        shipping?.district &&
+        shipping?.upazila;
+
+      if (isCheckTracked) {
         initiateCheckoutTracked.current = true;
+
+        const divisionName = BdAddress.divisionNameById(
+          shipping?.division,
+          "en"
+        ).name;
+        const districtName = BdAddress.districtNameById(
+          shipping?.district,
+          "en"
+        ).name;
+        const upazilaName = BdAddress.upazilaNameById(
+          shipping?.upazila,
+          "en"
+        ).name;
 
         eventHandler({
           event_name: "initiate_checkout",
-          fullName: values.fullName,
-          ph: values.phoneNumber,
-          em: values.email,
+          fn: shipping?.fullName || undefined,
+          ph: shipping?.phoneNumber || undefined,
+          em: shipping?.email || undefined,
+          st: divisionName || undefined,
+          ct: districtName || undefined,
+          zp: upazilaName || undefined,
           content_name: productTitle,
           content_ids: cartItems.map((item) => item.productId),
           content_type: "product",

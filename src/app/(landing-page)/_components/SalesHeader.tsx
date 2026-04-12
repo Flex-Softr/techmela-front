@@ -1,8 +1,9 @@
 "use client";
+import logo from "@/../public/logo/logo.png";
 import Image from "next/image";
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 import { MdCall } from "react-icons/md";
-import logo from "@/../public/logo/logo.png";
 
 type Props = {
   onOrderClick: () => void;
@@ -22,14 +23,31 @@ const SalesHeader = ({ onOrderClick }: Props) => {
         />
       </Link>
 
-      <div className="flex items-center gap-3 sm:gap-4">
-        <div className="hidden sm:flex items-center gap-1.5 bg-primary/5 text-primary px-3 py-1.5 rounded-full border border-primary/20 font-bold text-sm">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <a
+          href="tel:+8801602431167"
+          className="hidden sm:flex items-center gap-1.5 bg-primary/5 text-primary px-3 py-1.5 rounded-full border border-primary/20 font-bold text-sm hover:bg-primary hover:text-white transition-all cursor-pointer"
+        >
           <MdCall className="text-lg" />
           <span>০১৬০২-৪৩১১৬৭</span>
-        </div>
+        </a>
+
+        <a
+          href="https://wa.me/8801602431167"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center bg-green-500 text-white p-2 sm:px-3 sm:py-1.5 rounded-full shadow-md hover:bg-green-600 transition-all active:scale-95"
+          title="WhatsApp"
+        >
+          <FaWhatsapp className="text-xl sm:text-lg" />
+          <span className="hidden sm:inline ml-1.5 font-bold text-sm">
+            হোয়াটসঅ্যাপ
+          </span>
+        </a>
+
         <button
           onClick={onOrderClick}
-          className="bg-primary text-white text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-2.5 rounded-full font-bold shadow-md hover:bg-primary/90 transition-all active:scale-95 animate-pulse-gentle"
+          className="bg-primary text-white text-sm sm:text-base px-5 py-2 sm:px-6 sm:py-2.5 rounded-full font-bold shadow-md hover:bg-primary/90 transition-all active:scale-95 animate-pulse-gentle whitespace-nowrap"
         >
           অর্ডার করুন
         </button>

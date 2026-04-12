@@ -27,11 +27,11 @@ const Quantity = ({ quantity, setQuantity, callBack }: TProps) => {
   };
 
   return (
-    <div className="flex justify-center items-center md:gap-5 gap-3">
+    <div className="flex justify-center items-center md:gap-3 gap-1.5">
       <button
         onClick={handleDecrement}
         disabled={quantity == 1 ? true : false}
-        className="xms:text-sm xls:text-base sm:text-lg md:text-xl hover:bg-slate-100 px-2 md:px-3 py-2  rounded"
+        className="xms:text-sm xls:text-base sm:text-lg md:text-xl hover:bg-slate-100 px-1.5 md:px-2 py-1  rounded text-slate-700"
       >
         <FiMinus />
       </button>
@@ -56,11 +56,11 @@ const Quantity = ({ quantity, setQuantity, callBack }: TProps) => {
             await callBack(newQuantity);
           }
         }}
-        className="text-xl border text-center w-[30px] md:w-[50px] h-[30px] md:h-[35px] rounded-md focus:outline-slate-100  [appearance:textfield][&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        className="text-base sm:text-lg border border-slate-200 text-center w-[28px] md:w-[40px] h-[28px] md:h-[32px] rounded focus:outline-slate-100  [appearance:textfield][&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none font-medium text-slate-800"
       />
       <button
         onClick={handleIncrement}
-        className="xms:text-sm xls:text-base sm:text-lg md:text-xl hover:bg-slate-100 px-2 md:px-3 py-2  rounded"
+        className="xms:text-sm xls:text-base sm:text-lg md:text-xl hover:bg-slate-100 px-1.5 md:px-2 py-1  rounded text-slate-700"
       >
         <FiPlus />
       </button>
