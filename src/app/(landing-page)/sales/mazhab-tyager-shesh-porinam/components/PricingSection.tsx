@@ -15,7 +15,7 @@ const PricingSection = ({
   regularPrice,
   salePrice,
   onOrderClick,
-  previewLink,
+  // previewLink,
   bookTitle,
 }: Props) => {
   return (
@@ -102,7 +102,7 @@ const PricingSection = ({
               <div className="w-full space-y-4">
                 <CTAButtonGroup
                   onOrderClick={onOrderClick}
-                  previewLink={previewLink}
+                  // previewLink={previewLink}
                   bookTitle={bookTitle}
                   className="w-full justify-center"
                 />

@@ -199,7 +199,7 @@ const SalesOrderForm = ({
               <ShippingAddress disablePhoneAutoFill={true} />
             </div>
             {/* Payment Methods */}
-            <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm p-4 md:p-0">
               <PaymentMethods
                 paymentMethods={paymentMethods}
                 idPrefix="sales-payment"
