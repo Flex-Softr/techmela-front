@@ -73,7 +73,7 @@ const CheckoutCartItem = ({
         <div>
           <Link
             href={`/product/${cartItem?.product?.slug}`}
-            className="text-sm font-bold hover:text-secondary truncate block"
+            className="text-sm font-bold hover:text-secondary line-clamp-2"
             title={cartItem?.product?.title}
           >
             {cartItem?.product?.title}
@@ -144,16 +144,16 @@ const CheckoutCartItem = ({
       <div className="flex flex-col justify-between items-end h-full gap-2 min-w-[100px]">
         <div className="text-right">
           <div className="text-base font-bold whitespace-nowrap text-gray-900">
-            &#2547;{(price * quantity)?.toFixed(2)}
+            &#2547;{price * quantity}
           </div>
           <div className="text-[11px] text-muted-foreground whitespace-nowrap mt-0.5 font-medium">
             {quantity} x{" "}
             {cartItem?.price?.regularPrice > cartItem?.price?.salePrice && (
               <span className="line-through mr-1 opacity-70">
-                &#2547;{cartItem.price.regularPrice.toFixed(2)}
+                &#2547;{cartItem.price.regularPrice}
               </span>
             )}
-            <span className="text-gray-600">&#2547;{price?.toFixed(2)}</span>
+            <span className="text-gray-600">&#2547;{price}</span>
           </div>
         </div>
         <button

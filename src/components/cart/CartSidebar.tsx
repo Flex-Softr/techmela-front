@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -45,6 +46,9 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
       <SheetContent className="flex flex-col h-full sm:max-w-md p-0">
         <SheetHeader className="border-b px-5 py-3 flex flex-row items-center justify-between space-y-0 bg-white">
           <SheetTitle className="text-lg font-bold">আমার কার্ট</SheetTitle>
+          <SheetDescription className="hidden">
+            আপনার কার্টের আইটেমগুলো এখানে দেখানো হয়েছে
+          </SheetDescription>
           <button
             onClick={() => setOpen(false)}
             className="rounded-full hover:bg-gray-100 h-8 w-8 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
@@ -140,11 +144,13 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
 
                     <div className="flex-1 flex flex-col min-w-0 py-1">
                       <div className="flex justify-between items-start gap-2">
-                        <h4
-                          className="text-base font-bold text-gray-900 leading-tight line-clamp-2"
-                          title={product?.title}
-                        >
-                          {product?.title}
+                        <h4 title={product?.title}>
+                          <Link
+                            href={`/product/${product?.slug}`}
+                            className="text-base font-bold text-gray-900 leading-tight line-clamp-2"
+                          >
+                            {product?.title}
+                          </Link>
                         </h4>
                         <button
                           onClick={() => handleRemoveFromCart(item._id)}
@@ -165,20 +171,21 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
 
                       <div className="flex items-center justify-between mt-auto pt-1">
                         <div className="flex items-center gap-1.5 text-sm font-medium text-gray-700">
-                          <span>
-                            &#2547;{price} x {item.quantity}
-                          </span>
-                          <span className="text-gray-400">=</span>
-                          <span className="font-bold text-gray-900">
-                            &#2547;{price * item.quantity}
-                          </span>
-                        </div>
-
-                        {originalPrice && originalPrice > price && (
-                          <div className="text-gray-600 line-through text-sm">
-                            &#2547;{originalPrice}
+                          {originalPrice && originalPrice > price && (
+                            <span className="text-gray-600 line-through text-sm">
+                              &#2547;{originalPrice}
+                            </span>
+                          )}
+                          <div className="flex items-center gap-1">
+                            <span>&#2547;{price}</span>
+                            <span>x</span>
+                            <span>{item.quantity}</span>
                           </div>
-                        )}
+                          {/* <span className="text-gray-400">=</span> */}
+                        </div>
+                        <span className="font-bold text-gray-900">
+                          &#2547;{price * item.quantity}
+                        </span>
                       </div>
                     </div>
                   </div>

@@ -41,7 +41,7 @@ const OrderNow = ({
 
   return (
     <Box className="bg-white px-4 py-2 border">
-      <BoxHeading className="flex items-center gap-2">
+      <BoxHeading className="flex items-center gap-2 mb-1">
         <ShoppingBag className="text-lg text-primary" />
         <span className="text-lg">অর্ডারের সারসংক্ষেপ</span>
       </BoxHeading>

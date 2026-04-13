@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -26,6 +27,9 @@ const CommonModal = ({
         <DialogContent className={`${className}`}>
           <DialogHeader className="pr-10">
             <DialogTitle>{modalTitle}</DialogTitle>
+            <DialogDescription className="hidden">
+              এই মডালটিতে {modalTitle} সম্পর্কিত বিষয়বস্তু রয়েছে।
+            </DialogDescription>
           </DialogHeader>
           {children}
         </DialogContent>
