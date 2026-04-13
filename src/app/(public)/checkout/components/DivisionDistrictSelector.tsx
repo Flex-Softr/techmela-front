@@ -35,17 +35,16 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
   showDivision = true,
 }: TProps<T>) => {
   // Register fields for validation
-  useEffect(() => {
-    register("shipping.division" as Path<T>, {
-      required: "বিভাগ সিলেক্ট করুন",
-    });
-    register("shipping.district" as Path<T>, {
-      required: "জেলা সিলেক্ট করুন",
-    });
-    register("shipping.upazila" as Path<T>, {
-      required: "উপজেলা সিলেক্ট করুন",
-    });
-  }, [register]);
+  // Bind react-hook-form registers so they have access to their refs for focus mapping
+  const divisionRegister = register("shipping.division" as Path<T>, {
+    required: "বিভাগ সিলেক্ট করুন",
+  });
+  const districtRegister = register("shipping.district" as Path<T>, {
+    required: "জেলা সিলেক্ট করুন",
+  });
+  const upazilaRegister = register("shipping.upazila" as Path<T>, {
+    required: "উপজেলা সিলেক্ট করুন",
+  });
   const division =
     useWatch({ control, name: "shipping.division" as Path<T> }) || "";
   const district =
@@ -74,14 +73,20 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
     >
       {showDivision && (
         <div className="flex flex-col gap-2">
-          <Label htmlFor="division" className="font-semibold text-gray-700">
-            বিভাগ
+          <Label
+            htmlFor="shipping.division"
+            className="font-semibold text-gray-700"
+          >
+            বিভাগ <span className="text-red-600">*</span>
           </Label>
           <select
-            id="division"
+            id="shipping.division"
+            ref={divisionRegister.ref}
+            name={divisionRegister.name}
+            onBlur={divisionRegister.onBlur}
             value={division}
             onChange={(e) => {
-              setValue("shipping.division" as Path<T>, e.target.value as any);
+              divisionRegister.onChange(e);
               setValue("shipping.district" as Path<T>, "" as any); // Reset dependent
               setValue("shipping.upazila" as Path<T>, "" as any);
             }}
@@ -103,14 +108,20 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
         </div>
       )}
       <div className="flex flex-col gap-2">
-        <Label htmlFor="district" className="font-semibold text-gray-700">
-          জেলা
+        <Label
+          htmlFor="shipping.district"
+          className="font-semibold text-gray-700"
+        >
+          জেলা <span className="text-red-600">*</span>
         </Label>
         <select
-          id="district"
+          id="shipping.district"
+          ref={districtRegister.ref}
+          name={districtRegister.name}
+          onBlur={districtRegister.onBlur}
           value={district}
           onChange={(e) => {
-            setValue("shipping.district" as Path<T>, e.target.value as any);
+            districtRegister.onChange(e);
             setValue("shipping.upazila" as Path<T>, "" as any);
           }}
           disabled={showDivision && !division}
@@ -135,15 +146,21 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
         )}
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="upazila" className="font-semibold text-gray-700">
-          উপজেলা
+        <Label
+          htmlFor="shipping.upazila"
+          className="font-semibold text-gray-700"
+        >
+          উপজেলা <span className="text-red-600">*</span>
         </Label>
         <select
-          id="upazila"
+          id="shipping.upazila"
+          ref={upazilaRegister.ref}
+          name={upazilaRegister.name}
+          onBlur={upazilaRegister.onBlur}
           value={upazila}
-          onChange={(e) =>
-            setValue("shipping.upazila" as Path<T>, e.target.value as any)
-          }
+          onChange={(e) => {
+            upazilaRegister.onChange(e);
+          }}
           disabled={!district}
           className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-gray-50 disabled:cursor-not-allowed"
         >

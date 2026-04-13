@@ -142,11 +142,14 @@ const ShippingAddress = ({
       )}
       <div id="shipping-address-form" className="space-y-3">
         <div>
-          <Label className="font-bold pl-1 mb-1.5 block">
-            নাম
-            <span className="text-red-600">*</span>
+          <Label
+            htmlFor="shipping.fullName"
+            className="font-bold pl-1 mb-1.5 block"
+          >
+            নাম <span className="text-red-600">*</span>
           </Label>
           <Input
+            id="shipping.fullName"
             placeholder="আপনার নাম লিখুন"
             {...register("shipping.fullName", {
               required: "নাম আবশ্যক।",
@@ -164,10 +167,14 @@ const ShippingAddress = ({
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 mb-1.5 block">
+          <Label
+            htmlFor="shipping.phoneNumber"
+            className="font-bold pl-1 mb-1.5 block"
+          >
             মোবাইল নম্বর <span className="text-red-600">*</span>
           </Label>
           <Input
+            id="shipping.phoneNumber"
             placeholder="আপনার মোবাইল নম্বর লিখুন"
             {...register("shipping.phoneNumber", {
               required: "মোবাইল নম্বর আবশ্যক।",
@@ -194,10 +201,14 @@ const ShippingAddress = ({
           />
         </div>
         <div>
-          <Label className="font-bold pl-1 mb-1.5 block">
+          <Label
+            htmlFor="shipping.fullAddress"
+            className="font-bold pl-1 mb-1.5 block"
+          >
             ঠিকানা <span className="text-red-600">*</span>
           </Label>
           <Input
+            id="shipping.fullAddress"
             placeholder="আপনার ঠিকানা লিখুন"
             {...register("shipping.fullAddress", {
               required: "ঠিকানা আবশ্যক।",
@@ -211,8 +222,14 @@ const ShippingAddress = ({
           )}
         </div>
         <div>
-          <Label className="font-bold pl-1 mb-1.5 block">নোট (ঐচ্ছিক)</Label>
+          <Label
+            htmlFor="shipping.notes"
+            className="font-bold pl-1 mb-1.5 block"
+          >
+            নোট (ঐচ্ছিক)
+          </Label>
           <textarea
+            id="shipping.notes"
             placeholder="কোনো নির্দিষ্ট নির্দেশনা থাকলে লিখুন..."
             {...register("shipping.notes")}
             className="w-full h-20 ring-1 ring-gray-200 rounded-md p-2 text-sm focus:ring-2 focus:ring-primary outline-none"

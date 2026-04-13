@@ -36,7 +36,7 @@ const AddToCartAndBuyNow = ({
   return (
     <div className="mt-4">
       {/* Quantity and Add to Cart Row */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-1 sm:gap-2 bg-gray-50/50 p-1 px-2 sm:px-3 rounded-lg border border-gray-100 h-[38px] sm:h-[42px]">
           <span className="text-xs sm:text-sm font-semibold text-gray-700 min-w-[40px] sm:min-w-[50px]">
             পরিমাণ:
@@ -59,7 +59,7 @@ const AddToCartAndBuyNow = ({
           disabled={isDisabled || isAddToCartLoading} // Disable if no variation is selected or loading
           variant="secondary"
         >
-          এখনই কিনুন
+          সরাসরি কিনুন
         </EcButton>
       </div>
 
