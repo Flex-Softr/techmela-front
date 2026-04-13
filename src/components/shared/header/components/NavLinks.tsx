@@ -13,7 +13,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname to get the current pathname
 import { useState } from "react";
-import { FaBars } from "react-icons/fa";
+import { MdCall } from "react-icons/md";
+import { FaWhatsapp, FaBars } from "react-icons/fa";
 import MenuBar from "./MenuBar";
 import logo from "../../../../../public/logo/logo.png";
 
@@ -63,13 +64,41 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
               </Button>
             </SheetClose>
           </SheetHeader>
-          <div className="flex-1 overflow-y-auto pb-6">
+          <div className="flex-1 overflow-y-auto">
             <MenuBar
               isVertical
               categories={categories}
               activePath={pathname}
               onMenuItemClick={handleMenuItemClick}
             />
+          </div>
+
+          <div className="p-4 bg-gray-50 border-t mt-auto">
+            <p className="text-xs font-bold text-primary uppercase tracking-wider mb-3">
+              যোগাযোগ করুন
+            </p>
+            <div className="space-y-3">
+              <a
+                href="tel:+8801602431167"
+                className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
+              >
+                <div className="size-8 rounded-full bg-white flex items-center justify-center shadow-sm text-primary">
+                  <MdCall className="size-4" />
+                </div>
+                <span>+8801602-431167</span>
+              </a>
+              <a
+                href="https://wa.me/8801602431167"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
+              >
+                <div className="size-8 rounded-full bg-white flex items-center justify-center shadow-sm text-green-600">
+                  <FaWhatsapp className="size-5" />
+                </div>
+                <span>হোয়াটসঅ্যাপ</span>
+              </a>
+            </div>
           </div>
         </SheetContent>
       </Sheet>

@@ -1,24 +1,24 @@
-import MobileMenuFetcher from "./components/MobileMenuFetcher";
-import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
-import { FaBars } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
-import CartLinksAndAccount from "./components/CartLinksAndAccount";
-import Search from "./components/Search";
+import { Suspense } from "react";
+import { FaBars } from "react-icons/fa";
 import logo from "../../../../public/logo/logo.png";
+import CartLinksAndAccount from "./components/CartLinksAndAccount";
+import MobileMenuFetcher from "./components/MobileMenuFetcher";
+import Search from "./components/Search";
 
 const MainHeader = () => {
   return (
-    <div className="flex gap-5 justify-between lg:justify-evenly items-center px-2 lg:px-10 py-2 bg-primary">
-      <div className="order-2 lg:order-1 bg-white rounded-md">
+    <div className="flex gap-2 justify-between items-center px-4 lg:px-8 py-1 max-w-6xl mx-auto">
+      <div className="order-2 lg:order-1 flex-shrink-0 transition-all duration-300 hover:scale-[1.05]">
         <Link href="/">
           <Image
             src={logo}
             alt="Siddikiya Prokashoni Logo"
-            width={96}
-            height={48}
-            className="w-16 h-12 md:w-24 md:h-12 rounded-md"
+            width={160}
+            height={44}
+            className="object-contain scale-[1.1]"
             priority
           />
         </Link>
@@ -34,7 +34,7 @@ const MainHeader = () => {
           <MobileMenuFetcher />
         </Suspense>
       </div>
-      <div className="flex-grow hidden lg:block lg:order-3 max-w-2xl">
+      <div className="flex-grow hidden lg:block lg:order-3 max-w-xl">
         <Search />
       </div>
       <div className="flex items-center order-3 lg:order-4  flex-grow-0 justify-end">

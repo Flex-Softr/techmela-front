@@ -1,14 +1,28 @@
-import { Fragment } from "react";
+"use client";
+
+import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
-import { FaBagShopping, FaLocationDot } from "react-icons/fa6";
-import { MdDeliveryDining } from "react-icons/md";
+import { FaBagShopping } from "react-icons/fa6";
+import { FaWhatsapp } from "react-icons/fa";
+import { MdCall, MdDeliveryDining } from "react-icons/md";
+
+const announcements = [
+  "২০০০ টাকার বেশি অর্ডার করলেই ফ্রি হোম ডেলিভারি ",
+  "সারা বাংলাদেশে ৩ দিনের মধ্যে ডেলিভারি ইনশাআল্লাহ   ",
+  "একদম সহজ রিটার্ন পলিসি  ",
+];
+
 const TopHeader = () => {
+  const [currentAnnouncement, setCurrentAnnouncement] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentAnnouncement((prev) => (prev + 1) % announcements.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   const links = [
-    {
-      href: "/store-location",
-      name: "আউটলেটসমূহ",
-      icon: <FaLocationDot className="size-4 text-primary" />,
-    },
     {
       href: "/track-your-order",
       name: "অর্ডার ট্র্যাক করুন",
@@ -20,21 +34,62 @@ const TopHeader = () => {
       icon: <FaBagShopping className="size-4 text-primary" />,
     },
   ];
+
   return (
     <>
-      <div className="hidden md:flex justify-end xl:px-10 py-1.5 bg-gray-50/50">
-        <div className="flex gap-4 items-center">
+      <div className="hidden md:flex justify-between items-center xl:px-10 py-1 bg-gray-50/50 h-9">
+        {/* Left: Contact Info */}
+        <div className="flex gap-3 items-center flex-1">
+          <a
+            href="tel:+8801602431167"
+            className="flex gap-1.5 items-center text-[13px] text-primary font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
+          >
+            <MdCall className="size-4 text-primary" />
+            <span>০১৬০২-৪৩১১৬৭</span>
+          </a>
+
+          <span className="text-primary/30">|</span>
+
+          <a
+            href="https://wa.me/8801602431167"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex gap-1.5 items-center text-[13px] text-primary font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
+          >
+            <FaWhatsapp className="size-4 text-green-600" />
+            <span>হোয়াটসঅ্যাপ</span>
+          </a>
+        </div>
+
+        {/* Center: Announcement Ticker */}
+        <div className="flex-1 flex justify-center items-center overflow-hidden h-full relative">
+          {announcements.map((text, index) => (
+            <p
+              key={index}
+              className={`absolute text-[13px] font-bold text-primary transition-all duration-700 ease-in-out whitespace-nowrap ${
+                index === currentAnnouncement
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4 pointer-events-none"
+              }`}
+            >
+              {text}
+            </p>
+          ))}
+        </div>
+
+        {/* Right: Quick Links */}
+        <div className="flex gap-3 items-center flex-1 justify-end">
           {links.map((link, index) => (
             <Fragment key={index}>
               <Link
                 href={link.href}
-                className="flex gap-1.5 items-center text-[13px] text-muted-foreground font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
+                className="flex gap-1.5 items-center text-[13px] text-primary font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
               >
-                <span>{link.icon}</span>
-                <span>{link.name}</span>
+                {link.icon}
+                {link.name}
               </Link>
               {index !== links.length - 1 ? (
-                <span className="text-gray-300">|</span>
+                <span className="text-primary/30">|</span>
               ) : null}
             </Fragment>
           ))}

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useDebounce } from "@/hooks/useDebounce";
 import useTypingPlaceholder from "@/hooks/useTypingPlaceholder";
 import { getImageSrc } from "@/lib/utils";
+import { ApiResponse } from "@/redux/features/searchProduct/interface";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
 import { TProduct } from "@/types/products/product";
 import { TVariableProduct } from "@/types/products/variableProduct";
@@ -11,7 +12,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
-import { ApiResponse } from "@/redux/features/searchProduct/interface";
 
 /* -------------------- type guards -------------------- */
 const isVariableProduct = (
@@ -72,30 +72,31 @@ const Search = () => {
 
   return (
     <form onSubmit={handleSearchSubmit} className="relative">
-      <div className="flex items-center w-full overflow-hidden">
+      <div className="flex items-center w-full relative group">
         <input
           type="text"
           value={searchValue}
           onChange={handleInputChange}
           placeholder={typingPlaceholder}
-          className="w-full h-[44px] px-4 text-sm outline-none border border-primary rounded-full pr-16"
+          className="w-full h-[44px] px-4 text-[13px] outline-none border border-primary bg-white rounded-full pr-12 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300"
         />
 
         {searchValue && (
           <button
             type="button"
             onClick={handleClearSearch}
-            className="absolute right-12 text-gray-400 hover:text-primary transition-colors"
+            className="absolute right-10 text-primary/60 hover:text-primary transition-colors p-1"
           >
-            <FaTimes />
+            <FaTimes className="size-3" />
           </button>
         )}
 
         <Button
           type="submit"
-          className="-ml-10 h-9 w-9 rounded-full flex items-center justify-center bg-primary text-white"
+          variant="ghost"
+          className="absolute right-0.5 top-1/2 -translate-y-1/2 h-[34px] w-[34px] rounded-full flex items-center justify-center bg-transparent text-primary hover:text-primary hover:bg-gray-50 transition-all duration-300 p-0"
         >
-          <FaSearch className="text-sm" />
+          <FaSearch className="text-[14px]" />
         </Button>
       </div>
 
@@ -138,7 +139,7 @@ const Search = () => {
                         {salePrice ? (
                           <>
                             {!isVariable && (
-                              <span className="text-xs text-gray-500 line-through mr-1">
+                              <span className="text-xs text-primary/60 line-through mr-1">
                                 &#2547;{regularPrice}
                               </span>
                             )}
@@ -169,7 +170,7 @@ const Search = () => {
                 );
               })
             : !isLoading && (
-                <p className="p-3 text-sm text-gray-500">No results found.</p>
+                <p className="p-3 text-sm text-primary/70">No results found.</p>
               )}
         </div>
       )}

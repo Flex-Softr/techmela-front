@@ -224,7 +224,7 @@ export default function MenuBar({
                                 <Link
                                   key={inner.title}
                                   href={inner.href}
-                                  className="text-[13px] text-gray-600 hover:text-primary hover:underline transition-colors"
+                                  className="text-[13px] text-primary hover:text-primary hover:underline transition-colors"
                                   onClick={onMenuItemClick}
                                 >
                                   {inner.title}
@@ -241,7 +241,7 @@ export default function MenuBar({
                         key={sub.title}
                         href={sub.href}
                         className={cn(
-                          "block px-3 py-2 text-[14px] text-gray-700 rounded-md hover:bg-primary/5 hover:text-primary transition-colors",
+                          "block px-3 py-2 text-[14px] text-primary rounded-md hover:bg-primary/5 hover:text-primary transition-colors",
                           isActive(sub.href) &&
                             "bg-primary/5 text-primary font-bold"
                         )}
