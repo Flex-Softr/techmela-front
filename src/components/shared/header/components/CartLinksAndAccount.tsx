@@ -98,7 +98,7 @@ const CartLinksAndAccount = () => {
           </Button>
           <form
             onSubmit={handleSearchSubmit}
-            className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-center pt-2 px-2 transition-all duration-300 ${
+            className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-center pt-1 px-2 transition-all duration-300 ${
               isSearchVisible
                 ? "opacity-100 pointer-events-auto"
                 : "opacity-0 pointer-events-none"
@@ -107,7 +107,7 @@ const CartLinksAndAccount = () => {
             <div
               className={`bg-white shadow-2xl p-3.5 rounded-xl flex items-center w-full max-w-md mx-auto transition-transform duration-300 transform ${
                 isSearchVisible
-                  ? "translate-y-4 scale-100"
+                  ? "translate-y-2 scale-100"
                   : "-translate-y-full scale-95"
               }`}
             >

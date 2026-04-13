@@ -4,7 +4,7 @@ import CategoryMenuBarFetcher from "./components/CategoryMenuBarFetcher";
 
 const BottomHeader = () => {
   return (
-    <div className="py-1 border-b-[1px] hidden md:block mb-2 md:mb-0">
+    <div className="py-1 hidden md:block mb-2 md:mb-0">
       <ContainerMax>
         <Suspense
           fallback={

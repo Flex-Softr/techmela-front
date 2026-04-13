@@ -103,21 +103,25 @@ const ShopFilters = ({
               }}
             >
               <div className="relative flex items-center justify-center">
-                <div className={cn(
-                  "size-5 rounded-full border-2 transition-all flex items-center justify-center",
-                  stockStatus === status.value 
-                    ? "border-primary bg-primary/5" 
-                    : "border-gray-300 group-hover:border-primary/50"
-                )}>
+                <div
+                  className={cn(
+                    "size-5 rounded-full border-2 transition-all flex items-center justify-center",
+                    stockStatus === status.value
+                      ? "border-primary bg-primary/5"
+                      : "border-gray-300 group-hover:border-primary/50"
+                  )}
+                >
                   {stockStatus === status.value && (
                     <div className="size-2.5 rounded-full bg-primary animate-in zoom-in duration-200" />
                   )}
                 </div>
               </div>
-              <span className={cn(
-                "text-sm font-medium text-gray-700 transition-colors",
-                stockStatus === status.value && "text-primary font-semibold"
-              )}>
+              <span
+                className={cn(
+                  "text-sm font-medium text-gray-700 transition-colors",
+                  stockStatus === status.value && "text-primary font-semibold"
+                )}
+              >
                 {status.label}
               </span>
             </label>
@@ -149,7 +153,7 @@ const ShopFilters = ({
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="w-full flex justify-between items-center px-4 py-5 border-2 border-primary/10 hover:border-primary/30 transition-all rounded-xl bg-white"
+              className="w-full flex justify-between items-center px-4 py-5 border-2 border-primary/10 hover:border-primary/30 transition-all rounded-md bg-white"
             >
               <div className="flex items-center gap-2.5">
                 <FaBarsStaggered className="text-primary w-4 h-4" />
@@ -157,11 +161,29 @@ const ShopFilters = ({
                   ফিল্টার করুন
                 </span>
               </div>
-              {activeFilterCount > 0 && (
-                <span className="flex items-center justify-center bg-primary text-white text-xs font-bold rounded-full h-5 w-5 animate-in zoom-in duration-300">
-                  {activeFilterCount}
-                </span>
-              )}
+              <div className="flex items-center gap-2">
+                {activeFilterCount > 0 && (
+                  <div
+                    role="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      clearAllFilters();
+                    }}
+                    className="flex items-center gap-1 px-2 py-1 rounded bg-red-50 text-red-500 hover:bg-red-100 transition-colors border border-red-100"
+                  >
+                    <X className="size-3" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">
+                      মুছুন
+                    </span>
+                  </div>
+                )}
+                {activeFilterCount > 0 && (
+                  <span className="flex items-center justify-center bg-primary text-white text-xs font-bold rounded-full h-5 w-5 animate-in zoom-in duration-300">
+                    {activeFilterCount}
+                  </span>
+                )}
+              </div>
             </Button>
           </SheetTrigger>
           <SheetContent

@@ -26,35 +26,35 @@ const TopHeader = () => {
     {
       href: "/track-your-order",
       name: "অর্ডার ট্র্যাক করুন",
-      icon: <MdDeliveryDining className="size-5 text-primary" />,
+      icon: <MdDeliveryDining className="size-5" />,
     },
     {
       href: "/shop",
       name: "শপ",
-      icon: <FaBagShopping className="size-4 text-primary" />,
+      icon: <FaBagShopping className="size-4" />,
     },
   ];
 
   return (
-    <>
-      <div className="hidden md:flex justify-between items-center xl:px-10 py-1 bg-gray-50/50 h-9">
+    <div className="bg-accent text-primary hidden md:block">
+      <div className="flex justify-between items-center xl:px-10 py-1 h-9 container">
         {/* Left: Contact Info */}
         <div className="flex gap-3 items-center flex-1">
           <a
             href="tel:+8801602431167"
-            className="flex gap-1.5 items-center text-[13px] text-primary font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
+            className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"
           >
             <MdCall className="size-4 text-primary" />
             <span>০১৬০২-৪৩১১৬৭</span>
           </a>
 
-          <span className="text-primary/30">|</span>
+          <span className="text-primary/20">|</span>
 
           <a
             href="https://wa.me/8801602431167"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex gap-1.5 items-center text-[13px] text-primary font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
+            className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"
           >
             <FaWhatsapp className="size-4 text-green-600" />
             <span>হোয়াটসঅ্যাপ</span>
@@ -83,20 +83,19 @@ const TopHeader = () => {
             <Fragment key={index}>
               <Link
                 href={link.href}
-                className="flex gap-1.5 items-center text-[13px] text-primary font-semibold hover:text-primary transition-all underline-offset-4 hover:underline"
+                className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"
               >
                 {link.icon}
                 {link.name}
               </Link>
               {index !== links.length - 1 ? (
-                <span className="text-primary/30">|</span>
+                <span className="text-primary/20">|</span>
               ) : null}
             </Fragment>
           ))}
         </div>
       </div>
-      <hr className="border-gray-100" />
-    </>
+    </div>
   );
 };
 

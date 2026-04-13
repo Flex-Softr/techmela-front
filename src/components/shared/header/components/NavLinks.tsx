@@ -8,15 +8,15 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import TCategory from "@/types/categories/categories";
-import { X } from "lucide-react";
+import { UserRound, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname to get the current pathname
 import { useState } from "react";
+import { FaBars, FaWhatsapp } from "react-icons/fa";
 import { MdCall } from "react-icons/md";
-import { FaWhatsapp, FaBars } from "react-icons/fa";
-import MenuBar from "./MenuBar";
 import logo from "../../../../../public/logo/logo.png";
+import MenuBar from "./MenuBar";
 
 const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,27 +42,37 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
           side="left"
           className="w-[85%] sm:w-[350px] p-0 flex flex-col overflow-hidden"
         >
-          <SheetHeader className="flex flex-row justify-between items-center px-4 py-3 border-b shrink-0">
+          <SheetHeader className="flex flex-row justify-between items-center px-4 h-16 border-b shrink-0">
             <Link href="/" onClick={() => setIsOpen(false)}>
-              <div className="bg-primary/5 rounded flex items-center justify-center p-1">
+              <div className="bg-primary/5 rounded-lg flex items-center justify-center p-1.5">
                 <Image
                   src={logo}
                   alt="Siddikiya Prokashoni Logo"
-                  height={40}
-                  width={100}
-                  className="h-8 w-auto rounded-sm"
+                  height={48}
+                  width={120}
+                  className="h-10 w-auto rounded-sm"
                   priority
                 />
               </div>
             </Link>
-            <SheetClose asChild>
-              <Button
-                size="icon"
-                className="size-8 rounded-full bg-primary hover:bg-primary/90 text-white shadow-sm"
+            <div className="flex items-center gap-2.5">
+              <Link
+                href="/my-account"
+                onClick={() => setIsOpen(false)}
+                className="size-10 rounded-full border border-primary/20 text-primary flex items-center justify-center hover:bg-primary/5 transition-all duration-300"
               >
-                <X className="size-4" />
-              </Button>
-            </SheetClose>
+                <UserRound className="size-5" />
+              </Link>
+              <SheetClose asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="size-10 rounded-full text-primary hover:bg-primary/5 hover:text-primary transition-all duration-300"
+                >
+                  <X className="size-5" />
+                </Button>
+              </SheetClose>
+            </div>
           </SheetHeader>
           <div className="flex-1 overflow-y-auto">
             <MenuBar

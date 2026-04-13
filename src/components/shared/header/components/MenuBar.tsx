@@ -5,7 +5,6 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import * as React from "react";
-import { FaUserCircle } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 
 import {
@@ -45,12 +44,6 @@ export default function MenuBar({
   const searchParams = useSearchParams();
 
   const menuLinks: MenuLink[] = [
-    {
-      title: "আমার অ্যাকাউন্ট",
-      href: "/my-account",
-      displayOnSmallScreenOnly: true,
-      icon: <FaUserCircle className="text-xl" />,
-    },
     { title: "হোম", href: "/" },
     { title: "শপ", href: "/shop" },
     {
