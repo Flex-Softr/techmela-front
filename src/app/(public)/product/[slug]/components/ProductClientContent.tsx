@@ -117,15 +117,7 @@ const ProductClientContent = ({
 
   return (
     <div>
-      <AddToCartAndBuyNow
-        quantity={quantity}
-        setQuantity={setQuantity}
-        addToCartHandler={addToCartHandler}
-        isAddToCartLoading={isAddToCartLoading}
-        isDisabled={isDisabled} // Pass the isDisabled prop
-        disabledReason={disabledReason}
-      />
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mt-4 sm:mt-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mt-3">
         {/* Large, Eye-catching Preview Button */}
         {onPreviewClick && (
           <button
@@ -143,6 +135,15 @@ const ProductClientContent = ({
           <ProductSharing />
         </div>
       </div>
+
+      <AddToCartAndBuyNow
+        quantity={quantity}
+        setQuantity={setQuantity}
+        addToCartHandler={addToCartHandler}
+        isAddToCartLoading={isAddToCartLoading}
+        isDisabled={isDisabled} // Pass the isDisabled prop
+        disabledReason={disabledReason}
+      />
 
       <div className="mt-4 sm:mt-6">
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border-2 border-primary/10 bg-primary/5">
