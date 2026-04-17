@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "dev:lan": "next dev -H 0.0.0.0 -p 3000",
+    "host": "next dev -H 0.0.0.0 -p 3000",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
