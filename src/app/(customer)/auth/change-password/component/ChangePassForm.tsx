@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { Eye, EyeOff, Lock, Save } from "lucide-react";
@@ -22,17 +23,19 @@ type ChangePasswordFormData = {
 };
 
 const ChangePasswordForm = () => {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [showPreviousPassword, setShowPreviousPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const [changePassword, { isLoading }] = useChangePasswordMutation();
-  const { toast } = useToast();
 
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm<ChangePasswordFormData>();
 
   const newPassword = watch("newPassword");
@@ -45,6 +48,8 @@ const ChangePasswordForm = () => {
         description: message,
         className: "text-green-500",
       });
+      reset();
+      router.push("/my-account");
     } catch (err) {
       if (err instanceof Error && err.message) {
         toast({
@@ -54,7 +59,7 @@ const ChangePasswordForm = () => {
       } else {
         toast({
           title: "পাসওয়ার্ড পরিবর্তন ব্যর্থ হয়েছে",
-          description: "পূর্ববর্তী পাসওয়ার্ডটি মিলেনি!",
+          description: "পুরানো পাসওয়ার্ডটি মিলেনি!",
           variant: "destructive",
         });
       }
@@ -83,22 +88,38 @@ const ChangePasswordForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-4"
         >
-          <div className="space-y-2">
+          <div className="space-y-2 relative">
             <label
               htmlFor="previousPassword"
               className="text-sm font-semibold text-gray-700 font-hind-siliguri"
             >
               বর্তমান পাসওয়ার্ড
             </label>
-            <Input
-              {...register("previousPassword", {
-                required: "বর্তমান পাসওয়ার্ড প্রয়োজন",
-              })}
-              type="password"
-              id="previousPassword"
-              className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
-              placeholder="আপনার বর্তমান পাসওয়ার্ড লিখুন"
-            />
+            <div className="relative">
+              <Input
+                {...register("previousPassword", {
+                  required: "বর্তমান পাসওয়ার্ড প্রয়োজন",
+                })}
+                type={showPreviousPassword ? "text" : "password"}
+                id="previousPassword"
+                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
+                placeholder="আপনার বর্তমান পাসওয়ার্ড লিখুন"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPreviousPassword(!showPreviousPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label={
+                  showPreviousPassword ? "Hide password" : "Show password"
+                }
+              >
+                {showPreviousPassword ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
+              </button>
+            </div>
             {renderError(errors.previousPassword)}
           </div>
 
@@ -114,14 +135,8 @@ const ChangePasswordForm = () => {
                 {...register("newPassword", {
                   required: "নতুন পাসওয়ার্ড প্রয়োজন",
                   minLength: {
-                    value: 8,
-                    message: "পাসওয়ার্ড অন্তত ৮ অক্ষরের হতে হবে",
-                  },
-                  pattern: {
-                    value:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*]).{8,}$/,
-                    message:
-                      "অবশ্যই বড় হাতের অক্ষর, ছোট হাতের অক্ষর, সংখ্যা এবং বিশেষ অক্ষর থাকতে হবে",
+                    value: 4,
+                    message: "পাসওয়ার্ড অন্তত ৪ অক্ষরের হতে হবে",
                   },
                 })}
                 type={showNewPassword ? "text" : "password"}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,7 +22,7 @@ import {
 } from "react-hook-form";
 import { useForgetPasswordMutation } from "@/redux/features/auth/authApi";
 import { useToast } from "@/components/ui/use-toast";
-import TGenericResponse, { TGenericErrorResponse } from "@/types/response";
+import TGenericResponse from "@/types/response";
 
 const ForgetPasswordForm = () => {
   const {
@@ -38,24 +38,34 @@ const ForgetPasswordForm = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = (await forgetPassword({
-        phoneNumber: data.number,
+        email: data.email,
       }).unwrap()) as TGenericResponse;
 
       if (res.success) {
         toast({
           className: "bg-green-600 text-white font-hind-siliguri",
           title: "সফল",
-          description: "আপনার ফোন নম্বরে OTP পাঠানো হয়েছে।",
+          description: "আপনার ইমেইলে OTP পাঠানো হয়েছে।",
         });
-        // Redirect to reset password with the phone number pre-filled.
-        router.push(`/auth/reset-password?phone=${data.number}`);
+        router.push(`/auth/reset-password?email=${data.email}`);
       }
-    } catch (error) {
-      const err = error as TGenericErrorResponse;
+    } catch (error: unknown) {
+      const err = error as {
+        data?: {
+          message?: string;
+          errorMessages?: { path: string; message: string }[];
+        };
+      };
+
+      const errorMessage =
+        err?.data?.errorMessages?.[0]?.message ||
+        err?.data?.message ||
+        "রিসেট লিংক পাঠাতে ব্যর্থ হয়েছে";
+
       toast({
         variant: "destructive",
         title: "ত্রুটি",
-        description: err?.message || "রিসেট লিংক পাঠাতে ব্যর্থ হয়েছে",
+        description: errorMessage,
       });
     }
   };
@@ -70,8 +80,8 @@ const ForgetPasswordForm = () => {
               পাসওয়ার্ড ভুলে গেছেন?
             </CardTitle>
             <CardDescription className="text-gray-500 px-4 font-hind-siliguri">
-              আপনার অ্যাকাউন্টের সাথে যুক্ত ফোন নম্বরটি লিখুন। আমরা আপনাকে
-              পাসওয়ার্ড রিসেট করতে সাহায্য করব।
+              আপনার অ্যাকাউন্টের সাথে যুক্ত ইমেইল নম্বরটি লিখুন। আমরা আপনাকে
+              পাসওয়ার্ড রিসেট করতে সাহায্য করব।
             </CardDescription>
           </div>
         </CardHeader>
@@ -80,28 +90,28 @@ const ForgetPasswordForm = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label
-                htmlFor="number"
+                htmlFor="email"
                 className="text-sm font-semibold text-gray-700 font-hind-siliguri"
               >
-                ফোন নম্বর
+                ইমেইল
               </Label>
               <Controller
-                name="number"
+                name="email"
                 control={control}
-                rules={{ required: "ফোন নম্বর প্রয়োজন" }}
+                rules={{ required: "ইমেইল প্রয়োজন" }}
                 render={({ field }) => (
                   <Input
                     {...field}
-                    id="number"
-                    type="tel"
-                    placeholder="01XXXXXXXXX"
-                    className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.number ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                    id="email"
+                    type="email"
+                    placeholder="আপনার ইমেইল"
+                    className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.email ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
                   />
                 )}
               />
-              {errors.number && (
+              {errors.email && (
                 <p className="text-xs text-red-500 font-medium">
-                  {errors.number.message as string}
+                  {errors.email.message as string}
                 </p>
               )}
             </div>

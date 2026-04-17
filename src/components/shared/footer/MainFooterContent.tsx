@@ -97,11 +97,11 @@ const MainFooterContent = () => {
                 ০১৬০২-৪৩১১৬৭
               </a>
               <a
-                href="mailto:md.faridhanafi@gmail.com"
+                href="mailto:support@siddikiaprokashoni.com"
                 className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary transition-colors"
               >
                 <Mail className="size-4 text-primary" />
-                md.faridhanafi@gmail.com
+                support@siddikiaprokashoni.com
               </a>
               <div className="flex items-start gap-2 text-sm font-medium text-primary">
                 <MapPin className="size-4 mt-1 shrink-0 text-primary" />

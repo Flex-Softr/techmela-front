@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,13 +25,13 @@ import {
 import * as yup from "yup";
 import { useResetPasswordMutation } from "@/redux/features/auth/authApi";
 import { useToast } from "@/components/ui/use-toast";
-import TGenericResponse, { TGenericErrorResponse } from "@/types/response";
+import TGenericResponse from "@/types/response";
 
 const ResetPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const schema = yup.object().shape({
-    PhoneNumber: yup.string().required("ফোন নম্বর প্রয়োজন"),
+    email: yup.string().required("ইমেইল প্রয়োজন"),
     otp: yup
       .string()
       .required("ওটিপি (OTP) প্রয়োজন")
@@ -40,11 +40,7 @@ const ResetPasswordForm = () => {
     password: yup
       .string()
       .required("পাসওয়ার্ড প্রয়োজন")
-      .min(6, "পাসওয়ার্ড অন্তত ৬টি অক্ষর হতে হবে")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-        "পাসওয়ার্ডে অন্তত একটি বড় হাতের অক্ষর, একটি ছোট হাতের অক্ষর, একটি সংখ্যা এবং একটি বিশেষ অক্ষর থাকতে হবে"
-      ),
+      .min(6, "পাসওয়ার্ড অন্তত ৬টি অক্ষর হতে হবে"),
   });
 
   const {
@@ -55,20 +51,20 @@ const ResetPasswordForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      PhoneNumber: "",
+      email: "",
       otp: "",
       password: "",
     },
   });
 
   const searchParams = useSearchParams();
-  const phone = searchParams.get("phone");
+  const email = searchParams.get("email");
 
   useEffect(() => {
-    if (phone) {
-      setValue("PhoneNumber", phone);
+    if (email) {
+      setValue("email", email);
     }
-  }, [phone, setValue]);
+  }, [email, setValue]);
 
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const router = useRouter();
@@ -77,7 +73,7 @@ const ResetPasswordForm = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = (await resetPassword({
-        phoneNumber: data.PhoneNumber,
+        email: email,
         otp: data.otp,
         newPassword: data.password,
       }).unwrap()) as TGenericResponse;
@@ -90,12 +86,23 @@ const ResetPasswordForm = () => {
         });
         router.push("/auth/login");
       }
-    } catch (error) {
-      const err = error as TGenericErrorResponse;
+    } catch (error: unknown) {
+      const err = error as {
+        data?: {
+          message?: string;
+          errorMessages?: { path: string; message: string }[];
+        };
+      };
+
+      const errorMessage =
+        err?.data?.errorMessages?.[0]?.message ||
+        err?.data?.message ||
+        "পাসওয়ার্ড রিসেট করতে ব্যর্থ হয়েছে";
+
       toast({
         variant: "destructive",
         title: "ত্রুটি",
-        description: err?.message || "পাসওয়ার্ড রিসেট করতে ব্যর্থ হয়েছে",
+        description: errorMessage,
       });
     }
   };
@@ -119,27 +126,27 @@ const ResetPasswordForm = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label
-                htmlFor="PhoneNumber"
+                htmlFor="email"
                 className="text-sm font-semibold text-gray-700 font-hind-siliguri"
               >
-                ফোন নম্বর
+                ইমেইল
               </Label>
               <Controller
-                name="PhoneNumber"
+                name="email"
                 control={control}
                 render={({ field }) => (
                   <Input
                     {...field}
-                    id="PhoneNumber"
+                    id="email"
                     type="text"
                     disabled
                     className="h-11 border-gray-200 bg-gray-50 transition-all rounded-lg opacity-80 cursor-not-allowed"
                   />
                 )}
               />
-              {errors.PhoneNumber && (
+              {errors.email && (
                 <p className="text-xs text-red-500 font-medium italic">
-                  {errors.PhoneNumber.message}
+                  {errors.email.message}
                 </p>
               )}
             </div>

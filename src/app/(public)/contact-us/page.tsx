@@ -148,7 +148,7 @@ const ContactUsPage = () => {
                       ইমেল
                     </h4>
                     <p className="text-lg font-bold text-gray-800 break-all">
-                      saddikiaprokashoni@gmail.com
+                      support@siddikiaprokashoni.com
                     </p>
                     <p className="text-sm text-gray-500 mt-1">অনলাইন সাপোর্ট</p>
                   </div>

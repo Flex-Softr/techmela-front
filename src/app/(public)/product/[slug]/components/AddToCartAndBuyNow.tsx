@@ -34,9 +34,9 @@ const AddToCartAndBuyNow = ({
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-3">
       {/* Quantity and Add to Cart Row */}
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 lg:gap-3">
         <div className="flex items-center gap-1 sm:gap-2 bg-gray-50/50 p-1 px-2 sm:px-3 rounded-lg border border-gray-100 h-[38px] sm:h-[42px]">
           <span className="text-xs sm:text-sm font-semibold text-gray-700 min-w-[40px] sm:min-w-[50px]">
             পরিমাণ:
@@ -54,12 +54,12 @@ const AddToCartAndBuyNow = ({
           কার্টে যোগ করুন
         </EcButton>
         <EcButton
-          className="flex-grow h-[38px] sm:h-[42px] lg:ml-1 px-3 sm:px-4 py-1.5 sm:py-2 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 text-sm sm:text-base"
+          className="flex-grow h-[38px] sm:h-[42px] lg:ml-1 px-3 sm:px-4 py-1.5 sm:py-2 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 text-sm sm:text-base mt-2.5 md:mt-0"
           onClick={handleBuyNow}
           disabled={isDisabled || isAddToCartLoading} // Disable if no variation is selected or loading
           variant="secondary"
         >
-          সরাসরি কিনুন
+          অর্ডার করুন
         </EcButton>
       </div>
 

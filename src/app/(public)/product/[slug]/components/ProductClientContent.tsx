@@ -117,12 +117,22 @@ const ProductClientContent = ({
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mt-3">
+      {/* Add to Cart and Buy Now Button */}
+      <AddToCartAndBuyNow
+        quantity={quantity}
+        setQuantity={setQuantity}
+        addToCartHandler={addToCartHandler}
+        isAddToCartLoading={isAddToCartLoading}
+        isDisabled={isDisabled} // Pass the isDisabled prop
+        disabledReason={disabledReason}
+      />
+
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mt-4">
         {/* Large, Eye-catching Preview Button */}
         {onPreviewClick && (
           <button
             onClick={onPreviewClick}
-            className="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3 bg-white text-primary border-2 border-primary/20 text-sm sm:text-base font-black rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-2 sm:gap-3 group/preview shadow-sm tracking-wide shrink-0"
+            className="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3 bg-white text-primary border-2 border-primary text-sm sm:text-base font-black rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-2 sm:gap-3 group/preview shadow-sm tracking-wide shrink-0"
             id="bookPreview"
           >
             <span className="text-lg sm:text-xl group-hover/preview:animate-bounce-subtle">
@@ -135,15 +145,6 @@ const ProductClientContent = ({
           <ProductSharing />
         </div>
       </div>
-
-      <AddToCartAndBuyNow
-        quantity={quantity}
-        setQuantity={setQuantity}
-        addToCartHandler={addToCartHandler}
-        isAddToCartLoading={isAddToCartLoading}
-        isDisabled={isDisabled} // Pass the isDisabled prop
-        disabledReason={disabledReason}
-      />
 
       <div className="mt-4 sm:mt-6">
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border-2 border-primary/10 bg-primary/5">

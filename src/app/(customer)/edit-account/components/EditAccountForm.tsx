@@ -17,6 +17,7 @@ import { TUserProfile } from "@/types/user";
 import { User, Save } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   fullName: string;
@@ -50,6 +51,7 @@ const EditAccountForm = () => {
 
   const [updateUserData] = useUpdateUserDataMutation();
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -96,6 +98,7 @@ const EditAccountForm = () => {
           description: "তথ্য সফলভাবে আপডেট করা হয়েছে",
           className: "text-green-500 font-hind-siliguri",
         });
+        router.push("/my-account");
       } else {
         toast({
           description: "পরিবর্তন করার মতো কিছু পাওয়া যায়নি",

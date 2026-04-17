@@ -48,13 +48,22 @@ const LoginForm = () => {
       });
       router.push("/dashboard");
     } catch (error: unknown) {
-      const err = error as { data?: { message?: string } };
+      const err = error as {
+        data?: {
+          message?: string;
+          errorMessages?: { path: string; message: string }[];
+        };
+      };
+
+      const errorMessage =
+        err?.data?.errorMessages?.[0]?.message ||
+        err?.data?.message ||
+        "লগইন ব্যর্থ হয়েছে। অনুগ্রহ করে আপনার তথ্যগুলো পুনরায় চেক করুন।";
+
       toast({
         variant: "destructive",
-        title: "লগইন ব্যর্থ হয়েছে",
-        description:
-          err?.data?.message ||
-          "কিছু ভুল হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+        title: "লগইন ব্যর্থ হয়েছে",
+        description: errorMessage,
       });
     }
   };
@@ -85,15 +94,15 @@ const LoginForm = () => {
                 htmlFor="phoneEmailOrUid"
                 className="text-sm font-semibold text-gray-700 font-hind-siliguri"
               >
-                ফোন নম্বর
+                ইমেইল অথবা ফোন নম্বর
               </Label>
               <Input
                 id="phoneEmailOrUid"
-                type="tel"
-                placeholder="০১XXXXXXXXX"
+                type="text"
+                placeholder="ইমেইল অথবা ফোন নম্বর"
                 className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.phoneEmailOrUid ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
                 {...register("phoneEmailOrUid", {
-                  required: "ফোন নম্বর প্রয়োজন",
+                  required: "ইমেইল অথবা ফোন নম্বর প্রয়োজন",
                 })}
               />
               {errors.phoneEmailOrUid && (

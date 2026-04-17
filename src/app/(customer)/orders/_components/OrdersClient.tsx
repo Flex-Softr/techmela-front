@@ -38,6 +38,7 @@ const OrdersClient = () => {
   const [isSearchingGuest, setIsSearchingGuest] = useState(false);
   const [guestOrders, setGuestOrders] = useState<TOrderInfo[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
 
   const { data: authOrdersData, isLoading: isAuthLoading } =
     useGetOrderedProductsQuery(undefined, {
@@ -53,15 +54,19 @@ const OrdersClient = () => {
     async (e?: React.FormEvent, phone?: string) => {
       if (e) e.preventDefault();
       const searchPhone = phone || guestPhone;
+      const pattern = /^(?:\+88)?01[3-9]\d{8}$/;
 
       if (!searchPhone) {
-        toast({
-          title: "Error",
-          description: "দয়া করে ফোন নম্বর দিন",
-          variant: "destructive",
-        });
+        setPhoneError("দয়া করে ফোন নম্বর দিন");
         return;
       }
+
+      if (!pattern.test(searchPhone)) {
+        setPhoneError("সঠিক ফোন নম্বর দিন (১১ ডিজিট)");
+        return;
+      }
+
+      setPhoneError("");
 
       try {
         setIsSearchingGuest(true);
@@ -94,6 +99,7 @@ const OrdersClient = () => {
     setGuestPhone("");
     setGuestOrders([]);
     setHasSearched(false);
+    setPhoneError("");
     if (typeof window !== "undefined") {
       sessionStorage.removeItem("lastGuestPhone");
     }
@@ -185,9 +191,12 @@ const OrdersClient = () => {
               />
               <Input
                 type="tel"
-                placeholder="০১XXXXXXXXX"
+                placeholder="01XXXXXXXXX"
                 value={guestPhone}
-                onChange={(e) => setGuestPhone(e.target.value)}
+                onChange={(e) => {
+                  setGuestPhone(e.target.value);
+                  if (phoneError) setPhoneError("");
+                }}
                 className="pl-9 pr-9 h-10 text-sm border-gray-200 focus:border-primary transition-all"
               />
               {guestPhone && (
@@ -209,6 +218,9 @@ const OrdersClient = () => {
               খুঁজুন
             </Button>
           </div>
+          {phoneError && (
+            <p className="text-[12px] text-red-500">{phoneError}</p>
+          )}
         </form>
       )}
 

@@ -130,7 +130,7 @@ const ProductDetailsPage = async ({ params }: TProps) => {
           <Box className="shadow-none ring-2 lg:mt-5">
             <ProductImageGallery gallery={gallery} discount={discount} />
           </Box>
-          <Box className="space-y-4 shadow-none ring-0">
+          <Box className="p-4 space-y-4 shadow-none ring-0">
             {/* Use the client-side wrapper component */}
             <ProductClientWrapper
               product={product}

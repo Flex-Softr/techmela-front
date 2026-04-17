@@ -1,6 +1,7 @@
 "use client";
 import EcButton from "@/components/shared/EcButton/EcButton";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -70,6 +71,13 @@ const OrderSearchInputHandler = () => {
           <p className="mt-10 text-center text-xs text-muted-foreground">
             আইডি খুঁজে পাচ্ছেন না? অনুগ্রহ করে আমাদের হেল্পলাইনে যোগাযোগ করুন।
           </p>
+
+          <div className="space-y-2 mt-5 text-center">
+            <p className="text-2xl font-bold">
+              অথবা মোবাইল নম্বর দিয়ে অর্ডার স্ট্যাটাস চেক করুন
+            </p>
+            <Button onClick={() => router.push("/orders")}>অর্ডার চেক</Button>
+          </div>
         </div>
       </ContainerMax>
     </section>

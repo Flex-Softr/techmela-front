@@ -1,5 +1,6 @@
 "use client";
-
+import Image from "next/image";
+import Link from "next/link";
 import CartSidebar from "@/components/cart/CartSidebar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,11 +9,10 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { getImageSrc } from "@/lib/utils";
 import { ApiResponse } from "@/redux/features/searchProduct/interface";
 import { useFindSearchProductQuery } from "@/redux/features/searchProduct/searchProuctApi";
+import { useGetUserDataQuery } from "@/redux/features/user/userApi";
 import { TProduct } from "@/types/products/product";
 import { TVariableProduct } from "@/types/products/variableProduct";
 import { ShoppingCart, UserRound } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
@@ -33,20 +33,20 @@ const isApiResponse = (response: unknown): response is ApiResponse => {
 };
 
 const CartLinksAndAccount = () => {
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
   const router = useRouter();
   const { totalCartItem } = useCart();
-
-  const [searchValue, setSearchValue] = useState("");
-  const debouncedSearchValue = useDebounce(searchValue, 400);
-
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const { data: user } = useGetUserDataQuery(undefined);
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
 
   const [isMounted, setIsMounted] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearchValue = useDebounce(searchValue, 400);
+  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
 
   const toggleSearchBar = () => {
     setIsSearchVisible(!isSearchVisible);
+    setShowSuggestions(false);
   };
 
   useEffect(() => {
@@ -228,10 +228,18 @@ const CartLinksAndAccount = () => {
       <Button
         asChild
         variant={"ghost"}
-        className="rounded-full size-9 border border-primary bg-white text-primary hover:text-primary hover:bg-gray-50 transition-all duration-300 hidden sm:flex items-center justify-center shadow-sm"
+        className="rounded-full size-9 p-0 border border-primary bg-white text-primary hover:text-primary hover:bg-gray-50 transition-all duration-300 hidden sm:flex items-center justify-center shadow-sm overflow-hidden"
       >
         <Link href="/my-account">
-          <UserRound className="size-6" />
+          {user?.data?._id ? (
+            <div className="w-full h-full flex items-center justify-center bg-primary/10">
+              <span className="font-bold text-[15px] uppercase">
+                {user?.data?.fullName ? user.data.fullName.charAt(0) : "U"}
+              </span>
+            </div>
+          ) : (
+            <UserRound className="size-5" />
+          )}
         </Link>
       </Button>
 

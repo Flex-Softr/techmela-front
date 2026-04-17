@@ -24,24 +24,23 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
+import DivisionDistrictUpazilaSelector from "@/app/(public)/checkout/components/DivisionDistrictSelector";
 
 const schema = yup.object().shape({
   phoneNumber: yup
     .string()
     .required("ফোন নম্বর প্রয়োজন")
-    .matches(/^[0-9+]+$/, "অকার্যকর ফোন নম্বর")
-    .max(15, "অকার্যকর ফোন নম্বর"),
+    .matches(/^(?:\+88)?01[3-9]\d{8}$/, "অকার্যকর ফোন নম্বর"),
   password: yup
     .string()
-    .required("পাসওয়ার্ড প্রয়োজন")
-    .min(6, "পাসওয়ার্ড অন্তত ৬টি অক্ষর হতে হবে")
-    .matches(
-      /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
-      "অন্তত একটি বড় হাতের অক্ষর এবং একটি বিশেষ অক্ষর (!@#$%^&*) থাকতে হবে"
-    ),
+    .required("পাসওয়ার্ড প্রয়োজন")
+    .min(4, "পাসওয়ার্ড কমপক্ষে 4 অক্ষরের হতে হবে"),
   address: yup
     .object()
     .shape({
+      division: yup.string().required("বিভাগ প্রয়োজন"),
+      district: yup.string().required("জেলা প্রয়োজন"),
+      upazila: yup.string().required("উপজেলা প্রয়োজন"),
       fullAddress: yup.string().required("বিস্তারিত ঠিকানা প্রয়োজন"),
     })
     .required("ঠিকানা প্রয়োজন"),
@@ -49,6 +48,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       fullName: yup.string().required("পুরো নাম প্রয়োজন"),
+      email: yup.string().email("সঠিক ইমেইল দিন").required("ইমেইল প্রয়োজন"),
     })
     .required("ব্যক্তিগত তথ্য প্রয়োজন"),
 });
@@ -63,9 +63,25 @@ const RegisterForm = () => {
   const {
     register,
     handleSubmit,
+    control,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      address: {
+        division: "",
+        district: "",
+        upazila: "",
+        fullAddress: "",
+      },
+      personalInfo: {
+        fullName: "",
+        email: "",
+      },
+      phoneNumber: "",
+      password: "",
+    },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -81,20 +97,30 @@ const RegisterForm = () => {
       });
       router.push("/");
     } catch (error: unknown) {
-      const err = error as { data?: { message?: string } };
+      const err = error as {
+        data?: {
+          message?: string;
+          errorMessages?: { path: string; message: string }[];
+        };
+      };
+
+      const errorMessage =
+        err?.data?.errorMessages?.[0]?.message ||
+        err?.data?.message ||
+        "অনুগ্রহ করে আপনার তথ্যগুলো পুনরায় চেক করুন।";
+
       toast({
         variant: "destructive",
         title: "নিবন্ধন ব্যর্থ হয়েছে",
-        description:
-          err?.data?.message || "অনুগ্রহ করে আপনার তথ্যগুলো পুনরায় চেক করুন।",
+        description: errorMessage,
       });
     }
   };
 
   return (
     <div className="flex items-center justify-center px-3 py-4 bg-gray-50/50">
-      <Card className="max-w-[500px] w-full shadow-sm border-gray-200/60 overflow-hidden bg-white">
-        <CardHeader className="space-y-2 pb-4 border-b border-gray-50 bg-gray-50/30">
+      <Card className="max-w-[650px] w-full shadow-sm border-gray-200/60 overflow-hidden bg-white">
+        <CardHeader className="space-y-1 pb-3 border-b border-gray-50 bg-gray-50/30">
           <div className="text-center space-y-1">
             <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2 font-hind-siliguri">
               <UserPlus className="w-6 h-6 text-primary" />
@@ -106,60 +132,130 @@ const RegisterForm = () => {
           </div>
         </CardHeader>
 
-        <CardContent className="pt-6 px-6">
+        <CardContent className="pt-4 px-6">
           <form
             id="register-form"
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4"
+            className="space-y-3"
           >
-            <div className="space-y-2">
-              <Label
-                htmlFor="fullName"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
-              >
-                পুরো নাম
-              </Label>
-              <Input
-                id="fullName"
-                type="text"
-                placeholder="আপনার পুরো নাম লিখুন"
-                className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.fullName ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
-                {...register("personalInfo.fullName")}
-              />
-              {errors.personalInfo?.fullName && (
-                <p className="text-xs text-red-500 font-medium">
-                  {errors.personalInfo.fullName.message as string}
-                </p>
-              )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="fullName"
+                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                >
+                  পুরো নাম <span className="text-red-600">*</span>
+                </Label>
+                <Input
+                  id="fullName"
+                  type="text"
+                  placeholder="আপনার নাম"
+                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.fullName ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  {...register("personalInfo.fullName")}
+                />
+                {errors.personalInfo?.fullName && (
+                  <p className="text-xs text-red-500 font-medium">
+                    {errors.personalInfo.fullName.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                >
+                  ইমেইল <span className="text-red-600">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="আপনার ইমেইল"
+                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.email ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  {...register("personalInfo.email")}
+                />
+                {errors.personalInfo?.email && (
+                  <p className="text-xs text-red-500 font-medium">
+                    {errors.personalInfo.email.message as string}
+                  </p>
+                )}
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <Label
-                htmlFor="phoneNumber"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
-              >
-                ফোন নম্বর
-              </Label>
-              <Input
-                id="phoneNumber"
-                type="tel"
-                placeholder="০১XXXXXXXXX"
-                className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.phoneNumber ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
-                {...register("phoneNumber")}
-              />
-              {errors.phoneNumber && (
-                <p className="text-xs text-red-500 font-medium">
-                  {errors.phoneNumber.message as string}
-                </p>
-              )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="phoneNumber"
+                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                >
+                  ফোন নম্বর <span className="text-red-600">*</span>
+                </Label>
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  placeholder="01XXXXXXXXX"
+                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.phoneNumber ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  {...register("phoneNumber")}
+                />
+                {errors.phoneNumber && (
+                  <p className="text-xs text-red-500 font-medium">
+                    {errors.phoneNumber.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label
+                  htmlFor="password"
+                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                >
+                  পাসওয়ার্ড <span className="text-red-600">*</span>
+                </Label>
+                <div className="relative group">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="পাসওয়ার্ড"
+                    className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                    {...register("password")}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 group-hover:text-gray-600 transition-colors"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="text-xs text-red-500 font-medium line-clamp-1">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
             </div>
+
+            <DivisionDistrictUpazilaSelector
+              control={control}
+              register={register}
+              setValue={setValue}
+              errors={errors}
+              basePath="address"
+            />
 
             <div className="space-y-2">
               <Label
                 htmlFor="fullAddress"
                 className="text-sm font-semibold text-gray-700 font-hind-siliguri"
               >
-                বিস্তারিত ঠিকানা
+                ঠিকানা <span className="text-red-600">*</span>
               </Label>
               <Input
                 id="fullAddress"
@@ -171,41 +267,6 @@ const RegisterForm = () => {
               {errors.address?.fullAddress && (
                 <p className="text-xs text-red-500 font-medium">
                   {errors.address.fullAddress.message as string}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label
-                htmlFor="password"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
-              >
-                পাসওয়ার্ড
-              </Label>
-              <div className="relative group">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="অন্তত ৬টি অক্ষর"
-                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
-                  {...register("password")}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 group-hover:text-gray-600 transition-colors"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
-                  ) : (
-                    <Eye className="w-5 h-5" />
-                  )}
-                </button>
-              </div>
-              {errors.password && (
-                <p className="text-xs text-red-500 font-medium line-clamp-1">
-                  {errors.password.message}
                 </p>
               )}
             </div>

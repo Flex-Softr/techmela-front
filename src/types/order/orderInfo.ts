@@ -14,9 +14,9 @@ export type TOrderedProducts = {
 };
 
 type TShipping = {
-  fullAddress: string;
   fullName: string;
   phoneNumber: string;
+  fullAddress: string;
 };
 
 type TPayment = {
