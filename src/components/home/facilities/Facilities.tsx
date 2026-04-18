@@ -26,7 +26,7 @@ const facilities = [
 
 const Facilities = () => {
   return (
-    <section className="py-1 md:py-3 bg-accent/30">
+    <section className="py-3 bg-accent/30">
       <ContainerMax>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
           {facilities.map((item, index) => (

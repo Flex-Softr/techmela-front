@@ -13,7 +13,7 @@ export const normalizeAlpha = (value: string): string => {
   return value
     .trim()
     .toLowerCase()
-    .replace(/[^a-z]/g, "");
+    .replace(/[\s\p{P}\p{S}\p{N}]/gu, "");
 };
 
 /**
@@ -24,7 +24,7 @@ export const normalizeAlphaNumeric = (value: string): string => {
   return value
     .trim()
     .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
+    .replace(/[\s\p{P}\p{S}]/gu, "");
 };
 
 export const hashUserData = async (
@@ -256,7 +256,7 @@ let cachedIp: string | undefined;
 export const getIP = async (): Promise<string | undefined> => {
   if (cachedIp) return cachedIp;
   try {
-    const response = await fetch("https://api.ipify.org?format=json");
+    const response = await fetch("https://api64.ipify.org?format=json");
     const data = await response.json();
     cachedIp = data?.ip;
     return cachedIp;
@@ -284,23 +284,18 @@ export const splitFullName = (fullName?: string) => {
 
   const nameParts = trimmed.split(/\s+/);
 
-  // Single word — no last name
+  // 1. Single word — no last name
   if (nameParts.length === 1) {
     return { fn: nameParts[0], ln: undefined };
   }
 
-  // If the first word is a prefix ending with "." (e.g. "Md.", "Dr.", "Sheikh."),
-  // group it together with the next word to form the first name.
-  // e.g. "Md. Mustaqim Khan" → fn: "Md. Mustaqim", ln: "Khan"
-  if (nameParts[0].endsWith(".")) {
-    const fn = `${nameParts[0]} ${nameParts[1]}`;
-    const ln = nameParts.length > 2 ? nameParts.slice(2).join(" ") : undefined;
-    return { fn, ln };
+  // 2. If exactly 2 parts: divide into two as fn, ln
+  if (nameParts.length === 2) {
+    return { fn: nameParts[0], ln: nameParts[1] };
   }
 
-  // Default: first word = fn, everything else = ln
-  // e.g. "Mustaqim Khan" → fn: "Mustaqim", ln: "Khan"
-  const fn = nameParts[0];
-  const ln = nameParts.slice(1).join(" ");
+  // 3. If 3 or more parts: first two words combined are fn, the rest is ln
+  const fn = `${nameParts[0]} ${nameParts[1]}`;
+  const ln = nameParts.slice(2).join(" ");
   return { fn, ln };
 };
