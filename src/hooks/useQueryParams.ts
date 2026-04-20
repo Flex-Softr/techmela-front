@@ -16,7 +16,8 @@ export type QueryKeys =
   | "page"
   | "limit"
   | "minPrice"
-  | "maxPrice";
+  | "maxPrice"
+  | "featured";
 
 /**
  * Custom hook to manage query parameters in the URL.
@@ -44,6 +45,7 @@ export const useQueryParams = () => {
       "limit",
       "minPrice",
       "maxPrice",
+      "featured",
     ];
 
     // Map allowed search params to the query object
