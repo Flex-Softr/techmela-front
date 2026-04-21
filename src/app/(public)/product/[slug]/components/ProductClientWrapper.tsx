@@ -3,7 +3,7 @@
 import { PRODUCT_TYPE } from "@/const/product.const";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import eventHandler from "@/tracking/eventHandler";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProductClientContent from "./ProductClientContent";
 import ProductMainInfo from "./ProductMainInfo";
 import VariationSelector from "./VariationSelector";
@@ -35,7 +35,12 @@ const ProductClientWrapper = ({
       : ((product?.price?.salePrice || product?.price?.regularPrice) ?? 0)
   );
 
+  const hasTrackedViewRef = useRef(false);
+
   useEffect(() => {
+    if (hasTrackedViewRef.current) return;
+    hasTrackedViewRef.current = true;
+
     eventHandler({
       event_name: "view_content",
       content_name: product.title,

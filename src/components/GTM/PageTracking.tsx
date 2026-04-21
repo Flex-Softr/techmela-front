@@ -1,22 +1,23 @@
 "use client";
 
 import eventHandler from "@/tracking/eventHandler";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+
+// Use a module-level variable so it persists across StrictMode remounts or Suspense unmounts/remounts
+let lastTrackedUrl: string | null = null;
 
 const PageTracking = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const lastTrackedUrl = useRef<string | null>(null);
 
   useEffect(() => {
-    const url = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
-
-    if (lastTrackedUrl.current === url) {
+    // Only track based on pathname. Ignoring searchParams prevents duplicate page_view
+    // events if query parameters are updated dynamically on the client (like selecting a variation).
+    if (lastTrackedUrl === pathname) {
       return;
     }
 
-    lastTrackedUrl.current = url;
+    lastTrackedUrl = pathname;
 
     const trackPage = async () => {
       // Trigger page_view event
@@ -26,7 +27,7 @@ const PageTracking = () => {
     };
 
     trackPage();
-  }, [pathname, searchParams]);
+  }, [pathname]); // Removed searchParams to prevent re-tracking on query changes
 
   return null;
 };
