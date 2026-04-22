@@ -1,12 +1,12 @@
 import { Content, GTMEventName } from "../event.types";
 
 export type UserData = {
-  em?: string[]; // email (SHA256)
-  ph?: string[]; // phone (SHA256)
   fn?: string[]; // first name (SHA256)
   ln?: string[]; // last name (SHA256)
-  db?: string[]; // date of birth (SHA256)
   ge?: string[]; // gender (SHA256)
+  db?: string[]; // date of birth (SHA256)
+  em?: string[]; // email (SHA256)
+  ph?: string[]; // phone (SHA256)
   ct?: string[]; // city (SHA256)
   st?: string[]; // state (SHA256)
   zp?: string[]; // zip/postal (SHA256)

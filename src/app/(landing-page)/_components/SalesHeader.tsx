@@ -25,15 +25,15 @@ const SalesHeader = ({ onOrderClick }: Props) => {
 
       <div className="flex items-center gap-2 sm:gap-3">
         <a
-          href="tel:+8801602431167"
+          href="tel:+8801339955155"
           className="hidden sm:flex items-center gap-1.5 bg-primary/5 text-primary px-3 py-1.5 rounded-full border border-primary/20 font-bold text-sm hover:bg-primary hover:text-white transition-all cursor-pointer"
         >
           <MdCall className="text-lg" />
-          <span>০১৬০২-৪৩১১৬৭</span>
+          <span>০১৩৩৯-৯৫৫১৫৫</span>
         </a>
 
         <a
-          href="https://wa.me/8801602431167"
+          href="https://wa.me/8801339955155"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center bg-green-500 text-white p-2 sm:px-3 sm:py-1.5 rounded-full shadow-md hover:bg-green-600 transition-all active:scale-95"

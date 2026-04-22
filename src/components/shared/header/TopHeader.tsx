@@ -41,17 +41,17 @@ const TopHeader = () => {
         {/* Left: Contact Info */}
         <div className="flex gap-3 items-center flex-1">
           <a
-            href="tel:+8801602431167"
+            href="tel:+8801339955155"
             className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"
           >
             <MdCall className="size-4 text-primary" />
-            <span>০১৬০২-৪৩১১৬৭</span>
+            <span>০১৩৩৯-৯৫৫১৫৫</span>
           </a>
 
           <span className="text-primary/20">|</span>
 
           <a
-            href="https://wa.me/8801602431167"
+            href="https://wa.me/8801339955155"
             target="_blank"
             rel="noopener noreferrer"
             className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"

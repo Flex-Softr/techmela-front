@@ -15,7 +15,7 @@ const facilities = [
   {
     icon: <Headphones className="w-8 h-8 text-primary" />,
     title: "সহজ যোগাযোগ",
-    description: "যেকোনো প্রয়োজনে কল করুনঃ ০১৬০২-৪৩১১৬৭",
+    description: "যেকোনো প্রয়োজনে কল করুনঃ ০১৩৩৯-৯৫৫১৫৫",
   },
   {
     icon: <RotateCcw className="w-8 h-8 text-primary" />,

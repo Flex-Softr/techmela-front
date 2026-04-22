@@ -155,9 +155,6 @@ const useSalesOrderSubmit = ({
         const districtName = shippingData.district
           ? BdAddress.districtNameById(shippingData.district, "en").name
           : undefined;
-        const upazilaName = shippingData.upazila
-          ? BdAddress.upazilaNameById(shippingData.upazila, "en").name
-          : undefined;
 
         eventHandler({
           event_name: "purchase",
@@ -166,7 +163,7 @@ const useSalesOrderSubmit = ({
           em: shippingData.email,
           st: divisionName,
           ct: districtName,
-          zp: upazilaName,
+          upazila_id: shippingData.upazila,
           order_id: result?.data?.orderId,
           content_type: "product",
           content_category: productCategory,

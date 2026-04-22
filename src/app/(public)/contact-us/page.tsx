@@ -68,7 +68,7 @@ const ContactUsPage = () => {
               name: "আপনাদের হেল্পলাইন নম্বর কত?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "আমাদের হেল্পলাইন নম্বর হলো ০১৬০২-৪৩১১৬৭। যেকোনো প্রয়োজনে আমাদের কল করতে পারেন।",
+                text: "আমাদের হেল্পলাইন নম্বর হলো ০১৩৩৯-৯৫৫১৫৫ এবং ০১৭১৮-৬৩৪৫০৮। যেকোনো প্রয়োজনে আমাদের কল করতে পারেন।",
               },
             },
           ],
@@ -130,7 +130,7 @@ const ContactUsPage = () => {
                       ফোন
                     </h4>
                     <p className="text-xl font-bold text-gray-800">
-                      ০১৬০২-৪৩১১৬৭
+                      ০১৩৩৯-৯৫৫১৫৫, ০১৭১৮-৬৩৪৫০৮
                     </p>
                     <p className="text-sm text-gray-500 mt-1">
                       সকাল ১০টা - রাত ১০টা (২৪/৭ সেবা)
@@ -186,7 +186,7 @@ const ContactUsPage = () => {
                     <FaFacebook className="text-2xl" />
                   </a>
                   <a
-                    href="http://wa.me/8801602431167"
+                    href="http://wa.me/8801339955155"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-[#25D366]/10 text-[#25D366] rounded-xl flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all transform hover:-translate-y-1 shadow-sm"

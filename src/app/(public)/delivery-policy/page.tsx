@@ -182,7 +182,7 @@ const DeliveryPolicyPage = async () => {
           </h3>
           <div className="inline-flex items-center gap-4 bg-white/10 backdrop-blur-md px-8 py-3 rounded-full border border-white/20">
             <span className="text-2xl md:text-3xl font-black tracking-widest">
-              ০১৬০২-৪৩১১৬৭
+              ০১৩৩৯-৯৫৫১৫৫
             </span>
           </div>
         </div>

@@ -42,12 +42,12 @@ export const buildGTMEventPayload = (
           country: rawEventData.country,
         }),
         // Advanced Matching Identifiers
+        gender: rawEventData.ge,
+        dob: rawEventData.db,
         external_id: rawEventData.external_id,
         fb_login_id: rawEventData.fb_login_id,
         fbc: rawEventData.fbc,
         fbp: rawEventData.fbp,
-        gender: rawEventData.ge,
-        dob: rawEventData.db,
       }),
       items:
         payload.custom_data?.contents && payload.custom_data.contents.length > 0

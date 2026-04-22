@@ -161,7 +161,7 @@ const ReturnPolicyPage = () => {
           <div className="inline-flex items-center gap-4 py-3 px-8 bg-white rounded-full shadow-lg border border-gray-100">
             <FaPhoneAlt className="text-primary" />
             <span className="text-2xl font-black text-gray-900 tracking-wider">
-              ০১৬০২-৪৩১১৬৭
+              ০১৩৩৯-৯৫৫১৫৫
             </span>
           </div>
         </div>

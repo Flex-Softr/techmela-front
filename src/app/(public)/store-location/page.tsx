@@ -129,17 +129,30 @@ const StoreLocationPage = () => {
                       <p className="text-sm font-bold text-primary uppercase tracking-widest mb-4">
                         হেল্পলাইন
                       </p>
-                      <a
-                        href="tel:+8801602431167"
-                        className="inline-flex items-center gap-4 group"
-                      >
-                        <div className="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 transition-colors group-hover:bg-primary group-hover:text-white">
-                          <FaHeadset size={22} />
-                        </div>
-                        <span className="text-2xl font-black text-gray-900 group-hover:text-primary transition-colors">
-                          ০১৬০২-৪৩১১৬৭
-                        </span>
-                      </a>
+                      <div className="space-y-4">
+                        <a
+                          href="tel:+8801339955155"
+                          className="inline-flex items-center gap-4 group"
+                        >
+                          <div className="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <FaHeadset size={22} />
+                          </div>
+                          <span className="text-2xl font-black text-gray-900 group-hover:text-primary transition-colors">
+                            ০১৩৩৯-৯৫৫১৫৫
+                          </span>
+                        </a>
+                        <a
+                          href="tel:+8801718634508"
+                          className="inline-flex items-center gap-4 group"
+                        >
+                          <div className="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <FaHeadset size={22} />
+                          </div>
+                          <span className="text-2xl font-black text-gray-900 group-hover:text-primary transition-colors">
+                            ০১৭১৮-৬৩৪৫০৮
+                          </span>
+                        </a>
+                      </div>
                     </div>
 
                     <div className="pt-4">
@@ -155,7 +168,7 @@ const StoreLocationPage = () => {
                             bg: "bg-blue-50",
                           },
                           {
-                            href: "http://wa.me/8801602431167",
+                            href: "http://wa.me/8801339955155",
                             icon: FaWhatsapp,
                             color: "text-green-500",
                             bg: "bg-green-50",

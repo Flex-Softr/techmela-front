@@ -137,10 +137,6 @@ const SalesOrderForm = ({
           shipping?.district,
           "en"
         ).name;
-        const upazilaName = BdAddress.upazilaNameById(
-          shipping?.upazila,
-          "en"
-        ).name;
 
         eventHandler({
           event_name: "initiate_checkout",
@@ -149,7 +145,7 @@ const SalesOrderForm = ({
           em: shipping?.email || undefined,
           st: divisionName || undefined,
           ct: districtName || undefined,
-          zp: upazilaName || undefined,
+          upazila_id: shipping?.upazila || undefined,
           content_name: productTitle,
           content_ids: cartItems.map((item) => item.productId),
           content_type: "product",
@@ -332,10 +328,10 @@ const SalesOrderForm = ({
                   অর্ডার করতে কোনো সমস্যা হলে নিচের নাম্বারে সরাসরি কল করুন
                 </p>
                 <a
-                  href="tel:+8801602431167"
+                  href="tel:+8801339955155"
                   className="inline-flex items-center justify-center gap-3 bg-white text-primary font-black px-8 py-3 rounded-xl border border-primary/10 shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all text-lg lg:text-xl"
                 >
-                  ০১৬০২-৪৩১১৬৭
+                  ০১৩৩৯-৯৫৫১৫৫
                 </a>
               </div>
             </div>

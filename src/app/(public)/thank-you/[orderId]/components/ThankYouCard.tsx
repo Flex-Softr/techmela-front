@@ -78,7 +78,7 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
             <FaUsers size={24} />
           </a>
           <a
-            href="http://wa.me/8801602431167"
+            href="http://wa.me/8801339955155"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-white hover:scale-110 transition-all duration-300"

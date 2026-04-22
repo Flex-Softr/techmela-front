@@ -90,11 +90,11 @@ const MainFooterContent = () => {
             <h3 className="font-bold text-lg mb-2.5 text-primary">যোগাযোগ</h3>
             <div className="space-y-2.5">
               <a
-                href="tel:+8801602431167"
+                href="tel:+8801339955155"
                 className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors text-primary"
               >
                 <Phone className="size-4 text-primary" />
-                ০১৬০২-৪৩১১৬৭
+                ০১৩৩৯-৯৫৫১৫৫
               </a>
               <a
                 href="mailto:support@siddikiaprokashoni.com"
@@ -127,7 +127,7 @@ const MainFooterContent = () => {
                   <FaUsers size={18} />
                 </a>
                 <a
-                  href="http://wa.me/8801602431167"
+                  href="http://wa.me/8801339955155"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-2.5 rounded-full text-green-600 hover:bg-green-600 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm"

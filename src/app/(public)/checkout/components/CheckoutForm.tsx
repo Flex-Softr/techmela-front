@@ -70,10 +70,6 @@ const CheckoutForm = ({
         shipping?.district,
         "en"
       ).name;
-      const upazilaName = BdAddress.upazilaNameById(
-        shipping?.upazila,
-        "en"
-      ).name;
 
       eventHandler({
         event_name: "initiate_checkout",
@@ -82,7 +78,7 @@ const CheckoutForm = ({
         em: shipping?.email || undefined,
         st: divisionName || undefined,
         ct: districtName || undefined,
-        zp: upazilaName || undefined,
+        upazila_id: shipping?.upazila || undefined,
         content_ids: cartData.data.map((item: TCartItemData) =>
           item.variation?._id
             ? `${item.product?._id}-${item.variation._id}`

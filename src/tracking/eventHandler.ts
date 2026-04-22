@@ -20,16 +20,8 @@ import { EventParameter } from "./event.types";
 import { buildGTMEventPayload } from "./gtm/gtm.builder";
 import { GTMEventPayload } from "./gtm/gtm.types";
 import { sendGTMEvent } from "@next/third-parties/google";
+import BdAddress from "@/utilities/bdAddress/bdAddress";
 
-/**
- * The main handler for processing and dispatching GTM and Meta Conversions API (CAPI) events.
- * It hashes sensitive user data, attaches tracking IDs (fbp, fbc), and sends data to both
- * Google Tag Manager (client-side) and a custom tracking endpoint (server-side).
- *
- * Implements Meta's 2026 Advanced Matching requirements for maximum Match Quality (10/10).
- *
- * @param eventData - The raw event parameters from the application
- */
 // eslint-disable-next-line no-unused-vars
 type Normalizer = (v: string) => string;
 
@@ -56,8 +48,31 @@ const eventHandler = async (eventData: EventParameter) => {
     eventData.content_type = eventData.content_type || "product";
   }
   eventData.country = eventData.country || "Bangladesh";
-  //Todo enable later
-  delete eventData.zp;
+  // Auto-resolve zip code from upazila_id if missing
+  if (!eventData.zp && eventData.upazila_id) {
+    eventData.zp = BdAddress.zipCodeByUpazilaId(eventData.upazila_id);
+  }
+
+  let fn = eventData.fn;
+  let ln = eventData.ln;
+
+  // If fn has spaces, a full name was put in the fn field — split it first
+  if (fn && fn.trim().includes(" ")) {
+    const split = splitFullName(fn);
+    fn = split.fn;
+    ln = ln || split.ln;
+  }
+
+  // Fallback: derive fn/ln from fullName if not already set
+  if (!fn && !ln && eventData.fullName) {
+    const split = splitFullName(eventData.fullName);
+    fn = split.fn;
+    ln = split.ln;
+  }
+
+  // Normalize AFTER splitting (normalizeAlpha strips spaces)
+  if (fn) fn = normalizeAlpha(fn);
+  if (ln) ln = normalizeAlpha(ln);
 
   // 0. Pre-normalize sensitive user data for consistency between GTM (unhashed) and CAPI (hashed)
   if (eventData.em) eventData.em = normalizeEmail(eventData.em);
@@ -89,37 +104,12 @@ const eventHandler = async (eventData: EventParameter) => {
     }
   };
 
+  // Names
+  await hashAndAssign("fn", fn);
+  await hashAndAssign("ln", ln);
   // Email & Phone
   await hashAndAssign("em", eventData.em);
   await hashAndAssign("ph", eventData.ph);
-
-  // Names — three possible input patterns:
-  // 1. Caller passes fn/ln directly
-  // 2. Caller passes full name in fn field (with spaces)
-  // 3. Caller passes fullName (most common — both hooks use this)
-  let fn = eventData.fn;
-  let ln = eventData.ln;
-
-  // If fn has spaces, a full name was put in the fn field — split it first
-  if (fn && fn.trim().includes(" ")) {
-    const split = splitFullName(fn);
-    fn = split.fn;
-    ln = ln || split.ln;
-  }
-
-  // Fallback: derive fn/ln from fullName if not already set
-  if (!fn && !ln && eventData.fullName) {
-    const split = splitFullName(eventData.fullName);
-    fn = split.fn;
-    ln = split.ln;
-  }
-
-  // Normalize AFTER splitting (normalizeAlpha strips spaces)
-  if (fn) fn = normalizeAlpha(fn);
-  if (ln) ln = normalizeAlpha(ln);
-
-  await hashAndAssign("fn", fn);
-  await hashAndAssign("ln", ln);
 
   // Demographic (Tiebreakers for shared IPs)
   await hashAndAssign("db", eventData.db);
@@ -233,7 +223,6 @@ const eventHandler = async (eventData: EventParameter) => {
 
   // 5. Send to Google Tag Manager
   sendGTMEvent(gtmPayload);
-
   // 5. Send to the server-side tracking endpoint for Meta CAPI
   try {
     await fetch(`${config.tracking_api_url}`, {

@@ -89,7 +89,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
             </p>
             <div className="space-y-3">
               <a
-                href="tel:+8801602431167"
+                href="tel:+8801339955155"
                 className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
               >
                 <div className="size-8 rounded-full bg-white flex items-center justify-center shadow-sm text-primary">
@@ -98,7 +98,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                 <span>+8801602-431167</span>
               </a>
               <a
-                href="https://wa.me/8801602431167"
+                href="https://wa.me/8801339955155"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"

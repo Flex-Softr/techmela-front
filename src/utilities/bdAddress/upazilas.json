@@ -33,7 +33,7 @@
   },
   {
     "id": 5,
-    "name": "Patharghata",
+    "name": "Pathorghata",
     "bnName": "পাথরঘাটা",
     "slug": "patharghata",
     "districtId": 1,
@@ -42,7 +42,7 @@
   {
     "id": 6,
     "name": "Taltali",
-    "bnName": "তালতলী",
+    "bnName": "তালতলি",
     "slug": "taltali",
     "districtId": 1,
     "postalCode": "8760"
@@ -50,7 +50,7 @@
   {
     "id": 7,
     "name": "Agailjhara",
-    "bnName": "আগৈলঝাড়া",
+    "bnName": "আগৈলঝাড়া",
     "slug": "agailjhara",
     "districtId": 2,
     "postalCode": "8250"
@@ -74,7 +74,7 @@
   {
     "id": 10,
     "name": "Banaripara",
-    "bnName": "বানারীপাড়া",
+    "bnName": "বানারীপাড়া",
     "slug": "banaripara",
     "districtId": 2,
     "postalCode": "8230"
@@ -89,7 +89,7 @@
   },
   {
     "id": 12,
-    "name": "Gaurnadi",
+    "name": "Gournadi",
     "bnName": "গৌরনদী",
     "slug": "gaurnadi",
     "districtId": 2,
@@ -137,15 +137,15 @@
   },
   {
     "id": 18,
-    "name": "Burhanuddin",
-    "bnName": "বুরহানউদ্দিন",
+    "name": "Borhan Sddin",
+    "bnName": "বোরহান উদ্দিন",
     "slug": "burhanuddin",
     "districtId": 3,
     "postalCode": "8320"
   },
   {
     "id": 19,
-    "name": "Char Fasson",
+    "name": "Charfesson",
     "bnName": "চরফ্যাশন",
     "slug": "char_fasson",
     "districtId": 3,
@@ -153,7 +153,7 @@
   },
   {
     "id": 20,
-    "name": "Daulatkhan",
+    "name": "Doulatkhan",
     "bnName": "দৌলতখান",
     "slug": "daulatkhan",
     "districtId": 3,
@@ -169,7 +169,7 @@
   },
   {
     "id": 22,
-    "name": "Manpura",
+    "name": "Monpura",
     "bnName": "মনপুরা",
     "slug": "manpura",
     "districtId": 3,
@@ -178,14 +178,14 @@
   {
     "id": 23,
     "name": "Tazumuddin",
-    "bnName": "তজুমুদ্দিন",
+    "bnName": "তজুমদ্দিন",
     "slug": "tazumuddin",
     "districtId": 3,
     "postalCode": "8380"
   },
   {
     "id": 24,
-    "name": "Jhalokati Sadar",
+    "name": "Jhalakathi Sadar",
     "bnName": "ঝালকাঠি সদর",
     "slug": "jhalokati_sadar",
     "districtId": 4,
@@ -194,7 +194,7 @@
   {
     "id": 25,
     "name": "Kathalia",
-    "bnName": "কাঠালিয়া",
+    "bnName": "কাঠালিয়া",
     "slug": "kathalia",
     "districtId": 4,
     "postalCode": "8420"
@@ -266,7 +266,7 @@
   {
     "id": 34,
     "name": "Patuakhali Sadar",
-    "bnName": "পটুয়াখালী সদর",
+    "bnName": "পটুয়াখালী সদর",
     "slug": "patuakhali_sadar",
     "districtId": 5,
     "postalCode": "8600"
@@ -281,19 +281,19 @@
   },
   {
     "id": 36,
-    "name": "Bhandaria",
-    "bnName": "ভাণ্ডারিয়া",
+    "name": "Zianagar",
+    "bnName": "জিয়ানগর",
     "slug": "bhandaria",
     "districtId": 6,
     "postalCode": "8510"
   },
   {
     "id": 37,
-    "name": "Indurkani",
-    "bnName": "ইন্দুরকানী",
+    "name": "Bhandaria",
+    "bnName": "ভান্ডারিয়া",
     "slug": "indurkani",
     "districtId": 6,
-    "postalCode": "8520"
+    "postalCode": "8510"
   },
   {
     "id": 38,
@@ -306,7 +306,7 @@
   {
     "id": 39,
     "name": "Mathbaria",
-    "bnName": "মঠবাড়িয়া",
+    "bnName": "মঠবাড়ীয়া",
     "slug": "mathbaria",
     "districtId": 6,
     "postalCode": "8540"
@@ -321,7 +321,7 @@
   },
   {
     "id": 41,
-    "name": "Nesarabad",
+    "name": "Nesharabad",
     "bnName": "নেছারাবাদ",
     "slug": "nesarabad",
     "districtId": 6,
@@ -337,7 +337,7 @@
   },
   {
     "id": 43,
-    "name": "Ali Kadam",
+    "name": "Alikadam",
     "bnName": "আলীকদম",
     "slug": "ali_kadam",
     "districtId": 7,
@@ -362,7 +362,7 @@
   {
     "id": 46,
     "name": "Naikhongchhari",
-    "bnName": "নাইক্ষ্যংছড়ি",
+    "bnName": "নাইক্ষ্যংছড়ি",
     "slug": "naikhongchhari",
     "districtId": 7,
     "postalCode": "4670"
@@ -370,7 +370,7 @@
   {
     "id": 47,
     "name": "Rowangchhari",
-    "bnName": "রোয়াংছড়ি",
+    "bnName": "রোয়াংছড়ি",
     "slug": "rowangchhari",
     "districtId": 7,
     "postalCode": "4660"
@@ -394,7 +394,7 @@
   {
     "id": 50,
     "name": "Akhaura",
-    "bnName": "আখাউড়া",
+    "bnName": "আখাউড়া",
     "slug": "akhaura",
     "districtId": 8,
     "postalCode": "3450"
@@ -418,7 +418,7 @@
   {
     "id": 53,
     "name": "Bijoynagar",
-    "bnName": "বিজয়নগর",
+    "bnName": "বিজয়নগর",
     "slug": "bijoynagar",
     "districtId": 8,
     "postalCode": "3430"
@@ -426,7 +426,7 @@
   {
     "id": 54,
     "name": "Brahmanbaria Sadar",
-    "bnName": "ব্রাহ্মণবাড়িয়া সদর",
+    "bnName": "ব্রাহ্মণবাড়িয়া সদর",
     "slug": "brahmanbaria_sadar",
     "districtId": 8,
     "postalCode": "3400"
@@ -473,7 +473,7 @@
   },
   {
     "id": 60,
-    "name": "Faridganj",
+    "name": "Faridgonj",
     "bnName": "ফরিদগঞ্জ",
     "slug": "faridganj",
     "districtId": 9,
@@ -489,7 +489,7 @@
   },
   {
     "id": 62,
-    "name": "Haziganj",
+    "name": "Hajiganj",
     "bnName": "হাজীগঞ্জ",
     "slug": "haziganj",
     "districtId": 9,
@@ -505,7 +505,7 @@
   },
   {
     "id": 64,
-    "name": "Matlab Dakshin",
+    "name": "Matlab South",
     "bnName": "মতলব দক্ষিণ",
     "slug": "matlab_dakshin",
     "districtId": 9,
@@ -513,7 +513,7 @@
   },
   {
     "id": 65,
-    "name": "Matlab Uttar",
+    "name": "Matlab North",
     "bnName": "মতলব উত্তর",
     "slug": "matlab_uttar",
     "districtId": 9,
@@ -522,7 +522,7 @@
   {
     "id": 66,
     "name": "Shahrasti",
-    "bnName": "শাহরাস্তি",
+    "bnName": "শাহরাস্তি\t",
     "slug": "shahrasti",
     "districtId": 9,
     "postalCode": "3670"
@@ -546,7 +546,7 @@
   {
     "id": 69,
     "name": "Boalkhali",
-    "bnName": "বোয়ালখালী",
+    "bnName": "বোয়ালখালী",
     "slug": "boalkhali",
     "districtId": 10,
     "postalCode": "4365"
@@ -562,7 +562,7 @@
   {
     "id": 71,
     "name": "Fatikchhari",
-    "bnName": "ফটিকছড়ি",
+    "bnName": "ফটিকছড়ি",
     "slug": "fatikchhari",
     "districtId": 10,
     "postalCode": "4350"
@@ -577,7 +577,7 @@
   },
   {
     "id": 73,
-    "name": "Karnaphuli",
+    "name": "Karnafuli",
     "bnName": "কর্ণফুলী",
     "slug": "karnaphuli",
     "districtId": 10,
@@ -586,7 +586,7 @@
   {
     "id": 74,
     "name": "Lohagara",
-    "bnName": "লোহাগাড়া",
+    "bnName": "লোহাগাড়া",
     "slug": "lohagara_chattogram",
     "districtId": 10,
     "postalCode": "4379"
@@ -602,7 +602,7 @@
   {
     "id": 76,
     "name": "Patiya",
-    "bnName": "পটিয়া",
+    "bnName": "পটিয়া",
     "slug": "patiya",
     "districtId": 10,
     "postalCode": "4375"
@@ -610,7 +610,7 @@
   {
     "id": 77,
     "name": "Rangunia",
-    "bnName": "রাঙ্গুনিয়া",
+    "bnName": "রাঙ্গুনিয়া",
     "slug": "rangunia",
     "districtId": 10,
     "postalCode": "4360"
@@ -634,7 +634,7 @@
   {
     "id": 80,
     "name": "Satkania",
-    "bnName": "সাতকানিয়া",
+    "bnName": "সাতকানিয়া",
     "slug": "satkania",
     "districtId": 10,
     "postalCode": "4386"
@@ -642,7 +642,7 @@
   {
     "id": 81,
     "name": "Sitakunda",
-    "bnName": "সীতাকুণ্ড",
+    "bnName": "সীতাকুন্ড",
     "slug": "sitakunda",
     "districtId": 10,
     "postalCode": "4310"
@@ -665,8 +665,8 @@
   },
   {
     "id": 84,
-    "name": "Burichang",
-    "bnName": "বুড়িচং",
+    "name": "Cumilla Sadar",
+    "bnName": "কুমিল্লা সদর",
     "slug": "burichang",
     "districtId": 11,
     "postalCode": "3520"
@@ -689,19 +689,19 @@
   },
   {
     "id": 87,
-    "name": "Cumilla Adarsha Sadar",
-    "bnName": "কুমিল্লা আদর্শ সদর",
+    "name": "Cumilla Sadar Dakshin",
+    "bnName": "কুমিল্লা সদর দক্ষিণ",
     "slug": "cumilla_adarsha_sadar",
     "districtId": 11,
     "postalCode": "3500"
   },
   {
     "id": 88,
-    "name": "Cumilla Sadar Dakshin",
-    "bnName": "কুমিল্লা সদর দক্ষিণ",
+    "name": "Burichang",
+    "bnName": "বুড়িচং",
     "slug": "cumilla_sadar_dakshin",
     "districtId": 11,
-    "postalCode": "3503"
+    "postalCode": "3520"
   },
   {
     "id": 89,
@@ -714,7 +714,7 @@
   {
     "id": 90,
     "name": "Debidwar",
-    "bnName": "দেবীদ্বার",
+    "bnName": "দেবিদ্বার",
     "slug": "debidwar",
     "districtId": 11,
     "postalCode": "3512"
@@ -786,7 +786,7 @@
   {
     "id": 99,
     "name": "Chakaria",
-    "bnName": "চকরিয়া",
+    "bnName": "চকরিয়া",
     "slug": "chakaria",
     "districtId": 12,
     "postalCode": "4720"
@@ -801,8 +801,8 @@
   },
   {
     "id": 101,
-    "name": "Eidgaon",
-    "bnName": "ঈদগাঁও",
+    "name": "Ukhiya",
+    "bnName": "উখিয়া",
     "slug": "eidgaon",
     "districtId": 12,
     "postalCode": "4703"
@@ -810,14 +810,14 @@
   {
     "id": 102,
     "name": "Kutubdia",
-    "bnName": "কুতুবদিয়া",
+    "bnName": "কুতুবদিয়া",
     "slug": "kutubdia",
     "districtId": 12,
     "postalCode": "4740"
   },
   {
     "id": 103,
-    "name": "Maheshkhali",
+    "name": "Moheshkhali",
     "bnName": "মহেশখালী",
     "slug": "maheshkhali",
     "districtId": 12,
@@ -826,7 +826,7 @@
   {
     "id": 104,
     "name": "Pekua",
-    "bnName": "পেকুয়া",
+    "bnName": "পেকুয়া",
     "slug": "pekua",
     "districtId": 12,
     "postalCode": "4730"
@@ -849,16 +849,16 @@
   },
   {
     "id": 107,
-    "name": "Ukhia",
-    "bnName": "উখিয়া",
+    "name": "Eidgaon",
+    "bnName": "ঈদগাঁও",
     "slug": "ukhia",
     "districtId": 12,
-    "postalCode": "4780"
+    "postalCode": "4703"
   },
   {
     "id": 108,
     "name": "Chhagalnaiya",
-    "bnName": "ছাগলনাইয়া",
+    "bnName": "ছাগলনাইয়া",
     "slug": "chhagalnaiya",
     "districtId": 13,
     "postalCode": "3910"
@@ -866,7 +866,7 @@
   {
     "id": 109,
     "name": "Daganbhuiyan",
-    "bnName": "দাগনভূঁইয়া",
+    "bnName": "দাগনভূঞা",
     "slug": "daganbhuiyan",
     "districtId": 13,
     "postalCode": "3940"
@@ -906,15 +906,15 @@
   {
     "id": 114,
     "name": "Dighinala",
-    "bnName": "দীঘিনালা",
+    "bnName": "দিঘীনালা",
     "slug": "dighinala",
     "districtId": 14,
     "postalCode": "4420"
   },
   {
     "id": 115,
-    "name": "Guimara",
-    "bnName": "গুইমারা",
+    "name": "Laxmichhari",
+    "bnName": "লক্ষীছড়ি",
     "slug": "guimara",
     "districtId": 14,
     "postalCode": "4480"
@@ -929,15 +929,15 @@
   },
   {
     "id": 117,
-    "name": "Lakshmichhari",
-    "bnName": "লক্ষ্মীছড়ি",
+    "name": "Guimara",
+    "bnName": "গুইমারা",
     "slug": "lakshmichhari",
     "districtId": 14,
-    "postalCode": "4470"
+    "postalCode": "4480"
   },
   {
     "id": 118,
-    "name": "Mahalchhari",
+    "name": "Mohalchari",
     "bnName": "মহালছড়ি",
     "slug": "mahalchhari",
     "districtId": 14,
@@ -945,7 +945,7 @@
   },
   {
     "id": 119,
-    "name": "Manikchhari",
+    "name": "Manikchari",
     "bnName": "মানিকছড়ি",
     "slug": "manikchhari",
     "districtId": 14,
@@ -961,7 +961,7 @@
   },
   {
     "id": 121,
-    "name": "Panchhari",
+    "name": "Panchari",
     "bnName": "পানছড়ি",
     "slug": "panchhari",
     "districtId": 14,
@@ -994,7 +994,7 @@
   {
     "id": 125,
     "name": "Raipur",
-    "bnName": "রায়পুর",
+    "bnName": "রায়পুর",
     "slug": "raipur",
     "districtId": 15,
     "postalCode": "3720"
@@ -1041,7 +1041,7 @@
   },
   {
     "id": 131,
-    "name": "Hatiya",
+    "name": "Hatia",
     "bnName": "হাতিয়া",
     "slug": "hatiya",
     "districtId": 16,
@@ -1065,7 +1065,7 @@
   },
   {
     "id": 134,
-    "name": "Senbagh",
+    "name": "Senbug",
     "bnName": "সেনবাগ",
     "slug": "senbagh",
     "districtId": 16,
@@ -1073,7 +1073,7 @@
   },
   {
     "id": 135,
-    "name": "Sonaimuri",
+    "name": "Sonaimori",
     "bnName": "সোনাইমুড়ী",
     "slug": "sonaimuri",
     "districtId": 16,
@@ -1089,8 +1089,8 @@
   },
   {
     "id": 137,
-    "name": "Bagaichhari",
-    "bnName": "বাঘাইছড়ি",
+    "name": "Baghaichari",
+    "bnName": "বাঘাইছড়ি",
     "slug": "bagaichhari",
     "districtId": 17,
     "postalCode": "4570"
@@ -1105,16 +1105,16 @@
   },
   {
     "id": 139,
-    "name": "Belaichhari",
-    "bnName": "বিলাইছড়ি",
+    "name": "Belaichari",
+    "bnName": "বিলাইছড়ি",
     "slug": "belaichhari",
     "districtId": 17,
     "postalCode": "4560"
   },
   {
     "id": 140,
-    "name": "Juraichhari",
-    "bnName": "জুরাছড়ি",
+    "name": "Juraichari",
+    "bnName": "জুরাছড়ি",
     "slug": "juraichhari",
     "districtId": 17,
     "postalCode": "4580"
@@ -1145,8 +1145,8 @@
   },
   {
     "id": 144,
-    "name": "Naniyachar",
-    "bnName": "নানিয়ারচর",
+    "name": "Naniarchar",
+    "bnName": "নানিয়ারচর",
     "slug": "naniyachar",
     "districtId": 17,
     "postalCode": "4510"
@@ -1186,7 +1186,7 @@
   {
     "id": 149,
     "name": "Keraniganj",
-    "bnName": "কেরানীগঞ্জ",
+    "bnName": "কেরাণীগঞ্জ",
     "slug": "keraniganj",
     "districtId": 18,
     "postalCode": "1310"
@@ -1226,7 +1226,7 @@
   {
     "id": 154,
     "name": "Boalmari",
-    "bnName": "বোয়ালমারী",
+    "bnName": "বোয়ালমারী",
     "slug": "boalmari",
     "districtId": 19,
     "postalCode": "7820"
@@ -1290,7 +1290,7 @@
   {
     "id": 162,
     "name": "Kaliakair",
-    "bnName": "কালিয়াকৈর",
+    "bnName": "কালিয়াকৈর",
     "slug": "kaliakair",
     "districtId": 20,
     "postalCode": "1750"
@@ -1306,7 +1306,7 @@
   {
     "id": 164,
     "name": "Kapasia",
-    "bnName": "কাপাসিয়া",
+    "bnName": "কাপাসিয়া",
     "slug": "kapasia",
     "districtId": 20,
     "postalCode": "1730"
@@ -1354,7 +1354,7 @@
   {
     "id": 170,
     "name": "Tungipara",
-    "bnName": "টুঙ্গিপাড়া",
+    "bnName": "টুংগীপাড়া",
     "slug": "tungipara",
     "districtId": 21,
     "postalCode": "8150"
@@ -1401,7 +1401,7 @@
   },
   {
     "id": 176,
-    "name": "Karimganj",
+    "name": "Karimgonj",
     "bnName": "করিমগঞ্জ",
     "slug": "karimganj",
     "districtId": 22,
@@ -1410,7 +1410,7 @@
   {
     "id": 177,
     "name": "Katiadi",
-    "bnName": "কটিয়াদী",
+    "bnName": "কটিয়াদী",
     "slug": "katiadi",
     "districtId": 22,
     "postalCode": "2330"
@@ -1426,14 +1426,14 @@
   {
     "id": 179,
     "name": "Kuliarchar",
-    "bnName": "কুলিয়ারচর",
+    "bnName": "কুলিয়ারচর",
     "slug": "kuliarchar",
     "districtId": 22,
     "postalCode": "2380"
   },
   {
     "id": 180,
-    "name": "Mithamain",
+    "name": "Mithamoin",
     "bnName": "মিঠামইন",
     "slug": "mithamain",
     "districtId": 22,
@@ -1450,7 +1450,7 @@
   {
     "id": 182,
     "name": "Pakundia",
-    "bnName": "পাকুন্দিয়া",
+    "bnName": "পাকুন্দিয়া",
     "slug": "pakundia",
     "districtId": 22,
     "postalCode": "2326"
@@ -1458,7 +1458,7 @@
   {
     "id": 183,
     "name": "Tarail",
-    "bnName": "তাড়াইল",
+    "bnName": "তাড়াইল",
     "slug": "tarail",
     "districtId": 22,
     "postalCode": "2316"
@@ -1505,15 +1505,15 @@
   },
   {
     "id": 189,
-    "name": "Daulatpur",
-    "bnName": "দৌলতপুর",
+    "name": "Shibaloy",
+    "bnName": "শিবালয়",
     "slug": "daulatpur_manikganj",
     "districtId": 24,
     "postalCode": "1860"
   },
   {
     "id": 190,
-    "name": "Ghior",
+    "name": "Gior",
     "bnName": "ঘিওর",
     "slug": "ghior",
     "districtId": 24,
@@ -1538,22 +1538,22 @@
   {
     "id": 193,
     "name": "Saturia",
-    "bnName": "সাটুরিয়া",
+    "bnName": "সাটুরিয়া",
     "slug": "saturia",
     "districtId": 24,
     "postalCode": "1820"
   },
   {
     "id": 194,
-    "name": "Shivalaya",
-    "bnName": "শিবালয়",
+    "name": "Doulatpur",
+    "bnName": "দৌলতপুর",
     "slug": "shivalaya",
     "districtId": 24,
-    "postalCode": "1830"
+    "postalCode": "1860"
   },
   {
     "id": 195,
-    "name": "Singair",
+    "name": "Singiar",
     "bnName": "সিংগাইর",
     "slug": "singair",
     "districtId": 24,
@@ -1561,15 +1561,15 @@
   },
   {
     "id": 196,
-    "name": "Gazaria",
-    "bnName": "গজারিয়া",
+    "name": "Gajaria",
+    "bnName": "গজারিয়া",
     "slug": "gazaria",
     "districtId": 25,
     "postalCode": "1510"
   },
   {
     "id": 197,
-    "name": "Lohajang",
+    "name": "Louhajanj",
     "bnName": "লৌহজং",
     "slug": "lohajang",
     "districtId": 25,
@@ -1602,7 +1602,7 @@
   {
     "id": 201,
     "name": "Tongibari",
-    "bnName": "টংগিবাড়ী",
+    "bnName": "টংগীবাড়ি",
     "slug": "tongibari",
     "districtId": 25,
     "postalCode": "1550"
@@ -1626,7 +1626,7 @@
   {
     "id": 204,
     "name": "Narayanganj Sadar",
-    "bnName": "নারায়ণগঞ্জ সদর",
+    "bnName": "নারায়নগঞ্জ সদর",
     "slug": "narayanganj_sadar",
     "districtId": 26,
     "postalCode": "1400"
@@ -1642,7 +1642,7 @@
   {
     "id": 206,
     "name": "Sonargaon",
-    "bnName": "সোনারগাঁও",
+    "bnName": "সোনারগাঁ",
     "slug": "sonargaon",
     "districtId": 26,
     "postalCode": "1440"
@@ -1705,8 +1705,8 @@
   },
   {
     "id": 214,
-    "name": "Goalandaghat",
-    "bnName": "গোয়ালন্দঘাট",
+    "name": "Goalanda",
+    "bnName": "গোয়ালন্দ",
     "slug": "goalandaghat",
     "districtId": 28,
     "postalCode": "7730"
@@ -1721,7 +1721,7 @@
   },
   {
     "id": 216,
-    "name": "Pangsha",
+    "name": "Pangsa",
     "bnName": "পাংশা",
     "slug": "pangsha",
     "districtId": 28,
@@ -1762,7 +1762,7 @@
   {
     "id": 221,
     "name": "Naria",
-    "bnName": "নড়িয়া",
+    "bnName": "নড়িয়া",
     "slug": "naria",
     "districtId": 29,
     "postalCode": "8010"
@@ -1770,7 +1770,7 @@
   {
     "id": 222,
     "name": "Shariatpur Sadar",
-    "bnName": "শরীয়তপুর সদর",
+    "bnName": "শরিয়তপুর সদর",
     "slug": "shariatpur_sadar",
     "districtId": 29,
     "postalCode": "8000"
@@ -1810,7 +1810,7 @@
   {
     "id": 227,
     "name": "Dhanbari",
-    "bnName": "ধনবাড়ী",
+    "bnName": "ধনবাড়ী",
     "slug": "dhanbari",
     "districtId": 30,
     "postalCode": "1990"
@@ -1906,7 +1906,7 @@
   {
     "id": 239,
     "name": "Kachua",
-    "bnName": "কচুয়া",
+    "bnName": "কচুয়া",
     "slug": "kachua_bagerhat",
     "districtId": 31,
     "postalCode": "9330"
@@ -1930,7 +1930,7 @@
   {
     "id": 242,
     "name": "Morrelganj",
-    "bnName": "মোড়েলগঞ্জ",
+    "bnName": "মোড়েলগঞ্জ",
     "slug": "morrelganj",
     "districtId": 31,
     "postalCode": "9360"
@@ -1986,7 +1986,7 @@
   {
     "id": 249,
     "name": "Abhaynagar",
-    "bnName": "অভয়নগর",
+    "bnName": "অভয়নগর",
     "slug": "abhaynagar",
     "districtId": 33,
     "postalCode": "7460"
@@ -1994,14 +1994,14 @@
   {
     "id": 250,
     "name": "Bagherpara",
-    "bnName": "বাঘারপাড়া",
+    "bnName": "বাঘারপাড়া",
     "slug": "bagherpara",
     "districtId": 33,
     "postalCode": "7470"
   },
   {
     "id": 251,
-    "name": "Chaugachha",
+    "name": "Chougachha",
     "bnName": "চৌগাছা",
     "slug": "chaugachha",
     "districtId": 33,
@@ -2017,7 +2017,7 @@
   },
   {
     "id": 253,
-    "name": "Jhikargachha",
+    "name": "Jhikargacha",
     "bnName": "ঝিকরগাছা",
     "slug": "jhikargachha",
     "districtId": 33,
@@ -2049,7 +2049,7 @@
   },
   {
     "id": 257,
-    "name": "Harinakunda",
+    "name": "Harinakundu",
     "bnName": "হরিণাকুন্ডু",
     "slug": "harinakunda",
     "districtId": 34,
@@ -2081,7 +2081,7 @@
   },
   {
     "id": 261,
-    "name": "Maheshpur",
+    "name": "Moheshpur",
     "bnName": "মহেশপুর",
     "slug": "maheshpur",
     "districtId": 34,
@@ -2097,32 +2097,32 @@
   },
   {
     "id": 263,
-    "name": "Batiaghata",
-    "bnName": "বটিয়াঘাটা",
+    "name": "Digholia",
+    "bnName": "দিঘলিয়া",
     "slug": "batiaghata",
     "districtId": 35,
     "postalCode": "9260"
   },
   {
     "id": 264,
-    "name": "Dacope",
-    "bnName": "দাকোপ",
+    "name": "Botiaghata",
+    "bnName": "বটিয়াঘাটা",
     "slug": "dacope",
+    "districtId": 35,
+    "postalCode": "9260"
+  },
+  {
+    "id": 265,
+    "name": "Dakop",
+    "bnName": "দাকোপ",
+    "slug": "dighalia",
     "districtId": 35,
     "postalCode": "9270"
   },
   {
-    "id": 265,
-    "name": "Dighalia",
-    "bnName": "দিঘলিয়া",
-    "slug": "dighalia",
-    "districtId": 35,
-    "postalCode": "9220"
-  },
-  {
     "id": 266,
     "name": "Dumuria",
-    "bnName": "ডুমুরিয়া",
+    "bnName": "ডুমুরিয়া",
     "slug": "dumuria",
     "districtId": 35,
     "postalCode": "9250"
@@ -2130,14 +2130,14 @@
   {
     "id": 267,
     "name": "Koyra",
-    "bnName": "কয়রা",
+    "bnName": "কয়রা",
     "slug": "koyra",
     "districtId": 35,
     "postalCode": "9290"
   },
   {
     "id": 268,
-    "name": "Paikgachha",
+    "name": "Paikgasa",
     "bnName": "পাইকগাছা",
     "slug": "paikgachha",
     "districtId": 35,
@@ -2145,7 +2145,7 @@
   },
   {
     "id": 269,
-    "name": "Phultala",
+    "name": "Fultola",
     "bnName": "ফুলতলা",
     "slug": "phultala",
     "districtId": 35,
@@ -2202,7 +2202,7 @@
   {
     "id": 276,
     "name": "Kushtia Sadar",
-    "bnName": "কুষ্টিয়া সদর",
+    "bnName": "কুষ্টিয়া সদর",
     "slug": "kushtia_sadar",
     "districtId": 36,
     "postalCode": "7000"
@@ -2274,7 +2274,7 @@
   {
     "id": 285,
     "name": "Kalia",
-    "bnName": "কালিয়া",
+    "bnName": "কালিয়া",
     "slug": "kalia",
     "districtId": 39,
     "postalCode": "7520"
@@ -2282,7 +2282,7 @@
   {
     "id": 286,
     "name": "Lohagara",
-    "bnName": "লোহাগড়া",
+    "bnName": "লোহাগড়া",
     "slug": "lohagara_narail",
     "districtId": 39,
     "postalCode": "7510"
@@ -2290,7 +2290,7 @@
   {
     "id": 287,
     "name": "Narail Sadar",
-    "bnName": "নড়াইল সদর",
+    "bnName": "নড়াইল সদর",
     "slug": "narail_sadar",
     "districtId": 39,
     "postalCode": "7500"
@@ -2314,7 +2314,7 @@
   {
     "id": 290,
     "name": "Kalaroa",
-    "bnName": "কলারোয়া",
+    "bnName": "কলারোয়া",
     "slug": "kalaroa",
     "districtId": 40,
     "postalCode": "9410"
@@ -2322,7 +2322,7 @@
   {
     "id": 291,
     "name": "Kaliganj",
-    "bnName": "কালীগঞ্জ",
+    "bnName": "কালিগঞ্জ",
     "slug": "kaliganj_satkhira",
     "districtId": 40,
     "postalCode": "9420"
@@ -2353,7 +2353,7 @@
   },
   {
     "id": 295,
-    "name": "Baksiganj",
+    "name": "Bokshiganj",
     "bnName": "বকশীগঞ্জ",
     "slug": "baksiganj",
     "districtId": 41,
@@ -2361,7 +2361,7 @@
   },
   {
     "id": 296,
-    "name": "Dewanganj",
+    "name": "Dewangonj",
     "bnName": "দেওয়ানগঞ্জ",
     "slug": "dewanganj",
     "districtId": 41,
@@ -2393,7 +2393,7 @@
   },
   {
     "id": 300,
-    "name": "Melandaha",
+    "name": "Melandah",
     "bnName": "মেলান্দহ",
     "slug": "melandaha",
     "districtId": 41,
@@ -2418,7 +2418,7 @@
   {
     "id": 303,
     "name": "Dhobaura",
-    "bnName": "ধোবাউড়া",
+    "bnName": "ধোবাউড়া",
     "slug": "dhobaura",
     "districtId": 42,
     "postalCode": "2290"
@@ -2426,7 +2426,7 @@
   {
     "id": 304,
     "name": "Fulbaria",
-    "bnName": "ফুলবাড়িয়া",
+    "bnName": "ফুলবাড়ীয়া",
     "slug": "fulbaria",
     "districtId": 42,
     "postalCode": "2216"
@@ -2441,7 +2441,7 @@
   },
   {
     "id": 306,
-    "name": "Gauripur",
+    "name": "Gouripur",
     "bnName": "গৌরীপুর",
     "slug": "gauripur",
     "districtId": 42,
@@ -2450,14 +2450,14 @@
   {
     "id": 307,
     "name": "Haluaghat",
-    "bnName": "হালুয়াঘাট",
+    "bnName": "হালুয়াঘাট",
     "slug": "haluaghat",
     "districtId": 42,
     "postalCode": "2280"
   },
   {
     "id": 308,
-    "name": "Ishwarganj",
+    "name": "Iswarganj",
     "bnName": "ঈশ্বরগঞ্জ",
     "slug": "ishwarganj",
     "districtId": 42,
@@ -2465,7 +2465,7 @@
   },
   {
     "id": 309,
-    "name": "Muktagachha",
+    "name": "Muktagacha",
     "bnName": "মুক্তাগাছা",
     "slug": "muktagachha",
     "districtId": 42,
@@ -2474,7 +2474,7 @@
   {
     "id": 310,
     "name": "Mymensingh Sadar",
-    "bnName": "ময়মনসিংহ সদর",
+    "bnName": "ময়মনসিংহ সদর",
     "slug": "mymensingh_sadar",
     "districtId": 42,
     "postalCode": "2200"
@@ -2497,7 +2497,7 @@
   },
   {
     "id": 313,
-    "name": "Tara Khanda",
+    "name": "Tarakanda",
     "bnName": "তারাকান্দা",
     "slug": "tara_khanda",
     "districtId": 42,
@@ -2514,7 +2514,7 @@
   {
     "id": 315,
     "name": "Atpara",
-    "bnName": "আটপাড়া",
+    "bnName": "আটপাড়া",
     "slug": "atpara",
     "districtId": 43,
     "postalCode": "2470"
@@ -2546,7 +2546,7 @@
   {
     "id": 319,
     "name": "Kendua",
-    "bnName": "কেন্দুয়া",
+    "bnName": "কেন্দুয়া",
     "slug": "kendua",
     "districtId": 43,
     "postalCode": "2410"
@@ -2554,7 +2554,7 @@
   {
     "id": 320,
     "name": "Khaliajuri",
-    "bnName": "খালিয়াজুরী",
+    "bnName": "খালিয়াজুরী",
     "slug": "khaliajuri",
     "districtId": 43,
     "postalCode": "2480"
@@ -2569,7 +2569,7 @@
   },
   {
     "id": 322,
-    "name": "Mohanganj",
+    "name": "Mohongonj",
     "bnName": "মোহনগঞ্জ",
     "slug": "mohanganj",
     "districtId": 43,
@@ -2578,7 +2578,7 @@
   {
     "id": 323,
     "name": "Netrokona Sadar",
-    "bnName": "নেত্রকোনা সদর",
+    "bnName": "নেত্রকোণা সদর",
     "slug": "netrokona_sadar",
     "districtId": 43,
     "postalCode": "2400"
@@ -2601,7 +2601,7 @@
   },
   {
     "id": 326,
-    "name": "Nakla",
+    "name": "Nokla",
     "bnName": "নকলা",
     "slug": "nakla",
     "districtId": 44,
@@ -2625,7 +2625,7 @@
   },
   {
     "id": 329,
-    "name": "Sreebardi",
+    "name": "Sreebordi",
     "bnName": "শ্রীবরদী",
     "slug": "sreebardi",
     "districtId": 44,
@@ -2633,43 +2633,43 @@
   },
   {
     "id": 330,
-    "name": "Adamdighi",
-    "bnName": "আদমদীঘি",
+    "name": "Bogura Sadar",
+    "bnName": "বগুড়া সদর",
     "slug": "adamdighi",
     "districtId": 45,
     "postalCode": "5810"
   },
   {
     "id": 331,
-    "name": "Bogura Sadar",
-    "bnName": "বগুড়া সদর",
+    "name": "Shariakandi",
+    "bnName": "সারিয়াকান্দি",
     "slug": "bogura_sadar",
     "districtId": 45,
     "postalCode": "5800"
   },
   {
     "id": 332,
-    "name": "Dhunat",
-    "bnName": "ধুনট",
+    "name": "Dupchanchia",
+    "bnName": "দুপচাচিঁয়া",
     "slug": "dhunat",
     "districtId": 45,
     "postalCode": "5850"
   },
   {
     "id": 333,
-    "name": "Dhupchanchia",
-    "bnName": "দুপচাঁচিয়া",
+    "name": "Adamdighi",
+    "bnName": "আদমদিঘি",
     "slug": "dhupchanchia",
     "districtId": 45,
-    "postalCode": "5830"
+    "postalCode": "5810"
   },
   {
     "id": 334,
-    "name": "Gabtali",
-    "bnName": "গাবতলী",
+    "name": "Nondigram",
+    "bnName": "নন্দিগ্রাম",
     "slug": "gabtali",
     "districtId": 45,
-    "postalCode": "5870"
+    "postalCode": "5830"
   },
   {
     "id": 335,
@@ -2681,19 +2681,19 @@
   },
   {
     "id": 336,
-    "name": "Nandigram",
-    "bnName": "নন্দীগ্রাম",
+    "name": "Dhunot",
+    "bnName": "ধুনট",
     "slug": "nandigram",
     "districtId": 45,
-    "postalCode": "5880"
+    "postalCode": "5850"
   },
   {
     "id": 337,
-    "name": "Sariakandi",
-    "bnName": "সারিয়াকান্দি",
+    "name": "Gabtali",
+    "bnName": "গাবতলী",
     "slug": "sariakandi",
     "districtId": 45,
-    "postalCode": "5860"
+    "postalCode": "5870"
   },
   {
     "id": 338,
@@ -2721,7 +2721,7 @@
   },
   {
     "id": 341,
-    "name": "Sonatola",
+    "name": "Sonatala",
     "bnName": "সোনাতলা",
     "slug": "sonatola",
     "districtId": 45,
@@ -2745,7 +2745,7 @@
   },
   {
     "id": 344,
-    "name": "Gomastapur",
+    "name": "Gomostapur",
     "bnName": "গোমস্তাপুর",
     "slug": "gomastapur",
     "districtId": 46,
@@ -2753,7 +2753,7 @@
   },
   {
     "id": 345,
-    "name": "Nachole",
+    "name": "Nachol",
     "bnName": "নাচোল",
     "slug": "nachole",
     "districtId": 46,
@@ -2778,7 +2778,7 @@
   {
     "id": 348,
     "name": "Joypurhat Sadar",
-    "bnName": "জয়পুরহাট সদর",
+    "bnName": "জয়পুরহাট সদর",
     "slug": "joypurhat_sadar",
     "districtId": 47,
     "postalCode": "5900"
@@ -2817,7 +2817,7 @@
   },
   {
     "id": 353,
-    "name": "Badalgachhi",
+    "name": "Badalgachi",
     "bnName": "বদলগাছী",
     "slug": "badalgachhi",
     "districtId": 48,
@@ -2858,7 +2858,7 @@
   {
     "id": 358,
     "name": "Niamatpur",
-    "bnName": "নিয়ামতপুর",
+    "bnName": "নিয়ামতপুর",
     "slug": "niamatpur",
     "districtId": 48,
     "postalCode": "6580"
@@ -2866,7 +2866,7 @@
   {
     "id": 359,
     "name": "Patnitala",
-    "bnName": "পত্নীতলা",
+    "bnName": "পত্নিতলা",
     "slug": "patnitala",
     "districtId": 48,
     "postalCode": "6560"
@@ -2953,8 +2953,8 @@
   },
   {
     "id": 370,
-    "name": "Atgharia",
-    "bnName": "আটঘরিয়া",
+    "name": "Atghoria",
+    "bnName": "আটঘরিয়া",
     "slug": "atgharia",
     "districtId": 50,
     "postalCode": "6650"
@@ -2962,7 +2962,7 @@
   {
     "id": 371,
     "name": "Bera",
-    "bnName": "বেড়া",
+    "bnName": "বেড়া",
     "slug": "bera",
     "districtId": 50,
     "postalCode": "6680"
@@ -2970,7 +2970,7 @@
   {
     "id": 372,
     "name": "Bhangura",
-    "bnName": "ভাঙ্গুড়া",
+    "bnName": "ভাঙ্গুড়া",
     "slug": "bhangura",
     "districtId": 50,
     "postalCode": "6640"
@@ -2993,7 +2993,7 @@
   },
   {
     "id": 375,
-    "name": "Ishwardi",
+    "name": "Ishurdi",
     "bnName": "ঈশ্বরদী",
     "slug": "ishwardi",
     "districtId": 50,
@@ -3010,7 +3010,7 @@
   {
     "id": 377,
     "name": "Santhia",
-    "bnName": "সাঁথিয়া",
+    "bnName": "সাঁথিয়া",
     "slug": "santhia",
     "districtId": 50,
     "postalCode": "6610"
@@ -3065,7 +3065,7 @@
   },
   {
     "id": 384,
-    "name": "Mohanpur",
+    "name": "Mohonpur",
     "bnName": "মোহনপুর",
     "slug": "mohanpur",
     "districtId": 51,
@@ -3113,7 +3113,7 @@
   },
   {
     "id": 390,
-    "name": "Kamarkhanda",
+    "name": "Kamarkhand",
     "bnName": "কামারখন্দ",
     "slug": "kamarkhanda",
     "districtId": 52,
@@ -3129,8 +3129,8 @@
   },
   {
     "id": 392,
-    "name": "Raiganj",
-    "bnName": "রায়গঞ্জ",
+    "name": "Raigonj",
+    "bnName": "রায়গঞ্জ",
     "slug": "raiganj",
     "districtId": 52,
     "postalCode": "6770"
@@ -3154,15 +3154,15 @@
   {
     "id": 395,
     "name": "Tarash",
-    "bnName": "তাড়াশ",
+    "bnName": "তাড়াশ",
     "slug": "tarash",
     "districtId": 52,
     "postalCode": "6720"
   },
   {
     "id": 396,
-    "name": "Ullahpara",
-    "bnName": "উল্লাপাড়া",
+    "name": "Ullapara",
+    "bnName": "উল্লাপাড়া",
     "slug": "ullahpara",
     "districtId": 52,
     "postalCode": "6710"
@@ -3185,8 +3185,8 @@
   },
   {
     "id": 399,
-    "name": "Biral",
-    "bnName": "বিরল",
+    "name": "Fulbari",
+    "bnName": "ফুলবাড়ী",
     "slug": "biral",
     "districtId": 53,
     "postalCode": "5250"
@@ -3201,11 +3201,11 @@
   },
   {
     "id": 401,
-    "name": "Chirirbandar",
-    "bnName": "চিরিরবন্দর",
+    "name": "Birol",
+    "bnName": "বিরল",
     "slug": "chirirbandar",
     "districtId": 53,
-    "postalCode": "5240"
+    "postalCode": "5250"
   },
   {
     "id": 402,
@@ -3218,7 +3218,7 @@
   {
     "id": 403,
     "name": "Ghoraghat",
-    "bnName": "ঘোড়াঘাট",
+    "bnName": "ঘোড়াঘাট",
     "slug": "ghoraghat",
     "districtId": 53,
     "postalCode": "5230"
@@ -3233,7 +3233,7 @@
   },
   {
     "id": 405,
-    "name": "Kaharole",
+    "name": "Kaharol",
     "bnName": "কাহারোল",
     "slug": "kaharole",
     "districtId": 53,
@@ -3265,11 +3265,11 @@
   },
   {
     "id": 409,
-    "name": "Phulbari",
-    "bnName": "ফুলবাড়ী",
+    "name": "Chirirbandar",
+    "bnName": "চিরিরবন্দর",
     "slug": "phulbari_dinajpur",
     "districtId": 53,
-    "postalCode": "5225"
+    "postalCode": "5240"
   },
   {
     "id": 410,
@@ -3281,8 +3281,8 @@
   },
   {
     "id": 411,
-    "name": "Gobindaganj",
-    "bnName": "গোবিন্দগঞ্জ",
+    "name": "Saghata",
+    "bnName": "সাঘাটা",
     "slug": "gobindaganj",
     "districtId": 54,
     "postalCode": "5750"
@@ -3290,18 +3290,18 @@
   {
     "id": 412,
     "name": "Palashbari",
-    "bnName": "পলাশবাড়ী",
+    "bnName": "পলাশবাড়ী",
     "slug": "palashbari",
     "districtId": 54,
     "postalCode": "5720"
   },
   {
     "id": 413,
-    "name": "Phulchhari",
-    "bnName": "ফুলছড়ি",
+    "name": "Gobindaganj",
+    "bnName": "গোবিন্দগঞ্জ",
     "slug": "phulchhari",
     "districtId": 54,
-    "postalCode": "5780"
+    "postalCode": "5750"
   },
   {
     "id": 414,
@@ -3313,11 +3313,11 @@
   },
   {
     "id": 415,
-    "name": "Sughatta",
-    "bnName": "সুন্দরগঞ্জ",
+    "name": "Phulchari",
+    "bnName": "ফুলছড়ি",
     "slug": "sughatta",
     "districtId": 54,
-    "postalCode": "5735"
+    "postalCode": "5780"
   },
   {
     "id": 416,
@@ -3337,7 +3337,7 @@
   },
   {
     "id": 418,
-    "name": "Char Rajibpur",
+    "name": "Charrajibpur",
     "bnName": "চর রাজিবপুর",
     "slug": "char_rajibpur",
     "districtId": 55,
@@ -3370,7 +3370,7 @@
   {
     "id": 422,
     "name": "Phulbari",
-    "bnName": "ফুলবাড়ী",
+    "bnName": "ফুলবাড়ী",
     "slug": "phulbari_kurigram",
     "districtId": 55,
     "postalCode": "5670"
@@ -3385,7 +3385,7 @@
   },
   {
     "id": 424,
-    "name": "Raomari",
+    "name": "Rowmari",
     "bnName": "রৌমারী",
     "slug": "raomari",
     "districtId": 55,
@@ -3465,7 +3465,7 @@
   },
   {
     "id": 434,
-    "name": "Kishoreganj",
+    "name": "Kishorganj",
     "bnName": "কিশোরগঞ্জ",
     "slug": "kishoreganj_nilphamari",
     "districtId": 57,
@@ -3481,7 +3481,7 @@
   },
   {
     "id": 436,
-    "name": "Saidpur",
+    "name": "Syedpur",
     "bnName": "সৈয়দপুর",
     "slug": "saidpur",
     "districtId": 57,
@@ -3529,19 +3529,19 @@
   },
   {
     "id": 442,
-    "name": "Badarganj",
-    "bnName": "বদরগঞ্জ",
+    "name": "Gangachara",
+    "bnName": "গংগাচড়া",
     "slug": "badarganj",
     "districtId": 59,
     "postalCode": "5410"
   },
   {
     "id": 443,
-    "name": "Gangachhara",
-    "bnName": "গঙ্গাছড়া",
+    "name": "Badargonj",
+    "bnName": "বদরগঞ্জ",
     "slug": "gangachhara",
     "districtId": 59,
-    "postalCode": "5450"
+    "postalCode": "5410"
   },
   {
     "id": 444,
@@ -3561,7 +3561,7 @@
   },
   {
     "id": 446,
-    "name": "Pirgachha",
+    "name": "Pirgacha",
     "bnName": "পীরগাছা",
     "slug": "pirgachha",
     "districtId": 59,
@@ -3569,7 +3569,7 @@
   },
   {
     "id": 447,
-    "name": "Pirganj",
+    "name": "Pirgonj",
     "bnName": "পীরগঞ্জ",
     "slug": "pirganj_rangpur",
     "districtId": 59,
@@ -3585,7 +3585,7 @@
   },
   {
     "id": 449,
-    "name": "Taraganj",
+    "name": "Taragonj",
     "bnName": "তারাগঞ্জ",
     "slug": "taraganj",
     "districtId": 59,
@@ -3649,8 +3649,8 @@
   },
   {
     "id": 457,
-    "name": "Baniyachong",
-    "bnName": "বানিয়াচং",
+    "name": "Baniachong",
+    "bnName": "বানিয়াচং",
     "slug": "baniyachong",
     "districtId": 61,
     "postalCode": "3370"
@@ -3706,7 +3706,7 @@
   {
     "id": 464,
     "name": "Barlekha",
-    "bnName": "বড়লেখা",
+    "bnName": "বড়লেখা",
     "slug": "barlekha",
     "districtId": 62,
     "postalCode": "3250"
@@ -3714,14 +3714,14 @@
   {
     "id": 465,
     "name": "Juri",
-    "bnName": "জুড়ী",
+    "bnName": "জুড়ী",
     "slug": "juri",
     "districtId": 62,
     "postalCode": "3260"
   },
   {
     "id": 466,
-    "name": "Kamalganj",
+    "name": "Kamolganj",
     "bnName": "কমলগঞ্জ",
     "slug": "kamalganj",
     "districtId": 62,
@@ -3730,7 +3730,7 @@
   {
     "id": 467,
     "name": "Kulaura",
-    "bnName": "কুলাউড়া",
+    "bnName": "কুলাউড়া",
     "slug": "kulaura",
     "districtId": 62,
     "postalCode": "3230"
@@ -3761,31 +3761,31 @@
   },
   {
     "id": 471,
-    "name": "Bishwamvarpur",
-    "bnName": "বিশ্বম্ভরপুর",
+    "name": "Shantiganj",
+    "bnName": "শান্তিগঞ্জ",
     "slug": "bishwamvarpur",
     "districtId": 63,
     "postalCode": "3080"
   },
   {
     "id": 472,
+    "name": "Bishwambarpur",
+    "bnName": "বিশ্বম্ভরপুর",
+    "slug": "chhatak",
+    "districtId": 63,
+    "postalCode": "3080"
+  },
+  {
+    "id": 473,
     "name": "Chhatak",
     "bnName": "ছাতক",
-    "slug": "chhatak",
+    "slug": "derai",
     "districtId": 63,
     "postalCode": "3060"
   },
   {
-    "id": 473,
-    "name": "Derai",
-    "bnName": "দিরাই",
-    "slug": "derai",
-    "districtId": 63,
-    "postalCode": "3050"
-  },
-  {
     "id": 474,
-    "name": "Dharamapasha",
+    "name": "Dharmapasha",
     "bnName": "ধর্মপাশা",
     "slug": "dharamapasha",
     "districtId": 63,
@@ -3817,27 +3817,27 @@
   },
   {
     "id": 478,
-    "name": "Madhyanagar",
-    "bnName": "মধ্যনগর",
+    "name": "Shalla",
+    "bnName": "শাল্লা",
     "slug": "madhyanagar",
     "districtId": 63,
-    "postalCode": "3085"
+    "postalCode": "3050"
   },
   {
     "id": 479,
-    "name": "Shantiganj",
-    "bnName": "শান্তিগঞ্জ",
+    "name": "Derai",
+    "bnName": "দিরাই",
     "slug": "shantiganj",
     "districtId": 63,
-    "postalCode": "3090"
+    "postalCode": "3050"
   },
   {
     "id": 480,
-    "name": "Sullah",
-    "bnName": "সুল্লা",
+    "name": "Madhyanagar",
+    "bnName": "মধ্যনগর",
     "slug": "sullah",
     "districtId": 63,
-    "postalCode": "3020"
+    "postalCode": "3085"
   },
   {
     "id": 481,
@@ -3866,7 +3866,7 @@
   {
     "id": 484,
     "name": "Beanibazar",
-    "bnName": "বিয়ানীবাজার",
+    "bnName": "বিয়ানীবাজার",
     "slug": "beanibazar",
     "districtId": 64,
     "postalCode": "3170"
@@ -3889,7 +3889,7 @@
   },
   {
     "id": 487,
-    "name": "Dakshin Surma",
+    "name": "Dakshinsurma",
     "bnName": "দক্ষিণ সুরমা",
     "slug": "dakshin_surma",
     "districtId": 64,
@@ -3914,7 +3914,7 @@
   {
     "id": 490,
     "name": "Gowainghat",
-    "bnName": "গোয়াইনঘাট",
+    "bnName": "গোয়াইনঘাট",
     "slug": "gowainghat",
     "districtId": 64,
     "postalCode": "3113"
@@ -3937,7 +3937,7 @@
   },
   {
     "id": 493,
-    "name": "Osmani Nagar",
+    "name": "Osmaninagar",
     "bnName": "ওসমানী নগর",
     "slug": "osmani_nagar",
     "districtId": 64,
@@ -3958,5 +3958,13 @@
     "slug": "zakiganj",
     "districtId": 64,
     "postalCode": "3190"
+  },
+  {
+    "id": 496,
+    "name": "Dhaka Sadar",
+    "bnName": "ঢাকা সদর",
+    "slug": "dhakasadar",
+    "districtId": 18,
+    "postalCode": "1000"
   }
 ]

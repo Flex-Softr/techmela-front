@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             logo: "https://siddikiaprokashoni.com/logo/logo.png",
             contactPoint: {
               "@type": "ContactPoint",
-              telephone: "+8801602431167",
+              telephone: "+8801339955155",
               contactType: "customer service",
             },
             sameAs: [

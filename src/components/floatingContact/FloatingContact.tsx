@@ -36,7 +36,7 @@ const FloatingContact = () => {
     {
       name: "WhatsApp",
       icon: "/images/social_icons/whatsapp.png",
-      link: "http://wa.me/8801602431167", // Replace with your WhatsApp number
+      link: "http://wa.me/8801339955155", // Replace with your WhatsApp number
       bgColor: "bg-green-500",
       hoverColor: "hover:bg-green-600",
     },
