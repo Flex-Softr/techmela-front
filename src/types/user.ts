@@ -9,6 +9,9 @@ type TStaff = TUserCommon;
 type TAdmin = TUserCommon;
 type TAddress = {
   fullAddress: string;
+  division?: string;
+  district?: string;
+  upazila?: string;
   city?: string;
   state?: string;
   country?: string;

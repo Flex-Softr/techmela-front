@@ -97,7 +97,6 @@ export type TSingleProduct = {
   };
   thumbnail: TGalleryImage;
   gallery: TGalleryImage[];
-  image: TGalleryImage;
   inventory: TInventory;
   attribute: TAttribute[];
   brand: TBrand;

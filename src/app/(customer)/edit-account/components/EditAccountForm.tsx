@@ -15,19 +15,24 @@ import {
 } from "@/redux/features/user/userApi";
 import { TUserProfile } from "@/types/user";
 import { User, Save } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import DivisionDistrictUpazilaSelector from "@/app/(public)/checkout/components/DivisionDistrictSelector";
 
 type FormData = {
   fullName: string;
   email: string;
   phoneNumber: string;
-  fullAddress: string;
+  address: {
+    division: string;
+    district: string;
+    upazila: string;
+    fullAddress: string;
+  };
 };
 
 const EditAccountForm = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const { data } = useGetUserDataQuery(undefined);
 
   const {
@@ -40,13 +45,17 @@ const EditAccountForm = () => {
   const initialEmail = rawEmail || "";
   const initialFullName = rawFullName || "";
   const initialPhoneNumber = rawPhoneNumber || "";
+  const initialDivision = address?.division || "";
+  const initialDistrict = address?.district || "";
+  const initialUpazila = address?.upazila || "";
   const initialFullAddress = address?.fullAddress || "";
 
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { isSubmitting },
+    control,
+    formState: { isSubmitting, errors },
   } = useForm<FormData>();
 
   const [updateUserData] = useUpdateUserDataMutation();
@@ -54,21 +63,20 @@ const EditAccountForm = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (isMounted) {
-      setValue("fullName", initialFullName);
-      setValue("email", initialEmail);
-      setValue("phoneNumber", initialPhoneNumber);
-      setValue("fullAddress", initialFullAddress);
-    }
+    setValue("fullName", initialFullName);
+    setValue("email", initialEmail);
+    setValue("phoneNumber", initialPhoneNumber);
+    setValue("address.division", initialDivision);
+    setValue("address.district", initialDistrict);
+    setValue("address.upazila", initialUpazila);
+    setValue("address.fullAddress", initialFullAddress);
   }, [
-    isMounted,
     initialFullName,
     initialEmail,
     initialPhoneNumber,
+    initialDivision,
+    initialDistrict,
+    initialUpazila,
     initialFullAddress,
     setValue,
   ]);
@@ -85,9 +93,26 @@ const EditAccountForm = () => {
     if (formData.phoneNumber !== initialPhoneNumber) {
       payload.phoneNumber = formData.phoneNumber;
     }
-    if (formData.fullAddress !== initialFullAddress) {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const addressPayload: any = {};
+    if (formData.address.division !== initialDivision) {
+      addressPayload.division = formData.address.division;
+    }
+    if (formData.address.district !== initialDistrict) {
+      addressPayload.district = formData.address.district;
+    }
+    if (formData.address.upazila !== initialUpazila) {
+      addressPayload.upazila = formData.address.upazila;
+    }
+    if (formData.address.fullAddress !== initialFullAddress) {
+      addressPayload.fullAddress = formData.address.fullAddress;
+    }
+
+    if (Object.keys(addressPayload).length > 0) {
       payload.address = {
-        fullAddress: formData.fullAddress,
+        ...address,
+        ...addressPayload,
       };
     }
 
@@ -122,15 +147,6 @@ const EditAccountForm = () => {
       });
     }
   };
-
-  if (!isMounted) {
-    return (
-      <div className="max-w-4xl mx-auto space-y-4 animate-pulse">
-        <div className="h-10 bg-gray-100 rounded-lg w-1/3"></div>
-        <div className="h-64 bg-gray-50 rounded-xl"></div>
-      </div>
-    );
-  }
 
   return (
     <Card className="w-full shadow-sm border-gray-200/60 max-w-4xl mx-auto font-hind-siliguri">
@@ -192,7 +208,18 @@ const EditAccountForm = () => {
               />
             </div>
 
-            <div className="space-y-1.5">
+            <div className="md:col-span-2">
+              <DivisionDistrictUpazilaSelector
+                control={control}
+                register={register}
+                setValue={setValue}
+                errors={errors}
+                shipping={address || undefined}
+                basePath="address"
+              />
+            </div>
+
+            <div className="space-y-1.5 md:col-span-2">
               <label
                 htmlFor="fullAddress"
                 className="text-sm font-semibold text-gray-700"
@@ -202,7 +229,7 @@ const EditAccountForm = () => {
               <Input
                 type="text"
                 id="fullAddress"
-                {...register("fullAddress")}
+                {...register("address.fullAddress")}
                 placeholder="আপনার বর্তমান ঠিকানা লিখুন"
                 className="h-10 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />

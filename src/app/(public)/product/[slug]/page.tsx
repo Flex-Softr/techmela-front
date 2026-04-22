@@ -21,13 +21,35 @@ type TProps = {
 
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const product = await fetchProductData(params.slug);
+  const imageUrl = getImageSrc(
+    product?.thumbnail?.src || product?.gallery?.[0]?.src
+  );
+
+  const title = product?.seoData?.metaTitle || product?.title;
+  const description =
+    product?.seoData?.metaDescription || product?.shortDescription;
 
   return {
-    title: product?.seoData?.metaTitle || product?.title,
-    description: product?.seoData?.metaDescription,
+    title,
+    description,
     openGraph: {
-      title: product?.seoData?.metaTitle || product?.title,
-      description: product?.seoData?.metaDescription,
+      title,
+      description,
+      images: [
+        {
+          url: imageUrl,
+          width: 800,
+          height: 600,
+          alt: title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
     },
     alternates: {
       canonical: `https://siddikiaprokashoni.com/product/${params.slug}`,
@@ -70,7 +92,7 @@ const ProductDetailsPage = async ({ params }: TProps) => {
     "@type": ["Product", "Book"],
     name: product.title,
     description: product.seoData?.metaDescription || product.shortDescription,
-    image: getImageSrc(product.image?.src),
+    image: getImageSrc(product.thumbnail?.src || product.gallery?.[0]?.src),
     sku: product.inventory?.sku,
     offers: {
       "@type": "Offer",
