@@ -45,6 +45,9 @@
     --input: 197 20% 85%;
     --ring: 197 98% 23%;
 
+    --success: 134 61% 41%;
+    --success-foreground: 0 0% 100%;
+
     --radius: 0.5rem;
   }
 
@@ -83,6 +86,9 @@
     --border: 197 20% 85%;
     --input: 197 20% 85%;
     --ring: 197 98% 23%;
+
+    --success: 134 61% 41%;
+    --success-foreground: 0 0% 100%;
 
     --radius: 0.5rem;
   }

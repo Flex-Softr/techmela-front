@@ -1,18 +1,38 @@
 "use client";
 
+import { useToast } from "@/components/ui/use-toast";
+import { useSendContactMessageMutation } from "@/redux/features/contactApi/contactApi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, useForm } from "react-hook-form";
 import { FaPaperPlane } from "react-icons/fa";
 import * as yup from "yup";
-import { useSendContactMessageMutation } from "@/redux/features/contactApi/contactApi";
-import { useToast } from "@/components/ui/use-toast";
 
 const schema = yup.object().shape({
-  name: yup.string().required("আপনার নাম লিখুন"),
-  email: yup.string().email("সঠিক ইমেল লিখুন").required("আপনার ইমেল লিখুন"),
-  phone: yup.string().required("আপনার ফোন নম্বর লিখুন"),
-  subject: yup.string().required("বিষয় লিখুন"),
-  message: yup.string().required("আপনার বার্তা লিখুন"),
+  name: yup
+    .string()
+    .required("আপনার নাম লিখুন")
+    .min(2, "নাম কমপক্ষে ২ অক্ষরের হতে হবে")
+    .max(50, "নাম সর্বোচ্চ ৫০ অক্ষরের হতে পারবে"),
+  email: yup
+    .string()
+    .email("সঠিক ইমেল লিখুন")
+    .required("আপনার ইমেল লিখুন")
+    .max(100, "ইমেল সর্বোচ্চ ১০০ অক্ষরের হতে পারবে"),
+  phone: yup
+    .string()
+    .required("আপনার ফোন নম্বর লিখুন")
+    .min(10, "ফোন নম্বর কমপক্ষে ১০ সংখ্যার হতে হবে")
+    .max(15, "ফোন নম্বর সর্বোচ্চ ১৫ সংখ্যার হতে পারবে"),
+  subject: yup
+    .string()
+    .required("বিষয় লিখুন")
+    .min(3, "বিষয় কমপক্ষে ৩ অক্ষরের হতে হবে")
+    .max(200, "বিষয় সর্বোচ্চ ২০০ অক্ষরের হতে পারবে"),
+  message: yup
+    .string()
+    .required("আপনার বার্তা লিখুন")
+    .min(10, "বার্তা কমপক্ষে ১০ অক্ষরের হতে হবে")
+    .max(2000, "বার্তা সর্বোচ্চ ২০০০ অক্ষরের হতে পারবে"),
 });
 
 const ContactForm = () => {
@@ -24,27 +44,31 @@ const ContactForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const messageValue = watch("message") || "";
 
   const onSubmit = async (data: FieldValues) => {
     try {
       await sendContactMessage(data).unwrap();
 
       toast({
-        title: "সফল হয়েছে",
+        variant: "success",
+        title: "সফল হয়েছে",
         description:
-          "আপনার বার্তা সফলভাবে পাঠানো হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।",
+          "আপনার বার্তা সফলভাবে পাঠানো হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।",
       });
 
       reset();
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "ব্যর্থ হয়েছে",
+        title: "ব্যর্থ হয়েছে",
         description:
-          "দুঃখিত, বার্তা পাঠানো সম্ভব হয়নি। দয়া করে আবার চেষ্টা করুন।",
+          "দুঃখিত, বার্তা পাঠানো সম্ভব হয়নি। দয়া করে আবার চেষ্টা করুন।",
       });
     }
   };
@@ -67,6 +91,7 @@ const ContactForm = () => {
               {...register("name")}
               type="text"
               placeholder="আপনার নাম"
+              maxLength={50}
               className={`w-full px-4 py-3 rounded-xl border ${
                 errors.name ? "border-red-500" : "border-gray-200"
               } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
@@ -83,6 +108,7 @@ const ContactForm = () => {
               {...register("phone")}
               type="text"
               placeholder="আপনার ফোন নম্বর"
+              maxLength={15}
               className={`w-full px-4 py-3 rounded-xl border ${
                 errors.phone ? "border-red-500" : "border-gray-200"
               } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
@@ -103,6 +129,7 @@ const ContactForm = () => {
             {...register("email")}
             type="email"
             placeholder="আপনার ইমেল"
+            maxLength={100}
             className={`w-full px-4 py-3 rounded-xl border ${
               errors.email ? "border-red-500" : "border-gray-200"
             } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
@@ -114,12 +141,13 @@ const ContactForm = () => {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            বিষয় *
+            বিষয় *
           </label>
           <input
             {...register("subject")}
             type="text"
-            placeholder="মেসেজের বিষয়"
+            placeholder="মেসেজের বিষয়"
+            maxLength={200}
             className={`w-full px-4 py-3 rounded-xl border ${
               errors.subject ? "border-red-500" : "border-gray-200"
             } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
@@ -132,13 +160,27 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            মেসেজ *
-          </label>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-sm font-semibold text-gray-700">
+              মেসেজ *
+            </label>
+            <span
+              className={`text-xs ${
+                messageValue.length > 1800
+                  ? "text-red-500"
+                  : messageValue.length > 1400
+                    ? "text-amber-500"
+                    : "text-gray-400"
+              }`}
+            >
+              {messageValue.length}/২০০০
+            </span>
+          </div>
           <textarea
             {...register("message")}
             rows={4}
             placeholder="আপনার বার্তা এখানে লিখুন..."
+            maxLength={2000}
             className={`w-full px-4 py-3 rounded-xl border ${
               errors.message ? "border-red-500" : "border-gray-200"
             } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none`}
