@@ -45,7 +45,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
     required: "জেলা সিলেক্ট করুন",
   });
   const upazilaRegister = register(`${basePath}.upazila` as Path<T>, {
-    required: "উপজেলা সিলেক্ট করুন",
+    required: "থানা / উপজেলা সিলেক্ট করুন",
   });
   const division =
     useWatch({ control, name: `${basePath}.division` as Path<T> }) || "";
@@ -152,7 +152,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           htmlFor={`${basePath}.upazila`}
           className="font-semibold text-gray-700"
         >
-          উপজেলা <span className="text-red-600">*</span>
+          থানা / উপজেলা <span className="text-red-600">*</span>
         </Label>
         <select
           id={`${basePath}.upazila`}
@@ -166,8 +166,11 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           disabled={!district}
           className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-gray-50 disabled:cursor-not-allowed"
         >
-          <option value="">
-            -- {district ? "উপজেলা সিলেক্ট" : "আগে জেলা সিলেক্ট"} --
+          <option value="" className="lg:hidden">
+            -- {district ? "থানা / উপজেলা সিলেক্ট" : "আগে জেলা সিলেক্ট"} --
+          </option>
+          <option value="" className="hidden lg:block">
+            -- {district ? "থানা / উপজেলা" : "আগে জেলা"} --
           </option>
           {upazilas.map((u) => (
             <option key={u.id} value={u.id}>
@@ -177,7 +180,8 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
         </select>
         {errorObj?.upazila && (
           <span className="text-red-500 text-xs">
-            {(errorObj.upazila.message as string) || "উপজেলা সিলেক্ট করুন"}
+            {(errorObj.upazila.message as string) ||
+              "থানা / উপজেলা সিলেক্ট করুন"}
           </span>
         )}
       </div>

@@ -40,7 +40,7 @@ const schema = yup.object().shape({
     .shape({
       division: yup.string().required("বিভাগ প্রয়োজন"),
       district: yup.string().required("জেলা প্রয়োজন"),
-      upazila: yup.string().required("উপজেলা প্রয়োজন"),
+      upazila: yup.string().required("থানা / উপজেলা প্রয়োজন"),
       fullAddress: yup.string().required("বিস্তারিত ঠিকানা প্রয়োজন"),
     })
     .required("ঠিকানা প্রয়োজন"),
