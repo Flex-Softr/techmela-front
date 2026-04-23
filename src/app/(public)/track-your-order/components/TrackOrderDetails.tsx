@@ -2,7 +2,15 @@
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import EcButton from "@/components/shared/EcButton/EcButton";
 import { useOderTrackerQuery } from "@/redux/features/trackOrder/TrackOrder";
-import { ArrowLeft, MapPin, Package, Phone, Truck, User } from "lucide-react";
+import {
+  ArrowLeft,
+  Mail,
+  MapPin,
+  Package,
+  Phone,
+  Truck,
+  User,
+} from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import Timeline from "./Timeline";
 
@@ -173,6 +181,19 @@ const TrackOrderDetails = () => {
                       </p>
                     </div>
                   </div>
+                  {orderData?.shipping?.email && (
+                    <div className="flex items-start gap-3">
+                      <Mail className="w-4 h-4 text-muted-foreground mt-1" />
+                      <div>
+                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                          ইমেইল
+                        </p>
+                        <p className="text-sm font-medium">
+                          {orderData?.shipping?.email}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

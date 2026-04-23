@@ -117,7 +117,7 @@ const OrderDetails = () => {
             <div className="flex justify-between border-t border-gray-50 pt-2.5">
               <span className="text-sm text-gray-500">সাবটোটাল</span>
               <span className="text-sm font-semibold text-gray-800">
-                &#2547;{subtotal?.toFixed(2)}
+                &#2547;{subtotal}
               </span>
             </div>
             <div className="flex justify-between border-t border-gray-50 pt-2.5">
@@ -125,7 +125,7 @@ const OrderDetails = () => {
                 শিপিং চার্জ ({shippingCharge?.name})
               </span>
               <span className="text-sm font-semibold text-gray-800">
-                &#2547;{shippingCharge?.amount?.toFixed(2)}
+                &#2547;{shippingCharge?.amount}
               </span>
             </div>
             <div className="flex justify-between border-t border-gray-100 pt-2.5">
@@ -133,7 +133,7 @@ const OrderDetails = () => {
                 মোট পরিমাণ
               </span>
               <span className="text-primary font-bold text-base">
-                &#2547;{total?.toFixed(2)}
+                &#2547;{total}
               </span>
             </div>
           </CardContent>
@@ -157,6 +157,9 @@ const OrderDetails = () => {
             <p className="text-sm text-gray-500">
               ফোন: {shipping?.phoneNumber}
             </p>
+            {shipping?.email && (
+              <p className="text-sm text-gray-500">ইমেইল: {shipping?.email}</p>
+            )}
             <div className="pt-3 border-t border-gray-50 mt-2 flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">

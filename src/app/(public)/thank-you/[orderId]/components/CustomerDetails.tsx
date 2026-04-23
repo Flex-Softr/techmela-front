@@ -33,6 +33,9 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
               <p className="text-gray-500 text-xs">
                 {orderInfo.shipping?.phoneNumber}
               </p>
+              <p className="text-gray-500 text-xs">
+                {orderInfo.shipping?.email}
+              </p>
             </div>
           </div>
 

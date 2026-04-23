@@ -141,52 +141,83 @@ const ShippingAddress = ({
         </Card>
       )}
       <div id="shipping-address-form" className="space-y-3">
-        <div>
-          <Label
-            htmlFor="shipping.fullName"
-            className="font-bold pl-1 mb-1.5 block"
-          >
-            নাম <span className="text-red-600">*</span>
-          </Label>
-          <Input
-            id="shipping.fullName"
-            placeholder="আপনার নাম লিখুন"
-            {...register("shipping.fullName", {
-              required: "নাম আবশ্যক।",
-              maxLength: {
-                value: 30,
-                message: "নাম ৩০ অক্ষরের বেশি হতে পারবে না।",
-              },
-            })}
-          />
-          {errors.shipping?.fullName && (
-            <ErrorMessage
-              message={errors.shipping.fullName.message}
-              className="mt-1"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label
+              htmlFor="shipping.fullName"
+              className="font-bold pl-1 mb-1.5 block"
+            >
+              নাম <span className="text-red-600">*</span>
+            </Label>
+            <Input
+              id="shipping.fullName"
+              placeholder="আপনার নাম লিখুন"
+              {...register("shipping.fullName", {
+                required: "আপনার নাম লিখুন",
+                maxLength: {
+                  value: 30,
+                  message: "নাম ৩০ অক্ষরের বেশি হতে পারবে না",
+                },
+              })}
             />
-          )}
+            {errors.shipping?.fullName && (
+              <ErrorMessage
+                message={errors.shipping.fullName.message}
+                className="mt-1"
+              />
+            )}
+          </div>
+          <div>
+            <Label
+              htmlFor="shipping.phoneNumber"
+              className="font-bold pl-1 mb-1.5 block"
+            >
+              মোবাইল নম্বর <span className="text-red-600">*</span>
+            </Label>
+            <Input
+              id="shipping.phoneNumber"
+              placeholder="আপনার মোবাইল নম্বর লিখুন"
+              {...register("shipping.phoneNumber", {
+                required: "আপনার মোবাইল নম্বর লিখুন",
+                pattern: {
+                  value: /^(?:\+88)?01[3-9]\d{8}$/,
+                  message: "সঠিক মোবাইল নম্বর দিন",
+                },
+              })}
+            />
+            {errors.shipping?.phoneNumber && (
+              <ErrorMessage
+                message={errors.shipping.phoneNumber.message}
+                className="mt-1"
+              />
+            )}
+          </div>
         </div>
         <div>
           <Label
-            htmlFor="shipping.phoneNumber"
+            htmlFor="shipping.email"
             className="font-bold pl-1 mb-1.5 block"
           >
-            মোবাইল নম্বর <span className="text-red-600">*</span>
+            ইমেইল (ঐচ্ছিক)
           </Label>
           <Input
-            id="shipping.phoneNumber"
-            placeholder="আপনার মোবাইল নম্বর লিখুন"
-            {...register("shipping.phoneNumber", {
-              required: "মোবাইল নম্বর আবশ্যক।",
-              pattern: {
-                value: /^(?:\+88)?01[3-9]\d{8}$/,
-                message: "সঠিক মোবাইল নম্বর দিন।",
+            id="shipping.email"
+            placeholder="আপনার ইমেইল লিখুন"
+            {...register("shipping.email", {
+              validate: (value) => {
+                if (!value) return true; // Optional field
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+                  return "সঠিক ইমেইল দিন";
+                if (value.length > 50)
+                  return "ইমেইল ৫০ অক্ষরের বেশি হতে পারবে না";
+                if (value.length < 5) return "ইমেইল ৫ অক্ষরের কম হতে পারবে না";
+                return true;
               },
             })}
           />
-          {errors.shipping?.phoneNumber && (
+          {errors.shipping?.email && (
             <ErrorMessage
-              message={errors.shipping.phoneNumber.message}
+              message={errors.shipping.email.message}
               className="mt-1"
             />
           )}
@@ -209,9 +240,9 @@ const ShippingAddress = ({
           </Label>
           <Input
             id="shipping.fullAddress"
-            placeholder="আপনার ঠিকানা লিখুন"
+            placeholder="পরিচিত স্থান/বাসা নম্বর, রাস্তা/গ্রাম/এলাকা..."
             {...register("shipping.fullAddress", {
-              required: "ঠিকানা আবশ্যক।",
+              required: "আপনার ঠিকানা লিখুন",
             })}
           />
           {errors.shipping?.fullAddress && (

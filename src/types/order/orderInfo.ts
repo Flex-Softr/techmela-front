@@ -16,6 +16,7 @@ export type TOrderedProducts = {
 type TShipping = {
   fullName: string;
   phoneNumber: string;
+  email?: string;
   fullAddress: string;
 };
 
