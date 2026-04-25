@@ -9,13 +9,13 @@ import {
 } from "@/redux/features/order/paymentInfo";
 import { setShippingInfo } from "@/redux/features/order/shippingInfo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import eventHandler from "@/tracking/eventHandler";
+import { TShippingInfo } from "@/types/order/shippingInfo";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TGenericErrorResponse } from "@/types/response";
+import BdAddress from "@/utilities/bdAddress/bdAddress";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import eventHandler from "@/tracking/eventHandler";
-import BdAddress from "@/utilities/bdAddress/bdAddress";
-import { TShippingInfo } from "@/types/order/shippingInfo";
 
 type TCheckoutFormData = {
   shipping: TShippingInfo;

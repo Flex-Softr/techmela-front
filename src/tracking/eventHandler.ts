@@ -3,6 +3,7 @@ import { CustomData, MetaCAPIEventPayload, UserData } from "./capi/capi.types";
 import {
   cleanObj,
   getFbc,
+  getFbLoginId,
   getFbp,
   getIP,
   getVisitorId,
@@ -128,14 +129,16 @@ const eventHandler = async (eventData: EventParameter) => {
   // Facebook IDs
   const fbp = getFbp();
   const fbc = eventData.fbc || getFbc();
+  const fbLoginId = eventData.fb_login_id || getFbLoginId();
   processedUserData.fbp = fbp;
   processedUserData.fbc = fbc;
-  processedUserData.fb_login_id = eventData.fb_login_id;
+  processedUserData.fb_login_id = fbLoginId;
 
   // Update raw eventData with resolved values for GTM consistency
   eventData.external_id = externalId;
   eventData.fbp = fbp;
   eventData.fbc = fbc;
+  eventData.fb_login_id = fbLoginId;
   eventData.fn = fn;
   eventData.ln = ln;
 

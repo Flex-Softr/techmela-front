@@ -8,12 +8,12 @@ import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
+import eventHandler from "@/tracking/eventHandler";
+import { TShippingInfo } from "@/types/order/shippingInfo";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
-import eventHandler from "@/tracking/eventHandler";
 import BdAddress from "@/utilities/bdAddress/bdAddress";
-import { TShippingInfo } from "@/types/order/shippingInfo";
 import Image from "next/image";
 import { useEffect, useMemo, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -111,61 +111,57 @@ const SalesOrderForm = ({
   });
 
   const initiateCheckoutTracked = useRef(false);
+  const shippingValues = methods.watch("shipping");
 
   // Fire InitiateCheckout when user starts filling the form
   useEffect(() => {
-    const subscription = methods.watch(() => {
-      const shipping = methods.getValues("shipping");
+    const isCheckTracked =
+      cartItems.length > 0 &&
+      !initiateCheckoutTracked.current &&
+      shippingValues?.fullName &&
+      shippingValues?.phoneNumber &&
+      shippingValues?.division &&
+      shippingValues?.district &&
+      shippingValues?.upazila;
 
-      const isCheckTracked =
-        cartItems.length > 0 &&
-        !initiateCheckoutTracked.current &&
-        shipping?.fullName &&
-        shipping?.phoneNumber &&
-        shipping?.division &&
-        shipping?.district &&
-        shipping?.upazila;
+    if (isCheckTracked) {
+      initiateCheckoutTracked.current = true;
 
-      if (isCheckTracked) {
-        initiateCheckoutTracked.current = true;
+      const divisionName = BdAddress.divisionNameById(
+        shippingValues?.division,
+        "en"
+      ).name;
+      const districtName = BdAddress.districtNameById(
+        shippingValues?.district,
+        "en"
+      ).name;
 
-        const divisionName = BdAddress.divisionNameById(
-          shipping?.division,
-          "en"
-        ).name;
-        const districtName = BdAddress.districtNameById(
-          shipping?.district,
-          "en"
-        ).name;
-
-        eventHandler({
-          event_name: "initiate_checkout",
-          fn: shipping?.fullName || undefined,
-          ph: shipping?.phoneNumber || undefined,
-          em: shipping?.email || undefined,
-          st: divisionName || undefined,
-          ct: districtName || undefined,
-          upazila_id: shipping?.upazila || undefined,
-          content_name: productTitle,
-          content_ids: cartItems.map((item) => item.productId),
-          content_type: "product",
-          content_category: product?.category?.[0]?.name,
-          shipping: shippingChange ?? undefined,
-          contents: cartItems.map((item) => ({
-            id: item.productId,
-            quantity: item.quantity,
-            item_price: salePrice || fallbackPrice,
-            name: product?.title,
-            brand: product?.brand?.name,
-            category: product?.category?.[0]?.name,
-          })),
-          value: calculatedTotal,
-        });
-      }
-    });
-    return () => subscription.unsubscribe();
+      eventHandler({
+        event_name: "initiate_checkout",
+        fn: shippingValues?.fullName || undefined,
+        ph: shippingValues?.phoneNumber || undefined,
+        em: shippingValues?.email || undefined,
+        st: divisionName || undefined,
+        ct: districtName || undefined,
+        upazila_id: shippingValues?.upazila || undefined,
+        content_name: productTitle,
+        content_ids: cartItems.map((item) => item.productId),
+        content_type: "product",
+        content_category: product?.category?.[0]?.name,
+        shipping: shippingChange ?? undefined,
+        contents: cartItems.map((item) => ({
+          id: item.productId,
+          quantity: item.quantity,
+          item_price: salePrice || fallbackPrice,
+          name: product?.title,
+          brand: product?.brand?.name,
+          category: product?.category?.[0]?.name,
+        })),
+        value: calculatedTotal,
+      });
+    }
   }, [
-    methods,
+    shippingValues,
     productTitle,
     cartItems,
     totalCost,

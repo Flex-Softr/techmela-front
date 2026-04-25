@@ -108,7 +108,7 @@ export const getFbc = (): string | undefined => {
 };
 
 /**
- * Retrieves the Meta Browser ID (_fbp). If missing, generates a new one to ensure
+ * Retrieves the Facebook Browser ID (_fbp). If missing, generates a new one to ensure
  * CAPI events always have a browser identifier.
  * @returns The FBP string
  */
@@ -124,6 +124,29 @@ export const getFbp = (): string | undefined => {
   )}`;
   setCookie("_fbp", fbp, 730); // Meta Pixel sets it for 2 years
   return fbp;
+};
+
+/**
+ * Extracts the Facebook Login ID (fb_login_id) from the URL and persists it in a cookie.
+ * @returns The FB Login ID string or the existing cookie value
+ */
+export const getFbLoginId = (): string | undefined => {
+  if (typeof window === "undefined") return undefined;
+
+  // 1. Check URL for new login ID
+  const params = new URLSearchParams(window.location.search);
+  const fbLoginId = params.get("fb_login_id");
+  const existingFbLoginId = getCookie("_fb_login_id");
+
+  if (fbLoginId) {
+    if (!existingFbLoginId || existingFbLoginId !== fbLoginId) {
+      setCookie("_fb_login_id", fbLoginId, 90); // Persist for 90 days
+      return fbLoginId;
+    }
+  }
+
+  // 2. Fallback to existing cookie
+  return existingFbLoginId;
 };
 
 /**

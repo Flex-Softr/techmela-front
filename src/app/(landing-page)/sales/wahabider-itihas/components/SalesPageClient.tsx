@@ -1,9 +1,9 @@
 "use client";
+import eventHandler from "@/tracking/eventHandler";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import { useEffect, useRef, useState } from "react";
-import eventHandler from "@/tracking/eventHandler";
 
 import SalesHeader from "../../../_components/SalesHeader";
 import SalesOrderForm from "../../../_components/SalesOrderForm";

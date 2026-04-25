@@ -3,14 +3,14 @@ import CheckoutCartItems from "@/components/cart/CheckoutCartItems";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
 import useCart from "@/hooks/useCart";
 import useOrderSubmit from "@/hooks/useOrderSubmit";
-import { TCartItemData } from "@/types/cart";
-import { ReactNode, useEffect, useRef } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import eventHandler from "@/tracking/eventHandler";
-import OrderNow from "./OrderNow";
-import ShippingAddress from "./ShippingAddress";
+import { TCartItemData } from "@/types/cart";
 import { TShippingInfo } from "@/types/order/shippingInfo";
 import BdAddress from "@/utilities/bdAddress/bdAddress";
+import { ReactNode, useEffect, useRef } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import OrderNow from "./OrderNow";
+import ShippingAddress from "./ShippingAddress";
 
 type TCheckoutFormData = {
   shipping: TShippingInfo;
@@ -48,37 +48,38 @@ const CheckoutForm = ({
   });
 
   const initiateCheckoutTracked = useRef(false);
+  const shippingValues = methods.watch("shipping");
 
   useEffect(() => {
-    const shipping = methods.getValues("shipping");
     const isCheckTracked =
       cartData?.data?.length > 0 &&
       !initiateCheckoutTracked.current &&
-      shipping?.fullName &&
-      shipping?.phoneNumber &&
-      shipping?.division &&
-      shipping?.district &&
-      shipping?.upazila;
+      shippingValues?.fullName &&
+      shippingValues?.phoneNumber &&
+      shippingValues?.division &&
+      shippingValues?.district &&
+      shippingValues?.upazila;
+
     if (isCheckTracked) {
       initiateCheckoutTracked.current = true;
 
       const divisionName = BdAddress.divisionNameById(
-        shipping?.division,
+        shippingValues?.division,
         "en"
       ).name;
       const districtName = BdAddress.districtNameById(
-        shipping?.district,
+        shippingValues?.district,
         "en"
       ).name;
 
       eventHandler({
         event_name: "initiate_checkout",
-        fn: shipping?.fullName || undefined,
-        ph: shipping?.phoneNumber || undefined,
-        em: shipping?.email || undefined,
+        fn: shippingValues?.fullName || undefined,
+        ph: shippingValues?.phoneNumber || undefined,
+        em: shippingValues?.email || undefined,
         st: divisionName || undefined,
         ct: districtName || undefined,
-        upazila_id: shipping?.upazila || undefined,
+        upazila_id: shippingValues?.upazila || undefined,
         content_ids: cartData.data.map((item: TCartItemData) =>
           item.variation?._id
             ? `${item.product?._id}-${item.variation._id}`
@@ -106,7 +107,7 @@ const CheckoutForm = ({
         //   shipping: shippingChange ?? undefined,
       });
     }
-  }, [cartData?.data, totalCost, methods]);
+  }, [cartData?.data, totalCost, shippingValues]);
 
   return (
     <>
