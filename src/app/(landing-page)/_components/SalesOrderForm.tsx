@@ -16,7 +16,7 @@ import TShippingCharges from "@/types/shippingCharge";
 import BdAddress from "@/utilities/bdAddress/bdAddress";
 import Image from "next/image";
 import { useEffect, useMemo, useRef } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
 
@@ -111,39 +111,39 @@ const SalesOrderForm = ({
   });
 
   const initiateCheckoutTracked = useRef(false);
-  const shippingValues = methods.watch("shipping");
+  const shippingValues = useWatch({
+    control: methods.control,
+    name: "shipping",
+  });
+
+  const { fullName, phoneNumber, division, district, upazila, email } =
+    shippingValues || {};
 
   // Fire InitiateCheckout when user starts filling the form
   useEffect(() => {
     const isCheckTracked =
       cartItems.length > 0 &&
       !initiateCheckoutTracked.current &&
-      shippingValues?.fullName &&
-      shippingValues?.phoneNumber &&
-      shippingValues?.division &&
-      shippingValues?.district &&
-      shippingValues?.upazila;
+      fullName &&
+      phoneNumber &&
+      division &&
+      district &&
+      upazila;
 
     if (isCheckTracked) {
       initiateCheckoutTracked.current = true;
 
-      const divisionName = BdAddress.divisionNameById(
-        shippingValues?.division,
-        "en"
-      ).name;
-      const districtName = BdAddress.districtNameById(
-        shippingValues?.district,
-        "en"
-      ).name;
+      const divisionName = BdAddress.divisionNameById(division, "en").name;
+      const districtName = BdAddress.districtNameById(district, "en").name;
 
       eventHandler({
         event_name: "initiate_checkout",
-        fn: shippingValues?.fullName || undefined,
-        ph: shippingValues?.phoneNumber || undefined,
-        em: shippingValues?.email || undefined,
+        fn: fullName || undefined,
+        ph: phoneNumber || undefined,
+        em: email || undefined,
         st: divisionName || undefined,
         ct: districtName || undefined,
-        upazila_id: shippingValues?.upazila || undefined,
+        upazila_id: upazila || undefined,
         content_name: productTitle,
         content_ids: cartItems.map((item) => item.productId),
         content_type: "product",
@@ -161,7 +161,7 @@ const SalesOrderForm = ({
       });
     }
   }, [
-    shippingValues,
+    product?.brand?.name,
     productTitle,
     cartItems,
     totalCost,
@@ -171,7 +171,12 @@ const SalesOrderForm = ({
     shippingChange,
     product?.category,
     product?.title,
-    product?.brand?.name,
+    fullName,
+    phoneNumber,
+    division,
+    district,
+    upazila,
+    email,
   ]);
 
   const actualThumbnail =
