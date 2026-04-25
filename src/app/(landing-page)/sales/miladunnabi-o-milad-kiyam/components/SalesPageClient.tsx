@@ -44,8 +44,10 @@ const SalesPageClient = ({
   const [lastTrackedCart, setLastTrackedCart] = useState<string>("");
   const price = product?.price?.salePrice || product?.price?.regularPrice || 0;
 
+  const hasTrackedViewRef = useRef(false);
   useEffect(() => {
-    if (product) {
+    if (product && !hasTrackedViewRef.current) {
+      hasTrackedViewRef.current = true;
       eventHandler({
         event_name: "view_content",
         content_name: product.title,

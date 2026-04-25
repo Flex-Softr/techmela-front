@@ -152,7 +152,6 @@ const eventHandler = async (eventData: EventParameter) => {
     "content_category",
     "order_id",
     "num_items",
-    "predicted_ltv",
     "shipping",
     "tax",
     "discount_value",
