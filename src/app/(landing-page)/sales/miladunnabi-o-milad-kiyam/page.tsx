@@ -9,14 +9,48 @@ import SalesPageClient from "./components/SalesPageClient";
 // Sub-components
 import AnnouncementBar from "../../_components/AnnouncementBar";
 
-export const metadata: Metadata = {
-  title:
-    "বরেন্য ইমাম ও মনীষীদের দৃষ্টিতে মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম - জুবাইর আহমাদ | সিদ্দীকিয়া প্রকাশনী",
-  description:
-    "জুবাইর আহমাদ রচিত 'বরেন্য ইমাম ও মনীষীদের দৃষ্টিতে মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম'। মিলাদুন্নবী ও মিলাদ-কিয়াম সম্পর্কে দালিলিক ও তাত্ত্বিক আলোচনা। সিদ্দীকিয়া প্রকাশনী থেকে প্রকাশিত একটি গুরুত্বপূর্ণ গ্রন্থ।",
-};
+import { getImageSrc } from "@/lib/utils";
 
 const MILAD_KIYAM_SLUG = config.milad_kiyam_slug;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const productRes = await serverSideFetcher<TSingleProduct>({
+    url: `/products/${MILAD_KIYAM_SLUG}`,
+    tags: [`product-${decodeURIComponent(MILAD_KIYAM_SLUG || "")}`],
+  });
+
+  const product = productRes?.data;
+  const imageUrl = getImageSrc(
+    product?.thumbnail?.src || product?.gallery?.[0]?.src
+  );
+
+  const title =
+    "বরেন্য ইমাম ও মনীষীদের দৃষ্টিতে মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম - জুবাইর আহমাদ | সিদ্দীকিয়া প্রকাশনী";
+  const description =
+    "জুবাইর আহমাদ রচিত 'বরেন্য ইমাম ও মনীষীদের দৃষ্টিতে মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম'। মিলাদুন্নবী ও মিলাদ-কিয়াম সম্পর্কে দালিলিক ও তাত্ত্বিক আলোচনা। সিদ্দীকিয়া প্রকাশনী থেকে প্রকাশিত একটি গুরুত্বপূর্ণ গ্রন্থ।";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: imageUrl,
+          alt: title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
 
 const BOOK_DETAILS = {
   title: "বরেন্য ইমাম ও মনীষীদের দৃষ্টিতে মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম",

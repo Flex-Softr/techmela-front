@@ -9,13 +9,48 @@ import SalesPageClient from "./components/SalesPageClient";
 // Sub-components
 import AnnouncementBar from "../../_components/AnnouncementBar";
 
-export const metadata: Metadata = {
-  title: "ওয়াহাবিদের ইতিহাস - ইয়াসির আরাফাত আল হিন্দী | সিদ্দীকিয়া প্রকাশনী",
-  description:
-    "ওয়াহাবি আন্দোলনের পেছনের সত্য কি? মুহাম্মদ ইবনে আব্দুল ওয়াহাব এবং তার নজদি আন্দোলনের দালিলিক ইতিহাস। ৩৩৫ পৃষ্ঠার এই চমৎকার গবেষণামূলক বইটিতে পাবেন ইসলামের ইতিহাসের অনেক অজানা তথ্য।",
-};
+import { getImageSrc } from "@/lib/utils";
 
 const WAHA_BITHER_ITIHAS_SLUG = config.wahabider_itihas_slug;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const productRes = await serverSideFetcher<TSingleProduct>({
+    url: `/products/${WAHA_BITHER_ITIHAS_SLUG}`,
+    tags: [`product-${decodeURIComponent(WAHA_BITHER_ITIHAS_SLUG || "")}`],
+  });
+
+  const product = productRes?.data;
+  const imageUrl = getImageSrc(
+    product?.thumbnail?.src || product?.gallery?.[0]?.src
+  );
+
+  const title =
+    "ওয়াহাবিদের ইতিহাস - ইয়াসির আরাফাত আল হিন্দী | সিদ্দীকিয়া প্রকাশনী";
+  const description =
+    "ওয়াহাবি আন্দোলনের পেছনের সত্য কি? মুহাম্মদ ইবনে আব্দুল ওয়াহাব এবং তার নজদি আন্দোলনের দালিলিক ইতিহাস। ৩৩৫ পৃষ্ঠার এই চমৎকার গবেষণামূলক বইটিতে পাবেন ইসলামের ইতিহাসের অনেক অজানা তথ্য।";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: imageUrl,
+          alt: title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
 
 const BOOK_DETAILS = {
   title: "ওয়াহাবিদের ইতিহাস",

@@ -38,8 +38,6 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
       images: [
         {
           url: imageUrl,
-          width: 800,
-          height: 600,
           alt: title,
         },
       ],

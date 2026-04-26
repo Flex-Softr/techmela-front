@@ -9,14 +9,48 @@ import SalesPageClient from "./components/SalesPageClient";
 // Sub-components
 import AnnouncementBar from "../../_components/AnnouncementBar";
 
-export const metadata: Metadata = {
-  title:
-    "মাযহাব ত্যাগের শেষ পরিণাম ইসলাম ত্যাগ - আল্লামা যাহিদ আলকাউসারী | সিদ্দীকিয়া প্রকাশনী",
-  description:
-    "শাইখুল ইসলাম আল্লামা যাহিদ আলকাউসারী (রহ.) রচিত 'মাযহাব ত্যাগের শেষ পরিণাম ইসলাম ত্যাগ'। মাযহাব অনুসরণের গুরুত্ব এবং মাযহাব ত্যাগের ভয়াবহ পরিণাম সম্পর্কে দালিলিক ও তাত্ত্বিক আলোচনা।",
-};
+import { getImageSrc } from "@/lib/utils";
 
 const MAZHAB_TYAGER_PORINAM_SLUG = config.mazhab_tyager_porinam_slug;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const productRes = await serverSideFetcher<TSingleProduct>({
+    url: `/products/${MAZHAB_TYAGER_PORINAM_SLUG}`,
+    tags: [`product-${decodeURIComponent(MAZHAB_TYAGER_PORINAM_SLUG || "")}`],
+  });
+
+  const product = productRes?.data;
+  const imageUrl = getImageSrc(
+    product?.thumbnail?.src || product?.gallery?.[0]?.src
+  );
+
+  const title =
+    "মাযহাব ত্যাগের শেষ পরিণাম ইসলাম ত্যাগ - আল্লামা যাহিদ আলকাউসারী | সিদ্দীকিয়া প্রকাশনী";
+  const description =
+    "শাইখুল ইসলাম আল্লামা যাহিদ আলকাউসারী (রহ.) রচিত 'মাযহাব ত্যাগের শেষ পরিণাম ইসলাম ত্যাগ'। মাযহাব অনুসরণের গুরুত্ব এবং মাযহাব ত্যাগের ভয়াবহ পরিণাম সম্পর্কে দালিলিক ও তাত্ত্বিক আলোচনা।";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: imageUrl,
+          alt: title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
 
 const BOOK_DETAILS = {
   title: "মাযহাব ত্যাগের শেষ পরিণাম ইসলাম ত্যাগ",
