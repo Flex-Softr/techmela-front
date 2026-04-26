@@ -26,8 +26,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const title =
     "বরেন্য ইমাম ও মনীষীদের দৃষ্টিতে মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম - জুবাইর আহমাদ | সিদ্দীকিয়া প্রকাশনী";
-  const description =
+  const rawDescription =
     "জুবাইর আহমাদ রচিত 'বরেন্য ইমাম ও মনীষীদের দৃষ্টিতে মিলাদুন্নবী উদযাপন ও মিলাদ-কিয়াম'। মিলাদুন্নবী ও মিলাদ-কিয়াম সম্পর্কে দালিলিক ও তাত্ত্বিক আলোচনা। সিদ্দীকিয়া প্রকাশনী থেকে প্রকাশিত একটি গুরুত্বপূর্ণ গ্রন্থ।";
+  const description = rawDescription.replace(/<[^>]+>/g, "").trim();
 
   return {
     title,
@@ -39,6 +40,10 @@ export async function generateMetadata(): Promise<Metadata> {
         {
           url: imageUrl,
           alt: title,
+        },
+        {
+          url: "https://siddikiaprokashoni.com/logo/logo.png",
+          alt: "সিদ্দীকিয়া প্রকাশনী",
         },
       ],
       type: "article",

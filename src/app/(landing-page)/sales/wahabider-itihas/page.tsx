@@ -26,8 +26,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const title =
     "ওয়াহাবিদের ইতিহাস - ইয়াসির আরাফাত আল হিন্দী | সিদ্দীকিয়া প্রকাশনী";
-  const description =
+  const rawDescription =
     "ওয়াহাবি আন্দোলনের পেছনের সত্য কি? মুহাম্মদ ইবনে আব্দুল ওয়াহাব এবং তার নজদি আন্দোলনের দালিলিক ইতিহাস। ৩৩৫ পৃষ্ঠার এই চমৎকার গবেষণামূলক বইটিতে পাবেন ইসলামের ইতিহাসের অনেক অজানা তথ্য।";
+  const description = rawDescription.replace(/<[^>]+>/g, "").trim();
 
   return {
     title,
@@ -39,6 +40,10 @@ export async function generateMetadata(): Promise<Metadata> {
         {
           url: imageUrl,
           alt: title,
+        },
+        {
+          url: "https://siddikiaprokashoni.com/logo/logo.png",
+          alt: "সিদ্দীকিয়া প্রকাশনী",
         },
       ],
       type: "article",

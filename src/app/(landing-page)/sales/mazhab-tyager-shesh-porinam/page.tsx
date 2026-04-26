@@ -26,8 +26,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const title =
     "মাযহাব ত্যাগের শেষ পরিণাম ইসলাম ত্যাগ - আল্লামা যাহিদ আলকাউসারী | সিদ্দীকিয়া প্রকাশনী";
-  const description =
+  const rawDescription =
     "শাইখুল ইসলাম আল্লামা যাহিদ আলকাউসারী (রহ.) রচিত 'মাযহাব ত্যাগের শেষ পরিণাম ইসলাম ত্যাগ'। মাযহাব অনুসরণের গুরুত্ব এবং মাযহাব ত্যাগের ভয়াবহ পরিণাম সম্পর্কে দালিলিক ও তাত্ত্বিক আলোচনা।";
+  const description = rawDescription.replace(/<[^>]+>/g, "").trim();
 
   return {
     title,
@@ -39,6 +40,10 @@ export async function generateMetadata(): Promise<Metadata> {
         {
           url: imageUrl,
           alt: title,
+        },
+        {
+          url: "https://siddikiaprokashoni.com/logo/logo.png",
+          alt: "সিদ্দীকিয়া প্রকাশনী",
         },
       ],
       type: "article",

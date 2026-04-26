@@ -26,8 +26,11 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   );
 
   const title = product?.seoData?.metaTitle || product?.title;
-  const description =
-    product?.seoData?.metaDescription || product?.shortDescription;
+  const rawDescription =
+    product?.seoData?.metaDescription ||
+    product?.shortDescription ||
+    "সিদ্দীকিয়া প্রকাশনী থেকে সেরা ইসলামিক বই কিনুন।";
+  const description = rawDescription.replace(/<[^>]+>/g, "").trim();
 
   return {
     title,
@@ -39,6 +42,10 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
         {
           url: imageUrl,
           alt: title,
+        },
+        {
+          url: "https://siddikiaprokashoni.com/logo/logo.png",
+          alt: "সিদ্দীকিয়া প্রকাশনী",
         },
       ],
       type: "article",
