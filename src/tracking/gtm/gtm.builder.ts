@@ -26,7 +26,10 @@ export const buildGTMEventPayload = (
   ].includes(payload.event_name);
 
   return {
-    event: payload.event_name,
+    event:
+      payload.event_name === "page_view"
+        ? "custom_page_view"
+        : payload.event_name,
     eventModel: cleanObj({
       event_id: payload.event_id,
       event_time: payload.event_time,
