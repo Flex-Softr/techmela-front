@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import eventHandler from "@/tracking/eventHandler";
 import { useDebounce } from "@/hooks/useDebounce";
 import useTypingPlaceholder from "@/hooks/useTypingPlaceholder";
 import { getImageSrc } from "@/lib/utils";
@@ -47,6 +48,12 @@ const Search = () => {
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (searchValue.trim()) {
+      eventHandler({
+        event_name: "search",
+        search_string: searchValue.trim(),
+      });
+    }
     router.push(`/shop?search=${encodeURIComponent(searchValue)}`);
     setShowSuggestions(false);
   };
