@@ -14,7 +14,7 @@ type TProps = {
 const VariableProductCard = ({
   product,
   className,
-  priority = true,
+  priority = false,
 }: TProps) => {
   const minPrice = product.minSalePrice || product.minRegularPrice || 0;
   const maxPrice = product.maxSalePrice || product.maxRegularPrice || 0;

@@ -1,19 +1,24 @@
 import { THomePageSection } from "@/types/homepageSection";
-import serverSideFetcher from "@/utilities/serverSideFetcher";
 import HomepageSectionContent from "./HomepageSectionContent";
+import { Suspense } from "react";
+import HomepageSectionSkeleton from "./HomepageSectionSkeleton";
+import TGenericResponse from "@/types/response";
 
-const HomepageSectionsFetcher = async () => {
-  const sectionRes = await serverSideFetcher<THomePageSection[]>({
-    url: "/homepage-sections?isActive=true",
-    tags: ["homepageSections"],
-  });
+const HomepageSectionsFetcher = async ({
+  promise,
+}: {
+  promise: Promise<TGenericResponse<THomePageSection[]>>;
+}) => {
+  const sectionRes = await promise;
 
   const homePageSections = sectionRes?.data || [];
 
   return (
     <>
       {homePageSections.map((section) => (
-        <HomepageSectionContent key={section._id} content={section} />
+        <Suspense key={section._id} fallback={<HomepageSectionSkeleton />}>
+          <HomepageSectionContent content={section} />
+        </Suspense>
       ))}
     </>
   );

@@ -66,6 +66,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="bn-BD">
+      <head>
+        <link rel="preconnect" href="https://api.siddikiaprokashoni.com" />
+        <link rel="dns-prefetch" href="https://api.siddikiaprokashoni.com" />
+      </head>
       <body
         className={`${hindSiliguri.variable} ${inter.className} ${inter.variable} antialiased`}
       >

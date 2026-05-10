@@ -14,7 +14,7 @@ type TProps = {
 const ProductCardPrimary = ({
   product,
   className,
-  priority = true,
+  priority = false,
 }: TProps) => {
   return (
     <div

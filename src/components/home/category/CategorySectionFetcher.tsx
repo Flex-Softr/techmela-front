@@ -1,13 +1,14 @@
 import TCategory from "@/types/categories/categories";
 import { TPaginatedData } from "@/types/response";
-import serverSideFetcher from "@/utilities/serverSideFetcher";
 import CategorySection from "./CategorySection";
+import TGenericResponse from "@/types/response";
 
-const CategorySectionFetcher = async () => {
-  const categoryRes = await serverSideFetcher<TPaginatedData<TCategory[]>>({
-    url: "/categories?isActive=true",
-    tags: ["categories"],
-  });
+const CategorySectionFetcher = async ({
+  promise,
+}: {
+  promise: Promise<TGenericResponse<TPaginatedData<TCategory[]>>>;
+}) => {
+  const categoryRes = await promise;
 
   const categories = categoryRes?.data?.data || [];
 

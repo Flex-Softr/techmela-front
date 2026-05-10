@@ -1,12 +1,13 @@
 import { TSliders } from "@/types/sliders/slider";
-import serverSideFetcher from "@/utilities/serverSideFetcher";
 import ClientBannerCarousel from "./BannerCarouselClient";
+import TGenericResponse from "@/types/response";
 
-const BannerCarousel = async () => {
-  const { data } = await serverSideFetcher<TSliders[]>({
-    url: "/slider-banner?isActive=true",
-    tags: ["sliderBanner"],
-  });
+const BannerCarousel = async ({
+  promise,
+}: {
+  promise: Promise<TGenericResponse<TSliders[]>>;
+}) => {
+  const { data } = await promise;
   const slides = data || [];
 
   return (

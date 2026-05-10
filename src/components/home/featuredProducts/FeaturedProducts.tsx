@@ -4,14 +4,15 @@ import SectionTitle from "@/components/SectionTitle";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { Button } from "@/components/ui/button";
 import { TProduct } from "@/types/products/product";
-import serverSideFetcher from "@/utilities/serverSideFetcher";
+import TGenericResponse from "@/types/response";
 import Link from "next/link";
 
-const FeaturedProducts = async () => {
-  const { data: featuredProducts = [] } = await serverSideFetcher<TProduct[]>({
-    url: "/products/featured",
-    tags: ["featuredProducts"],
-  });
+const FeaturedProducts = async ({
+  promise,
+}: {
+  promise: Promise<TGenericResponse<TProduct[]>>;
+}) => {
+  const { data: featuredProducts = [] } = await promise;
 
   return (
     <>

@@ -9,7 +9,7 @@ type TProps = {
   priority?: boolean;
 };
 
-const ProductCard = ({ product, priority = true }: TProps) => {
+const ProductCard = ({ product, priority = false }: TProps) => {
   if (product.type === PRODUCT_TYPE.VARIABLE) {
     // Cast to TVariableProduct as we know it's variable type
     // and TProduct now shares the structure or we cast for safety
