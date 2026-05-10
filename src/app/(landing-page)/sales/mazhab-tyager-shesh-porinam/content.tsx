@@ -13,6 +13,8 @@ import { getImageSrc } from "@/lib/utils";
 
 const MAZHAB_TYAGER_PORINAM_SLUG = config.mazhab_tyager_porinam_slug;
 
+export const revalidate = false; // On-demand revalidation only
+
 export async function generateMetadata(): Promise<Metadata> {
   const productRes = await serverSideFetcher<TSingleProduct>({
     url: `/products/${MAZHAB_TYAGER_PORINAM_SLUG}`,

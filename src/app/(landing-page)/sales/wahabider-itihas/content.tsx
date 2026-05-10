@@ -13,6 +13,8 @@ import { getImageSrc } from "@/lib/utils";
 
 const WAHA_BITHER_ITIHAS_SLUG = config.wahabider_itihas_slug;
 
+export const revalidate = false; // On-demand revalidation only
+
 export async function generateMetadata(): Promise<Metadata> {
   const productRes = await serverSideFetcher<TSingleProduct>({
     url: `/products/${WAHA_BITHER_ITIHAS_SLUG}`,

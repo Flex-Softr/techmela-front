@@ -1,9 +1,9 @@
 "use client";
 import Quantity from "@/app/(public)/checkout/components/Quantity";
 import EcButton from "@/components/shared/EcButton/EcButton";
-import { Dispatch, SetStateAction } from "react";
 import { ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
 const AddToCartAndBuyNow = ({
   quantity,
@@ -11,7 +11,7 @@ const AddToCartAndBuyNow = ({
   addToCartHandler,
   isAddToCartLoading,
   isDisabled, // Prop to control the disabled state
-  disabledReason,
+  // disabledReason,
 }: {
   addToCartHandler: () => Promise<boolean>;
   quantity: number;
@@ -64,12 +64,12 @@ const AddToCartAndBuyNow = ({
       >
         অর্ডার করুন
       </EcButton>
-
+      {/* 
       {isDisabled && (
         <div className="bg-red-50 text-red-600 text-sm font-medium px-4 py-2 rounded-lg border border-red-100 animate-in fade-in slide-in-from-top-1">
           {disabledReason || "Please select a variation"}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

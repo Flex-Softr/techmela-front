@@ -19,6 +19,25 @@ type TProps = {
   };
 };
 
+// export const revalidate = false; // On-demand revalidation only
+
+export async function generateStaticParams() {
+  try {
+    const productsResponse = await serverSideFetcher<{ slug: string }[]>({
+      url: "/products?limit=30&fields=slug",
+      tags: ["products"],
+    });
+
+    return (productsResponse?.data || []).map((product) => ({
+      slug: product.slug,
+    }));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Error generating static params for products:", error);
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const product = await fetchProductData(params.slug);
   const imageUrl = getImageSrc(
@@ -99,6 +118,9 @@ const ProductDetailsPage = async ({ params }: TProps) => {
     description: product.seoData?.metaDescription || product.shortDescription,
     image: getImageSrc(product.thumbnail?.src || product.gallery?.[0]?.src),
     sku: product.inventory?.sku,
+    isbn: product.attribute?.find((attr) => attr.name.toLowerCase() === "isbn")
+      ?.values[0],
+    inLanguage: "bn",
     offers: {
       "@type": "Offer",
       url: `https://siddikiaprokashoni.com/product/${product.slug}`,
@@ -114,9 +136,11 @@ const ProductDetailsPage = async ({ params }: TProps) => {
         name: "সিদ্দীকিয়া প্রকাশনী",
       },
     },
-    author: product.brand?.name
-      ? { "@type": "Person", name: product.brand.name }
-      : undefined,
+    author: product.author
+      ? { "@type": "Person", name: product.author }
+      : product.brand?.name
+        ? { "@type": "Person", name: product.brand.name }
+        : undefined,
     publisher: {
       "@type": "Organization",
       name: "সিদ্দীকিয়া প্রকাশনী",

@@ -4,6 +4,7 @@ import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import { useEffect, useRef, useState } from "react";
+import { getImageSrc } from "@/lib/utils";
 
 import SalesHeader from "../../../_components/SalesHeader";
 import SalesOrderForm from "../../../_components/SalesOrderForm";
@@ -115,7 +116,7 @@ const SalesPageClient = ({
   const regularPrice = product?.price?.regularPrice ?? 0;
   const salePrice = product?.price?.salePrice ?? regularPrice;
 
-  const thumbnailSrc = product?.thumbnail?.src?.replace(/\\/g, "/");
+  const thumbnailSrc = getImageSrc(product?.thumbnail?.src);
 
   const cartItems = product
     ? [

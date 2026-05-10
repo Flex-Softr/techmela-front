@@ -13,6 +13,8 @@ import { getImageSrc } from "@/lib/utils";
 
 const MILAD_KIYAM_SLUG = config.milad_kiyam_slug;
 
+export const revalidate = false; // On-demand revalidation only
+
 export async function generateMetadata(): Promise<Metadata> {
   const productRes = await serverSideFetcher<TSingleProduct>({
     url: `/products/${MILAD_KIYAM_SLUG}`,
