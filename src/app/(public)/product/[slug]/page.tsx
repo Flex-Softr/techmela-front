@@ -40,6 +40,18 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const product = await fetchProductData(params.slug);
+
+  if (!product) {
+    const fallbackTitle = params.slug
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    return {
+      title: fallbackTitle,
+      description: `সিদ্দীকিয়া প্রকাশনী থেকে ${fallbackTitle} কিনুন।`,
+    };
+  }
+
   const imageUrl = getImageSrc(
     product?.thumbnail?.src || product?.gallery?.[0]?.src
   );
@@ -49,14 +61,19 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     product?.seoData?.metaDescription ||
     product?.shortDescription ||
     "সিদ্দীকিয়া প্রকাশনী থেকে সেরা ইসলামিক বই কিনুন।";
-  const description = rawDescription.replace(/<[^>]+>/g, "").trim();
+  const description = rawDescription
+    .replace(/<[^>]+>/g, "")
+    .trim()
+    .substring(0, 160);
 
   return {
     title,
     description,
+    keywords: product?.seoData?.focusKeyphrase || "",
     openGraph: {
       title,
       description,
+      siteName: "সিদ্দীকিয়া প্রকাশনী",
       images: [
         {
           url: imageUrl,
@@ -147,29 +164,47 @@ const ProductDetailsPage = async ({ params }: TProps) => {
     },
   };
 
+  const breadcrumbItems = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "হোম",
+      item: "https://siddikiaprokashoni.com",
+    },
+  ];
+
+  if (product.category && product.category.length > 0) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: product.category[0].name,
+      item: `https://siddikiaprokashoni.com/shop?category=${product.category[0].slug}`,
+    });
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 3,
+      name: product.title,
+      item: `https://siddikiaprokashoni.com/product/${product.slug}`,
+    });
+  } else {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: "শপ",
+      item: "https://siddikiaprokashoni.com/shop",
+    });
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 3,
+      name: product.title,
+      item: `https://siddikiaprokashoni.com/product/${product.slug}`,
+    });
+  }
+
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "হোম",
-        item: "https://siddikiaprokashoni.com",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "শপ",
-        item: "https://siddikiaprokashoni.com/shop",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: product.title,
-        item: `https://siddikiaprokashoni.com/product/${product.slug}`,
-      },
-    ],
+    itemListElement: breadcrumbItems,
   };
 
   return (
