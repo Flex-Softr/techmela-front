@@ -4,6 +4,8 @@ import { TGalleryImage } from "@/types/products/singleProduct";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
+import Image from "next/image";
+
 const ProductImageGallery = ({
   gallery,
   discount,
@@ -14,17 +16,54 @@ const ProductImageGallery = ({
   const galleryImages = gallery?.map((image) => ({
     original: getImageSrc(image?.src),
     thumbnail: getImageSrc(image?.src),
+    originalAlt: image?.alt || "Product image",
+    thumbnailAlt: image?.alt || "Product thumbnail",
     crossOrigin: "anonymous",
   }));
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const renderItem = (item: any) => {
+    const isFirstImage = item.original === galleryImages[0]?.original;
+
+    return (
+      <div className="image-gallery-image">
+        <Image
+          src={item.original}
+          alt={item.originalAlt}
+          width={800}
+          height={800}
+          className="w-full h-auto object-contain max-h-[500px]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={isFirstImage}
+        />
+      </div>
+    );
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const renderThumbInner = (item: any) => {
+    return (
+      <div className="image-gallery-thumbnail-inner">
+        <Image
+          src={item.thumbnail}
+          alt={item.thumbnailAlt}
+          width={150}
+          height={150}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    );
+  };
 
   return (
     <div className="relative">
       <ImageGallery
         items={galleryImages}
-        lazyLoad
         showNav={false}
         autoPlay // TODO: enable this
         infinite //TODO: enable this
+        renderItem={renderItem}
+        renderThumbInner={renderThumbInner}
       />
       {discount > 0 && (
         <div className="absolute -top-3 -right-3 lg:-top-5 lg:-right-5 z-10 w-14 h-14 lg:w-20 lg:h-20 flex items-center justify-center pointer-events-none drop-shadow-xl transition-transform duration-300 hover:rotate-12">

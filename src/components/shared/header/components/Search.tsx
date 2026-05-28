@@ -86,6 +86,7 @@ const Search = () => {
           onChange={handleInputChange}
           placeholder={typingPlaceholder}
           className="w-full h-[44px] px-4 text-[13px] outline-none border border-primary bg-white rounded-full pr-12 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300"
+          aria-label="বই সার্চ করুন"
         />
 
         {searchValue && (
@@ -93,6 +94,7 @@ const Search = () => {
             type="button"
             onClick={handleClearSearch}
             className="absolute right-10 text-primary/60 hover:text-primary transition-colors p-1"
+            aria-label="Clear search"
           >
             <FaTimes className="size-3" />
           </button>
@@ -102,6 +104,7 @@ const Search = () => {
           type="submit"
           variant="ghost"
           className="absolute right-0.5 top-1/2 -translate-y-1/2 h-[34px] w-[34px] rounded-full flex items-center justify-center bg-transparent text-primary hover:text-primary hover:bg-gray-50 transition-all duration-300 p-0"
+          aria-label="Submit search"
         >
           <FaSearch className="text-[14px]" />
         </Button>

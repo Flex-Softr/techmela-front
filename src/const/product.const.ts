@@ -21,9 +21,9 @@ export const formatStockStatus = (status: TStockStatus) =>
   STOCK_STATUS_LABEL[status];
 
 export const STOCK_STATUS_COLOR = {
-  [STOCK_STATUS.IN_STOCK]: "text-green-600",
-  [STOCK_STATUS.LOW_STOCK]: "text-yellow-600",
-  [STOCK_STATUS.OUT_OF_STOCK]: "text-red-600",
+  [STOCK_STATUS.IN_STOCK]: "text-green-700",
+  [STOCK_STATUS.LOW_STOCK]: "text-yellow-700",
+  [STOCK_STATUS.OUT_OF_STOCK]: "text-red-700",
 } as const;
 
 export function stockStatusColor(status: TStockStatus) {

@@ -27,7 +27,7 @@ const BestSellingProducts = async ({
             />
             <SectionSubtitle
               text="আমাদের সবথেকে জনপ্রিয় বইগুলো দেখে নিন"
-              className="text-primary/70 max-w-2xl mx-auto"
+              className="text-primary/90 max-w-2xl mx-auto"
             />
           </div>
 

@@ -48,7 +48,7 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
         />
         <SectionSubtitle
           text="পছন্দের ক্যাটাগরি অনুযায়ী বই খুঁজুন"
-          className="text-primary/70 max-w-2xl mx-auto"
+          className="text-primary/90 max-w-2xl mx-auto"
         />
       </div>
 

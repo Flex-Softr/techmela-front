@@ -23,7 +23,7 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
         {category.name}
       </span>
       {category.productCount !== undefined && (
-        <span className="text-[10px] md:text-xs text-gray-500 font-medium bg-gray-100 px-2 py-0.5 rounded-full mt-1">
+        <span className="text-[10px] md:text-xs text-gray-700 font-medium bg-gray-100 px-2 py-0.5 rounded-full mt-1">
           {category.productCount} টি বই
         </span>
       )}

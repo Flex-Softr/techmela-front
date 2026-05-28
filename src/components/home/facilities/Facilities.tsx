@@ -38,9 +38,9 @@ const Facilities = () => {
                 {/* Scale icon down slightly for mobile */}
                 <div className="scale-75 md:scale-100">{item.icon}</div>
               </div>
-              <h3 className="text-xs md:text-lg font-bold text-foreground mb-1 md:mb-2 line-clamp-1 md:line-clamp-none">
+              <h2 className="text-xs md:text-lg font-bold text-foreground mb-1 md:mb-2 line-clamp-1 md:line-clamp-none">
                 {item.title}
-              </h3>
+              </h2>
               <p className="text-[10px] md:text-sm text-muted-foreground leading-tight md:leading-relaxed line-clamp-2 md:line-clamp-none">
                 {item.description}
               </p>

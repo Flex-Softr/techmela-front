@@ -115,6 +115,7 @@ const MainFooterContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-2.5 rounded-full text-blue-600 hover:bg-blue-600 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm"
+                  aria-label="Facebook Page"
                 >
                   <FaFacebookF size={18} />
                 </a>
@@ -123,6 +124,7 @@ const MainFooterContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-2.5 rounded-full text-blue-500 hover:bg-blue-500 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm"
+                  aria-label="Facebook Group"
                 >
                   <FaUsers size={18} />
                 </a>
@@ -131,6 +133,7 @@ const MainFooterContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-2.5 rounded-full text-green-600 hover:bg-green-600 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm"
+                  aria-label="WhatsApp"
                 >
                   <FaWhatsapp size={18} />
                 </a>
@@ -139,6 +142,7 @@ const MainFooterContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-2.5 rounded-full text-red-600 hover:bg-red-600 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm"
+                  aria-label="YouTube Channel"
                 >
                   <FaYoutube size={18} />
                 </a>

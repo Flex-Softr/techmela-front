@@ -34,7 +34,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
           className="my-auto size-10 rounded-full"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <Button variant={"outline"}>
+          <Button variant={"outline"} aria-label="Open menu">
             <FaBars />
           </Button>
         </SheetTrigger>
@@ -60,6 +60,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                 href="/my-account"
                 onClick={() => setIsOpen(false)}
                 className="size-10 rounded-full border border-primary/20 text-primary flex items-center justify-center hover:bg-primary/5 transition-all duration-300"
+                aria-label="My Account"
               >
                 <UserRound className="size-5" />
               </Link>
@@ -68,6 +69,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                   variant="ghost"
                   size="icon"
                   className="size-10 rounded-full text-primary hover:bg-primary/5 hover:text-primary transition-all duration-300"
+                  aria-label="Close menu"
                 >
                   <X className="size-5" />
                 </Button>

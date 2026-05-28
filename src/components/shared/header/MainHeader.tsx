@@ -20,7 +20,9 @@ const MainHeader = () => {
               width={160}
               height={44}
               className="object-contain scale-[1.1]"
+              sizes="160px"
               priority
+              quality={60}
             />
           </Link>
         </div>

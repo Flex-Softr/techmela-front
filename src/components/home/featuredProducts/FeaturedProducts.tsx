@@ -25,7 +25,7 @@ const FeaturedProducts = async ({
             />
             <SectionSubtitle
               text="আমাদের নির্বাচিত বইগুলোর কালেকশন দেখুন"
-              className="text-primary/70 max-w-2xl mx-auto"
+              className="text-primary/90 max-w-2xl mx-auto"
             />
           </div>
 

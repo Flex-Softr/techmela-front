@@ -24,13 +24,13 @@
     --primary: 150 100% 18%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary – Emerald 600 */
-    --secondary: 161 94% 30%;
+    /* Secondary – Emerald 600 (darkened for WCAG AA contrast) */
+    --secondary: 161 94% 25%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted – Soft olive tint */
+    /* Muted – Soft olive tint (darkened for WCAG AA contrast) */
     --muted: 79 20% 90%;
-    --muted-foreground: 150 5% 45%;
+    --muted-foreground: 150 5% 35%;
 
     /* Accent – Bright Forest Green tint */
     --accent: 150 20% 96%;
@@ -66,13 +66,13 @@
     --primary: 150 100% 18%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary – Emerald 600 */
-    --secondary: 161 94% 30%;
+    /* Secondary – Emerald 600 (darkened for WCAG AA contrast) */
+    --secondary: 161 94% 25%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted – Soft olive tint */
+    /* Muted – Soft olive tint (darkened for WCAG AA contrast) */
     --muted: 79 20% 90%;
-    --muted-foreground: 150 5% 45%;
+    --muted-foreground: 150 5% 35%;
 
     /* Accent – Bright Forest Green tint */
     --accent: 150 20% 96%;

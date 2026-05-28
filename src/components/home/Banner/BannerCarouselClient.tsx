@@ -48,7 +48,7 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
 
   if (sliders.length === 1) {
     return (
-      <div className="px-1 md:px-0">
+      <div className="md:px-0">
         <CarouselUi slider={sliders[0]} />
       </div>
     );
@@ -56,7 +56,7 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
 
   return (
     <div
-      className="relative group/banner px-1 md:px-0"
+      className="relative group/banner md:px-0"
       onMouseEnter={() => {
         if (plugin.current) plugin.current?.stop();
       }}

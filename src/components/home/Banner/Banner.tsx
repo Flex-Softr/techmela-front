@@ -1,4 +1,3 @@
-import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import BannerCarousel from "./BannerCarousel";
 import { TSliders } from "@/types/sliders/slider";
 import TGenericResponse from "@/types/response";
@@ -10,9 +9,10 @@ const Banner = async ({
 }) => {
   return (
     <section className="mt-4">
-      <ContainerMax>
+      {/* Padding on mobile, contained on desktop */}
+      <div className="w-full px-2 md:max-w-7xl md:mx-auto md:px-5">
         <BannerCarousel promise={promise} />
-      </ContainerMax>
+      </div>
     </section>
   );
 };

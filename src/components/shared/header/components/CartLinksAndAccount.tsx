@@ -93,6 +93,7 @@ const CartLinksAndAccount = () => {
             variant={"ghost"}
             onClick={toggleSearchBar}
             className="size-10 rounded-full text-primary hover:text-primary hover:bg-gray-100/80 transition-all duration-300"
+            aria-label="Open search"
           >
             <FaSearch className="size-5" />
           </Button>
@@ -120,10 +121,12 @@ const CartLinksAndAccount = () => {
                   value={searchValue}
                   onChange={handleInputChange}
                   onFocus={() => setShowSuggestions(true)}
+                  aria-label="বই সার্চ করুন"
                 />
                 <button
                   className="absolute right-1 top-1/2 -translate-y-1/2"
                   type="submit"
+                  aria-label="Submit search"
                 >
                   <div className="h-9 w-9 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
                     <FaSearch className="text-sm" />
@@ -216,6 +219,7 @@ const CartLinksAndAccount = () => {
                   variant={"ghost"}
                   className="h-9 w-9 aspect-square rounded-full hover:bg-gray-100 text-primary/80 hover:text-primary transition-colors"
                   onClick={toggleSearchBar}
+                  aria-label="Close search"
                 >
                   <FaTimes />
                 </Button>
@@ -230,7 +234,7 @@ const CartLinksAndAccount = () => {
         variant={"ghost"}
         className="rounded-full size-9 p-0 border border-primary bg-white text-primary hover:text-primary hover:bg-gray-50 transition-all duration-300 hidden sm:flex items-center justify-center shadow-sm overflow-hidden"
       >
-        <Link href="/my-account">
+        <Link href="/my-account" aria-label="My Account">
           {user?.data?._id ? (
             <div className="w-full h-full flex items-center justify-center bg-primary/10">
               <span className="font-bold text-[15px] uppercase">
@@ -247,6 +251,7 @@ const CartLinksAndAccount = () => {
         <Button
           variant={"ghost"}
           className="rounded-full size-9 relative border border-primary bg-white text-primary hover:text-primary hover:bg-gray-50 transition-all duration-300 flex items-center justify-center p-0 shadow-sm"
+          aria-label="Shopping Cart"
         >
           <ShoppingCart className="size-6" />
           <Badge className="bg-primary size-5 flex items-center justify-center text-[10px] font-bold text-white absolute -top-1 -right-1 pointer-events-none shadow-sm shadow-primary/20 border-2 border-white">

@@ -36,7 +36,7 @@ const HomepageSectionContent = async ({
               {content?.subtitle && (
                 <SectionSubtitle
                   text={content?.subtitle}
-                  className="text-primary/70 max-w-2xl mx-auto"
+                  className="text-primary/90 max-w-2xl mx-auto"
                 />
               )}
             </div>
