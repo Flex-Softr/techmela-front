@@ -4,7 +4,6 @@ import { clsx, type ClassValue } from "clsx";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 import TCategory from "@/types/categories/categories";
@@ -26,20 +25,31 @@ export default function CategoryMenuBar({
   const searchParams = useSearchParams();
 
   const isActive = (href: string) => {
-    if (href === "/" && pathname === "/") return true;
-    if (href === "/shop" && pathname === "/shop" && !searchParams.toString())
+    // Decode the pathname because Next.js usePathname() returns URL-encoded string
+    // which won't match Bengali slugs directly (e.g. %E0%A6%87... vs ইতিহাস...)
+    const decodedPathname = decodeURIComponent(pathname);
+
+    if (href === "/" && decodedPathname === "/") return true;
+    if (
+      href === "/shop" &&
+      decodedPathname === "/shop" &&
+      !searchParams.toString()
+    )
       return true;
     if (href.includes("?")) {
       const [hrefPath, hrefQuery] = href.split("?");
       const [paramKey, paramValue] = hrefQuery.split("=");
-      return pathname === hrefPath && searchParams.get(paramKey) === paramValue;
+      return (
+        decodedPathname === hrefPath &&
+        searchParams.get(paramKey) === paramValue
+      );
     }
-    return href !== "/" && pathname.startsWith(href);
+    return href !== "/" && decodedPathname === href;
   };
 
   const menuLinks = [
     { title: "হোম", href: "/" },
-    { title: "শপ", href: "/shop" },
+    { title: "সকল বই", href: "/shop" },
   ];
 
   return (

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select";
 import { useQueryParams } from "@/hooks/useQueryParams";
 import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
+import { usePathname } from "next/navigation";
 
 const SORT_OPTIONS = [
   { value: "-updatedAt", label: "Sort by default" },
@@ -23,15 +24,20 @@ const ProductSorter = () => {
   const totalProducts = productData?.meta?.total ?? 0;
   const currentSort = (queryParams.sort as string) || "-updatedAt";
 
+  const pathname = usePathname();
+  const isCategoryPage = pathname.startsWith("/category/");
+
   const handleSortChange = (value: string) => {
     setParam({ sort: value, page: "1" });
   };
 
   return (
     <div className="flex items-center justify-between gap-3 mb-5 px-1 font-hind-siliguri">
-      <p className="text-sm text-muted-foreground">
-        <span className="font-bold text-gray-800">{totalProducts}</span> টি বই
-      </p>
+      {!isCategoryPage && (
+        <p className="text-sm text-muted-foreground">
+          <span className="font-bold text-gray-800">{totalProducts}</span> টি বই
+        </p>
+      )}
 
       <div className="ml-auto">
         <Select value={currentSort} onValueChange={handleSortChange}>

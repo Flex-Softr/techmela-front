@@ -30,7 +30,7 @@ const TopHeader = () => {
     },
     {
       href: "/shop",
-      name: "শপ",
+      name: "সকল বই",
       icon: <FaBagShopping className="size-4" />,
     },
   ];

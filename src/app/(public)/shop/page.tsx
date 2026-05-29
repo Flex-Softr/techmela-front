@@ -27,29 +27,25 @@ export const metadata: Metadata = {
 
 const ShopPage = async () => {
   // Fetch filter data in parallel
-  const [
-    categoriesRes,
-    brandsRes,
-    collectionsRes,
-    priceRangeRes,
-  ] = await Promise.all([
-    serverSideFetcher<TPaginatedData<TCategory[]>>({
-      url: "/categories?isActive=true",
-      tags: ["categories"],
-    }),
-    serverSideFetcher<TPaginatedData<TBrand[]>>({
-      url: "/brands?isActive=true",
-      tags: ["brands"],
-    }),
-    serverSideFetcher<TPaginatedData<TCollection[]>>({
-      url: "/collections?isActive=true",
-      tags: ["collections"],
-    }),
-    serverSideFetcher<{ minPrice: number; maxPrice: number }>({
-      url: "/products/price-range",
-      tags: ["priceRange"],
-    }),
-  ]);
+  const [categoriesRes, brandsRes, collectionsRes, priceRangeRes] =
+    await Promise.all([
+      serverSideFetcher<TPaginatedData<TCategory[]>>({
+        url: "/categories?isActive=true",
+        tags: ["categories"],
+      }),
+      serverSideFetcher<TPaginatedData<TBrand[]>>({
+        url: "/brands?isActive=true",
+        tags: ["brands"],
+      }),
+      serverSideFetcher<TPaginatedData<TCollection[]>>({
+        url: "/collections?isActive=true",
+        tags: ["collections"],
+      }),
+      serverSideFetcher<{ minPrice: number; maxPrice: number }>({
+        url: "/products/price-range",
+        tags: ["priceRange"],
+      }),
+    ]);
 
   const categories = categoriesRes?.data?.data || [];
   const brands = brandsRes?.data?.data || [];
@@ -72,14 +68,17 @@ const ShopPage = async () => {
             {
               "@type": "ListItem",
               position: 2,
-              name: "শপ",
+              name: "সকল বই",
               item: "https://siddikiaprokashoni.com/shop",
             },
           ],
         }}
       />
       <ShopBanner />
-      <ShopContent minPrice={priceRange.minPrice} maxPrice={priceRange.maxPrice}>
+      <ShopContent
+        minPrice={priceRange.minPrice}
+        maxPrice={priceRange.maxPrice}
+      >
         <ShopFilters
           categories={categories}
           brands={brands}

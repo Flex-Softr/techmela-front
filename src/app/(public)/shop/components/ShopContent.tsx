@@ -9,14 +9,21 @@ import ProductSorter from "./ProductSorter";
 import { ShopFiltersProvider, useShopFilters } from "./ShopFiltersContext";
 
 type ShopContentProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   minPrice?: number;
   maxPrice?: number;
   defaultSelectedCategories?: string[];
   syncDefaultCategoriesToUrl?: boolean;
+  hideSidebar?: boolean;
 };
 
-const ShopContentInner = ({ children }: { children: React.ReactNode }) => {
+const ShopContentInner = ({
+  children,
+  hideSidebar,
+}: {
+  children?: React.ReactNode;
+  hideSidebar?: boolean;
+}) => {
   const { queryParams, currentPage, limit } = useShopFilters();
   const { data: productData, isLoading } = useGetAllProductsQuery(queryParams);
 
@@ -29,24 +36,35 @@ const ShopContentInner = ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="relative pt-0 md:pt-2 px-2 h-full">
       <ContainerMax>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 my-2 md:mb-4">
+        <div
+          className={
+            hideSidebar
+              ? "my-2 md:mb-4"
+              : "grid grid-cols-1 lg:grid-cols-4 gap-5 my-2 md:mb-4"
+          }
+        >
           {/* Sidebar Filter – desktop only */}
-          <div className="hidden lg:block">{children}</div>
+          {!hideSidebar && <div className="hidden lg:block">{children}</div>}
 
           {/* Main Content */}
-          <div className="lg:col-span-3">
+          <div className={hideSidebar ? "w-full" : "lg:col-span-3"}>
             {/* Filter trigger shows above content on mobile */}
-            <div className="lg:hidden mb-4">{children}</div>
+            {!hideSidebar && <div className="lg:hidden mb-4">{children}</div>}
 
             <ProductSorter />
             {isLoading ? (
               <ProductGridSkeleton
                 count={6}
-                className="lg:grid-cols-3"
+                className={hideSidebar ? "lg:grid-cols-4" : "lg:grid-cols-3"}
                 itemClassName="h-80"
               />
             ) : (
-              <ProductGrid products={products} />
+              <ProductGrid
+                products={products}
+                gridClassName={
+                  hideSidebar ? "lg:grid-cols-4" : "lg:grid-cols-3"
+                }
+              />
             )}
 
             {!isLoading && shouldShowPagination && (
@@ -69,6 +87,7 @@ const ShopContent = ({
   maxPrice,
   defaultSelectedCategories,
   syncDefaultCategoriesToUrl,
+  hideSidebar,
 }: ShopContentProps) => {
   return (
     <ShopFiltersProvider
@@ -77,7 +96,7 @@ const ShopContent = ({
       defaultCategories={defaultSelectedCategories}
       syncDefaultCategoriesToUrl={syncDefaultCategoriesToUrl}
     >
-      <ShopContentInner>{children}</ShopContentInner>
+      <ShopContentInner hideSidebar={hideSidebar}>{children}</ShopContentInner>
     </ShopFiltersProvider>
   );
 };

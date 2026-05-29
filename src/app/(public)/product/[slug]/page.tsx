@@ -190,7 +190,7 @@ const ProductDetailsPage = async ({ params }: TProps) => {
     breadcrumbItems.push({
       "@type": "ListItem",
       position: 2,
-      name: "শপ",
+      name: "সকল বই",
       item: "https://siddikiaprokashoni.com/shop",
     });
     breadcrumbItems.push({

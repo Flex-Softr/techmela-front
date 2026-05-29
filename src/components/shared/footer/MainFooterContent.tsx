@@ -6,7 +6,7 @@ import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import logo from "../../../../public/logo/logo.webp";
 
 const companyLinks = [
-  { name: "শপ", url: "/shop" },
+  { name: "সকল বই", url: "/shop" },
   { name: "আমাদের সম্পর্কে", url: "/about-us" },
   { name: "যোগাযোগ করুন", url: "/contact-us" },
   { name: "বিপণন কেন্দ্র", url: "/store-location" },

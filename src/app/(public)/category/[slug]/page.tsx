@@ -1,14 +1,11 @@
 import ShopContent from "@/app/(public)/shop/components/ShopContent";
-import ShopFilters from "@/app/(public)/shop/components/ShopFilters";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import JsonLd from "@/components/shared/JsonLd";
 import { getImageSrc } from "@/lib/utils";
-import TBrand from "@/types/brands/brands";
 import TCategory from "@/types/categories/categories";
-import TCollection from "@/types/collections/collections";
 import { TPaginatedData } from "@/types/response";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
-import { BookOpen, Search } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Metadata } from "next";
 
 const BASE_URL = "https://siddikiaprokashoni.com";
@@ -22,44 +19,6 @@ const fetchCategories = async () => {
     return res?.data?.data || [];
   } catch {
     return [];
-  }
-};
-
-const fetchBrands = async () => {
-  try {
-    const res = await serverSideFetcher<TPaginatedData<TBrand[]>>({
-      url: "/brands?isActive=true",
-      tags: ["brands"],
-    });
-    return res?.data?.data || [];
-  } catch {
-    return [];
-  }
-};
-
-const fetchCollections = async () => {
-  try {
-    const res = await serverSideFetcher<TPaginatedData<TCollection[]>>({
-      url: "/collections?isActive=true",
-      tags: ["collections"],
-    });
-    return res?.data?.data || [];
-  } catch {
-    return [];
-  }
-};
-
-const fetchPriceRange = async () => {
-  try {
-    const res = await serverSideFetcher<{ minPrice: number; maxPrice: number }>(
-      {
-        url: "/products/price-range",
-        tags: ["priceRange"],
-      }
-    );
-    return res?.data || { minPrice: 0, maxPrice: 10000 };
-  } catch {
-    return { minPrice: 0, maxPrice: 10000 };
   }
 };
 
@@ -116,9 +75,6 @@ export default async function CategoryPage({
   const decodedSlug = decodeURIComponent(params.slug);
 
   const categories = await fetchCategories();
-  const brands = await fetchBrands();
-  const collections = await fetchCollections();
-  const priceRange = await fetchPriceRange();
 
   const category = categories.find((cat) => cat.slug === decodedSlug);
 
@@ -191,8 +147,8 @@ export default async function CategoryPage({
             {/* Chip — hidden on very small mobile to avoid crowding */}
             <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
               <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-3 py-1.5 rounded-xl text-sm font-medium">
-                <Search className="w-4 h-4" />
-                <span>ফিল্টার করে খুঁজুন</span>
+                <BookOpen className="w-4 h-4" />
+                <span>ক্যাটাগরি সংগ্রহ</span>
               </div>
             </div>
           </div>
@@ -200,19 +156,10 @@ export default async function CategoryPage({
       </div>
 
       <ShopContent
-        minPrice={priceRange.minPrice}
-        maxPrice={priceRange.maxPrice}
         defaultSelectedCategories={[decodedSlug]}
         syncDefaultCategoriesToUrl={false}
-      >
-        <ShopFilters
-          categories={categories}
-          brands={brands}
-          collections={collections}
-          priceRange={priceRange}
-          hideCategorySection
-        />
-      </ShopContent>
+        hideSidebar={true}
+      />
     </>
   );
 }

@@ -45,7 +45,7 @@ export default function MenuBar({
 
   const menuLinks: MenuLink[] = [
     { title: "হোম", href: "/" },
-    { title: "শপ", href: "/shop" },
+    { title: "সকল বই", href: "/shop" },
     {
       title: "অর্ডার ট্র্যাক",
       href: "/track-your-order",
@@ -74,13 +74,18 @@ export default function MenuBar({
   }
 
   const isActive = (href: string) => {
-    if (pathname === href) return true;
+    const decodedPathname = decodeURIComponent(pathname);
+
+    if (decodedPathname === href) return true;
     if (href.includes("?")) {
       const [hrefPath, hrefQuery] = href.split("?");
       const [paramKey, paramValue] = hrefQuery.split("=");
-      return pathname === hrefPath && searchParams.get(paramKey) === paramValue;
+      return (
+        decodedPathname === hrefPath &&
+        searchParams.get(paramKey) === paramValue
+      );
     }
-    return href !== "/" && pathname.startsWith(href);
+    return href !== "/" && decodedPathname === href;
   };
 
   // --------------------------------------------------------------------------
