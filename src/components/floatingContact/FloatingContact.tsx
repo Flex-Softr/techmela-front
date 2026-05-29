@@ -35,14 +35,14 @@ const FloatingContact = () => {
   const contactOptions = [
     {
       name: "WhatsApp",
-      icon: "/images/social_icons/whatsapp.png",
+      icon: "/images/social_icons/whatsapp.webp",
       link: "http://wa.me/8801339955155", // Replace with your WhatsApp number
       bgColor: "bg-green-500",
       hoverColor: "hover:bg-green-600",
     },
     {
       name: "Facebook",
-      icon: "/images/social_icons/facebook.png",
+      icon: "/images/social_icons/facebook.webp",
       link: "https://www.facebook.com/siddikiyaprokashoni", // Replace with your Facebook page username
       bgColor: "bg-blue-500",
       hoverColor: "hover:bg-blue-600",

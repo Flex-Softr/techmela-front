@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
           alt: title,
         },
         {
-          url: "https://siddikiaprokashoni.com/logo/logo.png",
+          url: "https://siddikiaprokashoni.com/logo/logo.webp",
           alt: "সিদ্দীকিয়া প্রকাশনী",
         },
       ],

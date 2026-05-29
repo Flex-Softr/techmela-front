@@ -55,10 +55,10 @@ export default function MenuBar({
 
   const categoryItems: MenuLink[] = categories.map((cat) => ({
     title: cat.name,
-    href: `/shop?category=${cat.slug}`,
+    href: `/category/${cat.slug}`,
     subMenus: (cat.subcategories || []).map((sub) => ({
       title: sub.name,
-      href: `/shop?category=${sub.slug}`,
+      href: `/category/${sub.slug}`,
     })),
   }));
 

@@ -66,7 +66,7 @@ export default function CategoryMenuBar({
 
         {categories.map((cat) => {
           const hasSubs = cat.subcategories && cat.subcategories.length > 0;
-          const href = `/shop?category=${cat.slug}`;
+          const href = `/category/${cat.slug}`;
           const active = isActive(href);
 
           return (
@@ -91,7 +91,7 @@ export default function CategoryMenuBar({
                 <div className="absolute left-0 top-full pt-0 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200 z-[100]">
                   <div className="bg-white border rounded-lg shadow-2xl p-2 min-w-[220px] flex flex-col gap-1 mt-[1px]">
                     {cat.subcategories?.map((sub) => {
-                      const subHref = `/shop?category=${sub.slug}`;
+                      const subHref = `/category/${sub.slug}`;
                       const subActive = isActive(subHref);
 
                       return (

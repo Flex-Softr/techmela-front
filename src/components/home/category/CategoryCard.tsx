@@ -7,7 +7,7 @@ import Link from "next/link";
 const CategoryCard = ({ category }: { category: TCategory }) => {
   return (
     <Link
-      href={`/shop?category=${category.slug}`}
+      href={`/category/${category.slug}`}
       className="text-center mx-auto flex flex-col justify-center items-center group transition-all duration-300"
     >
       <div className="size-20 sm:size-24 md:size-32 rounded-full flex justify-center items-center bg-gray-50 border border-gray-100 group-hover:bg-primary/5 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-300 overflow-hidden shadow-sm">

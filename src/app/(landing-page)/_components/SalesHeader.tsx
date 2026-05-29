@@ -1,5 +1,5 @@
 "use client";
-import logo from "@/../public/logo/logo.png";
+import logo from "@/../public/logo/logo.webp";
 import Image from "next/image";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";

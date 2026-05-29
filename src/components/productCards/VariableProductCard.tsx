@@ -86,7 +86,7 @@ const VariableProductCard = ({
             height={400}
             width={400}
             className="w-full aspect-square object-contain mx-auto rounded-md transition-transform duration-300 group-hover/card:scale-105 bg-gray-50/50"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 768px) 50vw, 250px"
             priority={priority}
           />
         </Link>

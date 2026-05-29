@@ -2,8 +2,8 @@ import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../../public/logo/logo.png";
 import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import logo from "../../../../public/logo/logo.webp";
 
 const companyLinks = [
   { name: "শপ", url: "/shop" },
@@ -36,6 +36,7 @@ const MainFooterContent = () => {
                   width={150}
                   height={50}
                   className="w-28 h-auto md:w-36 rounded-md"
+                  sizes="(max-width: 768px) 112px, 144px"
                   priority
                 />
               </div>

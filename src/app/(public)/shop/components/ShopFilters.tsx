@@ -12,25 +12,26 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
+import TBrand from "@/types/brands/brands";
+import TCategory from "@/types/categories/categories";
+import TCollection from "@/types/collections/collections";
 import { X } from "lucide-react";
 import { useRef } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { useShopFilters } from "./ShopFiltersContext";
-import CollapsibleFilterSection from "./CollapsibleFilterSection";
-import TCategory from "@/types/categories/categories";
-import TBrand from "@/types/brands/brands";
-import TCollection from "@/types/collections/collections";
-import CategorySelector from "./categories/CategorySelector";
 import BrandSelectorWrapper from "./brands/BrandSelectorWrapper";
+import CategorySelector from "./categories/CategorySelector";
+import CollapsibleFilterSection from "./CollapsibleFilterSection";
 import CollectionSelectorWrapper from "./collections/CollectionSelectorWrapper";
 import PriceRangeSliderWrapper from "./price-range/PriceRangeSliderWrapper";
-import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
+import { useShopFilters } from "./ShopFiltersContext";
 
 type ShopFiltersProps = {
   categories: TCategory[];
   brands: TBrand[];
   collections: TCollection[];
   priceRange: { minPrice: number; maxPrice: number };
+  hideCategorySection?: boolean;
 };
 
 const ShopFilters = ({
@@ -38,6 +39,7 @@ const ShopFilters = ({
   brands,
   collections,
   priceRange,
+  hideCategorySection = false,
 }: ShopFiltersProps) => {
   const sheetCloseRef = useRef<HTMLButtonElement>(null);
   const {
@@ -78,7 +80,7 @@ const ShopFilters = ({
         </CollapsibleFilterSection>
       </div>
 
-      <CategorySelector categories={categories} />
+      {!hideCategorySection && <CategorySelector categories={categories} />}
 
       <BrandSelectorWrapper brands={brands} />
 

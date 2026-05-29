@@ -15,7 +15,7 @@ const ReturnPolicyPage = () => {
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary">
         {/* Custom Brand Image with Overlay */}
         <Image
-          src="/images/return_hero_new.png"
+          src="/images/return_hero_new.webp"
           alt="রিটার্ন পলিসি"
           fill
           className="object-cover opacity-50 mix-blend-overlay"

@@ -350,4 +350,4 @@ Thumbnail
 সারাদেশে ডেলিভারি
 সীমিত স্টক
 
-![alt text](image.png)
+![alt text](image.webp)

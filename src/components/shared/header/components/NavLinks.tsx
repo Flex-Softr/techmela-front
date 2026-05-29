@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation"; // Import usePathname to get the 
 import { useState } from "react";
 import { FaBars, FaWhatsapp } from "react-icons/fa";
 import { MdCall } from "react-icons/md";
-import logo from "../../../../../public/logo/logo.png";
+import logo from "../../../../../public/logo/logo.webp";
 import MenuBar from "./MenuBar";
 
 const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
@@ -51,6 +51,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                   height={48}
                   width={120}
                   className="h-10 w-auto rounded-sm"
+                  sizes="120px"
                   priority
                 />
               </div>

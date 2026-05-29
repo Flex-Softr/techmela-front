@@ -37,7 +37,7 @@ export async function GET() {
     .map(
       (cat: any) => `
   <url>
-    <loc>${baseUrl}/shop?category=${sanitize(cat.slug || "")}</loc>
+    <loc>${baseUrl}/category/${sanitize(cat.slug || "")}</loc>
     <lastmod>${new Date(cat.updatedAt || new Date()).toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

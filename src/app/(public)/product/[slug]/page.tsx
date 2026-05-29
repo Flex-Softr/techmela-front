@@ -3,14 +3,14 @@ import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import JsonLd from "@/components/shared/JsonLd";
 import Box from "@/components/ui/ec/Box";
 import { STOCK_STATUS } from "@/const/product.const";
+import { getImageSrc } from "@/lib/utils";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
-import { getImageSrc } from "@/lib/utils";
 import { Metadata } from "next";
 import ProductClientWrapper from "./components/ProductClientWrapper";
 import ProductDescription from "./components/ProductDescription";
-import RelatedProduct from "./components/RelatedProduct";
 import ProductImageGallery from "./components/ProductImageGallery";
+import RelatedProduct from "./components/RelatedProduct";
 
 type TProps = {
   params: {
@@ -24,7 +24,7 @@ type TProps = {
 export async function generateStaticParams() {
   try {
     const productsResponse = await serverSideFetcher<{ slug: string }[]>({
-      url: "/products?limit=30&fields=slug",
+      url: "/products?limit=1000&fields=slug",
       tags: ["products"],
     });
 
@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
           alt: title,
         },
         {
-          url: "https://siddikiaprokashoni.com/logo/logo.png",
+          url: "https://siddikiaprokashoni.com/logo/logo.webp",
           alt: "সিদ্দীকিয়া প্রকাশনী",
         },
       ],
@@ -178,7 +178,7 @@ const ProductDetailsPage = async ({ params }: TProps) => {
       "@type": "ListItem",
       position: 2,
       name: product.category[0].name,
-      item: `https://siddikiaprokashoni.com/shop?category=${product.category[0].slug}`,
+      item: `https://siddikiaprokashoni.com/category/${product.category[0].slug}`,
     });
     breadcrumbItems.push({
       "@type": "ListItem",

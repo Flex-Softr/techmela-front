@@ -219,7 +219,7 @@ const SalesOrderForm = ({
               <div className="flex gap-4 mb-4 relative z-10">
                 <div className="w-20 h-28 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0 shadow-md border border-gray-100 p-0.5">
                   <Image
-                    src={actualThumbnail ?? "/placeholder.jpg"}
+                    src={actualThumbnail ?? "/placeholder.webp"}
                     alt="Thumbnail"
                     width={80}
                     height={112}

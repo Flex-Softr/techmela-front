@@ -141,7 +141,7 @@ const ProductsPromotion = () => {
               <Image
                 width={200}
                 height={150}
-                src="https://i.ibb.co/YLM3tnP/LED-BULb.png"
+                src="https://i.ibb.co/YLM3tnP/LED-BULb.webp"
                 alt="card-image"
                 className=" object-cover me-4 mt-6"
               />
@@ -212,7 +212,7 @@ const ProductsPromotion = () => {
               <Image
                 width={200}
                 height={150}
-                src="https://i.ibb.co/YLM3tnP/LED-BULb.png"
+                src="https://i.ibb.co/YLM3tnP/LED-BULb.webp"
                 alt="card-image"
                 className=" object-cover me-4 mt-6 "
               />

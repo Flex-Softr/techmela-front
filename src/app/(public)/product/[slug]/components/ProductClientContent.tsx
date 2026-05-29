@@ -150,7 +150,7 @@ const ProductClientContent = ({
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border-2 border-primary/10 bg-primary/5">
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="bg-primary/10 p-2 sm:p-3 rounded-full">
-              <a href="tel:+8801339955155">
+              <a href="tel:+8801339955155" aria-label="আমাদের কল করুন">
                 <Phone className="text-primary h-5 w-5 sm:h-6 sm:w-6" />
               </a>
             </div>

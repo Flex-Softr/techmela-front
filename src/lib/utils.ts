@@ -8,13 +8,13 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getImageSrc(src: string | undefined | null): string {
   // Return placeholder if src is missing
-  if (!src) return "/placeholder.jpg";
+  if (!src) return "/placeholder.webp";
 
   // Trim and replace backslashes
   let cleanSrc = src.trim().replace(/\\/g, "/");
 
   // Return placeholder if src became empty after trim
-  if (!cleanSrc) return "/placeholder.jpg";
+  if (!cleanSrc) return "/placeholder.webp";
 
   // If already absolute, just return the cleaned URL
   if (cleanSrc.startsWith("http://") || cleanSrc.startsWith("https://")) {

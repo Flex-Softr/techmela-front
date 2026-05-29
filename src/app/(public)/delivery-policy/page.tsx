@@ -24,7 +24,7 @@ const DeliveryPolicyPage = async () => {
       {/* Premium Hero Section */}
       <section className="relative h-[200px] md:h-[300px] flex items-center justify-center overflow-hidden bg-primary">
         <Image
-          src="/images/delivery_hero_new.png"
+          src="/images/delivery_hero_new.webp"
           alt="ডেলিভারি পলিসি"
           fill
           className="object-cover opacity-50 mix-blend-overlay"

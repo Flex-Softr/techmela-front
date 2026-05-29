@@ -1,5 +1,5 @@
-import { FiAward, FiBookOpen, FiFeather } from "react-icons/fi";
 import Image from "next/image";
+import { FiAward, FiBookOpen, FiFeather } from "react-icons/fi";
 
 const ScholarContext = () => {
   return (
@@ -85,7 +85,7 @@ const ScholarContext = () => {
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
               <Image
-                src="/logo.png" // Use fallback logo
+                src="/logo.webp" // Use fallback logo
                 alt="Siddikia Logo"
                 width={40}
                 height={40}

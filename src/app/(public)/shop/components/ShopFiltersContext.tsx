@@ -4,14 +4,14 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useShopFilterQuery } from "@/hooks/useShopFilterQuery";
 import {
   createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
   useContext,
   useEffect,
   useMemo,
-  useState,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
   useRef,
+  useState,
 } from "react";
 
 type ShopFiltersContextType = {
@@ -52,10 +52,14 @@ export const ShopFiltersProvider = ({
   children,
   minPrice = 0,
   maxPrice = 10000,
+  defaultCategories,
+  syncDefaultCategoriesToUrl = true,
 }: {
   children: ReactNode;
   minPrice?: number;
   maxPrice?: number;
+  defaultCategories?: string[];
+  syncDefaultCategoriesToUrl?: boolean;
 }) => {
   const {
     queryParams,
@@ -73,6 +77,9 @@ export const ShopFiltersProvider = ({
 
   const isClearing = useRef(false);
 
+  // State for hidden categories that filter products but don't show in URL
+  const [hiddenCategories, setHiddenCategories] = useState<string[]>([]);
+
   const [priceFilterState, setPriceFilterState] = useState<number[]>(() => [
     Number(queryParams.minPrice) || minPrice,
     Number(queryParams.maxPrice) || maxPrice,
@@ -88,6 +95,22 @@ export const ShopFiltersProvider = ({
     ]);
   }, [minPrice, maxPrice, queryParams.minPrice, queryParams.maxPrice]);
 
+  useEffect(() => {
+    if (!defaultCategories?.length) return;
+    if (queryParams.category) return;
+
+    if (syncDefaultCategoriesToUrl) {
+      setArrayParam("category", defaultCategories);
+    } else {
+      setHiddenCategories(defaultCategories);
+    }
+  }, [
+    defaultCategories,
+    queryParams.category,
+    setArrayParam,
+    syncDefaultCategoriesToUrl,
+  ]);
+
   const setAbsPriceRange = (min: number, max: number) => {
     setAbsMinPrice(min);
     setAbsMaxPrice(max);
@@ -98,11 +121,10 @@ export const ShopFiltersProvider = ({
   // Sync price filter to URL when debounced value changes
   useEffect(() => {
     if (isClearing.current) return;
-    
+
     // Only sync if the defaults are actually loaded (not 0/10000 if that's initial)
     const isPriceDefault =
-      debouncedPrice[0] === absMinPrice &&
-      debouncedPrice[1] === absMaxPrice;
+      debouncedPrice[0] === absMinPrice && debouncedPrice[1] === absMaxPrice;
 
     // IMPORTANT: Also check immediate state to prevent race conditions during clearing
     const isImmediatePriceDefault =
@@ -139,24 +161,19 @@ export const ShopFiltersProvider = ({
     const minParam = Number(queryParams.minPrice) || absMinPrice;
     const maxParam = Number(queryParams.maxPrice) || absMaxPrice;
     setPriceFilterState((prev) =>
-      prev[0] === minParam && prev[1] === maxParam
-        ? prev
-        : [minParam, maxParam]
+      prev[0] === minParam && prev[1] === maxParam ? prev : [minParam, maxParam]
     );
-  }, [
-    queryParams.minPrice,
-    queryParams.maxPrice,
-    absMinPrice,
-    absMaxPrice,
-  ]);
+  }, [queryParams.minPrice, queryParams.maxPrice, absMinPrice, absMaxPrice]);
 
-  const selectedCategories = useMemo(() => getArrayParam("category"), [
-    getArrayParam,
-  ]);
+  const selectedCategories = useMemo(
+    () => getArrayParam("category"),
+    [getArrayParam]
+  );
   const selectedBrands = useMemo(() => getArrayParam("brand"), [getArrayParam]);
-  const selectedCollections = useMemo(() => getArrayParam("collection"), [
-    getArrayParam,
-  ]);
+  const selectedCollections = useMemo(
+    () => getArrayParam("collection"),
+    [getArrayParam]
+  );
   const stockStatus = (queryParams["stock"] as string) || "";
 
   const clearAllFilters = () => {
@@ -178,6 +195,24 @@ export const ShopFiltersProvider = ({
     if (queryParams.minPrice || queryParams.maxPrice) count += 1;
     return count;
   }, [queryParams]);
+
+  // Merge visible and hidden categories for API call
+  const finalQueryParams = useMemo(() => {
+    if (!hiddenCategories.length) {
+      return queryParams;
+    }
+
+    const visibleCategories = getArrayParam("category");
+    const allCategories = [
+      ...(Array.isArray(visibleCategories) ? visibleCategories : []),
+      ...hiddenCategories,
+    ];
+
+    return {
+      ...queryParams,
+      category: allCategories.join(","),
+    };
+  }, [queryParams, hiddenCategories, getArrayParam]);
 
   return (
     <ShopFiltersContext.Provider
@@ -211,7 +246,7 @@ export const ShopFiltersProvider = ({
         setAbsPriceRange,
         clearAllFilters,
         activeFilterCount,
-        queryParams,
+        queryParams: finalQueryParams,
         currentPage,
         limit,
       }}

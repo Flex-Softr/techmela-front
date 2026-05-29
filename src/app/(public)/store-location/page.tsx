@@ -52,7 +52,7 @@ const StoreLocationPage = () => {
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary">
         {/* Custom Brand Image with Overlay */}
         <Image
-          src="/images/store_hero_new.png"
+          src="/images/store_hero_new.webp"
           alt="স্টোর লোকেশন"
           fill
           className="object-cover opacity-50 mix-blend-overlay"

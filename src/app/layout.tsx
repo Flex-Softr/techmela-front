@@ -3,7 +3,6 @@ import PageTracking from "@/components/GTM/PageTracking";
 import JsonLd from "@/components/shared/JsonLd";
 import { Toaster } from "@/components/ui/toaster";
 import StoreProvider from "@/redux/StoreProvider";
-import "@smastrom/react-rating/style.css";
 import { Metadata } from "next";
 import { Hind_Siliguri, Inter } from "next/font/google";
 import { ReactNode, Suspense } from "react";
@@ -79,7 +78,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             "@type": "Organization",
             name: "সিদ্দীকিয়া প্রকাশনী",
             url: "https://siddikiaprokashoni.com",
-            logo: "https://siddikiaprokashoni.com/logo/logo.png",
+            logo: "https://siddikiaprokashoni.com/logo/logo.webp",
             contactPoint: {
               "@type": "ContactPoint",
               telephone: "+8801339955155",

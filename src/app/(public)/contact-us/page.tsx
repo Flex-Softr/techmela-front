@@ -78,7 +78,7 @@ const ContactUsPage = () => {
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary font-hind-siliguri">
         {/* New Generated Brand Image with Overlay */}
         <Image
-          src="/images/contact_hero_new.png"
+          src="/images/contact_hero_new.webp"
           alt="যোগাযোগ করুন"
           fill
           className="object-cover opacity-50 mix-blend-overlay"

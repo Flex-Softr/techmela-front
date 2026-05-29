@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { FaBars } from "react-icons/fa";
-import logo from "../../../../public/logo/logo.png";
+import logo from "../../../../public/logo/logo.webp";
 import CartLinksAndAccount from "./components/CartLinksAndAccount";
 import MobileMenuFetcher from "./components/MobileMenuFetcher";
 import Search from "./components/Search";
@@ -22,7 +22,6 @@ const MainHeader = () => {
               className="object-contain scale-[1.1]"
               sizes="160px"
               priority
-              quality={60}
             />
           </Link>
         </div>

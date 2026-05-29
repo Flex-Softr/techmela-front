@@ -78,7 +78,7 @@ const AboutPage: React.FC = () => {
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary mb-12">
         {/* Bespoke Brand Image with Overlay */}
         <Image
-          src="/images/about_hero_new.png"
+          src="/images/about_hero_new.webp"
           alt="আমাদের সম্পর্কে"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
@@ -109,7 +109,7 @@ const AboutPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center mb-16">
             <div className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about_journey_new.png"
+                src="/images/about_journey_new.webp"
                 alt="সিদ্দীকিয়া প্রকাশনীর যাত্রা"
                 fill
                 className="object-cover"

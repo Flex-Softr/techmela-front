@@ -1,7 +1,9 @@
 import TCategory from "@/types/categories/categories";
 import { TPaginatedData } from "@/types/response";
-import CategorySection from "./CategorySection";
+import dynamic from "next/dynamic";
 import TGenericResponse from "@/types/response";
+
+const CategorySection = dynamic(() => import("./CategorySection"));
 
 const CategorySectionFetcher = async ({
   promise,

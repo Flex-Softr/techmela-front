@@ -126,7 +126,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
               Category:
             </span>
             <Link
-              href={`/shop?category=${category?.[0]?.slug}`}
+              href={`/category/${category?.[0]?.slug}`}
               className="font-semibold text-foreground hover:text-primary hover:underline truncate"
             >
               {category?.[0]?.name}
@@ -214,7 +214,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             <span className="font-semibold text-foreground flex-1">
               <Link
                 className="hover:text-primary hover:underline"
-                href={`/shop?category=${category?.[0]?.slug}`}
+                href={`/category/${category?.[0]?.slug}`}
               >
                 {category?.[0]?.name}
               </Link>

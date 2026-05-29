@@ -9,7 +9,7 @@ export type TSubCategory = {
 // Define TCategory type
 export type TCategory = {
   hasProducts: boolean;
-
+  description?: string;
   slug: string;
   _id: string;
   name: string;

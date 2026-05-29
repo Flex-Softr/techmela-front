@@ -1,17 +1,19 @@
 "use client";
 
+import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import Paginate from "@/components/shared/paginate/Paginate";
 import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
 import ProductGrid from "./ProductGrid";
 import ProductSorter from "./ProductSorter";
-import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
 import { ShopFiltersProvider, useShopFilters } from "./ShopFiltersContext";
 
 type ShopContentProps = {
   children: React.ReactNode;
   minPrice?: number;
   maxPrice?: number;
+  defaultSelectedCategories?: string[];
+  syncDefaultCategoriesToUrl?: boolean;
 };
 
 const ShopContentInner = ({ children }: { children: React.ReactNode }) => {
@@ -61,9 +63,20 @@ const ShopContentInner = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const ShopContent = ({ children, minPrice, maxPrice }: ShopContentProps) => {
+const ShopContent = ({
+  children,
+  minPrice,
+  maxPrice,
+  defaultSelectedCategories,
+  syncDefaultCategoriesToUrl,
+}: ShopContentProps) => {
   return (
-    <ShopFiltersProvider minPrice={minPrice} maxPrice={maxPrice}>
+    <ShopFiltersProvider
+      minPrice={minPrice}
+      maxPrice={maxPrice}
+      defaultCategories={defaultSelectedCategories}
+      syncDefaultCategoriesToUrl={syncDefaultCategoriesToUrl}
+    >
       <ShopContentInner>{children}</ShopContentInner>
     </ShopFiltersProvider>
   );
