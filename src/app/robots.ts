@@ -39,7 +39,13 @@ export default function robots(): MetadataRoute.Robots {
           "PerplexityBot",
           "Applebot-Extended",
         ],
-        allow: ["/product/", "/shop", "/best-selling-products"],
+        allow: [
+          "/product/",
+          "/shop",
+          "/best-selling-products",
+          "/blog",
+          "/questions",
+        ],
         disallow: [
           "/api/",
           "/dashboard/",

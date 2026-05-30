@@ -5,6 +5,8 @@ export async function GET() {
   const staticPages = [
     "",
     "/shop",
+    "/blog",
+    "/questions",
     "/best-selling-products",
     "/about-us",
     "/contact-us",
