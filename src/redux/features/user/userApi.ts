@@ -15,7 +15,6 @@ export const userApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
-
     getUserData: builder.query<TGenericResponse<TUserProfile>, undefined>({
       query: () => "/users/profile",
       providesTags: ["UserProfile"],

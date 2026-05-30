@@ -50,6 +50,8 @@ export default function CategoryMenuBar({
   const menuLinks = [
     { title: "হোম", href: "/" },
     { title: "সকল বই", href: "/shop" },
+    { title: "ব্লগ", href: "/blog" },
+    { title: "প্রশ্নোত্তর", href: "/questions" },
   ];
 
   return (

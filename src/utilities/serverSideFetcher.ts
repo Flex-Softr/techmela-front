@@ -12,6 +12,12 @@ export type TTags =
   | "featuredProducts"
   | "priceRange"
   | "categories"
+  | "blogPosts"
+  | `blogPost-${string}`
+  | "qna"
+  | `qna-${string}`
+  | "blogQaCategories"
+  | "blogQaTags"
   | "brands"
   | "collections"
   | "paymentMethod"

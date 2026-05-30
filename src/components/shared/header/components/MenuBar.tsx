@@ -46,6 +46,8 @@ export default function MenuBar({
   const menuLinks: MenuLink[] = [
     { title: "হোম", href: "/" },
     { title: "সকল বই", href: "/shop" },
+    { title: "ব্লগ", href: "/blog" },
+    { title: "প্রশ্নোত্তর", href: "/questions" },
     {
       title: "অর্ডার ট্র্যাক",
       href: "/track-your-order",

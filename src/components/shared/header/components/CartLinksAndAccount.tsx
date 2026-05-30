@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
+import { useAppSelector } from "@/redux/hooks";
 
 /* -------------------- type guards -------------------- */
 const isVariableProduct = (
@@ -35,7 +36,10 @@ const isApiResponse = (response: unknown): response is ApiResponse => {
 const CartLinksAndAccount = () => {
   const router = useRouter();
   const { totalCartItem } = useCart();
-  const { data: user } = useGetUserDataQuery(undefined);
+
+  const token = useAppSelector((state) => state.auth.token);
+
+  const { data: user } = useGetUserDataQuery(undefined, { skip: !token });
   const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
 
   const [isMounted, setIsMounted] = useState(false);
