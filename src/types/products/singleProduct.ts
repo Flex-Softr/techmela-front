@@ -65,12 +65,13 @@ export type TPublishedStatus = {
   date: string;
 };
 
-export type TSeoData = {
-  _id: string;
-  focusKeyphrase: string;
-  metaTitle: string;
-  slug: string;
-  metaDescription: string;
+export type TSeo = {
+  _id?: string;
+  metaTitle?: string;
+  keywords?: string[];
+  metaDescription?: string;
+  canonicalUrl?: string;
+  schemaMarkup?: string;
 };
 
 export type TSingleProduct = {
@@ -103,15 +104,15 @@ export type TSingleProduct = {
   category: TCategory[];
   tag: TTag[];
   publishedStatus: TPublishedStatus;
-  seoData: TSeoData;
+  seo: TSeo;
   createdBy: string;
   isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
   __v: number;
-  variations: Tvariations[];
+  variations: TVariations[];
 };
-export type Tvariations = {
+export type TVariations = {
   options: string[];
   priceDifference: number;
   id: string;
@@ -129,7 +130,7 @@ export type Tvariations = {
 };
 
 export type VariationSelectorProps = {
-  variations: Tvariations[];
+  variations: TVariations[];
   initialPrice: {
     regularPrice: number;
     salePrice: number;

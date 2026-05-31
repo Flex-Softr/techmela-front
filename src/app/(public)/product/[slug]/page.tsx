@@ -56,9 +56,9 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     product?.thumbnail?.src || product?.gallery?.[0]?.src
   );
 
-  const title = product?.seoData?.metaTitle || product?.title;
+  const title = product?.seo?.metaTitle || product?.title;
   const rawDescription =
-    product?.seoData?.metaDescription ||
+    product?.seo?.metaDescription ||
     product?.shortDescription ||
     "সিদ্দীকিয়া প্রকাশনী থেকে সেরা ইসলামিক বই কিনুন।";
   const description = rawDescription
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   return {
     title,
     description,
-    keywords: product?.seoData?.focusKeyphrase || "",
+    keywords: product?.seo?.keywords?.join(", ") || "",
     openGraph: {
       title,
       description,
@@ -132,7 +132,7 @@ const ProductDetailsPage = async ({ params }: TProps) => {
     "@context": "https://schema.org",
     "@type": ["Product", "Book"],
     name: product.title,
-    description: product.seoData?.metaDescription || product.shortDescription,
+    description: product.seo?.metaDescription || product.shortDescription,
     image: getImageSrc(product.thumbnail?.src || product.gallery?.[0]?.src),
     sku: product.inventory?.sku,
     isbn: product.attribute?.find((attr) => attr.name.toLowerCase() === "isbn")
