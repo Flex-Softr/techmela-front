@@ -11,10 +11,13 @@ export function getImageSrc(src: string | undefined | null): string {
   if (!src) return "/placeholder.webp";
 
   // Trim and replace backslashes
-  let cleanSrc = src.trim().replace(/\\/g, "/");
+  let cleanSrc =
+    config.env === "development" ? src.trim().replace(/\\/g, "/") : src;
 
-  // Return placeholder if src became empty after trim
-  if (!cleanSrc) return "/placeholder.webp";
+  // Check for string "null" or "undefined"
+  if (cleanSrc === "null" || cleanSrc === "undefined" || !cleanSrc) {
+    return "/placeholder.webp";
+  }
 
   // If already absolute, just return the cleaned URL
   if (cleanSrc.startsWith("http://") || cleanSrc.startsWith("https://")) {

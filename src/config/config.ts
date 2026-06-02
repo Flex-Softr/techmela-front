@@ -1,4 +1,5 @@
 const config = {
+  env: process.env.NEXT_PUBLIC_NODE_ENV,
   api_base_url: process.env.NEXT_PUBLIC_API_BASE_URL,
   gtm_id: process.env.GTM_ID,
   revalidate_secret: process.env.REVALIDATE_SECRET,
