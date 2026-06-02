@@ -19,6 +19,7 @@ export type TTags =
   | "blogQaCategories"
   | "blogQaTags"
   | "brands"
+  | "bookPreviews"
   | "collections"
   | "paymentMethod"
   | "shippingCharge"

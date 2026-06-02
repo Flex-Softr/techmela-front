@@ -1,13 +1,13 @@
 "use client";
 
+import BookPreviewModal from "@/components/shared/BookPreviewModal/BookPreviewModal";
 import { PRODUCT_TYPE } from "@/const/product.const";
-import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
 import eventHandler from "@/tracking/eventHandler";
-import { useEffect, useState, useRef } from "react";
+import { TSingleProduct, TVariations } from "@/types/products/singleProduct";
+import { useEffect, useRef, useState } from "react";
 import ProductClientContent from "./ProductClientContent";
 import ProductMainInfo from "./ProductMainInfo";
 import VariationSelector from "./VariationSelector";
-import BookPreviewModal from "@/components/shared/BookPreviewModal/BookPreviewModal";
 
 type ProductClientWrapperProps = {
   product: TSingleProduct;
@@ -15,7 +15,7 @@ type ProductClientWrapperProps = {
     regularPrice: number;
     salePrice: number;
   };
-  defaultVariation: Tvariations;
+  defaultVariation: TVariations;
 };
 
 const ProductClientWrapper = ({

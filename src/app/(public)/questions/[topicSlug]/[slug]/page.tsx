@@ -21,8 +21,15 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+type TLinkedRef = {
+  _id: string;
+  slug?: string;
+  category?: string | { slug?: string };
+  topic?: string | { slug?: string };
+};
+
 type TProps = {
-  params: { slug: string };
+  params: { topicSlug: string; slug: string };
 };
 
 async function getQuestion(slug: string) {
@@ -40,7 +47,13 @@ export async function generateStaticParams() {
       tags: ["qna"],
       params: { limit: 1000, status: "published" },
     });
-    return (res.data?.data || []).map((item) => ({ slug: item.slug }));
+    return (res.data?.data || []).map((item) => ({
+      topicSlug:
+        typeof item.topic === "object"
+          ? item.topic.slug || "general"
+          : "general",
+      slug: item.slug,
+    }));
   } catch {
     return [];
   }
@@ -61,13 +74,13 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     description,
     keywords: item.seo?.keywords?.join(", "),
     alternates: {
-      canonical: `${SITE_URL}/questions/${item.slug}`,
+      canonical: `${SITE_URL}/questions/${params.topicSlug}/${item.slug}`,
     },
     openGraph: {
       title,
       description,
       type: "article",
-      url: `${SITE_URL}/questions/${item.slug}`,
+      url: `${SITE_URL}/questions/${params.topicSlug}/${item.slug}`,
     },
   };
 }
@@ -106,11 +119,11 @@ export default async function QuestionPage({ params }: TProps) {
                 className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
               >
                 <HelpCircle className="h-4 w-4" />
-                QnA
+                প্রশ্নোত্তর
               </Link>
               <div className="space-y-3">
                 <Badge variant="outline">
-                  {getRefLabel(item.category) || "Question"}
+                  {getRefLabel(item.category) || "প্রশ্ন"}
                 </Badge>
                 <h1 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
                   {item.question}
@@ -138,7 +151,7 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-white">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
-                    Tags
+                    ট্যাগ
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
@@ -155,15 +168,38 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-white">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    Related posts
+                    সম্পর্কিত প্রবন্ধ
                   </h2>
-                  {item.relatedBlogs.map((post) => (
-                    <RelatedInlineLink
-                      key={String(typeof post === "object" ? post._id : post)}
-                      href={`/blog/${typeof post === "object" ? post.slug : post}`}
-                      title={getRefLabel(post)}
-                    />
-                  ))}
+                  {item.relatedBlogs.map((post) => {
+                    const linkedPost = post as string | TLinkedRef;
+                    const relCategorySlug =
+                      typeof linkedPost === "object" &&
+                      linkedPost.category &&
+                      typeof linkedPost.category === "object"
+                        ? linkedPost.category.slug || "general"
+                        : "general";
+                    const relTopicSlug =
+                      typeof linkedPost === "object" &&
+                      linkedPost.topic &&
+                      typeof linkedPost.topic === "object"
+                        ? linkedPost.topic.slug || "general"
+                        : "general";
+                    return (
+                      <RelatedInlineLink
+                        key={String(
+                          typeof linkedPost === "object"
+                            ? linkedPost._id
+                            : linkedPost
+                        )}
+                        href={`/blog/${relCategorySlug}/${relTopicSlug}/${
+                          typeof linkedPost === "object"
+                            ? linkedPost.slug
+                            : linkedPost
+                        }`}
+                        title={getRefLabel(post)}
+                      />
+                    );
+                  })}
                 </CardContent>
               </Card>
             ) : null}
@@ -172,17 +208,32 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-white">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    Related questions
+                    সম্পর্কিত প্রশ্ন
                   </h2>
-                  {item.relatedQuestions.map((question) => (
-                    <RelatedInlineLink
-                      key={String(
-                        typeof question === "object" ? question._id : question
-                      )}
-                      href={`/questions/${typeof question === "object" ? question.slug : question}`}
-                      title={getRefLabel(question)}
-                    />
-                  ))}
+                  {item.relatedQuestions.map((question) => {
+                    const linkedQuestion = question as string | TLinkedRef;
+                    const relTopicSlug =
+                      typeof linkedQuestion === "object" &&
+                      linkedQuestion.topic &&
+                      typeof linkedQuestion.topic === "object"
+                        ? linkedQuestion.topic.slug || "general"
+                        : "general";
+                    return (
+                      <RelatedInlineLink
+                        key={String(
+                          typeof linkedQuestion === "object"
+                            ? linkedQuestion._id
+                            : linkedQuestion
+                        )}
+                        href={`/questions/${relTopicSlug}/${
+                          typeof linkedQuestion === "object"
+                            ? linkedQuestion.slug
+                            : linkedQuestion
+                        }`}
+                        title={getRefLabel(question)}
+                      />
+                    );
+                  })}
                 </CardContent>
               </Card>
             ) : null}

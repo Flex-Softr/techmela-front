@@ -48,6 +48,7 @@ export default function MenuBar({
     { title: "সকল বই", href: "/shop" },
     { title: "ব্লগ", href: "/blog" },
     { title: "প্রশ্নোত্তর", href: "/questions" },
+    { title: "ফ্রি পিডিএফ", href: "/free-pdfs" },
     {
       title: "অর্ডার ট্র্যাক",
       href: "/track-your-order",

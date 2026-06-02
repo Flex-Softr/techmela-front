@@ -43,6 +43,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "api.siddikiaprokashoni.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.siddikiaprokashoni.com",
+      },
     ],
   },
   reactStrictMode: false,

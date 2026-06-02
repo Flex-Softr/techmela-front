@@ -51,7 +51,7 @@ export function BlogQnaListShell({
               ) : (
                 <HelpCircle className="h-4 w-4" />
               )}
-              {type === "blog" ? "Articles" : "QnA"}
+              {type === "blog" ? "ব্লগ" : "প্রশ্নোত্তর"}
             </div>
             <h1 className="text-3xl font-bold tracking-tight text-primary md:text-4xl">
               {title}
@@ -74,7 +74,7 @@ export function BlogQnaListShell({
               <input
                 name="search"
                 defaultValue={search}
-                placeholder="Search"
+                placeholder="খুঁজুন..."
                 className="h-10 w-full rounded-md border bg-white pl-9 pr-3 text-sm outline-none focus:border-primary"
               />
             </label>
@@ -86,30 +86,30 @@ export function BlogQnaListShell({
             )}
           </form>
 
-          <FilterBlock title="Categories">
+          <FilterBlock title="ক্যাটাগরি">
             <FilterLink
               href={baseHref}
               active={!selectedCategory && !selectedTag}
             >
-              All
+              সকল
             </FilterLink>
             {categories.map((category) => (
               <FilterLink
                 key={category._id}
-                href={`${baseHref}?category=${encodeURIComponent(category._id)}`}
-                active={selectedCategory === category._id}
+                href={`${baseHref}?category=${encodeURIComponent(category.slug)}`}
+                active={selectedCategory === category.slug}
               >
                 {category.name}
               </FilterLink>
             ))}
           </FilterBlock>
 
-          <FilterBlock title="Tags">
+          <FilterBlock title="ট্যাগ">
             {tags.map((tag) => (
               <FilterLink
                 key={tag._id}
-                href={`${baseHref}?tag=${encodeURIComponent(tag._id)}`}
-                active={selectedTag === tag._id}
+                href={`${baseHref}?tag=${encodeURIComponent(tag.slug)}`}
+                active={selectedTag === tag.slug}
               >
                 {tag.name}
               </FilterLink>
@@ -167,7 +167,11 @@ export function BlogCard({ post }: { post: TBlogPost }) {
   return (
     <Card className="overflow-hidden rounded-lg border bg-white shadow-sm transition-shadow hover:shadow-md">
       <Link
-        href={`/blog/${post.slug}`}
+        href={`/blog/${
+          typeof post.category === "object" ? post.category.slug : "general"
+        }/${
+          typeof post.topic === "object" ? post.topic.slug : "general"
+        }/${post.slug}`}
         className="grid h-full md:grid-cols-[220px_1fr]"
       >
         <div className="relative aspect-[16/10] bg-muted md:aspect-auto">
@@ -182,9 +186,9 @@ export function BlogCard({ post }: { post: TBlogPost }) {
         <CardContent className="flex flex-col gap-3 p-4">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <Badge variant="outline">
-              {getRefLabel(post.category) || "Article"}
+              {getRefLabel(post.category) || "প্রবন্ধ"}
             </Badge>
-            {post.readTime ? <span>{post.readTime} min read</span> : null}
+            {post.readTime ? <span>{post.readTime} মিনিট</span> : null}
             {post.publishedAt ? (
               <span>{formatDate(post.publishedAt)}</span>
             ) : null}
@@ -196,7 +200,7 @@ export function BlogCard({ post }: { post: TBlogPost }) {
             {post.excerpt || truncateText(post.content, 180)}
           </p>
           <div className="mt-auto flex items-center justify-between text-sm font-semibold text-primary">
-            <span>Read article</span>
+            <span>বিস্তারিত পড়ুন</span>
             <ArrowRight className="h-4 w-4" />
           </div>
         </CardContent>
@@ -208,11 +212,15 @@ export function BlogCard({ post }: { post: TBlogPost }) {
 export function QuestionCard({ item }: { item: TQnA }) {
   return (
     <Card className="rounded-lg border bg-white shadow-sm transition-shadow hover:shadow-md">
-      <Link href={`/questions/${item.slug}`}>
+      <Link
+        href={`/questions/${
+          typeof item.topic === "object" ? item.topic.slug : "general"
+        }/${item.slug}`}
+      >
         <CardContent className="space-y-3 p-4">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <Badge variant="outline">
-              {getRefLabel(item.category) || "QnA"}
+              {getRefLabel(item.category) || "প্রশ্নোত্তর"}
             </Badge>
             <span className="inline-flex items-center gap-1">
               <Eye className="h-3.5 w-3.5" />
@@ -226,7 +234,7 @@ export function QuestionCard({ item }: { item: TQnA }) {
             {truncateText(item.answer, 180)}
           </p>
           <div className="flex items-center gap-2 text-sm font-semibold text-primary">
-            <span>Read answer</span>
+            <span>উত্তর পড়ুন</span>
             <ArrowRight className="h-4 w-4" />
           </div>
         </CardContent>
@@ -272,18 +280,18 @@ export function Pagination({
           className="rounded-md border bg-white px-3 py-2 text-sm font-semibold text-primary"
           href={makeHref(page - 1)}
         >
-          Previous
+          পূর্ববর্তী
         </Link>
       )}
       <span className="text-sm text-muted-foreground">
-        Page {page} of {meta.totalPage}
+        পৃষ্ঠা {page} / {meta.totalPage}
       </span>
       {page < meta.totalPage && (
         <Link
           className="rounded-md border bg-white px-3 py-2 text-sm font-semibold text-primary"
           href={makeHref(page + 1)}
         >
-          Next
+          পরবর্তী
         </Link>
       )}
     </div>

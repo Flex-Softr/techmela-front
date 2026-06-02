@@ -95,7 +95,7 @@ export default async function QuestionsPage({
             qnaList.map((item) => <QuestionCard key={item._id} item={item} />)
           ) : (
             <div className="md:col-span-2">
-              <EmptyState label="No questions found." />
+              <EmptyState label="কোনো প্রশ্ন পাওয়া যায়নি।" />
             </div>
           )}
         </div>

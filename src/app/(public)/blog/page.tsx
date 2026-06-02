@@ -95,7 +95,7 @@ export default async function BlogPage({
           {posts.length ? (
             posts.map((post) => <BlogCard key={post._id} post={post} />)
           ) : (
-            <EmptyState label="No blog posts found." />
+            <EmptyState label="কোনো ব্লগ পোস্ট পাওয়া যায়নি।" />
           )}
         </div>
         <Pagination meta={meta} basePath="/blog" searchParams={searchParams} />

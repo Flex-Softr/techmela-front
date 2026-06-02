@@ -11,7 +11,7 @@ import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
 import eventHandler from "@/tracking/eventHandler";
 import { TShippingInfo } from "@/types/order/shippingInfo";
 import { TPaymentMethod } from "@/types/paymentMethod";
-import { TSingleProduct, Tvariations } from "@/types/products/singleProduct";
+import { TSingleProduct, TVariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import BdAddress from "@/utilities/bdAddress/bdAddress";
 import Image from "next/image";
@@ -28,7 +28,7 @@ type TCheckoutFormData = {
 
 type TCartItem = {
   productId: string;
-  variation: Tvariations | null;
+  variation: TVariations | null;
   quantity: number;
 };
 

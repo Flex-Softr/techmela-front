@@ -15,7 +15,7 @@ export type TEntityRef = {
   excerpt?: string;
 };
 
-export type TSeoData = {
+export type TSeo = {
   metaTitle?: string;
   metaDescription?: string;
   keywords?: string[];
@@ -27,7 +27,7 @@ export type TBlogQACategory = {
   name: string;
   slug: string;
   description?: string;
-  seo?: TSeoData;
+  seo?: TSeo;
   status: TBlogTaxonomyStatus;
 };
 
@@ -48,6 +48,7 @@ export type TBlogPost = {
   excerpt?: string;
   readTime?: number;
   category: string | TEntityRef;
+  topic?: string | TEntityRef;
   tags?: Array<string | TEntityRef>;
   author: string | TEntityRef;
   authorBio?: string;
@@ -56,7 +57,7 @@ export type TBlogPost = {
   toc?: { title: string; id: string }[];
   relatedBlogs?: Array<string | TEntityRef>;
   relatedBooks?: Array<string | TEntityRef>;
-  seo?: TSeoData;
+  seo?: TSeo;
   status: TBlogStatus;
   publishedAt?: string;
   views: number;
@@ -70,12 +71,13 @@ export type TQnA = {
   slug: string;
   answer: string;
   category: string | TEntityRef;
+  topic?: string | TEntityRef;
   tags?: Array<string | TEntityRef>;
   author: string | TEntityRef;
   relatedBlogs?: Array<string | TEntityRef>;
   relatedQuestions?: Array<string | TEntityRef>;
   relatedBooks?: Array<string | TEntityRef>;
-  seo?: TSeoData;
+  seo?: TSeo;
   status: TBlogStatus;
   views: number;
   createdAt?: string;

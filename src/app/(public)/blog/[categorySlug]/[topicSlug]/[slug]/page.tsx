@@ -24,8 +24,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+type TLinkedRef = {
+  _id: string;
+  slug?: string;
+  category?: string | { slug?: string };
+  topic?: string | { slug?: string };
+};
+
 type TProps = {
-  params: { slug: string };
+  params: { categorySlug: string; topicSlug: string; slug: string };
 };
 
 async function getPost(slug: string) {
@@ -43,7 +50,17 @@ export async function generateStaticParams() {
       tags: ["blogPosts"],
       params: { limit: 1000, status: "published" },
     });
-    return (res.data?.data || []).map((post) => ({ slug: post.slug }));
+    return (res.data?.data || []).map((post) => ({
+      categorySlug:
+        typeof post.category === "object"
+          ? post.category.slug || "general"
+          : "general",
+      topicSlug:
+        typeof post.topic === "object"
+          ? post.topic.slug || "general"
+          : "general",
+      slug: post.slug,
+    }));
   } catch {
     return [];
   }
@@ -66,13 +83,13 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     description,
     keywords: post.seo?.keywords?.join(", "),
     alternates: {
-      canonical: `${SITE_URL}/blog/${post.slug}`,
+      canonical: `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`,
     },
     openGraph: {
       title,
       description,
       type: "article",
-      url: `${SITE_URL}/blog/${post.slug}`,
+      url: `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`,
       images: [{ url: image, alt: post.title }],
     },
     twitter: {
@@ -111,7 +128,7 @@ export default async function BlogPostPage({ params }: TProps) {
       "@type": "Organization",
       name: "Siddikiya Prokashoni",
     },
-    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    mainEntityOfPage: `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`,
   };
 
   const faqJsonLd = post.faqs?.length
@@ -142,11 +159,11 @@ export default async function BlogPostPage({ params }: TProps) {
                 className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
               >
                 <BookOpen className="h-4 w-4" />
-                Blog
+                ব্লগ
               </Link>
               <div className="space-y-3">
                 <Badge variant="outline">
-                  {getRefLabel(post.category) || "Article"}
+                  {getRefLabel(post.category) || "প্রবন্ধ"}
                 </Badge>
                 <h1 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
                   {post.title}
@@ -165,7 +182,7 @@ export default async function BlogPostPage({ params }: TProps) {
                 {post.readTime ? (
                   <span className="inline-flex items-center gap-1.5">
                     <Clock className="h-4 w-4" />
-                    {post.readTime} min read
+                    {post.readTime} মিনিট
                   </span>
                 ) : null}
                 <span className="inline-flex items-center gap-1.5">
@@ -198,7 +215,9 @@ export default async function BlogPostPage({ params }: TProps) {
             {post.faqs?.length ? (
               <Card className="rounded-lg border bg-white">
                 <CardContent className="space-y-4 p-4 md:p-6">
-                  <h2 className="text-2xl font-bold text-primary">FAQ</h2>
+                  <h2 className="text-2xl font-bold text-primary">
+                    সাধারণ জিজ্ঞাসা
+                  </h2>
                   {post.faqs.map((faq, index) => (
                     <div
                       key={`${faq.question}-${index}`}
@@ -220,7 +239,7 @@ export default async function BlogPostPage({ params }: TProps) {
               <Card className="rounded-lg border bg-white">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
-                    Tags
+                    ট্যাগ
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
@@ -237,17 +256,38 @@ export default async function BlogPostPage({ params }: TProps) {
               <Card className="rounded-lg border bg-white">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    Related posts
+                    সম্পর্কিত প্রবন্ধ
                   </h2>
-                  {post.relatedBlogs.map((related) => (
-                    <RelatedInlineLink
-                      key={String(
-                        typeof related === "object" ? related._id : related
-                      )}
-                      href={`/blog/${typeof related === "object" ? related.slug : related}`}
-                      title={getRefLabel(related)}
-                    />
-                  ))}
+                  {post.relatedBlogs.map((related) => {
+                    const linkedPost = related as string | TLinkedRef;
+                    const relCategorySlug =
+                      typeof linkedPost === "object" &&
+                      linkedPost.category &&
+                      typeof linkedPost.category === "object"
+                        ? linkedPost.category.slug || "general"
+                        : "general";
+                    const relTopicSlug =
+                      typeof linkedPost === "object" &&
+                      linkedPost.topic &&
+                      typeof linkedPost.topic === "object"
+                        ? linkedPost.topic.slug || "general"
+                        : "general";
+                    return (
+                      <RelatedInlineLink
+                        key={String(
+                          typeof linkedPost === "object"
+                            ? linkedPost._id
+                            : linkedPost
+                        )}
+                        href={`/blog/${relCategorySlug}/${relTopicSlug}/${
+                          typeof linkedPost === "object"
+                            ? linkedPost.slug
+                            : linkedPost
+                        }`}
+                        title={getRefLabel(related)}
+                      />
+                    );
+                  })}
                 </CardContent>
               </Card>
             ) : null}
