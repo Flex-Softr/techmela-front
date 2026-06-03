@@ -8,6 +8,7 @@ import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
+import { getImageSrc } from "@/lib/utils";
 import eventHandler from "@/tracking/eventHandler";
 import { TShippingInfo } from "@/types/order/shippingInfo";
 import { TPaymentMethod } from "@/types/paymentMethod";
@@ -179,8 +180,7 @@ const SalesOrderForm = ({
     email,
   ]);
 
-  const actualThumbnail =
-    thumbnailSrc || product?.thumbnail?.src?.replace(/\\/g, "/");
+  const actualThumbnail = getImageSrc(thumbnailSrc || product?.thumbnail?.src);
 
   return (
     <>

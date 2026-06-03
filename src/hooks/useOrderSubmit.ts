@@ -165,7 +165,6 @@ const useOrderSubmit = ({
           shipping: shippingClass.amount,
           discount_value: result?.data?.discount,
           coupon: couponInfo.coupon ?? undefined,
-          status: result?.data?.status,
           external_id: auth.user?.userId,
         });
 

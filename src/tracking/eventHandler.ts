@@ -48,7 +48,7 @@ const eventHandler = async (eventData: EventParameter) => {
     eventData.currency = eventData.currency || "BDT";
     eventData.content_type = eventData.content_type || "product";
   }
-  eventData.country = eventData.country || "Bangladesh";
+  eventData.country = eventData.country || "bd";
   // Auto-resolve zip code from upazila_id if missing
   if (!eventData.zp && eventData.upazila_id) {
     eventData.zp = BdAddress.zipCodeByUpazilaId(eventData.upazila_id);
@@ -159,7 +159,6 @@ const eventHandler = async (eventData: EventParameter) => {
     "tax",
     "discount_value",
     "coupon",
-    "status",
     "search_string",
     "payment_method",
     "store_id",

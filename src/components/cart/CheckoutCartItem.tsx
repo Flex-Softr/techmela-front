@@ -1,5 +1,6 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
+import { getImageSrc } from "@/lib/utils";
 import { useUpdateCartQuantityMutation } from "@/redux/features/cart/cartApi";
 import { TCartItemData } from "@/types/cart";
 import { Minus, Plus } from "lucide-react";
@@ -60,7 +61,7 @@ const CheckoutCartItem = ({
         className="relative flex-shrink-0"
       >
         <Image
-          src={cartItem?.product?.image?.src || ""}
+          src={getImageSrc(cartItem?.product?.image?.src)}
           alt={cartItem?.product?.image?.alt || ""}
           height={100}
           width={100}

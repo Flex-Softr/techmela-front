@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import EcButton from "../shared/EcButton/EcButton";
 import { TableCell, TableRow } from "../ui/table";
+import { getImageSrc } from "@/lib/utils";
 
 const CartItem = ({
   cartItem,
@@ -61,7 +62,7 @@ const CartItem = ({
           className="hover:text-secondary flex-grow flex flex-row gap-3 items-center font-semibold text-left"
         >
           <Image
-            src={cartItem?.product?.image?.src || ""}
+            src={getImageSrc(cartItem?.product?.image?.src || "")}
             alt={cartItem?.product?.image?.alt || ""}
             height={200}
             width={200}

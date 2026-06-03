@@ -23,6 +23,7 @@ import {
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getImageSrc } from "@/lib/utils";
 
 const OrderDetails = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -233,7 +234,7 @@ const OrderDetails = () => {
                           <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-gray-100 bg-gray-50 shrink-0">
                             <Image
                               fill
-                              src={item?.image?.src || ""}
+                              src={getImageSrc(item?.image?.src)}
                               alt={item?.image?.alt || item?.title || "Product"}
                               className="object-cover"
                             />
