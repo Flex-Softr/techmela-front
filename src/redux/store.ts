@@ -25,6 +25,7 @@ import { tableDataSlice } from "./features/tableData/tableData";
 import { userApi } from "./features/user/userApi";
 import { warrantyApiSlice } from "./features/warrantyApi/warrantyApiSlice";
 import storage from "./storage";
+import viewersReducer from "./features/viewers/viewersSlice";
 const persistConfig = {
   key: "auth",
   storage,
@@ -47,6 +48,7 @@ export const store = configureStore({
     shippingInfo: shippingInfo,
     tableData: tableDataSlice.reducer,
     coupon: couponInfo,
+    viewers: viewersReducer,
   },
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares({

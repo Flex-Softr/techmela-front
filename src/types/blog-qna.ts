@@ -31,6 +31,14 @@ export type TBlogQACategory = {
   status: TBlogTaxonomyStatus;
 };
 
+export type TBlogQATopic = {
+  _id: string;
+  name: string;
+  slug: string;
+  category: string | TBlogQACategory;
+  status: TBlogTaxonomyStatus;
+};
+
 export type TBlogQATag = {
   _id: string;
   name: string;

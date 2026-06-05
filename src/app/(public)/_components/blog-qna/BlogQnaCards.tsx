@@ -1,12 +1,25 @@
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { TBlogPost, TBlogQACategory, TBlogQATag, TQnA } from "@/types/blog-qna";
+import {
+  TBlogPost,
+  TBlogQACategory,
+  TBlogQATag,
+  TBlogQATopic,
+  TQnA,
+} from "@/types/blog-qna";
 import { TMeta } from "@/types/response";
-import { ArrowRight, BookOpen, Eye, HelpCircle, Search } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  CalendarDays,
+  HelpCircle,
+  Search,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
+import CollapsibleCategory from "./CollapsibleCategory";
 import {
   formatDate,
   getImageFromRef,
@@ -21,6 +34,7 @@ type TListShellProps = {
   description: string;
   type: "blog" | "questions";
   categories: TBlogQACategory[];
+  topics?: TBlogQATopic[];
   tags: TBlogQATag[];
   searchParams: Record<string, string | string[] | undefined>;
   children: ReactNode;
@@ -31,6 +45,7 @@ export function BlogQnaListShell({
   description,
   type,
   categories,
+  topics = [],
   tags,
   searchParams,
   children,
@@ -43,28 +58,23 @@ export function BlogQnaListShell({
   return (
     <div className="bg-[#f7faf7]">
       <section className="border-b bg-white">
-        <ContainerMax className="py-4 md:py-6">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-              {type === "blog" ? (
-                <BookOpen className="h-4 w-4" />
-              ) : (
-                <HelpCircle className="h-4 w-4" />
-              )}
-              {type === "blog" ? "ব্লগ" : "প্রশ্নোত্তর"}
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight text-primary md:text-4xl">
+        <ContainerMax className="py-2">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary shrink-0">
+            {type === "blog" ? (
+              <BookOpen className="size-6" />
+            ) : (
+              <HelpCircle className="size-6" />
+            )}
+            <h1 className="text-xl font-bold tracking-tight text-primary md:text-2xl">
               {title}
             </h1>
-            <p className="text-base leading-7 text-muted-foreground md:text-lg">
-              {description}
-            </p>
           </div>
+          <p className="mt-4 text-muted-foreground">{description}</p>
         </ContainerMax>
       </section>
 
-      <ContainerMax className="grid gap-6 py-6 lg:grid-cols-[260px_1fr]">
-        <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start">
+      <ContainerMax className="grid gap-5 py-4 lg:grid-cols-[240px_1fr]">
+        <aside className="space-y-3 lg:sticky lg:top-4 lg:self-start">
           <form
             action={baseHref}
             className="rounded-lg border bg-white p-3 shadow-sm"
@@ -93,15 +103,23 @@ export function BlogQnaListShell({
             >
               সকল
             </FilterLink>
-            {categories.map((category) => (
-              <FilterLink
-                key={category._id}
-                href={`${baseHref}?category=${encodeURIComponent(category.slug)}`}
-                active={selectedCategory === category.slug}
-              >
-                {category.name}
-              </FilterLink>
-            ))}
+            {categories.map((category) => {
+              const categoryTopics = topics.filter((t) =>
+                typeof t.category === "object"
+                  ? t.category._id === category._id
+                  : t.category === category._id
+              );
+              return (
+                <CollapsibleCategory
+                  key={category._id}
+                  category={category}
+                  topics={categoryTopics}
+                  baseHref={baseHref}
+                  selectedCategory={selectedCategory}
+                  selectedTopic={String(searchParams.topic || "")}
+                />
+              );
+            })}
           </FilterBlock>
 
           <FilterBlock title="ট্যাগ">
@@ -135,7 +153,7 @@ function FilterBlock({
       <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
         {title}
       </h2>
-      <div className="flex flex-wrap gap-2 lg:flex-col">{children}</div>
+      <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   );
 }
@@ -143,18 +161,22 @@ function FilterBlock({
 function FilterLink({
   href,
   active,
+  small,
   children,
 }: {
   href: string;
   active: boolean;
+  small?: boolean;
   children: ReactNode;
 }) {
   return (
     <Link
       href={href}
-      className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+      className={`rounded-md font-medium transition-colors ${
+        small ? "px-2 py-1 text-xs" : "px-3 py-2 text-sm"
+      } ${
         active
-          ? "bg-primary text-white"
+          ? "bg-primary/15 text-primary font-semibold"
           : "bg-primary/5 text-primary hover:bg-primary/10"
       }`}
     >
@@ -172,7 +194,7 @@ export function BlogCard({ post }: { post: TBlogPost }) {
         }/${
           typeof post.topic === "object" ? post.topic.slug : "general"
         }/${post.slug}`}
-        className="grid h-full md:grid-cols-[220px_1fr]"
+        className="grid h-full md:grid-cols-[180px_1fr]"
       >
         <div className="relative aspect-[16/10] bg-muted md:aspect-auto">
           <Image
@@ -180,28 +202,33 @@ export function BlogCard({ post }: { post: TBlogPost }) {
             alt={post.title}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 220px"
+            sizes="(max-width: 768px) 100vw, 180px"
           />
         </div>
-        <CardContent className="flex flex-col gap-3 p-4">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <Badge variant="outline">
-              {getRefLabel(post.category) || "প্রবন্ধ"}
-            </Badge>
-            {post.readTime ? <span>{post.readTime} মিনিট</span> : null}
-            {post.publishedAt ? (
-              <span>{formatDate(post.publishedAt)}</span>
-            ) : null}
-          </div>
-          <h2 className="line-clamp-2 text-xl font-bold text-primary">
+        <CardContent className="flex flex-col gap-2 p-3 md:p-4">
+          <h2 className="line-clamp-2 text-lg font-bold leading-tight text-primary">
             {post.title}
           </h2>
-          <p className="line-clamp-3 text-sm leading-6 text-muted-foreground">
+          <p className="line-clamp-2 text-sm leading-5 text-muted-foreground">
             {post.excerpt || truncateText(post.content, 180)}
           </p>
-          <div className="mt-auto flex items-center justify-between text-sm font-semibold text-primary">
-            <span>বিস্তারিত পড়ুন</span>
-            <ArrowRight className="h-4 w-4" />
+          <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <Badge variant="outline">
+                {getRefLabel(post.category) || "প্রবন্ধ"}
+              </Badge>
+              {post.readTime ? <span>{post.readTime} মিনিট</span> : null}
+              {post.publishedAt ? (
+                <span className="inline-flex items-center gap-1">
+                  <CalendarDays className="h-3.5 w-3.5" />
+                  {formatDate(post.publishedAt)}
+                </span>
+              ) : null}
+            </div>
+            <div className="flex items-center justify-between text-sm font-semibold text-primary">
+              <span>বিস্তারিত পড়ুন</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </div>
           </div>
         </CardContent>
       </Link>
@@ -217,25 +244,29 @@ export function QuestionCard({ item }: { item: TQnA }) {
           typeof item.topic === "object" ? item.topic.slug : "general"
         }/${item.slug}`}
       >
-        <CardContent className="space-y-3 p-4">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <Badge variant="outline">
-              {getRefLabel(item.category) || "প্রশ্নোত্তর"}
-            </Badge>
-            <span className="inline-flex items-center gap-1">
-              <Eye className="h-3.5 w-3.5" />
-              {item.views || 0}
-            </span>
-          </div>
-          <h2 className="text-lg font-bold leading-7 text-primary">
+        <CardContent className="flex flex-col gap-2 p-3 md:p-4">
+          <h2 className="text-base md:text-lg font-bold leading-tight text-primary">
             {item.question}
           </h2>
-          <p className="line-clamp-3 text-sm leading-6 text-muted-foreground">
+          <p className="line-clamp-2 text-sm leading-5 text-muted-foreground">
             {truncateText(item.answer, 180)}
           </p>
-          <div className="flex items-center gap-2 text-sm font-semibold text-primary">
-            <span>উত্তর পড়ুন</span>
-            <ArrowRight className="h-4 w-4" />
+          <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <Badge variant="outline">
+                {getRefLabel(item.category) || "প্রশ্নোত্তর"}
+              </Badge>
+              {item.createdAt ? (
+                <span className="inline-flex items-center gap-1">
+                  <CalendarDays className="h-3.5 w-3.5" />
+                  {formatDate(item.createdAt)}
+                </span>
+              ) : null}
+            </div>
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
+              <span>উত্তর পড়ুন</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </div>
           </div>
         </CardContent>
       </Link>

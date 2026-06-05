@@ -6,17 +6,24 @@ import {
 } from "@/app/(public)/_components/blog-qna/BlogQnaCards";
 import {
   SITE_URL,
+  formatDate,
   getRefLabel,
   truncateText,
 } from "@/app/(public)/_components/blog-qna/utils";
+import BackButton from "@/app/(public)/_components/blog-qna/BackButton";
+import ViewCount from "@/app/(public)/_components/blog-qna/ViewCount";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import JsonLd from "@/components/shared/JsonLd";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { TQnA } from "@/types/blog-qna";
 import { TPaginatedData } from "@/types/response";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
-import { Eye, HelpCircle } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarDays,
+  ChevronRight,
+  HelpCircle,
+} from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -93,6 +100,21 @@ export default async function QuestionPage({ params }: TProps) {
   }
 
   const tags = tagLabels(item.tags);
+  const categorySlug =
+    item.category && typeof item.category === "object"
+      ? item.category.slug
+      : undefined;
+  const categoryHref = categorySlug
+    ? `/questions?category=${encodeURIComponent(categorySlug)}`
+    : "/questions";
+
+  const topicSlug =
+    item.topic && typeof item.topic === "object" ? item.topic.slug : undefined;
+  const topicHref =
+    categorySlug && topicSlug
+      ? `/questions?category=${encodeURIComponent(categorySlug)}&topic=${encodeURIComponent(topicSlug)}`
+      : "/questions";
+
   const questionJsonLd = {
     "@context": "https://schema.org",
     "@type": "QAPage",
@@ -112,28 +134,58 @@ export default async function QuestionPage({ params }: TProps) {
       <JsonLd data={questionJsonLd} />
       <article className="bg-[#f7faf7]">
         <section className="border-b bg-white">
-          <ContainerMax className="py-6 md:py-10">
-            <div className="mx-auto max-w-4xl space-y-5">
-              <Link
-                href="/questions"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
-              >
-                <HelpCircle className="h-4 w-4" />
-                প্রশ্নোত্তর
-              </Link>
-              <div className="space-y-3">
-                <Badge variant="outline">
-                  {getRefLabel(item.category) || "প্রশ্ন"}
-                </Badge>
-                <h1 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
+          <ContainerMax className="py-4 md:py-6">
+            <div className="mx-auto max-w-4xl space-y-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <Link
+                    href="/questions"
+                    className="inline-flex items-center gap-1 hover:text-primary transition-colors font-medium"
+                  >
+                    <HelpCircle className="h-4 w-4" />
+                    প্রশ্নোত্তর
+                  </Link>
+                  <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
+                  <Link
+                    href={categoryHref}
+                    className="hover:text-primary transition-colors font-medium"
+                  >
+                    {getRefLabel(item.category) || "প্রশ্ন"}
+                  </Link>
+                  {item.topic ? (
+                    <>
+                      <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
+                      <Link
+                        href={topicHref}
+                        className="hover:text-primary transition-colors font-medium"
+                      >
+                        {getRefLabel(item.topic)}
+                      </Link>
+                    </>
+                  ) : null}
+                </div>
+                <BackButton className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-full bg-primary/5 font-semibold text-primary transition-colors hover:bg-primary/10 border border-primary/10">
+                  <ArrowLeft className="h-4 w-4" />
+                  ফিরে যান
+                </BackButton>
+              </div>
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold leading-tight text-primary md:text-4xl">
                   {item.question}
                 </h1>
               </div>
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <Eye className="h-4 w-4" />
-                  {item.views || 0}
-                </span>
+                {item.createdAt ? (
+                  <span className="inline-flex items-center gap-1.5">
+                    <CalendarDays className="h-4 w-4" />
+                    {formatDate(item.createdAt)}
+                  </span>
+                ) : null}
+                <ViewCount
+                  id={item._id}
+                  initialViews={item.views || 0}
+                  resource="qna"
+                />
               </div>
             </div>
           </ContainerMax>
@@ -153,12 +205,23 @@ export default async function QuestionPage({ params }: TProps) {
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
                     ট্যাগ
                   </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {tags.map((tag) => (
-                      <Badge key={tag} variant="outline">
-                        {tag}
-                      </Badge>
-                    ))}
+                  <div className="flex flex-wrap gap-1.5">
+                    {(item.tags || []).map((tag) => {
+                      const name =
+                        (typeof tag === "object" ? tag.name : tag) || "";
+                      const slug =
+                        (typeof tag === "object" ? tag.slug : tag) || "";
+                      if (!slug) return null;
+                      return (
+                        <Link
+                          key={slug}
+                          href={`/questions?tag=${encodeURIComponent(slug)}`}
+                          className="rounded-md bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary transition-colors hover:bg-primary/10"
+                        >
+                          {name}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>

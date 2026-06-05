@@ -6,7 +6,12 @@ import {
 } from "@/app/(public)/_components/blog-qna/BlogQnaCards";
 import { SITE_URL } from "@/app/(public)/_components/blog-qna/utils";
 import JsonLd from "@/components/shared/JsonLd";
-import { TBlogPost, TBlogQACategory, TBlogQATag } from "@/types/blog-qna";
+import {
+  TBlogPost,
+  TBlogQACategory,
+  TBlogQATag,
+  TBlogQATopic,
+} from "@/types/blog-qna";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { Metadata } from "next";
 
@@ -32,6 +37,7 @@ async function getBlogPosts(searchParams: TSearchParams) {
       status: "published",
       search: searchParams.search,
       category: searchParams.category,
+      topic: searchParams.topic,
       tags: searchParams.tag,
       sortBy: "publishedAt",
       sortOrder: "desc",
@@ -40,7 +46,7 @@ async function getBlogPosts(searchParams: TSearchParams) {
 }
 
 async function getFilters() {
-  const [categoriesRes, tagsRes] = await Promise.all([
+  const [categoriesRes, tagsRes, topicsRes] = await Promise.all([
     serverSideFetcher<TBlogQACategory[]>({
       url: "/blog-qa-categories",
       tags: ["blogQaCategories"],
@@ -51,11 +57,17 @@ async function getFilters() {
       tags: ["blogQaTags"],
       params: { limit: 1000, status: "active" },
     }),
+    serverSideFetcher<TBlogQATopic[]>({
+      url: "/blog-qa-topics",
+      tags: ["blogQaTopics"],
+      params: { limit: 1000, status: "active" },
+    }),
   ]);
 
   return {
     categories: categoriesRes?.data || [],
     tags: tagsRes?.data || [],
+    topics: topicsRes?.data || [],
   };
 }
 
@@ -85,9 +97,10 @@ export default async function BlogPage({
       <JsonLd data={collectionJsonLd} />
       <BlogQnaListShell
         title="ব্লগ"
-        description="সিদ্ধিকিয়া প্রকাশনীর ব্লগে স্বাগতম! এখানে আপনি ইসলামিক বই, জ্ঞানভিত্তিক নিবন্ধ, পাঠ নির্দেশিকা এবং চিন্তাশীল পাঠকদের জন্য বিভিন্ন বিষয়ের উপর তথ্যপূর্ণ আর্টিকেল পাবেন। আমাদের ব্লগে ইসলামিক জ্ঞান ও সাহিত্য সম্পর্কে গভীর অন্তর্দৃষ্টি এবং প্রাসঙ্গিক তথ্য শেয়ার করা হয়। নতুন আর্টিকেল এবং আপডেটের জন্য আমাদের ব্লগটি নিয়মিত চেক করুন।"
+        description="সিদ্ধিকিয়া প্রকাশনীর ব্লগে স্বাগতম্! এখানে আপনি ইসলামিক বই, জ্ঞানভিত্তিক নিবন্ধ, পাঠ নির্দেশিকা এবং চিন্তাশীল পাঠকদের জন্য বিভিন্ন বিষয়ের উপর তথ্যপূর্ণ আর্টিকেল পাবেন। আমাদের ব্লগে ইসলামিক জ্ঞান ও সাহিত্য সম্পর্কে গভীর অন্তর্দৃষ্টি এবং প্রাসঙ্গিক তথ্য শেয়ার করা হয়। নতুন আর্টিকেল এবং আপডেটের জন্য আমাদের ব্লগটি নিয়মিত চেক করুন।"
         type="blog"
         categories={filters.categories}
+        topics={filters.topics}
         tags={filters.tags}
         searchParams={searchParams}
       >

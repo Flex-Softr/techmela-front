@@ -11,14 +11,21 @@ import {
   getRefLabel,
   truncateText,
 } from "@/app/(public)/_components/blog-qna/utils";
+import BackButton from "@/app/(public)/_components/blog-qna/BackButton";
+import ViewCount from "@/app/(public)/_components/blog-qna/ViewCount";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import JsonLd from "@/components/shared/JsonLd";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { TBlogPost } from "@/types/blog-qna";
 import { TPaginatedData } from "@/types/response";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
-import { BookOpen, CalendarDays, Clock, Eye } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpen,
+  CalendarDays,
+  ChevronRight,
+  Clock,
+} from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -110,6 +117,20 @@ export default async function BlogPostPage({ params }: TProps) {
 
   const image = getImageFromRef(post.featuredImage);
   const tags = tagLabels(post.tags);
+  const categorySlug =
+    post.category && typeof post.category === "object"
+      ? post.category.slug
+      : undefined;
+  const categoryHref = categorySlug
+    ? `/blog?category=${encodeURIComponent(categorySlug)}`
+    : "/blog";
+
+  const topicSlug =
+    post.topic && typeof post.topic === "object" ? post.topic.slug : undefined;
+  const topicHref =
+    categorySlug && topicSlug
+      ? `/blog?category=${encodeURIComponent(categorySlug)}&topic=${encodeURIComponent(topicSlug)}`
+      : "/blog";
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -152,23 +173,46 @@ export default async function BlogPostPage({ params }: TProps) {
       {faqJsonLd ? <JsonLd data={faqJsonLd} /> : null}
       <article className="bg-[#f7faf7]">
         <section className="border-b bg-white">
-          <ContainerMax className="py-6 md:py-10">
-            <div className="mx-auto max-w-4xl space-y-5">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
-              >
-                <BookOpen className="h-4 w-4" />
-                ব্লগ
-              </Link>
-              <div className="space-y-3">
-                <Badge variant="outline">
-                  {getRefLabel(post.category) || "প্রবন্ধ"}
-                </Badge>
-                <h1 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
+          <ContainerMax className="py-4 md:py-6">
+            <div className="mx-auto max-w-4xl space-y-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <Link
+                    href="/blog"
+                    className="inline-flex items-center gap-1 hover:text-primary transition-colors font-medium"
+                  >
+                    <BookOpen className="h-4 w-4" />
+                    ব্লগ
+                  </Link>
+                  <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
+                  <Link
+                    href={categoryHref}
+                    className="hover:text-primary transition-colors font-medium"
+                  >
+                    {getRefLabel(post.category) || "প্রবন্ধ"}
+                  </Link>
+                  {post.topic ? (
+                    <>
+                      <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
+                      <Link
+                        href={topicHref}
+                        className="hover:text-primary transition-colors font-medium"
+                      >
+                        {getRefLabel(post.topic)}
+                      </Link>
+                    </>
+                  ) : null}
+                </div>
+                <BackButton className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-full bg-primary/5 font-semibold text-primary transition-colors hover:bg-primary/10 border border-primary/10">
+                  <ArrowLeft className="h-4 w-4" />
+                  ফিরে যান
+                </BackButton>
+              </div>
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold leading-tight text-primary md:text-4xl">
                   {post.title}
                 </h1>
-                <p className="text-base leading-7 text-muted-foreground md:text-lg">
+                <p className="text-sm leading-6 text-muted-foreground md:text-base">
                   {post.excerpt || truncateText(post.content, 220)}
                 </p>
               </div>
@@ -185,17 +229,18 @@ export default async function BlogPostPage({ params }: TProps) {
                     {post.readTime} মিনিট
                   </span>
                 ) : null}
-                <span className="inline-flex items-center gap-1.5">
-                  <Eye className="h-4 w-4" />
-                  {post.views || 0}
-                </span>
+                <ViewCount
+                  id={post._id}
+                  initialViews={post.views || 0}
+                  resource="blog-posts"
+                />
               </div>
             </div>
           </ContainerMax>
         </section>
 
-        <ContainerMax className="grid gap-6 py-6 lg:grid-cols-[1fr_280px]">
-          <div className="min-w-0 space-y-5">
+        <ContainerMax className="grid gap-5 py-4 lg:grid-cols-[1fr_280px]">
+          <div className="min-w-0 space-y-4">
             <div className="relative aspect-[16/9] overflow-hidden rounded-lg border bg-white">
               <Image
                 src={image}
@@ -241,12 +286,23 @@ export default async function BlogPostPage({ params }: TProps) {
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
                     ট্যাগ
                   </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {tags.map((tag) => (
-                      <Badge key={tag} variant="outline">
-                        {tag}
-                      </Badge>
-                    ))}
+                  <div className="flex flex-wrap gap-1.5">
+                    {(post.tags || []).map((tag) => {
+                      const name =
+                        (typeof tag === "object" ? tag.name : tag) || "";
+                      const slug =
+                        (typeof tag === "object" ? tag.slug : tag) || "";
+                      if (!slug) return null;
+                      return (
+                        <Link
+                          key={slug}
+                          href={`/blog?tag=${encodeURIComponent(slug)}`}
+                          className="rounded-md bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary transition-colors hover:bg-primary/10"
+                        >
+                          {name}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>

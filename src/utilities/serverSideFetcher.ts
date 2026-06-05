@@ -18,6 +18,7 @@ export type TTags =
   | `qna-${string}`
   | "blogQaCategories"
   | "blogQaTags"
+  | "blogQaTopics"
   | "brands"
   | "bookPreviews"
   | "collections"
