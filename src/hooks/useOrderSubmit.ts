@@ -161,8 +161,7 @@ const useOrderSubmit = ({
                     item_price: product.unitPrice,
                   })
                 ),
-          value: result?.data?.total || totalCost,
-          shipping: shippingClass.amount,
+          value: result?.data?.subtotal || totalCost,
           discount_value: result?.data?.discount,
           coupon: couponInfo.coupon ?? undefined,
           external_id: auth.user?.userId,

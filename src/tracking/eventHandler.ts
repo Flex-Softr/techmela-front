@@ -155,7 +155,6 @@ const eventHandler = async (eventData: EventParameter) => {
     "content_category",
     "order_id",
     "num_items",
-    "shipping",
     "tax",
     "discount_value",
     "coupon",
@@ -172,7 +171,7 @@ const eventHandler = async (eventData: EventParameter) => {
       const value = (eventData as Record<string, unknown>)[key];
 
       // Only include these fields if they have a non-zero value
-      const fieldsToSkipIfZero = ["shipping", "tax", "discount_value"];
+      const fieldsToSkipIfZero = ["tax", "discount_value"];
       if (fieldsToSkipIfZero.includes(key) && value === 0) {
         return;
       }

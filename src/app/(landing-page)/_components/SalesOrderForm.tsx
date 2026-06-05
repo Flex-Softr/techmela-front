@@ -149,7 +149,6 @@ const SalesOrderForm = ({
         content_ids: cartItems.map((item) => item.productId),
         content_type: "product",
         content_category: product?.category?.[0]?.name,
-        shipping: shippingChange ?? undefined,
         contents: cartItems.map((item) => ({
           id: item.productId,
           quantity: item.quantity,
@@ -158,7 +157,7 @@ const SalesOrderForm = ({
           brand: product?.brand?.name,
           category: product?.category?.[0]?.name,
         })),
-        value: calculatedTotal,
+        value: totalCost,
       });
     }
   }, [
