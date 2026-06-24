@@ -20,12 +20,6 @@ export async function GET() {
   <sitemap>
     <loc>${baseUrl}/category-sitemap.xml</loc>
   </sitemap>
-  <sitemap>
-    <loc>${baseUrl}/brand-sitemap.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>${baseUrl}/collection-sitemap.xml</loc>
-  </sitemap>
 </sitemapindex>`;
 
   return new NextResponse(sitemapIndex, {

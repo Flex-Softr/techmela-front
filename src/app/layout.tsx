@@ -57,9 +57,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: "https://siddikiaprokashoni.com",
-  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -75,46 +72,47 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <JsonLd
           data={{
             "@context": "https://schema.org",
-            "@type": "Organization",
+            "@type": ["Organization", "BookStore", "OnlineStore"],
             name: "সিদ্দীকিয়া প্রকাশনী",
+            description:
+              "আহলুস সুন্নাহ ওয়াল জামাআহর আকীদা, ফিকহ, ইতিহাস, তাসাউফ, সীরাত ও গবেষণাধর্মী ইসলামী বই প্রকাশ ও বিক্রয়কারী প্রকাশনা প্রতিষ্ঠান।",
             url: "https://siddikiaprokashoni.com",
             logo: "https://siddikiaprokashoni.com/logo/logo.webp",
+            image: "https://siddikiaprokashoni.com/logo/logo.webp",
+            telephone: "+8801339955155",
+            email: "siddikiyaprokashoni@gmail.com",
+            priceRange: "৳৳",
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "BD",
+            },
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Saturday",
+                  "Sunday",
+                ],
+                opens: "09:00",
+                closes: "21:00",
+              },
+            ],
             contactPoint: {
               "@type": "ContactPoint",
               telephone: "+8801339955155",
+              email: "siddikiyaprokashoni@gmail.com",
               contactType: "customer service",
             },
             sameAs: [
-              "https://www.facebook.com/SiddikiaProkashoni",
+              "https://www.facebook.com/siddikiaprokashoni",
+              "https://www.youtube.com/@SiddikiaProkashoni",
+              "https://www.instagram.com/siddikiaprokashoni",
+              "https://www.tiktok.com/@siddikiaprokashoni",
               // Add other social links if available
-            ],
-          }}
-        />
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "সিদ্দীকিয়া প্রকাশনী",
-            url: "https://siddikiaprokashoni.com",
-            potentialAction: {
-              "@type": "SearchAction",
-              target:
-                "https://siddikiaprokashoni.com/shop?searchTerm={search_term_string}",
-              "query-input": "required name=search_term_string",
-            },
-          }}
-        />
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              {
-                "@type": "ListItem",
-                position: 1,
-                name: "হোম",
-                item: "https://siddikiaprokashoni.com",
-              },
             ],
           }}
         />

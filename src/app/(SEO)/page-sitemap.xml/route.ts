@@ -12,6 +12,8 @@ export async function GET() {
     "/contact-us",
     "/store-location",
     "/track-your-order",
+    "/delivery-policy",
+    "/return-policy",
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
