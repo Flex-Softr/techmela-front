@@ -4,7 +4,6 @@ import {
   EmptyState,
   Pagination,
 } from "@/app/(public)/_components/blog-qna/BlogQnaCards";
-import { SITE_URL } from "@/app/(public)/_components/blog-qna/utils";
 import JsonLd from "@/components/shared/JsonLd";
 import {
   TBlogPost,
@@ -13,18 +12,12 @@ import {
   TBlogQATopic,
 } from "@/types/blog-qna";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
+import { blogMetadata, blogJsonLd } from "./metadata";
 import { Metadata } from "next";
 
 type TSearchParams = Record<string, string | string[] | undefined>;
 
-export const metadata: Metadata = {
-  title: "ব্লগ",
-  description:
-    "সিদ্ধিকিয়া প্রকাশনীর ব্লগে স্বাগতম! এখানে আপনি ইসলামিক বই, জ্ঞানভিত্তিক নিবন্ধ, পাঠ নির্দেশিকা এবং চিন্তাশীল পাঠকদের জন্য বিভিন্ন বিষয়ের উপর তথ্যপূর্ণ আর্টিকেল পাবেন। আমাদের ব্লগে ইসলামিক জ্ঞান ও সাহিত্য সম্পর্কে গভীর অন্তর্দৃষ্টি এবং প্রাসঙ্গিক তথ্য শেয়ার করা হয়। নতুন আর্টিকেল এবং আপডেটের জন্য আমাদের ব্লগটি নিয়মিত চেক করুন।",
-  alternates: {
-    canonical: `${SITE_URL}/blog`,
-  },
-};
+export const metadata: Metadata = blogMetadata;
 
 async function getBlogPosts(searchParams: TSearchParams) {
   const page = Number(searchParams.page || 1);
@@ -84,17 +77,9 @@ export default async function BlogPage({
   const posts = postsRes?.data || [];
   const meta = postsRes?.meta;
 
-  const collectionJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: "Blog",
-    url: `${SITE_URL}/blog`,
-    about: "Islamic books and knowledge articles",
-  };
-
   return (
     <>
-      <JsonLd data={collectionJsonLd} />
+      <JsonLd data={blogJsonLd} />
       <BlogQnaListShell
         title="ব্লগ"
         description="সিদ্ধিকিয়া প্রকাশনীর ব্লগে স্বাগতম্! এখানে আপনি ইসলামিক বই, জ্ঞানভিত্তিক নিবন্ধ, পাঠ নির্দেশিকা এবং চিন্তাশীল পাঠকদের জন্য বিভিন্ন বিষয়ের উপর তথ্যপূর্ণ আর্টিকেল পাবেন। আমাদের ব্লগে ইসলামিক জ্ঞান ও সাহিত্য সম্পর্কে গভীর অন্তর্দৃষ্টি এবং প্রাসঙ্গিক তথ্য শেয়ার করা হয়। নতুন আর্টিকেল এবং আপডেটের জন্য আমাদের ব্লগটি নিয়মিত চেক করুন।"

@@ -1,19 +1,22 @@
 import {
   ArticleHtml,
   RelatedInlineLink,
-  asPlainText,
   tagLabels,
 } from "@/app/(public)/_components/blog-qna/BlogQnaCards";
 import {
   SITE_URL,
   formatDate,
   getRefLabel,
-  truncateText,
 } from "@/app/(public)/_components/blog-qna/utils";
 import BackButton from "@/app/(public)/_components/blog-qna/BackButton";
 import ViewCount from "@/app/(public)/_components/blog-qna/ViewCount";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import JsonLd from "@/components/shared/JsonLd";
+import {
+  generateQnABreadcrumbSchema,
+  generateQnAMetadata,
+  generateQnASchema,
+} from "@/utilities/schema.util";
 import { Card, CardContent } from "@/components/ui/card";
 import { TQnA } from "@/types/blog-qna";
 import { TPaginatedData } from "@/types/response";
@@ -73,23 +76,8 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     return { title: "Question not found" };
   }
 
-  const title = item.seo?.metaTitle || item.question;
-  const description = item.seo?.metaDescription || truncateText(item.answer);
-
-  return {
-    title,
-    description,
-    keywords: item.seo?.keywords?.join(", "),
-    alternates: {
-      canonical: `${SITE_URL}/questions/${params.topicSlug}/${item.slug}`,
-    },
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      url: `${SITE_URL}/questions/${params.topicSlug}/${item.slug}`,
-    },
-  };
+  const url = `${SITE_URL}/questions/${params.topicSlug}/${item.slug}`;
+  return generateQnAMetadata(item, url) as Metadata;
 }
 
 export default async function QuestionPage({ params }: TProps) {
@@ -115,23 +103,14 @@ export default async function QuestionPage({ params }: TProps) {
       ? `/questions?category=${encodeURIComponent(categorySlug)}&topic=${encodeURIComponent(topicSlug)}`
       : "/questions";
 
-  const questionJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "QAPage",
-    mainEntity: {
-      "@type": "Question",
-      name: item.question,
-      answerCount: 1,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: asPlainText(item.answer),
-      },
-    },
-  };
+  const url = `${SITE_URL}/questions/${params.topicSlug}/${item.slug}`;
+  const questionJsonLd = generateQnASchema(item);
+  const breadcrumbJsonLd = generateQnABreadcrumbSchema(item, url);
 
   return (
     <>
       <JsonLd data={questionJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <article className="bg-[#f7faf7]">
         <section className="border-b bg-white">
           <ContainerMax className="py-4 md:py-6">

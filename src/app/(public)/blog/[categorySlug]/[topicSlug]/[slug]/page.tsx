@@ -1,7 +1,6 @@
 import {
   ArticleHtml,
   RelatedInlineLink,
-  asPlainText,
   tagLabels,
 } from "@/app/(public)/_components/blog-qna/BlogQnaCards";
 import {
@@ -15,6 +14,12 @@ import BackButton from "@/app/(public)/_components/blog-qna/BackButton";
 import ViewCount from "@/app/(public)/_components/blog-qna/ViewCount";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import JsonLd from "@/components/shared/JsonLd";
+import {
+  generateArticleSchema,
+  generateBlogBreadcrumbSchema,
+  generateBlogPostMetadata,
+  generateFAQSchema,
+} from "@/utilities/schema.util";
 import { Card, CardContent } from "@/components/ui/card";
 import { TBlogPost } from "@/types/blog-qna";
 import { TPaginatedData } from "@/types/response";
@@ -80,32 +85,8 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     return { title: "Blog post not found" };
   }
 
-  const title = post.seo?.metaTitle || post.title;
-  const description =
-    post.seo?.metaDescription || post.excerpt || truncateText(post.content);
-  const image = getImageFromRef(post.featuredImage);
-
-  return {
-    title,
-    description,
-    keywords: post.seo?.keywords?.join(", "),
-    alternates: {
-      canonical: `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`,
-    },
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      url: `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`,
-      images: [{ url: image, alt: post.title }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
-  };
+  const url = `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`;
+  return generateBlogPostMetadata(post, url) as Metadata;
 }
 
 export default async function BlogPostPage({ params }: TProps) {
@@ -132,45 +113,16 @@ export default async function BlogPostPage({ params }: TProps) {
       ? `/blog?category=${encodeURIComponent(categorySlug)}&topic=${encodeURIComponent(topicSlug)}`
       : "/blog";
 
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description:
-      post.seo?.metaDescription || post.excerpt || truncateText(post.content),
-    image,
-    datePublished: post.publishedAt || post.createdAt,
-    dateModified: post.updatedAt,
-    author: {
-      "@type": "Person",
-      name: getRefLabel(post.author) || "Siddikiya Prokashoni",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Siddikiya Prokashoni",
-    },
-    mainEntityOfPage: `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`,
-  };
-
-  const faqJsonLd = post.faqs?.length
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: post.faqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: asPlainText(faq.answer),
-          },
-        })),
-      }
-    : null;
+  const url = `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`;
+  const articleJsonLd = generateArticleSchema(post, url);
+  const faqJsonLd = generateFAQSchema(post.faqs);
+  const breadcrumbJsonLd = generateBlogBreadcrumbSchema(post, url);
 
   return (
     <>
       <JsonLd data={articleJsonLd} />
       {faqJsonLd ? <JsonLd data={faqJsonLd} /> : null}
+      <JsonLd data={breadcrumbJsonLd} />
       <article className="bg-[#f7faf7]">
         <section className="border-b bg-white">
           <ContainerMax className="py-4 md:py-6">
