@@ -7,6 +7,7 @@ import Facilities from "@/components/home/facilities/Facilities";
 import FeaturedProducts from "@/components/home/featuredProducts/FeaturedProducts";
 import HomepageSectionsFetcher from "@/components/home/homePageSections/HomepageSectionsFetcher";
 import HomepageSectionSkeleton from "@/components/home/homePageSections/HomepageSectionSkeleton";
+import JsonLd from "@/components/shared/JsonLd";
 import TCategory from "@/types/categories/categories";
 import { THomePageSection } from "@/types/homepageSection";
 import { TProduct } from "@/types/products/product";
@@ -21,12 +22,67 @@ export const metadata: Metadata = {
   description:
     "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
   keywords: [
+    // Brand
+    "সিদ্দীকিয়া প্রকাশনী",
+    "Siddikia Prokashoni",
+    "দারুননাজাত মাদরাসা কিতাব",
+    // Generic intent
     "ইসলামিক বই কিনুন",
-    "সিদ্দীকিয়া প্রকাশনী",
+    "ইসলামিক বই অনলাইন",
+    "বাংলা ইসলামিক বই",
     "Bangla Islamic Books",
+    "Islamic Books Bangladesh",
+    "Online Islamic Bookshop Bangladesh",
+    // Subject-specific
+    "ফিকহের বই",
+    "হাদিসের বই",
+    "তাফসিরের বই",
+    "আকিদার বই",
+    "সিরাতের বই",
+    "তাসাউফের বই",
+    "মাদরাসার কিতাব",
+    "উসুলুল ফিকহ বই",
+    "নাহু সরফ কিতাব",
+    "আরবি গ্রামার বই",
+    "দোয়া ও আমলের বই",
+    "ইসলামিক ইতিহাসের বই",
+    "খলিফাদের জীবনী বই",
+    "রাসুলের জীবনী বই",
+    "সাহাবাদের জীবনী বই",
+    "ইসলামিক উপন্যাস",
+    "ওলামায়ে কেরামের বই",
+    "ইজতিমায়ী মাসায়েল",
+    "কবর ও আখেরাতের বই",
+    "ইসলামিক শিশু বই",
     "Darunnajat Madrasa Books",
-    "আহলে সুন্নাত ওয়াল জামাআত বই",
+    "আহলে সুন্নাত ওয়াল জামাআত বই",
+    // Delivery / Ecommerce
+    "বাংলাদেশে বই ডেলিভারি",
+    "ক্যাশ অন ডেলিভারি বই",
+    "অনলাইনে বই কিনুন বাংলাদেশ",
   ].join(", "),
+  openGraph: {
+    title: "সিদ্দীকিয়া প্রকাশনী | সেরা ইসলামিক বইয়ের সমাহার",
+    description:
+      "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
+    url: "https://siddikiaprokashoni.com",
+    siteName: "সিদ্দীকিয়া প্রকাশনী",
+    locale: "bn_BD",
+    type: "website",
+    images: [
+      {
+        url: "https://siddikiaprokashoni.com/logo/logo.webp",
+        alt: "সিদ্দীকিয়া প্রকাশনী",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "সিদ্দীকিয়া প্রকাশনী | সেরা ইসলামিক বইয়ের সমাহার",
+    description:
+      "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
+    images: ["https://siddikiaprokashoni.com/logo/logo.webp"],
+  },
 };
 
 const Home = async () => {
@@ -51,8 +107,52 @@ const Home = async () => {
     tags: ["bestSellingProducts"],
   });
 
+  const bookstoreSchema = {
+    "@context": "https://schema.org",
+    "@type": ["BookStore", "OnlineStore"],
+    name: "সিদ্দীকিয়া প্রকাশনী",
+    description:
+      "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
+    url: "https://siddikiaprokashoni.com",
+    image: "https://siddikiaprokashoni.com/logo/logo.webp",
+    telephone: "+8801339955155",
+    email: "siddikiyaprokashoni@gmail.com",
+    priceRange: "৳৳",
+    address: { "@type": "PostalAddress", addressCountry: "BD" },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "09:00",
+        closes: "21:00",
+      },
+    ],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "সিদ্দীকিয়া প্রকাশনী",
+    url: "https://siddikiaprokashoni.com",
+    inLanguage: "bn-BD",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://siddikiaprokashoni.com/shop?search={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <>
+      <JsonLd data={bookstoreSchema} />
+      <JsonLd data={websiteSchema} />
       <h1 className="sr-only">
         সিদ্দীকিয়া প্রকাশনী - সেরা ইসলামিক বইয়ের সমাহার
       </h1>

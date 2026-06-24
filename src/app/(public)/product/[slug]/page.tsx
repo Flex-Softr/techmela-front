@@ -2,11 +2,14 @@ import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import JsonLd from "@/components/shared/JsonLd";
 import Box from "@/components/ui/ec/Box";
-import { STOCK_STATUS } from "@/const/product.const";
-import { getImageSrc } from "@/lib/utils";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { Metadata } from "next";
+import {
+  generateBreadcrumbSchema,
+  generateProductSchema,
+  generateProductMetadata,
+} from "@/utilities/schema.util";
 import ProductClientWrapper from "./components/ProductClientWrapper";
 import ProductDescription from "./components/ProductDescription";
 import ProductImageGallery from "./components/ProductImageGallery";
@@ -40,62 +43,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const product = await fetchProductData(params.slug);
-
-  if (!product) {
-    const fallbackTitle = params.slug
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-    return {
-      title: fallbackTitle,
-      description: `সিদ্দীকিয়া প্রকাশনী থেকে ${fallbackTitle} কিনুন।`,
-    };
-  }
-
-  const imageUrl = getImageSrc(
-    product?.thumbnail?.src || product?.gallery?.[0]?.src
-  );
-
-  const title = product?.seo?.metaTitle || product?.title;
-  const rawDescription =
-    product?.seo?.metaDescription ||
-    product?.shortDescription ||
-    "সিদ্দীকিয়া প্রকাশনী থেকে সেরা ইসলামিক বই কিনুন।";
-  const description = rawDescription
-    .replace(/<[^>]+>/g, "")
-    .trim()
-    .substring(0, 160);
-
-  return {
-    title,
-    description,
-    keywords: product?.seo?.keywords?.join(", ") || "",
-    openGraph: {
-      title,
-      description,
-      siteName: "সিদ্দীকিয়া প্রকাশনী",
-      images: [
-        {
-          url: imageUrl,
-          alt: title,
-        },
-        {
-          url: "https://siddikiaprokashoni.com/logo/logo.webp",
-          alt: "সিদ্দীকিয়া প্রকাশনী",
-        },
-      ],
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [imageUrl],
-    },
-    alternates: {
-      canonical: `https://siddikiaprokashoni.com/product/${params.slug}`,
-    },
-  };
+  return generateProductMetadata(product, params.slug) as Metadata;
 }
 
 const fetchProductData = async (slug: string) => {
@@ -128,84 +76,8 @@ const ProductDetailsPage = async ({ params }: TProps) => {
 
   const discount = price?.discountPercent || 0;
 
-  const productJsonLd = {
-    "@context": "https://schema.org",
-    "@type": ["Product", "Book"],
-    name: product.title,
-    description: product.seo?.metaDescription || product.shortDescription,
-    image: getImageSrc(product.thumbnail?.src || product.gallery?.[0]?.src),
-    sku: product.inventory?.sku,
-    isbn: product.attribute?.find((attr) => attr.name.toLowerCase() === "isbn")
-      ?.values[0],
-    inLanguage: "bn",
-    offers: {
-      "@type": "Offer",
-      url: `https://siddikiaprokashoni.com/product/${product.slug}`,
-      priceCurrency: "BDT",
-      price: product.price?.salePrice || product.price?.regularPrice,
-      itemCondition: "https://schema.org/NewCondition",
-      availability:
-        product.inventory?.stockStatus === STOCK_STATUS.IN_STOCK
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock",
-      seller: {
-        "@type": "Organization",
-        name: "সিদ্দীকিয়া প্রকাশনী",
-      },
-    },
-    author: product.author
-      ? { "@type": "Person", name: product.author }
-      : product.brand?.name
-        ? { "@type": "Person", name: product.brand.name }
-        : undefined,
-    publisher: {
-      "@type": "Organization",
-      name: "সিদ্দীকিয়া প্রকাশনী",
-    },
-  };
-
-  const breadcrumbItems = [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "হোম",
-      item: "https://siddikiaprokashoni.com",
-    },
-  ];
-
-  if (product.category && product.category.length > 0) {
-    breadcrumbItems.push({
-      "@type": "ListItem",
-      position: 2,
-      name: product.category[0].name,
-      item: `https://siddikiaprokashoni.com/category/${product.category[0].slug}`,
-    });
-    breadcrumbItems.push({
-      "@type": "ListItem",
-      position: 3,
-      name: product.title,
-      item: `https://siddikiaprokashoni.com/product/${product.slug}`,
-    });
-  } else {
-    breadcrumbItems.push({
-      "@type": "ListItem",
-      position: 2,
-      name: "সকল বই",
-      item: "https://siddikiaprokashoni.com/shop",
-    });
-    breadcrumbItems.push({
-      "@type": "ListItem",
-      position: 3,
-      name: product.title,
-      item: `https://siddikiaprokashoni.com/product/${product.slug}`,
-    });
-  }
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbItems,
-  };
+  const productJsonLd = generateProductSchema(product);
+  const breadcrumbJsonLd = generateBreadcrumbSchema(product);
 
   return (
     <section>
@@ -217,6 +89,9 @@ const ProductDetailsPage = async ({ params }: TProps) => {
             <ProductImageGallery gallery={gallery} discount={discount} />
           </Box>
           <Box className="p-4 space-y-4 shadow-none ring-0">
+            <h1 className="font-semibold text-xl lg:text-2xl text-foreground">
+              {product.title}
+            </h1>
             {/* Use the client-side wrapper component */}
             <ProductClientWrapper
               product={product}

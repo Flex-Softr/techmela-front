@@ -39,7 +39,7 @@ export async function generateMetadata({
 
   if (!category) return { title: "Category Not Found" };
 
-  const title = `${category.name} বিষয়ক ইসলামিক বই | সিদ্দীকিয়া প্রকাশনী`;
+  const title = `${category.name} বিষয়ক ইসলামিক বই`;
   const description =
     category.description ||
     `সিদ্দীকিয়া প্রকাশনী থেকে ${category.name} বিষয়ক সেরা ইসলামিক বই কিনুন। হাজারো ইসলামিক কিতাব একটি প্ল্যাটফর্মে।`;

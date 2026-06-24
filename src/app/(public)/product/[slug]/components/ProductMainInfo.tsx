@@ -14,7 +14,7 @@ type TProps = {
 
 const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   const {
-    title,
+    // title,
     // category,
     // brand,
     inventory,
@@ -81,10 +81,6 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   if (shortDescription) {
     return (
       <div className="space-y-4 pt-2">
-        <h2 className="font-semibold text-xl lg:text-2xl text-foreground">
-          {title}
-        </h2>
-
         {/* Unified Info Flow (Flattened for better space usage) */}
         <div className="flex flex-wrap gap-x-6 gap-y-3 items-center pt-2">
           {/* Price Section */}
@@ -166,10 +162,6 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
   // --- Default Layout (Used when NO shortDescription) ---
   return (
     <div className="space-y-4">
-      <h2 className="font-semibold text-xl lg:text-2xl text-foreground">
-        {title}
-      </h2>
-
       {/* Price Section */}
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-muted-foreground font-medium text-lg">
