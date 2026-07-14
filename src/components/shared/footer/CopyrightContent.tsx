@@ -18,7 +18,7 @@ const CopyrightContent = () => {
             <p className="text-primary transition-colors text-sm font-medium text-center md:text-right">
               Developed and maintained by{" "}
               <a
-                href="https://www.facebook.com/mustaqimkhanbd"
+                href="https://www.facebook.com/mustakimfb"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary font-bold hover:underline transition-colors relative z-[60]"
