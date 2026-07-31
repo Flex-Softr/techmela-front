@@ -2,28 +2,26 @@ import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 
 const CopyrightContent = () => {
   return (
-    <div className="py-4 border-t border-primary/20">
+    <div className="py-4 border-t border-border">
       <ContainerMax>
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-3">
           <div>
-            <p className="text-primary transition-colors text-sm font-medium text-center md:text-left">
+            <p className="text-foreground transition-colors text-sm font-medium text-center md:text-left">
               &copy; {new Date().getFullYear()}{" "}
-              <span className="text-primary font-bold">
-                সিদ্দীকিয়া প্রকাশনী
-              </span>
-              . সর্বস্বত্ব সংরক্ষিত।
+              <span className="text-foreground font-bold">ShajGhor</span>.
+              সর্বস্বত্ব সংরক্ষিত।
             </p>
           </div>
           <div>
-            <p className="text-primary transition-colors text-sm font-medium text-center md:text-right">
+            <p className="text-foreground transition-colors text-sm font-medium text-center md:text-right">
               Developed and maintained by{" "}
               <a
-                href="https://www.facebook.com/mustakimfb"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary font-bold hover:underline transition-colors relative z-[60]"
+                className="text-foreground font-bold hover:text-primary hover:underline transition-colors relative z-[60]"
               >
-                Mustakim Khan
+                FlexSoftr
               </a>
             </p>
           </div>

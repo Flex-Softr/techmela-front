@@ -25,23 +25,23 @@ const DefaultShippingAddress = () => {
 
   if (!isMounted) {
     return (
-      <Card className="w-full h-full flex flex-col shadow-sm border-gray-100 animate-pulse">
-        <CardHeader className="py-2.5 px-4 border-b border-gray-100">
-          <CardTitle className="text-sm font-semibold text-gray-800">
+      <Card className="w-full h-full flex flex-col shadow-sm border-border animate-pulse">
+        <CardHeader className="py-2.5 px-4 border-b border-border">
+          <CardTitle className="text-sm font-semibold text-foreground">
             ডিফল্ট শিপিং এড্রেস
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 flex-1">
-          <div className="h-20 bg-gray-50 rounded-lg"></div>
+          <div className="h-20 bg-muted rounded-lg"></div>
         </CardContent>
       </Card>
     );
   }
 
   return (
-    <Card className="w-full h-full flex flex-col shadow-sm border-gray-100">
-      <CardHeader className="py-2.5 px-4 border-b border-gray-100">
-        <CardTitle className="text-sm font-semibold text-gray-800">
+    <Card className="w-full h-full flex flex-col shadow-sm border-border">
+      <CardHeader className="py-2.5 px-4 border-b border-border">
+        <CardTitle className="text-sm font-semibold text-foreground">
           ডিফল্ট শিপিং এড্রেস
         </CardTitle>
       </CardHeader>
@@ -50,39 +50,41 @@ const DefaultShippingAddress = () => {
         {address ? (
           <div className="space-y-3">
             <div>
-              <div className="text-xs text-gray-400 font-medium mb-0.5 font-hind-siliguri">
+              <div className="text-xs text-muted-foreground font-medium mb-0.5 font-hind-siliguri">
                 বিস্তারিত ঠিকানা
               </div>
-              <div className="text-sm text-gray-800">{address.fullAddress}</div>
+              <div className="text-sm text-foreground">
+                {address.fullAddress}
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <div className="text-xs text-gray-400 font-medium mb-0.5 font-hind-siliguri">
+                <div className="text-xs text-muted-foreground font-medium mb-0.5 font-hind-siliguri">
                   শহর
                 </div>
-                <div className="text-sm text-gray-800">{address.city}</div>
+                <div className="text-sm text-foreground">{address.city}</div>
               </div>
               <div>
-                <div className="text-xs text-gray-400 font-medium mb-0.5 font-hind-siliguri">
+                <div className="text-xs text-muted-foreground font-medium mb-0.5 font-hind-siliguri">
                   দেশ
                 </div>
-                <div className="text-sm text-gray-800">{address.country}</div>
+                <div className="text-sm text-foreground">{address.country}</div>
               </div>
             </div>
           </div>
         ) : (
           <div className="h-full flex flex-col items-center justify-center text-center py-6">
-            <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-2">
-              <MapPin className="w-5 h-5 text-gray-400" />
+            <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center mb-2">
+              <MapPin className="w-5 h-5 text-muted-foreground" />
             </div>
-            <p className="text-xs text-gray-400 font-hind-siliguri">
+            <p className="text-xs text-muted-foreground font-hind-siliguri">
               আপনার কোনো ডিফল্ট শিপিং এড্রেস নেই।
             </p>
           </div>
         )}
       </CardContent>
 
-      <CardFooter className="p-4 border-t border-gray-100 bg-gray-50/50 rounded-b-xl">
+      <CardFooter className="p-4 border-t border-border bg-muted/50 rounded-b-xl">
         <Button
           asChild
           variant="default"

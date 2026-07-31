@@ -2,6 +2,7 @@
 
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
 import { Button } from "@/components/ui/button";
+import { SITE } from "@/const/site.const";
 import { useSingleOrderQuery } from "@/redux/features/order/orderApi";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -37,7 +38,7 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
   ) : (
     <div className="flex flex-col items-center justify-center min-h-[30vh] gap-4">
       <ErrorMessage
-        className="text-center py-3 block text-red-500 font-medium"
+        className="text-center py-3 block text-destructive font-medium"
         message="We couldn't locate the order details you're looking for. It's possible the order ID is incorrect or the order has been removed."
       />
     </div>
@@ -48,7 +49,7 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
       {content}
 
       {/* Social Media Links Section */}
-      <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col items-center gap-6">
+      <div className="mt-12 pt-8 border-t border-border flex flex-col items-center gap-6">
         <div className="text-center">
           <h3 className="text-lg font-bold text-foreground">
             আমাদের সাথে যুক্ত থাকুন
@@ -60,37 +61,37 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
 
         <div className="flex gap-4 sm:gap-6">
           <a
-            href="https://www.facebook.com/siddikiyaprokashoni"
+            href={SITE.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-white hover:scale-110 transition-all duration-300"
+            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-300"
             title="Facebook Page"
           >
             <FaFacebookF size={24} />
           </a>
           <a
-            href="https://www.facebook.com/groups/548576081614946"
+            href={SITE.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-white hover:scale-110 transition-all duration-300"
-            title="Facebook Group"
+            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-300"
+            title="Instagram"
           >
             <FaUsers size={24} />
           </a>
           <a
-            href="http://wa.me/8801339955155"
+            href={`https://wa.me/${SITE.phone.replace("+", "")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-white hover:scale-110 transition-all duration-300"
+            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-300"
             title="WhatsApp"
           >
             <FaWhatsapp size={24} />
           </a>
           <a
-            href="https://youtube.com/@dmkbofficial"
+            href={SITE.social.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-white hover:scale-110 transition-all duration-300"
+            className="bg-primary/5 p-3 rounded-full text-primary hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-300"
             title="YouTube"
           >
             <FaYoutube size={24} />

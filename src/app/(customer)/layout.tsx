@@ -16,7 +16,7 @@ const CustomerLayout = ({ children }: Props) => {
     <main className="min-h-screen flex flex-col font-hind-siliguri">
       <Header />
 
-      <div className="flex-grow bg-gray-50/50 py-2 md:py-3">
+      <div className="flex-grow bg-muted/50 py-2 md:py-3">
         <ContainerMax>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6">
             {/* Dashboard Sidebar */}
@@ -25,7 +25,7 @@ const CustomerLayout = ({ children }: Props) => {
             </aside>
 
             {/* Content Area */}
-            <div className="md:col-span-8 lg:col-span-9 bg-white rounded-xl p-3 md:p-4 shadow-sm border border-gray-100 min-h-[500px]">
+            <div className="md:col-span-8 lg:col-span-9 bg-background rounded-xl p-3 md:p-4 shadow-sm border border-border min-h-[500px]">
               <CustomerProtection>{children}</CustomerProtection>
             </div>
           </div>

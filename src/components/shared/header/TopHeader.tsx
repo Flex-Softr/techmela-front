@@ -1,13 +1,12 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
-import { FaBagShopping } from "react-icons/fa6";
+import { Fragment, useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
+import { FaBagShopping } from "react-icons/fa6";
 import { MdCall, MdDeliveryDining } from "react-icons/md";
 
 const announcements = [
-  "২০০০ টাকার বেশি অর্ডার করলেই ফ্রি হোম ডেলিভারি ",
   "সারা বাংলাদেশে ৩ দিনের মধ্যে ডেলিভারি ইনশাআল্লাহ   ",
   "একদম সহজ রিটার্ন পলিসি  ",
 ];
@@ -30,7 +29,7 @@ const TopHeader = () => {
     },
     {
       href: "/shop",
-      name: "সকল বই",
+      name: "সকল পণ্য",
       icon: <FaBagShopping className="size-4" />,
     },
   ];
@@ -41,22 +40,22 @@ const TopHeader = () => {
         {/* Left: Contact Info */}
         <div className="flex gap-3 items-center flex-1">
           <a
-            href="tel:+8801339955155"
+            href="tel:+01710020030"
             className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"
           >
             <MdCall className="size-4 text-primary" />
-            <span>০১৩৩৯-৯৫৫১৫৫</span>
+            <span>01710020030</span>
           </a>
 
           <span className="text-primary/20">|</span>
 
           <a
-            href="https://wa.me/8801339955155"
+            href="https://wa.me/01710020030"
             target="_blank"
             rel="noopener noreferrer"
             className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"
           >
-            <FaWhatsapp className="size-4 text-green-600" />
+            <FaWhatsapp className="size-4 text-success" />
             <span>হোয়াটসঅ্যাপ</span>
           </a>
         </div>

@@ -46,7 +46,7 @@ const ChangePasswordForm = () => {
       const message = result.message;
       toast({
         description: message,
-        className: "text-green-500",
+        className: "text-success",
       });
       reset();
       router.push("/my-account");
@@ -54,7 +54,7 @@ const ChangePasswordForm = () => {
       if (err instanceof Error && err.message) {
         toast({
           description: err.message,
-          className: "text-red-500",
+          className: "text-destructive",
         });
       } else {
         toast({
@@ -69,14 +69,16 @@ const ChangePasswordForm = () => {
   const renderError = (error: FieldError | undefined) => {
     if (!error) return null;
     return (
-      <p className="text-xs text-red-500 mt-1 font-medium">{error.message}</p>
+      <p className="text-xs text-destructive mt-1 font-medium">
+        {error.message}
+      </p>
     );
   };
 
   return (
-    <Card className="w-full shadow-sm border-gray-200/60 max-w-md mx-auto">
-      <CardHeader className="pb-4 border-b border-gray-100">
-        <CardTitle className="text-xl font-bold text-gray-800 flex items-center gap-2 font-hind-siliguri">
+    <Card className="w-full shadow-sm border-border/60 max-w-md mx-auto">
+      <CardHeader className="pb-4 border-b border-border">
+        <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2 font-hind-siliguri">
           <Lock className="w-5 h-5 text-primary" />
           পাসওয়ার্ড পরিবর্তন করুন
         </CardTitle>
@@ -91,7 +93,7 @@ const ChangePasswordForm = () => {
           <div className="space-y-2 relative">
             <label
               htmlFor="previousPassword"
-              className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+              className="text-sm font-semibold text-foreground font-hind-siliguri"
             >
               বর্তমান পাসওয়ার্ড
             </label>
@@ -102,13 +104,13 @@ const ChangePasswordForm = () => {
                 })}
                 type={showPreviousPassword ? "text" : "password"}
                 id="previousPassword"
-                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
+                className="h-11 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
                 placeholder="আপনার বর্তমান পাসওয়ার্ড লিখুন"
               />
               <button
                 type="button"
                 onClick={() => setShowPreviousPassword(!showPreviousPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-muted-foreground transition-colors"
                 aria-label={
                   showPreviousPassword ? "Hide password" : "Show password"
                 }
@@ -126,7 +128,7 @@ const ChangePasswordForm = () => {
           <div className="space-y-2 relative">
             <label
               htmlFor="newPassword"
-              className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+              className="text-sm font-semibold text-foreground font-hind-siliguri"
             >
               নতুন পাসওয়ার্ড
             </label>
@@ -141,13 +143,13 @@ const ChangePasswordForm = () => {
                 })}
                 type={showNewPassword ? "text" : "password"}
                 id="newPassword"
-                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg pr-10"
+                className="h-11 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg pr-10"
                 placeholder="আপনার নতুন পাসওয়ার্ড লিখুন"
               />
               <button
                 type="button"
                 onClick={() => setShowNewPassword(!showNewPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-muted-foreground transition-colors"
                 aria-label={showNewPassword ? "Hide password" : "Show password"}
               >
                 {showNewPassword ? (
@@ -163,7 +165,7 @@ const ChangePasswordForm = () => {
           <div className="space-y-2 relative">
             <label
               htmlFor="confirmPassword"
-              className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+              className="text-sm font-semibold text-foreground font-hind-siliguri"
             >
               পাসওয়ার্ড নিশ্চিত করুন
             </label>
@@ -176,13 +178,13 @@ const ChangePasswordForm = () => {
                 })}
                 type={showConfirmPassword ? "text" : "password"}
                 id="confirmPassword"
-                className="h-11 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg pr-10"
+                className="h-11 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg pr-10"
                 placeholder="পাসওয়ার্ডটি আবার লিখুন"
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-muted-foreground transition-colors"
                 aria-label={
                   showConfirmPassword ? "Hide password" : "Show password"
                 }

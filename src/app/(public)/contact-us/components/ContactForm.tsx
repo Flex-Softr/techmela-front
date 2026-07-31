@@ -74,8 +74,8 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-200">
-      <h3 className="text-2xl font-bold text-gray-900 mb-6 font-hind-siliguri">
+    <div className="bg-background p-6 md:p-10 rounded-3xl shadow-sm border border-border">
+      <h3 className="text-2xl font-bold text-foreground mb-6 font-hind-siliguri">
         আমাদের মেসেজ দিন
       </h3>
       <form
@@ -84,7 +84,7 @@ const ContactForm = () => {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-foreground mb-2">
               নাম *
             </label>
             <input
@@ -93,15 +93,17 @@ const ContactForm = () => {
               placeholder="আপনার নাম"
               maxLength={50}
               className={`w-full px-4 py-3 rounded-xl border ${
-                errors.name ? "border-red-500" : "border-gray-200"
+                errors.name ? "border-destructive" : "border-border"
               } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
             />
             {errors.name && (
-              <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
+              <p className="text-destructive text-xs mt-1">
+                {errors.name.message}
+              </p>
             )}
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-foreground mb-2">
               ফোন নম্বর *
             </label>
             <input
@@ -110,11 +112,11 @@ const ContactForm = () => {
               placeholder="আপনার ফোন নম্বর"
               maxLength={15}
               className={`w-full px-4 py-3 rounded-xl border ${
-                errors.phone ? "border-red-500" : "border-gray-200"
+                errors.phone ? "border-destructive" : "border-border"
               } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
             />
             {errors.phone && (
-              <p className="text-red-500 text-xs mt-1">
+              <p className="text-destructive text-xs mt-1">
                 {errors.phone.message}
               </p>
             )}
@@ -122,7 +124,7 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-foreground mb-2">
             ইমেল *
           </label>
           <input
@@ -131,16 +133,18 @@ const ContactForm = () => {
             placeholder="আপনার ইমেল"
             maxLength={100}
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.email ? "border-red-500" : "border-gray-200"
+              errors.email ? "border-destructive" : "border-border"
             } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
           />
           {errors.email && (
-            <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+            <p className="text-destructive text-xs mt-1">
+              {errors.email.message}
+            </p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-foreground mb-2">
             বিষয় *
           </label>
           <input
@@ -149,11 +153,11 @@ const ContactForm = () => {
             placeholder="মেসেজের বিষয়"
             maxLength={200}
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.subject ? "border-red-500" : "border-gray-200"
+              errors.subject ? "border-destructive" : "border-border"
             } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all`}
           />
           {errors.subject && (
-            <p className="text-red-500 text-xs mt-1">
+            <p className="text-destructive text-xs mt-1">
               {errors.subject.message}
             </p>
           )}
@@ -161,16 +165,16 @@ const ContactForm = () => {
 
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-semibold text-gray-700">
+            <label className="block text-sm font-semibold text-foreground">
               মেসেজ *
             </label>
             <span
               className={`text-xs ${
                 messageValue.length > 1800
-                  ? "text-red-500"
+                  ? "text-destructive"
                   : messageValue.length > 1400
-                    ? "text-amber-500"
-                    : "text-gray-400"
+                    ? "text-warning"
+                    : "text-muted-foreground"
               }`}
             >
               {messageValue.length}/২০০০
@@ -182,11 +186,11 @@ const ContactForm = () => {
             placeholder="আপনার বার্তা এখানে লিখুন..."
             maxLength={2000}
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.message ? "border-red-500" : "border-gray-200"
+              errors.message ? "border-destructive" : "border-border"
             } focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none`}
           ></textarea>
           {errors.message && (
-            <p className="text-red-500 text-xs mt-1">
+            <p className="text-destructive text-xs mt-1">
               {errors.message.message}
             </p>
           )}
@@ -195,7 +199,7 @@ const ContactForm = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-70"
+          className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-70"
         >
           {isLoading ? (
             "পাঠানো হচ্ছে..."

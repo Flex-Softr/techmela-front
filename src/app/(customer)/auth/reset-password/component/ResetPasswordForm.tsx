@@ -80,7 +80,7 @@ const ResetPasswordForm = () => {
 
       if (res.success) {
         toast({
-          className: "bg-green-600 text-white font-hind-siliguri",
+          className: "bg-success text-primary-foreground font-hind-siliguri",
           title: "সফল",
           description: "আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।",
         });
@@ -108,15 +108,15 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center px-3 py-4 bg-gray-50/50">
-      <Card className="max-w-[450px] w-full shadow-sm border-gray-200/60 overflow-hidden bg-white">
-        <CardHeader className="space-y-2 pb-4 border-b border-gray-50 bg-gray-50/30">
+    <div className="flex items-center justify-center px-3 py-4 bg-muted/50">
+      <Card className="max-w-[450px] w-full shadow-sm border-border/60 overflow-hidden bg-background">
+        <CardHeader className="space-y-2 pb-4 border-b border-border bg-muted/30">
           <div className="text-center space-y-1">
-            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2 font-hind-siliguri">
+            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 font-hind-siliguri">
               <Lock className="w-6 h-6 text-primary" />
               পাসওয়ার্ড রিসেট করুন
             </CardTitle>
-            <CardDescription className="text-gray-500 font-hind-siliguri">
+            <CardDescription className="text-muted-foreground font-hind-siliguri">
               আপনার একাউন্টের জন্য একটি নতুন নিরাপদ পাসওয়ার্ড তৈরি করুন
             </CardDescription>
           </div>
@@ -127,7 +127,7 @@ const ResetPasswordForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="email"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                className="text-sm font-semibold text-foreground font-hind-siliguri"
               >
                 ইমেইল
               </Label>
@@ -140,12 +140,12 @@ const ResetPasswordForm = () => {
                     id="email"
                     type="text"
                     disabled
-                    className="h-11 border-gray-200 bg-gray-50 transition-all rounded-lg opacity-80 cursor-not-allowed"
+                    className="h-11 border-border bg-muted transition-all rounded-lg opacity-80 cursor-not-allowed"
                   />
                 )}
               />
               {errors.email && (
-                <p className="text-xs text-red-500 font-medium italic">
+                <p className="text-xs text-destructive font-medium italic">
                   {errors.email.message}
                 </p>
               )}
@@ -154,7 +154,7 @@ const ResetPasswordForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="otp"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                className="text-sm font-semibold text-foreground font-hind-siliguri"
               >
                 ওটিপি (OTP) কোড
               </Label>
@@ -167,12 +167,12 @@ const ResetPasswordForm = () => {
                     id="otp"
                     type="text"
                     placeholder="৬ ডিজিটের ওটিপি লিখুন"
-                    className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg font-hind-siliguri ${errors.otp ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                    className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg font-hind-siliguri ${errors.otp ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   />
                 )}
               />
               {errors.otp && (
-                <p className="text-xs text-red-500 font-medium italic">
+                <p className="text-xs text-destructive font-medium italic">
                   {errors.otp.message}
                 </p>
               )}
@@ -181,7 +181,7 @@ const ResetPasswordForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="password"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                className="text-sm font-semibold text-foreground font-hind-siliguri"
               >
                 নতুন পাসওয়ার্ড
               </Label>
@@ -195,14 +195,14 @@ const ResetPasswordForm = () => {
                       id="password"
                       type={showPassword ? "text" : "password"}
                       placeholder="অন্তত ৬টি অক্ষর"
-                      className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg pr-10 font-hind-siliguri ${errors.password ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                      className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 font-hind-siliguri ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                     />
                   )}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 group-hover:text-gray-600 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground group-hover:text-muted-foreground transition-colors"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
@@ -213,7 +213,7 @@ const ResetPasswordForm = () => {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-red-500 font-medium leading-tight">
+                <p className="text-xs text-destructive font-medium leading-tight">
                   {errors.password.message}
                 </p>
               )}
@@ -236,7 +236,7 @@ const ResetPasswordForm = () => {
           </form>
         </CardContent>
 
-        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-gray-50/30 border-t border-gray-50 text-sm text-gray-600 font-hind-siliguri">
+        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border text-sm text-muted-foreground font-hind-siliguri">
           <p>
             পাসওয়ার্ড মনে পড়েছে?{" "}
             <Link

@@ -1,5 +1,5 @@
 {
-  "name": "siddikiaprokashoni-frontend",
+  "name": "shajghor-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -76,6 +76,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=20.19.0 <21.0.0"
+    "node": ">=20.19.0 <23.0.0"
   }
 }

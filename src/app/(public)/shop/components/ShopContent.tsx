@@ -54,15 +54,20 @@ const ShopContentInner = ({
             <ProductSorter />
             {isLoading ? (
               <ProductGridSkeleton
-                count={6}
-                className={hideSidebar ? "lg:grid-cols-4" : "lg:grid-cols-3"}
-                itemClassName="h-80"
+                count={10}
+                className={
+                  hideSidebar
+                    ? "lg:grid-cols-5"
+                    : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+                }
               />
             ) : (
               <ProductGrid
                 products={products}
                 gridClassName={
-                  hideSidebar ? "lg:grid-cols-4" : "lg:grid-cols-3"
+                  hideSidebar
+                    ? "lg:grid-cols-5"
+                    : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
                 }
               />
             )}

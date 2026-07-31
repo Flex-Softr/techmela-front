@@ -19,14 +19,14 @@ const TimelineEvent: React.FC<TimelineEventProps> = ({
   return (
     <div className="relative pl-12 pb-10 last:pb-0 group">
       {/* Vertical line connecting steps — soft green since all are completed */}
-      <div className="absolute left-[15px] top-8 bottom-0 w-0.5 bg-green-100 group-last:hidden"></div>
+      <div className="absolute left-[15px] top-8 bottom-0 w-0.5 bg-success/15 group-last:hidden"></div>
 
       {/* Step dot — all filled with a check since all are completed historical events */}
       <div
         className={`absolute left-0 top-0 w-8 h-8 rounded-full border-2 flex items-center justify-center z-10 transition-all ${
           isActive
-            ? "border-primary bg-primary text-white shadow-md shadow-primary/30 scale-110"
-            : "border-green-400 bg-green-50 text-green-600"
+            ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/30 scale-110"
+            : "border-success bg-success/10 text-success"
         }`}
       >
         <Check className="w-4 h-4" strokeWidth={3} />

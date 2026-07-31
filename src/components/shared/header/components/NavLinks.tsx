@@ -47,7 +47,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
               <div className="bg-primary/5 rounded-lg flex items-center justify-center p-1.5">
                 <Image
                   src={logo}
-                  alt="Siddikiya Prokashoni Logo"
+                  alt="ShajGhor Logo"
                   height={48}
                   width={120}
                   className="h-10 w-auto rounded-sm"
@@ -86,27 +86,27 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
             />
           </div>
 
-          <div className="p-4 bg-gray-50 border-t mt-auto">
+          <div className="p-4 bg-muted border-t mt-auto">
             <p className="text-xs font-bold text-primary uppercase tracking-wider mb-3">
               যোগাযোগ করুন
             </p>
             <div className="space-y-3">
               <a
-                href="tel:+8801339955155"
+                href="tel:+01710020030"
                 className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
               >
-                <div className="size-8 rounded-full bg-white flex items-center justify-center shadow-sm text-primary">
+                <div className="size-8 rounded-full bg-background flex items-center justify-center shadow-sm text-primary">
                   <MdCall className="size-4" />
                 </div>
                 <span>+8801602-431167</span>
               </a>
               <a
-                href="https://wa.me/8801339955155"
+                href="https://wa.me/01710020030"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
               >
-                <div className="size-8 rounded-full bg-white flex items-center justify-center shadow-sm text-green-600">
+                <div className="size-8 rounded-full bg-background flex items-center justify-center shadow-sm text-success">
                   <FaWhatsapp className="size-5" />
                 </div>
                 <span>হোয়াটসঅ্যাপ</span>

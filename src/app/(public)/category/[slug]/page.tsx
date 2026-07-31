@@ -1,14 +1,15 @@
 import ShopContent from "@/app/(public)/shop/components/ShopContent";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import JsonLd from "@/components/shared/JsonLd";
+import { SITE } from "@/const/site.const";
 import { getImageSrc } from "@/lib/utils";
 import TCategory from "@/types/categories/categories";
 import { TPaginatedData } from "@/types/response";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
-import { BookOpen } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Metadata } from "next";
 
-const BASE_URL = "https://siddikiaprokashoni.com";
+const BASE_URL = SITE.baseUrl;
 
 const fetchCategories = async () => {
   try {
@@ -39,21 +40,21 @@ export async function generateMetadata({
 
   if (!category) return { title: "Category Not Found" };
 
-  const title = `${category.name} বিষয়ক ইসলামিক বই`;
+  const title = `${category.name} বিষয়ক কসমেটিক্স ও বিউটি প্রোডাক্ট`;
   const description =
     category.description ||
-    `সিদ্দীকিয়া প্রকাশনী থেকে ${category.name} বিষয়ক সেরা ইসলামিক বই কিনুন। হাজারো ইসলামিক কিতাব একটি প্ল্যাটফর্মে।`;
+    `${SITE.nameBn} থেকে ${category.name} বিষয়ক সেরা কসমেটিক্স ও বিউটি প্রোডাক্ট কিনুন। হাজারো পণ্য একটি প্ল্যাটফর্মে।`;
   const imageUrl = category.image ? getImageSrc(category.image.src) : undefined;
 
   return {
     title,
     description,
     keywords: [
-      `${category.name} বই`,
-      `${category.name} ইসলামিক বই`,
-      `${category.name} কিতাব`,
-      "সিদ্দীকিয়া প্রকাশনী",
-      "Islamic books Bangladesh",
+      `${category.name} পণ্য`,
+      `${category.name} কসমেটিক্স`,
+      `${category.name} বিউটি প্রোডাক্ট`,
+      SITE.nameBn,
+      "Cosmetics Bangladesh",
     ].join(", "),
     alternates: {
       canonical: `${BASE_URL}/category/${decodedSlug}`,
@@ -61,7 +62,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      siteName: "সিদ্দীকিয়া প্রকাশনী",
+      siteName: SITE.nameBn,
       images: imageUrl ? [{ url: imageUrl, alt: category.name }] : [],
     },
   };
@@ -108,11 +109,11 @@ export default async function CategoryPage({
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <div className="mt-4 relative overflow-hidden bg-gradient-to-br from-primary/90 via-primary to-primary/80 text-white">
+      <div className="mt-4 relative overflow-hidden bg-gradient-to-br from-primary/90 via-primary to-primary/80 text-primary-foreground">
         {/* Decorative blurred circles */}
-        <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-        {/* Subtle book pattern */}
+        <div className="absolute -top-10 -right-10 w-48 h-48 bg-primary-foreground/5 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-primary-foreground/5 rounded-full blur-3xl pointer-events-none" />
+        {/* Subtle decorative pattern */}
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
@@ -130,24 +131,24 @@ export default async function CategoryPage({
           <div className="relative py-4 md:py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             {/* Text block */}
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-white/15 rounded-xl backdrop-blur-sm flex-shrink-0">
-                <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              <div className="p-2 bg-primary-foreground/15 rounded-xl backdrop-blur-sm flex-shrink-0">
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
               </div>
               <div>
                 <h1 className="text-base sm:text-xl md:text-2xl font-bold leading-snug">
                   {category.name}
                 </h1>
-                <p className="text-xs sm:text-sm text-white/80 mt-0.5 leading-relaxed">
+                <p className="text-xs sm:text-sm text-primary-foreground/80 mt-0.5 leading-relaxed">
                   {category.description ||
-                    `সিদ্দীকিয়া প্রকাশনী থেকে ${category.name} বিষয়ক সেরা ইসলামিক বই কিনুন।`}
+                    `${SITE.nameBn} থেকে ${category.name} বিষয়ক সেরা কসমেটিক্স ও বিউটি প্রোডাক্ট কিনুন।`}
                 </p>
               </div>
             </div>
 
             {/* Chip — hidden on very small mobile to avoid crowding */}
             <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
-              <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-3 py-1.5 rounded-xl text-sm font-medium">
-                <BookOpen className="w-4 h-4" />
+              <div className="flex items-center gap-1.5 bg-primary-foreground/15 backdrop-blur-sm px-3 py-1.5 rounded-xl text-sm font-medium">
+                <Sparkles className="w-4 h-4" />
                 <span>ক্যাটাগরি সংগ্রহ</span>
               </div>
             </div>

@@ -8,89 +8,86 @@
 
 @layer base {
   :root {
-    /* Base */
-    --background: 0 0% 100%;
-    /* hsl(0 0% 100%) → white */
-    --foreground: 197 67% 15%;
-    /* derived dark teal */
+    /* Soft blush canvas – cosmetics / beauty */
+    --background: 340 40% 99%;
+    --foreground: 340 28% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 197 67% 15%;
+    --card-foreground: 340 28% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 197 67% 15%;
+    --popover-foreground: 340 28% 14%;
 
-    /* Primary – Deep Forest Green (from logo) */
-    --primary: 150 100% 18%;
+    /* Primary – rich rose */
+    --primary: 338 62% 44%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary – Emerald 600 (darkened for WCAG AA contrast) */
-    --secondary: 161 94% 25%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary – soft blush wash */
+    --secondary: 340 45% 94%;
+    --secondary-foreground: 338 50% 28%;
 
-    /* Muted – Soft olive tint (darkened for WCAG AA contrast) */
-    --muted: 79 20% 90%;
-    --muted-foreground: 150 5% 35%;
+    /* Muted – powder pink-gray */
+    --muted: 340 25% 96%;
+    --muted-foreground: 340 12% 42%;
 
-    /* Accent – Bright Forest Green tint */
-    --accent: 150 20% 96%;
-    --accent-foreground: 150 100% 18%;
+    /* Accent – soft peach highlight */
+    --accent: 18 70% 95%;
+    --accent-foreground: 338 50% 28%;
 
-    /* Destructive */
-    --destructive: 0 72% 55%;
+    /* Destructive – sale / error */
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
     /* UI */
-    --border: 197 20% 85%;
-    --input: 197 20% 85%;
-    --ring: 197 98% 23%;
+    --border: 340 18% 90%;
+    --input: 340 18% 90%;
+    --ring: 338 62% 44%;
 
-    --success: 134 61% 41%;
+    --success: 152 48% 36%;
     --success-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --warning: 32 90% 42%;
+    --warning-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
   }
 
   .dark {
-    /* Base */
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 340 25% 7%;
+    --foreground: 340 20% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 340 22% 10%;
+    --card-foreground: 340 20% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 340 22% 10%;
+    --popover-foreground: 340 20% 96%;
 
-    /* Primary */
-    --primary: 150 100% 18%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 338 70% 62%;
+    --primary-foreground: 340 40% 10%;
 
-    /* Secondary – Emerald 600 (darkened for WCAG AA contrast) */
-    --secondary: 161 94% 25%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 340 20% 16%;
+    --secondary-foreground: 340 30% 92%;
 
-    /* Muted – Soft olive tint (darkened for WCAG AA contrast) */
-    --muted: 79 20% 90%;
-    --muted-foreground: 150 5% 35%;
+    --muted: 340 18% 15%;
+    --muted-foreground: 340 12% 68%;
 
-    /* Accent – Bright Forest Green tint */
-    --accent: 150 20% 96%;
-    --accent-foreground: 150 100% 18%;
+    --accent: 340 22% 18%;
+    --accent-foreground: 340 30% 92%;
 
-    /* Destructive */
-    --destructive: 0 72% 55%;
+    --destructive: 0 70% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    /* UI */
-    --border: 197 20% 85%;
-    --input: 197 20% 85%;
-    --ring: 197 98% 23%;
+    --border: 340 16% 20%;
+    --input: 340 16% 20%;
+    --ring: 338 70% 62%;
 
-    --success: 134 61% 41%;
+    --success: 152 45% 42%;
     --success-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --warning: 32 90% 48%;
+    --warning-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
   }
 }
 
@@ -108,7 +105,6 @@
   @apply max-w-7xl mx-auto px-2 md:px-5;
 }
 
-/* Add this in your global CSS file */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -123,18 +119,17 @@
   animation: spin 60s linear infinite;
 }
 
-/* Add this to your global CSS or a relevant CSS file */
 @keyframes fire {
   0% {
-    background-color: red;
+    background-color: hsl(var(--destructive));
   }
 
   50% {
-    background-color: orange;
+    background-color: hsl(var(--warning));
   }
 
   100% {
-    background-color: red;
+    background-color: hsl(var(--destructive));
   }
 }
 
@@ -174,23 +169,23 @@
 
 /* Base Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px; /* thinner scrollbar */
-  height: 8px; /* thinner horizontal scrollbar */
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f5f5; /* very light gray track */
-  border-radius: 6px; /* slightly smaller radius */
+  background: hsl(var(--muted));
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b0b0b0; /* softer gray thumb */
+  background: hsl(var(--muted-foreground) / 0.35);
   border-radius: 6px;
-  border: 2px solid #f5f5f5; /* subtle border */
+  border: 2px solid hsl(var(--muted));
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #999999; /* slightly darker on hover */
+  background: hsl(var(--muted-foreground) / 0.55);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -200,8 +195,8 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Fix for react-image-gallery mobile vertical scroll issue */

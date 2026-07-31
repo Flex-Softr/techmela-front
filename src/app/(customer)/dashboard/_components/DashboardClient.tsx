@@ -42,30 +42,30 @@ const DashboardClient = () => {
       label: "মোট অর্ডার",
       value: orders.length,
       icon: <ShoppingBag size={18} />,
-      color: "bg-blue-50 text-blue-600",
+      color: "bg-primary/10 text-primary",
     },
     {
       label: "সফল ডেলিভারি",
       value: successfulOrders,
       icon: <CheckCircle size={18} />,
-      color: "bg-emerald-50 text-emerald-600",
+      color: "bg-success/10 text-success",
     },
     {
       label: "পেন্ডিং অর্ডার",
       value: orders.length - successfulOrders,
       icon: <Clock size={18} />,
-      color: "bg-amber-50 text-amber-600",
+      color: "bg-warning/10 text-warning",
     },
   ];
 
   if (!isMounted) {
     return (
       <div className="space-y-4 animate-pulse">
-        <div className="h-8 bg-gray-100 rounded-lg w-1/3 mb-4"></div>
+        <div className="h-8 bg-muted rounded-lg w-1/3 mb-4"></div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="h-20 bg-gray-50 rounded-xl"></div>
-          <div className="h-20 bg-gray-50 rounded-xl"></div>
-          <div className="h-20 bg-gray-50 rounded-xl"></div>
+          <div className="h-20 bg-muted rounded-xl"></div>
+          <div className="h-20 bg-muted rounded-xl"></div>
+          <div className="h-20 bg-muted rounded-xl"></div>
         </div>
       </div>
     );
@@ -77,15 +77,15 @@ const DashboardClient = () => {
       <section>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-0.5">
+            <h1 className="text-xl md:text-2xl font-bold text-foreground mb-0.5">
               আসসালামু আলাইকুম,{" "}
               <span className="text-primary">
                 {fullName || "সম্মানিত গ্রাহক"}
               </span>
               !
             </h1>
-            <p className="text-gray-400 text-sm">
-              সিদ্দীকিয়া প্রকাশনীতে আপনাকে স্বাগতম।
+            <p className="text-muted-foreground text-sm">
+              ShajGhorতে আপনাকে স্বাগতম।
             </p>
           </div>
           <div className="hidden lg:block">
@@ -104,7 +104,7 @@ const DashboardClient = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-gray-50 border border-gray-100 p-3.5 rounded-xl flex items-center gap-3 transition-transform hover:scale-[1.01]"
+            className="bg-muted border border-border p-3.5 rounded-xl flex items-center gap-3 transition-transform hover:scale-[1.01]"
           >
             <div
               className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${stat.color}`}
@@ -112,8 +112,8 @@ const DashboardClient = () => {
               {stat.icon}
             </div>
             <div>
-              <p className="text-gray-500 text-sm">{stat.label}</p>
-              <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+              <p className="text-muted-foreground text-sm">{stat.label}</p>
+              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
             </div>
           </div>
         ))}
@@ -122,9 +122,9 @@ const DashboardClient = () => {
       {/* Info Sections */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Profile Card */}
-        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
-          <div className="px-4 py-2.5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-            <h3 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+        <div className="bg-background border border-border rounded-xl overflow-hidden">
+          <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
+            <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
               <User size={14} className="text-primary" />
               ব্যক্তিগত তথ্য
             </h3>
@@ -137,26 +137,26 @@ const DashboardClient = () => {
           </div>
           <div className="p-4 space-y-3">
             <div className="flex flex-col gap-0.5">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 নাম
               </span>
-              <span className="text-base font-medium text-gray-800">
+              <span className="text-base font-medium text-foreground">
                 {fullName || "তথ্য নেই"}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 ইমেইল
               </span>
-              <span className="text-base font-medium text-gray-800">
+              <span className="text-base font-medium text-foreground">
                 {email || "তথ্য নেই"}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 ফোন নম্বর
               </span>
-              <span className="text-base font-medium text-gray-800">
+              <span className="text-base font-medium text-foreground">
                 {phoneNumber || "তথ্য নেই"}
               </span>
             </div>
@@ -164,9 +164,9 @@ const DashboardClient = () => {
         </div>
 
         {/* Address Card */}
-        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
-          <div className="px-4 py-2.5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-            <h3 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+        <div className="bg-background border border-border rounded-xl overflow-hidden">
+          <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
+            <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
               <MapPin size={14} className="text-primary" />
               শিপিং এড্রেস
             </h3>
@@ -180,10 +180,10 @@ const DashboardClient = () => {
           <div className="p-4">
             {address ? (
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                   ঠিকানা
                 </span>
-                <p className="text-base font-medium text-gray-800 leading-relaxed">
+                <p className="text-base font-medium text-foreground leading-relaxed">
                   {address.fullAddress}
                   <br />
                   {address.city}, {address.country}
@@ -200,9 +200,9 @@ const DashboardClient = () => {
       </div>
 
       {/* Recent Orders Section */}
-      <section className="bg-white border border-gray-100 rounded-xl overflow-hidden">
-        <div className="px-4 py-2.5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-          <h3 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+      <section className="bg-background border border-border rounded-xl overflow-hidden">
+        <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
+          <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
             <Package size={14} className="text-primary" />
             সাম্প্রতিক অর্ডার
           </h3>
@@ -215,13 +215,13 @@ const DashboardClient = () => {
         </div>
         <div className="overflow-x-auto">
           {isOrdersLoading ? (
-            <div className="p-10 text-center text-gray-400 text-sm">
+            <div className="p-10 text-center text-muted-foreground text-sm">
               লোড হচ্ছে...
             </div>
           ) : orders.length > 0 ? (
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-50 text-gray-400 uppercase text-xs font-bold tracking-widest">
+                <tr className="bg-muted text-muted-foreground uppercase text-xs font-bold tracking-widest">
                   <th className="px-4 py-3">অর্ডার ID</th>
                   <th className="px-4 py-3">তারিখ</th>
                   <th className="px-4 py-3">অবস্থা</th>
@@ -232,12 +232,12 @@ const DashboardClient = () => {
                 {orders.slice(0, 3).map((order: TOrderInfo) => (
                   <tr
                     key={order._id}
-                    className="hover:bg-gray-50/50 transition-colors"
+                    className="hover:bg-muted/50 transition-colors"
                   >
-                    <td className="px-4 py-3 font-semibold text-gray-900 text-base">
+                    <td className="px-4 py-3 font-semibold text-foreground text-base">
                       #{order.orderId}
                     </td>
-                    <td className="px-4 py-3 text-gray-500 text-base">
+                    <td className="px-4 py-3 text-muted-foreground text-base">
                       {isMounted
                         ? new Date(order.createdAt).toLocaleDateString("bn-BD")
                         : "..."}
@@ -262,7 +262,7 @@ const DashboardClient = () => {
               </tbody>
             </table>
           ) : (
-            <div className="p-10 text-center text-gray-400 text-sm italic">
+            <div className="p-10 text-center text-muted-foreground text-sm italic">
               এখনও কোনো অর্ডার করা হয়নি।
             </div>
           )}

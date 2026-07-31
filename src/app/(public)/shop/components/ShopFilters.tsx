@@ -54,7 +54,7 @@ const ShopFilters = ({
   const totalProducts = productData?.meta?.total ?? 0;
 
   const filterContent = (
-    <Box className="bg-white lg:rounded-xl lg:border lg:border-border/50 p-0 lg:p-3 space-y-1 font-hind-siliguri">
+    <Box className="bg-background lg:rounded-xl lg:border lg:border-border/50 p-0 lg:p-3 space-y-1 font-hind-siliguri">
       {/* Header with title + clear button (Desktop Only) */}
       <div className="hidden lg:flex items-center justify-between px-3 pt-2 pb-2.5 border-b border-border/40">
         <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
@@ -63,7 +63,7 @@ const ShopFilters = ({
         <button
           onClick={clearAllFilters}
           disabled={activeFilterCount === 0}
-          className="text-xs text-red-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed font-medium transition-colors"
+          className="text-xs text-destructive hover:text-destructive disabled:opacity-30 disabled:cursor-not-allowed font-medium transition-colors"
         >
           সব মুছুন
         </button>
@@ -110,7 +110,7 @@ const ShopFilters = ({
                     "size-5 rounded-full border-2 transition-all flex items-center justify-center",
                     stockStatus === status.value
                       ? "border-primary bg-primary/5"
-                      : "border-gray-300 group-hover:border-primary/50"
+                      : "border-border group-hover:border-primary/50"
                   )}
                 >
                   {stockStatus === status.value && (
@@ -120,7 +120,7 @@ const ShopFilters = ({
               </div>
               <span
                 className={cn(
-                  "text-sm font-medium text-gray-700 transition-colors",
+                  "text-sm font-medium text-foreground transition-colors",
                   stockStatus === status.value && "text-primary font-semibold"
                 )}
               >
@@ -134,7 +134,7 @@ const ShopFilters = ({
       {/* Mobile-only clear button at bottom */}
       <div className="lg:hidden px-2 pt-3 pb-1 border-t border-border/40 mt-2">
         <EcButton
-          className="w-full font-bold bg-white border border-red-200 text-red-500 hover:bg-red-50 hover:border-red-400 transition-colors text-sm"
+          className="w-full font-bold bg-background border border-destructive/25 text-destructive hover:bg-destructive/10 hover:border-destructive transition-colors text-sm"
           onClick={() => {
             clearAllFilters();
             sheetCloseRef.current?.click();
@@ -155,11 +155,11 @@ const ShopFilters = ({
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="w-full flex justify-between items-center px-4 py-5 border-2 border-primary/10 hover:border-primary/30 transition-all rounded-md bg-white"
+              className="w-full flex justify-between items-center px-4 py-5 border-2 border-primary/10 hover:border-primary/30 transition-all rounded-md bg-background"
             >
               <div className="flex items-center gap-2.5">
                 <FaBarsStaggered className="text-primary w-4 h-4" />
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-foreground">
                   ফিল্টার করুন
                 </span>
               </div>
@@ -172,7 +172,7 @@ const ShopFilters = ({
                       e.stopPropagation();
                       clearAllFilters();
                     }}
-                    className="flex items-center gap-1 px-2 py-1 rounded bg-red-50 text-red-500 hover:bg-red-100 transition-colors border border-red-100"
+                    className="flex items-center gap-1 px-2 py-1 rounded bg-destructive/10 text-destructive hover:bg-destructive/15 transition-colors border border-destructive/20"
                   >
                     <X className="size-3" />
                     <span className="text-[10px] font-bold uppercase tracking-wider">
@@ -181,7 +181,7 @@ const ShopFilters = ({
                   </div>
                 )}
                 {activeFilterCount > 0 && (
-                  <span className="flex items-center justify-center bg-primary text-white text-xs font-bold rounded-full h-5 w-5 animate-in zoom-in duration-300">
+                  <span className="flex items-center justify-center bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 animate-in zoom-in duration-300">
                     {activeFilterCount}
                   </span>
                 )}
@@ -201,7 +201,7 @@ const ShopFilters = ({
                 <SheetClose asChild>
                   <button
                     ref={sheetCloseRef}
-                    className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-muted-foreground hover:text-foreground"
+                    className="p-1.5 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
                     aria-label="Close filter"
                   >
                     <X className="w-4 h-4" />
@@ -214,14 +214,14 @@ const ShopFilters = ({
             </div>
 
             {/* Mobile Sticky Footer */}
-            <div className="p-4 border-t bg-white shrink-0">
+            <div className="p-4 border-t bg-background shrink-0">
               <Button
-                className="w-full h-12 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl flex justify-between items-center px-6"
+                className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl flex justify-between items-center px-6"
                 onClick={() => sheetCloseRef.current?.click()}
               >
                 <span>ফলাফল দেখুন</span>
-                <span className="bg-white/20 px-2 py-0.5 rounded-lg text-xs">
-                  {totalProducts} টি বই
+                <span className="bg-background/20 px-2 py-0.5 rounded-lg text-xs">
+                  {totalProducts} টি পণ্য
                 </span>
               </Button>
             </div>

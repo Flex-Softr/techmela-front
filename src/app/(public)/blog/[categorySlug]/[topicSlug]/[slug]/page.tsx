@@ -123,8 +123,8 @@ export default async function BlogPostPage({ params }: TProps) {
       <JsonLd data={articleJsonLd} />
       {faqJsonLd ? <JsonLd data={faqJsonLd} /> : null}
       <JsonLd data={breadcrumbJsonLd} />
-      <article className="bg-[#f7faf7]">
-        <section className="border-b bg-white">
+      <article className="bg-muted">
+        <section className="border-b bg-background">
           <ContainerMax className="py-4 md:py-6">
             <div className="mx-auto max-w-4xl space-y-4">
               <div className="flex items-center justify-between gap-4">
@@ -193,7 +193,7 @@ export default async function BlogPostPage({ params }: TProps) {
 
         <ContainerMax className="grid gap-5 py-4 lg:grid-cols-[1fr_280px]">
           <div className="min-w-0 space-y-4">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border bg-white">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border bg-background">
               <Image
                 src={image}
                 alt={post.title}
@@ -203,14 +203,14 @@ export default async function BlogPostPage({ params }: TProps) {
                 priority
               />
             </div>
-            <Card className="rounded-lg border bg-white">
+            <Card className="rounded-lg border bg-background">
               <CardContent className="p-4 md:p-6">
                 <ArticleHtml html={post.content} />
               </CardContent>
             </Card>
 
             {post.faqs?.length ? (
-              <Card className="rounded-lg border bg-white">
+              <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-4 p-4 md:p-6">
                   <h2 className="text-2xl font-bold text-primary">
                     সাধারণ জিজ্ঞাসা
@@ -233,7 +233,7 @@ export default async function BlogPostPage({ params }: TProps) {
 
           <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start">
             {tags.length ? (
-              <Card className="rounded-lg border bg-white">
+              <Card className="rounded-lg border bg-background">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
                     ট্যাগ
@@ -261,7 +261,7 @@ export default async function BlogPostPage({ params }: TProps) {
             ) : null}
 
             {post.relatedBlogs?.length ? (
-              <Card className="rounded-lg border bg-white">
+              <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
                     সম্পর্কিত প্রবন্ধ

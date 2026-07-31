@@ -8,20 +8,20 @@ import TCategory from "@/types/categories/categories";
 import TBrand from "@/types/brands/brands";
 import TCollection from "@/types/collections/collections";
 import ShopFilters from "./components/ShopFilters";
+import { SITE } from "@/const/site.const";
 
 export const metadata: Metadata = {
-  title: "ইসলামিক বইয়ের বিশাল সংগ্রহ",
-  description:
-    "সিদ্দীকিয়া প্রকাশনীর অনলাইন শপে আপনাকে স্বাগতম। এখানে পাবেন দেশি-বিদেশি লেখকের কয়েক হাজার ইসলামিক বই, মাদরাসার কিতাব এবং গবেষণামূলক কিতাবসমূহ।",
+  title: "কসমেটিক্স ও বিউটি প্রোডাক্টের বিশাল সংগ্রহ",
+  description: `${SITE.nameBn} অনলাইন শপে আপনাকে স্বাগতম। এখানে পাবেন দেশি-বিদেশি ব্র্যান্ডের কয়েক হাজার স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার, পারফিউম ও বিউটি অ্যাক্সেসরিজ।`,
   keywords: [
-    "অনলাইন ইসলামিক শপ",
-    "ইসলামিক বই সংগ্রহ",
-    "মাদরাসার কিতাব কিনুন",
-    "Islamic Book Shop Bangladesh",
-    "Buy Islamic Books Online",
+    "অনলাইন কসমেটিক্স শপ",
+    "কসমেটিক্স ও বিউটি প্রোডাক্ট সংগ্রহ",
+    "স্কিনকেয়ার মেকআপ কিনুন",
+    "Cosmetics Shop Bangladesh",
+    "Buy Beauty Products Online",
   ].join(", "),
   alternates: {
-    canonical: "https://siddikiaprokashoni.com/shop",
+    canonical: `${SITE.baseUrl}/shop`,
   },
 };
 
@@ -63,13 +63,13 @@ const ShopPage = async () => {
               "@type": "ListItem",
               position: 1,
               name: "হোম",
-              item: "https://siddikiaprokashoni.com",
+              item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "সকল বই",
-              item: "https://siddikiaprokashoni.com/shop",
+              name: "সকল পণ্য",
+              item: `${SITE.baseUrl}/shop`,
             },
           ],
         }}

@@ -41,15 +41,9 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
 
   return (
     <section className="pt-4 md:pt-6">
-      <div className="bg-primary/5 py-2 md:py-3 px-4 md:mb-4 text-center border border-primary/10 shadow-sm">
-        <SectionTitle
-          title="আমাদের গ্রন্থ বিভাগ"
-          className="text-primary mb-2"
-        />
-        <SectionSubtitle
-          text="পছন্দের ক্যাটাগরি অনুযায়ী বই খুঁজুন"
-          className="text-primary/90 max-w-2xl mx-auto"
-        />
+      <div className="mb-6 px-4 text-center md:mb-8">
+        <SectionTitle title="আমাদের পণ্য বিভাগ" className="text-primary" />
+        <SectionSubtitle text="পছন্দের ক্যাটাগরি অনুযায়ী পণ্য খুঁজুন" />
       </div>
 
       <ContainerMax>
@@ -89,8 +83,8 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
 
             {categories.length > 3 && (
               <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none z-30">
-                <CarouselPrevious className="pointer-events-auto relative -left-2 md:-left-4 bg-white hover:bg-white text-primary border border-primary/50 h-8 w-8 md:h-10 md:w-10 shadow-lg transition-all flex items-center justify-center ring-2 ring-primary/5" />
-                <CarouselNext className="pointer-events-auto relative -right-2 md:-right-4 left-auto md:left-auto bg-white hover:bg-white text-primary border border-primary/50 h-8 w-8 md:h-10 md:w-10 shadow-lg transition-all flex items-center justify-center ring-2 ring-primary/5" />
+                <CarouselPrevious className="pointer-events-auto relative -left-2 md:-left-4 bg-background hover:bg-background text-primary border border-primary/50 h-8 w-8 md:h-10 md:w-10 shadow-lg transition-all flex items-center justify-center ring-2 ring-primary/5" />
+                <CarouselNext className="pointer-events-auto relative -right-2 md:-right-4 left-auto md:left-auto bg-background hover:bg-background text-primary border border-primary/50 h-8 w-8 md:h-10 md:w-10 shadow-lg transition-all flex items-center justify-center ring-2 ring-primary/5" />
               </div>
             )}
           </Carousel>

@@ -12,7 +12,7 @@ const sanitize = (value: string) =>
     .replace(/'/g, "&apos;");
 
 export async function GET() {
-  const baseUrl = "https://siddikiaprokashoni.com";
+  const baseUrl = "https://shajghor.com";
   const qnaRes = await serverSideFetcher<TPaginatedData<TQnA[]>>({
     url: "/qna",
     tags: ["qna"],

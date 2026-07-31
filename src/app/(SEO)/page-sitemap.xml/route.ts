@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://siddikiaprokashoni.com";
+  const baseUrl = "https://shajghor.com";
   const staticPages = [
     "",
     "/shop",

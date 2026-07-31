@@ -191,11 +191,11 @@ const SalesOrderForm = ({
           {/* Left Column: Form Inputs */}
           <div className="space-y-2">
             {/* Shipping Info */}
-            <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+            <div className="bg-background rounded-xl overflow-hidden border border-border shadow-sm">
               <ShippingAddress disablePhoneAutoFill={true} />
             </div>
             {/* Payment Methods */}
-            <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm p-4 md:p-0">
+            <div className="bg-background rounded-xl overflow-hidden border border-border shadow-sm p-4 md:p-0">
               <PaymentMethods
                 paymentMethods={paymentMethods}
                 idPrefix="sales-payment"
@@ -205,10 +205,10 @@ const SalesOrderForm = ({
 
           {/* Right Column: Summary & Final Action */}
           <div className="space-y-4 lg:sticky lg:top-24">
-            <div className="bg-white p-4 lg:p-5 rounded-[2rem] border border-emerald-100 shadow-xl shadow-emerald-900/5 relative overflow-hidden group">
+            <div className="bg-background p-4 lg:p-5 rounded-[2rem] border border-success/20 shadow-xl shadow-emerald-900/5 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 blur-2xl group-hover:bg-primary/10 transition-colors"></div>
 
-              <h3 className="text-lg lg:text-xl font-black mb-3 flex items-center gap-3 text-gray-900 relative z-10">
+              <h3 className="text-lg lg:text-xl font-black mb-3 flex items-center gap-3 text-foreground relative z-10">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                   <MdShoppingBag className="text-primary text-xl" />
                 </div>
@@ -216,7 +216,7 @@ const SalesOrderForm = ({
               </h3>
 
               <div className="flex gap-4 mb-4 relative z-10">
-                <div className="w-20 h-28 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0 shadow-md border border-gray-100 p-0.5">
+                <div className="w-20 h-28 bg-muted rounded-xl overflow-hidden flex-shrink-0 shadow-md border border-border p-0.5">
                   <Image
                     src={actualThumbnail ?? "/placeholder.webp"}
                     alt="Thumbnail"
@@ -227,7 +227,7 @@ const SalesOrderForm = ({
                   />
                 </div>
                 <div className="flex-grow py-1 space-y-2">
-                  <h4 className="font-black text-gray-900 text-sm lg:text-base leading-[1.3] lg:leading-tight">
+                  <h4 className="font-black text-foreground text-sm lg:text-base leading-[1.3] lg:leading-tight">
                     {product?.title || bookDetails.title}
                   </h4>
                   <div className="flex items-center gap-2">
@@ -236,14 +236,14 @@ const SalesOrderForm = ({
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs text-gray-400 font-black uppercase tracking-widest">
+                    <span className="text-xs text-muted-foreground font-black uppercase tracking-widest">
                       পরিমাণ:
                     </span>
-                    <div className="flex items-center border border-primary/10 rounded-lg overflow-hidden bg-white shadow-sm ring-1 ring-primary/5">
+                    <div className="flex items-center border border-primary/10 rounded-lg overflow-hidden bg-background shadow-sm ring-1 ring-primary/5">
                       <button
                         type="button"
                         onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                        className="w-8 h-8 flex items-center justify-center hover:bg-emerald-50 text-gray-600 transition-colors border-r border-primary/5"
+                        className="w-8 h-8 flex items-center justify-center hover:bg-success/10 text-muted-foreground transition-colors border-r border-primary/5"
                       >
                         <FaMinus className="text-[10px]" />
                       </button>
@@ -253,7 +253,7 @@ const SalesOrderForm = ({
                       <button
                         type="button"
                         onClick={() => setQuantity((q) => q + 1)}
-                        className="w-8 h-8 flex items-center justify-center hover:bg-emerald-50 text-gray-600 transition-colors border-l border-primary/5"
+                        className="w-8 h-8 flex items-center justify-center hover:bg-success/10 text-muted-foreground transition-colors border-l border-primary/5"
                       >
                         <FaPlus className="text-[10px]" />
                       </button>
@@ -264,7 +264,7 @@ const SalesOrderForm = ({
                       &#2547;{salePrice * quantity}
                     </p>
                     {regularPrice > salePrice && (
-                      <span className="text-base text-gray-400 line-through font-bold">
+                      <span className="text-base text-muted-foreground line-through font-bold">
                         &#2547;{regularPrice * quantity}
                       </span>
                     )}
@@ -278,21 +278,21 @@ const SalesOrderForm = ({
             {/* Errors */}
             {(errorMessages.length > 0 ||
               Object.keys(methods.formState.errors).length > 0) && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-2 shadow-sm animate-shake">
+              <div className="p-4 bg-destructive/10 border border-destructive/25 rounded-2xl space-y-2 shadow-sm animate-shake">
                 {errorMessages.map((message, i) => (
                   <div
                     key={i}
-                    className="flex gap-2 items-start text-red-600 font-bold text-sm"
+                    className="flex gap-2 items-start text-destructive font-bold text-sm"
                   >
                     <MdErrorOutline className="text-lg flex-shrink-0 mt-0.5" />
                     <ErrorMessage
                       message={message}
-                      className="!mt-0 !text-red-600 font-bold text-sm"
+                      className="!mt-0 !text-destructive font-bold text-sm"
                     />
                   </div>
                 ))}
                 {Object.keys(methods.formState.errors).length > 0 && (
-                  <div className="flex gap-2 items-start text-red-600 font-bold text-sm">
+                  <div className="flex gap-2 items-start text-destructive font-bold text-sm">
                     <MdErrorOutline className="text-lg flex-shrink-0 mt-0.5" />
                     <span>সবগুলো তথ্য সঠিকভাবে পূরণ করুন।</span>
                   </div>
@@ -303,7 +303,7 @@ const SalesOrderForm = ({
             {/* Submit Button */}
             <div className="space-y-3">
               <EcButton
-                className="w-full py-6 text-xl lg:text-2xl font-black bg-primary hover:bg-primary/95 text-white rounded-full transition-all shadow-[0_15px_35px_-5px_hsla(var(--primary)/0.4)] active:scale-[0.98] font-bengali relative overflow-hidden group"
+                className="w-full py-6 text-xl lg:text-2xl font-black bg-primary hover:bg-primary/95 text-primary-foreground rounded-full transition-all shadow-[0_15px_35px_-5px_hsla(var(--primary)/0.4)] active:scale-[0.98] font-bengali relative overflow-hidden group"
                 type="submit"
                 loading={isLoading || isSuccess}
                 disabled={isLoading || isSuccess}
@@ -324,14 +324,14 @@ const SalesOrderForm = ({
                 <h4 className="font-black text-lg mb-0.5 flex items-center justify-center gap-2 text-primary">
                   <MdCall /> সরাসরি কথা বলুন
                 </h4>
-                <p className="text-sm font-bold text-gray-500 mb-4 px-4 leading-relaxed">
+                <p className="text-sm font-bold text-muted-foreground mb-4 px-4 leading-relaxed">
                   অর্ডার করতে কোনো সমস্যা হলে নিচের নাম্বারে সরাসরি কল করুন
                 </p>
                 <a
-                  href="tel:+8801339955155"
-                  className="inline-flex items-center justify-center gap-3 bg-white text-primary font-black px-8 py-3 rounded-xl border border-primary/10 shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all text-lg lg:text-xl"
+                  href="tel:+01710020030"
+                  className="inline-flex items-center justify-center gap-3 bg-background text-primary font-black px-8 py-3 rounded-xl border border-primary/10 shadow-lg hover:shadow-xl hover:bg-muted transition-all text-lg lg:text-xl"
                 >
-                  ০১৩৩৯-৯৫৫১৫৫
+                  01710020030
                 </a>
               </div>
             </div>

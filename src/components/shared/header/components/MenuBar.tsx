@@ -45,10 +45,10 @@ export default function MenuBar({
 
   const menuLinks: MenuLink[] = [
     { title: "হোম", href: "/" },
-    { title: "সকল বই", href: "/shop" },
+    { title: "সকল পণ্য", href: "/shop" },
     { title: "ব্লগ", href: "/blog" },
     { title: "প্রশ্নোত্তর", href: "/questions" },
-    { title: "ফ্রি পিডিএফ", href: "/free-pdfs" },
+    { title: "বিউটি গাইড", href: "/free-pdfs" },
     {
       title: "অর্ডার ট্র্যাক",
       href: "/track-your-order",
@@ -199,7 +199,7 @@ export default function MenuBar({
               >
                 <div
                   className={cn(
-                    "bg-white border rounded-lg shadow-2xl p-4",
+                    "bg-background border rounded-lg shadow-2xl p-4",
                     isMega
                       ? "grid grid-cols-2 md:grid-cols-4 gap-6"
                       : "flex flex-col gap-1"
@@ -220,7 +220,7 @@ export default function MenuBar({
                             {sub.title}
                           </Link>
                           {hasInnerSubs && (
-                            <div className="flex flex-col gap-1 border-l border-gray-100 pl-3 ml-1">
+                            <div className="flex flex-col gap-1 border-l border-border pl-3 ml-1">
                               {sub.subMenus?.map((inner) => (
                                 <Link
                                   key={inner.title}

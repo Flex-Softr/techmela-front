@@ -111,8 +111,8 @@ export default async function QuestionPage({ params }: TProps) {
     <>
       <JsonLd data={questionJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      <article className="bg-[#f7faf7]">
-        <section className="border-b bg-white">
+      <article className="bg-muted">
+        <section className="border-b bg-background">
           <ContainerMax className="py-4 md:py-6">
             <div className="mx-auto max-w-4xl space-y-4">
               <div className="flex items-center justify-between gap-4">
@@ -171,7 +171,7 @@ export default async function QuestionPage({ params }: TProps) {
         </section>
 
         <ContainerMax className="grid gap-6 py-6 lg:grid-cols-[1fr_280px]">
-          <Card className="min-w-0 rounded-lg border bg-white">
+          <Card className="min-w-0 rounded-lg border bg-background">
             <CardContent className="p-4 md:p-6">
               <ArticleHtml html={item.answer} />
             </CardContent>
@@ -179,7 +179,7 @@ export default async function QuestionPage({ params }: TProps) {
 
           <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start">
             {tags.length ? (
-              <Card className="rounded-lg border bg-white">
+              <Card className="rounded-lg border bg-background">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
                     ট্যাগ
@@ -207,7 +207,7 @@ export default async function QuestionPage({ params }: TProps) {
             ) : null}
 
             {item.relatedBlogs?.length ? (
-              <Card className="rounded-lg border bg-white">
+              <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
                     সম্পর্কিত প্রবন্ধ
@@ -247,7 +247,7 @@ export default async function QuestionPage({ params }: TProps) {
             ) : null}
 
             {item.relatedQuestions?.length ? (
-              <Card className="rounded-lg border bg-white">
+              <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
                     সম্পর্কিত প্রশ্ন

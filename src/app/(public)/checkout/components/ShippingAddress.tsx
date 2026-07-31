@@ -113,7 +113,7 @@ const ShippingAddress = ({
   }, [dispatch]);
 
   return (
-    <Box className="bg-white px-4 py-2 border">
+    <Box className="bg-background px-4 py-2 border">
       <BoxHeading className="flex items-center gap-2">
         <Truck className="text-lg text-primary" />
         <span className="text-lg">ডেলিভারি ঠিকানা</span>
@@ -131,7 +131,7 @@ const ShippingAddress = ({
           <CardFooter className="flex justify-between">
             <Link href="/my-account/add-shipping-address">
               <div
-                className="cursor-pointer text-blue-600"
+                className="cursor-pointer text-primary"
                 title="শিপিং ঠিকানা সম্পাদনা করুন"
               >
                 ঠিকানা সম্পাদনা করুন
@@ -147,7 +147,7 @@ const ShippingAddress = ({
               htmlFor="shipping.fullName"
               className="font-bold pl-1 mb-1.5 block"
             >
-              নাম <span className="text-red-600">*</span>
+              নাম <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.fullName"
@@ -172,7 +172,7 @@ const ShippingAddress = ({
               htmlFor="shipping.phoneNumber"
               className="font-bold pl-1 mb-1.5 block"
             >
-              মোবাইল নম্বর <span className="text-red-600">*</span>
+              মোবাইল নম্বর <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.phoneNumber"
@@ -236,7 +236,7 @@ const ShippingAddress = ({
             htmlFor="shipping.fullAddress"
             className="font-bold pl-1 mb-1.5 block"
           >
-            ঠিকানা <span className="text-red-600">*</span>
+            ঠিকানা <span className="text-destructive">*</span>
           </Label>
           <Input
             id="shipping.fullAddress"

@@ -1,7 +1,8 @@
+import { SITE } from "@/const/site.const";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://siddikiaprokashoni.com";
+  const baseUrl = SITE.baseUrl;
 
   return {
     rules: [

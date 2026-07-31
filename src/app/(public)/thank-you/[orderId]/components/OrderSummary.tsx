@@ -32,7 +32,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
 
   return (
     <Card className="border-none shadow-sm overflow-hidden">
-      <CardHeader className="bg-gray-50/50 border-b !pb-0 pt-4 px-5">
+      <CardHeader className="bg-muted/50 border-b !pb-0 pt-4 px-5">
         <CardTitle className="flex items-center gap-2 text-lg mb-0">
           <ShoppingBag className="w-5 h-5 text-primary" />
           অর্ডারের সারসংক্ষেপ
@@ -43,9 +43,9 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
           {orderInfo.products?.map((item: any) => (
             <div
               key={item._id}
-              className="flex items-start gap-4 p-5 hover:bg-gray-50/30 transition-colors"
+              className="flex items-start gap-4 p-5 hover:bg-muted/30 transition-colors"
             >
-              <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border bg-gray-100">
+              <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border bg-muted">
                 <Image
                   src={getImageSrc(item?.image?.src)}
                   alt={item?.image?.alt || item?.title}
@@ -54,16 +54,16 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
+                <h3 className="text-sm font-semibold text-foreground line-clamp-1">
                   {item.title}
                 </h3>
                 {item.variation && (
-                  <div className="mt-1 text-xs text-gray-500 flex flex-wrap gap-2">
+                  <div className="mt-1 text-xs text-muted-foreground flex flex-wrap gap-2">
                     {Object.entries(item.variation.attributes || {}).map(
                       ([key, value]) => (
                         <span
                           key={key}
-                          className="inline-flex items-center rounded-md bg-gray-50 px-1.5 py-0.5 font-medium ring-1 ring-inset ring-gray-500/10"
+                          className="inline-flex items-center rounded-md bg-muted px-1.5 py-0.5 font-medium ring-1 ring-inset ring-gray-500/10"
                         >
                           {key}: {value as string}
                         </span>
@@ -71,12 +71,12 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
                     )}
                   </div>
                 )}
-                <div className="mt-1 flex items-center text-sm text-gray-500">
+                <div className="mt-1 flex items-center text-sm text-muted-foreground">
                   পরিমাণ: {item.quantity} × &#2547;{item.unitPrice}
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-semibold text-gray-900 text-sm">
+                <p className="font-semibold text-foreground text-sm">
                   &#2547;{item.total}
                 </p>
               </div>
@@ -84,29 +84,29 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
           ))}
         </div>
 
-        <div className="bg-gray-50/30 p-5 space-y-2">
-          <div className="flex justify-between text-sm text-gray-600">
+        <div className="bg-muted/30 p-5 space-y-2">
+          <div className="flex justify-between text-sm text-muted-foreground">
             <span>মোট মূল্য</span>
             <span>&#2547;{orderInfo.subtotal}</span>
           </div>
-          <div className="flex justify-between text-sm text-gray-600">
+          <div className="flex justify-between text-sm text-muted-foreground">
             <span>ডেলিভারি চার্জ ({orderInfo.shippingCharge?.name})</span>
             <span>&#2547;{totalShippingCost}</span>
           </div>
           {orderInfo.discount > 0 && (
-            <div className="flex justify-between text-sm text-green-600">
+            <div className="flex justify-between text-sm text-success">
               <span>ডিসকাউন্ট</span>
               <span>-&#2547;{orderInfo.discount}</span>
             </div>
           )}
           {orderInfo?.couponDiscount > 0 && (
-            <div className="flex justify-between text-sm text-green-600">
+            <div className="flex justify-between text-sm text-success">
               <span>কুপন ডিসকাউন্ট</span>
               <span>-&#2547;{orderInfo?.couponDiscount}</span>
             </div>
           )}
           <Separator className="my-2" />
-          <div className="flex justify-between text-base font-bold text-gray-900">
+          <div className="flex justify-between text-base font-bold text-foreground">
             <span>সর্বমোট মূল্য</span>
             <span>&#2547;{orderInfo.total}</span>
           </div>

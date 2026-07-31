@@ -191,7 +191,7 @@ const useSalesOrderSubmit = ({
 
         toast({
           title: "Thank you! Your order was successfully placed",
-          className: "bg-success text-white",
+          className: "bg-success text-primary-foreground",
         });
 
         dispatch(resetCoupon());

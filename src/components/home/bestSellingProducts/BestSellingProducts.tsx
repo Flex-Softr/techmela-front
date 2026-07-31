@@ -20,26 +20,23 @@ const BestSellingProducts = async ({
     <>
       {bestSellingProducts.length > 0 && (
         <section className="pt-10 md:pt-12">
-          <div className="bg-primary/5 py-2 md:py-3 px-4 mb-4 text-center border border-primary/10 shadow-sm">
+          <div className="mb-6 px-4 text-center md:mb-8">
             <SectionTitle
-              title="বেস্ট সেলিং বইসমূহ"
-              className="text-primary mb-2"
+              title="বেস্ট সেলিং পণ্যসমূহ"
+              className="text-primary"
             />
-            <SectionSubtitle
-              text="আমাদের সবথেকে জনপ্রিয় বইগুলো দেখে নিন"
-              className="text-primary/90 max-w-2xl mx-auto"
-            />
+            <SectionSubtitle text="আমাদের সবথেকে জনপ্রিয় পণ্যগুলো দেখে নিন" />
           </div>
 
           <ContainerMax>
             <div className="mt-5">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-5 justify-between mt-5">
-                {bestSellingProducts?.slice(0, 4)?.map((product) => (
+              <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 lg:gap-3">
+                {bestSellingProducts?.slice(0, 5)?.map((product) => (
                   <ProductCard product={product} key={product._id} />
                 ))}
               </div>
             </div>
-            {bestSellingProducts.length > 4 && (
+            {bestSellingProducts.length > 5 && (
               <div className="flex justify-center mt-5">
                 <Button asChild size={"sm"} className="px-6">
                   <Link href={"/best-selling-products"}>সবগুলো দেখুন</Link>

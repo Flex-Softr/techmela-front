@@ -1,4 +1,5 @@
 import ProductCard from "@/components/productCards/ProductCard";
+import { cn } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
 import NoProductsFound from "./NoProductsFound";
 
@@ -14,10 +15,13 @@ const ProductGrid = ({ products, gridClassName }: ProductGridProps) => {
 
   return (
     <div
-      className={`grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-2 ${gridClassName || "lg:grid-cols-3"} gap-2 md:gap-5 justify-between mt-5`}
+      className={cn(
+        "mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 lg:gap-3",
+        gridClassName
+      )}
     >
       {products.map((product, index) => (
-        <ProductCard key={product._id} product={product} priority={index < 4} />
+        <ProductCard key={product._id} product={product} priority={index < 5} />
       ))}
     </div>
   );

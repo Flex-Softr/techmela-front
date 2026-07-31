@@ -56,8 +56,8 @@ export function BlogQnaListShell({
   const baseHref = type === "blog" ? "/blog" : "/questions";
 
   return (
-    <div className="bg-[#f7faf7]">
-      <section className="border-b bg-white">
+    <div className="bg-muted">
+      <section className="border-b bg-background">
         <ContainerMax className="py-2">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary shrink-0">
             {type === "blog" ? (
@@ -77,7 +77,7 @@ export function BlogQnaListShell({
         <aside className="space-y-3 lg:sticky lg:top-4 lg:self-start">
           <form
             action={baseHref}
-            className="rounded-lg border bg-white p-3 shadow-sm"
+            className="rounded-lg border bg-background p-3 shadow-sm"
           >
             <label className="relative block">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -85,7 +85,7 @@ export function BlogQnaListShell({
                 name="search"
                 defaultValue={search}
                 placeholder="খুঁজুন..."
-                className="h-10 w-full rounded-md border bg-white pl-9 pr-3 text-sm outline-none focus:border-primary"
+                className="h-10 w-full rounded-md border bg-background pl-9 pr-3 text-sm outline-none focus:border-primary"
               />
             </label>
             {selectedCategory && (
@@ -149,7 +149,7 @@ function FilterBlock({
   children: ReactNode;
 }) {
   return (
-    <div className="rounded-lg border bg-white p-3 shadow-sm">
+    <div className="rounded-lg border bg-background p-3 shadow-sm">
       <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
         {title}
       </h2>
@@ -187,7 +187,7 @@ function FilterLink({
 
 export function BlogCard({ post }: { post: TBlogPost }) {
   return (
-    <Card className="overflow-hidden rounded-lg border bg-white shadow-sm transition-shadow hover:shadow-md">
+    <Card className="overflow-hidden rounded-lg border bg-background shadow-sm transition-shadow hover:shadow-md">
       <Link
         href={`/blog/${
           typeof post.category === "object" ? post.category.slug : "general"
@@ -238,7 +238,7 @@ export function BlogCard({ post }: { post: TBlogPost }) {
 
 export function QuestionCard({ item }: { item: TQnA }) {
   return (
-    <Card className="rounded-lg border bg-white shadow-sm transition-shadow hover:shadow-md">
+    <Card className="rounded-lg border bg-background shadow-sm transition-shadow hover:shadow-md">
       <Link
         href={`/questions/${
           typeof item.topic === "object" ? item.topic.slug : "general"
@@ -276,7 +276,7 @@ export function QuestionCard({ item }: { item: TQnA }) {
 
 export function EmptyState({ label }: { label: string }) {
   return (
-    <div className="rounded-lg border bg-white p-10 text-center text-muted-foreground">
+    <div className="rounded-lg border bg-background p-10 text-center text-muted-foreground">
       {label}
     </div>
   );
@@ -308,7 +308,7 @@ export function Pagination({
     <div className="mt-6 flex items-center justify-end gap-2">
       {page > 1 && (
         <Link
-          className="rounded-md border bg-white px-3 py-2 text-sm font-semibold text-primary"
+          className="rounded-md border bg-background px-3 py-2 text-sm font-semibold text-primary"
           href={makeHref(page - 1)}
         >
           পূর্ববর্তী
@@ -319,7 +319,7 @@ export function Pagination({
       </span>
       {page < meta.totalPage && (
         <Link
-          className="rounded-md border bg-white px-3 py-2 text-sm font-semibold text-primary"
+          className="rounded-md border bg-background px-3 py-2 text-sm font-semibold text-primary"
           href={makeHref(page + 1)}
         >
           পরবর্তী
@@ -332,7 +332,7 @@ export function Pagination({
 export function ArticleHtml({ html }: { html: string }) {
   return (
     <div
-      className="prose prose-green max-w-none prose-headings:text-primary prose-a:text-primary prose-img:rounded-lg"
+      className="prose prose-neutral max-w-none prose-headings:text-primary prose-a:text-primary prose-img:rounded-lg"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
@@ -348,7 +348,7 @@ export function RelatedInlineLink({
   return (
     <Link
       href={href}
-      className="block rounded-md border bg-white p-3 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
+      className="block rounded-md border bg-background p-3 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
     >
       {title}
     </Link>

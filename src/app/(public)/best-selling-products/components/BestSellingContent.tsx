@@ -30,18 +30,18 @@ const BestSellingContent = () => {
 
   return (
     <>
-      <section className="relative py-4 md:py-8 bg-gray-50/30">
+      <section className="relative py-4 md:py-8 bg-muted/30">
         <ContainerMax>
           {isLoading || isFetching ? (
             <ProductGridSkeleton count={limit} />
           ) : products.length > 0 ? (
             <>
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-5 justify-between">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 lg:gap-3">
                 {products.map((product: TProduct, index: number) => (
                   <ProductCard
                     key={product._id}
                     product={product}
-                    priority={index < 4}
+                    priority={index < 5}
                   />
                 ))}
               </div>

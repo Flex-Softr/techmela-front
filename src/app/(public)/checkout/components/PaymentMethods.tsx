@@ -63,7 +63,7 @@ const SinglePaymentInput = ({
     <div className="space-y-1">
       <Label className="text-sm font-semibold">
         {input.name}{" "}
-        {input.is_required && <span className="text-red-600">*</span>}
+        {input.is_required && <span className="text-destructive">*</span>}
       </Label>
       {input.type === "select" ? (
         <select
@@ -74,7 +74,7 @@ const SinglePaymentInput = ({
             });
             clearErrors(`paymentDetails.${input.name}`);
           }}
-          className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary text-sm"
+          className="w-full h-10 px-3 border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary text-sm"
         >
           <option value="">Select {input.name}</option>
           {input.enums?.split(",").map((opt) => (
@@ -182,7 +182,7 @@ const PaymentMethods = ({
                 className={`flex items-center p-3 rounded-md border transition-all cursor-pointer ${
                   paymentMethodId === method._id
                     ? "border-primary bg-primary/5"
-                    : "border-gray-200 hover:border-primary/30"
+                    : "border-border hover:border-primary/30"
                 } ${method?.logo?.src && "py-1 pr-1"}`}
                 onClick={() => {
                   setValue("paymentMethod", method._id, {
@@ -243,17 +243,17 @@ const PaymentMethods = ({
                 selectedMethod.merchantACInfo ||
                 (selectedMethod.required_inputs &&
                   selectedMethod.required_inputs.length > 0)) && (
-                <div className="p-4 border rounded-md bg-gray-50/50 space-y-4">
+                <div className="p-4 border rounded-md bg-muted/50 space-y-4">
                   {selectedMethod.merchantACInfo && (
-                    <div className="text-sm bg-white p-2 rounded border border-gray-100 mb-2">
+                    <div className="text-sm bg-background p-2 rounded border border-border mb-2">
                       <p>
-                        <span className="font-semibold text-gray-600">
+                        <span className="font-semibold text-muted-foreground">
                           Account Type:
                         </span>{" "}
                         {selectedMethod.merchantACInfo.accountType}
                       </p>
                       <p>
-                        <span className="font-semibold text-gray-600">
+                        <span className="font-semibold text-muted-foreground">
                           Account No:
                         </span>{" "}
                         {selectedMethod.merchantACInfo.accountNo}
@@ -262,7 +262,7 @@ const PaymentMethods = ({
                   )}
 
                   {selectedMethod.instructions && (
-                    <p className="text-sm text-gray-600 italic">
+                    <p className="text-sm text-muted-foreground italic">
                       Note: {selectedMethod.instructions}
                     </p>
                   )}

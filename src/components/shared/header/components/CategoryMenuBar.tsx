@@ -49,10 +49,10 @@ export default function CategoryMenuBar({
 
   const menuLinks = [
     { title: "হোম", href: "/" },
-    { title: "সকল বই", href: "/shop" },
+    { title: "সকল পণ্য", href: "/shop" },
     { title: "ব্লগ", href: "/blog" },
     { title: "প্রশ্নোত্তর", href: "/questions" },
-    { title: "ফ্রি পিডিএফ", href: "/free-pdfs" },
+    { title: "বিউটি গাইড", href: "/free-pdfs" },
   ];
 
   return (
@@ -102,7 +102,7 @@ export default function CategoryMenuBar({
 
               {hasSubs && (
                 <div className="absolute left-0 top-full pt-0 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200 z-[100]">
-                  <div className="bg-white border rounded-lg shadow-2xl p-2 min-w-[220px] flex flex-col gap-1 mt-[1px]">
+                  <div className="bg-background border rounded-lg shadow-2xl p-2 min-w-[220px] flex flex-col gap-1 mt-[1px]">
                     {cat.subcategories?.map((sub) => {
                       const subHref = `/category/${sub.slug}`;
                       const subActive = isActive(subHref);
@@ -112,7 +112,7 @@ export default function CategoryMenuBar({
                           key={sub.slug}
                           href={subHref}
                           className={cn(
-                            "block px-3 py-2 text-[13px] text-gray-700 rounded-md hover:bg-primary/5 hover:text-primary transition-colors whitespace-nowrap",
+                            "block px-3 py-2 text-[13px] text-foreground rounded-md hover:bg-primary/5 hover:text-primary transition-colors whitespace-nowrap",
                             subActive && "bg-primary/5 text-primary font-bold"
                           )}
                           onClick={onMenuItemClick}

@@ -40,7 +40,7 @@ const OrderNow = ({
   // No local click handler needed, form submit handles it.
 
   return (
-    <Box className="bg-white px-4 py-2 border">
+    <Box className="bg-background px-4 py-2 border">
       <BoxHeading className="flex items-center gap-2 mb-1">
         <ShoppingBag className="text-lg text-primary" />
         <span className="text-lg">অর্ডারের সারসংক্ষেপ</span>
@@ -68,7 +68,7 @@ const OrderNow = ({
           {errorMessages.map((message, index) => (
             <div
               key={index}
-              className="flex gap-1 items-center text-red-600 text-sm"
+              className="flex gap-1 items-center text-destructive text-sm"
             >
               <MdErrorOutline />
               <ErrorMessage message={message} className="!mt-0" />
@@ -79,7 +79,7 @@ const OrderNow = ({
 
       {/* Validation Error Message */}
       {Object.keys(errors).length > 0 && (
-        <div className="py-2 px-3 mb-2 bg-red-50 border border-red-200 rounded text-red-600 font-medium text-sm flex items-center gap-2">
+        <div className="py-2 px-3 mb-2 bg-destructive/10 border border-destructive/25 rounded text-destructive font-medium text-sm flex items-center gap-2">
           <MdErrorOutline className="text-lg flex-shrink-0" />
           <span>প্রয়োজনীয় তথ্যগুলো সঠিকভাবে পূরণ করুন।</span>
         </div>
@@ -87,7 +87,7 @@ const OrderNow = ({
 
       {/* Order Now Button with ultimateTotalCost */}
       <EcButton
-        className="w-full font-bold text-white mt-2 flex items-center gap-2 lg:gap-4"
+        className="w-full font-bold text-primary-foreground mt-2 flex items-center gap-2 lg:gap-4"
         type="submit"
         loading={isLoading || isSuccess}
         disabled={isLoading || isSuccess}

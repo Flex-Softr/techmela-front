@@ -132,10 +132,10 @@
 //     <div className="flex justify-center items-center my-10 mx-2 md:my-20">
 //       <div className="text-center w-full">
 //         <div className="mb-8 w-full md:w-2/3 mx-auto">
-//           <h1 className=" xms:text-lg xls:text-lg  sm:text-xl md:text-4xl font-bold text-gray-800 mb-4">
+//           <h1 className=" xms:text-lg xls:text-lg  sm:text-xl md:text-4xl font-bold text-foreground mb-4">
 //             আপনার পন্য নির্বাচন করুন
 //           </h1>
-//           <p className="text-gray-700 xms:text-xs xls:text-xs sm:text-sm md:text-lg mx-5">
+//           <p className="text-foreground xms:text-xs xls:text-xs sm:text-sm md:text-lg mx-5">
 //             পন্যের গায়ে থাকা ওয়ারেন্টি কোড দিয়ে পন্য বাছাই করুন
 //           </p>
 //         </div>
@@ -144,7 +144,7 @@
 //           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mx-4">
 //             <div>
 //               <label
-//                 className="block text-gray-700 text-left text-sm font-bold mb-2"
+//                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="warrantyCode"
 //               >
 //                 পন্যের ওয়ারেন্টি কোড -
@@ -153,7 +153,7 @@
 //                 <input
 //                   value={newWarrantyCode}
 //                   onChange={handleInputChange}
-//                   className="appearance-none outline-none border border-gray-300 rounded-l-md py-2  px-3 focus:ring-0 w-full
+//                   className="appearance-none outline-none border border-border rounded-l-md py-2  px-3 focus:ring-0 w-full
 //                     sm:h-5 md:h-12"
 //                   id="warrantyCode"
 //                   type="text"
@@ -161,7 +161,7 @@
 //                   style={{ fontSize: "0.9rem" }}
 //                 />
 //                 <button
-//                   className="bg-blue-500 text-white rounded-r-md py-2 px-4 hover:bg-blue-600"
+//                   className="bg-primary/100 text-primary-foreground rounded-r-md py-2 px-4 hover:bg-primary"
 //                   onClick={handleAddCode}
 //                   type="button"
 //                 >
@@ -172,20 +172,20 @@
 //                 {warrantyCodes.map((code, index) => (
 //                   <div
 //                     key={index}
-//                     className="bg-blue-50 rounded-full flex items-center py-1 px-3"
+//                     className="bg-primary/10 rounded-full flex items-center py-1 px-3"
 //                   >
 //                     <span className="mr-2 xms:text-xs xls:text-xs sm:text-sm md:text-sm">
 //                       {code}
 //                     </span>
 //                     <button
-//                       className="text-red-500"
+//                       className="text-destructive"
 //                       onClick={() => handleRemoveCode(index)}
 //                       aria-label={`Remove ${code}`}
 //                     >
 //                       &#10005;
 //                     </button>
 //                     {notFoundProducts.includes(code) && (
-//                       <p className="text-red-500 xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
+//                       <p className="text-destructive xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
 //                         এই ওয়ারেন্টি কোডটি সঠিক নয়
 //                       </p>
 //                     )}
@@ -195,7 +195,7 @@
 //             </div>
 //             <div>
 //               <label
-//                 className="block text-gray-700 text-left text-sm font-bold mb-2"
+//                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="orderedPhoneNumber"
 //               >
 //                 অডারকৃত মোবাইল নম্বর-
@@ -203,14 +203,14 @@
 //               <input
 //                 value={orderedPhoneNumber}
 //                 onChange={handlePhoneNumberChange}
-//                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline sm:h-5 md:h-12"
+//                 className="shadow appearance-none border rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline sm:h-5 md:h-12"
 //                 id="orderedPhoneNumber"
 //                 type="text"
 //                 placeholder="অর্ডারকৃত ফোন নম্বরটি লিখুন"
 //                 style={{ fontSize: "0.9rem" }}
 //               />
 //               {phoneNumberError && (
-//                 <p className="text-red-500 text-sm">{phoneNumberError}</p>
+//                 <p className="text-destructive text-sm">{phoneNumberError}</p>
 //               )}
 //             </div>
 //           </div>
@@ -218,7 +218,7 @@
 //           <div className="flex items-center justify-center mt-5">
 //             <button
 //               type="submit"
-//               className="bg-blue-500 xls:text-xs sm:text-sm md:text-lg text-white rounded-md py-2 px-2 md:px-4 hover:bg-blue-600"
+//               className="bg-primary/100 xls:text-xs sm:text-sm md:text-lg text-primary-foreground rounded-md py-2 px-2 md:px-4 hover:bg-primary"
 //             >
 //               অনুসন্ধান করুন
 //             </button>
@@ -229,7 +229,7 @@
 
 //         <div className="text-center w-full mt-2">
 //           {notFoundProducts?.length > 0 && (
-//             <p className="text-red-500 xms:text-xs xls:text-xs sm:text-sm md:text-sm mb-4">
+//             <p className="text-destructive xms:text-xs xls:text-xs sm:text-sm md:text-sm mb-4">
 //               এই ওয়ারেন্টি কোডগুলি সঠিক নয়:{" "}
 //               {notFoundProducts.map((code, index) => (
 //                 <React.Fragment key={index}>
@@ -249,7 +249,7 @@
 
 //         <div className="my-10">
 //           {!notFoundProducts.length && error && (
-//             <p className="text-red-500 text-[18px] mx-3">{error}</p>
+//             <p className="text-destructive text-[18px] mx-3">{error}</p>
 //           )}
 
 //           {notFoundProducts.length > 0 && (
@@ -485,10 +485,10 @@
 //     <div className="flex justify-center items-center my-10 mx-2 md:my-20">
 //       <div className="text-center w-full">
 //         <div className="mb-8 w-full md:w-2/3 mx-auto">
-//           <h1 className="xms:text-lg xls:text-lg sm:text-xl md:text-4xl font-bold text-gray-800 mb-4">
+//           <h1 className="xms:text-lg xls:text-lg sm:text-xl md:text-4xl font-bold text-foreground mb-4">
 //             আপনার পন্য নির্বাচন করুন
 //           </h1>
-//           <p className="text-gray-700 xms:text-xs xls:text-xs sm:text-sm md:text-lg mx-5">
+//           <p className="text-foreground xms:text-xs xls:text-xs sm:text-sm md:text-lg mx-5">
 //             পন্যের গায়ে থাকা ওয়ারেন্টি কোড দিয়ে পন্য বাছাই করুন
 //           </p>
 //         </div>
@@ -497,7 +497,7 @@
 //           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mx-4">
 //             <div>
 //               <label
-//                 className="block text-gray-700 text-left text-sm font-bold mb-2"
+//                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="warrantyCode"
 //               >
 //                 পন্যের ওয়ারেন্টি কোড -
@@ -506,14 +506,14 @@
 //                 <input
 //                   value={newWarrantyCode}
 //                   onChange={handleInputChange}
-//                   className="appearance-none outline-none border border-gray-300 rounded-l-md py-2 px-3 focus:ring-0 w-full sm:h-5 md:h-12"
+//                   className="appearance-none outline-none border border-border rounded-l-md py-2 px-3 focus:ring-0 w-full sm:h-5 md:h-12"
 //                   id="warrantyCode"
 //                   type="text"
 //                   placeholder="প্যাকেটের গায়ে থাকা ওয়ারেন্টি কোডটি লিখুন"
 //                   style={{ fontSize: "0.9rem" }}
 //                 />
 //                 <button
-//                   className="bg-blue-500 text-white rounded-r-md py-2 px-4 hover:bg-blue-600"
+//                   className="bg-primary/100 text-primary-foreground rounded-r-md py-2 px-4 hover:bg-primary"
 //                   onClick={handleAddCode}
 //                   type="button"
 //                 >
@@ -524,20 +524,20 @@
 //                 {warrantyCodes.map((code, index) => (
 //                   <div
 //                     key={index}
-//                     className="bg-blue-50 rounded-full flex items-center py-1 px-3"
+//                     className="bg-primary/10 rounded-full flex items-center py-1 px-3"
 //                   >
 //                     <span className="mr-2 xms:text-xs xls:text-xs sm:text-sm md:text-sm">
 //                       {code}
 //                     </span>
 //                     <button
-//                       className="text-red-500"
+//                       className="text-destructive"
 //                       onClick={() => handleRemoveCode(index)}
 //                       aria-label={`Remove ${code}`}
 //                     >
 //                       &#10005;
 //                     </button>
 //                     {notFoundProducts.includes(code) && (
-//                       <p className="text-red-500 xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
+//                       <p className="text-destructive xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
 //                         এই ওয়ারেন্টি কোডটি সঠিক নয়
 //                       </p>
 //                     )}
@@ -547,7 +547,7 @@
 //             </div>
 //             <div>
 //               <label
-//                 className="block text-gray-700 text-left text-sm font-bold mb-2"
+//                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="orderedPhoneNumber"
 //               >
 //                 অডারকৃত মোবাইল নম্বর-
@@ -555,14 +555,14 @@
 //               <input
 //                 value={orderedPhoneNumber}
 //                 onChange={handlePhoneNumberChange}
-//                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline sm:h-5 md:h-12"
+//                 className="shadow appearance-none border rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline sm:h-5 md:h-12"
 //                 id="orderedPhoneNumber"
 //                 type="text"
 //                 placeholder="অর্ডারকৃত ফোন নম্বরটি লিখুন"
 //                 style={{ fontSize: "0.9rem" }}
 //               />
 //               {phoneNumberError && (
-//                 <p className="text-red-500 text-sm">{phoneNumberError}</p>
+//                 <p className="text-destructive text-sm">{phoneNumberError}</p>
 //               )}
 //             </div>
 //           </div>
@@ -570,7 +570,7 @@
 //           <div className="flex items-center justify-center mt-5">
 //             <button
 //               type="submit"
-//               className="bg-blue-500 xls:text-xs sm:text-sm md:text-lg text-white rounded-md py-2 px-2 md:px-4 hover:bg-blue-600"
+//               className="bg-primary/100 xls:text-xs sm:text-sm md:text-lg text-primary-foreground rounded-md py-2 px-2 md:px-4 hover:bg-primary"
 //             >
 //               অনুসন্ধান করুন
 //             </button>
@@ -581,11 +581,11 @@
 
 //         <div className="text-center w-full mt-2">
 //           {notFoundProducts?.length > 0 && (
-//             <p className="text-red-500">{` কোডগুলি সঠিক নয়: ${notFoundProducts.join(
+//             <p className="text-destructive">{` কোডগুলি সঠিক নয়: ${notFoundProducts.join(
 //               ", "
 //             )}`}</p>
 //           )}
-//           {error && <p className="text-red-500">{error}</p>}
+//           {error && <p className="text-destructive">{error}</p>}
 //         </div>
 
 //         {searched && !isLoading && !error && (
@@ -633,7 +633,7 @@
 //   const router = useRouter();
 
 //   if (error) {
-//     return <div className="text-center text-red-600 font-bold">{error}</div>;
+//     return <div className="text-center text-destructive font-bold">{error}</div>;
 //   }
 //   console.log("validCodes", validCodes);
 //   // Split products based on warranty status
@@ -653,12 +653,12 @@
 //       }
 
 //       const warrantyStatusClass =
-//         remainingDays < 0 ? "text-red-500" : "text-green-500";
+//         remainingDays < 0 ? "text-destructive" : "text-success";
 
 //       const productRow = (
 //         <TableRow
 //           key={`${orderIndex}-${index}`}
-//           className={orderIndex % 2 === 0 ? "bg-gray-100" : "bg-gray-50"}
+//           className={orderIndex % 2 === 0 ? "bg-muted" : "bg-muted"}
 //         >
 //           <TableCell className="px-2 md:px-4 py-2">
 //             <div className="w-12 h-12 md:w-16 md:h-16 relative">
@@ -729,7 +729,7 @@
 //   };
 
 //   const renderTableHeader = () => (
-//     <TableRow className="bg-gray-200 font-bold text-xs md:text-base">
+//     <TableRow className="bg-muted font-bold text-xs md:text-base">
 //       <TableCell className="px-2 md:px-4 py-2">Image</TableCell>
 //       <TableCell className="px-2 md:px-4 py-2">Product Name</TableCell>
 
@@ -742,39 +742,39 @@
 //     <div className="overflow-x-auto">
 //       {productsWithWarranty.length > 0 ? (
 //         <>
-//           <Table className="w-[90%] sm:w-[85%] mx-auto border-collapse border border-gray-300 mb-8">
+//           <Table className="w-[90%] sm:w-[85%] mx-auto border-collapse border border-border mb-8">
 //             <thead>{renderTableHeader()}</thead>
 //             <TableBody>{productsWithWarranty}</TableBody>
 //           </Table>
 //           <div className="w-[90%] sm:w-[85%] mx-auto">
 //             <button
 //               onClick={handleClaimAllClick}
-//               className="w-full border mt-2 border-blue-500 p-2 rounded-sm hover:bg-blue-500 text-black hover:text-white text-xs md:text-base"
+//               className="w-full border mt-2 border-blue-500 p-2 rounded-sm hover:bg-primary/100 text-foreground hover:text-primary-foreground text-xs md:text-base"
 //             >
 //               Claim All
 //             </button>
 //           </div>
 //         </>
 //       ) : (
-//         <p className="text-center text-red-600">
+//         <p className="text-center text-destructive">
 //           No products with warranty available.
 //         </p>
 //       )}
 
 //       {productsWithoutWarranty.length > 0 ? (
 //         <>
-//           <Table className="w-[90%] sm:w-[85%] mx-auto border-collapse border border-gray-300 mt-8">
+//           <Table className="w-[90%] sm:w-[85%] mx-auto border-collapse border border-border mt-8">
 //             <thead>{renderTableHeader()}</thead>
 //             <TableBody>{productsWithoutWarranty}</TableBody>
 //           </Table>
 //           <div className="w-[90%] sm:w-[85%] mx-auto">
-//             <p className="w-full p-2 font-bold text-sm md:text-xl text-red-600 text-center">
+//             <p className="w-full p-2 font-bold text-sm md:text-xl text-destructive text-center">
 //               উক্ত পন্যের ওয়ারেন্টি নেই
 //             </p>
 //           </div>
 //         </>
 //       ) : (
-//         <p className="text-center text-red-600">
+//         <p className="text-center text-destructive">
 //           No products without warranty available.
 //         </p>
 //       )}

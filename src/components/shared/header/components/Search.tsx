@@ -35,7 +35,10 @@ const Search = () => {
 
   const [showSuggestions, setShowSuggestions] = useState(true);
 
-  const placeholders = ["পছন্দের বই খুঁজুন...", "বইয়ের নাম দিয়ে সার্চ করুন..."];
+  const placeholders = [
+    "পছন্দের পণ্য খুঁজুন...",
+    "পণ্যয়ের নাম দিয়ে সার্চ করুন...",
+  ];
 
   const typingPlaceholder = useTypingPlaceholder(placeholders);
 
@@ -85,8 +88,8 @@ const Search = () => {
           value={searchValue}
           onChange={handleInputChange}
           placeholder={typingPlaceholder}
-          className="w-full h-[44px] px-4 text-[13px] outline-none border border-primary bg-white rounded-full pr-12 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300"
-          aria-label="বই সার্চ করুন"
+          className="w-full h-[44px] px-4 text-[13px] outline-none border border-primary bg-background rounded-full pr-12 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300"
+          aria-label="পণ্য সার্চ করুন"
         />
 
         {searchValue && (
@@ -103,7 +106,7 @@ const Search = () => {
         <Button
           type="submit"
           variant="ghost"
-          className="absolute right-0.5 top-1/2 -translate-y-1/2 h-[34px] w-[34px] rounded-full flex items-center justify-center bg-transparent text-primary hover:text-primary hover:bg-gray-50 transition-all duration-300 p-0"
+          className="absolute right-0.5 top-1/2 -translate-y-1/2 h-[34px] w-[34px] rounded-full flex items-center justify-center bg-transparent text-primary hover:text-primary hover:bg-muted transition-all duration-300 p-0"
           aria-label="Submit search"
         >
           <FaSearch className="text-[14px]" />
@@ -111,7 +114,7 @@ const Search = () => {
       </div>
 
       {showSuggestions && debouncedSearchValue.trim() !== "" && (
-        <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-[100] max-h-[400px] overflow-y-auto">
+        <div className="absolute top-full mt-2 w-full bg-background border border-border rounded-lg shadow-lg z-[100] max-h-[400px] overflow-y-auto">
           {isLoading && <p className="p-3 text-sm">Loading...</p>}
 
           {!isLoading && !isError && products.length > 0
@@ -129,7 +132,7 @@ const Search = () => {
                 return (
                   <div
                     key={product._id}
-                    className="flex items-center gap-2 p-2 border-b last:border-0 cursor-pointer hover:bg-gray-50"
+                    className="flex items-center gap-2 p-2 border-b last:border-0 cursor-pointer hover:bg-muted"
                     onClick={() => handleProductClick(product.slug)}
                   >
                     <Image
@@ -171,7 +174,7 @@ const Search = () => {
                       </div>
 
                       {isVariable && (
-                        <p className="text-[11px] text-blue-600">
+                        <p className="text-[11px] text-primary">
                           Multiple options
                         </p>
                       )}

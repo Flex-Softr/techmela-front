@@ -36,7 +36,7 @@ const CheckoutCartItem = ({
       if (res?.success) {
         toast({
           title: "Cart updated successfully",
-          className: "bg-success text-white",
+          className: "bg-success text-primary-foreground",
         });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,7 +65,7 @@ const CheckoutCartItem = ({
           alt={cartItem?.product?.image?.alt || ""}
           height={100}
           width={100}
-          className="w-16 h-16 object-cover rounded-md border border-gray-100"
+          className="w-16 h-16 object-cover rounded-md border border-border"
         />
       </Link>
 
@@ -90,12 +90,12 @@ const CheckoutCartItem = ({
             </div>
           ) : (
             <div className="mt-2">
-              <div className="flex items-center border rounded-md w-max bg-white">
+              <div className="flex items-center border rounded-md w-max bg-background">
                 <button
                   type="button"
                   onClick={() => handleUpdateQuantity(quantity - 1)}
                   disabled={quantity <= 1 || isLoading}
-                  className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+                  className="px-2 py-1 hover:bg-muted text-sm disabled:opacity-50 font-bold"
                 >
                   <Minus className="w-4 h-4" />
                 </button>
@@ -106,7 +106,7 @@ const CheckoutCartItem = ({
                   type="button"
                   onClick={() => handleUpdateQuantity(quantity + 1)}
                   disabled={isLoading}
-                  className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+                  className="px-2 py-1 hover:bg-muted text-sm disabled:opacity-50 font-bold"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -117,12 +117,12 @@ const CheckoutCartItem = ({
 
         {/* Bottom Quantity Control (for Variable Products only) */}
         {cartItem?.variation && (
-          <div className="flex items-center border rounded-md w-max bg-white">
+          <div className="flex items-center border rounded-md w-max bg-background">
             <button
               type="button"
               onClick={() => handleUpdateQuantity(quantity - 1)}
               disabled={quantity <= 1 || isLoading}
-              className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+              className="px-2 py-1 hover:bg-muted text-sm disabled:opacity-50 font-bold"
             >
               <Minus className="w-4 h-4" />
             </button>
@@ -133,7 +133,7 @@ const CheckoutCartItem = ({
               type="button"
               onClick={() => handleUpdateQuantity(quantity + 1)}
               disabled={isLoading}
-              className="px-2 py-1 hover:bg-gray-100 text-sm disabled:opacity-50 font-bold"
+              className="px-2 py-1 hover:bg-muted text-sm disabled:opacity-50 font-bold"
             >
               <Plus className="w-4 h-4" />
             </button>
@@ -144,7 +144,7 @@ const CheckoutCartItem = ({
       {/* Right Column: Price & Remove */}
       <div className="flex flex-col justify-between items-end h-full gap-2 min-w-[100px]">
         <div className="text-right">
-          <div className="text-base font-bold whitespace-nowrap text-gray-900">
+          <div className="text-base font-bold whitespace-nowrap text-foreground">
             &#2547;{price * quantity}
           </div>
           <div className="text-[11px] text-muted-foreground whitespace-nowrap mt-0.5 font-medium">
@@ -154,16 +154,16 @@ const CheckoutCartItem = ({
                 &#2547;{cartItem.price.regularPrice}
               </span>
             )}
-            <span className="text-gray-600">&#2547;{price}</span>
+            <span className="text-muted-foreground">&#2547;{price}</span>
           </div>
         </div>
         <button
           type="button"
           onClick={() => handleRemoveFromCart(cartItem?._id)}
-          className="text-gray-400 hover:text-red-500 transition-colors"
+          className="text-muted-foreground hover:text-destructive transition-colors"
           title="Remove item"
         >
-          <IoCloseSharp className="w-5 h-5 text-red-500" />
+          <IoCloseSharp className="w-5 h-5 text-destructive" />
         </button>
       </div>
     </div>

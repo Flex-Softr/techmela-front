@@ -15,7 +15,7 @@ const ProductsPromotion = () => {
         <div className="md:col-span-8 sm:col-span-12  ">
           <Card
             shadow={false}
-            className="w-full  h-56 rounded-none justify-between bg-gray-200  max-w-[52rem] flex-row"
+            className="w-full  h-56 rounded-none justify-between bg-muted  max-w-[52rem] flex-row"
             placeholder={undefined}
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
@@ -63,7 +63,7 @@ const ProductsPromotion = () => {
             <CardHeader
               shadow={false}
               floated={false}
-              className="m-0 w-2/5 shrink-0 bg-gray-200"
+              className="m-0 w-2/5 shrink-0 bg-muted"
               placeholder={undefined}
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
@@ -83,7 +83,7 @@ const ProductsPromotion = () => {
         <div className="md:col-span-4 sm:col-span-12 md:me-7 ">
           <Card
             shadow={false}
-            className="w-full  h-56 rounded-none bg-gray-200  max-w-[38rem] flex-row"
+            className="w-full  h-56 rounded-none bg-muted  max-w-[38rem] flex-row"
             placeholder={undefined}
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
@@ -131,7 +131,7 @@ const ProductsPromotion = () => {
             <CardHeader
               shadow={false}
               floated={false}
-              className="m-0 w-2/5 shrink-0 bg-gray-200"
+              className="m-0 w-2/5 shrink-0 bg-muted"
               placeholder={undefined}
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
@@ -154,7 +154,7 @@ const ProductsPromotion = () => {
         <div className="md:col-span-4 sm:col-span-12  ">
           <Card
             shadow={false}
-            className="w-full  h-56 rounded-none bg-gray-200  max-w-[38rem] flex-row"
+            className="w-full  h-56 rounded-none bg-muted  max-w-[38rem] flex-row"
             placeholder={undefined}
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
@@ -202,7 +202,7 @@ const ProductsPromotion = () => {
             <CardHeader
               shadow={false}
               floated={false}
-              className="m-0 w-2/5 shrink-0 bg-gray-200"
+              className="m-0 w-2/5 shrink-0 bg-muted"
               placeholder={undefined}
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
@@ -221,7 +221,7 @@ const ProductsPromotion = () => {
         </div>
         <div className="md:col-span-8 sm:col-span-12 md:ms-7 ">
           <Card
-            className="w-full  h-56 rounded-none bg-gray-200  max-w-[51rem] flex-row"
+            className="w-full  h-56 rounded-none bg-muted  max-w-[51rem] flex-row"
             placeholder={undefined}
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
@@ -231,7 +231,7 @@ const ProductsPromotion = () => {
             <CardHeader
               shadow={false}
               floated={false}
-              className="m-0 w-2/5 shrink-0 bg-gray-200 "
+              className="m-0 w-2/5 shrink-0 bg-muted "
               placeholder={undefined}
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}

@@ -128,7 +128,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
           />
         ) : (
           <div className="h-[36px] flex items-center w-full">
-            <div className="h-1 w-full bg-gray-200 rounded-full" />
+            <div className="h-1 w-full bg-muted rounded-full" />
           </div>
         )}
       </div>

@@ -125,7 +125,7 @@ const WarrantyForm = () => {
     } catch (error: unknown) {
       toast({
         description: "Error submitting warranty claim request",
-        className: "text-red-500",
+        className: "text-destructive",
       });
     }
   };
@@ -203,7 +203,7 @@ const WarrantyForm = () => {
           return (
             <div
               key={index}
-              className="relative group border rounded-lg overflow-hidden bg-gray-50 aspect-square flex items-center justify-center"
+              className="relative group border rounded-lg overflow-hidden bg-muted aspect-square flex items-center justify-center"
             >
               {isImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -222,8 +222,10 @@ const WarrantyForm = () => {
                 />
               ) : (
                 <div className="flex flex-col items-center p-2 text-center">
-                  <span className="text-gray-400 text-3xl mb-1">📄</span>
-                  <span className="text-xs text-gray-600 truncate w-full">
+                  <span className="text-muted-foreground text-3xl mb-1">
+                    📄
+                  </span>
+                  <span className="text-xs text-muted-foreground truncate w-full">
                     {file.name}
                   </span>
                 </div>
@@ -233,7 +235,7 @@ const WarrantyForm = () => {
                 <button
                   type="button"
                   onClick={() => handleDeleteFile(index)}
-                  className="p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-sm"
+                  className="p-1.5 bg-destructive/100 text-primary-foreground rounded-full hover:bg-destructive transition-colors shadow-sm"
                   title="Remove file"
                 >
                   <FaTrashAlt size={12} />
@@ -252,14 +254,14 @@ const WarrantyForm = () => {
         <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-2">
           ওয়ারেন্টি দাবি ফর্ম
         </h2>
-        <p className="text-gray-500 text-sm md:text-base">
+        <p className="text-muted-foreground text-sm md:text-base">
           আপনার পন্যের সমস্যা বিস্তারিত জানান
         </p>
       </div>
 
-      <div className="bg-white shadow-sm border border-gray-100 p-6 md:p-8 rounded-xl">
+      <div className="bg-background shadow-sm border border-border p-6 md:p-8 rounded-xl">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h3 className="text-lg font-medium text-gray-800 mb-6 border-b pb-2">
+          <h3 className="text-lg font-medium text-foreground mb-6 border-b pb-2">
             ক্রয়ের তথ্য
           </h3>
 
@@ -267,7 +269,7 @@ const WarrantyForm = () => {
             <div>
               <label
                 htmlFor="orderedPhoneNumber"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-muted-foreground"
               >
                 অডারকৃত মোবাইল নম্বর
               </label>
@@ -275,14 +277,14 @@ const WarrantyForm = () => {
                 type="text"
                 id="orderedPhoneNumber"
                 {...register("orderedPhoneNumber")}
-                className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 readOnly
               />
             </div>
             <div>
               <label
                 htmlFor="warrantyCodes"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-muted-foreground"
               >
                 পন্যের ওয়ারেন্টি কোড
               </label>
@@ -290,7 +292,7 @@ const WarrantyForm = () => {
                 type="text"
                 id="warrantyCodes"
                 {...register("validCodes")}
-                className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 readOnly
               />
             </div>
@@ -299,31 +301,33 @@ const WarrantyForm = () => {
           <div className="mb-6">
             <label
               htmlFor="issueDescription"
-              className="block mb-2 text-sm font-medium text-gray-600"
+              className="block mb-2 text-sm font-medium text-muted-foreground"
             >
               সমস্যাটি বর্ণনা করুন
             </label>
             <textarea
               id="issueDescription"
               {...register("issueDescription", { required: true })}
-              className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm h-[120px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
+              className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm h-[120px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
               placeholder="বিস্তারিত বর্ণনা লিখুন..."
             />
             {errors.issueDescription && (
-              <p className="text-red-500 text-xs mt-1">সমস্যার বিবরণ আবশ্যক</p>
+              <p className="text-destructive text-xs mt-1">
+                সমস্যার বিবরণ আবশ্যক
+              </p>
             )}
           </div>
 
           <div className="mb-8">
-            <span className="block mb-2 text-sm font-medium text-gray-600">
+            <span className="block mb-2 text-sm font-medium text-muted-foreground">
               প্রমাণাদি (ছবি/ভিডিও)
             </span>
             <div
               className={`relative border-2 border-dashed ${
                 fileDragged
                   ? "border-primary bg-primary/5"
-                  : "border-gray-200 bg-gray-50/50"
-              } rounded-xl p-8 flex flex-col justify-center items-center transition-all hover:bg-gray-50 cursor-pointer`}
+                  : "border-border bg-muted/50"
+              } rounded-xl p-8 flex flex-col justify-center items-center transition-all hover:bg-muted cursor-pointer`}
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
@@ -341,20 +345,22 @@ const WarrantyForm = () => {
                 multiple
               />
               <div className="flex flex-col items-center pointer-events-none">
-                <div className="p-3 bg-white rounded-full shadow-sm mb-3">
+                <div className="p-3 bg-background rounded-full shadow-sm mb-3">
                   <AiOutlineCloudUpload className="text-2xl text-primary" />
                 </div>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   <span className="font-medium text-primary">
                     Click to upload
                   </span>{" "}
                   or drag and drop
                 </p>
-                <p className="text-xs text-gray-400 mt-1">Images or Videos</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Images or Videos
+                </p>
               </div>
             </div>
             {errors.customerFiles && (
-              <p className="text-red-500 text-xs mt-1">
+              <p className="text-destructive text-xs mt-1">
                 {errors.customerFiles.message as string}
               </p>
             )}
@@ -362,11 +368,11 @@ const WarrantyForm = () => {
             {renderSelectedFiles()}
           </div>
 
-          <h3 className="text-lg font-medium text-gray-800 mb-6 border-b pb-2">
+          <h3 className="text-lg font-medium text-foreground mb-6 border-b pb-2">
             ক্রেতার তথ্য
           </h3>
 
-          <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+          <div className="mb-6 p-4 bg-muted rounded-lg">
             <div className="flex items-center gap-6">
               <div className="flex items-center">
                 <input
@@ -390,11 +396,11 @@ const WarrantyForm = () => {
                     );
                   }}
                   checked={addressOption === "keep"}
-                  className="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+                  className="w-4 h-4 text-primary focus:ring-primary border-border"
                 />
                 <label
                   htmlFor="keepAddress"
-                  className="ml-2 text-sm font-medium text-gray-700 cursor-pointer"
+                  className="ml-2 text-sm font-medium text-foreground cursor-pointer"
                 >
                   পূর্বের ঠিকানা ব্যবহার করুন
                 </label>
@@ -412,11 +418,11 @@ const WarrantyForm = () => {
                     setValue("fullAddress", "");
                   }}
                   checked={addressOption === "change"}
-                  className="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+                  className="w-4 h-4 text-primary focus:ring-primary border-border"
                 />
                 <label
                   htmlFor="changeAddress"
-                  className="ml-2 text-sm font-medium text-gray-700 cursor-pointer"
+                  className="ml-2 text-sm font-medium text-foreground cursor-pointer"
                 >
                   নতুন ঠিকানা দিন
                 </label>
@@ -428,7 +434,7 @@ const WarrantyForm = () => {
             <div>
               <label
                 htmlFor="fullName"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-muted-foreground"
               >
                 নাম
               </label>
@@ -436,18 +442,18 @@ const WarrantyForm = () => {
                 type="text"
                 id="fullName"
                 {...register("fullName", { required: true })}
-                className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 placeholder="আপনার নাম"
                 readOnly={addressOption === "keep"}
               />
               {errors.fullName && (
-                <p className="text-red-500 text-xs mt-1">নাম প্রয়োজন</p>
+                <p className="text-destructive text-xs mt-1">নাম প্রয়োজন</p>
               )}
             </div>
             <div>
               <label
                 htmlFor="phoneNumber"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-muted-foreground"
               >
                 মোবাইল নম্বর
               </label>
@@ -458,12 +464,12 @@ const WarrantyForm = () => {
                   required: true,
                   pattern: /^[0-9]*$/,
                 })}
-                className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 placeholder="01xxxxxxxxx"
                 readOnly={addressOption === "keep"}
               />
               {errors.phoneNumber && (
-                <p className="text-red-500 text-xs mt-1">
+                <p className="text-destructive text-xs mt-1">
                   মোবাইল নম্বর প্রয়োজন
                 </p>
               )}
@@ -473,7 +479,7 @@ const WarrantyForm = () => {
           <div className="mb-8">
             <label
               htmlFor="fullAddress"
-              className="block mb-2 text-sm font-medium text-gray-600"
+              className="block mb-2 text-sm font-medium text-muted-foreground"
             >
               ঠিকানা
             </label>
@@ -481,26 +487,30 @@ const WarrantyForm = () => {
               type="text"
               id="fullAddress"
               {...register("fullAddress", { required: true })}
-              className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+              className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
               placeholder="সম্পূর্ণ ঠিকানা"
               readOnly={addressOption === "keep"}
             />
             {errors.fullAddress && (
-              <p className="text-red-500 text-xs mt-1">ঠিকানা প্রয়োজন</p>
+              <p className="text-destructive text-xs mt-1">ঠিকানা প্রয়োজন</p>
             )}
           </div>
           <div className="flex justify-end">
             {!isFormSubmitted && ( // Render the button only if the form is not submitted
               <EcButton
                 type="submit"
-                className="text-white"
+                className="text-primary-foreground"
                 disabled={isLoading}
               >
                 {isLoading ? "Submitting..." : "Submit"}
               </EcButton>
             )}
             {isFormSubmitted && (
-              <EcButton type="submit" className="text-white" disabled>
+              <EcButton
+                type="submit"
+                className="text-primary-foreground"
+                disabled
+              >
                 Form Submitted
               </EcButton>
             )}
@@ -526,7 +536,9 @@ const WarrantyForm = () => {
               </DialogHeader>
               <DialogFooter className="mx-auto my-1">
                 <Link href="/">
-                  <EcButton className="text-white ">Go back home</EcButton>
+                  <EcButton className="text-primary-foreground ">
+                    Go back home
+                  </EcButton>
                 </Link>
               </DialogFooter>
             </DialogContent>

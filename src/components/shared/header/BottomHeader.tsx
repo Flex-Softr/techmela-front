@@ -10,7 +10,7 @@ const BottomHeader = () => {
           fallback={
             <div className="flex justify-center gap-4 py-2 animate-pulse">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-4 w-20 bg-gray-100 rounded" />
+                <div key={i} className="h-4 w-20 bg-muted rounded" />
               ))}
             </div>
           }

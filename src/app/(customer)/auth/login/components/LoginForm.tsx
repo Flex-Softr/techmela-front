@@ -42,7 +42,7 @@ const LoginForm = () => {
       const user = decodeJWT(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast({
-        className: "bg-green-600 text-white font-hind-siliguri",
+        className: "bg-success text-primary-foreground font-hind-siliguri",
         title: "লগইন সফল হয়েছে",
         description: "স্বাগতম! আপনি সফলভাবে লগইন করেছেন।",
       });
@@ -69,15 +69,15 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex justify-center px-3 py-4 bg-gray-50/50">
-      <Card className="max-w-[450px] w-full shadow-sm border-gray-200/60 overflow-hidden bg-white">
-        <CardHeader className="space-y-2 pb-4 border-b border-gray-50 bg-gray-50/30">
+    <div className="flex justify-center px-3 py-4 bg-muted/50">
+      <Card className="max-w-[450px] w-full shadow-sm border-border/60 overflow-hidden bg-background">
+        <CardHeader className="space-y-2 pb-4 border-b border-border bg-muted/30">
           <div className="text-center space-y-1">
-            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2 font-hind-siliguri">
+            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 font-hind-siliguri">
               <LogIn className="w-6 h-6 text-primary" />
               আবার স্বাগতম
             </CardTitle>
-            <CardDescription className="text-gray-500 font-hind-siliguri">
+            <CardDescription className="text-muted-foreground font-hind-siliguri">
               আপনার একাউন্টে প্রবেশ করতে তথ্য প্রদান করুন
             </CardDescription>
           </div>
@@ -92,7 +92,7 @@ const LoginForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="phoneEmailOrUid"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                className="text-sm font-semibold text-foreground font-hind-siliguri"
               >
                 ইমেইল অথবা ফোন নম্বর
               </Label>
@@ -100,13 +100,13 @@ const LoginForm = () => {
                 id="phoneEmailOrUid"
                 type="text"
                 placeholder="ইমেইল অথবা ফোন নম্বর"
-                className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.phoneEmailOrUid ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.phoneEmailOrUid ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                 {...register("phoneEmailOrUid", {
                   required: "ইমেইল অথবা ফোন নম্বর প্রয়োজন",
                 })}
               />
               {errors.phoneEmailOrUid && (
-                <p className="text-xs text-red-500 font-medium">
+                <p className="text-xs text-destructive font-medium">
                   {errors.phoneEmailOrUid.message as string}
                 </p>
               )}
@@ -116,7 +116,7 @@ const LoginForm = () => {
               <div className="flex items-center justify-between">
                 <Label
                   htmlFor="password"
-                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                  className="text-sm font-semibold text-foreground font-hind-siliguri"
                 >
                   পাসওয়ার্ড
                 </Label>
@@ -132,7 +132,7 @@ const LoginForm = () => {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("password", {
                     required: "পাসওয়ার্ড প্রয়োজন",
                   })}
@@ -140,7 +140,7 @@ const LoginForm = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 group-hover:text-gray-600 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground group-hover:text-muted-foreground transition-colors"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
@@ -151,7 +151,7 @@ const LoginForm = () => {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-red-500 font-medium">
+                <p className="text-xs text-destructive font-medium">
                   {errors.password.message as string}
                 </p>
               )}
@@ -174,8 +174,8 @@ const LoginForm = () => {
           </form>
         </CardContent>
 
-        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-gray-50/30 border-t border-gray-50">
-          <p className="text-sm text-gray-600 font-hind-siliguri">
+        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border">
+          <p className="text-sm text-muted-foreground font-hind-siliguri">
             একাউন্ট নেই?{" "}
             <Link
               href="/auth/registration"

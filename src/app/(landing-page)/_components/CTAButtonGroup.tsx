@@ -45,12 +45,12 @@ const CTAButtonGroup = ({
       {(onPreviewClick || previewLink) && (
         <button
           onClick={handlePreviewClick}
-          className="w-full sm:w-auto px-7 py-3 bg-white text-primary border-2 border-primary/20 text-base font-black rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-3 group/preview shadow-sm tracking-wide"
+          className="w-full sm:w-auto px-7 py-3 bg-background text-primary border-2 border-primary/20 text-base font-black rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-3 group/preview shadow-sm tracking-wide"
         >
           <span className="text-xl group-hover/preview:animate-bounce-subtle">
-            📖
+            ✨
           </span>
-          একটু পড়ে দেখুন
+          বিস্তারিত দেখুন
         </button>
       )}
 

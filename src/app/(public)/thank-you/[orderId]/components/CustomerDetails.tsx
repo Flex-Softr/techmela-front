@@ -14,26 +14,26 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
   return (
     <div className="space-y-4">
       <Card className="border-none shadow-sm h-fit">
-        <CardHeader className="bg-gray-50/50 border-b pb-3 pt-4 px-5">
+        <CardHeader className="bg-muted/50 border-b pb-3 pt-4 px-5">
           <CardTitle className="text-lg font-semibold">গ্রাহকের তথ্য</CardTitle>
         </CardHeader>
         <CardContent className="p-5 space-y-5 text-sm">
           <div className="flex gap-3">
             <div className="flex-shrink-0 mt-0.5">
-              <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-primary border border-blue-100">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
                 <span className="font-bold text-sm">
                   {orderInfo.shipping?.fullName?.charAt(0)}
                 </span>
               </div>
             </div>
             <div>
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-foreground">
                 {orderInfo.shipping?.fullName}
               </p>
-              <p className="text-gray-500 text-xs">
+              <p className="text-muted-foreground text-xs">
                 {orderInfo.shipping?.phoneNumber}
               </p>
-              <p className="text-gray-500 text-xs">
+              <p className="text-muted-foreground text-xs">
                 {orderInfo.shipping?.email}
               </p>
             </div>
@@ -42,20 +42,20 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           <Separator />
 
           <div className="flex gap-3">
-            <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+            <MapPin className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-gray-900">ডেলিভারি ঠিকানা</p>
-              <p className="text-gray-500 mt-0.5 text-xs leading-relaxed">
+              <p className="font-medium text-foreground">ডেলিভারি ঠিকানা</p>
+              <p className="text-muted-foreground mt-0.5 text-xs leading-relaxed">
                 {orderInfo.shipping?.fullAddress}
               </p>
             </div>
           </div>
 
           <div className="flex gap-3">
-            <CreditCard className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+            <CreditCard className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-gray-900">পেমেন্ট পদ্ধতি</p>
-              <p className="text-gray-500 mt-0.5 text-xs">
+              <p className="font-medium text-foreground">পেমেন্ট পদ্ধতি</p>
+              <p className="text-muted-foreground mt-0.5 text-xs">
                 {orderInfo.payment?.paymentMethod?.name || "ক্যাশ অন ডেলিভারি"}
                 {orderInfo.payment?.transactionId &&
                   `(TrxID: ${orderInfo.payment.transactionId})`}
@@ -64,10 +64,10 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           </div>
 
           <div className="flex gap-3">
-            <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+            <Calendar className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-gray-900">অর্ডারের তারিখ</p>
-              <p className="text-gray-500 mt-0.5 text-xs">
+              <p className="font-medium text-foreground">অর্ডারের তারিখ</p>
+              <p className="text-muted-foreground mt-0.5 text-xs">
                 {orderInfo.createdAt
                   ? format(
                       new Date(orderInfo.createdAt),

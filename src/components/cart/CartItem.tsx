@@ -36,7 +36,7 @@ const CartItem = ({
       setQuantity(cartItem?.quantity);
       toast({
         title: res?.message,
-        className: "bg-success text-white",
+        className: "bg-success text-primary-foreground",
       });
     }
   };
@@ -49,7 +49,7 @@ const CartItem = ({
     <TableRow>
       <TableCell className="font-medium flex gap-3 items-center justify-center min-w-48">
         <EcButton
-          className="rounded-full w-5 h-5 md:w-8 md:h-8 p-0 hover:text-white hover:bg-secondary"
+          className="rounded-full w-5 h-5 md:w-8 md:h-8 p-0 hover:text-primary-foreground hover:bg-secondary"
           variant="ghost"
           type="icon"
           onClick={() => handleRemoveFromCart(cartItem?._id)}

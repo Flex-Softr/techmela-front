@@ -33,5 +33,5 @@ export function getImageSrc(src: string | undefined | null): string {
   // Ensure base URL doesn't have trailing slash if we're joining
   const cleanBaseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
 
-  return `${cleanBaseUrl}/${cleanSrc}`;
+  return `${cleanBaseUrl}/server-api/${cleanSrc}`;
 }

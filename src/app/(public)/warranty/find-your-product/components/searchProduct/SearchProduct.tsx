@@ -171,20 +171,20 @@ const SearchProduct = () => {
   return (
     <div className="w-full">
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
           আপনার পন্য নির্বাচন করুন
         </h1>
-        <p className="text-gray-500 text-sm md:text-base">
+        <p className="text-muted-foreground text-sm md:text-base">
           পন্যের গায়ে থাকা ওয়ারেন্টি কোড দিয়ে পন্য বাছাই করুন
         </p>
       </div>
 
-      <div className="bg-white shadow-sm border border-gray-100 rounded-xl p-6 md:p-8">
+      <div className="bg-background shadow-sm border border-border rounded-xl p-6 md:p-8">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label
-                className="block text-gray-700 text-sm font-medium mb-2"
+                className="block text-foreground text-sm font-medium mb-2"
                 htmlFor="warrantyCode"
               >
                 পন্যের ওয়ারেন্টি কোড
@@ -193,7 +193,7 @@ const SearchProduct = () => {
                 <input
                   value={newWarrantyCode}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                  className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   id="warrantyCode"
                   type="text"
                   placeholder="যেমন: CODE1, CODE2"
@@ -203,7 +203,7 @@ const SearchProduct = () => {
               </div>
               {(isFocused || newWarrantyCode.trim() !== "") &&
               warrantyCodes.length === 0 ? (
-                <p className="text-gray-400 text-xs mt-1">
+                <p className="text-muted-foreground text-xs mt-1">
                   একাধিক কোড দিতে কমা (,) ব্যবহার করুন এবং "অনুসন্ধান করুন"
                   বাটনে ক্লিক করুন
                 </p>
@@ -220,14 +220,14 @@ const SearchProduct = () => {
                     </span>
                     <button
                       type="button"
-                      className="text-red-400 hover:text-red-500 transition-colors"
+                      className="text-destructive hover:text-destructive transition-colors"
                       onClick={() => handleRemoveCode(index)}
                       aria-label={`Remove ${code}`}
                     >
                       &#10005;
                     </button>
                     {notFoundProducts.includes(code) && (
-                      <p className="text-red-500 text-xs ml-2">সঠিক নয়</p>
+                      <p className="text-destructive text-xs ml-2">সঠিক নয়</p>
                     )}
                   </div>
                 ))}
@@ -235,7 +235,7 @@ const SearchProduct = () => {
             </div>
             <div>
               <label
-                className="block text-gray-700 text-sm font-medium mb-2"
+                className="block text-foreground text-sm font-medium mb-2"
                 htmlFor="orderedPhoneNumber"
               >
                 অডারকৃত মোবাইল নম্বর
@@ -243,13 +243,15 @@ const SearchProduct = () => {
               <input
                 value={orderedPhoneNumber}
                 onChange={handlePhoneNumberChange}
-                className="w-full border border-gray-200 bg-gray-50/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 id="orderedPhoneNumber"
                 type="text"
                 placeholder="01xxxxxxxxx"
               />
               {phoneNumberError && (
-                <p className="text-red-500 text-xs mt-1">{phoneNumberError}</p>
+                <p className="text-destructive text-xs mt-1">
+                  {phoneNumberError}
+                </p>
               )}
             </div>
           </div>
@@ -257,7 +259,7 @@ const SearchProduct = () => {
           <div className="flex justify-center mt-8">
             <button
               type="submit"
-              className="bg-primary text-white rounded-lg py-3 px-8 hover:bg-primary/90 transition-all shadow-sm font-medium text-sm md:text-base"
+              className="bg-primary text-primary-foreground rounded-lg py-3 px-8 hover:bg-primary/90 transition-all shadow-sm font-medium text-sm md:text-base"
             >
               অনুসন্ধান করুন
             </button>
@@ -266,9 +268,13 @@ const SearchProduct = () => {
 
         <div className="mt-6">
           {isLoading && (
-            <p className="text-center text-gray-500 text-sm">Loading...</p>
+            <p className="text-center text-muted-foreground text-sm">
+              Loading...
+            </p>
           )}
-          {error && <p className="text-red-500 text-center text-sm">{error}</p>}
+          {error && (
+            <p className="text-destructive text-center text-sm">{error}</p>
+          )}
         </div>
       </div>
 

@@ -48,10 +48,10 @@ const TrackOrderDetails = () => {
 
   const ErrorDisplay = ({ message }: { message: string }) => (
     <div className="text-center py-4 my-10 md:my-16">
-      <p className="text-red-500 text-md md:text-2xl">{message}</p>
+      <p className="text-destructive text-md md:text-2xl">{message}</p>
       <EcButton
         onClick={() => router.back()}
-        className="mt-4 px-6 py-1 text-white transition"
+        className="mt-4 px-6 py-1 text-primary-foreground transition"
       >
         Go Back
       </EcButton>
@@ -91,7 +91,7 @@ const TrackOrderDetails = () => {
   const parcelTrackingLink = orderData.parcelTrackingLink;
 
   return (
-    <section className="pb-12 pt-6 bg-gray-50/50 min-h-screen">
+    <section className="pb-12 pt-6 bg-muted/50 min-h-screen">
       <ContainerMax>
         <div className="max-w-5xl mx-auto">
           <button
@@ -106,7 +106,7 @@ const TrackOrderDetails = () => {
             {/* Left Column: Order & Shipping Summary */}
             <div className="lg:col-span-1 space-y-6">
               {/* Order Info Card */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-border/50">
+              <div className="bg-background p-6 rounded-2xl shadow-sm border border-border/50">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 bg-primary/10 rounded-lg text-primary">
                     <Package className="w-5 h-5" />
@@ -137,7 +137,7 @@ const TrackOrderDetails = () => {
               </div>
 
               {/* Shipping Info Card */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-border/50">
+              <div className="bg-background p-6 rounded-2xl shadow-sm border border-border/50">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 bg-primary/10 rounded-lg text-primary">
                     <MapPin className="w-5 h-5" />
@@ -200,7 +200,7 @@ const TrackOrderDetails = () => {
 
             {/* Right Column: Timeline */}
             <div className="lg:col-span-2">
-              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-border/50">
+              <div className="bg-background p-6 md:p-8 rounded-2xl shadow-sm border border-border/50">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="p-2 bg-primary/10 rounded-lg text-primary">
                     <Truck className="w-5 h-5" />
@@ -227,13 +227,13 @@ const TrackOrderDetails = () => {
                         href={parcelTrackingLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                        className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
                       >
                         Live Track Parcel
                       </a>
                     </div>
                   ) : (
-                    <div className="text-center bg-gray-50/50 p-6 rounded-xl border border-dashed border-border">
+                    <div className="text-center bg-muted/50 p-6 rounded-xl border border-dashed border-border">
                       <p className="text-sm text-muted-foreground max-w-sm mx-auto">
                         আপনার পণ্য কুরিয়ারে পাঠানোর পর এখানে
                         <span className="text-primary font-bold">

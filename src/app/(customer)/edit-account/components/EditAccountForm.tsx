@@ -121,7 +121,7 @@ const EditAccountForm = () => {
         await updateUserData(payload).unwrap();
         toast({
           description: "তথ্য সফলভাবে আপডেট করা হয়েছে",
-          className: "text-green-500 font-hind-siliguri",
+          className: "text-success font-hind-siliguri",
         });
         router.push("/my-account");
       } else {
@@ -143,15 +143,15 @@ const EditAccountForm = () => {
       }
       toast({
         description: errorMessage,
-        className: "text-red-500 font-hind-siliguri",
+        className: "text-destructive font-hind-siliguri",
       });
     }
   };
 
   return (
-    <Card className="w-full shadow-sm border-gray-200/60 max-w-4xl mx-auto font-hind-siliguri">
-      <CardHeader className="py-3 px-4 border-b border-gray-100">
-        <CardTitle className="text-lg md:text-xl font-bold text-gray-800 flex items-center gap-2">
+    <Card className="w-full shadow-sm border-border/60 max-w-4xl mx-auto font-hind-siliguri">
+      <CardHeader className="py-3 px-4 border-b border-border">
+        <CardTitle className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
           <User className="w-5 h-5 text-primary" />
           অ্যাকাউন্ট তথ্য এডিট করুন
         </CardTitle>
@@ -163,7 +163,7 @@ const EditAccountForm = () => {
             <div className="space-y-1.5">
               <label
                 htmlFor="fullName"
-                className="text-sm font-semibold text-gray-700"
+                className="text-sm font-semibold text-foreground"
               >
                 পুরো নাম
               </label>
@@ -172,14 +172,14 @@ const EditAccountForm = () => {
                 id="fullName"
                 {...register("fullName")}
                 placeholder="আপনার নাম লিখুন"
-                className="h-10 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
+                className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
 
             <div className="space-y-1.5">
               <label
                 htmlFor="phoneNumber"
-                className="text-sm font-semibold text-gray-700"
+                className="text-sm font-semibold text-foreground"
               >
                 ফোন নম্বর
               </label>
@@ -188,14 +188,14 @@ const EditAccountForm = () => {
                 id="phoneNumber"
                 {...register("phoneNumber")}
                 placeholder="আপনার ফোন নম্বর লিখুন"
-                className="h-10 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
+                className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
 
             <div className="space-y-1.5">
               <label
                 htmlFor="email"
-                className="text-sm font-semibold text-gray-700"
+                className="text-sm font-semibold text-foreground"
               >
                 ইমেইল
               </label>
@@ -204,7 +204,7 @@ const EditAccountForm = () => {
                 id="email"
                 {...register("email")}
                 placeholder="example@example.com"
-                className="h-10 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
+                className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
 
@@ -222,7 +222,7 @@ const EditAccountForm = () => {
             <div className="space-y-1.5 md:col-span-2">
               <label
                 htmlFor="fullAddress"
-                className="text-sm font-semibold text-gray-700"
+                className="text-sm font-semibold text-foreground"
               >
                 ঠিকানা
               </label>
@@ -231,14 +231,14 @@ const EditAccountForm = () => {
                 id="fullAddress"
                 {...register("address.fullAddress")}
                 placeholder="আপনার বর্তমান ঠিকানা লিখুন"
-                className="h-10 border-gray-200 focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
+                className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
           </div>
         </form>
       </CardContent>
 
-      <CardFooter className="pt-4 pb-6 px-4 border-t border-gray-100 bg-gray-50/50 rounded-b-xl flex justify-end">
+      <CardFooter className="pt-4 pb-6 px-4 border-t border-border bg-muted/50 rounded-b-xl flex justify-end">
         <Button
           form="edit-account-form"
           type="submit"

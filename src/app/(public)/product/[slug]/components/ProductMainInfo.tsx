@@ -43,7 +43,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
     if (salePrice && salePrice < (regularPrice || 0)) {
       return (
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="text-2xl font-extrabold text-black">
+          <span className="text-2xl font-extrabold text-foreground">
             &#2547;{salePrice}
           </span>
           <del className="text-muted-foreground text-lg">
@@ -52,13 +52,13 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {discountPercent && discountPercent > 0 && (
             <div className="flex flex-wrap items-center gap-2">
               {/* Percentage Badge */}
-              <span className="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-extrabold shadow-sm whitespace-nowrap uppercase tracking-wider">
+              <span className="bg-destructive text-primary-foreground text-xs px-2.5 py-1 rounded-full font-extrabold shadow-sm whitespace-nowrap uppercase tracking-wider">
                 {Math.round(discountPercent)}% ছাড়
               </span>
 
               {/* Savings Information */}
               {/* {priceSave && (
-                <span className="bg-green-100 text-green-700 text-xs px-2.5 py-1 rounded-full font-bold border border-green-200 flex items-center gap-1 whitespace-nowrap">
+                <span className="bg-success/15 text-success text-xs px-2.5 py-1 rounded-full font-bold border border-success/25 flex items-center gap-1 whitespace-nowrap">
                   <span className="opacity-70 font-medium">সাশ্রয়</span>
                   <span>&#2547;{priceSave}</span>
                 </span>
@@ -69,7 +69,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
       );
     }
     return (
-      <span className="text-2xl font-extrabold text-black">
+      <span className="text-2xl font-extrabold text-foreground">
         &#2547;{regularPrice}
       </span>
     );
@@ -92,7 +92,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           </div>
 
           {/* Status Chip */}
-          <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+          <div className="px-4 py-1.5 bg-muted rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
               স্ট্যাটাস:
             </span>
@@ -107,7 +107,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           </div>
 
           {/* SKU Chip */}
-          {/* <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+          {/* <div className="px-4 py-1.5 bg-muted rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
               SKU:
             </span>
@@ -117,7 +117,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           </div> */}
 
           {/* Category Chip */}
-          {/* <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+          {/* <div className="px-4 py-1.5 bg-muted rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
               Category:
             </span>
@@ -130,9 +130,9 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           </div> */}
 
           {/* Brand Chip */}
-          {/* <div className="px-4 py-1.5 bg-gray-100 rounded-full flex items-center gap-2 text-sm">
+          {/* <div className="px-4 py-1.5 bg-muted rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
-              Prokashoni:
+              ব্র্যান্ড:
             </span>
             <span className="font-semibold text-foreground truncate">
               {brand?.name || "N/A"}
@@ -150,8 +150,8 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
 
         {/* Warranty Info */}
         {warranty && warrantyInfo && (
-          <div className="flex items-center gap-2 text-sm pt-2 border-t border-dashed border-gray-200">
-            <span className="text-black font-bold">Warranty:</span>
+          <div className="flex items-center gap-2 text-sm pt-2 border-t border-dashed border-border">
+            <span className="text-foreground font-bold">Warranty:</span>
             <WarrantyInfo warrantyInfo={warrantyInfo} />
           </div>
         )}
@@ -179,7 +179,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           </span>
           <div className="flex-1">
             <span
-              className={`${stockStatusColor(stockStatus)} font-bold bg-red-50 px-2 py-0.5 rounded`}
+              className={`${stockStatusColor(stockStatus)} font-bold bg-destructive/10 px-2 py-0.5 rounded`}
             >
               {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
               manageStock &&
@@ -217,7 +217,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         {/* Brand */}
         {/* <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">
-            Prokashoni:
+            ব্র্যান্ড:
           </span>
           <span className="font-semibold text-foreground flex-1">
             {brand?.name || "N/A"}
@@ -226,8 +226,8 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
 
         {/* Warranty Info (Moved here for better context) */}
         {/* {warranty && warrantyInfo && (
-          <div className="flex items-center gap-2 text-sm pt-2 border-t border-dashed border-gray-200 mt-2">
-            <span className="text-black font-bold w-24">Warranty:</span>
+          <div className="flex items-center gap-2 text-sm pt-2 border-t border-dashed border-border mt-2">
+            <span className="text-foreground font-bold w-24">Warranty:</span>
             <div className="flex-1">
               <WarrantyInfo warrantyInfo={warrantyInfo} />
             </div>

@@ -18,26 +18,20 @@ const FeaturedProducts = async ({
     <>
       {featuredProducts.length > 0 && (
         <section className="pt-10 md:pt-12">
-          <div className="bg-primary/5 py-2 md:py-3 px-4 mb-4 text-center border border-primary/10 shadow-sm">
-            <SectionTitle
-              title="নির্বাচিত বইসমূহ"
-              className="text-primary mb-2"
-            />
-            <SectionSubtitle
-              text="আমাদের নির্বাচিত বইগুলোর কালেকশন দেখুন"
-              className="text-primary/90 max-w-2xl mx-auto"
-            />
+          <div className="mb-6 px-4 text-center md:mb-8">
+            <SectionTitle title="নির্বাচিত পণ্যসমূহ" className="text-primary" />
+            <SectionSubtitle text="আমাদের নির্বাচিত পণ্যগুলোর কালেকশন দেখুন" />
           </div>
 
           <ContainerMax>
             <div className="mt-5">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-5 justify-between mt-5">
-                {featuredProducts?.slice(0, 4)?.map((product) => (
+              <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 lg:gap-3">
+                {featuredProducts?.slice(0, 5)?.map((product) => (
                   <ProductCard product={product} key={product._id} />
                 ))}
               </div>
             </div>
-            {featuredProducts.length > 4 && (
+            {featuredProducts.length > 5 && (
               <div className="flex justify-center mt-5">
                 <Button asChild size={"sm"} className="px-6">
                   <Link href={"/shop?featured=true"}>সবগুলো দেখুন</Link>

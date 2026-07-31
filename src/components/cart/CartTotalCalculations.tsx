@@ -73,7 +73,7 @@ const CartTotalCalculations = ({
       {/* Grand Total Section */}
       {discount > 0 && (
         <div>
-          <hr className="py-1 border-t border-gray-200 w-full" />
+          <hr className="py-1 border-t border-border w-full" />
           <div className="flex justify-between pb-1 pt-1 px-2">
             <p className="font-bold">Grand Total (with coupon)</p>
             <span className="font-bold">

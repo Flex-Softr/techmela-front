@@ -43,7 +43,7 @@ const ForgetPasswordForm = () => {
 
       if (res.success) {
         toast({
-          className: "bg-green-600 text-white font-hind-siliguri",
+          className: "bg-success text-primary-foreground font-hind-siliguri",
           title: "সফল",
           description: "আপনার ইমেইলে OTP পাঠানো হয়েছে।",
         });
@@ -71,15 +71,15 @@ const ForgetPasswordForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center px-3 py-4 bg-gray-50/50">
-      <Card className="max-w-[450px] w-full shadow-sm border-gray-200/60 overflow-hidden bg-white">
-        <CardHeader className="space-y-2 pb-4 border-b border-gray-50 bg-gray-50/30">
+    <div className="flex items-center justify-center px-3 py-4 bg-muted/50">
+      <Card className="max-w-[450px] w-full shadow-sm border-border/60 overflow-hidden bg-background">
+        <CardHeader className="space-y-2 pb-4 border-b border-border bg-muted/30">
           <div className="text-center space-y-1">
-            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2 font-hind-siliguri">
+            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 font-hind-siliguri">
               <Fingerprint className="w-6 h-6 text-primary" />
               পাসওয়ার্ড ভুলে গেছেন?
             </CardTitle>
-            <CardDescription className="text-gray-500 px-4 font-hind-siliguri">
+            <CardDescription className="text-muted-foreground px-4 font-hind-siliguri">
               আপনার অ্যাকাউন্টের সাথে যুক্ত ইমেইল নম্বরটি লিখুন। আমরা আপনাকে
               পাসওয়ার্ড রিসেট করতে সাহায্য করব।
             </CardDescription>
@@ -91,7 +91,7 @@ const ForgetPasswordForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="email"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                className="text-sm font-semibold text-foreground font-hind-siliguri"
               >
                 ইমেইল
               </Label>
@@ -105,12 +105,12 @@ const ForgetPasswordForm = () => {
                     id="email"
                     type="email"
                     placeholder="আপনার ইমেইল"
-                    className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.email ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                    className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.email ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   />
                 )}
               />
               {errors.email && (
-                <p className="text-xs text-red-500 font-medium">
+                <p className="text-xs text-destructive font-medium">
                   {errors.email.message as string}
                 </p>
               )}
@@ -133,7 +133,7 @@ const ForgetPasswordForm = () => {
           </form>
         </CardContent>
 
-        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-gray-50/30 border-t border-gray-50">
+        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border">
           <Link
             href="/auth/login"
             className="flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-all mt-2 font-hind-siliguri"

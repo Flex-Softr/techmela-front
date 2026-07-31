@@ -19,7 +19,7 @@ type TimelineProps = {
 const Timeline: React.FC<TimelineProps> = ({ statuses }) => {
   return (
     <div className="space-y-0 relative">
-      <div className="absolute left-[15px] top-2 bottom-2 w-0.5 bg-gray-100"></div>
+      <div className="absolute left-[15px] top-2 bottom-2 w-0.5 bg-muted"></div>
 
       {/* Show in reverse order (latest at top) */}
       {[...statuses].reverse().map((status, index) => (

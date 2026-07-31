@@ -4,7 +4,7 @@ const BannerSkeleton = () => {
   return (
     <section className="mt-4 animate-pulse">
       <ContainerMax>
-        <div className="w-full h-[200px] sm:h-[300px] md:h-[380px] lg:h-[460px] bg-gray-200 rounded-xl" />
+        <div className="w-full h-[200px] sm:h-[300px] md:h-[380px] lg:h-[460px] bg-muted rounded-xl" />
       </ContainerMax>
     </section>
   );

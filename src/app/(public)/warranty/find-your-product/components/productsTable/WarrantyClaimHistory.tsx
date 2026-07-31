@@ -72,7 +72,7 @@ const WarrantyClaimHistory = ({
               </tbody>
             </table>
           ) : (
-            <h2 className="text-green-600 font-bold">
+            <h2 className="text-success font-bold">
               No previous warranty claims.
             </h2>
           )}

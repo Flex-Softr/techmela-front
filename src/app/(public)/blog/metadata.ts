@@ -1,67 +1,66 @@
 import { SITE_URL } from "@/app/(public)/_components/blog-qna/utils";
+import { SITE } from "@/const/site.const";
 import { Metadata } from "next";
 
-export const BLOG_DESCRIPTION =
-  "সিদ্দীকিয়া প্রকাশনীর ব্লগে স্বাগতম! এখানে পাবেন ইসলামিক বইয়ের রিভিউ, আহলে সুন্নাতের আকিদা বিষয়ক প্রবন্ধ, ফিকহ, হাদিস, তাফসির, সিরাত ও তাসাউফ বিষয়ক জ্ঞানভিত্তিক নিবন্ধ।";
+export const BLOG_DESCRIPTION = `${SITE.nameBn}র ব্লগে স্বাগতম! এখানে পাবেন স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার ও পারফিউম বিষয়ক বিউটি টিপস, প্রোডাক্ট রিভিউ এবং সৌন্দর্যচর্চার জ্ঞানভিত্তিক নিবন্ধ।`;
 
 export const blogJsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  name: "সিদ্দীকিয়া প্রকাশনী ব্লগ",
+  name: `${SITE.nameBn} ব্লগ`,
   description: BLOG_DESCRIPTION,
   url: `${SITE_URL}/blog`,
   inLanguage: "bn-BD",
   publisher: {
     "@type": "Organization",
-    name: "সিদ্দীকিয়া প্রকাশনী",
+    name: SITE.nameBn,
     logo: {
       "@type": "ImageObject",
-      url: "https://siddikiaprokashoni.com/logo/logo.webp",
+      url: `${SITE.baseUrl}${SITE.logoPath}`,
     },
   },
   about: [
-    { "@type": "Thing", name: "ইসলামিক বই" },
-    { "@type": "Thing", name: "ফিকহ" },
-    { "@type": "Thing", name: "হাদিস" },
-    { "@type": "Thing", name: "তাফসির" },
-    { "@type": "Thing", name: "আকিদা" },
+    { "@type": "Thing", name: "স্কিনকেয়ার" },
+    { "@type": "Thing", name: "মেকআপ" },
+    { "@type": "Thing", name: "হেয়ারকেয়ার" },
+    { "@type": "Thing", name: "পারফিউম" },
+    { "@type": "Thing", name: "বিউটি টিপস" },
   ],
 };
 
 export const blogMetadata: Metadata = {
-  title: "ব্লগ | ইসলামিক প্রবন্ধ",
+  title: "ব্লগ | বিউটি টিপস ও গাইড",
   description: BLOG_DESCRIPTION,
   keywords: [
-    "ইসলামিক ব্লগ",
-    "ইসলামিক প্রবন্ধ",
-    "বইয়ের রিভিউ",
-    "ইসলামিক জ্ঞান",
-    "আহলে সুন্নাতের আকিদা",
-    "ফিকহ প্রবন্ধ",
-    "হাদিস বিষয়ক লেখা",
-    "Islamic blog Bangladesh",
-    "Bangla Islamic articles",
-    "সিদ্দীকিয়া প্রকাশনী ব্লগ",
+    "বিউটি ব্লগ",
+    "কসমেটিক্স প্রবন্ধ",
+    "প্রোডাক্ট রিভিউ",
+    "স্কিনকেয়ার টিপস",
+    "মেকআপ গাইড",
+    "হেয়ারকেয়ার প্রবন্ধ",
+    "Beauty blog Bangladesh",
+    "Bangla cosmetics articles",
+    `${SITE.nameBn} ব্লগ`,
   ].join(", "),
   openGraph: {
-    title: "ব্লগ | সিদ্দীকিয়া প্রকাশনী",
+    title: `ব্লগ | ${SITE.nameBn}`,
     description: BLOG_DESCRIPTION,
     url: `${SITE_URL}/blog`,
-    siteName: "সিদ্দীকিয়া প্রকাশনী",
+    siteName: SITE.nameBn,
     locale: "bn_BD",
     type: "website",
     images: [
       {
-        url: "https://siddikiaprokashoni.com/logo/logo.webp",
-        alt: "সিদ্দীকিয়া প্রকাশনী ব্লগ",
+        url: `${SITE.baseUrl}${SITE.logoPath}`,
+        alt: `${SITE.nameBn} ব্লগ`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ব্লগ | সিদ্দীকিয়া প্রকাশনী",
+    title: `ব্লগ | ${SITE.nameBn}`,
     description: BLOG_DESCRIPTION,
-    images: ["https://siddikiaprokashoni.com/logo/logo.webp"],
+    images: [`${SITE.baseUrl}${SITE.logoPath}`],
   },
   alternates: {
     canonical: `${SITE_URL}/blog`,

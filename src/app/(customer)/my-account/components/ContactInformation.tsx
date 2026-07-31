@@ -24,52 +24,52 @@ const ContactInformation = () => {
 
   if (!isMounted) {
     return (
-      <Card className="w-full h-full flex flex-col shadow-sm border-gray-100 animate-pulse">
-        <CardHeader className="py-2.5 px-4 border-b border-gray-100">
-          <CardTitle className="text-sm font-semibold text-gray-800">
+      <Card className="w-full h-full flex flex-col shadow-sm border-border animate-pulse">
+        <CardHeader className="py-2.5 px-4 border-b border-border">
+          <CardTitle className="text-sm font-semibold text-foreground">
             ব্যক্তিগত তথ্য
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 flex-1">
-          <div className="h-20 bg-gray-50 rounded-lg"></div>
+          <div className="h-20 bg-muted rounded-lg"></div>
         </CardContent>
       </Card>
     );
   }
   return (
-    <Card className="w-full h-full flex flex-col shadow-sm border-gray-100">
-      <CardHeader className="py-2.5 px-4 border-b border-gray-100">
-        <CardTitle className="text-sm font-semibold text-gray-800">
+    <Card className="w-full h-full flex flex-col shadow-sm border-border">
+      <CardHeader className="py-2.5 px-4 border-b border-border">
+        <CardTitle className="text-sm font-semibold text-foreground">
           ব্যক্তিগত তথ্য
         </CardTitle>
       </CardHeader>
 
       <CardContent className="p-4 flex-1">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-3 gap-x-2">
-          <div className="text-xs text-gray-400 font-medium font-hind-siliguri">
+          <div className="text-xs text-muted-foreground font-medium font-hind-siliguri">
             নাম
           </div>
-          <div className="sm:col-span-2 text-sm text-gray-800 font-medium">
+          <div className="sm:col-span-2 text-sm text-foreground font-medium">
             {fullName || "তথ্য নেই"}
           </div>
 
-          <div className="text-xs text-gray-400 font-medium font-hind-siliguri">
+          <div className="text-xs text-muted-foreground font-medium font-hind-siliguri">
             ই-মেইল
           </div>
-          <div className="sm:col-span-2 text-sm text-gray-800 font-medium">
+          <div className="sm:col-span-2 text-sm text-foreground font-medium">
             {email || "তথ্য নেই"}
           </div>
 
-          <div className="text-xs text-gray-400 font-medium font-hind-siliguri">
+          <div className="text-xs text-muted-foreground font-medium font-hind-siliguri">
             ফোন নম্বর
           </div>
-          <div className="sm:col-span-2 text-sm text-gray-800 font-medium">
+          <div className="sm:col-span-2 text-sm text-foreground font-medium">
             {phoneNumber || "তথ্য নেই"}
           </div>
         </div>
       </CardContent>
 
-      <CardFooter className="flex flex-col sm:flex-row gap-2 p-4 border-t border-gray-100 bg-gray-50/50 rounded-b-xl">
+      <CardFooter className="flex flex-col sm:flex-row gap-2 p-4 border-t border-border bg-muted/50 rounded-b-xl">
         <Button
           asChild
           variant="default"

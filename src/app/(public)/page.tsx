@@ -8,6 +8,7 @@ import FeaturedProducts from "@/components/home/featuredProducts/FeaturedProduct
 import HomepageSectionsFetcher from "@/components/home/homePageSections/HomepageSectionsFetcher";
 import HomepageSectionSkeleton from "@/components/home/homePageSections/HomepageSectionSkeleton";
 import JsonLd from "@/components/shared/JsonLd";
+import { SITE } from "@/const/site.const";
 import TCategory from "@/types/categories/categories";
 import { THomePageSection } from "@/types/homepageSection";
 import { TProduct } from "@/types/products/product";
@@ -18,70 +19,53 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "সেরা ইসলামিক বইয়ের সমাহার",
-  description:
-    "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
+  title: SITE.taglineBn,
+  description: `${SITE.nameBn}তে আপনাদের স্বাগতম। ${SITE.descriptionBn}`,
   keywords: [
-    // Brand
-    "সিদ্দীকিয়া প্রকাশনী",
-    "Siddikia Prokashoni",
-    "দারুননাজাত মাদরাসা কিতাব",
-    // Generic intent
-    "ইসলামিক বই কিনুন",
-    "ইসলামিক বই অনলাইন",
-    "বাংলা ইসলামিক বই",
-    "Bangla Islamic Books",
-    "Islamic Books Bangladesh",
-    "Online Islamic Bookshop Bangladesh",
-    // Subject-specific
-    "ফিকহের বই",
-    "হাদিসের বই",
-    "তাফসিরের বই",
-    "আকিদার বই",
-    "সিরাতের বই",
-    "তাসাউফের বই",
-    "মাদরাসার কিতাব",
-    "উসুলুল ফিকহ বই",
-    "নাহু সরফ কিতাব",
-    "আরবি গ্রামার বই",
-    "দোয়া ও আমলের বই",
-    "ইসলামিক ইতিহাসের বই",
-    "খলিফাদের জীবনী বই",
-    "রাসুলের জীবনী বই",
-    "সাহাবাদের জীবনী বই",
-    "ইসলামিক উপন্যাস",
-    "ওলামায়ে কেরামের বই",
-    "ইজতিমায়ী মাসায়েল",
-    "কবর ও আখেরাতের বই",
-    "ইসলামিক শিশু বই",
-    "Darunnajat Madrasa Books",
-    "আহলে সুন্নাত ওয়াল জামাআত বই",
-    // Delivery / Ecommerce
-    "বাংলাদেশে বই ডেলিভারি",
-    "ক্যাশ অন ডেলিভারি বই",
-    "অনলাইনে বই কিনুন বাংলাদেশ",
+    SITE.nameBn,
+    SITE.nameEn,
+    "কসমেটিক্স কিনুন",
+    "কসমেটিক্স অনলাইন",
+    "বাংলা কসমেটিক্স",
+    "Bangla Cosmetics",
+    "Cosmetics Bangladesh",
+    "Online Cosmetics Shop Bangladesh",
+    "স্কিনকেয়ার",
+    "মেকআপ",
+    "হেয়ারকেয়ার",
+    "পারফিউম",
+    "ফেস ওয়াশ",
+    "ময়শ্চারাইজার",
+    "লিপস্টিক",
+    "ফাউন্ডেশন",
+    "সানস্ক্রিন",
+    "হেয়ার অয়েল",
+    "বডি লোশন",
+    "বিউটি অ্যাক্সেসরিজ",
+    "অর্গানিক কসমেটিক্স",
+    "বাংলাদেশে কসমেটিক্স ডেলিভারি",
+    "ক্যাশ অন ডেলিভারি কসমেটিক্স",
+    "অনলাইনে কসমেটিক্স কিনুন বাংলাদেশ",
   ].join(", "),
   openGraph: {
-    title: "সিদ্দীকিয়া প্রকাশনী | সেরা ইসলামিক বইয়ের সমাহার",
-    description:
-      "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
-    url: "https://siddikiaprokashoni.com",
-    siteName: "সিদ্দীকিয়া প্রকাশনী",
+    title: `${SITE.nameBn} | ${SITE.taglineBn}`,
+    description: `${SITE.nameBn}তে আপনাদের স্বাগতম। ${SITE.descriptionBn}`,
+    url: SITE.baseUrl,
+    siteName: SITE.nameBn,
     locale: "bn_BD",
     type: "website",
     images: [
       {
-        url: "https://siddikiaprokashoni.com/logo/logo.webp",
-        alt: "সিদ্দীকিয়া প্রকাশনী",
+        url: `${SITE.baseUrl}${SITE.logoPath}`,
+        alt: SITE.nameBn,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "সিদ্দীকিয়া প্রকাশনী | সেরা ইসলামিক বইয়ের সমাহার",
-    description:
-      "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
-    images: ["https://siddikiaprokashoni.com/logo/logo.webp"],
+    title: `${SITE.nameBn} | ${SITE.taglineBn}`,
+    description: `${SITE.nameBn}তে আপনাদের স্বাগতম। ${SITE.descriptionBn}`,
+    images: [`${SITE.baseUrl}${SITE.logoPath}`],
   },
 };
 
@@ -107,16 +91,15 @@ const Home = async () => {
     tags: ["bestSellingProducts"],
   });
 
-  const bookstoreSchema = {
+  const storeSchema = {
     "@context": "https://schema.org",
-    "@type": ["BookStore", "OnlineStore"],
-    name: "সিদ্দীকিয়া প্রকাশনী",
-    description:
-      "সিদ্দীকিয়া প্রকাশনীতে আপনাদের স্বাগতম। এখানে পাবেন আহলে সুন্নাত ওয়াল জামাআতের আকিদা ভিত্তিক মানসম্পন্ন ইসলামিক বই ও মাদরাসার কিতাবসমূহ।",
-    url: "https://siddikiaprokashoni.com",
-    image: "https://siddikiaprokashoni.com/logo/logo.webp",
-    telephone: "+8801339955155",
-    email: "siddikiyaprokashoni@gmail.com",
+    "@type": ["Store", "OnlineStore"],
+    name: SITE.nameBn,
+    description: `${SITE.nameBn}তে আপনাদের স্বাগতম। ${SITE.descriptionBn}`,
+    url: SITE.baseUrl,
+    image: `${SITE.baseUrl}${SITE.logoPath}`,
+    telephone: SITE.phone,
+    email: SITE.email,
     priceRange: "৳৳",
     address: { "@type": "PostalAddress", addressCountry: "BD" },
     openingHoursSpecification: [
@@ -139,22 +122,22 @@ const Home = async () => {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "সিদ্দীকিয়া প্রকাশনী",
-    url: "https://siddikiaprokashoni.com",
+    name: SITE.nameBn,
+    url: SITE.baseUrl,
     inLanguage: "bn-BD",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://siddikiaprokashoni.com/shop?search={search_term_string}",
+      target: `${SITE.baseUrl}/shop?search={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
 
   return (
     <>
-      <JsonLd data={bookstoreSchema} />
+      <JsonLd data={storeSchema} />
       <JsonLd data={websiteSchema} />
       <h1 className="sr-only">
-        সিদ্দীকিয়া প্রকাশনী - সেরা ইসলামিক বইয়ের সমাহার
+        {SITE.nameBn} - {SITE.taglineBn}
       </h1>
       <Suspense fallback={<BannerSkeleton />}>
         <Banner promise={sliderBannerPromise} />

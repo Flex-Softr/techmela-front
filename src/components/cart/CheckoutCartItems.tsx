@@ -19,7 +19,7 @@ const CheckoutCartItems = () => {
       if (res?.success) {
         toast({
           title: res.message,
-          className: "bg-success text-white",
+          className: "bg-success text-primary-foreground",
         });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,7 +44,7 @@ const CheckoutCartItems = () => {
 
   if (!cartItems?.data?.length) {
     return (
-      <div className="p-4 text-center text-sm text-gray-500">
+      <div className="p-4 text-center text-sm text-muted-foreground">
         Your cart is empty
       </div>
     );

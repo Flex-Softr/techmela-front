@@ -31,7 +31,9 @@ const ProductTable = ({
   const router = useRouter();
 
   if (error) {
-    return <div className="text-center text-red-600 font-bold">{error}</div>;
+    return (
+      <div className="text-center text-destructive font-bold">{error}</div>
+    );
   }
 
   // Split products based on warranty status
@@ -51,7 +53,7 @@ const ProductTable = ({
       }
 
       const warrantyStatusClass =
-        remainingDays < 0 ? "text-red-500" : "text-green-500";
+        remainingDays < 0 ? "text-destructive" : "text-success";
 
       const handleSingleClaimClick = () => {
         const applicableCodes =
@@ -77,10 +79,10 @@ const ProductTable = ({
       const productRow = (
         <TableRow
           key={`${orderIndex}-${index}`}
-          className={orderIndex % 2 === 0 ? "bg-white" : "bg-gray-50"}
+          className={orderIndex % 2 === 0 ? "bg-background" : "bg-muted"}
         >
           <TableCell className="px-2 md:px-4 py-3">
-            <div className="w-12 h-12 md:w-16 md:h-16 relative border border-gray-100 rounded-md overflow-hidden bg-white">
+            <div className="w-12 h-12 md:w-16 md:h-16 relative border border-border rounded-md overflow-hidden bg-background">
               <Image
                 layout="fill"
                 objectFit="contain"
@@ -90,10 +92,10 @@ const ProductTable = ({
               />
             </div>
           </TableCell>
-          <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-semibold text-gray-800">
+          <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-semibold text-foreground">
             {product?.title}
             {product.attributes && (
-              <div className="text-[10px] md:text-xs text-gray-500 font-normal mt-1">
+              <div className="text-[10px] md:text-xs text-muted-foreground font-normal mt-1">
                 {Object.entries(product.attributes)
                   .map(([key, value]) => `${key}: ${value}`)
                   .join(", ")}
@@ -103,7 +105,7 @@ const ProductTable = ({
           <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-center font-medium">
             &#2547;{product?.unitPrice?.toLocaleString()}
           </TableCell>
-          <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-center text-gray-600">
+          <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-center text-muted-foreground">
             {product?.warranty
               ? `${product?.warranty?.startDate} — ${product?.warranty?.endsDate}`
               : "N/A"}
@@ -122,7 +124,7 @@ const ProductTable = ({
             {remainingDays >= 0 && (
               <button
                 onClick={handleSingleClaimClick}
-                className="bg-primary hover:bg-primary/90 text-white text-[10px] md:text-xs font-bold py-1.5 px-3 md:px-4 rounded transition-colors shadow-sm"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground text-[10px] md:text-xs font-bold py-1.5 px-3 md:px-4 rounded transition-colors shadow-sm"
               >
                 Claim
               </button>
@@ -165,7 +167,7 @@ const ProductTable = ({
     <div className="overflow-x-auto mt-10">
       {productsWithWarranty.length > 0 ? (
         <div className="space-y-6">
-          <div className="border border-border rounded-lg overflow-hidden shadow-sm bg-white w-full md:w-[97%] mx-auto">
+          <div className="border border-border rounded-lg overflow-hidden shadow-sm bg-background w-full md:w-[97%] mx-auto">
             <Table>
               <thead>{renderTableHeader()}</thead>
               <TableBody>{productsWithWarranty}</TableBody>
@@ -174,19 +176,19 @@ const ProductTable = ({
           {/* Claim All button removed correctly */}
         </div>
       ) : (
-        <p className="text-center text-red-600">
+        <p className="text-center text-destructive">
           No products with warranty available.
         </p>
       )}
 
       {productsWithoutWarranty.length > 0 ? (
         <>
-          <Table className="w-[90%] sm:w-[85%] mx-auto border-collapse border border-gray-300 mt-8">
+          <Table className="w-[90%] sm:w-[85%] mx-auto border-collapse border border-border mt-8">
             <thead>{renderTableHeader()}</thead>
             <TableBody>{productsWithoutWarranty}</TableBody>
           </Table>
           <div className="w-[90%] sm:w-[85%] mx-auto">
-            <p className="w-full p-2 font-bold text-sm md:text-xl text-red-600 text-center">
+            <p className="w-full p-2 font-bold text-sm md:text-xl text-destructive text-center">
               উক্ত পন্যের ওয়ারেন্টি নেই
             </p>
           </div>

@@ -100,8 +100,8 @@ const VariationSelector = ({
                           onClick={() => handleAttributeSelection(key, value)}
                           className={`relative py-1 px-2.5 border rounded-md text-sm font-medium transition-all h-7 flex justify-center items-center ${
                             isSelected
-                              ? "bg-primary text-white border-primary"
-                              : "bg-white text-gray-700 border-gray-200 hover:border-gray-400"
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-background text-foreground border-border hover:border-border"
                           }`}
                         >
                           {value}
@@ -117,7 +117,7 @@ const VariationSelector = ({
       </div>
 
       {errorMessage && (
-        <p className="text-red-500 text-sm font-semibold mt-2 mb-1">
+        <p className="text-destructive text-sm font-semibold mt-2 mb-1">
           {errorMessage}
         </p>
       )}

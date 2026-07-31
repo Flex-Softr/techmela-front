@@ -79,9 +79,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
         <div className="flex flex-col gap-2">
           <Label
             htmlFor={`${basePath}.division`}
-            className="font-semibold text-gray-700"
+            className="font-semibold text-foreground"
           >
-            বিভাগ <span className="text-red-600">*</span>
+            বিভাগ <span className="text-destructive">*</span>
           </Label>
           <select
             id={`${basePath}.division`}
@@ -94,7 +94,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
               setValue(`${basePath}.district` as Path<T>, "" as any); // Reset dependent
               setValue(`${basePath}.upazila` as Path<T>, "" as any);
             }}
-            className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm"
+            className="w-full h-10 px-3 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm"
           >
             <option value="">-- বিভাগ সিলেক্ট --</option>
             {divisions.map((d) => (
@@ -104,7 +104,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             ))}
           </select>
           {errorObj?.division && (
-            <span className="text-red-500 text-xs">
+            <span className="text-destructive text-xs">
               {(errorObj.division.message as string) || "বিভাগ সিলেক্ট করুন"}
             </span>
           )}
@@ -113,9 +113,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
       <div className="flex flex-col gap-2">
         <Label
           htmlFor={`${basePath}.district`}
-          className="font-semibold text-gray-700"
+          className="font-semibold text-foreground"
         >
-          জেলা <span className="text-red-600">*</span>
+          জেলা <span className="text-destructive">*</span>
         </Label>
         <select
           id={`${basePath}.district`}
@@ -128,7 +128,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             setValue(`${basePath}.upazila` as Path<T>, "" as any);
           }}
           disabled={showDivision && !division}
-          className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-gray-50 disabled:cursor-not-allowed"
+          className="w-full h-10 px-3 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-muted disabled:cursor-not-allowed"
         >
           <option value="">
             --{" "}
@@ -142,7 +142,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           ))}
         </select>
         {errorObj?.district && (
-          <span className="text-red-500 text-xs">
+          <span className="text-destructive text-xs">
             {(errorObj.district.message as string) || "জেলা সিলেক্ট করুন"}
           </span>
         )}
@@ -150,9 +150,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
       <div className="flex flex-col gap-2">
         <Label
           htmlFor={`${basePath}.upazila`}
-          className="font-semibold text-gray-700"
+          className="font-semibold text-foreground"
         >
-          থানা / উপজেলা <span className="text-red-600">*</span>
+          থানা / উপজেলা <span className="text-destructive">*</span>
         </Label>
         <select
           id={`${basePath}.upazila`}
@@ -164,7 +164,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             upazilaRegister.onChange(e);
           }}
           disabled={!district}
-          className="w-full h-10 px-3 border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-gray-50 disabled:cursor-not-allowed"
+          className="w-full h-10 px-3 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-muted disabled:cursor-not-allowed"
         >
           <option value="" className="lg:hidden">
             -- {district ? "থানা / উপজেলা সিলেক্ট" : "আগে জেলা সিলেক্ট"} --
@@ -179,7 +179,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           ))}
         </select>
         {errorObj?.upazila && (
-          <span className="text-red-500 text-xs">
+          <span className="text-destructive text-xs">
             {(errorObj.upazila.message as string) ||
               "থানা / উপজেলা সিলেক্ট করুন"}
           </span>

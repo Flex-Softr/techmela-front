@@ -16,7 +16,7 @@ const MainHeader = () => {
           <Link href="/">
             <Image
               src={logo}
-              alt="Siddikiya Prokashoni Logo"
+              alt="ShajGhor Logo"
               width={160}
               height={44}
               className="object-contain scale-[1.1]"

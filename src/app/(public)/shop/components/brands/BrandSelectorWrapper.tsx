@@ -1,5 +1,7 @@
 "use client";
-import GenericFilterPropsSelector, { TGenericItem } from "../GenericFilterPropsSelector";
+import GenericFilterPropsSelector, {
+  TGenericItem,
+} from "../GenericFilterPropsSelector";
 import TBrand from "@/types/brands/brands";
 import { useShopFilters } from "../ShopFiltersContext";
 
@@ -8,7 +10,7 @@ const BrandSelectorWrapper = ({ brands }: { brands: TBrand[] }) => {
 
   return (
     <GenericFilterPropsSelector
-      title="প্রকাশনী"
+      title="ব্র্যান্ড"
       items={brands as unknown as TGenericItem[]}
       selectedValues={selectedBrands}
       setSelectedValues={setSelectedBrands}

@@ -83,10 +83,7 @@ export default function ApplyCupon() {
         toast({
           title: "কুপন সফলভাবে প্রয়োগ করা হয়েছে",
           action: <ToastAction altText="Thanks">ধন্যবাদ</ToastAction>,
-          style: {
-            backgroundColor: "green",
-            color: "#fff",
-          },
+          className: "bg-success text-success-foreground border-none",
         });
       } else {
         const errorMessage = appliedCoupon?.errorMessages?.[0]?.message;
@@ -99,10 +96,6 @@ export default function ApplyCupon() {
               আবার চেষ্টা করুন
             </ToastAction>
           ),
-          style: {
-            backgroundColor: "#ff4d4f",
-            color: "#fff",
-          },
         });
 
         setApplied(false);
@@ -123,10 +116,6 @@ export default function ApplyCupon() {
             Try again
           </ToastAction>
         ),
-        style: {
-          backgroundColor: "#ff4d4f",
-          color: "#fff",
-        },
       });
     } finally {
       setLoading(false);
@@ -141,7 +130,7 @@ export default function ApplyCupon() {
             disabled={applied ? true : false}
             type="text"
             placeholder="যদি আপনার কাছে প্রোমো কোড থাকে, তবে এখানে লিখুন..."
-            className={`w-full ${errors.promoCode ? "ring-red-500" : ""}`}
+            className={`w-full ${errors.promoCode ? "ring-destructive" : ""}`}
             {...register("promoCode")}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -154,7 +143,7 @@ export default function ApplyCupon() {
         <Button
           type="button"
           onClick={handleSubmit(onSubmit)}
-          className="bg-primary text-white flex items-center"
+          className="bg-primary text-primary-foreground flex items-center"
           disabled={loading || applied}
         >
           {applied ? "Applied" : "Apply"}
@@ -162,7 +151,9 @@ export default function ApplyCupon() {
         </Button>
       </div>
       {errors.promoCode && (
-        <span className="text-red-500 text-sm">{errors.promoCode.message}</span>
+        <span className="text-destructive text-sm">
+          {errors.promoCode.message}
+        </span>
       )}
     </div>
   );

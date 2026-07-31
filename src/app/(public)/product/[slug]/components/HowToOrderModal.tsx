@@ -2,12 +2,12 @@
 
 import CommonModal from "@/components/shared/commonModal/CommonModal";
 import {
-  ShoppingCart,
-  UserCheck,
+  ArrowRight,
   CheckCircle,
   PackageCheck,
+  ShoppingCart,
   Truck,
-  ArrowRight,
+  UserCheck,
 } from "lucide-react";
 
 type Props = {
@@ -21,7 +21,7 @@ const steps = [
     id: 1,
     title: "ধাপ ১",
     description:
-      "পছন্দের বই কার্টে যোগ করুন এবং উপরের কার্ট আইকনে ক্লিক করে চেকআউট পেজে যান।",
+      "পছন্দের পণ্য কার্টে যোগ করুন এবং উপরের কার্ট আইকনে ক্লিক করে চেকআউট পেজে যান।",
     icon: <ShoppingCart className="h-6 w-6 text-primary" />,
   },
   {
@@ -45,7 +45,7 @@ const steps = [
   {
     id: 5,
     title: "ধাপ ৫",
-    description: "কুরিয়ারযোগে বই আপনার ঠিকানায় পৌঁছে যাবে।",
+    description: "কুরিয়ারযোগে পণ্য আপনার ঠিকানায় পৌঁছে যাবে।",
     icon: <Truck className="h-6 w-6 text-primary" />,
   },
 ];
@@ -56,12 +56,12 @@ export default function HowToOrderModal({ isOpen, onOpenChange }: Props) {
       open={isOpen}
       handleOpen={onOpenChange}
       modalTitle="অর্ডার কীভাবে করবেন?"
-      className="max-w-2xl w-full p-6 rounded-2xl bg-white shadow-2xl max-h-[90vh] overflow-y-auto"
+      className="max-w-2xl w-full p-6 rounded-2xl bg-background shadow-2xl max-h-[90vh] overflow-y-auto"
     >
       <div className="flex flex-col gap-6 py-4">
         <p className="text-muted-foreground text-center mb-4">
-          আমাদের ওয়েবসাইট থেকে বই অর্ডার করা খুবই সহজ। নিচের সহজ ধাপগুলো অনুসরণ
-          করুন:
+          আমাদের ওয়েবসাইট থেকে পণ্য অর্ডার করা খুবই সহজ। নিচের সহজ ধাপগুলো
+          অনুসরণ করুন:
         </p>
 
         <div className="space-y-4 sm:space-y-6 relative before:absolute before:left-8 before:top-4 before:bottom-4 before:w-0.5 before:bg-primary/10 before:hidden md:before:block">
@@ -76,7 +76,7 @@ export default function HowToOrderModal({ isOpen, onOpenChange }: Props) {
               </div>
 
               {/* Step Content */}
-              <div className="flex-1 pt-0.5 sm:pt-1 pb-3 sm:pb-4 border-b border-gray-100 group-last:border-none">
+              <div className="flex-1 pt-0.5 sm:pt-1 pb-3 sm:pb-4 border-b border-border group-last:border-none">
                 <h3 className="text-primary font-black text-base sm:text-lg mb-0.5 sm:mb-1 flex items-center gap-2">
                   {step.title}
                   {index < steps.length - 1 && (
@@ -93,7 +93,7 @@ export default function HowToOrderModal({ isOpen, onOpenChange }: Props) {
 
         <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
           <p className="text-sm font-bold text-primary">
-            যেকোনো সমস্যায় আমাদের কল করতে পারেন: ০১৩৩৯-৯৫৫১৫৫
+            যেকোনো সমস্যায় আমাদের কল করতে পারেন: 01710020030
           </p>
         </div>
       </div>

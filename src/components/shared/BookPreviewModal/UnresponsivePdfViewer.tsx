@@ -15,11 +15,11 @@ export default function PdfViewer({ url }: Props) {
   const pdfUrl = url.includes("#") ? url : `${url}#toolbar=0`;
 
   return (
-    <div className="flex w-full h-full flex-col bg-gray-100 relative overflow-hidden">
+    <div className="flex w-full h-full flex-col bg-muted relative overflow-hidden">
       {isLoading && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-muted-foreground bg-gray-100 z-20">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-muted-foreground bg-muted z-20">
           <Loader2 className="animate-spin text-primary" size={32} />
-          <p className="font-semibold text-sm">বই লোড হচ্ছে...</p>
+          <p className="font-semibold text-sm">প্রিভিউ লোড হচ্ছে...</p>
         </div>
       )}
 

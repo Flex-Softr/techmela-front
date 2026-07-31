@@ -3,7 +3,7 @@ import serverSideFetcher from "@/utilities/serverSideFetcher";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://siddikiaprokashoni.com";
+  const baseUrl = "https://shajghor.com";
   const sanitize = (val: string) =>
     val
       ? val

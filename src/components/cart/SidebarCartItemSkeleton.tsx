@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const SidebarCartItemSkeleton = () => {
   return (
-    <div className="flex gap-3 relative py-3 px-2 bg-white rounded-xl shadow-sm border border-gray-100">
+    <div className="flex gap-3 relative py-3 px-2 bg-background rounded-xl shadow-sm border border-border">
       <Skeleton className="w-16 h-16 flex-shrink-0 rounded-md" />
       <div className="flex-1 flex flex-col justify-center gap-2 min-w-0">
         <Skeleton className="h-4 w-3/4" />

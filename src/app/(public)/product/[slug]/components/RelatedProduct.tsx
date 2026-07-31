@@ -26,7 +26,7 @@ const RelatedProduct = async ({ slug }: TRelatedProductProps) => {
         href="/shop"
         linkText="সবগুলো দেখুন"
       />
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-5 justify-between mt-5">
+      <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 lg:gap-3">
         {products?.map((product) => (
           <ProductCard product={product} key={product._id} />
         ))}

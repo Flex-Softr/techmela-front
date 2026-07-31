@@ -1,5 +1,6 @@
 "use client";
 
+import { SITE } from "@/const/site.const";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -36,16 +37,16 @@ const FloatingContact = () => {
     {
       name: "WhatsApp",
       icon: "/images/social_icons/whatsapp.webp",
-      link: "http://wa.me/8801339955155", // Replace with your WhatsApp number
-      bgColor: "bg-green-500",
-      hoverColor: "hover:bg-green-600",
+      link: `https://wa.me/${SITE.phone.replace("+", "")}`,
+      bgColor: "bg-success",
+      hoverColor: "hover:bg-success/90",
     },
     {
       name: "Facebook",
       icon: "/images/social_icons/facebook.webp",
-      link: "https://www.facebook.com/siddikiyaprokashoni", // Replace with your Facebook page username
-      bgColor: "bg-blue-500",
-      hoverColor: "hover:bg-blue-600",
+      link: SITE.social.facebook,
+      bgColor: "bg-primary",
+      hoverColor: "hover:bg-primary/90",
     },
   ];
 
@@ -60,13 +61,13 @@ const FloatingContact = () => {
         onClick={toggleExpand}
         className={`size-[50px] rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 flex items-center justify-center pointer-events-auto z-50 ${
           isExpanded
-            ? "bg-red-500 hover:bg-red-600 rotate-45"
-            : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+            ? "bg-destructive hover:bg-destructive/90 rotate-45"
+            : "bg-primary hover:bg-primary/90"
         }`}
         aria-label="Toggle contact options"
       >
         <svg
-          className="w-6 h-6 text-white transition-transform duration-300"
+          className="w-6 h-6 text-primary-foreground transition-transform duration-300"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -103,7 +104,7 @@ const FloatingContact = () => {
             href={option.link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-3 ${option.bgColor} ${option.hoverColor} text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 group`}
+            className={`flex items-center gap-3 ${option.bgColor} ${option.hoverColor} text-primary-foreground px-4 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 group`}
             style={{
               transitionDelay: isExpanded ? `${index * 50}ms` : "0ms",
             }}

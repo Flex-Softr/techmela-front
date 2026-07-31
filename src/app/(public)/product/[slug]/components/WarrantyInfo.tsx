@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { SITE } from "@/const/site.const";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
@@ -32,7 +33,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
   return (
     <div className="flex items-center gap-3">
       {warrantyInfo?.duration ? (
-        <span className="text-gray-700 font-medium text-sm">
+        <span className="text-foreground font-medium text-sm">
           {renderDuration(warrantyInfo.duration)}
         </span>
       ) : (
@@ -41,7 +42,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
         </span>
       )}
       <button
-        className="px-3 py-0.5 text-xs font-semibold text-secondary bg-transparent hover:bg-secondary hover:text-white rounded-md transition-colors border border-secondary"
+        className="px-3 py-0.5 text-xs font-semibold text-secondary bg-transparent hover:bg-secondary hover:text-primary-foreground rounded-md transition-colors border border-secondary"
         onClick={openModal}
       >
         View Details
@@ -51,7 +52,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="w-[90%] lg:w-[80%] max-w-4xl h-[80vh] md:h-[90vh] overflow-hidden rounded-lg shadow-lg">
           <DialogHeader className="flex items-center justify-between  border-b">
-            <DialogTitle className="text-xl font-semibold text-gray-800">
+            <DialogTitle className="text-xl font-semibold text-foreground">
               Warranty Information
             </DialogTitle>
           </DialogHeader>
@@ -59,11 +60,11 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
           <div className="h-full overflow-y-auto space-y-2">
             {/* Warranty Description */}
             <DialogDescription>
-              <div className="space-y-4 text-gray-700">
+              <div className="space-y-4 text-foreground">
                 <p>
                   প্রিয় গ্রাহক, <br />
-                  আমাদের পণ্যের উপর আপনার আস্থা এবং সন্তুষ্টি নিশ্চিত করাই Nora
-                  life style-এর প্রধান লক্ষ্য। আমাদের প্রতিটি প্রোডাক্টে একটি
+                  আমাদের পণ্যের উপর আপনার আস্থা এবং সন্তুষ্টি নিশ্চিত করাই{" "}
+                  {SITE.nameBn}-এর প্রধান লক্ষ্য। আমাদের প্রতিটি প্রোডাক্টে একটি
                   ওয়ারেন্টি কোড নম্বর রয়েছে। যার মাধ্যমে নির্দিষ্ট ওয়ারেন্টি
                   মেয়াদের ভিতরে আপনার প্রোডাক্টটি যদি নষ্ট হয়, তাহলে খুব সহজে
                   ওয়ারেন্টির সুবিধা গ্রহণ করতে নিচের নির্দেশনা অনুসরণ করুন:
@@ -100,12 +101,12 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
 
             {/* Video Section */}
             <div>
-              <p className="text-sm md:text-lg font-medium text-gray-800 mb-2">
+              <p className="text-sm md:text-lg font-medium text-foreground mb-2">
                 এছাড়াও খুব সহজে ওয়েবসাইটের মাধ্যমে ওয়ারেন্টি সুবিধা গ্রহণ করতে
                 নিচের Link টি click করুন।
               </p>
               <Link href="/warranty/find-your-product" target="_blank">
-                <EcButton className="bg-secondary text-white flex items-center gap-2 mt-4 hover:bg-secondary/90 transition-all font-semibold px-6 py-2 h-auto text-base">
+                <EcButton className="bg-secondary text-primary-foreground flex items-center gap-2 mt-4 hover:bg-secondary/90 transition-all font-semibold px-6 py-2 h-auto text-base">
                   ওয়ারেন্টি ক্লেইম করুন <FaArrowRight size={16} />
                 </EcButton>
               </Link>
@@ -124,7 +125,7 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
                 <p className="text-base md:text-lg">
                   আপনার সন্তুষ্টিই আমাদের অনুপ্রেরণা।
                 </p>
-                <p className="font-bold text-base">সিদ্দীকিয়া প্রকাশনী</p>
+                <p className="font-bold text-base">ShajGhor</p>
                 <p className="font-semibold">&quot;বিশ্বাসের প্রতীক&quot;</p>
               </div>
             </div>

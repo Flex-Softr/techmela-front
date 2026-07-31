@@ -19,7 +19,7 @@ export default function Error({ error, reset }: TProps) {
       <p>Contact Us</p>
       <div className="space-x-5">
         <button
-          className="text-white py-1 px-4 bg-primary rounded-md"
+          className="text-primary-foreground py-1 px-4 bg-primary rounded-md"
           onClick={
             // Attempt to recover by trying to re-render the segment
             () => reset()
@@ -27,7 +27,10 @@ export default function Error({ error, reset }: TProps) {
         >
           Try again
         </button>
-        <Link href="/" className="text-white py-1 px-4 bg-primary rounded-md">
+        <Link
+          href="/"
+          className="text-primary-foreground py-1 px-4 bg-primary rounded-md"
+        >
           Return Home
         </Link>
       </div>

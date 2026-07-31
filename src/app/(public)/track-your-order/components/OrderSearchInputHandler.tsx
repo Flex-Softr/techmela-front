@@ -26,9 +26,9 @@ const OrderSearchInputHandler = () => {
   };
 
   return (
-    <section className="py-6 bg-gray-50/50 min-h-[80vh] flex items-center">
+    <section className="py-6 bg-muted/50 min-h-[80vh] flex items-center">
       <ContainerMax>
-        <div className="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-border/50">
+        <div className="max-w-xl mx-auto bg-background p-6 md:p-8 rounded-3xl shadow-sm border border-border/50">
           <div className="text-center mb-7">
             <h2 className="text-3xl font-bold text-foreground mb-3">
               অর্ডার ট্র্যাক করুন
@@ -49,7 +49,7 @@ const OrderSearchInputHandler = () => {
               <Input
                 {...register("orderId", { required: true })}
                 id="orderId"
-                className="w-full h-12 rounded-xl border-border/60 bg-gray-50/30 focus:bg-white transition-all text-lg font-mono placeholder:font-sans"
+                className="w-full h-12 rounded-xl border-border/60 bg-muted/30 focus:bg-background transition-all text-lg font-mono placeholder:font-sans"
                 type="text"
                 placeholder="অর্ডার নিশ্চিতকরণ মেসেজ থেকে আইডিটি দিন"
               />
@@ -61,7 +61,7 @@ const OrderSearchInputHandler = () => {
             </div>
 
             <EcButton
-              className="w-full h-12 text-white text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
+              className="w-full h-12 text-primary-foreground text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
               type="submit"
             >
               ট্র্যাকিং শুরু করুন

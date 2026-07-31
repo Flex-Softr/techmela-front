@@ -41,7 +41,7 @@ const OrderDetails = () => {
 
   if (!isMounted || isLoading) {
     return (
-      <div className="flex items-center justify-center py-20 text-gray-500">
+      <div className="flex items-center justify-center py-20 text-muted-foreground">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
           <span className="text-lg font-medium">
@@ -55,8 +55,10 @@ const OrderDetails = () => {
   if (isError || !data) {
     return (
       <div className="text-center py-20">
-        <h2 className="text-xl font-bold text-gray-800">Error fetching data</h2>
-        <p className="text-gray-500 mt-2">
+        <h2 className="text-xl font-bold text-foreground">
+          Error fetching data
+        </h2>
+        <p className="text-muted-foreground mt-2">
           We couldn&apos;t load the order details. Please try again later.
         </p>
         <Button
@@ -89,48 +91,50 @@ const OrderDetails = () => {
           variant="ghost"
           size="sm"
           onClick={() => router.back()}
-          className="group flex items-center gap-1.5 text-gray-600 hover:text-primary transition-colors text-sm h-9"
+          className="group flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors text-sm h-9"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           অর্ডারে ফিরুন
         </Button>
-        <div className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full">
+        <div className="text-sm font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-full">
           অর্ডার ID: #{orderId}
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Order Summary */}
-        <Card className="shadow-sm border-gray-100">
-          <CardHeader className="py-3 px-4 border-b border-gray-100">
-            <CardTitle className="text-base font-semibold text-gray-800 flex items-center gap-2">
+        <Card className="shadow-sm border-border">
+          <CardHeader className="py-3 px-4 border-b border-border">
+            <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
               <Package className="w-5 h-5 text-primary" />
               অর্ডার সারসংক্ষেপ
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-2.5">
             <div className="flex justify-between">
-              <span className="text-sm text-gray-500">পেমেন্ট পদ্ধতি</span>
-              <span className="text-sm font-semibold text-gray-800">
+              <span className="text-sm text-muted-foreground">
+                পেমেন্ট পদ্ধতি
+              </span>
+              <span className="text-sm font-semibold text-foreground">
                 {payment?.paymentMethod?.name || "N/A"}
               </span>
             </div>
-            <div className="flex justify-between border-t border-gray-50 pt-2.5">
-              <span className="text-sm text-gray-500">সাবটোটাল</span>
-              <span className="text-sm font-semibold text-gray-800">
+            <div className="flex justify-between border-t border-border pt-2.5">
+              <span className="text-sm text-muted-foreground">সাবটোটাল</span>
+              <span className="text-sm font-semibold text-foreground">
                 &#2547;{subtotal}
               </span>
             </div>
-            <div className="flex justify-between border-t border-gray-50 pt-2.5">
-              <span className="text-sm text-gray-500">
+            <div className="flex justify-between border-t border-border pt-2.5">
+              <span className="text-sm text-muted-foreground">
                 শিপিং চার্জ ({shippingCharge?.name})
               </span>
-              <span className="text-sm font-semibold text-gray-800">
+              <span className="text-sm font-semibold text-foreground">
                 &#2547;{shippingCharge?.amount}
               </span>
             </div>
-            <div className="flex justify-between border-t border-gray-100 pt-2.5">
-              <span className="text-gray-700 font-bold text-base">
+            <div className="flex justify-between border-t border-border pt-2.5">
+              <span className="text-foreground font-bold text-base">
                 মোট পরিমাণ
               </span>
               <span className="text-primary font-bold text-base">
@@ -141,29 +145,31 @@ const OrderDetails = () => {
         </Card>
 
         {/* Shipping Address */}
-        <Card className="shadow-sm border-gray-100">
-          <CardHeader className="py-3 px-4 border-b border-gray-100">
-            <CardTitle className="text-base font-semibold text-gray-800 flex items-center gap-2">
+        <Card className="shadow-sm border-border">
+          <CardHeader className="py-3 px-4 border-b border-border">
+            <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
               <MapPin className="w-5 h-5 text-primary" />
               শিপিং এড্রেস
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-2">
-            <p className="font-semibold text-base text-gray-900">
+            <p className="font-semibold text-base text-foreground">
               {shipping?.fullName}
             </p>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               {shipping?.fullAddress}
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               ফোন: {shipping?.phoneNumber}
             </p>
             {shipping?.email && (
-              <p className="text-sm text-gray-500">ইমেইল: {shipping?.email}</p>
+              <p className="text-sm text-muted-foreground">
+                ইমেইল: {shipping?.email}
+              </p>
             )}
-            <div className="pt-3 border-t border-gray-50 mt-2 flex flex-col gap-3">
+            <div className="pt-3 border-t border-border mt-2 flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                   অর্ডার অবস্থা
                 </span>
                 {(() => {
@@ -192,9 +198,9 @@ const OrderDetails = () => {
       </div>
 
       {/* Product Information */}
-      <Card className="shadow-sm border-gray-100 overflow-hidden">
-        <CardHeader className="py-3 px-4 border-b border-gray-100 bg-gray-50/30">
-          <CardTitle className="text-base font-semibold text-gray-800 flex items-center gap-2">
+      <Card className="shadow-sm border-border overflow-hidden">
+        <CardHeader className="py-3 px-4 border-b border-border bg-muted/30">
+          <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-primary" />
             এই অর্ডারের পণ্যসমূহ
           </CardTitle>
@@ -203,17 +209,17 @@ const OrderDetails = () => {
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-gray-50/50 hover:bg-gray-50/50">
-                  <TableHead className="font-bold text-gray-700 py-3 px-4 text-sm">
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
+                  <TableHead className="font-bold text-foreground py-3 px-4 text-sm">
                     পণ্য
                   </TableHead>
-                  <TableHead className="font-bold text-gray-700 py-3 px-4 text-sm">
+                  <TableHead className="font-bold text-foreground py-3 px-4 text-sm">
                     পরিমাণ
                   </TableHead>
-                  <TableHead className="font-bold text-gray-700 py-3 px-4 text-sm text-right">
+                  <TableHead className="font-bold text-foreground py-3 px-4 text-sm text-right">
                     একক মূল্য
                   </TableHead>
-                  <TableHead className="font-bold text-gray-700 py-3 px-4 text-sm text-right">
+                  <TableHead className="font-bold text-foreground py-3 px-4 text-sm text-right">
                     মোট
                   </TableHead>
                 </TableRow>
@@ -227,11 +233,11 @@ const OrderDetails = () => {
                   return (
                     <TableRow
                       key={item.productId || index}
-                      className="border-gray-100 transition-colors"
+                      className="border-border transition-colors"
                     >
                       <TableCell className="py-3 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-gray-100 bg-gray-50 shrink-0">
+                          <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-border bg-muted shrink-0">
                             <Image
                               fill
                               src={getImageSrc(item?.image?.src)}
@@ -240,7 +246,7 @@ const OrderDetails = () => {
                             />
                           </div>
                           <div className="flex flex-col min-w-0">
-                            <span className="text-sm font-medium text-gray-900 line-clamp-2">
+                            <span className="text-sm font-medium text-foreground line-clamp-2">
                               {item?.title || "Unknown Product"}
                             </span>
                             {variation && (
@@ -253,7 +259,7 @@ const OrderDetails = () => {
                                 ).map(([key, value]) => (
                                   <span
                                     key={key}
-                                    className="inline-flex items-center rounded bg-gray-50 px-2 py-1 text-xs text-gray-600 ring-1 ring-inset ring-gray-500/10 capitalize"
+                                    className="inline-flex items-center rounded bg-muted px-2 py-1 text-xs text-muted-foreground ring-1 ring-inset ring-gray-500/10 capitalize"
                                   >
                                     {key}: {value}
                                   </span>
@@ -263,13 +269,13 @@ const OrderDetails = () => {
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell className="py-4 px-4 text-sm text-gray-600 font-medium text-center">
+                      <TableCell className="py-4 px-4 text-sm text-muted-foreground font-medium text-center">
                         {item.quantity}
                       </TableCell>
-                      <TableCell className="py-4 px-4 text-sm text-right text-gray-600">
+                      <TableCell className="py-4 px-4 text-sm text-right text-muted-foreground">
                         &#2547;{item.unitPrice}
                       </TableCell>
-                      <TableCell className="py-4 px-4 text-sm text-right font-bold text-gray-900">
+                      <TableCell className="py-4 px-4 text-sm text-right font-bold text-foreground">
                         &#2547;{item.total}
                       </TableCell>
                     </TableRow>

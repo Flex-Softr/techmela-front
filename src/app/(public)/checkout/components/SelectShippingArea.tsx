@@ -43,7 +43,7 @@ const SelectShippingMethod = ({
             className={`flex items-center p-3 rounded-md border transition-all cursor-pointer ${
               selectedShipping._id === item?._id
                 ? "border-primary bg-primary/5"
-                : "border-gray-200 hover:border-primary/30"
+                : "border-border hover:border-primary/30"
             }`}
             onClick={() => handleShippingChargeChange(item?._id, item?.amount)}
           >

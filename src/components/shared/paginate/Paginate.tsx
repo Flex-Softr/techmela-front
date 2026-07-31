@@ -123,7 +123,7 @@ const Paginate = ({
                       e.preventDefault();
                       handlePageChange(item);
                     }}
-                    className={`${selectedPage === item ? "bg-primary text-white" : ""}`}
+                    className={`${selectedPage === item ? "bg-primary text-primary-foreground" : ""}`}
                   >
                     {item}
                   </PaginationLink>

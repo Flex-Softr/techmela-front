@@ -16,7 +16,7 @@ const ErrorMessage = ({
   return (
     <p
       className={twMerge(
-        "text-red-600 font-bold pl-2 !mt-2 text-sm",
+        "text-destructive font-bold pl-2 !mt-2 text-sm",
         className
       )}
     >

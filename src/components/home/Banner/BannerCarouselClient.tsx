@@ -82,8 +82,8 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
 
         {sliders.length > 1 && (
           <div className="absolute inset-0 pointer-events-none">
-            <CarouselPrevious className="pointer-events-auto disabled:pointer-events-auto absolute -left-2 md:-left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-white text-primary border border-primary/50 h-8 w-8 md:h-11 md:w-11 shadow-xl transition-all flex items-center justify-center z-30 ring-2 ring-primary/5" />
-            <CarouselNext className="pointer-events-auto disabled:pointer-events-auto absolute -right-2 md:-right-4 left-auto md:left-auto top-1/2 -translate-y-1/2 bg-white hover:bg-white text-primary border border-primary/50 h-8 w-8 md:h-11 md:w-11 shadow-xl transition-all flex items-center justify-center z-30 ring-2 ring-primary/5" />
+            <CarouselPrevious className="pointer-events-auto disabled:pointer-events-auto absolute -left-2 md:-left-4 top-1/2 -translate-y-1/2 bg-background hover:bg-background text-primary border border-primary/50 h-8 w-8 md:h-11 md:w-11 shadow-xl transition-all flex items-center justify-center z-30 ring-2 ring-primary/5" />
+            <CarouselNext className="pointer-events-auto disabled:pointer-events-auto absolute -right-2 md:-right-4 left-auto md:left-auto top-1/2 -translate-y-1/2 bg-background hover:bg-background text-primary border border-primary/50 h-8 w-8 md:h-11 md:w-11 shadow-xl transition-all flex items-center justify-center z-30 ring-2 ring-primary/5" />
           </div>
         )}
       </Carousel>
@@ -96,10 +96,10 @@ const ClientBannerCarousel: React.FC<ClientBannerCarouselProps> = ({
               key={index}
               onClick={() => api?.scrollTo(index)}
               className={cn(
-                "h-1.5 rounded-full transition-all duration-300 border border-white/20 shadow-sm",
+                "h-1.5 rounded-full transition-all duration-300 border border-primary-foreground/20 shadow-sm",
                 current === index
                   ? "w-8 bg-primary shadow-[0_0_10px_rgba(255,255,255,0.3)]"
-                  : "w-2 bg-white/60 hover:bg-white/90"
+                  : "w-2 bg-background/60 hover:bg-background/90"
               )}
               aria-label={`Go to slide ${index + 1}`}
             />

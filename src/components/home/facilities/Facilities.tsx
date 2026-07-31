@@ -15,7 +15,7 @@ const facilities = [
   {
     icon: <Headphones className="w-8 h-8 text-primary" />,
     title: "সহজ যোগাযোগ",
-    description: "যেকোনো প্রয়োজনে কল করুনঃ ০১৩৩৯-৯৫৫১৫৫",
+    description: "যেকোনো প্রয়োজনে কল করুনঃ 01710020030",
   },
   {
     icon: <RotateCcw className="w-8 h-8 text-primary" />,
@@ -32,7 +32,7 @@ const Facilities = () => {
           {facilities.map((item, index) => (
             <div
               key={index}
-              className="group p-3 md:p-4 bg-white rounded-xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/20 transition-all duration-300 flex flex-col items-center text-center"
+              className="group p-3 md:p-4 bg-background rounded-xl shadow-sm border border-border/50 hover:shadow-md hover:border-primary/20 transition-all duration-300 flex flex-col items-center text-center"
             >
               <div className="mb-1 md:mb-2 p-1.5 md:p-2 bg-primary/5 rounded-full group-hover:scale-110 transition-transform duration-300">
                 {/* Scale icon down slightly for mobile */}

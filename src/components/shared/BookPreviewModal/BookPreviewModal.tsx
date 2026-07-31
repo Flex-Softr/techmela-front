@@ -15,7 +15,7 @@ export default function BookPreviewModal({
   isOpen,
   onOpenChange,
   previewLink,
-  title = "একটু পড়ুন",
+  title = "বিস্তারিত দেখুন",
 }: Props) {
   const isIframeDomain =
     previewLink?.includes("drive.google.com") ||
@@ -26,9 +26,9 @@ export default function BookPreviewModal({
       open={isOpen}
       handleOpen={onOpenChange}
       modalTitle={`প্রিভিউ: ${title}`}
-      className="max-w-[98vw] md:max-w-6xl w-full max-h-[95vh] p-2 md:p-6 overflow-hidden rounded-xl bg-white"
+      className="max-w-[98vw] md:max-w-6xl w-full max-h-[95vh] p-2 md:p-6 overflow-hidden rounded-xl bg-background"
     >
-      <div className="w-full h-[82vh] md:h-[80vh] bg-gray-100 rounded-md overflow-hidden relative flex flex-col">
+      <div className="w-full h-[82vh] md:h-[80vh] bg-muted rounded-md overflow-hidden relative flex flex-col">
         {previewLink ? (
           isIframeDomain ? (
             <iframe
@@ -42,9 +42,9 @@ export default function BookPreviewModal({
           )
         ) : (
           <div className="flex-1 flex items-center justify-center text-muted-foreground p-8 text-center flex-col gap-4">
-            <span className="text-4xl">📚</span>
+            <span className="text-4xl">✨</span>
             <p className="text-lg font-medium">
-              দুঃখিত, এই বইয়ের কোনো প্রিভিউ বর্তমানে উপলব্ধ নেই।
+              দুঃখিত, এই পণ্যের কোনো প্রিভিউ বর্তমানে উপলব্ধ নেই।
             </p>
           </div>
         )}

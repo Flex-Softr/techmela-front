@@ -35,13 +35,14 @@ const ProductSorter = () => {
     <div className="flex items-center justify-between gap-3 mb-5 px-1 font-hind-siliguri">
       {!isCategoryPage && (
         <p className="text-sm text-muted-foreground">
-          <span className="font-bold text-gray-800">{totalProducts}</span> টি বই
+          <span className="font-bold text-foreground">{totalProducts}</span> টি
+          পণ্য
         </p>
       )}
 
       <div className="ml-auto">
         <Select value={currentSort} onValueChange={handleSortChange}>
-          <SelectTrigger className="w-[170px] h-9 bg-white border border-border rounded-lg text-sm font-medium focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-primary/50 focus:outline-none transition-all hover:border-primary/30">
+          <SelectTrigger className="w-[170px] h-9 bg-background border border-border rounded-lg text-sm font-medium focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-primary/50 focus:outline-none transition-all hover:border-primary/30">
             <SelectValue placeholder="সাজান" />
           </SelectTrigger>
           <SelectContent className="rounded-xl font-hind-siliguri">

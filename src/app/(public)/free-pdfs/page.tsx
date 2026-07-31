@@ -7,16 +7,16 @@ import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import JsonLd from "@/components/shared/JsonLd";
 import { Card, CardContent } from "@/components/ui/card";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
-import { BookOpen, Search, Download } from "lucide-react";
+import { Sparkles, Search, Download } from "lucide-react";
 import { Metadata } from "next";
 import { getImageSrc } from "@/lib/utils";
 
 type TSearchParams = Record<string, string | string[] | undefined>;
 
 export const metadata: Metadata = {
-  title: "ফ্রি পিডিএফ",
+  title: "বিউটি গাইড",
   description:
-    "সিদ্ধিকিয়া প্রকাশনীর ফ্রি পিডিএফ বিভাগে স্বাগতম! এখানে আপনি বিভিন্ন ইসলামিক বইয়ের ফ্রি পিডিএফ ডাউনলোড করতে পারবেন।",
+    "ShajGhorর বিউটি গাইড বিভাগে স্বাগতম! এখানে আপনি স্কিনকেয়ার, মেকআপ ও হেয়ারকেয়ার বিষয়ক বিভিন্ন ফ্রি বিউটি গাইড ডাউনলোড করতে পারবেন।",
   alternates: {
     canonical: `${SITE_URL}/free-pdfs`,
   },
@@ -50,11 +50,11 @@ function FreePdfCard({ item }: { item: TBookPreview }) {
   const fileUrl = getImageSrc(item.src);
 
   return (
-    <Card className="overflow-hidden rounded-lg border bg-white shadow-sm transition-shadow hover:shadow-md">
+    <Card className="overflow-hidden rounded-lg border bg-background shadow-sm transition-shadow hover:shadow-md">
       <CardContent className="flex flex-col gap-4 p-5 h-full">
         <div className="flex items-start gap-4">
           <div className="rounded-md bg-primary/10 p-3 text-primary">
-            <BookOpen className="h-6 w-6" />
+            <Sparkles className="h-6 w-6" />
           </div>
           <div className="flex-1 space-y-1">
             <h2 className="line-clamp-2 text-lg font-bold text-primary">
@@ -74,7 +74,7 @@ function FreePdfCard({ item }: { item: TBookPreview }) {
             href={fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-md bg-primary/5 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-primary/5 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             <Download className="h-4 w-4" />
             ডাউনলোড করুন
@@ -106,21 +106,21 @@ export default async function FreePdfsPage({
   return (
     <>
       <JsonLd data={collectionJsonLd} />
-      <div className="bg-[#f7faf7] min-h-screen">
-        <section className="border-b bg-white">
+      <div className="bg-muted min-h-screen">
+        <section className="border-b bg-background">
           <ContainerMax className="py-4 md:py-6">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                <BookOpen className="h-4 w-4" />
-                ফ্রি পিডিএফ
+                <Sparkles className="h-4 w-4" />
+                বিউটি গাইড
               </div>
               <h1 className="text-3xl font-bold tracking-tight text-primary md:text-4xl">
-                ফ্রি পিডিএফ সংগ্রহ
+                বিউটি গাইড সংগ্রহ
               </h1>
               <p className="text-base leading-7 text-muted-foreground md:text-lg">
-                সিদ্ধিকিয়া প্রকাশনীর পক্ষ থেকে আপনাদের জন্য কিছু বিশেষ বইয়ের
-                ফ্রি পিডিএফ। এগুলো ডাউনলোড করে পড়তে পারেন এবং অন্যদের সাথে
-                শেয়ার করতে পারেন।
+                ShajGhorর পক্ষ থেকে আপনাদের জন্য কিছু বিশেষ ফ্রি বিউটি গাইড।
+                এগুলো ডাউনলোড করে পড়তে পারেন এবং অন্যদের সাথে শেয়ার করতে
+                পারেন।
               </p>
             </div>
           </ContainerMax>
@@ -130,7 +130,7 @@ export default async function FreePdfsPage({
           <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start">
             <form
               action="/free-pdfs"
-              className="rounded-lg border bg-white p-3 shadow-sm"
+              className="rounded-lg border bg-background p-3 shadow-sm"
             >
               <label className="relative block">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -138,7 +138,7 @@ export default async function FreePdfsPage({
                   name="search"
                   defaultValue={search}
                   placeholder="পিডিএফ খুঁজুন..."
-                  className="h-10 w-full rounded-md border bg-white pl-9 pr-3 text-sm outline-none focus:border-primary"
+                  className="h-10 w-full rounded-md border bg-background pl-9 pr-3 text-sm outline-none focus:border-primary"
                 />
               </label>
             </form>

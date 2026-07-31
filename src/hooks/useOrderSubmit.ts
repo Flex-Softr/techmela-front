@@ -53,7 +53,7 @@ const useOrderSubmit = ({
       setErrorMessages([message]);
       toast({
         title: "Your cart is empty",
-        className: "bg-red-500 text-white",
+        className: "bg-destructive/100 text-primary-foreground",
       });
       return;
     }
@@ -169,7 +169,7 @@ const useOrderSubmit = ({
 
         toast({
           title: "Thank you! Your order was successfully placed",
-          className: "bg-success text-white",
+          className: "bg-success text-primary-foreground",
         });
 
         dispatch(resetCoupon());

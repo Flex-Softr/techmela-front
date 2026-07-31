@@ -1,7 +1,7 @@
 "use client";
 import Quantity from "@/app/(public)/checkout/components/Quantity";
 import EcButton from "@/components/shared/EcButton/EcButton";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingBag, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 
@@ -37,15 +37,15 @@ const AddToCartAndBuyNow = ({
     <div className="mt-4 flex flex-col md:flex-row gap-3">
       {/* Row 1 (Mobile) / Left (Desktop): Quantity and Add to Cart */}
       <div className="flex items-center gap-2 sm:gap-3 w-full md:w-auto md:flex-1">
-        <div className="flex items-center shrink-0 gap-1 sm:gap-2 bg-gray-50/50 p-1 px-2 sm:px-3 rounded-lg border border-gray-100 h-[40px] sm:h-[42px]">
-          <span className="text-xs sm:text-sm font-semibold text-gray-700">
+        <div className="flex items-center shrink-0 gap-1 sm:gap-2 bg-muted/50 p-1 px-2 sm:px-3 rounded-lg border border-border h-[40px] sm:h-[42px]">
+          <span className="text-xs sm:text-sm font-semibold text-foreground">
             পরিমাণ:
           </span>
           <Quantity quantity={quantity} setQuantity={setQuantity} />
         </div>
 
         <EcButton
-          className="flex-grow h-[40px] sm:h-[42px] px-2 sm:px-4 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 text-[13px] sm:text-base whitespace-nowrap"
+          className="flex-grow h-[40px] sm:h-[42px] px-2 sm:px-4 text-primary-foreground font-semibold rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 text-[13px] sm:text-base whitespace-nowrap"
           onClick={handleAddToCart}
           disabled={isDisabled || isAddToCartLoading}
           id="addToCart"
@@ -57,16 +57,17 @@ const AddToCartAndBuyNow = ({
 
       {/* Row 2 (Mobile) / Right (Desktop): Buy Now */}
       <EcButton
-        className="w-full md:w-auto md:flex-1 h-[40px] sm:h-[42px] px-3 sm:px-4 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 text-[15px] sm:text-base"
+        className="w-full md:w-auto md:flex-1 h-[40px] sm:h-[42px] px-3 sm:px-4 font-semibold rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 text-[15px] sm:text-base"
         onClick={handleBuyNow}
         disabled={isDisabled || isAddToCartLoading}
         variant="secondary"
       >
+        <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
         অর্ডার করুন
       </EcButton>
       {/* 
       {isDisabled && (
-        <div className="bg-red-50 text-red-600 text-sm font-medium px-4 py-2 rounded-lg border border-red-100 animate-in fade-in slide-in-from-top-1">
+        <div className="bg-destructive/10 text-destructive text-sm font-medium px-4 py-2 rounded-lg border border-destructive/20 animate-in fade-in slide-in-from-top-1">
           {disabledReason || "Please select a variation"}
         </div>
       )} */}

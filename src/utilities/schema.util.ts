@@ -9,6 +9,7 @@ import {
 } from "@/app/(public)/_components/blog-qna/utils";
 import { asPlainText } from "@/app/(public)/_components/blog-qna/BlogQnaCards";
 import { Metadata } from "next";
+import { SITE } from "@/const/site.const";
 
 export const generateProductSchema = (product: TSingleProduct) => {
   // If custom schema markup is provided from backend, try to parse and use it
@@ -26,7 +27,7 @@ export const generateProductSchema = (product: TSingleProduct) => {
   const rawDescription =
     product?.seo?.metaDescription ||
     product?.shortDescription ||
-    `সিদ্দীকিয়া প্রকাশনী থেকে ${product?.title || "বই"}টি কিনুন।`;
+    `${SITE.nameBn} থেকে ${product?.title || "পণ্য"}টি কিনুন।`;
 
   const sanitizedDescription = rawDescription
     .replace(/<[^>]+>/g, "")
@@ -35,7 +36,7 @@ export const generateProductSchema = (product: TSingleProduct) => {
 
   return {
     "@context": "https://schema.org",
-    "@type": ["Product", "Book"],
+    "@type": "Product",
     name: product?.title,
     description: sanitizedDescription,
     image: getImageSrc(product?.thumbnail?.src || product?.gallery?.[0]?.src),
@@ -43,12 +44,12 @@ export const generateProductSchema = (product: TSingleProduct) => {
     mpn: product?.inventory?.sku,
     brand: {
       "@type": "Brand",
-      name: product?.brand?.name || "সিদ্দীকিয়া প্রকাশনী",
+      name: product?.brand?.name || SITE.nameBn,
     },
     inLanguage: "bn",
     offers: {
       "@type": "Offer",
-      url: `https://siddikiaprokashoni.com/product/${product?.slug}`,
+      url: `${SITE.baseUrl}/product/${product?.slug}`,
       priceCurrency: "BDT",
       price: product?.price?.salePrice || product?.price?.regularPrice,
       itemCondition: "https://schema.org/NewCondition",
@@ -58,17 +59,12 @@ export const generateProductSchema = (product: TSingleProduct) => {
           : "https://schema.org/OutOfStock",
       seller: {
         "@type": "Organization",
-        name: "সিদ্দীকিয়া প্রকাশনী",
+        name: SITE.nameBn,
       },
     },
-    author: product?.author
-      ? { "@type": "Person", name: product.author }
-      : product?.brand?.name
-        ? { "@type": "Person", name: product.brand.name }
-        : undefined,
-    publisher: {
+    manufacturer: {
       "@type": "Organization",
-      name: "সিদ্দীকিয়া প্রকাশনী",
+      name: product?.brand?.name || SITE.nameBn,
     },
   };
 };
@@ -79,7 +75,7 @@ export const generateBreadcrumbSchema = (product: TSingleProduct) => {
       "@type": "ListItem",
       position: 1,
       name: "হোম",
-      item: "https://siddikiaprokashoni.com",
+      item: SITE.baseUrl as string,
     },
   ];
 
@@ -88,26 +84,26 @@ export const generateBreadcrumbSchema = (product: TSingleProduct) => {
       "@type": "ListItem",
       position: 2,
       name: product.category[0].name,
-      item: `https://siddikiaprokashoni.com/category/${product.category[0].slug}`,
+      item: `${SITE.baseUrl}/category/${product.category[0].slug}`,
     });
     breadcrumbItems.push({
       "@type": "ListItem",
       position: 3,
       name: product?.title,
-      item: `https://siddikiaprokashoni.com/product/${product?.slug}`,
+      item: `${SITE.baseUrl}/product/${product?.slug}`,
     });
   } else {
     breadcrumbItems.push({
       "@type": "ListItem",
       position: 2,
-      name: "সকল বই",
-      item: "https://siddikiaprokashoni.com/shop",
+      name: "সকল পণ্য",
+      item: `${SITE.baseUrl}/shop`,
     });
     breadcrumbItems.push({
       "@type": "ListItem",
       position: 3,
       name: product?.title,
-      item: `https://siddikiaprokashoni.com/product/${product?.slug}`,
+      item: `${SITE.baseUrl}/product/${product?.slug}`,
     });
   }
 
@@ -129,7 +125,7 @@ export const generateProductMetadata = (
       .join(" ");
     return {
       title: fallbackTitle,
-      description: `সিদ্দীকিয়া প্রকাশনী থেকে ${fallbackTitle} কিনুন।`,
+      description: `${SITE.nameBn} থেকে ${fallbackTitle} কিনুন।`,
     };
   }
 
@@ -141,7 +137,7 @@ export const generateProductMetadata = (
   const rawDescription =
     product?.seo?.metaDescription ||
     product?.shortDescription ||
-    "সিদ্দীকিয়া প্রকাশনী থেকে সেরা ইসলামিক বই কিনুন।";
+    `${SITE.nameBn} থেকে সেরা কসমেটিক্স ও বিউটি পণ্য কিনুন।`;
   const description = rawDescription
     .replace(/<[^>]+>/g, "")
     .trim()
@@ -154,15 +150,15 @@ export const generateProductMetadata = (
     openGraph: {
       title,
       description,
-      siteName: "সিদ্দীকিয়া প্রকাশনী",
+      siteName: SITE.nameBn,
       images: [
         {
           url: imageUrl,
           alt: title,
         },
         {
-          url: "https://siddikiaprokashoni.com/logo/logo.webp",
-          alt: "সিদ্দীকিয়া প্রকাশনী",
+          url: `${SITE.baseUrl}${SITE.logoPath}`,
+          alt: SITE.nameBn,
         },
       ],
       type: "article",
@@ -175,8 +171,7 @@ export const generateProductMetadata = (
     },
     alternates: {
       canonical:
-        product?.seo?.canonicalUrl ||
-        `https://siddikiaprokashoni.com/product/${slug}`,
+        product?.seo?.canonicalUrl || `${SITE.baseUrl}/product/${slug}`,
     },
   };
 };
@@ -207,11 +202,11 @@ export const generateArticleSchema = (post: TBlogPost, url: string) => {
     dateModified: post.updatedAt,
     author: {
       "@type": "Person",
-      name: getRefLabel(post.author) || "সিদ্দীকিয়া প্রকাশনী",
+      name: getRefLabel(post.author) || SITE.nameBn,
     },
     publisher: {
       "@type": "Organization",
-      name: "সিদ্দীকিয়া প্রকাশনী",
+      name: SITE.nameBn,
     },
     mainEntityOfPage: url,
   };
@@ -267,13 +262,13 @@ export const generateBlogBreadcrumbSchema = (post: TBlogPost, url: string) => {
       "@type": "ListItem",
       position: 1,
       name: "হোম",
-      item: "https://siddikiaprokashoni.com",
+      item: SITE.baseUrl as string,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "ব্লগ",
-      item: "https://siddikiaprokashoni.com/blog",
+      item: `${SITE.baseUrl}/blog`,
     },
   ];
 
@@ -287,7 +282,7 @@ export const generateBlogBreadcrumbSchema = (post: TBlogPost, url: string) => {
       "@type": "ListItem",
       position: position++,
       name: categoryName || "প্রবন্ধ",
-      item: `https://siddikiaprokashoni.com/blog?category=${encodeURIComponent(categorySlug || "general")}`,
+      item: `${SITE.baseUrl}/blog?category=${encodeURIComponent(categorySlug || "general")}`,
     });
   }
 
@@ -311,13 +306,13 @@ export const generateQnABreadcrumbSchema = (item: TQnA, url: string) => {
       "@type": "ListItem",
       position: 1,
       name: "হোম",
-      item: "https://siddikiaprokashoni.com",
+      item: SITE.baseUrl as string,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "প্রশ্নোত্তর",
-      item: "https://siddikiaprokashoni.com/questions",
+      item: `${SITE.baseUrl}/questions`,
     },
   ];
 
@@ -331,7 +326,7 @@ export const generateQnABreadcrumbSchema = (item: TQnA, url: string) => {
       "@type": "ListItem",
       position: position++,
       name: categoryName || "প্রশ্ন",
-      item: `https://siddikiaprokashoni.com/questions?category=${encodeURIComponent(categorySlug || "general")}`,
+      item: `${SITE.baseUrl}/questions?category=${encodeURIComponent(categorySlug || "general")}`,
     });
   }
 

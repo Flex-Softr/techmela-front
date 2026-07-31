@@ -1,4 +1,5 @@
 import JsonLd from "@/components/shared/JsonLd";
+import { SITE } from "@/const/site.const";
 import { Metadata } from "next";
 import Image from "next/image";
 import {
@@ -14,22 +15,21 @@ import ContactForm from "./components/ContactForm";
 
 export const metadata: Metadata = {
   title: "যোগাযোগ করুন",
-  description:
-    "সিদ্দীকিয়া প্রকাশনীর সাথে যোগাযোগ করুন। আপনার যেকোনো জিজ্ঞাসা, পরামর্শ বা সহায়তার জন্য আমরা সর্বদা প্রস্তুত। আমাদের ঠিকানা, ফোন নম্বর এবং ইমেল এখানে পাবেন।",
+  description: `${SITE.nameBn}র সাথে যোগাযোগ করুন। আপনার যেকোনো জিজ্ঞাসা, পরামর্শ বা সহায়তার জন্য আমরা সর্বদা প্রস্তুত। আমাদের ঠিকানা, ফোন নম্বর এবং ইমেল এখানে পাবেন।`,
   keywords: [
-    "যোগাযোগ সিদ্দীকিয়া প্রকাশনী",
-    "Siddikia Prokashoni Contact",
-    "Islamic Publisher Phone Number",
-    "Siddikia Prokashoni Address",
+    `যোগাযোগ ${SITE.nameBn}`,
+    "ShajGhor Contact",
+    "Cosmetics Shop Phone Number",
+    "ShajGhor Address",
   ].join(", "),
   alternates: {
-    canonical: "https://siddikiaprokashoni.com/contact-us",
+    canonical: `${SITE.baseUrl}/contact-us`,
   },
 };
 
 const ContactUsPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50/50 font-hind-siliguri">
+    <div className="min-h-screen bg-muted/50 font-hind-siliguri">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -39,13 +39,13 @@ const ContactUsPage = () => {
               "@type": "ListItem",
               position: 1,
               name: "হোম",
-              item: "https://siddikiaprokashoni.com",
+              item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
               name: "যোগাযোগ",
-              item: "https://siddikiaprokashoni.com/contact-us",
+              item: `${SITE.baseUrl}/contact-us`,
             },
           ],
         }}
@@ -57,10 +57,10 @@ const ContactUsPage = () => {
           mainEntity: [
             {
               "@type": "Question",
-              name: "সরাসরি বই কেনার জন্য শো-রুম কোথায়?",
+              name: "সরাসরি পণ্য কেনার জন্য শো-রুম কোথায়?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "আমাদের শো-রুম ঢাকার বক্সনগর, সারুলিয়া, ডেমরা এলাকায় অবস্থিত। বিস্তারিত ঠিকানার জন্য স্টোর লোকেশন পেজ দেখুন।",
+                text: "আমাদের শো-রুম ঢাকার বক্সনগর, সারুলিয়া, ডেমরা এলাকায় অবস্থিত। বিস্তারিত ঠিকানার জন্য স্টোর লোকেশন পেজ দেখুন।",
               },
             },
             {
@@ -68,7 +68,7 @@ const ContactUsPage = () => {
               name: "আপনাদের হেল্পলাইন নম্বর কত?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "আমাদের হেল্পলাইন নম্বর হলো ০১৩৩৯-৯৫৫১৫৫ এবং ০১৭১৮-৬৩৪৫০৮। যেকোনো প্রয়োজনে আমাদের কল করতে পারেন।",
+                text: "আমাদের হেল্পলাইন নম্বর হলো 01710020030 এবং 01710020030। যেকোনো প্রয়োজনে আমাদের কল করতে পারেন।",
               },
             },
           ],
@@ -88,16 +88,16 @@ const ContactUsPage = () => {
 
         {/* Subtle Decorative Background Pattern/Gradient */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent" />
-        <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute -top-16 -right-16 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-primary-foreground/5 rounded-full blur-3xl" />
+        <div className="absolute -top-16 -right-16 w-64 h-64 bg-primary-foreground/5 rounded-full blur-3xl" />
         <div className="relative text-center z-10 px-6">
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
             যোগাযোগ করুন
           </h1>
-          <div className="h-1.5 w-24 bg-white/30 mx-auto rounded-full mb-6" />
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
-            আপনার যেকোনো জিজ্ঞাসা বা পরামর্শ আমাদের জানান। আমরা আপনার সেবায়
-            সর্বদা নিয়োজিত।
+          <div className="h-1.5 w-24 bg-background/30 mx-auto rounded-full mb-6" />
+          <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
+            আপনার যেকোনো জিজ্ঞাসা বা পরামর্শ আমাদের জানান। আমরা আপনার সেবায়
+            সর্বদা নিয়োজিত।
           </p>
         </div>
       </section>
@@ -109,19 +109,19 @@ const ContactUsPage = () => {
             {/* Left Side: Contact Info */}
             <div className="lg:col-span-5 space-y-10">
               <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-gray-900 border-l-4 border-primary pl-4">
+                <h2 className="text-3xl font-bold text-foreground border-l-4 border-primary pl-4">
                   তথ্য ও সহযোগিতা
                 </h2>
-                <p className="text-gray-600 text-lg leading-relaxed">
-                  সিদ্দীকিয়া প্রকাশনী আপনার পাঠ্য অভিজ্ঞতাকে সমৃদ্ধ করতে
-                  প্রতিশ্রুতিবদ্ধ। যেকোনো প্রয়োজনে নির্দ্বিধায় আমাদের সাথে
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  {SITE.nameBn} আপনার সৌন্দর্যচর্চার অভিজ্ঞতাকে সমৃদ্ধ করতে
+                  প্রতিশ্রুতিবদ্ধ। যেকোনো প্রয়োজনে নির্দ্বিধায় আমাদের সাথে
                   যোগাযোগ করুন।
                 </p>
               </div>
 
               <div className="space-y-6">
                 {/* Phone */}
-                <div className="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                <div className="flex items-start gap-5 p-6 bg-background rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-border">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
                     <FaPhoneAlt className="text-xl text-primary" />
                   </div>
@@ -129,17 +129,17 @@ const ContactUsPage = () => {
                     <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">
                       ফোন
                     </h4>
-                    <p className="text-xl font-bold text-gray-800">
-                      ০১৩৩৯-৯৫৫১৫৫, ০১৭১৮-৬৩৪৫০৮
+                    <p className="text-xl font-bold text-foreground">
+                      01710020030, 01710020030
                     </p>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       সকাল ১০টা - রাত ১০টা (২৪/৭ সেবা)
                     </p>
                   </div>
                 </div>
 
                 {/* Email */}
-                <div className="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                <div className="flex items-start gap-5 p-6 bg-background rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-border">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
                     <FaEnvelope className="text-xl text-primary" />
                   </div>
@@ -147,15 +147,17 @@ const ContactUsPage = () => {
                     <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">
                       ইমেল
                     </h4>
-                    <p className="text-lg font-bold text-gray-800 break-all">
-                      support@siddikiaprokashoni.com
+                    <p className="text-lg font-bold text-foreground break-all">
+                      {SITE.email}
                     </p>
-                    <p className="text-sm text-gray-500 mt-1">অনলাইন সাপোর্ট</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      অনলাইন সাপোর্ট
+                    </p>
                   </div>
                 </div>
 
                 {/* Location */}
-                <div className="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                <div className="flex items-start gap-5 p-6 bg-background rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-border">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
                     <FaMapMarkerAlt className="text-xl text-primary" />
                   </div>
@@ -163,8 +165,8 @@ const ContactUsPage = () => {
                     <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">
                       ঠিকানা
                     </h4>
-                    <p className="text-gray-800 font-bold leading-relaxed">
-                      সুরমেলা গলি, পূর্ব বক্সনগর, সারুলিয়া, ডেমরা, ঢাকা-১৩৬১
+                    <p className="text-foreground font-bold leading-relaxed">
+                      সুরমেলা গলি, পূর্ব বক্সনগর, সারুলিয়া, ডেমরা, ঢাকা-১৩৬১
                     </p>
                   </div>
                 </div>
@@ -172,24 +174,24 @@ const ContactUsPage = () => {
 
               {/* Social Media Section */}
               <div className="pt-8 space-y-6">
-                <h3 className="text-xl font-bold text-gray-900">
-                  সোশ্যাল মিডিয়ায় আমাদের সাথে যুক্ত হোন
+                <h3 className="text-xl font-bold text-foreground">
+                  সোশ্যাল মিডিয়ায় আমাদের সাথে যুক্ত হোন
                 </h3>
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="https://www.facebook.com/siddikiyaprokashoni"
+                    href={SITE.social.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-[#1877F2]/10 text-[#1877F2] rounded-xl flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all transform hover:-translate-y-1 shadow-sm"
+                    className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all transform hover:-translate-y-1 shadow-sm"
                     aria-label="Facebook Page"
                   >
                     <FaFacebook className="text-2xl" />
                   </a>
                   <a
-                    href="http://wa.me/8801339955155"
+                    href={`https://wa.me/${SITE.phone.replace("+", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-[#25D366]/10 text-[#25D366] rounded-xl flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all transform hover:-translate-y-1 shadow-sm"
+                    className="w-12 h-12 bg-success/10 text-success rounded-xl flex items-center justify-center hover:bg-success hover:text-success-foreground transition-all transform hover:-translate-y-1 shadow-sm"
                     aria-label="WhatsApp"
                   >
                     <FaWhatsapp className="text-2xl" />
@@ -198,16 +200,16 @@ const ContactUsPage = () => {
                     href="https://www.facebook.com/groups/548576081614946"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-[#1877F2]/10 text-[#1877F2] rounded-xl flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all transform hover:-translate-y-1 shadow-sm"
+                    className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all transform hover:-translate-y-1 shadow-sm"
                     aria-label="Facebook Group"
                   >
                     <FaUsers className="text-2xl" />
                   </a>
                   <a
-                    href="https://youtube.com/@dmkbofficial"
+                    href={SITE.social.youtube}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-[#FF0000]/10 text-[#FF0000] rounded-xl flex items-center justify-center hover:bg-[#FF0000] hover:text-white transition-all transform hover:-translate-y-1 shadow-sm"
+                    className="w-12 h-12 bg-destructive/10 text-destructive rounded-xl flex items-center justify-center hover:bg-destructive hover:text-destructive-foreground transition-all transform hover:-translate-y-1 shadow-sm"
                     aria-label="YouTube"
                   >
                     <FaYoutube className="text-2xl" />
@@ -225,15 +227,15 @@ const ContactUsPage = () => {
       </section>
 
       {/* Map Embed Section (Optional, using the one from store-location) */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-background">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 h-[400px]">
+          <div className="rounded-3xl overflow-hidden shadow-xl border border-border h-[400px]">
             <iframe
               className="w-full h-full"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.9931714529966!2d90.48777747362271!3d23.711937890255083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b70009c04db1%3A0x814b3a09778a03cf!2sSurmela%20bari!5e0!3m2!1sen!2sbd!4v1773033356114!5m2!1sen!2sbd"
               allowFullScreen
               loading="lazy"
-              title="Google Map - Siddikia Prokashoni"
+              title="Google Map - ShajGhor"
             ></iframe>
           </div>
         </div>

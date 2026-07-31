@@ -1,6 +1,7 @@
+import { SITE } from "@/const/site.const";
 import { getImageSrc } from "@/lib/utils";
 
-export const SITE_URL = "https://siddikiaprokashoni.com";
+export const SITE_URL = SITE.baseUrl;
 
 export const stripHtml = (value = "") =>
   value

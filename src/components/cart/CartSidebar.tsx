@@ -44,21 +44,21 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="flex flex-col h-full sm:max-w-md p-0">
-        <SheetHeader className="border-b px-5 py-3 flex flex-row items-center justify-between space-y-0 bg-white">
+        <SheetHeader className="border-b px-5 py-3 flex flex-row items-center justify-between space-y-0 bg-background">
           <SheetTitle className="text-lg font-bold">আমার কার্ট</SheetTitle>
           <SheetDescription className="hidden">
             আপনার কার্টের আইটেমগুলো এখানে দেখানো হয়েছে
           </SheetDescription>
           <button
             onClick={() => setOpen(false)}
-            className="rounded-full hover:bg-gray-100 h-8 w-8 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
+            className="rounded-full hover:bg-muted h-8 w-8 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Close cart"
           >
             <X size={18} />
           </button>
         </SheetHeader>
 
-        <div className="flex-1 overflow-y-auto px-5 bg-white">
+        <div className="flex-1 overflow-y-auto px-5 bg-background">
           {isLoading ? (
             <div className="space-y-3">
               {[1, 2, 3, 4].map((i) => (
@@ -67,14 +67,14 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
             </div>
           ) : !cartItems || cartItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-4">
-              <p className="text-gray-500">আপনার কার্ট খালি</p>
+              <p className="text-muted-foreground">আপনার কার্ট খালি</p>
               <Button
                 onClick={() => {
                   setOpen(false);
                   router.push("/shop");
                 }}
                 variant="outline"
-                className="text-white hover:text-white bg-primary hover:bg-primary"
+                className="text-primary-foreground hover:text-primary-foreground bg-primary hover:bg-primary"
               >
                 শপিং চালিয়ে যান
               </Button>
@@ -127,9 +127,9 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                 return (
                   <div
                     key={item._id}
-                    className="flex items-center gap-3 py-2 relative group border-b border-gray-200 last:border-b-0"
+                    className="flex items-center gap-3 py-2 relative group border-b border-border last:border-b-0"
                   >
-                    <div className="relative size-16 flex-shrink-0 border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+                    <div className="relative size-16 flex-shrink-0 border border-border rounded-lg overflow-hidden bg-muted">
                       <Image
                         src={getImageSrc(product?.image?.src)}
                         alt={
@@ -147,14 +147,14 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                         <h4 title={product?.title}>
                           <Link
                             href={`/product/${product?.slug}`}
-                            className="text-base font-bold text-gray-900 leading-tight line-clamp-2"
+                            className="text-base font-bold text-foreground leading-tight line-clamp-2"
                           >
                             {product?.title}
                           </Link>
                         </h4>
                         <button
                           onClick={() => handleRemoveFromCart(item._id)}
-                          className="p-1 -mr-1 transition-colors text-red-400 hover:text-red-600"
+                          className="p-1 -mr-1 transition-colors text-destructive hover:text-destructive"
                           aria-label="Remove item"
                         >
                           <X className="w-5 h-5" />
@@ -162,7 +162,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                       </div>
 
                       {variation && variation.attributes && (
-                        <div className="text-xs text-gray-500 mt-1">
+                        <div className="text-xs text-muted-foreground mt-1">
                           {Object.entries(variation.attributes)
                             .map(([key, val]) => `${key}: ${val}`)
                             .join(" | ")}
@@ -170,9 +170,9 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                       )}
 
                       <div className="flex items-center justify-between mt-auto pt-1">
-                        <div className="flex items-center gap-1.5 text-sm font-medium text-gray-700">
+                        <div className="flex items-center gap-1.5 text-sm font-medium text-foreground">
                           {originalPrice && originalPrice > price && (
-                            <span className="text-gray-600 line-through text-sm">
+                            <span className="text-muted-foreground line-through text-sm">
                               &#2547;{originalPrice}
                             </span>
                           )}
@@ -181,9 +181,9 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                             <span>x</span>
                             <span>{item.quantity}</span>
                           </div>
-                          {/* <span className="text-gray-400">=</span> */}
+                          {/* <span className="text-muted-foreground">=</span> */}
                         </div>
-                        <span className="font-bold text-gray-900">
+                        <span className="font-bold text-foreground">
                           &#2547;{price * item.quantity}
                         </span>
                       </div>
@@ -196,9 +196,9 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
         </div>
 
         {cartItems && cartItems.length > 0 && (
-          <div className="border-t pt-4 mt-auto space-y-4 bg-white px-5 pb-6">
+          <div className="border-t pt-4 mt-auto space-y-4 bg-background px-5 pb-6">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+              <span className="text-sm font-semibold text-foreground uppercase tracking-wider">
                 সাবটোটাল
               </span>
               <span className="text-xl font-bold text-primary">

@@ -29,7 +29,7 @@ const ProductSharing = () => {
       await navigator.clipboard.writeText(productUrl);
       toast({
         title: "Link copied to clipboard!",
-        className: "bg-green-600 text-white border-none",
+        className: "bg-success text-primary-foreground border-none",
       });
     } catch (err) {
       toast({
@@ -42,17 +42,17 @@ const ProductSharing = () => {
   const socialMedias = [
     {
       name: "Facebook",
-      icon: <FaFacebook className="text-[#1877F2]" />,
+      icon: <FaFacebook className="text-primary" />,
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`,
     },
     {
       name: "X",
-      icon: <FaXTwitter className="text-black" />,
+      icon: <FaXTwitter className="text-foreground" />,
       url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(productUrl)}`,
     },
     {
       name: "WhatsApp",
-      icon: <FaWhatsapp className="text-[#25D366]" />,
+      icon: <FaWhatsapp className="text-success" />,
       url: `https://api.whatsapp.com/send?text=${encodeURIComponent(productUrl)}`,
     },
   ];
@@ -61,7 +61,7 @@ const ProductSharing = () => {
 
   return (
     <div className="flex gap-3 items-center py-3">
-      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider flex items-center gap-2">
+      <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
         <FaShareAlt className="text-primary" /> শেয়ার করুন:
       </span>
 
@@ -82,7 +82,7 @@ const ProductSharing = () => {
         <Dialog>
           <DialogTrigger asChild>
             <button
-              className="text-xl text-gray-500 hover:text-primary transition-colors p-1"
+              className="text-xl text-muted-foreground hover:text-primary transition-colors p-1"
               title="More sharing options"
             >
               <FaRegCopy />
@@ -105,7 +105,7 @@ const ProductSharing = () => {
                     className="flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
                   >
                     <span className="text-4xl">{social.icon}</span>
-                    <span className="text-xs font-medium text-gray-500">
+                    <span className="text-xs font-medium text-muted-foreground">
                       {social.name}
                     </span>
                   </a>
@@ -113,7 +113,7 @@ const ProductSharing = () => {
               </div>
 
               <div className="relative group">
-                <div className="flex items-center gap-2 bg-gray-50 p-1 rounded-lg border border-gray-200 transition-colors group-hover:border-primary">
+                <div className="flex items-center gap-2 bg-muted p-1 rounded-lg border border-border transition-colors group-hover:border-primary">
                   <Input
                     readOnly
                     value={productUrl}

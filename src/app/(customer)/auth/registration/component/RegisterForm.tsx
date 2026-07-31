@@ -91,7 +91,7 @@ const RegisterForm = () => {
       const user = decodeJWT(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast({
-        className: "bg-green-500 text-white font-hind-siliguri",
+        className: "bg-success/100 text-primary-foreground font-hind-siliguri",
         title: "নিবন্ধন সফল হয়েছে",
         description: res.message,
       });
@@ -118,16 +118,16 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center px-3 py-4 bg-gray-50/50">
-      <Card className="max-w-[650px] w-full shadow-sm border-gray-200/60 overflow-hidden bg-white">
-        <CardHeader className="space-y-1 pb-3 border-b border-gray-50 bg-gray-50/30">
+    <div className="flex items-center justify-center px-3 py-4 bg-muted/50">
+      <Card className="max-w-[650px] w-full shadow-sm border-border/60 overflow-hidden bg-background">
+        <CardHeader className="space-y-1 pb-3 border-b border-border bg-muted/30">
           <div className="text-center space-y-1">
-            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2 font-hind-siliguri">
+            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 font-hind-siliguri">
               <UserPlus className="w-6 h-6 text-primary" />
               নতুন অ্যাকাউন্ট তৈরি করুন
             </CardTitle>
-            <CardDescription className="text-gray-500 font-hind-siliguri">
-              বইয়ের জগতে আপনার যাত্রা শুরু করতে আমাদের সাথে যুক্ত হন
+            <CardDescription className="text-muted-foreground font-hind-siliguri">
+              ShajGhorে আপনার কেনাকাটা শুরু করতে আমাদের সাথে যুক্ত হন
             </CardDescription>
           </div>
         </CardHeader>
@@ -142,19 +142,19 @@ const RegisterForm = () => {
               <div className="space-y-2">
                 <Label
                   htmlFor="fullName"
-                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                  className="text-sm font-semibold text-foreground font-hind-siliguri"
                 >
-                  পুরো নাম <span className="text-red-600">*</span>
+                  পুরো নাম <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="fullName"
                   type="text"
                   placeholder="আপনার নাম"
-                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.fullName ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.fullName ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("personalInfo.fullName")}
                 />
                 {errors.personalInfo?.fullName && (
-                  <p className="text-xs text-red-500 font-medium">
+                  <p className="text-xs text-destructive font-medium">
                     {errors.personalInfo.fullName.message as string}
                   </p>
                 )}
@@ -163,19 +163,19 @@ const RegisterForm = () => {
               <div className="space-y-2">
                 <Label
                   htmlFor="email"
-                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                  className="text-sm font-semibold text-foreground font-hind-siliguri"
                 >
-                  ইমেইল <span className="text-red-600">*</span>
+                  ইমেইল <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="আপনার ইমেইল"
-                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.email ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.email ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("personalInfo.email")}
                 />
                 {errors.personalInfo?.email && (
-                  <p className="text-xs text-red-500 font-medium">
+                  <p className="text-xs text-destructive font-medium">
                     {errors.personalInfo.email.message as string}
                   </p>
                 )}
@@ -186,19 +186,19 @@ const RegisterForm = () => {
               <div className="space-y-2">
                 <Label
                   htmlFor="phoneNumber"
-                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                  className="text-sm font-semibold text-foreground font-hind-siliguri"
                 >
-                  ফোন নম্বর <span className="text-red-600">*</span>
+                  ফোন নম্বর <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="phoneNumber"
                   type="tel"
                   placeholder="01XXXXXXXXX"
-                  className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.phoneNumber ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                  className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.phoneNumber ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("phoneNumber")}
                 />
                 {errors.phoneNumber && (
-                  <p className="text-xs text-red-500 font-medium">
+                  <p className="text-xs text-destructive font-medium">
                     {errors.phoneNumber.message as string}
                   </p>
                 )}
@@ -207,22 +207,22 @@ const RegisterForm = () => {
               <div className="space-y-2">
                 <Label
                   htmlFor="password"
-                  className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                  className="text-sm font-semibold text-foreground font-hind-siliguri"
                 >
-                  পাসওয়ার্ড <span className="text-red-600">*</span>
+                  পাসওয়ার্ড <span className="text-destructive">*</span>
                 </Label>
                 <div className="relative group">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="পাসওয়ার্ড"
-                    className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                    className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                     {...register("password")}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 group-hover:text-gray-600 transition-colors"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground group-hover:text-muted-foreground transition-colors"
                     aria-label={
                       showPassword ? "Hide password" : "Show password"
                     }
@@ -235,7 +235,7 @@ const RegisterForm = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-xs text-red-500 font-medium line-clamp-1">
+                  <p className="text-xs text-destructive font-medium line-clamp-1">
                     {errors.password.message}
                   </p>
                 )}
@@ -253,19 +253,19 @@ const RegisterForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="fullAddress"
-                className="text-sm font-semibold text-gray-700 font-hind-siliguri"
+                className="text-sm font-semibold text-foreground font-hind-siliguri"
               >
-                ঠিকানা <span className="text-red-600">*</span>
+                ঠিকানা <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="fullAddress"
                 type="text"
                 placeholder="শহর, এলাকা, রাস্তা..."
-                className={`h-11 border-gray-200 focus:ring-primary/20 transition-all rounded-lg ${errors.address?.fullAddress ? "border-red-500 focus:border-red-500" : "focus:border-primary"}`}
+                className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.address?.fullAddress ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                 {...register("address.fullAddress")}
               />
               {errors.address?.fullAddress && (
-                <p className="text-xs text-red-500 font-medium">
+                <p className="text-xs text-destructive font-medium">
                   {errors.address.fullAddress.message as string}
                 </p>
               )}
@@ -288,8 +288,8 @@ const RegisterForm = () => {
           </form>
         </CardContent>
 
-        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-gray-50/30 border-t border-gray-50">
-          <p className="text-sm text-gray-600 font-hind-siliguri">
+        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border">
+          <p className="text-sm text-muted-foreground font-hind-siliguri">
             ইতিমধ্যেই অ্যাকাউন্ট আছে?{" "}
             <Link
               href="/auth/login"
