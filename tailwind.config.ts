@@ -71,9 +71,28 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         "base-100": {
-          DEFAULT: "var(--base-100)",
+          DEFAULT: "hsl(var(--base-100))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+
+      boxShadow: {
+        soft: "0 1px 2px -1px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.05)",
+        card: "0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px -2px rgb(0 0 0 / 0.06)",
+        "card-hover":
+          "0 1px 3px rgb(0 0 0 / 0.04), 0 6px 16px -8px rgb(0 0 0 / 0.08)",
+        xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      },
+
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        "hind-siliguri": ["var(--font-bengali)", "Hind Siliguri", "sans-serif"],
       },
 
       keyframes: {
@@ -100,9 +119,6 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "shimmer-bounce": "shimmer-bounce 2s infinite ease-in-out",
         marquee: "marquee 25s linear infinite",
-      },
-      fontFamily: {
-        "hind-siliguri": ["Hind Siliguri", "sans-serif"],
       },
     },
   },

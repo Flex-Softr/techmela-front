@@ -41,7 +41,7 @@ const EcButton = ({
           disabled
           id={id}
           className={twMerge(
-            "bg-base-100 flex justify-center items-center text-xs",
+            "bg-muted flex justify-center items-center text-xs",
             className
           )}
           {...props}

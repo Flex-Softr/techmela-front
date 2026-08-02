@@ -124,7 +124,7 @@ const MainFooterContent = () => {
                   <FaFacebookF size={18} />
                 </a>
                 <a
-                  href="https://www.facebook.com/groups/548576081614946"
+                  href="https://www.facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-muted p-2.5 rounded-full text-foreground hover:bg-primary hover:text-primary-foreground hover:-translate-y-1 transition-all duration-300 shadow-sm"

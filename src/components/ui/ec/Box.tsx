@@ -11,7 +11,7 @@ const Box = ({
   return (
     <div
       className={twMerge(
-        "ring-1 shadow-md rounded-md p-5 ring-base-100",
+        "rounded-xl border border-border bg-card p-5 text-card-foreground shadow-none",
         className
       )}
     >
