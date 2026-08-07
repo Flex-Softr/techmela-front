@@ -20,12 +20,12 @@ const DeliveryPolicyPage = async () => {
   });
 
   return (
-    <div className="min-h-screen bg-muted/30 font-hind-siliguri">
+    <div className="min-h-screen bg-muted/30">
       {/* Premium Hero Section */}
       <section className="relative h-[200px] md:h-[300px] flex items-center justify-center overflow-hidden bg-primary">
         <Image
           src="/images/delivery_hero_new.webp"
-          alt="ডেলিভারি পলিসি"
+          alt="Delivery policy"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -37,12 +37,12 @@ const DeliveryPolicyPage = async () => {
 
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            ডেলিভারি পলিসি
+            Delivery policy
           </h1>
           <div className="h-1.5 w-16 bg-background/30 mx-auto rounded-full mb-4" />
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
-            দ্রুত ও নিরাপদ ডেলিভারি আমাদের অঙ্গীকার। আমাদের শিপিং নীতিমালা
-            সম্পর্কে বিস্তারিত জানুন।
+            Fast and safe delivery is our promise. Learn more about our shipping
+            policy.
           </p>
         </div>
       </section>
@@ -57,14 +57,13 @@ const DeliveryPolicyPage = async () => {
               <FaTruck size={24} />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              ডেলিভারি এলাকা
+              Delivery areas
             </h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed font-light">
-            ShajGhor বর্তমানে সমগ্র বাংলাদেশে হোম ডেলিভারি সেবা প্রদান করছে।
-            ঢাকার ভিতরে এবং ঢাকার বাইরে যেকোনো প্রান্তে আমরা আমাদের পণ্য
-            বিশ্বস্ত কুরিয়ার সার্ভিসের মাধ্যমে নিরাপদভাবে পৌঁছে দিতে
-            প্রতিশ্রুতিবদ্ধ।
+            ShajGhor currently offers home delivery across Bangladesh. Inside
+            and outside Dhaka, we deliver products safely through trusted
+            courier services.
           </p>
         </section>
 
@@ -77,7 +76,7 @@ const DeliveryPolicyPage = async () => {
                 <FaMapMarkedAlt size={22} />
               </div>
               <h3 className="text-xl font-bold text-foreground">
-                ডেলিভারি চার্জ
+                Delivery charges
               </h3>
             </div>
             <ul className="space-y-4">
@@ -99,8 +98,7 @@ const DeliveryPolicyPage = async () => {
             </ul>
             <p className="mt-4 text-xs text-muted-foreground italic flex items-center gap-2">
               <FaCheckCircle className="text-primary/40 shrink-0" />
-              বিশেষ অফার বা প্রমোশনের ক্ষেত্রে ডেলিভারি চার্জ পরিবর্তিত হতে
-              পারে।
+              Delivery charges may change during special offers or promotions.
             </p>
           </section>
 
@@ -111,27 +109,29 @@ const DeliveryPolicyPage = async () => {
                 <FaClock size={22} />
               </div>
               <h3 className="text-xl font-bold text-foreground">
-                ডেলিভারি সময়সীমা
+                Delivery timeline
               </h3>
             </div>
             <div className="space-y-4">
               <div className="flex justify-between items-center bg-muted/50 p-3 rounded-xl border border-border">
                 <span className="font-medium text-foreground">
-                  ঢাকার ভিতরে:
+                  Inside Dhaka:
                 </span>
-                <span className="font-bold text-primary">২৪ - ৪৮ ঘণ্টা</span>
+                <span className="font-bold text-primary">24 – 48 hours</span>
               </div>
               <div className="flex justify-between items-center bg-muted/50 p-3 rounded-xl border border-border">
                 <span className="font-medium text-foreground">
-                  ঢাকার বাইরে:
+                  Outside Dhaka:
                 </span>
-                <span className="font-bold text-primary">৩ - ৫ কার্যদিবস</span>
+                <span className="font-bold text-primary">
+                  3 – 5 business days
+                </span>
               </div>
             </div>
             <p className="mt-4 text-xs text-muted-foreground italic flex items-center gap-2">
               <FaCheckCircle className="text-primary/40 shrink-0" />
-              অনিবার্য কারণে বা দুর্যোগপূর্ণ আবহাওয়াতে সময় কিছুটা বেশি লাগতে
-              পারে।
+              Delivery may take longer due to unforeseen circumstances or severe
+              weather.
             </p>
           </section>
         </div>
@@ -145,12 +145,12 @@ const DeliveryPolicyPage = async () => {
             </div>
             <div>
               <h4 className="text-lg font-bold text-primary mb-2">
-                সুরক্ষিত প্যাকেজিং
+                Secure packaging
               </h4>
               <p className="text-primary/80 leading-relaxed font-light text-sm">
-                আপনার পণ্য যেন সুরক্ষিত ও অক্ষত থাকে, সেজন্য আমরা আন্তর্জাতিক
-                মানের প্যাকেজিং নিশ্চিত করি। প্রতিটি পণ্য বাবল র‍্যাপ এবং মজবুত
-                বক্সে প্যাক করা হয়।
+                We use international-standard packaging so your products arrive
+                safe and intact. Every item is packed with bubble wrap in a
+                sturdy box.
               </p>
             </div>
           </div>
@@ -162,17 +162,17 @@ const DeliveryPolicyPage = async () => {
             </div>
             <div>
               <h4 className="text-lg font-bold text-primary mb-2">
-                অর্ডার ট্র্যাকিং
+                Order tracking
               </h4>
               <p className="text-foreground leading-relaxed font-light text-sm mb-3">
-                আপনার অর্ডারের বর্তমান অবস্থা যেকোনো সময় জানতে আমাদের ট্র্যাকিং
-                সিস্টেম ব্যবহার করুন। বা আমাদের হেল্পলাইনে কল করুন।
+                Use our tracking system anytime to check your order status, or
+                call our helpline.
               </p>
               <Link
                 href="/track-your-order"
                 className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
               >
-                অর্ডার ট্র্যাক করুন →
+                Track order →
               </Link>
             </div>
           </div>
@@ -182,7 +182,7 @@ const DeliveryPolicyPage = async () => {
         <div className="bg-primary rounded-[1.5rem] p-6 md:p-8 text-center text-primary-foreground relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <h3 className="text-xl md:text-2xl font-bold mb-4">
-            আরও তথ্যের জন্য আমাদের হেল্পলাইনে যোগাযোগ করুন
+            Contact our helpline for more information
           </h3>
           <div className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-md px-8 py-3 rounded-full border border-primary-foreground/20">
             <span className="text-2xl md:text-3xl font-black tracking-widest">

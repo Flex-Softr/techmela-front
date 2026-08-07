@@ -31,16 +31,16 @@ const ResetPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const schema = yup.object().shape({
-    email: yup.string().required("ইমেইল প্রয়োজন"),
+    email: yup.string().required("Email is required"),
     otp: yup
       .string()
-      .required("ওটিপি (OTP) প্রয়োজন")
-      .length(6, "ওটিপি অবশ্যই ৬ ডিজিটের হতে হবে")
-      .matches(/^[0-9]+$/, "ওটিপি অবশ্যই সংখ্যা হতে হবে"),
+      .required("OTP is required")
+      .length(6, "OTP must be 6 digits")
+      .matches(/^[0-9]+$/, "OTP must be numeric"),
     password: yup
       .string()
-      .required("পাসওয়ার্ড প্রয়োজন")
-      .min(6, "পাসওয়ার্ড অন্তত ৬টি অক্ষর হতে হবে"),
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters"),
   });
 
   const {
@@ -80,9 +80,9 @@ const ResetPasswordForm = () => {
 
       if (res.success) {
         toast({
-          className: "bg-success text-primary-foreground font-hind-siliguri",
-          title: "সফল",
-          description: "আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।",
+          className: "bg-success text-primary-foreground",
+          title: "Success",
+          description: "Your password has been changed successfully.",
         });
         router.push("/auth/login");
       }
@@ -97,11 +97,11 @@ const ResetPasswordForm = () => {
       const errorMessage =
         err?.data?.errorMessages?.[0]?.message ||
         err?.data?.message ||
-        "পাসওয়ার্ড রিসেট করতে ব্যর্থ হয়েছে";
+        "Failed to reset password";
 
       toast({
         variant: "destructive",
-        title: "ত্রুটি",
+        title: "Error",
         description: errorMessage,
       });
     }
@@ -112,12 +112,12 @@ const ResetPasswordForm = () => {
       <Card className="max-w-[450px] w-full shadow-sm border-border/60 overflow-hidden bg-background">
         <CardHeader className="space-y-2 pb-4 border-b border-border bg-muted/30">
           <div className="text-center space-y-1">
-            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 font-hind-siliguri">
+            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
               <Lock className="w-6 h-6 text-primary" />
-              পাসওয়ার্ড রিসেট করুন
+              Reset password
             </CardTitle>
-            <CardDescription className="text-muted-foreground font-hind-siliguri">
-              আপনার একাউন্টের জন্য একটি নতুন নিরাপদ পাসওয়ার্ড তৈরি করুন
+            <CardDescription className="text-muted-foreground">
+              Create a new secure password for your account
             </CardDescription>
           </div>
         </CardHeader>
@@ -127,9 +127,9 @@ const ResetPasswordForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="email"
-                className="text-sm font-semibold text-foreground font-hind-siliguri"
+                className="text-sm font-semibold text-foreground"
               >
-                ইমেইল
+                Email
               </Label>
               <Controller
                 name="email"
@@ -154,9 +154,9 @@ const ResetPasswordForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="otp"
-                className="text-sm font-semibold text-foreground font-hind-siliguri"
+                className="text-sm font-semibold text-foreground"
               >
-                ওটিপি (OTP) কোড
+                OTP code
               </Label>
               <Controller
                 name="otp"
@@ -166,8 +166,8 @@ const ResetPasswordForm = () => {
                     {...field}
                     id="otp"
                     type="text"
-                    placeholder="৬ ডিজিটের ওটিপি লিখুন"
-                    className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg font-hind-siliguri ${errors.otp ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
+                    placeholder="Enter 6-digit OTP"
+                    className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.otp ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   />
                 )}
               />
@@ -181,9 +181,9 @@ const ResetPasswordForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="password"
-                className="text-sm font-semibold text-foreground font-hind-siliguri"
+                className="text-sm font-semibold text-foreground"
               >
-                নতুন পাসওয়ার্ড
+                New password
               </Label>
               <div className="relative group">
                 <Controller
@@ -194,8 +194,8 @@ const ResetPasswordForm = () => {
                       {...field}
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="অন্তত ৬টি অক্ষর"
-                      className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 font-hind-siliguri ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
+                      placeholder="At least 6 characters"
+                      className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                     />
                   )}
                 />
@@ -225,25 +225,25 @@ const ResetPasswordForm = () => {
               className="w-full h-11 text-base font-bold transition-all shadow-md hover:shadow-lg active:scale-[0.98]"
             >
               {isLoading ? (
-                <div className="flex items-center gap-2 font-hind-siliguri">
+                <div className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  আপডেট হচ্ছে...
+                  Updating...
                 </div>
               ) : (
-                <span className="font-hind-siliguri">পাসওয়ার্ড আপডেট করুন</span>
+                <span>Update password</span>
               )}
             </Button>
           </form>
         </CardContent>
 
-        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border text-sm text-muted-foreground font-hind-siliguri">
+        <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border text-sm text-muted-foreground">
           <p>
-            পাসওয়ার্ড মনে পড়েছে?{" "}
+            Remember your password?{" "}
             <Link
               href="/auth/login"
               className="font-bold text-primary hover:underline transition-all"
             >
-              লগইন করুন
+              Log in
             </Link>
           </p>
         </CardFooter>

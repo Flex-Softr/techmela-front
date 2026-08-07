@@ -19,8 +19,8 @@ const FeaturedProducts = async ({
       {featuredProducts.length > 0 && (
         <section className="pt-10 md:pt-12">
           <div className="mb-6 px-4 text-center md:mb-8">
-            <SectionTitle title="নির্বাচিত পণ্যসমূহ" className="text-primary" />
-            <SectionSubtitle text="আমাদের নির্বাচিত পণ্যগুলোর কালেকশন দেখুন" />
+            <SectionTitle title="Featured Products" className="text-primary" />
+            <SectionSubtitle text="Browse our curated product collection" />
           </div>
 
           <ContainerMax>
@@ -34,7 +34,7 @@ const FeaturedProducts = async ({
             {featuredProducts.length > 5 && (
               <div className="flex justify-center mt-5">
                 <Button asChild size={"sm"} className="px-6">
-                  <Link href={"/shop?featured=true"}>সবগুলো দেখুন</Link>
+                  <Link href={"/shop?featured=true"}>View All</Link>
                 </Button>
               </div>
             )}

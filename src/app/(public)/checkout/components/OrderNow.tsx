@@ -43,7 +43,7 @@ const OrderNow = ({
     <Box className="bg-background px-4 py-2 border">
       <BoxHeading className="flex items-center gap-2 mb-1">
         <ShoppingBag className="text-lg text-primary" />
-        <span className="text-lg">অর্ডারের সারসংক্ষেপ</span>
+        <span className="text-lg">Order Summary</span>
       </BoxHeading>
 
       {children}
@@ -81,7 +81,7 @@ const OrderNow = ({
       {Object.keys(errors).length > 0 && (
         <div className="py-2 px-3 mb-2 bg-destructive/10 border border-destructive/25 rounded text-destructive font-medium text-sm flex items-center gap-2">
           <MdErrorOutline className="text-lg flex-shrink-0" />
-          <span>প্রয়োজনীয় তথ্যগুলো সঠিকভাবে পূরণ করুন।</span>
+          <span>Please fill in all required information correctly.</span>
         </div>
       )}
 
@@ -91,9 +91,9 @@ const OrderNow = ({
         type="submit"
         loading={isLoading || isSuccess}
         disabled={isLoading || isSuccess}
-        loadingText="অর্ডার করা হচ্ছে..."
+        loadingText="Placing order..."
       >
-        <span className="text-lg">অর্ডার করুন </span>
+        <span className="text-lg">Place Order </span>
         <span className="text-lg">{calculatedTotal} Tk.</span>
       </EcButton>
     </Box>

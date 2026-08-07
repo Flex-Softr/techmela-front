@@ -15,7 +15,9 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
     <div className="space-y-4">
       <Card className="border-none shadow-sm h-fit">
         <CardHeader className="bg-muted/50 border-b pb-3 pt-4 px-5">
-          <CardTitle className="text-lg font-semibold">গ্রাহকের তথ্য</CardTitle>
+          <CardTitle className="text-lg font-semibold">
+            Customer Details
+          </CardTitle>
         </CardHeader>
         <CardContent className="p-5 space-y-5 text-sm">
           <div className="flex gap-3">
@@ -44,7 +46,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           <div className="flex gap-3">
             <MapPin className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-foreground">ডেলিভারি ঠিকানা</p>
+              <p className="font-medium text-foreground">Delivery Address</p>
               <p className="text-muted-foreground mt-0.5 text-xs leading-relaxed">
                 {orderInfo.shipping?.fullAddress}
               </p>
@@ -54,9 +56,9 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           <div className="flex gap-3">
             <CreditCard className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-foreground">পেমেন্ট পদ্ধতি</p>
+              <p className="font-medium text-foreground">Payment Method</p>
               <p className="text-muted-foreground mt-0.5 text-xs">
-                {orderInfo.payment?.paymentMethod?.name || "ক্যাশ অন ডেলিভারি"}
+                {orderInfo.payment?.paymentMethod?.name || "Cash on Delivery"}
                 {orderInfo.payment?.transactionId &&
                   `(TrxID: ${orderInfo.payment.transactionId})`}
               </p>
@@ -66,7 +68,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
           <div className="flex gap-3">
             <Calendar className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-foreground">অর্ডারের তারিখ</p>
+              <p className="font-medium text-foreground">Order Date</p>
               <p className="text-muted-foreground mt-0.5 text-xs">
                 {orderInfo.createdAt
                   ? format(
@@ -86,7 +88,7 @@ const CustomerDetails = ({ orderInfo }: TCustomerDetailsProps) => {
         size="lg"
       >
         <Link href="/shop">
-          শপিং চালিয়ে যান <ArrowRight className="ml-2 w-4 h-4" />
+          Continue Shopping <ArrowRight className="ml-2 w-4 h-4" />
         </Link>
       </Button>
     </div>

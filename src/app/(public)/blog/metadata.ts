@@ -2,15 +2,15 @@ import { SITE_URL } from "@/app/(public)/_components/blog-qna/utils";
 import { SITE } from "@/const/site.const";
 import { Metadata } from "next";
 
-export const BLOG_DESCRIPTION = `${SITE.nameBn}র ব্লগে স্বাগতম! এখানে পাবেন স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার ও পারফিউম বিষয়ক বিউটি টিপস, প্রোডাক্ট রিভিউ এবং সৌন্দর্যচর্চার জ্ঞানভিত্তিক নিবন্ধ।`;
+export const BLOG_DESCRIPTION = `Welcome to the ${SITE.nameBn} blog! Find beauty tips, product reviews, and informative articles on skincare, makeup, haircare, and perfume.`;
 
 export const blogJsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  name: `${SITE.nameBn} ব্লগ`,
+  name: `${SITE.nameBn} Blog`,
   description: BLOG_DESCRIPTION,
   url: `${SITE_URL}/blog`,
-  inLanguage: "bn-BD",
+  inLanguage: "en-US",
   publisher: {
     "@type": "Organization",
     name: SITE.nameBn,
@@ -20,45 +20,45 @@ export const blogJsonLd = {
     },
   },
   about: [
-    { "@type": "Thing", name: "স্কিনকেয়ার" },
-    { "@type": "Thing", name: "মেকআপ" },
-    { "@type": "Thing", name: "হেয়ারকেয়ার" },
-    { "@type": "Thing", name: "পারফিউম" },
-    { "@type": "Thing", name: "বিউটি টিপস" },
+    { "@type": "Thing", name: "Skincare" },
+    { "@type": "Thing", name: "Makeup" },
+    { "@type": "Thing", name: "Haircare" },
+    { "@type": "Thing", name: "Perfume" },
+    { "@type": "Thing", name: "Beauty tips" },
   ],
 };
 
 export const blogMetadata: Metadata = {
-  title: "ব্লগ | বিউটি টিপস ও গাইড",
+  title: "Blog | Beauty tips & guides",
   description: BLOG_DESCRIPTION,
   keywords: [
-    "বিউটি ব্লগ",
-    "কসমেটিক্স প্রবন্ধ",
-    "প্রোডাক্ট রিভিউ",
-    "স্কিনকেয়ার টিপস",
-    "মেকআপ গাইড",
-    "হেয়ারকেয়ার প্রবন্ধ",
+    "Beauty blog",
+    "Cosmetics articles",
+    "Product reviews",
+    "Skincare tips",
+    "Makeup guides",
+    "Haircare articles",
     "Beauty blog Bangladesh",
     "Bangla cosmetics articles",
-    `${SITE.nameBn} ব্লগ`,
+    `${SITE.nameBn} Blog`,
   ].join(", "),
   openGraph: {
-    title: `ব্লগ | ${SITE.nameBn}`,
+    title: `Blog | ${SITE.nameBn}`,
     description: BLOG_DESCRIPTION,
     url: `${SITE_URL}/blog`,
     siteName: SITE.nameBn,
-    locale: "bn_BD",
+    locale: "en_US",
     type: "website",
     images: [
       {
         url: `${SITE.baseUrl}${SITE.logoPath}`,
-        alt: `${SITE.nameBn} ব্লগ`,
+        alt: `${SITE.nameBn} Blog`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `ব্লগ | ${SITE.nameBn}`,
+    title: `Blog | ${SITE.nameBn}`,
     description: BLOG_DESCRIPTION,
     images: [`${SITE.baseUrl}${SITE.logoPath}`],
   },

@@ -120,18 +120,18 @@ const EditAccountForm = () => {
       if (Object.keys(payload).length > 0) {
         await updateUserData(payload).unwrap();
         toast({
-          description: "তথ্য সফলভাবে আপডেট করা হয়েছে",
-          className: "text-success font-hind-siliguri",
+          description: "Information updated successfully",
+          className: "text-success ",
         });
         router.push("/my-account");
       } else {
         toast({
-          description: "পরিবর্তন করার মতো কিছু পাওয়া যায়নি",
-          className: "text-yellow-500 font-hind-siliguri",
+          description: "No changes to save",
+          className: "text-yellow-500 ",
         });
       }
     } catch (error: unknown) {
-      let errorMessage = "তথ্য আপডেট করতে সমস্যা হয়েছে";
+      let errorMessage = "Failed to update information";
       if (error instanceof Error) {
         errorMessage = error.message;
       } else if (
@@ -143,17 +143,17 @@ const EditAccountForm = () => {
       }
       toast({
         description: errorMessage,
-        className: "text-destructive font-hind-siliguri",
+        className: "text-destructive ",
       });
     }
   };
 
   return (
-    <Card className="w-full shadow-sm border-border/60 max-w-4xl mx-auto font-hind-siliguri">
+    <Card className="w-full shadow-sm border-border/60 max-w-4xl mx-auto ">
       <CardHeader className="py-3 px-4 border-b border-border">
         <CardTitle className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
           <User className="w-5 h-5 text-primary" />
-          অ্যাকাউন্ট তথ্য এডিট করুন
+          Edit account information
         </CardTitle>
       </CardHeader>
 
@@ -165,13 +165,13 @@ const EditAccountForm = () => {
                 htmlFor="fullName"
                 className="text-sm font-semibold text-foreground"
               >
-                পুরো নাম
+                Full name
               </label>
               <Input
                 type="text"
                 id="fullName"
                 {...register("fullName")}
-                placeholder="আপনার নাম লিখুন"
+                placeholder="Enter your name"
                 className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
@@ -181,13 +181,13 @@ const EditAccountForm = () => {
                 htmlFor="phoneNumber"
                 className="text-sm font-semibold text-foreground"
               >
-                ফোন নম্বর
+                Phone number
               </label>
               <Input
                 type="tel"
                 id="phoneNumber"
                 {...register("phoneNumber")}
-                placeholder="আপনার ফোন নম্বর লিখুন"
+                placeholder="Enter your phone number"
                 className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
@@ -197,7 +197,7 @@ const EditAccountForm = () => {
                 htmlFor="email"
                 className="text-sm font-semibold text-foreground"
               >
-                ইমেইল
+                Email
               </label>
               <Input
                 type="email"
@@ -224,13 +224,13 @@ const EditAccountForm = () => {
                 htmlFor="fullAddress"
                 className="text-sm font-semibold text-foreground"
               >
-                ঠিকানা
+                Address
               </label>
               <Input
                 type="text"
                 id="fullAddress"
                 {...register("address.fullAddress")}
-                placeholder="আপনার বর্তমান ঠিকানা লিখুন"
+                placeholder="Enter your current address"
                 className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
@@ -247,11 +247,11 @@ const EditAccountForm = () => {
           className="w-full sm:w-auto h-10 px-8 flex items-center gap-2 font-bold"
         >
           {isSubmitting ? (
-            "সেভ হচ্ছে..."
+            "Saving..."
           ) : (
             <>
               <Save className="w-4 h-4" />
-              তথ্য সেভ করুন
+              Save information
             </>
           )}
         </Button>

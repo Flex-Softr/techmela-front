@@ -42,9 +42,9 @@ const LoginForm = () => {
       const user = decodeJWT(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast({
-        className: "bg-success text-primary-foreground font-hind-siliguri",
-        title: "লগইন সফল হয়েছে",
-        description: "স্বাগতম! আপনি সফলভাবে লগইন করেছেন।",
+        className: "bg-success text-primary-foreground",
+        title: "Login successful",
+        description: "Welcome! You have logged in successfully.",
       });
       router.push("/dashboard");
     } catch (error: unknown) {
@@ -58,11 +58,11 @@ const LoginForm = () => {
       const errorMessage =
         err?.data?.errorMessages?.[0]?.message ||
         err?.data?.message ||
-        "লগইন ব্যর্থ হয়েছে। অনুগ্রহ করে আপনার তথ্যগুলো পুনরায় চেক করুন।";
+        "Login failed. Please check your details and try again.";
 
       toast({
         variant: "destructive",
-        title: "লগইন ব্যর্থ হয়েছে",
+        title: "Login failed",
         description: errorMessage,
       });
     }
@@ -73,12 +73,12 @@ const LoginForm = () => {
       <Card className="max-w-[450px] w-full shadow-sm border-border/60 overflow-hidden bg-background">
         <CardHeader className="space-y-2 pb-4 border-b border-border bg-muted/30">
           <div className="text-center space-y-1">
-            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 font-hind-siliguri">
+            <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
               <LogIn className="w-6 h-6 text-primary" />
-              আবার স্বাগতম
+              Welcome back
             </CardTitle>
-            <CardDescription className="text-muted-foreground font-hind-siliguri">
-              আপনার একাউন্টে প্রবেশ করতে তথ্য প্রদান করুন
+            <CardDescription className="text-muted-foreground">
+              Enter your details to access your account
             </CardDescription>
           </div>
         </CardHeader>
@@ -92,17 +92,17 @@ const LoginForm = () => {
             <div className="space-y-2">
               <Label
                 htmlFor="phoneEmailOrUid"
-                className="text-sm font-semibold text-foreground font-hind-siliguri"
+                className="text-sm font-semibold text-foreground"
               >
-                ইমেইল অথবা ফোন নম্বর
+                Email or phone number
               </Label>
               <Input
                 id="phoneEmailOrUid"
                 type="text"
-                placeholder="ইমেইল অথবা ফোন নম্বর"
+                placeholder="Email or phone number"
                 className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.phoneEmailOrUid ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                 {...register("phoneEmailOrUid", {
-                  required: "ইমেইল অথবা ফোন নম্বর প্রয়োজন",
+                  required: "Email or phone number is required",
                 })}
               />
               {errors.phoneEmailOrUid && (
@@ -116,15 +116,15 @@ const LoginForm = () => {
               <div className="flex items-center justify-between">
                 <Label
                   htmlFor="password"
-                  className="text-sm font-semibold text-foreground font-hind-siliguri"
+                  className="text-sm font-semibold text-foreground"
                 >
-                  পাসওয়ার্ড
+                  Password
                 </Label>
                 <Link
                   href="/auth/forget-password"
-                  className="text-xs font-semibold text-primary hover:underline transition-all font-hind-siliguri"
+                  className="text-xs font-semibold text-primary hover:underline transition-all"
                 >
-                  পাসওয়ার্ড ভুলে গেছেন?
+                  Forgot password?
                 </Link>
               </div>
               <div className="relative group">
@@ -134,7 +134,7 @@ const LoginForm = () => {
                   placeholder="••••••••"
                   className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("password", {
-                    required: "পাসওয়ার্ড প্রয়োজন",
+                    required: "Password is required",
                   })}
                 />
                 <button
@@ -163,25 +163,25 @@ const LoginForm = () => {
               disabled={isLoading}
             >
               {isLoading ? (
-                <div className="flex items-center gap-2 font-hind-siliguri">
+                <div className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  লগইন হচ্ছে...
+                  Logging in...
                 </div>
               ) : (
-                <span className="font-hind-siliguri">লগইন করুন</span>
+                <span>Log in</span>
               )}
             </Button>
           </form>
         </CardContent>
 
         <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border">
-          <p className="text-sm text-muted-foreground font-hind-siliguri">
-            একাউন্ট নেই?{" "}
+          <p className="text-sm text-muted-foreground">
+            Don&apos;t have an account?{" "}
             <Link
               href="/auth/registration"
               className="font-bold text-primary hover:underline transition-all"
             >
-              নতুন একাউন্ট তৈরি করুন
+              Create a new account
             </Link>
           </p>
         </CardFooter>

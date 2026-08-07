@@ -19,33 +19,33 @@ type Props = {
 const steps = [
   {
     id: 1,
-    title: "ধাপ ১",
+    title: "Step 1",
     description:
-      "পছন্দের পণ্য কার্টে যোগ করুন এবং উপরের কার্ট আইকনে ক্লিক করে চেকআউট পেজে যান।",
+      "Add your preferred product to the cart, then click the cart icon at the top to go to checkout.",
     icon: <ShoppingCart className="h-6 w-6 text-primary" />,
   },
   {
     id: 2,
-    title: "ধাপ ২",
-    description: "নাম, মোবাইল নম্বর ও ঠিকানা দিন।",
+    title: "Step 2",
+    description: "Enter your name, mobile number, and address.",
     icon: <UserCheck className="h-6 w-6 text-primary" />,
   },
   {
     id: 3,
-    title: "ধাপ ৩",
-    description: "অর্ডার কনফার্ম করুন।",
+    title: "Step 3",
+    description: "Confirm your order.",
     icon: <CheckCircle className="h-6 w-6 text-primary" />,
   },
   {
     id: 4,
-    title: "ধাপ ৪",
-    description: "আমাদের টিম আপনার অর্ডার প্রসেস করবে।",
+    title: "Step 4",
+    description: "Our team will process your order.",
     icon: <PackageCheck className="h-6 w-6 text-primary" />,
   },
   {
     id: 5,
-    title: "ধাপ ৫",
-    description: "কুরিয়ারযোগে পণ্য আপনার ঠিকানায় পৌঁছে যাবে।",
+    title: "Step 5",
+    description: "Your product will be delivered to your address by courier.",
     icon: <Truck className="h-6 w-6 text-primary" />,
   },
 ];
@@ -55,13 +55,12 @@ export default function HowToOrderModal({ isOpen, onOpenChange }: Props) {
     <CommonModal
       open={isOpen}
       handleOpen={onOpenChange}
-      modalTitle="অর্ডার কীভাবে করবেন?"
+      modalTitle="How to order?"
       className="max-w-2xl w-full p-6 rounded-2xl bg-background shadow-2xl max-h-[90vh] overflow-y-auto"
     >
       <div className="flex flex-col gap-6 py-4">
         <p className="text-muted-foreground text-center mb-4">
-          আমাদের ওয়েবসাইট থেকে পণ্য অর্ডার করা খুবই সহজ। নিচের সহজ ধাপগুলো
-          অনুসরণ করুন:
+          Ordering from our website is easy. Just follow the simple steps below:
         </p>
 
         <div className="space-y-4 sm:space-y-6 relative before:absolute before:left-8 before:top-4 before:bottom-4 before:w-0.5 before:bg-primary/10 before:hidden md:before:block">
@@ -93,7 +92,7 @@ export default function HowToOrderModal({ isOpen, onOpenChange }: Props) {
 
         <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
           <p className="text-sm font-bold text-primary">
-            যেকোনো সমস্যায় আমাদের কল করতে পারেন: 01710020030
+            For any issues, call us at: 01710020030
           </p>
         </div>
       </div>

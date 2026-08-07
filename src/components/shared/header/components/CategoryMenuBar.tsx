@@ -26,7 +26,7 @@ export default function CategoryMenuBar({
 
   const isActive = (href: string) => {
     // Decode the pathname because Next.js usePathname() returns URL-encoded string
-    // which won't match Bengali slugs directly (e.g. %E0%A6%87... vs ইতিহাস...)
+    // which won't match Unicode slugs directly (e.g. %E0%A6%87... vs decoded text)
     const decodedPathname = decodeURIComponent(pathname);
 
     if (href === "/" && decodedPathname === "/") return true;
@@ -48,11 +48,11 @@ export default function CategoryMenuBar({
   };
 
   const menuLinks = [
-    { title: "হোম", href: "/" },
-    { title: "সকল পণ্য", href: "/shop" },
-    { title: "ব্লগ", href: "/blog" },
-    { title: "প্রশ্নোত্তর", href: "/questions" },
-    { title: "বিউটি গাইড", href: "/free-pdfs" },
+    { title: "Home", href: "/" },
+    { title: "All Products", href: "/shop" },
+    { title: "Blog", href: "/blog" },
+    { title: "Q&A", href: "/questions" },
+    { title: "Beauty Guide", href: "/free-pdfs" },
   ];
 
   return (

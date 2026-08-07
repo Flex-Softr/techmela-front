@@ -52,10 +52,10 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
       <div className="mt-12 pt-8 border-t border-border flex flex-col items-center gap-6">
         <div className="text-center">
           <h3 className="text-lg font-bold text-foreground">
-            আমাদের সাথে যুক্ত থাকুন
+            Stay connected with us
           </h3>
           <p className="text-sm text-muted-foreground mt-1">
-            সবশেষ আপডেট এবং অফার পেতে আমাদের সোশ্যাল মিডিয়ায় যুক্ত হন
+            Follow us on social media for the latest updates and offers
           </p>
         </div>
 
@@ -99,7 +99,7 @@ const ThankYouCard = ({ orderId }: { orderId?: string }) => {
         </div>
 
         <Button asChild className="mt-4">
-          <Link href="/">হোম পেজে ফিরে যান</Link>
+          <Link href="/">Back to Home</Link>
         </Button>
       </div>
     </div>

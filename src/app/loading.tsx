@@ -9,7 +9,7 @@ const Loading = () => {
         <Image src={logo} alt="ShajGhor Logo" width={100} height={100} />
       </div>
       <h1 className="xms:text-lg xls:text-xl sm:text-2xl md:text-4xl text-foreground">
-        ShajGhorতে স্বাগতম
+        Welcome to ShajGhor
       </h1>
       {/* Animated shimmer bar */}
       <div className="relative w-64 h-2 overflow-hidden rounded bg-muted">

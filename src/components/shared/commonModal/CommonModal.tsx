@@ -28,7 +28,7 @@ const CommonModal = ({
           <DialogHeader className="pr-10">
             <DialogTitle>{modalTitle}</DialogTitle>
             <DialogDescription className="hidden">
-              এই মডালটিতে {modalTitle} সম্পর্কিত বিষয়বস্তু রয়েছে।
+              This modal contains content related to {modalTitle}.
             </DialogDescription>
           </DialogHeader>
           {children}

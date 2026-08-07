@@ -14,10 +14,10 @@ import {
 import ContactForm from "./components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "যোগাযোগ করুন",
-  description: `${SITE.nameBn}র সাথে যোগাযোগ করুন। আপনার যেকোনো জিজ্ঞাসা, পরামর্শ বা সহায়তার জন্য আমরা সর্বদা প্রস্তুত। আমাদের ঠিকানা, ফোন নম্বর এবং ইমেল এখানে পাবেন।`,
+  title: "Contact us",
+  description: `Contact ${SITE.nameBn}. We're always ready for your questions, feedback, or support. Find our address, phone number, and email here.`,
   keywords: [
-    `যোগাযোগ ${SITE.nameBn}`,
+    `Contact ${SITE.nameBn}`,
     "ShajGhor Contact",
     "Cosmetics Shop Phone Number",
     "ShajGhor Address",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 const ContactUsPage = () => {
   return (
-    <div className="min-h-screen bg-muted/50 font-hind-siliguri">
+    <div className="min-h-screen bg-muted/50">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -38,13 +38,13 @@ const ContactUsPage = () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "হোম",
+              name: "Home",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "যোগাযোগ",
+              name: "Contact",
               item: `${SITE.baseUrl}/contact-us`,
             },
           ],
@@ -57,29 +57,29 @@ const ContactUsPage = () => {
           mainEntity: [
             {
               "@type": "Question",
-              name: "সরাসরি পণ্য কেনার জন্য শো-রুম কোথায়?",
+              name: "Where is the showroom for in-person purchases?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "আমাদের শো-রুম ঢাকার বক্সনগর, সারুলিয়া, ডেমরা এলাকায় অবস্থিত। বিস্তারিত ঠিকানার জন্য স্টোর লোকেশন পেজ দেখুন।",
+                text: "Our showroom is in Boxnagar, Sarulia, Demra, Dhaka. See the store location page for the full address.",
               },
             },
             {
               "@type": "Question",
-              name: "আপনাদের হেল্পলাইন নম্বর কত?",
+              name: "What is your helpline number?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "আমাদের হেল্পলাইন নম্বর হলো 01710020030 এবং 01710020030। যেকোনো প্রয়োজনে আমাদের কল করতে পারেন।",
+                text: "Our helpline numbers are 01710020030 and 01710020030. Call us whenever you need help.",
               },
             },
           ],
         }}
       />
       {/* Hero Section */}
-      <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary font-hind-siliguri">
+      <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary">
         {/* New Generated Brand Image with Overlay */}
         <Image
           src="/images/contact_hero_new.webp"
-          alt="যোগাযোগ করুন"
+          alt="Contact us"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -92,12 +92,12 @@ const ContactUsPage = () => {
         <div className="absolute -top-16 -right-16 w-64 h-64 bg-primary-foreground/5 rounded-full blur-3xl" />
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            যোগাযোগ করুন
+            Contact us
           </h1>
           <div className="h-1.5 w-24 bg-background/30 mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
-            আপনার যেকোনো জিজ্ঞাসা বা পরামর্শ আমাদের জানান। আমরা আপনার সেবায়
-            সর্বদা নিয়োজিত।
+            Share any questions or feedback with us. We&apos;re always here to
+            help.
           </p>
         </div>
       </section>
@@ -110,12 +110,11 @@ const ContactUsPage = () => {
             <div className="lg:col-span-5 space-y-10">
               <div className="space-y-6">
                 <h2 className="text-3xl font-bold text-foreground border-l-4 border-primary pl-4">
-                  তথ্য ও সহযোগিতা
+                  Information & support
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  {SITE.nameBn} আপনার সৌন্দর্যচর্চার অভিজ্ঞতাকে সমৃদ্ধ করতে
-                  প্রতিশ্রুতিবদ্ধ। যেকোনো প্রয়োজনে নির্দ্বিধায় আমাদের সাথে
-                  যোগাযোগ করুন।
+                  {SITE.nameBn} is committed to enriching your beauty routine.
+                  Feel free to contact us anytime.
                 </p>
               </div>
 
@@ -127,13 +126,13 @@ const ContactUsPage = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">
-                      ফোন
+                      Phone
                     </h4>
                     <p className="text-xl font-bold text-foreground">
                       01710020030, 01710020030
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
-                      সকাল ১০টা - রাত ১০টা (২৪/৭ সেবা)
+                      10 AM – 10 PM (24/7 support)
                     </p>
                   </div>
                 </div>
@@ -145,13 +144,13 @@ const ContactUsPage = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">
-                      ইমেল
+                      Email
                     </h4>
                     <p className="text-lg font-bold text-foreground break-all">
                       {SITE.email}
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
-                      অনলাইন সাপোর্ট
+                      Online support
                     </p>
                   </div>
                 </div>
@@ -163,10 +162,10 @@ const ContactUsPage = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">
-                      ঠিকানা
+                      Address
                     </h4>
                     <p className="text-foreground font-bold leading-relaxed">
-                      সুরমেলা গলি, পূর্ব বক্সনগর, সারুলিয়া, ডেমরা, ঢাকা-১৩৬১
+                      Surmela Goli, East Boxnagar, Sarulia, Demra, Dhaka-1361
                     </p>
                   </div>
                 </div>
@@ -175,7 +174,7 @@ const ContactUsPage = () => {
               {/* Social Media Section */}
               <div className="pt-8 space-y-6">
                 <h3 className="text-xl font-bold text-foreground">
-                  সোশ্যাল মিডিয়ায় আমাদের সাথে যুক্ত হোন
+                  Connect with us on social media
                 </h3>
                 <div className="flex flex-wrap gap-4">
                   <a

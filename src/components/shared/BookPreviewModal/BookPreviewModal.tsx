@@ -15,7 +15,7 @@ export default function BookPreviewModal({
   isOpen,
   onOpenChange,
   previewLink,
-  title = "বিস্তারিত দেখুন",
+  title = "View Details",
 }: Props) {
   const isIframeDomain =
     previewLink?.includes("drive.google.com") ||
@@ -25,7 +25,7 @@ export default function BookPreviewModal({
     <CommonModal
       open={isOpen}
       handleOpen={onOpenChange}
-      modalTitle={`প্রিভিউ: ${title}`}
+      modalTitle={`Preview: ${title}`}
       className="max-w-[98vw] md:max-w-6xl w-full max-h-[95vh] p-2 md:p-6 overflow-hidden rounded-xl bg-background"
     >
       <div className="w-full h-[82vh] md:h-[80vh] bg-muted rounded-md overflow-hidden relative flex flex-col">
@@ -44,7 +44,7 @@ export default function BookPreviewModal({
           <div className="flex-1 flex items-center justify-center text-muted-foreground p-8 text-center flex-col gap-4">
             <span className="text-4xl">✨</span>
             <p className="text-lg font-medium">
-              দুঃখিত, এই পণ্যের কোনো প্রিভিউ বর্তমানে উপলব্ধ নেই।
+              Sorry, no preview is currently available for this product.
             </p>
           </div>
         )}

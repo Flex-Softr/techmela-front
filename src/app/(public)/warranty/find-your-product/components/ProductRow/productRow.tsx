@@ -28,7 +28,7 @@
 //   const handleAddCode = () => {
 //     if (newWarrantyCode?.trim() !== "") {
 //       if (warrantyCodes?.includes(newWarrantyCode?.trim())) {
-//         setError("দুঃখিত, এই ওয়ারেন্টি কোডটি ইতিমধ্যে যুক্ত করা হয়েছে");
+//         setError("Sorry, this warranty code has already been added");
 //         return;
 //       }
 //       setWarrantyCodes([...warrantyCodes, newWarrantyCode?.trim()]);
@@ -48,7 +48,7 @@
 //     const phoneNumber = e.target.value.trim();
 
 //     if (!/^\d+$/.test(phoneNumber)) {
-//       setPhoneNumberError("ফোন নম্বর অবশ্যই সংখ্যার অংশ হতে হবে");
+//       setPhoneNumberError("Phone number must contain only digits");
 //       setOrderedPhoneNumber(phoneNumber);
 //       return;
 //     }
@@ -57,7 +57,7 @@
 //     setPhoneNumberError("");
 
 //     if (phoneNumber?.length !== 11) {
-//       setPhoneNumberError("ফোন নম্বর ১১ টি সংখ্যা হতে হবে");
+//       setPhoneNumberError("Phone number must be 11 digits");
 //     }
 //   };
 
@@ -65,12 +65,12 @@
 //     e.preventDefault();
 
 //     if (warrantyCodes?.length === 0) {
-//       setError("পন্যের ওয়ারেন্টি কোডগুলি লিখুন");
+//       setError("Enter the product warranty codes");
 //       return;
 //     }
 
 //     if (orderedPhoneNumber?.length !== 11) {
-//       setPhoneNumberError("অর্ডারকৃত ফোন নম্বরটি লিখুন");
+//       setPhoneNumberError("Enter the phone number used for the order");
 //       return;
 //     }
 
@@ -96,7 +96,7 @@
 //   useEffect(() => {
 //     if (searched && !isError && searchResultData) {
 //       if (searchResultData?.data?.length === 0) {
-//         setError("কোনো তথ্য পাওয়া যায়নি");
+//         setError("No information found");
 //         setNotFoundProducts([]);
 //       } else {
 //         const foundCodes: string[] = [];
@@ -113,7 +113,7 @@
 //           (code) => !foundCodes.includes(code)
 //         );
 //         setNotFoundProducts(notFound);
-//         setError(notFound?.length > 0 ? "এই ওয়ারেন্টি কোডগুলি সঠিক নয়" : null);
+//         setError(notFound?.length > 0 ? "These warranty codes are invalid" : null);
 //       }
 //     } else {
 //       setNotFoundProducts([]);
@@ -133,10 +133,10 @@
 //       <div className="text-center w-full">
 //         <div className="mb-8 w-full md:w-2/3 mx-auto">
 //           <h1 className=" xms:text-lg xls:text-lg  sm:text-xl md:text-4xl font-bold text-foreground mb-4">
-//             আপনার পন্য নির্বাচন করুন
+//             Select your product
 //           </h1>
 //           <p className="text-foreground xms:text-xs xls:text-xs sm:text-sm md:text-lg mx-5">
-//             পন্যের গায়ে থাকা ওয়ারেন্টি কোড দিয়ে পন্য বাছাই করুন
+//             Find your product using the warranty code on the package
 //           </p>
 //         </div>
 
@@ -147,7 +147,7 @@
 //                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="warrantyCode"
 //               >
-//                 পন্যের ওয়ারেন্টি কোড -
+//                 Product warranty code -
 //               </label>
 //               <div className="flex">
 //                 <input
@@ -157,7 +157,7 @@
 //                     sm:h-5 md:h-12"
 //                   id="warrantyCode"
 //                   type="text"
-//                   placeholder="প্যাকেটের গায়ে থাকা ওয়ারেন্টি কোডটি লিখুন"
+//                   placeholder="Enter the warranty code on the package"
 //                   style={{ fontSize: "0.9rem" }}
 //                 />
 //                 <button
@@ -186,7 +186,7 @@
 //                     </button>
 //                     {notFoundProducts.includes(code) && (
 //                       <p className="text-destructive xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
-//                         এই ওয়ারেন্টি কোডটি সঠিক নয়
+//                         This warranty code is invalid
 //                       </p>
 //                     )}
 //                   </div>
@@ -198,7 +198,7 @@
 //                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="orderedPhoneNumber"
 //               >
-//                 অডারকৃত মোবাইল নম্বর-
+//                 Order phone number-
 //               </label>
 //               <input
 //                 value={orderedPhoneNumber}
@@ -206,7 +206,7 @@
 //                 className="shadow appearance-none border rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline sm:h-5 md:h-12"
 //                 id="orderedPhoneNumber"
 //                 type="text"
-//                 placeholder="অর্ডারকৃত ফোন নম্বরটি লিখুন"
+//                 placeholder="Enter the phone number used for the order"
 //                 style={{ fontSize: "0.9rem" }}
 //               />
 //               {phoneNumberError && (
@@ -220,7 +220,7 @@
 //               type="submit"
 //               className="bg-primary/100 xls:text-xs sm:text-sm md:text-lg text-primary-foreground rounded-md py-2 px-2 md:px-4 hover:bg-primary"
 //             >
-//               অনুসন্ধান করুন
+//               Search
 //             </button>
 //           </div>
 //         </form>
@@ -230,7 +230,7 @@
 //         <div className="text-center w-full mt-2">
 //           {notFoundProducts?.length > 0 && (
 //             <p className="text-destructive xms:text-xs xls:text-xs sm:text-sm md:text-sm mb-4">
-//               এই ওয়ারেন্টি কোডগুলি সঠিক নয়:{" "}
+//               These warranty codes are invalid:{" "}
 //               {notFoundProducts.map((code, index) => (
 //                 <React.Fragment key={index}>
 //                   {index > 0 && ", "}
@@ -300,7 +300,7 @@
 //   const handleAddCode = () => {
 //     if (newWarrantyCode?.trim() !== "") {
 //       if (warrantyCodes?.includes(newWarrantyCode?.trim())) {
-//         setError("দুঃখিত, এই ওয়ারেন্টি কোডটি ইতিমধ্যে যুক্ত করা হয়েছে");
+//         setError("Sorry, this warranty code has already been added");
 //         return;
 //       }
 //       setWarrantyCodes([...warrantyCodes, newWarrantyCode?.trim()]);
@@ -320,7 +320,7 @@
 //     const phoneNumber = e.target.value.trim();
 
 //     if (!/^\d+$/.test(phoneNumber)) {
-//       setPhoneNumberError("ফোন নম্বর অবশ্যই সংখ্যার অংশ হতে হবে");
+//       setPhoneNumberError("Phone number must contain only digits");
 //       setOrderedPhoneNumber(phoneNumber);
 //       return;
 //     }
@@ -329,7 +329,7 @@
 //     setPhoneNumberError("");
 
 //     if (phoneNumber?.length !== 11) {
-//       setPhoneNumberError("ফোন নম্বর ১১ টি সংখ্যা হতে হবে");
+//       setPhoneNumberError("Phone number must be 11 digits");
 //     }
 //   };
 
@@ -337,12 +337,12 @@
 //     e.preventDefault();
 
 //     if (warrantyCodes?.length === 0) {
-//       setError("পন্যের ওয়ারেন্টি কোডগুলি লিখুন");
+//       setError("Enter the product warranty codes");
 //       return;
 //     }
 
 //     if (orderedPhoneNumber?.length !== 11) {
-//       setPhoneNumberError("অর্ডারকৃত ফোন নম্বরটি লিখুন");
+//       setPhoneNumberError("Enter the phone number used for the order");
 //       return;
 //     }
 
@@ -402,10 +402,10 @@
 //         setError("");
 //       } else if (invalidCodes.length > 0) {
 //         // If no valid codes found, show error message
-//         setError("এই কোডগুলির সাথে মিল নেই: " + invalidCodes.join(", "));
+//         setError("No match for these codes: " + invalidCodes.join(", "));
 //       } else {
 //         // If there are no codes at all, handle it as an error
-//         setError("এই ওয়ারেন্টি কোডগুলি সঠিক নয়");
+//         setError("These warranty codes are invalid");
 //       }
 //     } else {
 //       // Reset error and not found products if search result is empty or has an error
@@ -461,10 +461,10 @@
 //   //       setError("");
 //   //     } else if (invalidCodes.length > 0) {
 //   //       // If no valid codes found, show error message
-//   //       setError("এই কোডগুলির সাথে মিল নেই: " + invalidCodes.join(", "));
+//   //       setError("No match for these codes: " + invalidCodes.join(", "));
 //   //     } else {
 //   //       // If there are no codes at all, handle it as an error
-//   //       setError("এই ওয়ারেন্টি কোডগুলি সঠিক নয়");
+//   //       setError("These warranty codes are invalid");
 //   //     }
 //   //   } else {
 //   //     // Reset error and not found products if search result is empty or has an error
@@ -486,10 +486,10 @@
 //       <div className="text-center w-full">
 //         <div className="mb-8 w-full md:w-2/3 mx-auto">
 //           <h1 className="xms:text-lg xls:text-lg sm:text-xl md:text-4xl font-bold text-foreground mb-4">
-//             আপনার পন্য নির্বাচন করুন
+//             Select your product
 //           </h1>
 //           <p className="text-foreground xms:text-xs xls:text-xs sm:text-sm md:text-lg mx-5">
-//             পন্যের গায়ে থাকা ওয়ারেন্টি কোড দিয়ে পন্য বাছাই করুন
+//             Find your product using the warranty code on the package
 //           </p>
 //         </div>
 
@@ -500,7 +500,7 @@
 //                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="warrantyCode"
 //               >
-//                 পন্যের ওয়ারেন্টি কোড -
+//                 Product warranty code -
 //               </label>
 //               <div className="flex">
 //                 <input
@@ -509,7 +509,7 @@
 //                   className="appearance-none outline-none border border-border rounded-l-md py-2 px-3 focus:ring-0 w-full sm:h-5 md:h-12"
 //                   id="warrantyCode"
 //                   type="text"
-//                   placeholder="প্যাকেটের গায়ে থাকা ওয়ারেন্টি কোডটি লিখুন"
+//                   placeholder="Enter the warranty code on the package"
 //                   style={{ fontSize: "0.9rem" }}
 //                 />
 //                 <button
@@ -538,7 +538,7 @@
 //                     </button>
 //                     {notFoundProducts.includes(code) && (
 //                       <p className="text-destructive xms:text-[9px] xls:text-[9px] sm:text-xs ml-2">
-//                         এই ওয়ারেন্টি কোডটি সঠিক নয়
+//                         This warranty code is invalid
 //                       </p>
 //                     )}
 //                   </div>
@@ -550,7 +550,7 @@
 //                 className="block text-foreground text-left text-sm font-bold mb-2"
 //                 htmlFor="orderedPhoneNumber"
 //               >
-//                 অডারকৃত মোবাইল নম্বর-
+//                 Order phone number-
 //               </label>
 //               <input
 //                 value={orderedPhoneNumber}
@@ -558,7 +558,7 @@
 //                 className="shadow appearance-none border rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline sm:h-5 md:h-12"
 //                 id="orderedPhoneNumber"
 //                 type="text"
-//                 placeholder="অর্ডারকৃত ফোন নম্বরটি লিখুন"
+//                 placeholder="Enter the phone number used for the order"
 //                 style={{ fontSize: "0.9rem" }}
 //               />
 //               {phoneNumberError && (
@@ -572,7 +572,7 @@
 //               type="submit"
 //               className="bg-primary/100 xls:text-xs sm:text-sm md:text-lg text-primary-foreground rounded-md py-2 px-2 md:px-4 hover:bg-primary"
 //             >
-//               অনুসন্ধান করুন
+//               Search
 //             </button>
 //           </div>
 //         </form>
@@ -581,7 +581,7 @@
 
 //         <div className="text-center w-full mt-2">
 //           {notFoundProducts?.length > 0 && (
-//             <p className="text-destructive">{` কোডগুলি সঠিক নয়: ${notFoundProducts.join(
+//             <p className="text-destructive">{` codes are invalid: ${notFoundProducts.join(
 //               ", "
 //             )}`}</p>
 //           )}
@@ -769,7 +769,7 @@
 //           </Table>
 //           <div className="w-[90%] sm:w-[85%] mx-auto">
 //             <p className="w-full p-2 font-bold text-sm md:text-xl text-destructive text-center">
-//               উক্ত পন্যের ওয়ারেন্টি নেই
+//               This product has no warranty
 //             </p>
 //           </div>
 //         </>

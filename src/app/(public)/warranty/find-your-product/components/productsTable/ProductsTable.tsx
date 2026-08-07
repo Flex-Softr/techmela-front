@@ -189,12 +189,12 @@ const ProductTable = ({
           </Table>
           <div className="w-[90%] sm:w-[85%] mx-auto">
             <p className="w-full p-2 font-bold text-sm md:text-xl text-destructive text-center">
-              উক্ত পন্যের ওয়ারেন্টি নেই
+              This product has no warranty
             </p>
           </div>
         </>
       ) : (
-        <p className="text-center ">{""}</p>
+        <p className="text-center">{""}</p>
       )}
     </div>
   );

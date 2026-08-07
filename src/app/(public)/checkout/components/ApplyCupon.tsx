@@ -81,8 +81,8 @@ export default function ApplyCupon() {
         setApplied(true);
 
         toast({
-          title: "কুপন সফলভাবে প্রয়োগ করা হয়েছে",
-          action: <ToastAction altText="Thanks">ধন্যবাদ</ToastAction>,
+          title: "Coupon applied successfully",
+          action: <ToastAction altText="Thanks">Thanks</ToastAction>,
           className: "bg-success text-success-foreground border-none",
         });
       } else {
@@ -93,7 +93,7 @@ export default function ApplyCupon() {
           title: errorMessage,
           action: (
             <ToastAction onClick={() => reset()} altText="Try again">
-              আবার চেষ্টা করুন
+              Try again
             </ToastAction>
           ),
         });
@@ -129,7 +129,7 @@ export default function ApplyCupon() {
           <Input
             disabled={applied ? true : false}
             type="text"
-            placeholder="যদি আপনার কাছে প্রোমো কোড থাকে, তবে এখানে লিখুন..."
+            placeholder="If you have a promo code, enter it here..."
             className={`w-full ${errors.promoCode ? "ring-destructive" : ""}`}
             {...register("promoCode")}
             onKeyDown={(e) => {

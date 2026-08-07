@@ -212,7 +212,7 @@ const SalesOrderForm = ({
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                   <MdShoppingBag className="text-primary text-xl" />
                 </div>
-                আপনার অর্ডার
+                Your order
               </h3>
 
               <div className="flex gap-4 mb-4 relative z-10">
@@ -232,12 +232,12 @@ const SalesOrderForm = ({
                   </h4>
                   <div className="flex items-center gap-2">
                     <p className="text-xs text-primary font-bold italic">
-                      বিশাল ছাড় চলছে!
+                      Huge discount available!
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-muted-foreground font-black uppercase tracking-widest">
-                      পরিমাণ:
+                      Quantity:
                     </span>
                     <div className="flex items-center border border-primary/10 rounded-lg overflow-hidden bg-background shadow-sm ring-1 ring-primary/5">
                       <button
@@ -294,7 +294,7 @@ const SalesOrderForm = ({
                 {Object.keys(methods.formState.errors).length > 0 && (
                   <div className="flex gap-2 items-start text-destructive font-bold text-sm">
                     <MdErrorOutline className="text-lg flex-shrink-0 mt-0.5" />
-                    <span>সবগুলো তথ্য সঠিকভাবে পূরণ করুন।</span>
+                    <span>Please fill in all details correctly.</span>
                   </div>
                 )}
               </div>
@@ -303,14 +303,14 @@ const SalesOrderForm = ({
             {/* Submit Button */}
             <div className="space-y-3">
               <EcButton
-                className="w-full py-6 text-xl lg:text-2xl font-black bg-primary hover:bg-primary/95 text-primary-foreground rounded-full transition-all shadow-[0_15px_35px_-5px_hsla(var(--primary)/0.4)] active:scale-[0.98] font-bengali relative overflow-hidden group"
+                className="w-full py-6 text-xl lg:text-2xl font-black bg-primary hover:bg-primary/95 text-primary-foreground rounded-full transition-all shadow-[0_15px_35px_-5px_hsla(var(--primary)/0.4)] active:scale-[0.98] relative overflow-hidden group"
                 type="submit"
                 loading={isLoading || isSuccess}
                 disabled={isLoading || isSuccess}
-                loadingText="অর্ডার প্রক্রিয়া হচ্ছে..."
+                loadingText="Processing order..."
               >
                 <span className="relative z-10">
-                  অর্ডার কনফার্ম করুন — &#2547;{calculatedTotal}
+                  Confirm order — &#2547;{calculatedTotal}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
               </EcButton>
@@ -322,10 +322,10 @@ const SalesOrderForm = ({
 
               <div className="relative z-10 text-center">
                 <h4 className="font-black text-lg mb-0.5 flex items-center justify-center gap-2 text-primary">
-                  <MdCall /> সরাসরি কথা বলুন
+                  <MdCall /> Talk to us directly
                 </h4>
                 <p className="text-sm font-bold text-muted-foreground mb-4 px-4 leading-relaxed">
-                  অর্ডার করতে কোনো সমস্যা হলে নিচের নাম্বারে সরাসরি কল করুন
+                  If you have trouble ordering, call the number below
                 </p>
                 <a
                   href="tel:+01710020030"

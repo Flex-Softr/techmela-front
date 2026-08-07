@@ -81,8 +81,8 @@ export default async function BlogPage({
     <>
       <JsonLd data={blogJsonLd} />
       <BlogQnaListShell
-        title="ব্লগ"
-        description="ShajGhorর ব্লগে স্বাগতম! এখানে আপনি স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার, পারফিউম বিষয়ক টিপস, প্রোডাক্ট গাইড এবং সৌন্দর্যপ্রেমীদের জন্য বিভিন্ন বিষয়ের উপর তথ্যপূর্ণ আর্টিকেল পাবেন। আমাদের ব্লগে বিউটি ও স্কিনকেয়ার সম্পর্কে গভীর অন্তর্দৃষ্টি এবং প্রাসঙ্গিক তথ্য শেয়ার করা হয়। নতুন আর্টিকেল এবং আপডেটের জন্য আমাদের ব্লগটি নিয়মিত চেক করুন।"
+        title="Blog"
+        description="Welcome to the ShajGhor blog! Find tips, product guides, and informative articles on skincare, makeup, haircare, and perfume. Check back regularly for new posts and updates."
         type="blog"
         categories={filters.categories}
         topics={filters.topics}
@@ -93,7 +93,7 @@ export default async function BlogPage({
           {posts.length ? (
             posts.map((post) => <BlogCard key={post._id} post={post} />)
           ) : (
-            <EmptyState label="কোনো ব্লগ পোস্ট পাওয়া যায়নি।" />
+            <EmptyState label="No blog posts found." />
           )}
         </div>
         <Pagination meta={meta} basePath="/blog" searchParams={searchParams} />

@@ -18,11 +18,11 @@ export async function GET() {
     categorySection = categories
       .map(
         (cat) =>
-          `### ${cat.name}\n\n- URL: ${BASE_URL}/category/${cat.slug}${cat.description ? `\n- বিবরণ: ${cat.description}` : ""}`
+          `### ${cat.name}\n\n- URL: ${BASE_URL}/category/${cat.slug}${cat.description ? `\n- Description: ${cat.description}` : ""}`
       )
       .join("\n\n");
   } catch {
-    categorySection = `### সকল পণ্য\n\n- URL: ${BASE_URL}/shop`;
+    categorySection = `### All Products\n\n- URL: ${BASE_URL}/shop`;
   }
 
   const content = `# ${SITE.nameBn} (${SITE.nameEn}) — Full Documentation
@@ -34,7 +34,7 @@ ${SITE.descriptionBn}
 ## Site Information
 
 - **Website:** ${BASE_URL}
-- **Language:** Bengali (বাংলা)
+- **Language:** English
 - **Country:** Bangladesh
 - **Business Type:** Cosmetics & Beauty Online Store
 
@@ -59,12 +59,12 @@ ${SITE.descriptionBn}
 
 ## Main Pages
 
-- [হোমপেজ](${BASE_URL}): সকল পণ্য ও অফারের তালিকা
-- [শপ / সকল পণ্য](${BASE_URL}/shop): সম্পূর্ণ পণ্যের সংগ্রহ, ফিল্টার ও সার্চ সহ
-- [ব্লগ](${BASE_URL}/blog): বিউটি টিপস ও পণ্যের রিভিউ
-- [প্রশ্নোত্তর](${BASE_URL}/questions): বিউটি ও স্কিনকেয়ার প্রশ্নোত্তর
-- [বিউটি গাইড](${BASE_URL}/free-pdfs): বিনামূল্যে দেখার জন্য বিউটি গাইড
-- [সাইটম্যাপ](${BASE_URL}/sitemap.xml): সকল পেজের তালিকা
+- [Homepage](${BASE_URL}): List of all products and offers
+- [Shop / All Products](${BASE_URL}/shop): Full product collection with filters and search
+- [Blog](${BASE_URL}/blog): Beauty tips and product reviews
+- [Q&A](${BASE_URL}/questions): Beauty and skincare Q&A
+- [Beauty Guide](${BASE_URL}/free-pdfs): Free beauty guides to browse
+- [Sitemap](${BASE_URL}/sitemap.xml): List of all pages
 
 ## Product Categories Directory
 

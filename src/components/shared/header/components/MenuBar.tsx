@@ -44,13 +44,13 @@ export default function MenuBar({
   const searchParams = useSearchParams();
 
   const menuLinks: MenuLink[] = [
-    { title: "হোম", href: "/" },
-    { title: "সকল পণ্য", href: "/shop" },
-    { title: "ব্লগ", href: "/blog" },
-    { title: "প্রশ্নোত্তর", href: "/questions" },
-    { title: "বিউটি গাইড", href: "/free-pdfs" },
+    { title: "Home", href: "/" },
+    { title: "All Products", href: "/shop" },
+    { title: "Blog", href: "/blog" },
+    { title: "Q&A", href: "/questions" },
+    { title: "Beauty Guide", href: "/free-pdfs" },
     {
-      title: "অর্ডার ট্র্যাক",
+      title: "Track Order",
       href: "/track-your-order",
       displayOnSmallScreenOnly: true,
     },
@@ -68,7 +68,7 @@ export default function MenuBar({
   // Consolidate categories if there are many
   if (!isVertical && categoryItems.length > 5) {
     menuLinks.push({
-      title: "সকল বিভাগ",
+      title: "All Categories",
       href: "/shop",
       subMenus: categoryItems,
     });
@@ -168,7 +168,7 @@ export default function MenuBar({
         if (menu.displayOnSmallScreenOnly) return null;
 
         const hasSubs = menu.subMenus && menu.subMenus.length > 0;
-        const isMega = menu.title === "সকল বিভাগ" && hasSubs;
+        const isMega = menu.title === "All Categories" && hasSubs;
 
         return (
           <div key={menu.title} className="relative group z-50">

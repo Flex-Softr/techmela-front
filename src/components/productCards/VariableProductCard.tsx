@@ -107,7 +107,7 @@ const VariableProductCard = ({
       >
         <Link href={`/product/${productSlug}`}>
           <Layers className="!size-3.5" />
-          অপশনগুলো দেখুন
+          View Options
         </Link>
       </Button>
     </article>

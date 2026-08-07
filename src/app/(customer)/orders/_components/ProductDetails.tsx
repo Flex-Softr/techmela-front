@@ -44,9 +44,7 @@ const OrderDetails = () => {
       <div className="flex items-center justify-center py-20 text-muted-foreground">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-lg font-medium">
-            অর্ডারের তথ্য লোড হচ্ছে...
-          </span>
+          <span className="text-lg font-medium">Loading order details...</span>
         </div>
       </div>
     );
@@ -94,10 +92,10 @@ const OrderDetails = () => {
           className="group flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors text-sm h-9"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          অর্ডারে ফিরুন
+          Back to orders
         </Button>
         <div className="text-sm font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-full">
-          অর্ডার ID: #{orderId}
+          Order ID: #{orderId}
         </div>
       </div>
 
@@ -107,27 +105,27 @@ const OrderDetails = () => {
           <CardHeader className="py-3 px-4 border-b border-border">
             <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
               <Package className="w-5 h-5 text-primary" />
-              অর্ডার সারসংক্ষেপ
+              Order summary
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-2.5">
             <div className="flex justify-between">
               <span className="text-sm text-muted-foreground">
-                পেমেন্ট পদ্ধতি
+                Payment method
               </span>
               <span className="text-sm font-semibold text-foreground">
                 {payment?.paymentMethod?.name || "N/A"}
               </span>
             </div>
             <div className="flex justify-between border-t border-border pt-2.5">
-              <span className="text-sm text-muted-foreground">সাবটোটাল</span>
+              <span className="text-sm text-muted-foreground">Subtotal</span>
               <span className="text-sm font-semibold text-foreground">
                 &#2547;{subtotal}
               </span>
             </div>
             <div className="flex justify-between border-t border-border pt-2.5">
               <span className="text-sm text-muted-foreground">
-                শিপিং চার্জ ({shippingCharge?.name})
+                Shipping charge ({shippingCharge?.name})
               </span>
               <span className="text-sm font-semibold text-foreground">
                 &#2547;{shippingCharge?.amount}
@@ -135,7 +133,7 @@ const OrderDetails = () => {
             </div>
             <div className="flex justify-between border-t border-border pt-2.5">
               <span className="text-foreground font-bold text-base">
-                মোট পরিমাণ
+                Total amount
               </span>
               <span className="text-primary font-bold text-base">
                 &#2547;{total}
@@ -149,7 +147,7 @@ const OrderDetails = () => {
           <CardHeader className="py-3 px-4 border-b border-border">
             <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
               <MapPin className="w-5 h-5 text-primary" />
-              শিপিং এড্রেস
+              Shipping address
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-2">
@@ -160,17 +158,17 @@ const OrderDetails = () => {
               {shipping?.fullAddress}
             </p>
             <p className="text-sm text-muted-foreground">
-              ফোন: {shipping?.phoneNumber}
+              Phone: {shipping?.phoneNumber}
             </p>
             {shipping?.email && (
               <p className="text-sm text-muted-foreground">
-                ইমেইল: {shipping?.email}
+                Email: {shipping?.email}
               </p>
             )}
             <div className="pt-3 border-t border-border mt-2 flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  অর্ডার অবস্থা
+                  Order status
                 </span>
                 {(() => {
                   const statusInfo = getStatusDisplay(data?.data?.status || "");
@@ -190,7 +188,7 @@ const OrderDetails = () => {
                 onClick={() => router.push(`/track-your-order/${orderId}`)}
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                অর্ডার ট্র্যাক করুন
+                Track order
               </Button>
             </div>
           </CardContent>
@@ -202,7 +200,7 @@ const OrderDetails = () => {
         <CardHeader className="py-3 px-4 border-b border-border bg-muted/30">
           <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-primary" />
-            এই অর্ডারের পণ্যসমূহ
+            Products in this order
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
@@ -211,16 +209,16 @@ const OrderDetails = () => {
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm">
-                    পণ্য
+                    Product
                   </TableHead>
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm">
-                    পরিমাণ
+                    Quantity
                   </TableHead>
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm text-right">
-                    একক মূল্য
+                    Unit price
                   </TableHead>
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm text-right">
-                    মোট
+                    Total
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -294,7 +292,7 @@ const OrderDetails = () => {
           size="sm"
           className="px-8 h-9 border-primary/30 text-sm font-medium"
         >
-          ফিরে যান
+          Go back
         </Button>
       </div>
     </div>

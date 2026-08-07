@@ -5,15 +5,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { SITE } from "@/const/site.const";
 import StoreProvider from "@/redux/StoreProvider";
 import { Metadata } from "next";
-import { Hind_Siliguri, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ReactNode, Suspense } from "react";
 import "./globals.css";
-
-const hindSiliguri = Hind_Siliguri({
-  subsets: ["bengali"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-bengali",
-});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,32 +18,31 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
   title: {
-    default: `${SITE.nameBn} | ${SITE.taglineBn}`,
-    template: `%s | ${SITE.nameBn}`,
+    default: `${SITE.nameEn} | ${SITE.taglineBn}`,
+    template: `%s | ${SITE.nameEn}`,
   },
-  description: `${SITE.descriptionBn} ❝${SITE.mottoBn}❞`,
+  description: `${SITE.descriptionBn} "${SITE.mottoBn}"`,
   keywords: [
-    SITE.nameBn,
-    "কসমেটিক্স",
-    "Cosmetics Bangladesh",
-    "Bangla Cosmetics",
-    "স্কিনকেয়ার",
-    "মেকআপ",
-    "হেয়ারকেয়ার",
     SITE.nameEn,
-    "অনলাইন কসমেটিক্স শপ",
+    "Cosmetics",
+    "Cosmetics Bangladesh",
+    "Skincare",
+    "Makeup",
+    "Haircare",
+    "Online Cosmetics Shop",
+    "Beauty Products",
   ].join(", "),
   openGraph: {
-    title: `${SITE.nameBn} | ${SITE.taglineBn}`,
+    title: `${SITE.nameEn} | ${SITE.taglineBn}`,
     description: SITE.shortDescriptionBn,
     url: SITE.baseUrl,
-    siteName: SITE.nameBn,
-    locale: "bn_BD",
+    siteName: SITE.nameEn,
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.nameBn} | ${SITE.taglineBn}`,
+    title: `${SITE.nameEn} | ${SITE.taglineBn}`,
     description: SITE.shortDescriptionBn,
   },
   robots: {
@@ -60,26 +53,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="bn-BD">
+    <html lang="en">
       <head>
         <link rel="preconnect" href={SITE.apiUrl} />
         <link rel="dns-prefetch" href={SITE.apiUrl} />
       </head>
-      <body
-        className={`${hindSiliguri.variable} ${inter.className} ${inter.variable} antialiased`}
-      >
+      <body className={`${inter.className} ${inter.variable} antialiased`}>
         <JsonLd
           data={{
             "@context": "https://schema.org",
             "@type": ["Organization", "Store", "OnlineStore"],
-            name: SITE.nameBn,
+            name: SITE.nameEn,
             description: SITE.descriptionBn,
             url: SITE.baseUrl,
             logo: `${SITE.baseUrl}${SITE.logoPath}`,
             image: `${SITE.baseUrl}${SITE.logoPath}`,
             telephone: SITE.phone,
             email: SITE.email,
-            priceRange: "৳৳",
+            priceRange: "$$",
             address: {
               "@type": "PostalAddress",
               addressCountry: "BD",

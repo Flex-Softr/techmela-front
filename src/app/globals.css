@@ -8,40 +8,40 @@
 
 @layer base {
   :root {
-    /* BRmart storefront – warm cream canvas */
-    --background: 40 33% 97%;
-    --foreground: 240 40% 8%;
+    /* ShajGhor – soft blush canvas from logo palette */
+    --background: 340 40% 98%;
+    --foreground: 340 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 40% 8%;
+    --card-foreground: 340 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 40% 8%;
+    --popover-foreground: 340 25% 12%;
 
-    /* Primary – green ~#29A56C */
-    --primary: 152 60% 40%;
-    --primary-foreground: 210 20% 98%;
+    /* Primary – logo pink ~#FF6294 */
+    --primary: 341 100% 69%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary – slate-lavender ~#323A57 */
-    --secondary: 228 26% 27%;
-    --secondary-foreground: 210 20% 98%;
+    /* Secondary – logo gold ~#E2B05E */
+    --secondary: 37 70% 63%;
+    --secondary-foreground: 37 50% 12%;
 
-    /* Muted – warm off-white */
-    --muted: 40 30% 94%;
-    --muted-foreground: 0 0% 40%;
+    /* Muted – soft blush gray */
+    --muted: 340 25% 95%;
+    --muted-foreground: 340 10% 40%;
 
-    /* Accent – soft coral */
-    --accent: 18 70% 78%;
-    --accent-foreground: 18 50% 18%;
+    /* Accent – soft gold wash */
+    --accent: 37 55% 92%;
+    --accent-foreground: 37 45% 22%;
 
     /* Destructive – sale / error */
     --destructive: 0 84% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    /* UI – whisper-warm borders */
-    --border: 40 33% 91%;
-    --input: 40 33% 91%;
-    --ring: 220 10% 64%;
+    /* UI – soft pink-tinted borders */
+    --border: 340 20% 90%;
+    --input: 340 20% 90%;
+    --ring: 341 80% 60%;
 
     /* Legacy surface token used by EcButton / Box call sites */
     --base-100: 0 0% 100%;
@@ -56,35 +56,35 @@
   }
 
   .dark {
-    --background: 240 40% 8%;
-    --foreground: 210 20% 98%;
+    --background: 340 25% 8%;
+    --foreground: 340 20% 98%;
 
-    --card: 240 28% 12%;
-    --card-foreground: 210 20% 98%;
+    --card: 340 20% 12%;
+    --card-foreground: 340 20% 98%;
 
-    --popover: 240 28% 12%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 340 20% 12%;
+    --popover-foreground: 340 20% 98%;
 
-    --primary: 152 60% 40%;
-    --primary-foreground: 240 40% 8%;
+    --primary: 341 100% 69%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 228 20% 20%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 37 65% 55%;
+    --secondary-foreground: 37 50% 10%;
 
-    --muted: 228 18% 18%;
-    --muted-foreground: 220 10% 64%;
+    --muted: 340 15% 18%;
+    --muted-foreground: 340 10% 65%;
 
-    --accent: 18 70% 78%;
-    --accent-foreground: 240 40% 8%;
+    --accent: 37 40% 22%;
+    --accent-foreground: 37 55% 90%;
 
     --destructive: 0 70% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 228 16% 22%;
-    --input: 228 16% 22%;
-    --ring: 220 8% 46%;
+    --border: 340 15% 22%;
+    --input: 340 15% 22%;
+    --ring: 341 70% 55%;
 
-    --base-100: 240 28% 12%;
+    --base-100: 340 20% 12%;
 
     --success: 152 50% 42%;
     --success-foreground: 0 0% 100%;

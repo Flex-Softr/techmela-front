@@ -88,7 +88,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
 
           <div className="p-4 bg-muted border-t mt-auto">
             <p className="text-xs font-bold text-primary uppercase tracking-wider mb-3">
-              যোগাযোগ করুন
+              Contact Us
             </p>
             <div className="space-y-3">
               <a
@@ -109,7 +109,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                 <div className="size-8 rounded-full bg-background flex items-center justify-center shadow-sm text-success">
                   <FaWhatsapp className="size-5" />
                 </div>
-                <span>হোয়াটসঅ্যাপ</span>
+                <span>WhatsApp</span>
               </a>
             </div>
           </div>

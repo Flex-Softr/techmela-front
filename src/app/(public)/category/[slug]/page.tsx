@@ -40,19 +40,19 @@ export async function generateMetadata({
 
   if (!category) return { title: "Category Not Found" };
 
-  const title = `${category.name} বিষয়ক কসমেটিক্স ও বিউটি প্রোডাক্ট`;
+  const title = `${category.name} Cosmetics & Beauty Products`;
   const description =
     category.description ||
-    `${SITE.nameBn} থেকে ${category.name} বিষয়ক সেরা কসমেটিক্স ও বিউটি প্রোডাক্ট কিনুন। হাজারো পণ্য একটি প্ল্যাটফর্মে।`;
+    `Shop the best ${category.name} cosmetics and beauty products from ${SITE.nameBn}. Thousands of products on one platform.`;
   const imageUrl = category.image ? getImageSrc(category.image.src) : undefined;
 
   return {
     title,
     description,
     keywords: [
-      `${category.name} পণ্য`,
-      `${category.name} কসমেটিক্স`,
-      `${category.name} বিউটি প্রোডাক্ট`,
+      `${category.name} products`,
+      `${category.name} cosmetics`,
+      `${category.name} beauty products`,
       SITE.nameBn,
       "Cosmetics Bangladesh",
     ].join(", "),
@@ -82,7 +82,7 @@ export default async function CategoryPage({
   if (!category) {
     return (
       <div className="py-20 text-center text-xl text-primary font-semibold">
-        ক্যাটাগরিটি পাওয়া যায়নি
+        Category not found
       </div>
     );
   }
@@ -94,7 +94,7 @@ export default async function CategoryPage({
       {
         "@type": "ListItem",
         position: 1,
-        name: "হোম",
+        name: "Home",
         item: BASE_URL,
       },
       {
@@ -140,7 +140,7 @@ export default async function CategoryPage({
                 </h1>
                 <p className="text-xs sm:text-sm text-primary-foreground/80 mt-0.5 leading-relaxed">
                   {category.description ||
-                    `${SITE.nameBn} থেকে ${category.name} বিষয়ক সেরা কসমেটিক্স ও বিউটি প্রোডাক্ট কিনুন।`}
+                    `Shop the best ${category.name} cosmetics and beauty products from ${SITE.nameBn}.`}
                 </p>
               </div>
             </div>
@@ -149,7 +149,7 @@ export default async function CategoryPage({
             <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
               <div className="flex items-center gap-1.5 bg-primary-foreground/15 backdrop-blur-sm px-3 py-1.5 rounded-xl text-sm font-medium">
                 <Sparkles className="w-4 h-4" />
-                <span>ক্যাটাগরি সংগ্রহ</span>
+                <span>Category collection</span>
               </div>
             </div>
           </div>

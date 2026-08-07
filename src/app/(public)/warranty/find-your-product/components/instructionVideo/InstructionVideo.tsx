@@ -3,7 +3,7 @@ const InstructionVideo = () => {
     <div className="my-4  mx-auto w-full md:max-w-[1025px]">
       <div>
         <p className="mx-2  text-xl md:mx-1 my-1">
-          বুঝতে অসুবিধা হলে নিচের ভিডিও দেখুনঃ-
+          If you need help, watch the video below:
         </p>
       </div>
       <div className="w-full mx-auto p-2 border-2 border-primary  max-w-screen-lg rounded-xl">

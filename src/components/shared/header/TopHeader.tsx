@@ -7,8 +7,8 @@ import { FaBagShopping } from "react-icons/fa6";
 import { MdCall, MdDeliveryDining } from "react-icons/md";
 
 const announcements = [
-  "সারা বাংলাদেশে ৩ দিনের মধ্যে ডেলিভারি ইনশাআল্লাহ   ",
-  "একদম সহজ রিটার্ন পলিসি  ",
+  "Delivery across Bangladesh within 3 days, InshaAllah   ",
+  "Hassle-free return policy  ",
 ];
 
 const TopHeader = () => {
@@ -24,12 +24,12 @@ const TopHeader = () => {
   const links = [
     {
       href: "/track-your-order",
-      name: "অর্ডার ট্র্যাক করুন",
+      name: "Track Order",
       icon: <MdDeliveryDining className="size-5" />,
     },
     {
       href: "/shop",
-      name: "সকল পণ্য",
+      name: "All Products",
       icon: <FaBagShopping className="size-4" />,
     },
   ];
@@ -56,7 +56,7 @@ const TopHeader = () => {
             className="flex gap-1.5 items-center text-[13px] hover:text-primary transition-all underline-offset-4 hover:underline"
           >
             <FaWhatsapp className="size-4 text-success" />
-            <span>হোয়াটসঅ্যাপ</span>
+            <span>WhatsApp</span>
           </a>
         </div>
 

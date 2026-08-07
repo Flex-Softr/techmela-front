@@ -95,7 +95,7 @@ const ProductCardPrimary = ({
       >
         <Link href={`/product/${product.slug}`}>
           <Eye className="!size-3.5" />
-          বিস্তারিত দেখুন
+          View Details
         </Link>
       </Button>
     </article>

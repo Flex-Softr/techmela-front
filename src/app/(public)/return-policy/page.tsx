@@ -9,13 +9,13 @@ import {
 
 const ReturnPolicyPage = () => {
   return (
-    <div className="min-h-screen bg-muted/30 font-hind-siliguri">
+    <div className="min-h-screen bg-muted/30">
       {/* Premium Hero Section */}
       <section className="relative h-[250px] md:h-[350px] flex items-center justify-center overflow-hidden bg-primary">
         {/* Custom Brand Image with Overlay */}
         <Image
           src="/images/return_hero_new.webp"
-          alt="রিটার্ন পলিসি"
+          alt="Return policy"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -29,12 +29,12 @@ const ReturnPolicyPage = () => {
 
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            রিটার্ন পলিসি
+            Return policy
           </h1>
           <div className="h-1.5 w-16 bg-background/30 mx-auto rounded-full mb-3" />
           <p className="text-base md:text-lg text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
-            গ্রাহক সন্তুষ্টি আমাদের মূল লক্ষ্য। আমাদের পণ্য ফেরতের নিয়মাবলী
-            নিচে বিস্তারিত দেওয়া হলো।
+            Customer satisfaction is our top priority. Our return rules are
+            detailed below.
           </p>
         </div>
       </section>
@@ -48,13 +48,12 @@ const ReturnPolicyPage = () => {
             <span className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
               <FaUndoAlt size={20} />
             </span>
-            ভূমিকা
+            Introduction
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed font-light">
-            প্রিয় গ্রাহক! ShajGhor গ্রাহকদের সর্বোত্তম সেবা নিশ্চিত করার জন্য
-            প্রতিশ্রুতিবদ্ধ। আমরা চাই আপনি আমাদের পণ্য কিনে সন্তুষ্ট হোন। তবে
-            কোনো কারণে যদি আপনাকে পণ্য ফেরত দিতে হয়, তাহলে এই নীতিমালা আপনাকে
-            সঠিক পদ্ধতি সম্পর্কে জানাবে।
+            Dear customer! ShajGhor is committed to excellent service. We want
+            you to be happy with your purchase. If you need to return a product,
+            this policy explains the correct process.
           </p>
         </section>
 
@@ -66,12 +65,12 @@ const ReturnPolicyPage = () => {
               <FaClock size={28} />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-4">
-              রিটার্নের সময়সীমা
+              Return window
             </h3>
             <p className="text-muted-foreground leading-relaxed font-light">
-              পণ্যটি পাওয়ার{" "}
-              <span className="text-primary font-bold">২৪ ঘণ্টার</span> মধ্যে
-              রিটার্নের জন্য আবেদন করতে হবে। সময়ের ব্যাপারে সচেতন থাকা জরুরি।
+              You must request a return within{" "}
+              <span className="text-primary font-bold">24 hours</span> of
+              receiving the product. Please be mindful of the deadline.
             </p>
           </div>
 
@@ -80,11 +79,11 @@ const ReturnPolicyPage = () => {
               <FaPhoneAlt size={24} />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-4">
-              পণ্য ফেরতের পদ্ধতি
+              How to return
             </h3>
             <p className="text-muted-foreground leading-relaxed font-light">
-              পণ্য ফেরত দেওয়ার জন্য উপযুক্ত কারণ উল্লেখ করে আমাদের কাস্টমার
-              কেয়ারে দ্রুত যোগাযোগ করুন এবং আমাদের গাইডলাইন অনুসরণ করুন।
+              Contact customer care promptly with a valid reason and follow our
+              guidelines to return a product.
             </p>
           </div>
         </div>
@@ -95,13 +94,13 @@ const ReturnPolicyPage = () => {
           <section className="bg-success/10/50 rounded-[1.5rem] p-6 md:p-8 border border-success/20 shadow-sm relative overflow-hidden">
             <FaCheckCircle className="absolute -right-6 -bottom-6 text-primary/30/30 text-9xl rotate-12" />
             <h2 className="text-2xl font-bold text-primary mb-8 border-b border-success/20 pb-4">
-              কখন পণ্য ফেরত নেয়া হবে:
+              When we accept returns:
             </h2>
             <ul className="space-y-4">
               {[
-                "দোষপূর্ণ পণ্য: প্যাকেজিং বা প্রোডাক্টে উৎপাদনগত ত্রুটি থাকলে।",
-                "ভুল পণ্য: অর্ডার করা পণ্যের বদলে অন্য পণ্য পাঠানো হলে।",
-                "ক্ষতিগ্রস্ত পণ্য: ডেলিভারির সময় প্যাকেট ছিঁড়ে গেলে বা পণ্য নষ্ট হলে।",
+                "Defective product: manufacturing faults in packaging or the product.",
+                "Wrong product: a different item was sent than what you ordered.",
+                "Damaged product: packaging torn or product damaged during delivery.",
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-4 text-primary">
                   <span className="mt-1.5 w-2 h-2 rounded-full bg-success/100 shrink-0" />
@@ -115,14 +114,14 @@ const ReturnPolicyPage = () => {
           <section className="bg-destructive/5 rounded-[1.5rem] p-6 md:p-8 border border-destructive/15 shadow-sm relative overflow-hidden">
             <FaTimesCircle className="absolute -right-6 -bottom-6 text-destructive/20 text-9xl -rotate-12" />
             <h2 className="text-2xl font-bold text-destructive mb-8 border-b border-destructive/15 pb-4">
-              কখন ফেরত নেয়া হবে না:
+              When we do not accept returns:
             </h2>
             <ul className="space-y-4">
               {[
-                "পণ্যের সিল বা মোড়ক খোলা কিংবা ব্যবহৃত হলে (হাইজিনের কারণে)।",
-                "পণ্যের মূল প্যাকেজিং ক্ষতিগ্রস্ত বা হারানো গেলে।",
-                "নির্ধারিত ২৪ ঘণ্টা সময় পার হওয়ার পর আবেদন করলে।",
-                "সেলের আইটেম বা বিশেষ অফারে কেনা পণ্য।",
+                "Seal or packaging opened, or product used (for hygiene reasons).",
+                "Original packaging damaged or missing.",
+                "Return requested after the 24-hour window.",
+                "Sale items or products purchased under special offers.",
               ].map((item, idx) => (
                 <li
                   key={idx}
@@ -140,22 +139,22 @@ const ReturnPolicyPage = () => {
         <section className="bg-primary text-primary-foreground rounded-[1.5rem] p-6 md:p-8 shadow-2xl relative overflow-hidden border-b-4 border-warning/30">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <h2 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3">
-            টাকা রিফান্ড প্রক্রিয়া
+            Refund process
           </h2>
           <p className="text-primary-foreground/90 text-lg leading-relaxed font-light max-w-3xl">
-            রিটার্ন পণ্যটি আমাদের হাতে পৌঁছানোর পর পরীক্ষা করে{" "}
+            After we receive and inspect the returned product, your payment will
+            be refunded within{" "}
             <span className="text-warning font-bold underline decoration-warning/50 underline-offset-4">
-              ৩ কার্যদিবসের
-            </span>{" "}
-            মধ্যে আপনার পেমেন্ট ফেরত দেওয়া হবে। রিফান্ডের জন্য আপনি যে পেমেন্ট
-            পদ্ধতি ব্যবহার করেছেন, সম্ভবত সেই মাধ্যমেই টাকা ফেরত দেয়া হবে।
+              3 business days
+            </span>
+            . Refunds are usually issued to the same payment method you used.
           </p>
         </section>
 
         {/* Final Contact Footer */}
         <div className="mt-8 text-center space-y-3">
           <p className="text-muted-foreground text-sm uppercase tracking-[0.3em]">
-            আরও তথ্যের জন্য
+            For more information
           </p>
           <div className="inline-flex items-center gap-4 py-3 px-8 bg-background rounded-full shadow-lg border border-border">
             <FaPhoneAlt className="text-primary" />

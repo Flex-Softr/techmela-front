@@ -13,12 +13,12 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "আমাদের সম্পর্কে",
-  description: `${SITE.nameBn} বাংলাদেশের একটি নির্ভরযোগ্য অনলাইন কসমেটিক্স ব্র্যান্ড। মানসম্পন্ন স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার, পারফিউম ও বিউটি অ্যাক্সেসরিজ সরবরাহে আমরা নিবেদিত।`,
+  title: "About us",
+  description: `${SITE.nameBn} is a trusted online cosmetics brand in Bangladesh. We provide quality skincare, makeup, haircare, perfume, and beauty accessories.`,
   keywords: [
     SITE.nameBn,
-    "কসমেটিক্স ব্র্যান্ড বাংলাদেশ",
-    "বিউটি প্রোডাক্ট শপ",
+    "Cosmetics brand Bangladesh",
+    "Beauty product shop",
     "About ShajGhor",
     "Cosmetics Brand Bangladesh",
   ].join(", "),
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-background selection:bg-primary/10 font-hind-siliguri">
+    <div className="min-h-screen bg-background selection:bg-primary/10">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -38,13 +38,13 @@ const AboutPage: React.FC = () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "হোম",
+              name: "Home",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "আমাদের সম্পর্কে",
+              name: "About us",
               item: `${SITE.baseUrl}/about-us`,
             },
           ],
@@ -57,18 +57,18 @@ const AboutPage: React.FC = () => {
           mainEntity: [
             {
               "@type": "Question",
-              name: `${SITE.nameBn} কোন ধরনের পণ্য বিক্রি করে?`,
+              name: `What types of products does ${SITE.nameBn} sell?`,
               acceptedAnswer: {
                 "@type": "Answer",
-                text: `${SITE.nameBn} মানসম্পন্ন স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার, পারফিউম ও বিউটি অ্যাক্সেসরিজ বিক্রি করে।`,
+                text: `${SITE.nameBn} sells quality skincare, makeup, haircare, perfume, and beauty accessories.`,
               },
             },
             {
               "@type": "Question",
-              name: `${SITE.nameBn}র পণ্যগুলো কি অথেনটিক?`,
+              name: `Are ${SITE.nameBn} products authentic?`,
               acceptedAnswer: {
                 "@type": "Answer",
-                text: `হ্যাঁ, ${SITE.nameBn} শুধুমাত্র নির্ভরযোগ্য উৎস থেকে সংগ্রহীত অথেনটিক ও মানসম্পন্ন কসমেটিক্স পণ্য সরবরাহ করে।`,
+                text: `Yes, ${SITE.nameBn} supplies only authentic, quality cosmetics sourced from trusted suppliers.`,
               },
             },
           ],
@@ -79,7 +79,7 @@ const AboutPage: React.FC = () => {
         {/* Bespoke Brand Image with Overlay */}
         <Image
           src="/images/about_hero_new.webp"
-          alt="আমাদের সম্পর্কে"
+          alt="About us"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -93,7 +93,7 @@ const AboutPage: React.FC = () => {
 
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            আমাদের সম্পর্কে
+            About us
           </h1>
           <div className="h-1.5 w-24 bg-background/30 mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
@@ -109,7 +109,7 @@ const AboutPage: React.FC = () => {
             <div className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/about_journey_new.webp"
-                alt={`${SITE.nameBn}র যাত্রা`}
+                alt={`${SITE.nameBn}'s journey`}
                 fill
                 className="object-cover"
               />
@@ -117,17 +117,17 @@ const AboutPage: React.FC = () => {
             </div>
             <div className="space-y-6">
               <h2 className="text-sm uppercase tracking-[0.4em] text-primary font-black">
-                আমাদের যাত্রা
+                Our journey
               </h2>
               <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                নির্ভেজাল সৌন্দর্য <br />
-                <span className="text-primary">সবার কাছে পৌঁছে দেয়া</span>
+                Authentic beauty <br />
+                <span className="text-primary">delivered to everyone</span>
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed font-light">
-                {SITE.nameBn} বাংলাদেশের কসমেটিক্স ও বিউটি ইন্ডাস্ট্রির একটি
-                নির্ভরযোগ্য নাম। আমাদের লক্ষ্য হলো অথেনটিক ও মানসম্পন্ন
-                স্কিনকেয়ার, মেকআপ ও বিউটি প্রোডাক্ট সহজলভ্য করা এবং প্রতিটি
-                গ্রাহকের সৌন্দর্যচর্চাকে নিরাপদ ও আনন্দময় করে তোলা।
+                {SITE.nameBn} is a trusted name in Bangladesh&apos;s cosmetics
+                and beauty industry. Our goal is to make authentic, quality
+                skincare, makeup, and beauty products accessible, and to make
+                every customer&apos;s beauty routine safe and enjoyable.
               </p>
             </div>
           </div>
@@ -135,31 +135,31 @@ const AboutPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
             <div className="space-y-6">
               <h2 className="text-sm uppercase tracking-[0.4em] text-primary font-black">
-                আমাদের কথা
+                Our story
               </h2>
               <p className="text-2xl md:text-4xl font-light leading-tight text-foreground">
-                গ্রাহকের আস্থাকে সবচেয়ে বেশি গুরুত্ব দিয়ে{" "}
-                <span className="text-primary font-medium">মানসম্পন্ন</span> ও
-                অথেনটিক পণ্য সরবরাহে নিবেদিত।
+                We put customer trust first and are dedicated to supplying{" "}
+                <span className="text-primary font-medium">quality</span> and
+                authentic products.
               </p>
             </div>
             <div className="space-y-10">
               <div className="space-y-3">
                 <h3 className="text-lg font-bold text-foreground border-l-4 border-primary pl-4">
-                  আমাদের লক্ষ্য
+                  Our mission
                 </h3>
                 <p className="text-base text-muted-foreground font-light leading-relaxed">
-                  প্রতিটি গ্রাহকের কাছে সাশ্রয়ী মূল্যে অথেনটিক কসমেটিক্স ও
-                  বিউটি প্রোডাক্ট পৌঁছে দেওয়াই আমাদের মূল উদ্দেশ্য।
+                  Our main purpose is to deliver authentic cosmetics and beauty
+                  products to every customer at affordable prices.
                 </p>
               </div>
               <div className="space-y-3">
                 <h3 className="text-lg font-bold text-foreground border-l-4 border-primary pl-4">
-                  বিশুদ্ধতা ও নির্ভরযোগ্যতা
+                  Purity & reliability
                 </h3>
                 <p className="text-base text-muted-foreground font-light leading-relaxed">
-                  নির্ভরযোগ্য উৎস থেকে সংগ্রহ করে আমরা বিশুদ্ধ ও মানসম্মত
-                  কসমেটিক্স পণ্য সরবরাহ করে আসছি।
+                  We source from trusted suppliers and deliver pure, quality
+                  cosmetics.
                 </p>
               </div>
             </div>
@@ -175,11 +175,11 @@ const AboutPage: React.FC = () => {
               <FaGlobe className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  বিশুদ্ধতা
+                  Purity
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  আমরা ত্বক ও চুলের জন্য নিরাপদ ও মানসম্পন্ন উপাদানযুক্ত পণ্য
-                  নির্বাচনে আপোষহীন।
+                  We are uncompromising when selecting products with safe,
+                  quality ingredients for skin and hair.
                 </p>
               </div>
             </div>
@@ -187,10 +187,10 @@ const AboutPage: React.FC = () => {
               <FaAward className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  গুণগত মান
+                  Quality
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  বিশেষজ্ঞদের যাচাই-বাছাইয়ে আমাদের প্রতিটি পণ্য নির্বাচিত হয়।
+                  Every product is selected through expert review.
                 </p>
               </div>
             </div>
@@ -198,10 +198,11 @@ const AboutPage: React.FC = () => {
               <FaHandsHelping className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  আস্থা
+                  Trust
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  গ্রাহকের আস্থা অর্জন ও ধরে রাখাই আমাদের ব্যবসার মূল ভিত্তি।
+                  Earning and keeping customer trust is the foundation of our
+                  business.
                 </p>
               </div>
             </div>
@@ -209,11 +210,11 @@ const AboutPage: React.FC = () => {
               <FaLightbulb className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  উৎকর্ষ
+                  Excellence
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  আধুনিক প্যাকেজিং ও নিরাপদ ডেলিভারিতে মানসম্মত সেবা নিশ্চিত
-                  করাই আমাদের লক্ষ্য।
+                  Our goal is quality service with modern packaging and safe
+                  delivery.
                 </p>
               </div>
             </div>
@@ -225,17 +226,17 @@ const AboutPage: React.FC = () => {
       <section className="py-8 md:pb-20 text-center">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-10 tracking-tight">
-            সৌন্দর্যের যাত্রায় আমাদের{" "}
+            Join us on your beauty{" "}
             <span className="text-primary font-semibold underline decoration-primary/20 underline-offset-8">
-              সঙ্গী হোন
+              journey
             </span>
           </h2>
           <Link
             href="/shop"
             className="group relative inline-flex items-center bg-primary px-14 py-4 text-primary-foreground transition-all hover:bg-foreground rounded-full shadow-lg shadow-primary/20 hover:shadow-none"
           >
-            <span className="text-sm font-black tracking-widest ">
-              পণ্যগুলো দেখুন
+            <span className="text-sm font-black tracking-widest">
+              Browse products
             </span>
             <FaArrowRight className="ml-4 text-sm transition-transform group-hover:translate-x-2" />
           </Link>

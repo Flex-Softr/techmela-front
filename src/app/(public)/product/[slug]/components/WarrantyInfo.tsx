@@ -62,39 +62,40 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
             <DialogDescription>
               <div className="space-y-4 text-foreground">
                 <p>
-                  প্রিয় গ্রাহক, <br />
-                  আমাদের পণ্যের উপর আপনার আস্থা এবং সন্তুষ্টি নিশ্চিত করাই{" "}
-                  {SITE.nameBn}-এর প্রধান লক্ষ্য। আমাদের প্রতিটি প্রোডাক্টে একটি
-                  ওয়ারেন্টি কোড নম্বর রয়েছে। যার মাধ্যমে নির্দিষ্ট ওয়ারেন্টি
-                  মেয়াদের ভিতরে আপনার প্রোডাক্টটি যদি নষ্ট হয়, তাহলে খুব সহজে
-                  ওয়ারেন্টির সুবিধা গ্রহণ করতে নিচের নির্দেশনা অনুসরণ করুন:
+                  Dear customer, <br />
+                  Building your trust and satisfaction with our products is{" "}
+                  {SITE.nameBn}&apos;s primary goal. Every product includes a
+                  warranty code number. If your product is damaged within the
+                  warranty period, follow the steps below to claim your warranty
+                  easily:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
-                    আমাদের হটলাইন নাম্বার, ফেসবুক পেজ বা ওয়েবসাইটের মাধ্যমে
-                    আমাদের সাথে যোগাযোগ করুন।
+                    Contact us via our hotline number, Facebook page, or
+                    website.
                   </li>
                   <li>
-                    পণ্যের কোড নাম্বারটি এবং অর্ডারকৃত মোবাইল নাম্বারটি আমাদের
-                    জানিয়ে দিন।
+                    Share the product code number and the mobile number used for
+                    the order.
                   </li>
                   <li>
-                    আমাদের প্রতিনিধি আপনার প্রোডাক্টের সমস্যা বিবেচনা করে দ্রুত
-                    আপনার কাছে একটি নতুন প্রোডাক্ট পাঠিয়ে দিবে।
+                    Our representative will review the issue and quickly send
+                    you a replacement product.
                   </li>
                   <li>
-                    ডেলিভারি ম্যানের হাতে নষ্ট প্রোডাক্টটি দিয়ে নতুন
-                    প্রোডাক্টটি রিসিভ করতে পারবেন খুব সহজেই।
+                    Simply hand the damaged product to the delivery person and
+                    receive the new one with ease.
                   </li>
                   <li>
-                    এই পদ্ধতিকে কুরিয়ারের ভাষায় &quot;এক্সেঞ্জ&quot; বলা হয়।
+                    In courier terms, this process is called an
+                    &quot;exchange.&quot;
                   </li>
                 </ul>
                 <p>
-                  <strong>দ্রষ্টব্য:</strong> <br />
-                  আপনার কোড নাম্বার এবং মোবাইল নাম্বারটি আপনার নামে আমাদের
-                  কম্পিউটার সিস্টেমে রেজিস্টার করা থাকবে। তাই আপনি নিশ্চিন্তে
-                  আমাদের সেবা গ্রহণ করতে পারবেন।
+                  <strong>Note:</strong> <br />
+                  Your code number and mobile number will be registered under
+                  your name in our system, so you can use our service with
+                  confidence.
                 </p>
               </div>
             </DialogDescription>
@@ -102,12 +103,12 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
             {/* Video Section */}
             <div>
               <p className="text-sm md:text-lg font-medium text-foreground mb-2">
-                এছাড়াও খুব সহজে ওয়েবসাইটের মাধ্যমে ওয়ারেন্টি সুবিধা গ্রহণ করতে
-                নিচের Link টি click করুন।
+                You can also claim your warranty easily through our website by
+                clicking the link below.
               </p>
               <Link href="/warranty/find-your-product" target="_blank">
                 <EcButton className="bg-secondary text-primary-foreground flex items-center gap-2 mt-4 hover:bg-secondary/90 transition-all font-semibold px-6 py-2 h-auto text-base">
-                  ওয়ারেন্টি ক্লেইম করুন <FaArrowRight size={16} />
+                  Claim Warranty <FaArrowRight size={16} />
                 </EcButton>
               </Link>
               {/* video if need  */}
@@ -123,10 +124,10 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
               </div> */}
               <div className="text-center mt-7 ">
                 <p className="text-base md:text-lg">
-                  আপনার সন্তুষ্টিই আমাদের অনুপ্রেরণা।
+                  Your satisfaction is our inspiration.
                 </p>
                 <p className="font-bold text-base">ShajGhor</p>
-                <p className="font-semibold">&quot;বিশ্বাসের প্রতীক&quot;</p>
+                <p className="font-semibold">&quot;A Symbol of Trust&quot;</p>
               </div>
             </div>
           </div>

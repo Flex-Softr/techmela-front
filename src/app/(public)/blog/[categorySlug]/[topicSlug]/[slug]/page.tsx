@@ -134,14 +134,14 @@ export default async function BlogPostPage({ params }: TProps) {
                     className="inline-flex items-center gap-1 hover:text-primary transition-colors font-medium"
                   >
                     <BookOpen className="h-4 w-4" />
-                    ব্লগ
+                    Blog
                   </Link>
                   <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
                   <Link
                     href={categoryHref}
                     className="hover:text-primary transition-colors font-medium"
                   >
-                    {getRefLabel(post.category) || "প্রবন্ধ"}
+                    {getRefLabel(post.category) || "Article"}
                   </Link>
                   {post.topic ? (
                     <>
@@ -157,7 +157,7 @@ export default async function BlogPostPage({ params }: TProps) {
                 </div>
                 <BackButton className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-full bg-primary/5 font-semibold text-primary transition-colors hover:bg-primary/10 border border-primary/10">
                   <ArrowLeft className="h-4 w-4" />
-                  ফিরে যান
+                  Go back
                 </BackButton>
               </div>
               <div className="space-y-2">
@@ -178,7 +178,7 @@ export default async function BlogPostPage({ params }: TProps) {
                 {post.readTime ? (
                   <span className="inline-flex items-center gap-1.5">
                     <Clock className="h-4 w-4" />
-                    {post.readTime} মিনিট
+                    {post.readTime} min
                   </span>
                 ) : null}
                 <ViewCount
@@ -212,9 +212,7 @@ export default async function BlogPostPage({ params }: TProps) {
             {post.faqs?.length ? (
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-4 p-4 md:p-6">
-                  <h2 className="text-2xl font-bold text-primary">
-                    সাধারণ জিজ্ঞাসা
-                  </h2>
+                  <h2 className="text-2xl font-bold text-primary">FAQ</h2>
                   {post.faqs.map((faq, index) => (
                     <div
                       key={`${faq.question}-${index}`}
@@ -236,7 +234,7 @@ export default async function BlogPostPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
-                    ট্যাগ
+                    Tags
                   </h2>
                   <div className="flex flex-wrap gap-1.5">
                     {(post.tags || []).map((tag) => {
@@ -264,7 +262,7 @@ export default async function BlogPostPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    সম্পর্কিত প্রবন্ধ
+                    Related articles
                   </h2>
                   {post.relatedBlogs.map((related) => {
                     const linkedPost = related as string | TLinkedRef;

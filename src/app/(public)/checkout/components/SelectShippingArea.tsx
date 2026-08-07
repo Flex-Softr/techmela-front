@@ -35,7 +35,7 @@ const SelectShippingMethod = ({
   }, [selectedShipping._id, shippingCharges]);
   return (
     <Box className="px-0 md:py-2 lg:pb-6">
-      <BoxHeading>ডেলিভারি এলাকা</BoxHeading>
+      <BoxHeading>Delivery Area</BoxHeading>
       <div className="space-y-2">
         {shippingCharges?.map((item) => (
           <div

@@ -53,13 +53,13 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             <div className="flex flex-wrap items-center gap-2">
               {/* Percentage Badge */}
               <span className="bg-destructive text-primary-foreground text-xs px-2.5 py-1 rounded-full font-extrabold shadow-sm whitespace-nowrap uppercase tracking-wider">
-                {Math.round(discountPercent)}% ছাড়
+                {Math.round(discountPercent)}% OFF
               </span>
 
               {/* Savings Information */}
               {/* {priceSave && (
                 <span className="bg-success/15 text-success text-xs px-2.5 py-1 rounded-full font-bold border border-success/25 flex items-center gap-1 whitespace-nowrap">
-                  <span className="opacity-70 font-medium">সাশ্রয়</span>
+                  <span className="opacity-70 font-medium">Save</span>
                   <span>&#2547;{priceSave}</span>
                 </span>
               )} */}
@@ -86,7 +86,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Price Section */}
           <div className="flex items-center gap-3">
             <span className="text-muted-foreground font-medium shrink-0">
-              মূল্য:
+              Price:
             </span>
             {priceDisplay}
           </div>
@@ -94,7 +94,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Status Chip */}
           <div className="px-4 py-1.5 bg-muted rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
-              স্ট্যাটাস:
+              Status:
             </span>
             <span className={`${stockStatusColor(stockStatus)} font-bold`}>
               {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
@@ -132,7 +132,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Brand Chip */}
           {/* <div className="px-4 py-1.5 bg-muted rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
-              ব্র্যান্ড:
+              Brand:
             </span>
             <span className="font-semibold text-foreground truncate">
               {brand?.name || "N/A"}
@@ -165,7 +165,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
       {/* Price Section */}
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-muted-foreground font-medium text-lg">
-          মূল্য:
+          Price:
         </span>
         {priceDisplay}
       </div>
@@ -175,7 +175,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         {/* Status */}
         <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">
-            স্ট্যাটাস:
+            Status:
           </span>
           <div className="flex-1">
             <span
@@ -217,7 +217,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         {/* Brand */}
         {/* <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">
-            ব্র্যান্ড:
+            Brand:
           </span>
           <span className="font-semibold text-foreground flex-1">
             {brand?.name || "N/A"}

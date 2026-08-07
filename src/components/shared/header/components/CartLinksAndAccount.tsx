@@ -119,13 +119,13 @@ const CartLinksAndAccount = () => {
               <div className="relative flex-1 h-11">
                 <input
                   type="text"
-                  placeholder="পছন্দের পণ্য খুঁজুন..."
+                  placeholder="Search your favorite products..."
                   className="w-full h-full rounded-full border border-border bg-muted pr-12 outline-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pl-5 placeholder:text-sm transition-all"
                   name="searchValue"
                   value={searchValue}
                   onChange={handleInputChange}
                   onFocus={() => setShowSuggestions(true)}
-                  aria-label="পণ্য সার্চ করুন"
+                  aria-label="Search products"
                 />
                 <button
                   className="absolute right-1 top-1/2 -translate-y-1/2"
@@ -141,7 +141,7 @@ const CartLinksAndAccount = () => {
                 <div className="absolute mt-2 top-full left-1/2 transform -translate-x-1/2 w-[95%] max-w-md bg-background border border-border rounded-xl shadow-xl z-50 overflow-y-auto max-h-80">
                   {isLoading && (
                     <p className="p-4 text-sm text-center text-primary/70 animate-pulse">
-                      খুঁজছি...
+                      Searching...
                     </p>
                   )}
 
@@ -203,7 +203,7 @@ const CartLinksAndAccount = () => {
 
                               {isVariable && (
                                 <p className="text-[10px] text-primary/80 font-medium uppercase tracking-wider mt-0.5">
-                                  একাধিক অপশন
+                                  Multiple options
                                 </p>
                               )}
                             </div>
@@ -212,7 +212,7 @@ const CartLinksAndAccount = () => {
                       })
                     : !isLoading && (
                         <p className="p-4 text-sm text-center text-primary/70">
-                          কোনো পণ্য পাওয়া যায়নি।
+                          No products found.
                         </p>
                       )}
                 </div>

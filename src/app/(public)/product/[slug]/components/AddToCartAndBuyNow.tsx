@@ -39,7 +39,7 @@ const AddToCartAndBuyNow = ({
       <div className="flex items-center gap-2 sm:gap-3 w-full md:w-auto md:flex-1">
         <div className="flex items-center shrink-0 gap-1 sm:gap-2 bg-muted/50 p-1 px-2 sm:px-3 rounded-lg border border-border h-[40px] sm:h-[42px]">
           <span className="text-xs sm:text-sm font-semibold text-foreground">
-            পরিমাণ:
+            Qty:
           </span>
           <Quantity quantity={quantity} setQuantity={setQuantity} />
         </div>
@@ -51,7 +51,7 @@ const AddToCartAndBuyNow = ({
           id="addToCart"
         >
           <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-          কার্টে যোগ করুন
+          Add to Cart
         </EcButton>
       </div>
 
@@ -63,7 +63,7 @@ const AddToCartAndBuyNow = ({
         variant="secondary"
       >
         <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-        অর্ডার করুন
+        Order Now
       </EcButton>
       {/* 
       {isDisabled && (

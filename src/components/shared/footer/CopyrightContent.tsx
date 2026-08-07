@@ -8,8 +8,8 @@ const CopyrightContent = () => {
           <div>
             <p className="text-foreground transition-colors text-sm font-medium text-center md:text-left">
               &copy; {new Date().getFullYear()}{" "}
-              <span className="text-foreground font-bold">ShajGhor</span>.
-              সর্বস্বত্ব সংরক্ষিত।
+              <span className="text-foreground font-bold">ShajGhor</span>. All
+              rights reserved.
             </p>
           </div>
           <div>

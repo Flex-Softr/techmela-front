@@ -252,17 +252,17 @@ const WarrantyForm = () => {
     <div className="my-10 max-w-4xl mx-auto">
       <div className="text-center mb-8">
         <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-2">
-          ওয়ারেন্টি দাবি ফর্ম
+          Warranty claim form
         </h2>
         <p className="text-muted-foreground text-sm md:text-base">
-          আপনার পন্যের সমস্যা বিস্তারিত জানান
+          Describe your product issue in detail
         </p>
       </div>
 
       <div className="bg-background shadow-sm border border-border p-6 md:p-8 rounded-xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3 className="text-lg font-medium text-foreground mb-6 border-b pb-2">
-            ক্রয়ের তথ্য
+            Purchase information
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -271,7 +271,7 @@ const WarrantyForm = () => {
                 htmlFor="orderedPhoneNumber"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                অডারকৃত মোবাইল নম্বর
+                Order phone number
               </label>
               <input
                 type="text"
@@ -286,7 +286,7 @@ const WarrantyForm = () => {
                 htmlFor="warrantyCodes"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                পন্যের ওয়ারেন্টি কোড
+                Product warranty code
               </label>
               <input
                 type="text"
@@ -303,24 +303,24 @@ const WarrantyForm = () => {
               htmlFor="issueDescription"
               className="block mb-2 text-sm font-medium text-muted-foreground"
             >
-              সমস্যাটি বর্ণনা করুন
+              Describe the issue
             </label>
             <textarea
               id="issueDescription"
               {...register("issueDescription", { required: true })}
               className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm h-[120px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
-              placeholder="বিস্তারিত বর্ণনা লিখুন..."
+              placeholder="Write a detailed description..."
             />
             {errors.issueDescription && (
               <p className="text-destructive text-xs mt-1">
-                সমস্যার বিবরণ আবশ্যক
+                Issue description is required
               </p>
             )}
           </div>
 
           <div className="mb-8">
             <span className="block mb-2 text-sm font-medium text-muted-foreground">
-              প্রমাণাদি (ছবি/ভিডিও)
+              Evidence (photos/videos)
             </span>
             <div
               className={`relative border-2 border-dashed ${
@@ -369,7 +369,7 @@ const WarrantyForm = () => {
           </div>
 
           <h3 className="text-lg font-medium text-foreground mb-6 border-b pb-2">
-            ক্রেতার তথ্য
+            Customer information
           </h3>
 
           <div className="mb-6 p-4 bg-muted rounded-lg">
@@ -402,7 +402,7 @@ const WarrantyForm = () => {
                   htmlFor="keepAddress"
                   className="ml-2 text-sm font-medium text-foreground cursor-pointer"
                 >
-                  পূর্বের ঠিকানা ব্যবহার করুন
+                  Use previous address
                 </label>
               </div>
               <div className="flex items-center">
@@ -424,7 +424,7 @@ const WarrantyForm = () => {
                   htmlFor="changeAddress"
                   className="ml-2 text-sm font-medium text-foreground cursor-pointer"
                 >
-                  নতুন ঠিকানা দিন
+                  Enter a new address
                 </label>
               </div>
             </div>
@@ -436,18 +436,20 @@ const WarrantyForm = () => {
                 htmlFor="fullName"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                নাম
+                Name
               </label>
               <input
                 type="text"
                 id="fullName"
                 {...register("fullName", { required: true })}
                 className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                placeholder="আপনার নাম"
+                placeholder="Your name"
                 readOnly={addressOption === "keep"}
               />
               {errors.fullName && (
-                <p className="text-destructive text-xs mt-1">নাম প্রয়োজন</p>
+                <p className="text-destructive text-xs mt-1">
+                  Name is required
+                </p>
               )}
             </div>
             <div>
@@ -455,7 +457,7 @@ const WarrantyForm = () => {
                 htmlFor="phoneNumber"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                মোবাইল নম্বর
+                Mobile number
               </label>
               <input
                 type="text"
@@ -470,7 +472,7 @@ const WarrantyForm = () => {
               />
               {errors.phoneNumber && (
                 <p className="text-destructive text-xs mt-1">
-                  মোবাইল নম্বর প্রয়োজন
+                  Mobile number is required
                 </p>
               )}
             </div>
@@ -481,18 +483,20 @@ const WarrantyForm = () => {
               htmlFor="fullAddress"
               className="block mb-2 text-sm font-medium text-muted-foreground"
             >
-              ঠিকানা
+              Address
             </label>
             <input
               type="text"
               id="fullAddress"
               {...register("fullAddress", { required: true })}
               className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-              placeholder="সম্পূর্ণ ঠিকানা"
+              placeholder="Full address"
               readOnly={addressOption === "keep"}
             />
             {errors.fullAddress && (
-              <p className="text-destructive text-xs mt-1">ঠিকানা প্রয়োজন</p>
+              <p className="text-destructive text-xs mt-1">
+                Address is required
+              </p>
             )}
           </div>
           <div className="flex justify-end">
@@ -527,16 +531,16 @@ const WarrantyForm = () => {
             <DialogContent className="w-11/12 max-w-[630px] mx-auto p-4">
               <DialogHeader>
                 <DialogTitle className="text-center my-2 xms:text-xs xls:text-xs sm:text-sm md:text-lg font-bold">
-                  অনুরোধ সফলভাবে গ্রহণ করা হয়েছে
+                  Request received successfully
                 </DialogTitle>
                 <DialogDescription className="text-center p-3 text-sm">
-                  আপনার অনুরোধটি গ্রহণ করা হয়েছে। আমাদের টেকনিক্যাল টিম আপনার
-                  সাথে যোগাযোগ করবে, ততক্ষণ পর্যন্ত অপেক্ষা করুন। ধন্যবাদ...
+                  Your request has been received. Our technical team will
+                  contact you. Please wait. Thank you.
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter className="mx-auto my-1">
                 <Link href="/">
-                  <EcButton className="text-primary-foreground ">
+                  <EcButton className="text-primary-foreground">
                     Go back home
                   </EcButton>
                 </Link>

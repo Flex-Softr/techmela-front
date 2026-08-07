@@ -4,23 +4,23 @@ import { Banknote, Headphones, RotateCcw, Truck } from "lucide-react";
 const facilities = [
   {
     icon: <Truck className="w-8 h-8 text-primary" />,
-    title: "সারাদেশে হোম ডেলিভারি",
-    description: "দেশের যেকোনো প্রান্তে দ্রুত পৌঁছে দেয়া হয়।",
+    title: "Nationwide Home Delivery",
+    description: "Fast delivery to every corner of the country.",
   },
   {
     icon: <Banknote className="w-8 h-8 text-primary" />,
-    title: "ক্যাশ অন ডেলিভারি সুবিধা",
-    description: "পণ্য হাতে পেয়ে টাকা পরিশোধের সুবিধা।",
+    title: "Cash on Delivery",
+    description: "Pay when you receive your product.",
   },
   {
     icon: <Headphones className="w-8 h-8 text-primary" />,
-    title: "সহজ যোগাযোগ",
-    description: "যেকোনো প্রয়োজনে কল করুনঃ 01710020030",
+    title: "Easy Support",
+    description: "Call us anytime: 01710020030",
   },
   {
     icon: <RotateCcw className="w-8 h-8 text-primary" />,
-    title: "সহজ রিটার্ন পলিসি",
-    description: "৩ দিনের মধ্যে পণ্য পরিবর্তনের নিশ্চয়তা।",
+    title: "Easy Return Policy",
+    description: "Product exchange guaranteed within 3 days.",
   },
 ];
 

@@ -36,8 +36,8 @@ const Search = () => {
   const [showSuggestions, setShowSuggestions] = useState(true);
 
   const placeholders = [
-    "পছন্দের পণ্য খুঁজুন...",
-    "পণ্যয়ের নাম দিয়ে সার্চ করুন...",
+    "Search your favorite products...",
+    "Search by product name...",
   ];
 
   const typingPlaceholder = useTypingPlaceholder(placeholders);
@@ -89,7 +89,7 @@ const Search = () => {
           onChange={handleInputChange}
           placeholder={typingPlaceholder}
           className="w-full h-[44px] px-4 text-[13px] outline-none border border-primary bg-background rounded-full pr-12 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300"
-          aria-label="পণ্য সার্চ করুন"
+          aria-label="Search products"
         />
 
         {searchValue && (

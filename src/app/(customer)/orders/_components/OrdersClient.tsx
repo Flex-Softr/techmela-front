@@ -57,12 +57,12 @@ const OrdersClient = () => {
       const pattern = /^(?:\+88)?01[3-9]\d{8}$/;
 
       if (!searchPhone) {
-        setPhoneError("দয়া করে ফোন নম্বর দিন");
+        setPhoneError("Please enter a phone number");
         return;
       }
 
       if (!pattern.test(searchPhone)) {
-        setPhoneError("সঠিক ফোন নম্বর দিন (১১ ডিজিট)");
+        setPhoneError("Enter a valid phone number (11 digits)");
         return;
       }
 
@@ -83,7 +83,7 @@ const OrdersClient = () => {
         const error = err as { data?: { message?: string } };
         toast({
           title: "Error",
-          description: error?.data?.message || "অর্ডার খুঁজে পাওয়া যায়নি",
+          description: error?.data?.message || "Order not found",
           variant: "destructive",
         });
         setGuestOrders([]);
@@ -150,20 +150,20 @@ const OrdersClient = () => {
   }
 
   return (
-    <div className="space-y-4 font-hind-siliguri">
+    <div className="space-y-4">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div>
           <h1 className="text-lg font-bold text-foreground mb-0.5">
-            অর্ডার হিস্টোরি
+            Order history
           </h1>
           <p className="text-sm text-muted-foreground">
-            আপনার পূর্বের সকল অর্ডার এখানে দেখা যাবে।
+            All your previous orders will appear here.
           </p>
         </div>
         {isLoggedIn && orders.length > 0 && (
           <div className="bg-primary/5 px-3 py-1.5 rounded-lg border border-primary/10">
             <span className="text-primary font-semibold text-sm">
-              মোট অর্ডার: {orders.length}
+              Total orders: {orders.length}
             </span>
           </div>
         )}
@@ -177,10 +177,10 @@ const OrdersClient = () => {
           <div className="space-y-1">
             <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Search size={14} className="text-primary" />
-              গেস্ট অর্ডার ট্র্যাক
+              Guest order tracking
             </h3>
             <p className="text-[11px] text-muted-foreground">
-              আপনার ফোন নম্বর দিয়ে অর্ডার হিস্টোরি দেখুন
+              View order history with your phone number
             </p>
           </div>
           <div className="flex gap-2">
@@ -215,7 +215,7 @@ const OrdersClient = () => {
               className="h-10 px-6 font-bold"
               disabled={isSearchingGuest}
             >
-              খুঁজুন
+              Search
             </Button>
           </div>
           {phoneError && (
@@ -228,7 +228,7 @@ const OrdersClient = () => {
         <div className="flex flex-col items-center justify-center py-16 text-muted-foreground gap-3">
           <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
           <p className="font-medium text-muted-foreground text-sm">
-            অর্ডার লোড হচ্ছে...
+            Loading orders...
           </p>
         </div>
       ) : sortedOrders.length > 0 ? (
@@ -238,19 +238,19 @@ const OrdersClient = () => {
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="py-4 px-4 font-bold text-foreground text-sm">
-                    অর্ডার ID
+                    Order ID
                   </TableHead>
                   <TableHead className="py-4 px-4 font-bold text-foreground text-sm">
-                    তারিখ
+                    Date
                   </TableHead>
                   <TableHead className="py-4 px-4 font-bold text-foreground text-sm">
-                    অবস্থা
+                    Status
                   </TableHead>
                   <TableHead className="py-4 px-4 font-bold text-foreground text-sm">
-                    মোট পরিমাণ
+                    Total amount
                   </TableHead>
                   <TableHead className="py-4 px-4 font-bold text-foreground text-sm text-right">
-                    অ্যাকশন
+                    Action
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -279,7 +279,7 @@ const OrdersClient = () => {
                           <span className="text-base">
                             {isMounted
                               ? new Date(order.createdAt).toLocaleDateString(
-                                  "bn-BD",
+                                  "en-US",
                                   {
                                     year: "numeric",
                                     month: "short",
@@ -311,7 +311,7 @@ const OrdersClient = () => {
                           onClick={() => router.push(`/orders/${order._id}`)}
                         >
                           <Eye size={16} />
-                          বিস্তারিত
+                          Details
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -327,18 +327,18 @@ const OrdersClient = () => {
             <ShoppingBag size={28} className="text-muted-foreground" />
           </div>
           <h3 className="text-sm font-bold text-foreground mb-1">
-            কোনো অর্ডার পাওয়া যায়নি
+            No orders found
           </h3>
           <p className="text-xs text-muted-foreground max-w-xs mb-6">
-            আপনার কোনো অর্ডার খুঁজে পাওয়া যায়নি। শপ থেকে আপনার পছন্দের পণ্য
-            অর্ডার করুন।
+            We could not find any orders. Browse the shop and order your
+            favorite products.
           </p>
           <Button
             size="sm"
             className="rounded-lg px-8 font-semibold"
             onClick={() => router.push("/shop")}
           >
-            কেনাকাটা শুরু করুন
+            Start shopping
           </Button>
         </div>
       ) : null}

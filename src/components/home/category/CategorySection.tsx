@@ -42,8 +42,8 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
   return (
     <section className="pt-4 md:pt-6">
       <div className="mb-6 px-4 text-center md:mb-8">
-        <SectionTitle title="আমাদের পণ্য বিভাগ" className="text-primary" />
-        <SectionSubtitle text="পছন্দের ক্যাটাগরি অনুযায়ী পণ্য খুঁজুন" />
+        <SectionTitle title="Our Product Categories" className="text-primary" />
+        <SectionSubtitle text="Find products by your favorite category" />
       </div>
 
       <ContainerMax>

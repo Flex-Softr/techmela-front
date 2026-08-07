@@ -10,7 +10,7 @@ const BrandSelectorWrapper = ({ brands }: { brands: TBrand[] }) => {
 
   return (
     <GenericFilterPropsSelector
-      title="ব্র্যান্ড"
+      title="Brand"
       items={brands as unknown as TGenericItem[]}
       selectedValues={selectedBrands}
       setSelectedValues={setSelectedBrands}

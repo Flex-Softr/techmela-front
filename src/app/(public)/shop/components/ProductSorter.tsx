@@ -13,8 +13,8 @@ import { usePathname } from "next/navigation";
 
 const SORT_OPTIONS = [
   { value: "-updatedAt", label: "Sort by default" },
-  { value: "price", label: "মূল্য: কম → বেশি" },
-  { value: "-price", label: "মূল্য: বেশি → কম" },
+  { value: "price", label: "Price: Low → High" },
+  { value: "-price", label: "Price: High → Low" },
 ];
 
 const ProductSorter = () => {
@@ -32,20 +32,20 @@ const ProductSorter = () => {
   };
 
   return (
-    <div className="flex items-center justify-between gap-3 mb-5 px-1 font-hind-siliguri">
+    <div className="flex items-center justify-between gap-3 mb-5 px-1">
       {!isCategoryPage && (
         <p className="text-sm text-muted-foreground">
-          <span className="font-bold text-foreground">{totalProducts}</span> টি
-          পণ্য
+          <span className="font-bold text-foreground">{totalProducts}</span>{" "}
+          products
         </p>
       )}
 
       <div className="ml-auto">
         <Select value={currentSort} onValueChange={handleSortChange}>
           <SelectTrigger className="w-[170px] h-9 bg-background border border-border rounded-lg text-sm font-medium focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-primary/50 focus:outline-none transition-all hover:border-primary/30">
-            <SelectValue placeholder="সাজান" />
+            <SelectValue placeholder="Sort" />
           </SelectTrigger>
-          <SelectContent className="rounded-xl font-hind-siliguri">
+          <SelectContent className="rounded-xl">
             {SORT_OPTIONS.map((opt) => (
               <SelectItem key={opt.value} value={opt.value}>
                 {opt.label}

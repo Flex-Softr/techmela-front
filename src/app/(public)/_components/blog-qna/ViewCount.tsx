@@ -48,10 +48,10 @@ export default function ViewCount({ id, initialViews, resource }: Props) {
   return (
     <span
       className="inline-flex items-center gap-1.5"
-      title={`${liveCount.toLocaleString()} বার দেখা হয়েছে`}
+      title={`${liveCount.toLocaleString()} views`}
     >
       <Eye className="h-4 w-4" />
-      {liveCount.toLocaleString("bn-BD")}
+      {liveCount.toLocaleString("en-US")}
     </span>
   );
 }

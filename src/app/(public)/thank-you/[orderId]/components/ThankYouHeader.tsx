@@ -27,15 +27,15 @@ const ThankYouHeader = ({ orderId, status }: TThankYouHeaderProps) => {
         <CheckCircle className="w-8 h-8 text-success" />
       </div>
       <h1 className="text-2xl font-bold tracking-tight text-success sm:text-4xl">
-        আপনার অর্ডারটি সফলভাবে সম্পন্ন হয়েছে।
+        Your order has been placed successfully.
       </h1>
       <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-        অর্ডারটি নিশ্চিত করার জন্য ধন্যবাদ! আমরা অর্ডারটি প্রক্রিয়া করছি এবং
-        শীঘ্রই নিশ্চিত করব।
+        Thank you for confirming your order! We are processing it and will
+        confirm shortly.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3 mt-3">
         <span className="whitespace-nowrap text-xl font-bold text-foreground">
-          অর্ডার #{orderId}
+          Order #{orderId}
         </span>
         <span
           className={`px-3 py-1 text-sm capitalize whitespace-nowrap rounded-full font-medium ${getStatusColor(

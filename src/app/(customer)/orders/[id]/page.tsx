@@ -2,7 +2,7 @@ import ProductDetails from "../_components/ProductDetails";
 
 const OrderDetailPage = () => {
   return (
-    <div className="font-hind-siliguri">
+    <div>
       <ProductDetails />
     </div>
   );

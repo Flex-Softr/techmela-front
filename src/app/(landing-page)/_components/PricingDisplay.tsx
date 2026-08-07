@@ -43,7 +43,7 @@ const PricingDisplay = ({
         <div
           className={`mt-1 font-bold text-primary ${isLarge ? "text-lg lg:text-xl" : "text-sm lg:text-base"} animate-pulse`}
         >
-          আপনি পাচ্ছেন {discount}% ডিসকাউন্ট!
+          You&apos;re getting {discount}% off!
         </div>
       )}
     </div>

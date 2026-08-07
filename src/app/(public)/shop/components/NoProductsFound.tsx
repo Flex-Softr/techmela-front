@@ -15,12 +15,12 @@ const NoProductsFound = () => {
   };
 
   const title = isCategoryPage
-    ? "এই ক্যাটাগরিতে কোনো পণ্য নেই"
-    : "কোনো পণ্য পাওয়া যায়নি";
+    ? "No products in this category"
+    : "No products found";
 
   const description = isCategoryPage
-    ? "দুঃখিত, বর্তমানে এই ক্যাটাগরিতে কোনো পণ্য আমাদের সংগ্রহে নেই। অন্যান্য ক্যাটাগরি ঘুরে দেখতে পারেন।"
-    : "দুঃখিত, আপনার পছন্দের ফিল্টার অনুযায়ী কোনো পণ্য আমাদের সংগ্রহে পাওয়া যায়নি। ভিন্ন ক্যাটাগরি বা প্রাইস রেঞ্জ চেষ্টা করে দেখুন।";
+    ? "Sorry, we currently have no products in this category. Feel free to browse other categories."
+    : "Sorry, no products match your selected filters. Try a different category or price range.";
 
   return (
     <div className="flex flex-col items-center justify-center py-20 px-6 text-center bg-background rounded-3xl border border-border/50">
@@ -45,7 +45,7 @@ const NoProductsFound = () => {
           className="group px-6 py-5 rounded-xl font-bold gap-2.5 bg-primary hover:bg-primary/90 text-primary-foreground active:scale-95 transition-all duration-300"
         >
           <RotateCcw className="w-4 h-4 group-hover:rotate-[-45deg] transition-transform duration-300" />
-          <span>সব ফিল্টার মুছে ফেলুন</span>
+          <span>Clear all filters</span>
         </Button>
       )}
     </div>

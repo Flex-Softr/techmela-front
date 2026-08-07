@@ -11,12 +11,12 @@ import ShopFilters from "./components/ShopFilters";
 import { SITE } from "@/const/site.const";
 
 export const metadata: Metadata = {
-  title: "কসমেটিক্স ও বিউটি প্রোডাক্টের বিশাল সংগ্রহ",
-  description: `${SITE.nameBn} অনলাইন শপে আপনাকে স্বাগতম। এখানে পাবেন দেশি-বিদেশি ব্র্যান্ডের কয়েক হাজার স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার, পারফিউম ও বিউটি অ্যাক্সেসরিজ।`,
+  title: "Huge Collection of Cosmetics & Beauty Products",
+  description: `Welcome to the ${SITE.nameBn} online shop. Discover thousands of skincare, makeup, haircare, perfume, and beauty accessories from local and international brands.`,
   keywords: [
-    "অনলাইন কসমেটিক্স শপ",
-    "কসমেটিক্স ও বিউটি প্রোডাক্ট সংগ্রহ",
-    "স্কিনকেয়ার মেকআপ কিনুন",
+    "Online Cosmetics Shop",
+    "Cosmetics & Beauty Product Collection",
+    "Buy Skincare Makeup",
     "Cosmetics Shop Bangladesh",
     "Buy Beauty Products Online",
   ].join(", "),
@@ -62,13 +62,13 @@ const ShopPage = async () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "হোম",
+              name: "Home",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "সকল পণ্য",
+              name: "All Products",
               item: `${SITE.baseUrl}/shop`,
             },
           ],

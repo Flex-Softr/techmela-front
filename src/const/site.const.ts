@@ -2,12 +2,12 @@
 export const SITE = {
   nameBn: "ShajGhor",
   nameEn: "ShajGhor",
-  taglineBn: "সেরা কসমেটিক্স ও বিউটি প্রোডাক্টের সমাহার",
+  taglineBn: "Premium Cosmetics & Beauty Products",
   descriptionBn:
-    "ShajGhor বাংলাদেশের নির্ভরযোগ্য অনলাইন কসমেটিক্স শপ। এখানে পাবেন মানসম্পন্ন স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার, পারফিউম ও বিউটি অ্যাক্সেসরিজ।",
+    "ShajGhor is a trusted online cosmetics shop in Bangladesh. Shop quality skincare, makeup, haircare, perfume, and beauty accessories.",
   shortDescriptionBn:
-    "মানসম্পন্ন স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার ও বিউটি প্রোডাক্টের নির্ভরযোগ্য অনলাইন শপ।",
-  mottoBn: "সৌন্দর্যের যত্ন, বিশ্বস্ততার সাথে",
+    "A trusted online shop for quality skincare, makeup, haircare, and beauty products.",
+  mottoBn: "Beauty care you can trust",
   baseUrl: "https://shajghor.com",
   apiUrl: "https://api.shajghor.com",
   email: "contact@shajghor.com",

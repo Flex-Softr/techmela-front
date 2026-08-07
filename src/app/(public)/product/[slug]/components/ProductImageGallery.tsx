@@ -87,7 +87,7 @@ const ProductImageGallery = ({
               {Math.round(discount)}%
             </span>
             <span className="text-[8px] lg:text-[10px] font-black uppercase tracking-wider">
-              ছাড়
+              OFF
             </span>
           </div>
         </div>

@@ -30,13 +30,13 @@ class BdAddress {
   /**
    * Get all divisions.
    */
-  static divisions(lang: Language = "bn"): LocalizedItem[] {
+  static divisions(lang: Language = "en"): LocalizedItem[] {
     return localize(divisions, lang);
   }
 
   static divisionNameById(
     divisionId: string | undefined,
-    lang: Language = "bn"
+    lang: Language = "en"
   ): LocalizedItem {
     if (!divisionId) {
       return { id: "", name: "" };
@@ -48,7 +48,7 @@ class BdAddress {
   /**
    * Get all districts.
    */
-  static allDistricts(lang: Language = "bn"): LocalizedItem[] {
+  static allDistricts(lang: Language = "en"): LocalizedItem[] {
     return localize(districts, lang);
   }
 
@@ -57,7 +57,7 @@ class BdAddress {
    */
   static districts(
     divisionId: string | undefined,
-    lang: Language = "bn"
+    lang: Language = "en"
   ): LocalizedItem[] {
     if (!divisionId) {
       return [];
@@ -70,7 +70,7 @@ class BdAddress {
 
   static districtNameById(
     districtId: string | undefined,
-    lang: Language = "bn"
+    lang: Language = "en"
   ): LocalizedItem {
     if (!districtId) {
       return { id: "", name: "" };
@@ -82,14 +82,14 @@ class BdAddress {
   /**
    * Get all upazilas.
    */
-  static allUpazilas(lang: Language = "bn"): LocalizedItem[] {
+  static allUpazilas(lang: Language = "en"): LocalizedItem[] {
     return localize(upazilas, lang);
   }
 
   /**
    * Get upazilas by district id.
    */
-  static upazilas(districtId: string, lang: Language = "bn"): LocalizedItem[] {
+  static upazilas(districtId: string, lang: Language = "en"): LocalizedItem[] {
     if (!districtId) {
       return [];
     }
@@ -101,7 +101,7 @@ class BdAddress {
 
   static upazilaNameById(
     upazilaId: string | undefined,
-    lang: Language = "bn"
+    lang: Language = "en"
   ): LocalizedItem {
     if (!upazilaId) {
       return { id: "", name: "" };

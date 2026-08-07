@@ -116,25 +116,25 @@ const ShippingAddress = ({
     <Box className="bg-background px-4 py-2 border">
       <BoxHeading className="flex items-center gap-2">
         <Truck className="text-lg text-primary" />
-        <span className="text-lg">ডেলিভারি ঠিকানা</span>
+        <span className="text-lg">Delivery Address</span>
       </BoxHeading>
       {customerHasAccount && (
         <Card className="w-[350px]">
           <CardHeader>
-            <CardTitle className="text-xl">ডিফল্ট শিপিং ঠিকানা</CardTitle>
+            <CardTitle className="text-xl">Default Shipping Address</CardTitle>
             <CardDescription>
               {shippingAddress
-                ? `ঠিকানা: ${shippingAddress?.fullAddress}`
-                : "আপনি কোনো ডিফল্ট শিপিং ঠিকানা সেট করেননি।"}
+                ? `Address: ${shippingAddress?.fullAddress}`
+                : "You have not set a default shipping address."}
             </CardDescription>
           </CardHeader>
           <CardFooter className="flex justify-between">
             <Link href="/my-account/add-shipping-address">
               <div
                 className="cursor-pointer text-primary"
-                title="শিপিং ঠিকানা সম্পাদনা করুন"
+                title="Edit shipping address"
               >
-                ঠিকানা সম্পাদনা করুন
+                Edit address
               </div>
             </Link>
           </CardFooter>
@@ -147,16 +147,16 @@ const ShippingAddress = ({
               htmlFor="shipping.fullName"
               className="font-bold pl-1 mb-1.5 block"
             >
-              নাম <span className="text-destructive">*</span>
+              Name <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.fullName"
-              placeholder="আপনার নাম লিখুন"
+              placeholder="Enter your name"
               {...register("shipping.fullName", {
-                required: "আপনার নাম লিখুন",
+                required: "Please enter your name",
                 maxLength: {
                   value: 30,
-                  message: "নাম ৩০ অক্ষরের বেশি হতে পারবে না",
+                  message: "Name cannot exceed 30 characters",
                 },
               })}
             />
@@ -172,16 +172,16 @@ const ShippingAddress = ({
               htmlFor="shipping.phoneNumber"
               className="font-bold pl-1 mb-1.5 block"
             >
-              মোবাইল নম্বর <span className="text-destructive">*</span>
+              Mobile Number <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.phoneNumber"
-              placeholder="আপনার মোবাইল নম্বর লিখুন"
+              placeholder="Enter your mobile number"
               {...register("shipping.phoneNumber", {
-                required: "আপনার মোবাইল নম্বর লিখুন",
+                required: "Please enter your mobile number",
                 pattern: {
                   value: /^(?:\+88)?01[3-9]\d{8}$/,
-                  message: "সঠিক মোবাইল নম্বর দিন",
+                  message: "Please enter a valid mobile number",
                 },
               })}
             />
@@ -198,19 +198,20 @@ const ShippingAddress = ({
             htmlFor="shipping.email"
             className="font-bold pl-1 mb-1.5 block"
           >
-            ইমেইল (ঐচ্ছিক)
+            Email (optional)
           </Label>
           <Input
             id="shipping.email"
-            placeholder="আপনার ইমেইল লিখুন"
+            placeholder="Enter your email"
             {...register("shipping.email", {
               validate: (value) => {
                 if (!value) return true; // Optional field
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
-                  return "সঠিক ইমেইল দিন";
+                  return "Please enter a valid email";
                 if (value.length > 50)
-                  return "ইমেইল ৫০ অক্ষরের বেশি হতে পারবে না";
-                if (value.length < 5) return "ইমেইল ৫ অক্ষরের কম হতে পারবে না";
+                  return "Email cannot exceed 50 characters";
+                if (value.length < 5)
+                  return "Email must be at least 5 characters";
                 return true;
               },
             })}
@@ -236,13 +237,13 @@ const ShippingAddress = ({
             htmlFor="shipping.fullAddress"
             className="font-bold pl-1 mb-1.5 block"
           >
-            ঠিকানা <span className="text-destructive">*</span>
+            Address <span className="text-destructive">*</span>
           </Label>
           <Input
             id="shipping.fullAddress"
-            placeholder="পরিচিত স্থান/বাসা নম্বর, রাস্তা/গ্রাম/এলাকা..."
+            placeholder="Landmark/house number, road/village/area..."
             {...register("shipping.fullAddress", {
-              required: "আপনার ঠিকানা লিখুন",
+              required: "Please enter your address",
             })}
           />
           {errors.shipping?.fullAddress && (
@@ -257,11 +258,11 @@ const ShippingAddress = ({
             htmlFor="shipping.notes"
             className="font-bold pl-1 mb-1.5 block"
           >
-            নোট (ঐচ্ছিক)
+            Notes (optional)
           </Label>
           <textarea
             id="shipping.notes"
-            placeholder="কোনো নির্দিষ্ট নির্দেশনা থাকলে লিখুন..."
+            placeholder="Add any special delivery instructions..."
             {...register("shipping.notes")}
             className="w-full h-20 ring-1 ring-gray-200 rounded-md p-2 text-sm focus:ring-2 focus:ring-primary outline-none"
           ></textarea>

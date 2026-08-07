@@ -16,7 +16,7 @@ const CarouselUi = ({ slider }: { slider: TSliders }) => {
       <Image
         className="w-full h-full object-cover transition-transform duration-700"
         src={getImageSrc(image?.src)}
-        alt={image?.alt || "ShajGhor বিউটি প্রোডাক্ট ব্যানার"}
+        alt={image?.alt || "ShajGhor beauty product banner"}
         height={1200}
         width={1920}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"

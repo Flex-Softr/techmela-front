@@ -63,7 +63,7 @@ const HomepageSectionContent = async ({
                             : content?.collectionId
                         }`}
                       >
-                        সবগুলো দেখুন
+                        View All
                       </Link>
                     </Button>
                   </div>

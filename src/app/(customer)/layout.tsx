@@ -13,7 +13,7 @@ type Props = {
 
 const CustomerLayout = ({ children }: Props) => {
   return (
-    <main className="min-h-screen flex flex-col font-hind-siliguri">
+    <main className="min-h-screen flex flex-col">
       <Header />
 
       <div className="flex-grow bg-muted/50 py-2 md:py-3">

@@ -41,7 +41,7 @@ const TrackOrderDetails = () => {
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
       <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
       <p className="text-lg text-muted-foreground animate-pulse">
-        অর্ডার তথ্য লোড হচ্ছে...
+        Loading order details...
       </p>
     </div>
   );
@@ -74,7 +74,7 @@ const TrackOrderDetails = () => {
         (statusEvent: StatusEvent, index: number) => ({
           status: capitalizeStatus(statusEvent?.status || "N/A"),
           description:
-            statusEvent?.description?.bn || "No description available",
+            statusEvent?.description?.en || "No description available",
           date: new Date(statusEvent?.createdAt).toLocaleDateString(),
           time: new Date(statusEvent?.createdAt).toLocaleTimeString(),
           icon: index === 0 ? "box" : "truck",
@@ -99,7 +99,7 @@ const TrackOrderDetails = () => {
             className="flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>পেছনে ফিরে যান</span>
+            <span>Go back</span>
           </button>
 
           <div className="grid lg:grid-cols-3 gap-8">
@@ -112,14 +112,14 @@ const TrackOrderDetails = () => {
                     <Package className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground">
-                    অর্ডার সামারি
+                    Order Summary
                   </h3>
                 </div>
 
                 <div className="space-y-4">
                   <div className="pb-3 border-b border-border/40">
                     <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">
-                      অর্ডার নম্বর
+                      Order Number
                     </p>
                     <p className="font-mono font-bold text-foreground">
                       #{orderId}
@@ -127,7 +127,7 @@ const TrackOrderDetails = () => {
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">
-                      বর্তমান অবস্থা
+                      Current Status
                     </p>
                     <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
                       {latestStatus}
@@ -143,7 +143,7 @@ const TrackOrderDetails = () => {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground">
-                    শিপিং ইনফরমেশন
+                    Shipping Information
                   </h3>
                 </div>
 
@@ -152,7 +152,7 @@ const TrackOrderDetails = () => {
                     <User className="w-4 h-4 text-muted-foreground mt-1" />
                     <div>
                       <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        নাম
+                        Name
                       </p>
                       <p className="text-sm font-medium">
                         {orderData?.shipping?.fullName}
@@ -163,7 +163,7 @@ const TrackOrderDetails = () => {
                     <MapPin className="w-4 h-4 text-muted-foreground mt-1" />
                     <div>
                       <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        ঠিকানা
+                        Address
                       </p>
                       <p className="text-sm font-medium">
                         {orderData?.shipping?.fullAddress}
@@ -174,7 +174,7 @@ const TrackOrderDetails = () => {
                     <Phone className="w-4 h-4 text-muted-foreground mt-1" />
                     <div>
                       <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        ফোন নম্বর
+                        Phone Number
                       </p>
                       <p className="text-sm font-medium font-mono">
                         {orderData?.shipping?.phoneNumber}
@@ -186,7 +186,7 @@ const TrackOrderDetails = () => {
                       <Mail className="w-4 h-4 text-muted-foreground mt-1" />
                       <div>
                         <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                          ইমেইল
+                          Email
                         </p>
                         <p className="text-sm font-medium">
                           {orderData?.shipping?.email}
@@ -206,7 +206,7 @@ const TrackOrderDetails = () => {
                     <Truck className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground">
-                    অর্ডার ট্র্যাকিং হিস্টোরি
+                    Order Tracking History
                   </h3>
                 </div>
 
@@ -220,8 +220,7 @@ const TrackOrderDetails = () => {
                   {parcelTrackingLink ? (
                     <div className="text-center">
                       <p className="text-sm text-muted-foreground mb-4">
-                        নিচের বাটনে ক্লিক করে কুরিয়ারে লাইভ ট্র্যাকিং করতে
-                        পারবেন
+                        Click the button below for live courier tracking
                       </p>
                       <a
                         href={parcelTrackingLink}
@@ -235,11 +234,12 @@ const TrackOrderDetails = () => {
                   ) : (
                     <div className="text-center bg-muted/50 p-6 rounded-xl border border-dashed border-border">
                       <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-                        আপনার পণ্য কুরিয়ারে পাঠানোর পর এখানে
+                        Once your product is handed over to the courier, you
+                        will see the{" "}
                         <span className="text-primary font-bold">
                           &quot;Live Track Parcel&quot;
-                        </span>
-                        বাটনটি দেখতে পাবেন। অনুগ্রহ করে অপেক্ষা করুন।
+                        </span>{" "}
+                        button here. Please wait.
                       </p>
                     </div>
                   )}

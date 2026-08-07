@@ -138,7 +138,7 @@ const ProductClientContent = ({
             <span className="text-lg sm:text-xl group-hover/preview:animate-bounce-subtle">
               <Sparkles className="mr-0.5 sm:mr-1 h-5 w-5 sm:h-6 sm:w-6" />
             </span>
-            বিস্তারিত দেখুন
+            View Details
           </button>
         )}
         <div className="flex justify-center sm:justify-end w-full sm:w-auto">
@@ -150,7 +150,7 @@ const ProductClientContent = ({
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border-2 border-primary/10 bg-primary/5">
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="bg-primary/10 p-2 sm:p-3 rounded-full">
-              <a href="tel:+01710020030" aria-label="আমাদের কল করুন">
+              <a href="tel:+01710020030" aria-label="Call us">
                 <Phone className="text-primary h-5 w-5 sm:h-6 sm:w-6" />
               </a>
             </div>
@@ -159,7 +159,7 @@ const ProductClientContent = ({
                 <a href="tel:+01710020030">01710020030</a>
               </p>
               <p className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                যেকোনো প্রয়োজনে কল করুন
+                Call us for any help
               </p>
             </div>
           </div>
@@ -169,7 +169,7 @@ const ProductClientContent = ({
             className="flex items-center gap-2 bg-background text-primary border border-primary/20 hover:border-primary/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 whitespace-nowrap"
           >
             <HelpCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-            অর্ডার কীভাবে করবেন?
+            How to order?
           </button>
         </div>
       </div>

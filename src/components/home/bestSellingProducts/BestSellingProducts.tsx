@@ -22,10 +22,10 @@ const BestSellingProducts = async ({
         <section className="pt-10 md:pt-12">
           <div className="mb-6 px-4 text-center md:mb-8">
             <SectionTitle
-              title="বেস্ট সেলিং পণ্যসমূহ"
+              title="Best Selling Products"
               className="text-primary"
             />
-            <SectionSubtitle text="আমাদের সবথেকে জনপ্রিয় পণ্যগুলো দেখে নিন" />
+            <SectionSubtitle text="Discover our most popular products" />
           </div>
 
           <ContainerMax>
@@ -39,7 +39,7 @@ const BestSellingProducts = async ({
             {bestSellingProducts.length > 5 && (
               <div className="flex justify-center mt-5">
                 <Button asChild size={"sm"} className="px-6">
-                  <Link href={"/best-selling-products"}>সবগুলো দেখুন</Link>
+                  <Link href={"/best-selling-products"}>View All</Link>
                 </Button>
               </div>
             )}

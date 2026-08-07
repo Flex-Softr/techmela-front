@@ -5,56 +5,56 @@ export const getStatusDisplay = (status: string) => {
     case "pending":
       return {
         label: "Pending",
-        banglaLabel: "পেন্ডিং",
+        banglaLabel: "Pending",
         className: "bg-warning/10 text-warning border-warning/20",
         color: "hsl(var(--warning))",
       };
     case "confirmed":
       return {
         label: "Confirmed",
-        banglaLabel: "কনফার্মড",
+        banglaLabel: "Confirmed",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
     case "processing":
       return {
         label: "Processing",
-        banglaLabel: "প্রসেসিং",
+        banglaLabel: "Processing",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
     case "warranty processing":
       return {
         label: "Warranty Processing",
-        banglaLabel: "ওয়ারেন্টি প্রসেসিং",
+        banglaLabel: "Warranty Processing",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
     case "follow up":
       return {
         label: "Follow Up",
-        banglaLabel: "ফলো আপ",
+        banglaLabel: "Follow Up",
         className: "bg-warning/10 text-warning border-warning/20",
         color: "hsl(var(--warning))",
       };
     case "processing done":
       return {
         label: "Processing Done",
-        banglaLabel: "প্রসেসিং সম্পন্ন",
+        banglaLabel: "Processing Done",
         className: "bg-success/10 text-success border-success/20",
         color: "hsl(var(--success))",
       };
     case "warranty added":
       return {
         label: "Warranty Added",
-        banglaLabel: "ওয়ারেন্টি যুক্ত করা হয়েছে",
+        banglaLabel: "Warranty Added",
         className: "bg-success/10 text-success border-success/20",
         color: "hsl(var(--success))",
       };
     case "on courier":
       return {
         label: "On Courier",
-        banglaLabel: "কুরিয়ারে আছে",
+        banglaLabel: "On Courier",
         className: "bg-secondary text-secondary-foreground border-border",
         color: "hsl(var(--secondary-foreground))",
       };
@@ -62,21 +62,21 @@ export const getStatusDisplay = (status: string) => {
     case "cancelled":
       return {
         label: "Cancelled",
-        banglaLabel: "বাতিল করা হয়েছে",
+        banglaLabel: "Cancelled",
         className: "bg-destructive/10 text-destructive border-destructive/20",
         color: "hsl(var(--destructive))",
       };
     case "returned":
       return {
         label: "Returned",
-        banglaLabel: "রিটার্ন করা হয়েছে",
+        banglaLabel: "Returned",
         className: "bg-destructive/10 text-destructive border-destructive/20",
         color: "hsl(var(--destructive))",
       };
     case "partial completed":
       return {
         label: "Partial Completed",
-        banglaLabel: "আংশিক সম্পন্ন",
+        banglaLabel: "Partial Completed",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
@@ -84,7 +84,7 @@ export const getStatusDisplay = (status: string) => {
     case "delivered":
       return {
         label: "Completed",
-        banglaLabel: "সম্পন্ন",
+        banglaLabel: "Completed",
         className: "bg-success/10 text-success border-success/20",
         color: "hsl(var(--success))",
       };

@@ -12,13 +12,13 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "স্টোর লোকেশন",
-  description: `${SITE.nameBn}র শোরুমের ঠিকানা এবং ম্যাপ লোকেশন। সরাসরি আমাদের শোরুম থেকে প্রিয় কসমেটিক্স ও বিউটি পণ্যগুলো সংগ্রহ করতে ডেমরা, ঢাকাস্থ আমাদের লোকেশনে চলে আসুন।`,
+  title: "Store location",
+  description: `${SITE.nameBn} showroom address and map location. Visit us in Demra, Dhaka to collect your favorite cosmetics and beauty products in person.`,
   keywords: [
-    `${SITE.nameBn} শোরুম`,
+    `${SITE.nameBn} showroom`,
     "Store Location ShajGhor",
     "Demra Cosmetics Shop",
-    "বক্সনগর সারুলিয়া ডেমরা ঢাকা",
+    "Boxnagar Sarulia Demra Dhaka",
   ].join(", "),
   alternates: {
     canonical: `${SITE.baseUrl}/store-location`,
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 const StoreLocationPage = () => {
   return (
-    <div className="min-h-screen bg-muted/30 font-hind-siliguri">
+    <div className="min-h-screen bg-muted/30">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -36,13 +36,13 @@ const StoreLocationPage = () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "হোম",
+              name: "Home",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "স্টোর লোকেশন",
+              name: "Store location",
               item: `${SITE.baseUrl}/store-location`,
             },
           ],
@@ -53,7 +53,7 @@ const StoreLocationPage = () => {
         {/* Custom Brand Image with Overlay */}
         <Image
           src="/images/store_hero_new.webp"
-          alt="স্টোর লোকেশন"
+          alt="Store location"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -67,11 +67,11 @@ const StoreLocationPage = () => {
 
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            স্টোর লোকেশন
+            Store location
           </h1>
           <div className="h-1.5 w-24 bg-background/30 mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
-            {SITE.nameBn}র পণ্য সরাসরি সংগ্রহ করতে আমাদের ঠিকানায় চলে আসুন।
+            Visit our address to collect {SITE.nameBn} products in person.
           </p>
         </div>
       </section>
@@ -109,17 +109,17 @@ const StoreLocationPage = () => {
                       <FaMapMarkerAlt size={22} />
                     </div>
                     <h2 className="text-3xl font-black text-foreground">
-                      আমাদের ঠিকানা
+                      Our address
                     </h2>
                   </div>
 
                   <div className="space-y-8">
                     <div>
                       <p className="text-sm font-bold text-primary uppercase tracking-widest mb-3">
-                        শোরুমের ঠিকানা
+                        Showroom address
                       </p>
                       <p className="text-xl text-foreground leading-relaxed font-medium">
-                        সুরমেলা গলি, পূর্ব বক্সনগর, সারুলিয়া, ডেমরা, ঢাকা-১৩৬১
+                        Surmela Goli, East Boxnagar, Sarulia, Demra, Dhaka-1361
                       </p>
                     </div>
 
@@ -127,7 +127,7 @@ const StoreLocationPage = () => {
 
                     <div>
                       <p className="text-sm font-bold text-primary uppercase tracking-widest mb-4">
-                        হেল্পলাইন
+                        Helpline
                       </p>
                       <div className="space-y-4">
                         <a
@@ -157,7 +157,7 @@ const StoreLocationPage = () => {
 
                     <div className="pt-4">
                       <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-6">
-                        সোশ্যাল মিডিয়া
+                        Social media
                       </p>
                       <div className="flex flex-wrap gap-4">
                         {[

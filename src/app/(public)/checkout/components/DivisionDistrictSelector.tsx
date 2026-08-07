@@ -32,20 +32,20 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
   setValue,
   shipping,
   errors,
-  lang = "bn",
+  lang = "en",
   showDivision = true,
   basePath = "shipping",
 }: TProps<T>) => {
   // Register fields for validation
   // Bind react-hook-form registers so they have access to their refs for focus mapping
   const divisionRegister = register(`${basePath}.division` as Path<T>, {
-    required: "বিভাগ সিলেক্ট করুন",
+    required: "Please select a division",
   });
   const districtRegister = register(`${basePath}.district` as Path<T>, {
-    required: "জেলা সিলেক্ট করুন",
+    required: "Please select a district",
   });
   const upazilaRegister = register(`${basePath}.upazila` as Path<T>, {
-    required: "থানা / উপজেলা সিলেক্ট করুন",
+    required: "Please select a thana / upazila",
   });
   const division =
     useWatch({ control, name: `${basePath}.division` as Path<T> }) || "";
@@ -81,7 +81,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             htmlFor={`${basePath}.division`}
             className="font-semibold text-foreground"
           >
-            বিভাগ <span className="text-destructive">*</span>
+            Division <span className="text-destructive">*</span>
           </Label>
           <select
             id={`${basePath}.division`}
@@ -96,7 +96,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
             }}
             className="w-full h-10 px-3 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm"
           >
-            <option value="">-- বিভাগ সিলেক্ট --</option>
+            <option value="">-- Select division --</option>
             {divisions.map((d) => (
               <option key={d.id} value={d.id}>
                 {d.name}
@@ -105,7 +105,8 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           </select>
           {errorObj?.division && (
             <span className="text-destructive text-xs">
-              {(errorObj.division.message as string) || "বিভাগ সিলেক্ট করুন"}
+              {(errorObj.division.message as string) ||
+                "Please select a division"}
             </span>
           )}
         </div>
@@ -115,7 +116,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           htmlFor={`${basePath}.district`}
           className="font-semibold text-foreground"
         >
-          জেলা <span className="text-destructive">*</span>
+          District <span className="text-destructive">*</span>
         </Label>
         <select
           id={`${basePath}.district`}
@@ -132,7 +133,9 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
         >
           <option value="">
             --{" "}
-            {showDivision && !division ? "আগে বিভাগ সিলেক্ট" : "জেলা সিলেক্ট"}{" "}
+            {showDivision && !division
+              ? "Select division first"
+              : "Select district"}{" "}
             --
           </option>
           {districts.map((d) => (
@@ -143,7 +146,8 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
         </select>
         {errorObj?.district && (
           <span className="text-destructive text-xs">
-            {(errorObj.district.message as string) || "জেলা সিলেক্ট করুন"}
+            {(errorObj.district.message as string) ||
+              "Please select a district"}
           </span>
         )}
       </div>
@@ -152,7 +156,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           htmlFor={`${basePath}.upazila`}
           className="font-semibold text-foreground"
         >
-          থানা / উপজেলা <span className="text-destructive">*</span>
+          Thana / Upazila <span className="text-destructive">*</span>
         </Label>
         <select
           id={`${basePath}.upazila`}
@@ -167,10 +171,11 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
           className="w-full h-10 px-3 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none rounded-md transition-all text-sm disabled:bg-muted disabled:cursor-not-allowed"
         >
           <option value="" className="lg:hidden">
-            -- {district ? "থানা / উপজেলা সিলেক্ট" : "আগে জেলা সিলেক্ট"} --
+            -- {district ? "Select thana / upazila" : "Select district first"}{" "}
+            --
           </option>
           <option value="" className="hidden lg:block">
-            -- {district ? "থানা / উপজেলা" : "আগে জেলা"} --
+            -- {district ? "Thana / Upazila" : "Select district first"} --
           </option>
           {upazilas.map((u) => (
             <option key={u.id} value={u.id}>
@@ -181,7 +186,7 @@ const DivisionDistrictUpazilaSelector = <T extends FieldValues>({
         {errorObj?.upazila && (
           <span className="text-destructive text-xs">
             {(errorObj.upazila.message as string) ||
-              "থানা / উপজেলা সিলেক্ট করুন"}
+              "Please select a thana / upazila"}
           </span>
         )}
       </div>

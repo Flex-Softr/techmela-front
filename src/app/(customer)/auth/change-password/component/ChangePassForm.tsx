@@ -58,8 +58,8 @@ const ChangePasswordForm = () => {
         });
       } else {
         toast({
-          title: "পাসওয়ার্ড পরিবর্তন ব্যর্থ হয়েছে",
-          description: "পুরানো পাসওয়ার্ডটি মিলেনি!",
+          title: "Password change failed",
+          description: "The current password does not match!",
           variant: "destructive",
         });
       }
@@ -78,9 +78,9 @@ const ChangePasswordForm = () => {
   return (
     <Card className="w-full shadow-sm border-border/60 max-w-md mx-auto">
       <CardHeader className="pb-4 border-b border-border">
-        <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2 font-hind-siliguri">
+        <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
           <Lock className="w-5 h-5 text-primary" />
-          পাসওয়ার্ড পরিবর্তন করুন
+          Change password
         </CardTitle>
       </CardHeader>
 
@@ -93,19 +93,19 @@ const ChangePasswordForm = () => {
           <div className="space-y-2 relative">
             <label
               htmlFor="previousPassword"
-              className="text-sm font-semibold text-foreground font-hind-siliguri"
+              className="text-sm font-semibold text-foreground"
             >
-              বর্তমান পাসওয়ার্ড
+              Current password
             </label>
             <div className="relative">
               <Input
                 {...register("previousPassword", {
-                  required: "বর্তমান পাসওয়ার্ড প্রয়োজন",
+                  required: "Current password is required",
                 })}
                 type={showPreviousPassword ? "text" : "password"}
                 id="previousPassword"
                 className="h-11 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg"
-                placeholder="আপনার বর্তমান পাসওয়ার্ড লিখুন"
+                placeholder="Enter your current password"
               />
               <button
                 type="button"
@@ -128,23 +128,23 @@ const ChangePasswordForm = () => {
           <div className="space-y-2 relative">
             <label
               htmlFor="newPassword"
-              className="text-sm font-semibold text-foreground font-hind-siliguri"
+              className="text-sm font-semibold text-foreground"
             >
-              নতুন পাসওয়ার্ড
+              New password
             </label>
             <div className="relative">
               <Input
                 {...register("newPassword", {
-                  required: "নতুন পাসওয়ার্ড প্রয়োজন",
+                  required: "New password is required",
                   minLength: {
                     value: 4,
-                    message: "পাসওয়ার্ড অন্তত ৪ অক্ষরের হতে হবে",
+                    message: "Password must be at least 4 characters",
                   },
                 })}
                 type={showNewPassword ? "text" : "password"}
                 id="newPassword"
                 className="h-11 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg pr-10"
-                placeholder="আপনার নতুন পাসওয়ার্ড লিখুন"
+                placeholder="Enter your new password"
               />
               <button
                 type="button"
@@ -165,21 +165,21 @@ const ChangePasswordForm = () => {
           <div className="space-y-2 relative">
             <label
               htmlFor="confirmPassword"
-              className="text-sm font-semibold text-foreground font-hind-siliguri"
+              className="text-sm font-semibold text-foreground"
             >
-              পাসওয়ার্ড নিশ্চিত করুন
+              Confirm password
             </label>
             <div className="relative">
               <Input
                 {...register("confirmPassword", {
-                  required: "অনুগ্রহ করে আপনার নতুন পাসওয়ার্ডটি নিশ্চিত করুন",
+                  required: "Please confirm your new password",
                   validate: (value) =>
-                    value === newPassword || "পাসওয়ার্ড দুটি মিলেনি",
+                    value === newPassword || "Passwords do not match",
                 })}
                 type={showConfirmPassword ? "text" : "password"}
                 id="confirmPassword"
                 className="h-11 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg pr-10"
-                placeholder="পাসওয়ার্ডটি আবার লিখুন"
+                placeholder="Re-enter password"
               />
               <button
                 type="button"
@@ -209,11 +209,11 @@ const ChangePasswordForm = () => {
           disabled={isLoading}
         >
           {isLoading ? (
-            <span className="font-hind-siliguri">সংরক্ষণ করা হচ্ছে...</span>
+            <span>Saving...</span>
           ) : (
             <>
               <Save className="w-4 h-4" />
-              <span className="font-hind-siliguri">পাসওয়ার্ড সংরক্ষণ করুন</span>
+              <span>Save password</span>
             </>
           )}
         </Button>

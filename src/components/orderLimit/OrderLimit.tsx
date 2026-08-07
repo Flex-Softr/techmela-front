@@ -20,19 +20,18 @@ const OrderLimit = ({
         className="min-h-[400px] w-[320px]"
       >
         <p className="text-justify">
-          <p>প্রিয় গ্রাহক,</p>
-          পুনরায় অর্ডার করার চেষ্টা করার জন্য ধন্যবাদ! আপনার একটি অর্ডার
-          সঠিকভাবে সম্পূর্ণ হয়েছে, অনুগ্রহ করে অপেক্ষা করুন আমাদের প্রতিনিধি
-          আপনার সাথে নির্ধারিত সময়ের মধ্যে কল দিয়ে অর্ডারটি কনফর্ম করবে। যদি
-          আপনার কোন সহায়তা প্রয়োজন হয় বা আপনি শীঘ্রই আরেকটি অর্ডার দিতে চান,
-          দয়া করে নিচের নাম্বারটিতে যোগাযোগ করুন।
+          <p>Dear customer,</p>
+          Thank you for trying to place another order! One of your orders has
+          already been completed successfully. Please wait — our representative
+          will call you within the scheduled time to confirm the order. If you
+          need any assistance or would like to place another order soon, please
+          contact us at the number below.
         </p>
         <p className="text-center">
-          যোগাযোগঃ <br /> +8801967214215
+          Contact: <br /> +8801967214215
         </p>
         <p className="text-center">
-          আমাদের সাথে থাকার জন্য ধন্যবাদ জানাই এবং আপনার সেবা করার অপেক্ষায়
-          রয়েছি!
+          Thank you for staying with us. We look forward to serving you!
         </p>
       </CommonModal>
     </div>

@@ -122,14 +122,14 @@ export default async function QuestionPage({ params }: TProps) {
                     className="inline-flex items-center gap-1 hover:text-primary transition-colors font-medium"
                   >
                     <HelpCircle className="h-4 w-4" />
-                    প্রশ্নোত্তর
+                    Q&A
                   </Link>
                   <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
                   <Link
                     href={categoryHref}
                     className="hover:text-primary transition-colors font-medium"
                   >
-                    {getRefLabel(item.category) || "প্রশ্ন"}
+                    {getRefLabel(item.category) || "Question"}
                   </Link>
                   {item.topic ? (
                     <>
@@ -145,7 +145,7 @@ export default async function QuestionPage({ params }: TProps) {
                 </div>
                 <BackButton className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-full bg-primary/5 font-semibold text-primary transition-colors hover:bg-primary/10 border border-primary/10">
                   <ArrowLeft className="h-4 w-4" />
-                  ফিরে যান
+                  Go back
                 </BackButton>
               </div>
               <div className="space-y-2">
@@ -182,7 +182,7 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
-                    ট্যাগ
+                    Tags
                   </h2>
                   <div className="flex flex-wrap gap-1.5">
                     {(item.tags || []).map((tag) => {
@@ -210,7 +210,7 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    সম্পর্কিত প্রবন্ধ
+                    Related articles
                   </h2>
                   {item.relatedBlogs.map((post) => {
                     const linkedPost = post as string | TLinkedRef;
@@ -250,7 +250,7 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    সম্পর্কিত প্রশ্ন
+                    Related questions
                   </h2>
                   {item.relatedQuestions.map((question) => {
                     const linkedQuestion = question as string | TLinkedRef;

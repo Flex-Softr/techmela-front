@@ -13,9 +13,9 @@ import { Metadata } from "next";
 type TSearchParams = Record<string, string | string[] | undefined>;
 
 export const metadata: Metadata = {
-  title: "প্রশ্ন ও উত্তর",
+  title: "Questions & answers",
   description:
-    "ShajGhorর প্রশ্ন ও উত্তর বিভাগে স্বাগতম! এখানে আপনি কসমেটিক্স ও বিউটি প্রোডাক্ট বিষয়ক প্রশ্নের স্পষ্ট এবং সংক্ষিপ্ত উত্তর পাবেন, যা বিভিন্ন বিষয় এবং টপিক অনুযায়ী সংগঠিত। আমাদের প্রশ্ন ও উত্তর বিভাগটি সৌন্দর্যপ্রেমীদের জন্য একটি মূল্যবান সম্পদ, যেখানে তারা সাধারণ প্রশ্নগুলির উত্তর খুঁজে পেতে পারেন। নতুন প্রশ্ন এবং আপডেটের জন্য আমাদের এই বিভাগটি নিয়মিত চেক করুন।",
+    "Welcome to ShajGhor Q&A! Find clear, concise answers about cosmetics and beauty products, organized by topic. Check back regularly for new questions and updates.",
   alternates: {
     canonical: `${SITE_URL}/questions`,
   },
@@ -84,8 +84,8 @@ export default async function QuestionsPage({
       <JsonLd data={collectionJsonLd} />
       <BlogQnaListShell
         type="questions"
-        title="প্রশ্ন ও উত্তর"
-        description="ShajGhorর প্রশ্ন ও উত্তর বিভাগে স্বাগতম! এখানে আপনি কসমেটিক্স ও বিউটি প্রোডাক্ট বিষয়ক প্রশ্নের স্পষ্ট এবং সংক্ষিপ্ত উত্তর পাবেন, যা বিভিন্ন বিষয় এবং টপিক অনুযায়ী সংগঠিত। আমাদের প্রশ্ন ও উত্তর বিভাগটি সৌন্দর্যপ্রেমীদের জন্য একটি মূল্যবান সম্পদ, যেখানে তারা সাধারণ প্রশ্নগুলির উত্তর খুঁজে পেতে পারেন। নতুন প্রশ্ন এবং আপডেটের জন্য আমাদের এই বিভাগটি নিয়মিত চেক করুন।"
+        title="Questions & answers"
+        description="Welcome to ShajGhor Q&A! Find clear, concise answers about cosmetics and beauty products, organized by topic. Check back regularly for new questions and updates."
         categories={filters.categories}
         tags={filters.tags}
         searchParams={searchParams}
@@ -95,7 +95,7 @@ export default async function QuestionsPage({
             qnaList.map((item) => <QuestionCard key={item._id} item={item} />)
           ) : (
             <div className="md:col-span-2">
-              <EmptyState label="কোনো প্রশ্ন পাওয়া যায়নি।" />
+              <EmptyState label="No questions found." />
             </div>
           )}
         </div>

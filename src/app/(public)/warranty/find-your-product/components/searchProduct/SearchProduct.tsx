@@ -42,7 +42,7 @@ const SearchProduct = () => {
     const phoneNumber = e.target.value.trim();
 
     if (!/^\d+$/.test(phoneNumber)) {
-      setPhoneNumberError("ফোন নম্বর অবশ্যই সংখ্যার অংশ হতে হবে");
+      setPhoneNumberError("Phone number must contain only digits");
       setOrderedPhoneNumber(phoneNumber);
       return;
     }
@@ -51,7 +51,7 @@ const SearchProduct = () => {
     setPhoneNumberError("");
 
     if (phoneNumber?.length !== 11) {
-      setPhoneNumberError("ফোন নম্বর ১১ টি সংখ্যা হতে হবে");
+      setPhoneNumberError("Phone number must be 11 digits");
     }
   };
 
@@ -75,12 +75,12 @@ const SearchProduct = () => {
     }
 
     if (currentCodes?.length === 0) {
-      setError("পন্যের ওয়ারেন্টি কোডগুলি লিখুন");
+      setError("Enter the product warranty codes");
       return;
     }
 
     if (orderedPhoneNumber?.length !== 11) {
-      setPhoneNumberError("অর্ডারকৃত ফোন নম্বরটি লিখুন");
+      setPhoneNumberError("Enter the phone number used for the order");
       return;
     }
 
@@ -149,7 +149,7 @@ const SearchProduct = () => {
       );
 
       if (found.length === 0) {
-        setError("কোনো তথ্য পাওয়া যায়নি");
+        setError("No information found");
       } else {
         setError("");
       }
@@ -172,10 +172,10 @@ const SearchProduct = () => {
     <div className="w-full">
       <div className="text-center mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-          আপনার পন্য নির্বাচন করুন
+          Select your product
         </h1>
         <p className="text-muted-foreground text-sm md:text-base">
-          পন্যের গায়ে থাকা ওয়ারেন্টি কোড দিয়ে পন্য বাছাই করুন
+          Find your product using the warranty code on the package
         </p>
       </div>
 
@@ -187,7 +187,7 @@ const SearchProduct = () => {
                 className="block text-foreground text-sm font-medium mb-2"
                 htmlFor="warrantyCode"
               >
-                পন্যের ওয়ারেন্টি কোড
+                Product warranty code
               </label>
               <div className="relative">
                 <input
@@ -196,7 +196,7 @@ const SearchProduct = () => {
                   className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   id="warrantyCode"
                   type="text"
-                  placeholder="যেমন: CODE1, CODE2"
+                  placeholder="e.g. CODE1, CODE2"
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
                 />
@@ -204,8 +204,7 @@ const SearchProduct = () => {
               {(isFocused || newWarrantyCode.trim() !== "") &&
               warrantyCodes.length === 0 ? (
                 <p className="text-muted-foreground text-xs mt-1">
-                  একাধিক কোড দিতে কমা (,) ব্যবহার করুন এবং "অনুসন্ধান করুন"
-                  বাটনে ক্লিক করুন
+                  Use commas (,) for multiple codes and click "Search"
                 </p>
               ) : null}
 
@@ -227,7 +226,7 @@ const SearchProduct = () => {
                       &#10005;
                     </button>
                     {notFoundProducts.includes(code) && (
-                      <p className="text-destructive text-xs ml-2">সঠিক নয়</p>
+                      <p className="text-destructive text-xs ml-2">Invalid</p>
                     )}
                   </div>
                 ))}
@@ -238,7 +237,7 @@ const SearchProduct = () => {
                 className="block text-foreground text-sm font-medium mb-2"
                 htmlFor="orderedPhoneNumber"
               >
-                অডারকৃত মোবাইল নম্বর
+                Order phone number
               </label>
               <input
                 value={orderedPhoneNumber}
@@ -261,7 +260,7 @@ const SearchProduct = () => {
               type="submit"
               className="bg-primary text-primary-foreground rounded-lg py-3 px-8 hover:bg-primary/90 transition-all shadow-sm font-medium text-sm md:text-base"
             >
-              অনুসন্ধান করুন
+              Search
             </button>
           </div>
         </form>

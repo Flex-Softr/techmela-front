@@ -30,11 +30,11 @@ const ShopBanner = () => {
             </div>
             <div>
               <h1 className="text-base sm:text-xl md:text-2xl font-bold leading-snug">
-                আমাদের সকল পণ্য
+                All Our Products
               </h1>
               <p className="text-xs sm:text-sm text-primary-foreground/80 mt-0.5 leading-relaxed">
-                স্কিনকেয়ার, মেকআপ, হেয়ারকেয়ার ও পারফিউমের বিশাল সংগ্রহ থেকে
-                আপনার পছন্দের পণ্য বেছে নিন
+                Choose your favorites from our wide range of skincare, makeup,
+                haircare, and perfume
               </p>
             </div>
           </div>
@@ -43,7 +43,7 @@ const ShopBanner = () => {
           <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
             <div className="flex items-center gap-1.5 bg-primary-foreground/15 backdrop-blur-sm px-3 py-1.5 rounded-xl text-sm font-medium">
               <Search className="w-4 h-4" />
-              <span>ফিল্টার করে খুঁজুন</span>
+              <span>Filter & find</span>
             </div>
           </div>
         </div>

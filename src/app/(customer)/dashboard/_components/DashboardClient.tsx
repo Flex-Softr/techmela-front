@@ -39,19 +39,19 @@ const DashboardClient = () => {
 
   const stats = [
     {
-      label: "মোট অর্ডার",
+      label: "Total orders",
       value: orders.length,
       icon: <ShoppingBag size={18} />,
       color: "bg-primary/10 text-primary",
     },
     {
-      label: "সফল ডেলিভারি",
+      label: "Successful deliveries",
       value: successfulOrders,
       icon: <CheckCircle size={18} />,
       color: "bg-success/10 text-success",
     },
     {
-      label: "পেন্ডিং অর্ডার",
+      label: "Pending orders",
       value: orders.length - successfulOrders,
       icon: <Clock size={18} />,
       color: "bg-warning/10 text-warning",
@@ -72,27 +72,27 @@ const DashboardClient = () => {
   }
 
   return (
-    <div className="space-y-4 font-hind-siliguri">
+    <div className="space-y-4">
       {/* Welcome Section */}
       <section>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <h1 className="text-xl md:text-2xl font-bold text-foreground mb-0.5">
-              আসসালামু আলাইকুম,{" "}
+              Hello,{" "}
               <span className="text-primary">
-                {fullName || "সম্মানিত গ্রাহক"}
+                {fullName || "valued customer"}
               </span>
               !
             </h1>
             <p className="text-muted-foreground text-sm">
-              ShajGhorতে আপনাকে স্বাগতম।
+              Welcome to ShajGhor.
             </p>
           </div>
           <div className="hidden lg:block">
             <div className="bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20 flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
               <span className="text-primary font-semibold text-xs">
-                অ্যাক্টিভ অ্যাকাউন্ট
+                Active account
               </span>
             </div>
           </div>
@@ -126,38 +126,38 @@ const DashboardClient = () => {
           <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
             <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
               <User size={14} className="text-primary" />
-              ব্যক্তিগত তথ্য
+              Personal information
             </h3>
             <Link
               href="/my-account"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              এডিট করুন
+              Edit
             </Link>
           </div>
           <div className="p-4 space-y-3">
             <div className="flex flex-col gap-0.5">
               <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                নাম
+                Name
               </span>
               <span className="text-base font-medium text-foreground">
-                {fullName || "তথ্য নেই"}
+                {fullName || "Not available"}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
               <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                ইমেইল
+                Email
               </span>
               <span className="text-base font-medium text-foreground">
-                {email || "তথ্য নেই"}
+                {email || "Not available"}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
               <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                ফোন নম্বর
+                Phone number
               </span>
               <span className="text-base font-medium text-foreground">
-                {phoneNumber || "তথ্য নেই"}
+                {phoneNumber || "Not available"}
               </span>
             </div>
           </div>
@@ -168,20 +168,20 @@ const DashboardClient = () => {
           <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
             <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
               <MapPin size={14} className="text-primary" />
-              শিপিং এড্রেস
+              Shipping address
             </h3>
             <Link
               href="/my-account"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              এডিট করুন
+              Edit
             </Link>
           </div>
           <div className="p-4">
             {address ? (
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  ঠিকানা
+                  Address
                 </span>
                 <p className="text-base font-medium text-foreground leading-relaxed">
                   {address.fullAddress}
@@ -192,7 +192,7 @@ const DashboardClient = () => {
             ) : (
               <div className="flex flex-col items-center justify-center py-6 opacity-40">
                 <MapPin size={28} className="mb-2" />
-                <p className="text-sm font-medium">কোন ঠিকানা যুক্ত করা নেই</p>
+                <p className="text-sm font-medium">No address added</p>
               </div>
             )}
           </div>
@@ -204,28 +204,28 @@ const DashboardClient = () => {
         <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
           <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
             <Package size={14} className="text-primary" />
-            সাম্প্রতিক অর্ডার
+            Recent orders
           </h3>
           <Link
             href="/orders"
             className="text-sm font-semibold text-primary hover:underline"
           >
-            সবগুলো দেখুন
+            View all
           </Link>
         </div>
         <div className="overflow-x-auto">
           {isOrdersLoading ? (
             <div className="p-10 text-center text-muted-foreground text-sm">
-              লোড হচ্ছে...
+              Loading...
             </div>
           ) : orders.length > 0 ? (
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-muted text-muted-foreground uppercase text-xs font-bold tracking-widest">
-                  <th className="px-4 py-3">অর্ডার ID</th>
-                  <th className="px-4 py-3">তারিখ</th>
-                  <th className="px-4 py-3">অবস্থা</th>
-                  <th className="px-4 py-3 text-right">পরিমাণ</th>
+                  <th className="px-4 py-3">Order ID</th>
+                  <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3 text-right">Amount</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
@@ -239,7 +239,7 @@ const DashboardClient = () => {
                     </td>
                     <td className="px-4 py-3 text-muted-foreground text-base">
                       {isMounted
-                        ? new Date(order.createdAt).toLocaleDateString("bn-BD")
+                        ? new Date(order.createdAt).toLocaleDateString("en-US")
                         : "..."}
                     </td>
                     <td className="px-4 py-3">
@@ -263,7 +263,7 @@ const DashboardClient = () => {
             </table>
           ) : (
             <div className="p-10 text-center text-muted-foreground text-sm italic">
-              এখনও কোনো অর্ডার করা হয়নি।
+              No orders yet.
             </div>
           )}
         </div>

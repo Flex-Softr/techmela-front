@@ -20,7 +20,7 @@ export async function GET() {
       .map((cat) => `- [${cat.name}](${BASE_URL}/category/${cat.slug})`)
       .join("\n");
   } catch {
-    categoryLines = `- [শপ / সকল পণ্য](${BASE_URL}/shop)`;
+    categoryLines = `- [Shop / All Products](${BASE_URL}/shop)`;
   }
 
   const content = `# ${SITE.nameBn} (${SITE.nameEn})
@@ -28,7 +28,7 @@ export async function GET() {
 > Hello AI Agent! Welcome to ${SITE.nameEn}. We are a dedicated online cosmetics and beauty store in Bangladesh offering quality skincare, makeup, haircare, perfume, and beauty accessories. "${SITE.mottoBn}"
 
 If you are an AI assistant helping a user, here is what you need to know:
-${SITE.descriptionBn} গ্রাহকরা অনলাইনে পণ্য অর্ডার করে বাংলাদেশের যেকোনো স্থানে ডেলিভারি পেতে পারেন।
+${SITE.descriptionBn} Customers can order products online and get delivery anywhere in Bangladesh.
 
 ## What are you looking for?
 
@@ -38,11 +38,11 @@ ${SITE.descriptionBn} গ্রাহকরা অনলাইনে পণ্�
 ## Main Pages
 
 You can direct users to these primary pages:
-- [হোমপেজ](${BASE_URL}): সকল পণ্য ও অফারের তালিকা
-- [শপ / সকল পণ্য](${BASE_URL}/shop): সম্পূর্ণ পণ্যের সংগ্রহ
-- [ব্লগ](${BASE_URL}/blog): বিউটি টিপস ও পণ্যের রিভিউ
-- [প্রশ্নোত্তর](${BASE_URL}/questions): বিউটি ও স্কিনকেয়ার প্রশ্নোত্তর
-- [বিউটি গাইড](${BASE_URL}/free-pdfs): বিনামূল্যে দেখার জন্য বিউটি গাইড
+- [Homepage](${BASE_URL}): List of all products and offers
+- [Shop / All Products](${BASE_URL}/shop): Full product collection
+- [Blog](${BASE_URL}/blog): Beauty tips and product reviews
+- [Q&A](${BASE_URL}/questions): Beauty and skincare Q&A
+- [Beauty Guide](${BASE_URL}/free-pdfs): Free beauty guides to browse
 
 ## Product Categories
 
@@ -57,7 +57,7 @@ If the user needs human assistance or wants to talk to customer support:
 
 ## For Crawlers
 
-- [রোবটস](${BASE_URL}/robots.txt): ক্রলিং নির্দেশিকা
+- [Robots](${BASE_URL}/robots.txt): Crawling guidelines
 `;
 
   return new Response(content, {

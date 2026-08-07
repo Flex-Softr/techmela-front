@@ -27,7 +27,7 @@ export const generateProductSchema = (product: TSingleProduct) => {
   const rawDescription =
     product?.seo?.metaDescription ||
     product?.shortDescription ||
-    `${SITE.nameBn} থেকে ${product?.title || "পণ্য"}টি কিনুন।`;
+    `Buy ${product?.title || "this product"} from ${SITE.nameBn}.`;
 
   const sanitizedDescription = rawDescription
     .replace(/<[^>]+>/g, "")
@@ -46,7 +46,7 @@ export const generateProductSchema = (product: TSingleProduct) => {
       "@type": "Brand",
       name: product?.brand?.name || SITE.nameBn,
     },
-    inLanguage: "bn",
+    inLanguage: "en",
     offers: {
       "@type": "Offer",
       url: `${SITE.baseUrl}/product/${product?.slug}`,
@@ -74,7 +74,7 @@ export const generateBreadcrumbSchema = (product: TSingleProduct) => {
     {
       "@type": "ListItem",
       position: 1,
-      name: "হোম",
+      name: "Home",
       item: SITE.baseUrl as string,
     },
   ];
@@ -96,7 +96,7 @@ export const generateBreadcrumbSchema = (product: TSingleProduct) => {
     breadcrumbItems.push({
       "@type": "ListItem",
       position: 2,
-      name: "সকল পণ্য",
+      name: "All Products",
       item: `${SITE.baseUrl}/shop`,
     });
     breadcrumbItems.push({
@@ -125,7 +125,7 @@ export const generateProductMetadata = (
       .join(" ");
     return {
       title: fallbackTitle,
-      description: `${SITE.nameBn} থেকে ${fallbackTitle} কিনুন।`,
+      description: `Buy ${fallbackTitle} from ${SITE.nameBn}.`,
     };
   }
 
@@ -137,7 +137,7 @@ export const generateProductMetadata = (
   const rawDescription =
     product?.seo?.metaDescription ||
     product?.shortDescription ||
-    `${SITE.nameBn} থেকে সেরা কসমেটিক্স ও বিউটি পণ্য কিনুন।`;
+    `Buy the best cosmetics and beauty products from ${SITE.nameBn}.`;
   const description = rawDescription
     .replace(/<[^>]+>/g, "")
     .trim()
@@ -261,13 +261,13 @@ export const generateBlogBreadcrumbSchema = (post: TBlogPost, url: string) => {
     {
       "@type": "ListItem",
       position: 1,
-      name: "হোম",
+      name: "Home",
       item: SITE.baseUrl as string,
     },
     {
       "@type": "ListItem",
       position: 2,
-      name: "ব্লগ",
+      name: "Blog",
       item: `${SITE.baseUrl}/blog`,
     },
   ];
@@ -281,7 +281,7 @@ export const generateBlogBreadcrumbSchema = (post: TBlogPost, url: string) => {
     breadcrumbItems.push({
       "@type": "ListItem",
       position: position++,
-      name: categoryName || "প্রবন্ধ",
+      name: categoryName || "Article",
       item: `${SITE.baseUrl}/blog?category=${encodeURIComponent(categorySlug || "general")}`,
     });
   }
@@ -305,13 +305,13 @@ export const generateQnABreadcrumbSchema = (item: TQnA, url: string) => {
     {
       "@type": "ListItem",
       position: 1,
-      name: "হোম",
+      name: "Home",
       item: SITE.baseUrl as string,
     },
     {
       "@type": "ListItem",
       position: 2,
-      name: "প্রশ্নোত্তর",
+      name: "Q&A",
       item: `${SITE.baseUrl}/questions`,
     },
   ];
@@ -325,7 +325,7 @@ export const generateQnABreadcrumbSchema = (item: TQnA, url: string) => {
     breadcrumbItems.push({
       "@type": "ListItem",
       position: position++,
-      name: categoryName || "প্রশ্ন",
+      name: categoryName || "Question",
       item: `${SITE.baseUrl}/questions?category=${encodeURIComponent(categorySlug || "general")}`,
     });
   }

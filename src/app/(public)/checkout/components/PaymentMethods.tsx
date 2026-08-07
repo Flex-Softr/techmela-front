@@ -163,7 +163,7 @@ const PaymentMethods = ({
     <Box className="p-0 md:p-4">
       <BoxHeading className="flex items-center gap-2">
         <Banknote className="text-lg text-primary" />
-        <span className="text-lg">পেমেন্ট পদ্ধতি</span>
+        <span className="text-lg">Payment Method</span>
       </BoxHeading>
 
       <div className="mt-3">
@@ -171,7 +171,7 @@ const PaymentMethods = ({
         <input
           type="hidden"
           {...register("paymentMethod", {
-            required: "অনুগ্রহ করে একটি পেমেন্ট পদ্ধতি নির্বাচন করুন",
+            required: "Please select a payment method",
           })}
         />
         <div className="space-y-4">

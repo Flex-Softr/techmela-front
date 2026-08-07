@@ -54,23 +54,23 @@ const ShopFilters = ({
   const totalProducts = productData?.meta?.total ?? 0;
 
   const filterContent = (
-    <Box className="bg-background lg:rounded-xl lg:border lg:border-border/50 p-0 lg:p-3 space-y-1 font-hind-siliguri">
+    <Box className="bg-background lg:rounded-xl lg:border lg:border-border/50 p-0 lg:p-3 space-y-1">
       {/* Header with title + clear button (Desktop Only) */}
       <div className="hidden lg:flex items-center justify-between px-3 pt-2 pb-2.5 border-b border-border/40">
         <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-          ফিল্টার করুন
+          Filters
         </p>
         <button
           onClick={clearAllFilters}
           disabled={activeFilterCount === 0}
           className="text-xs text-destructive hover:text-destructive disabled:opacity-30 disabled:cursor-not-allowed font-medium transition-colors"
         >
-          সব মুছুন
+          Clear all
         </button>
       </div>
 
       <div className="pt-0 lg:pt-2">
-        <CollapsibleFilterSection title="মূল্য পরিসীমা">
+        <CollapsibleFilterSection title="Price range">
           <div className="px-1">
             <PriceRangeSliderWrapper
               min={priceRange.minPrice}
@@ -86,12 +86,12 @@ const ShopFilters = ({
 
       <CollectionSelectorWrapper collections={collections} />
 
-      <CollapsibleFilterSection title="স্টক স্ট্যাটাস">
+      <CollapsibleFilterSection title="Stock status">
         <div className="px-2 py-1 space-y-2">
           {[
-            { label: "স্টকে আছে", value: "in_stock" },
-            { label: "স্টক শেষ", value: "out_of_stock" },
-            { label: "অল্প আছে", value: "low_stock" },
+            { label: "In stock", value: "in_stock" },
+            { label: "Out of stock", value: "out_of_stock" },
+            { label: "Low stock", value: "low_stock" },
           ].map((status) => (
             <label
               key={status.value}
@@ -142,7 +142,7 @@ const ShopFilters = ({
           variant="outline"
           disabled={activeFilterCount === 0}
         >
-          সব ফিল্টার মুছুন
+          Clear all filters
         </EcButton>
       </div>
     </Box>
@@ -150,7 +150,7 @@ const ShopFilters = ({
 
   return (
     <>
-      <div className="block lg:hidden font-hind-siliguri">
+      <div className="block lg:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -159,9 +159,7 @@ const ShopFilters = ({
             >
               <div className="flex items-center gap-2.5">
                 <FaBarsStaggered className="text-primary w-4 h-4" />
-                <span className="font-semibold text-foreground">
-                  ফিল্টার করুন
-                </span>
+                <span className="font-semibold text-foreground">Filters</span>
               </div>
               <div className="flex items-center gap-2">
                 {activeFilterCount > 0 && (
@@ -176,7 +174,7 @@ const ShopFilters = ({
                   >
                     <X className="size-3" />
                     <span className="text-[10px] font-bold uppercase tracking-wider">
-                      মুছুন
+                      Clear
                     </span>
                   </div>
                 )}
@@ -190,13 +188,13 @@ const ShopFilters = ({
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="w-[85%] sm:w-[360px] p-0 flex flex-col font-hind-siliguri"
+            className="w-[85%] sm:w-[360px] p-0 flex flex-col"
           >
             <SheetHeader className="px-4 py-3 border-b shrink-0">
               <div className="flex items-center justify-between">
                 <SheetTitle className="text-base font-bold flex items-center gap-2">
                   <FaBarsStaggered className="text-primary w-4 h-4" />
-                  ফিল্টার করুন
+                  Filters
                 </SheetTitle>
                 <SheetClose asChild>
                   <button
@@ -219,9 +217,9 @@ const ShopFilters = ({
                 className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl flex justify-between items-center px-6"
                 onClick={() => sheetCloseRef.current?.click()}
               >
-                <span>ফলাফল দেখুন</span>
+                <span>Show results</span>
                 <span className="bg-background/20 px-2 py-0.5 rounded-lg text-xs">
-                  {totalProducts} টি পণ্য
+                  {totalProducts} products
                 </span>
               </Button>
             </div>

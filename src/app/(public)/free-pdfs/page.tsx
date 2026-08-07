@@ -14,9 +14,9 @@ import { getImageSrc } from "@/lib/utils";
 type TSearchParams = Record<string, string | string[] | undefined>;
 
 export const metadata: Metadata = {
-  title: "বিউটি গাইড",
+  title: "Beauty guides",
   description:
-    "ShajGhorর বিউটি গাইড বিভাগে স্বাগতম! এখানে আপনি স্কিনকেয়ার, মেকআপ ও হেয়ারকেয়ার বিষয়ক বিভিন্ন ফ্রি বিউটি গাইড ডাউনলোড করতে পারবেন।",
+    "Welcome to ShajGhor beauty guides! Download free guides on skincare, makeup, and haircare.",
   alternates: {
     canonical: `${SITE_URL}/free-pdfs`,
   },
@@ -61,7 +61,7 @@ function FreePdfCard({ item }: { item: TBookPreview }) {
               {item.alt}
             </h2>
             <p className="text-xs text-muted-foreground">
-              {new Date(item.createdAt).toLocaleDateString("bn-BD", {
+              {new Date(item.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
@@ -77,7 +77,7 @@ function FreePdfCard({ item }: { item: TBookPreview }) {
             className="flex w-full items-center justify-center gap-2 rounded-md bg-primary/5 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             <Download className="h-4 w-4" />
-            ডাউনলোড করুন
+            Download
           </a>
         </div>
       </CardContent>
@@ -112,15 +112,14 @@ export default async function FreePdfsPage({
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
                 <Sparkles className="h-4 w-4" />
-                বিউটি গাইড
+                Beauty guides
               </div>
               <h1 className="text-3xl font-bold tracking-tight text-primary md:text-4xl">
-                বিউটি গাইড সংগ্রহ
+                Beauty guide collection
               </h1>
               <p className="text-base leading-7 text-muted-foreground md:text-lg">
-                ShajGhorর পক্ষ থেকে আপনাদের জন্য কিছু বিশেষ ফ্রি বিউটি গাইড।
-                এগুলো ডাউনলোড করে পড়তে পারেন এবং অন্যদের সাথে শেয়ার করতে
-                পারেন।
+                Special free beauty guides from ShajGhor. Download, read, and
+                share them with others.
               </p>
             </div>
           </ContainerMax>
@@ -137,7 +136,7 @@ export default async function FreePdfsPage({
                 <input
                   name="search"
                   defaultValue={search}
-                  placeholder="পিডিএফ খুঁজুন..."
+                  placeholder="Search PDFs..."
                   className="h-10 w-full rounded-md border bg-background pl-9 pr-3 text-sm outline-none focus:border-primary"
                 />
               </label>
@@ -152,7 +151,7 @@ export default async function FreePdfsPage({
                 ))
               ) : (
                 <div className="md:col-span-2 xl:col-span-3">
-                  <EmptyState label="কোনো পিডিএফ পাওয়া যায়নি।" />
+                  <EmptyState label="No PDFs found." />
                 </div>
               )}
             </div>

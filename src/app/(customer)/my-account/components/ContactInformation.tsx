@@ -27,7 +27,7 @@ const ContactInformation = () => {
       <Card className="w-full h-full flex flex-col shadow-sm border-border animate-pulse">
         <CardHeader className="py-2.5 px-4 border-b border-border">
           <CardTitle className="text-sm font-semibold text-foreground">
-            ব্যক্তিগত তথ্য
+            Personal information
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 flex-1">
@@ -40,31 +40,29 @@ const ContactInformation = () => {
     <Card className="w-full h-full flex flex-col shadow-sm border-border">
       <CardHeader className="py-2.5 px-4 border-b border-border">
         <CardTitle className="text-sm font-semibold text-foreground">
-          ব্যক্তিগত তথ্য
+          Personal information
         </CardTitle>
       </CardHeader>
 
       <CardContent className="p-4 flex-1">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-3 gap-x-2">
-          <div className="text-xs text-muted-foreground font-medium font-hind-siliguri">
-            নাম
-          </div>
+          <div className="text-xs text-muted-foreground font-medium ">Name</div>
           <div className="sm:col-span-2 text-sm text-foreground font-medium">
-            {fullName || "তথ্য নেই"}
+            {fullName || "Not available"}
           </div>
 
-          <div className="text-xs text-muted-foreground font-medium font-hind-siliguri">
-            ই-মেইল
+          <div className="text-xs text-muted-foreground font-medium ">
+            Email
           </div>
           <div className="sm:col-span-2 text-sm text-foreground font-medium">
-            {email || "তথ্য নেই"}
+            {email || "Not available"}
           </div>
 
-          <div className="text-xs text-muted-foreground font-medium font-hind-siliguri">
-            ফোন নম্বর
+          <div className="text-xs text-muted-foreground font-medium ">
+            Phone number
           </div>
           <div className="sm:col-span-2 text-sm text-foreground font-medium">
-            {phoneNumber || "তথ্য নেই"}
+            {phoneNumber || "Not available"}
           </div>
         </div>
       </CardContent>
@@ -76,12 +74,9 @@ const ContactInformation = () => {
           size="sm"
           className="w-full sm:w-auto text-xs"
         >
-          <Link
-            href="/edit-account"
-            className="flex items-center gap-1.5 font-hind-siliguri"
-          >
+          <Link href="/edit-account" className="flex items-center gap-1.5 ">
             <Edit className="w-3.5 h-3.5" />
-            প্রোফাইল এডিট করুন
+            Edit profile
           </Link>
         </Button>
         <Button
@@ -92,10 +87,10 @@ const ContactInformation = () => {
         >
           <Link
             href="/auth/change-password"
-            className="flex items-center gap-1.5 font-hind-siliguri"
+            className="flex items-center gap-1.5 "
           >
             <KeyRound className="w-3.5 h-3.5" />
-            পাসওয়ার্ড পরিবর্তন করুন
+            Change password
           </Link>
         </Button>
       </CardFooter>

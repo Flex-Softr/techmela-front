@@ -4,23 +4,23 @@ const Conditions = () => {
       <div className="bg-primary/10/50 border border-primary/20 rounded-xl p-6 md:p-8">
         <h3 className="text-lg md:text-xl font-semibold text-primary mb-4 flex items-center gap-2">
           <span className="bg-primary/10 p-1.5 rounded-full">📝</span>
-          শর্তাবলী
+          Terms & conditions
         </h3>
         <p className="mb-4 text-sm md:text-base font-medium text-foreground">
-          নিচের শর্ত গুলোর সাপেক্ষে ওয়ারেন্টি দাবি করা যাবেঃ
+          Warranty claims are subject to the following conditions:
         </p>
         <ul className="space-y-2 text-sm md:text-base text-muted-foreground list-disc list-inside ml-2">
           <li>
-            পণ্য ক্রয়ের তারিখ ও ক্রেতার নাম, মোবাইল নম্বর, ঠিকানা সঠিকভাবে
-            প্রদান করা আবশ্যক।
+            Purchase date and the buyer&apos;s name, mobile number, and address
+            must be provided correctly.
           </li>
-          <li>সঠিক পণ্য আইডি প্রদান করতে হবে।</li>
-          <li>সমস্যার বর্ণনা প্রদান করা আবশ্যক।</li>
-          <li>পণ্যের কোনো অধিকার সরিয়ে নেওয়া বা পরিবর্তন করা অনুমোদিত নয়।</li>
-          <li>ওয়ারেন্টি সার্ভিস এর জন্য নির্দিষ্ট সময়সীমা প্রদান করা হবে।</li>
+          <li>A valid product ID must be provided.</li>
+          <li>A description of the issue is required.</li>
+          <li>Removing or altering any product rights is not allowed.</li>
+          <li>A specific timeline will be provided for warranty service.</li>
           <li>
-            সকল অ্যাক্সেসরিজ, ডকুমেন্টেশন এবং প্যাকেজিং সম্পূর্ণ ও সঠিকভাবে
-            সাবধানে সংরক্ষিত থাকতে হবে।
+            All accessories, documentation, and packaging must be kept complete
+            and carefully preserved.
           </li>
         </ul>
       </div>
