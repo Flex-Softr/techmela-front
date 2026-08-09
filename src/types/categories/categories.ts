@@ -18,16 +18,7 @@ export type TCategory = {
     src: string;
     alt: string;
   };
-  subcategories: [
-    {
-      name: string;
-      slug: string;
-      productCount: number;
-      image: {
-        src: string;
-      };
-    },
-  ];
+  children?: TCategory[];
   productCount?: number;
 };
 
