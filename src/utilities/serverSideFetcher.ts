@@ -55,26 +55,38 @@ const serverSideFetcher = async <T>({
     apiUrl = apiUrl.concat("?", modifiedSearchParams);
   }
 
-  const res = await fetch(apiUrl, reqConfig);
+  try {
+    const res = await fetch(apiUrl, reqConfig);
 
-  if (!res.ok) {
-    const errorData = await res.json().catch(() => null);
-    const errorMessage =
-      errorData?.message ||
-      errorData?.error ||
-      `Something went wrong or try again later`;
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      const errorMessage =
+        errorData?.message ||
+        errorData?.error ||
+        `Something went wrong or try again later`;
 
-    throw new Error(errorMessage);
+      return {
+        success: false,
+        message: errorMessage,
+        data: [] as unknown as T,
+      };
+    }
+
+    const data = await res.json();
+
+    return {
+      success: data?.success,
+      message: data?.message,
+      data: data?.data as T,
+      meta: data?.meta,
+    };
+  } catch (err: unknown) {
+    return {
+      success: false,
+      message: err instanceof Error ? err.message : "Failed to fetch",
+      data: [] as unknown as T,
+    };
   }
-
-  const data = await res.json();
-
-  return {
-    success: data?.success,
-    message: data?.message,
-    data: data?.data as T,
-    meta: data?.meta,
-  };
 };
 
 export default serverSideFetcher;

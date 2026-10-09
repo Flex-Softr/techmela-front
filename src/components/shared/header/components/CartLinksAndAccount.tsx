@@ -96,10 +96,10 @@ const CartLinksAndAccount = () => {
           <Button
             variant={"ghost"}
             onClick={toggleSearchBar}
-            className="size-10 rounded-full text-primary hover:text-primary hover:bg-muted/80 transition-all duration-300"
+            className="size-9 rounded-full text-white hover:text-white hover:bg-white/15 transition-all duration-300"
             aria-label="Open search"
           >
-            <FaSearch className="size-5" />
+            <FaSearch className="size-4" />
           </Button>
           <form
             onSubmit={handleSearchSubmit}
@@ -236,11 +236,11 @@ const CartLinksAndAccount = () => {
       <Button
         asChild
         variant={"ghost"}
-        className="rounded-full size-9 p-0 border border-primary bg-background text-primary hover:text-primary hover:bg-muted transition-all duration-300 hidden sm:flex items-center justify-center shadow-sm overflow-hidden"
+        className="rounded-full size-9 p-0 border border-white/25 bg-white/10 text-white hover:text-white hover:bg-white/20 transition-all duration-300 hidden sm:flex items-center justify-center shadow-xs overflow-hidden"
       >
         <Link href="/my-account" aria-label="My Account">
           {user?.data?._id ? (
-            <div className="w-full h-full flex items-center justify-center bg-primary/10">
+            <div className="w-full h-full flex items-center justify-center bg-white/20 text-white">
               <span className="font-bold text-[15px] uppercase">
                 {user?.data?.fullName ? user.data.fullName.charAt(0) : "U"}
               </span>
@@ -254,11 +254,11 @@ const CartLinksAndAccount = () => {
       <CartSidebar>
         <Button
           variant={"ghost"}
-          className="rounded-full size-9 relative border border-primary bg-background text-primary hover:text-primary hover:bg-muted transition-all duration-300 flex items-center justify-center p-0 shadow-sm"
+          className="rounded-full size-9 relative border border-white/25 bg-white/10 text-white hover:text-white hover:bg-white/20 transition-all duration-300 flex items-center justify-center p-0 shadow-xs"
           aria-label="Shopping Cart"
         >
-          <ShoppingCart className="size-6" />
-          <Badge className="bg-primary size-5 flex items-center justify-center text-[10px] font-bold text-primary-foreground absolute -top-1 -right-1 pointer-events-none shadow-sm shadow-primary/20 border-2 border-white">
+          <ShoppingCart className="size-5" />
+          <Badge className="bg-amber-400 text-slate-950 font-bold size-5 flex items-center justify-center text-[10px] absolute -top-1.5 -right-1.5 pointer-events-none rounded-full border-2 border-[rgba(9,33,67,1)] shadow-xs">
             {totalCartItem ?? 0}
           </Badge>
         </Button>

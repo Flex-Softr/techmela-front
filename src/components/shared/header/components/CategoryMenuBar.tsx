@@ -49,7 +49,6 @@ export default function CategoryMenuBar({
     { title: "Home", href: "/" },
     { title: "All Products", href: "/shop" },
     { title: "Blog", href: "/blog" },
-    { title: "Beauty Guide", href: "/free-pdfs" },
   ];
 
   // Recursive component for rendering category dropdowns

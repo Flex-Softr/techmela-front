@@ -21,7 +21,6 @@ import { Truck } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import DivisionDistrictUpazilaSelector from "./DivisionDistrictSelector";
 
 // Define a type for the form data we expect in the context
 type CheckoutFormData = {
@@ -39,7 +38,6 @@ const ShippingAddress = ({
     register,
     formState: { errors },
     setValue,
-    control,
   } = useFormContext<CheckoutFormData>();
 
   const dispatch = useAppDispatch();
@@ -55,42 +53,26 @@ const ShippingAddress = ({
     setCustomerHasAccount(hasAccount);
 
     if (shippingInfoData?.data) {
-      const {
-        fullName,
-        phoneNumber,
-        fullAddress,
-        notes,
-        email,
-        division,
-        district,
-        upazila,
-      } = shippingInfoData.data;
+      const { fullName, phoneNumber, fullAddress, notes } =
+        shippingInfoData.data;
       setValue("shipping.fullName", fullName || "");
       if (!disablePhoneAutoFill) {
         setValue("shipping.phoneNumber", phoneNumber || "");
       }
       setValue("shipping.fullAddress", fullAddress || "");
       setValue("shipping.notes", notes || "");
-      setValue("shipping.email", email || "");
-      setValue("shipping.division", division || "");
-      setValue("shipping.district", district || "");
-      setValue("shipping.upazila", upazila || "");
     } else if (!hasAccount) {
       const storedShippingAddress = localStorage.getItem("shippingAddress");
       if (storedShippingAddress) {
         const parsedAddress = JSON.parse(storedShippingAddress);
         setShippingAddress(parsedAddress);
         // Set form field values using setValue
-        setValue("shipping.fullName", parsedAddress.fullName);
+        setValue("shipping.fullName", parsedAddress.fullName || "");
         if (!disablePhoneAutoFill) {
-          setValue("shipping.phoneNumber", parsedAddress.phoneNumber);
+          setValue("shipping.phoneNumber", parsedAddress.phoneNumber || "");
         }
-        setValue("shipping.fullAddress", parsedAddress.fullAddress);
+        setValue("shipping.fullAddress", parsedAddress.fullAddress || "");
         setValue("shipping.notes", parsedAddress.notes || "");
-        setValue("shipping.email", parsedAddress.email || "");
-        setValue("shipping.division", parsedAddress.division || "");
-        setValue("shipping.district", parsedAddress.district || "");
-        setValue("shipping.upazila", parsedAddress.upazila || "");
 
         // Sync with Redux immediately so CheckoutPageContent sees the data
         dispatch(setShippingInfo(parsedAddress));
@@ -147,13 +129,13 @@ const ShippingAddress = ({
               htmlFor="shipping.fullName"
               className="font-bold pl-1 mb-1.5 block"
             >
-              Name <span className="text-destructive">*</span>
+              Full Name <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.fullName"
-              placeholder="Enter your name"
+              placeholder="Enter your full name"
               {...register("shipping.fullName", {
-                required: "Please enter your name",
+                required: "Please enter your full name",
                 maxLength: {
                   value: 30,
                   message: "Name cannot exceed 30 characters",
@@ -172,16 +154,16 @@ const ShippingAddress = ({
               htmlFor="shipping.phoneNumber"
               className="font-bold pl-1 mb-1.5 block"
             >
-              Mobile Number <span className="text-destructive">*</span>
+              Phone <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.phoneNumber"
-              placeholder="Enter your mobile number"
+              placeholder="Enter your phone number"
               {...register("shipping.phoneNumber", {
-                required: "Please enter your mobile number",
+                required: "Please enter your phone number",
                 pattern: {
                   value: /^(?:\+88)?01[3-9]\d{8}$/,
-                  message: "Please enter a valid mobile number",
+                  message: "Please enter a valid phone number",
                 },
               })}
             />
@@ -195,55 +177,16 @@ const ShippingAddress = ({
         </div>
         <div>
           <Label
-            htmlFor="shipping.email"
-            className="font-bold pl-1 mb-1.5 block"
-          >
-            Email (optional)
-          </Label>
-          <Input
-            id="shipping.email"
-            placeholder="Enter your email"
-            {...register("shipping.email", {
-              validate: (value) => {
-                if (!value) return true; // Optional field
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
-                  return "Please enter a valid email";
-                if (value.length > 50)
-                  return "Email cannot exceed 50 characters";
-                if (value.length < 5)
-                  return "Email must be at least 5 characters";
-                return true;
-              },
-            })}
-          />
-          {errors.shipping?.email && (
-            <ErrorMessage
-              message={errors.shipping.email.message}
-              className="mt-1"
-            />
-          )}
-        </div>
-        <div>
-          <DivisionDistrictUpazilaSelector
-            control={control}
-            register={register}
-            setValue={setValue}
-            errors={errors}
-            shipping={shippingAddress || undefined}
-          />
-        </div>
-        <div>
-          <Label
             htmlFor="shipping.fullAddress"
             className="font-bold pl-1 mb-1.5 block"
           >
-            Address <span className="text-destructive">*</span>
+            Full Address <span className="text-destructive">*</span>
           </Label>
           <Input
             id="shipping.fullAddress"
             placeholder="Landmark/house number, road/village/area..."
             {...register("shipping.fullAddress", {
-              required: "Please enter your address",
+              required: "Please enter your full address",
             })}
           />
           {errors.shipping?.fullAddress && (
@@ -258,11 +201,11 @@ const ShippingAddress = ({
             htmlFor="shipping.notes"
             className="font-bold pl-1 mb-1.5 block"
           >
-            Notes (optional)
+            Additional Note (optional)
           </Label>
           <textarea
             id="shipping.notes"
-            placeholder="Add any special delivery instructions..."
+            placeholder="Add any special delivery instructions or notes..."
             {...register("shipping.notes")}
             className="w-full h-20 ring-1 ring-gray-200 rounded-md p-2 text-sm focus:ring-2 focus:ring-primary outline-none"
           ></textarea>

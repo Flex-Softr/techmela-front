@@ -8,6 +8,7 @@ import FeaturedProducts from "@/components/home/featuredProducts/FeaturedProduct
 import HomepageSectionsFetcher from "@/components/home/homePageSections/HomepageSectionsFetcher";
 import HomepageSectionSkeleton from "@/components/home/homePageSections/HomepageSectionSkeleton";
 import JsonLd from "@/components/shared/JsonLd";
+import SustainabilityBanner from "@/components/home/sustainability/SustainabilityBanner";
 import { SITE } from "@/const/site.const";
 import TCategory from "@/types/categories/categories";
 import { THomePageSection } from "@/types/homepageSection";
@@ -100,7 +101,13 @@ const Home = async () => {
     telephone: SITE.phone,
     email: SITE.email,
     priceRange: "$$",
-    address: { "@type": "PostalAddress", addressCountry: "BD" },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: SITE.address,
+      addressLocality: "Hatirpool, Dhaka",
+      postalCode: "1205",
+      addressCountry: "BD",
+    },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -151,6 +158,7 @@ const Home = async () => {
       <Suspense fallback={<HomepageSectionSkeleton />}>
         <HomepageSectionsFetcher promise={homepageSectionsPromise} />
       </Suspense>
+      <SustainabilityBanner />
       <Suspense fallback={<HomepageSectionSkeleton />}>
         <BestSellingProducts promise={bestSellingProductsPromise} />
       </Suspense>

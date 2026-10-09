@@ -32,9 +32,9 @@ const FeaturedProducts = async ({
               </div>
             </div>
             {featuredProducts.length > 5 && (
-              <div className="flex justify-center mt-5">
-                <Button asChild size={"sm"} className="px-6">
-                  <Link href={"/shop?featured=true"}>View All</Link>
+              <div className="flex justify-center mt-6">
+                <Button asChild size="sm" className="rounded-full px-7 bg-primary hover:bg-secondary text-primary-foreground shadow-sm">
+                  <Link href={"/shop?featured=true"}>View All Products</Link>
                 </Button>
               </div>
             )}

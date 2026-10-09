@@ -6,7 +6,6 @@ import useOrderSubmit from "@/hooks/useOrderSubmit";
 import eventHandler from "@/tracking/eventHandler";
 import { TCartItemData } from "@/types/cart";
 import { TShippingInfo } from "@/types/order/shippingInfo";
-import BdAddress from "@/utilities/bdAddress/bdAddress";
 import { ReactNode, useEffect, useRef } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import OrderNow from "./OrderNow";
@@ -53,33 +52,22 @@ const CheckoutForm = ({
     name: "shipping",
   });
 
-  const { fullName, phoneNumber, division, district, upazila, email } =
-    shippingValues || {};
+  const { fullName, phoneNumber } = shippingValues || {};
 
   useEffect(() => {
     const isCheckTracked =
       cartData?.data?.length > 0 &&
       !initiateCheckoutTracked.current &&
       fullName &&
-      phoneNumber &&
-      division &&
-      district &&
-      upazila;
+      phoneNumber;
 
     if (isCheckTracked) {
       initiateCheckoutTracked.current = true;
-
-      const divisionName = BdAddress.divisionNameById(division, "en").name;
-      const districtName = BdAddress.districtNameById(district, "en").name;
 
       eventHandler({
         event_name: "initiate_checkout",
         fn: fullName || undefined,
         ph: phoneNumber || undefined,
-        em: email || undefined,
-        st: divisionName || undefined,
-        ct: districtName || undefined,
-        upazila_id: upazila || undefined,
         content_ids: cartData.data.map((item: TCartItemData) =>
           item.variation?._id
             ? `${item.product?._id}-${item.variation._id}`
@@ -107,16 +95,7 @@ const CheckoutForm = ({
         //   shipping: shippingChange ?? undefined,
       });
     }
-  }, [
-    cartData?.data,
-    totalCost,
-    fullName,
-    phoneNumber,
-    division,
-    district,
-    upazila,
-    email,
-  ]);
+  }, [cartData?.data, totalCost, fullName, phoneNumber]);
 
   return (
     <>

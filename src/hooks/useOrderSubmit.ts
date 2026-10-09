@@ -109,23 +109,21 @@ const useOrderSubmit = ({
         setIsSuccess(true);
 
         // GTM Event
-        const divisionName = BdAddress.divisionNameById(
-          shippingData.division,
-          "en"
-        ).name;
-        const districtName = BdAddress.districtNameById(
-          shippingData.district,
-          "en"
-        ).name;
+        const divisionName = shippingData.division
+          ? BdAddress.divisionNameById(shippingData.division, "en").name
+          : undefined;
+        const districtName = shippingData.district
+          ? BdAddress.districtNameById(shippingData.district, "en").name
+          : undefined;
 
         eventHandler({
           event_name: "purchase",
           fullName: shippingData.fullName,
           ph: shippingData.phoneNumber,
-          em: shippingData.email,
+          em: shippingData.email || undefined,
           st: divisionName,
           ct: districtName,
-          upazila_id: shippingData.upazila,
+          upazila_id: shippingData.upazila || undefined,
           order_id: result?.data?.orderId,
           content_type: "product",
           content_category: productCategory,

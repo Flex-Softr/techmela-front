@@ -4,7 +4,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
-import logo from "../../../../public/logo/logo.webp";
+import logo from "../../../../public/logo/techmela-lightlogo.png";
 
 const companyLinks = [
   { name: "All Products", url: "/shop" },
@@ -29,23 +29,23 @@ const MainFooterContent = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-3">
           {/* Column 1: Logo & Description */}
           <div className="space-y-2">
-            <Link href="/" className="flex">
-              <div className="bg-background rounded-md">
+            <Link href="/" className="inline-flex">
+              <div className="bg-[rgba(9,33,67,1)] px-3 py-1.5 rounded-lg inline-flex items-center shadow-xs">
                 <Image
                   src={logo}
-                  alt="ShajGhor Logo"
+                  alt="TechMela Logo"
                   width={150}
                   height={50}
-                  className="w-28 h-auto md:w-36 rounded-md"
+                  className="w-28 h-auto md:w-36"
                   sizes="(max-width: 768px) 112px, 144px"
                   priority
                 />
               </div>
             </Link>
             <p className="text-sm font-medium leading-relaxed text-foreground">
-              ❝ShajGhor❞ is a trusted online cosmetics shop in Bangladesh. We
-              are dedicated to providing quality skincare, makeup, haircare,
-              perfume, and beauty accessories.
+              ❝TechMela❞ is a trusted online shop in Bangladesh, providing
+              authentic products with fast delivery and dedicated customer
+              support.
             </p>
           </div>
 
@@ -94,23 +94,23 @@ const MainFooterContent = () => {
             </h3>
             <div className="space-y-2.5">
               <a
-                href="tel:+01710020030"
+                href="tel:+8801772065894"
                 className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 <Phone className="size-4 text-foreground" />
-                01710020030
+                +8801772065894
               </a>
               <a
-                href="mailto:support@shajghor.com"
+                href="mailto:support@techmela.com.bd"
                 className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 <Mail className="size-4 text-foreground" />
-                support@shajghor.com
+                support@techmela.com.bd
               </a>
               <div className="flex items-start gap-2 text-sm font-medium text-foreground">
                 <MapPin className="size-4 mt-1 shrink-0 text-foreground" />
                 <span>
-                  Surmela Goli, East Boxnagar, Sarulia, Demra, Dhaka-1361
+                  Shop No- 369, Motalib Plaza, Hatirpool, Dhaka-1205
                 </span>
               </div>
               <div className="flex gap-3 pt-2">
@@ -131,7 +131,7 @@ const MainFooterContent = () => {
                   <FaUsers size={18} />
                 </a>
                 <a
-                  href="http://wa.me/01710020030"
+                  href="https://wa.me/8801772065894"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-muted p-2.5 rounded-full text-foreground hover:bg-success hover:text-success-foreground hover:-translate-y-1 transition-all duration-300 shadow-sm"

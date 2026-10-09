@@ -91,15 +91,28 @@ const config = {
       },
 
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        // Alias legacy Bangla font classes to Inter
-        "hind-siliguri": [
+        sans: [
+          "var(--font-plus-jakarta)",
           "var(--font-inter)",
           "Inter",
           "system-ui",
           "sans-serif",
         ],
-        bengali: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        // Alias legacy Bangla font classes to primary sans
+        "hind-siliguri": [
+          "var(--font-plus-jakarta)",
+          "var(--font-inter)",
+          "Inter",
+          "system-ui",
+          "sans-serif",
+        ],
+        bengali: [
+          "var(--font-plus-jakarta)",
+          "var(--font-inter)",
+          "Inter",
+          "system-ui",
+          "sans-serif",
+        ],
       },
 
       keyframes: {

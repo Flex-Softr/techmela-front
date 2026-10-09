@@ -57,7 +57,6 @@ export default function MenuBar({
     { title: "Home", href: "/" },
     { title: "All Products", href: "/shop" },
     { title: "Blog", href: "/blog" },
-    { title: "Beauty Guide", href: "/free-pdfs" },
     {
       title: "Track Order",
       href: "/track-your-order",

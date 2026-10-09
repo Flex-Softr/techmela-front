@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation"; // Import usePathname to get the 
 import { useState } from "react";
 import { FaBars, FaWhatsapp } from "react-icons/fa";
 import { MdCall } from "react-icons/md";
-import logo from "../../../../../public/logo/logo.webp";
+import logo from "../../../../../public/logo/techmela-lightlogo.png";
 import MenuBar from "./MenuBar";
 
 const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
@@ -34,7 +34,11 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
           className="my-auto size-10 rounded-full"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <Button variant={"outline"} aria-label="Open menu">
+          <Button
+            variant={"outline"}
+            aria-label="Open menu"
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
+          >
             <FaBars />
           </Button>
         </SheetTrigger>
@@ -44,14 +48,14 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
         >
           <SheetHeader className="flex flex-row justify-between items-center px-4 h-16 border-b shrink-0">
             <Link href="/" onClick={() => setIsOpen(false)}>
-              <div className="bg-primary/5 rounded-lg flex items-center justify-center p-1.5">
+              <div className="bg-[rgba(9,33,67,1)] rounded-lg flex items-center justify-center px-2.5 py-1.5 shadow-sm">
                 <Image
                   src={logo}
-                  alt="ShajGhor Logo"
+                  alt="TechMela Logo"
                   height={48}
-                  width={120}
-                  className="h-10 w-auto rounded-sm"
-                  sizes="120px"
+                  width={130}
+                  className="h-9 w-auto"
+                  sizes="130px"
                   priority
                 />
               </div>
@@ -92,16 +96,16 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
             </p>
             <div className="space-y-3">
               <a
-                href="tel:+01710020030"
+                href="tel:+8801772065894"
                 className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
               >
                 <div className="size-8 rounded-full bg-background flex items-center justify-center shadow-sm text-primary">
                   <MdCall className="size-4" />
                 </div>
-                <span>+8801602-431167</span>
+                <span>+8801772065894</span>
               </a>
               <a
-                href="https://wa.me/01710020030"
+                href="https://wa.me/8801772065894"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"

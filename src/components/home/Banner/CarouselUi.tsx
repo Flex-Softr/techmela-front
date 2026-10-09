@@ -9,7 +9,7 @@ const CarouselUi = ({ slider }: { slider: TSliders }) => {
   const content = (
     <div
       className={cn(
-        "block relative w-full aspect-[2/1] sm:aspect-auto sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-md md:rounded-xl overflow-hidden shadow-sm group border border-border",
+        "block relative w-full aspect-[2/1] sm:aspect-auto sm:h-[400px] md:h-[500px] lg:h-[560px] rounded-2xl md:rounded-3xl overflow-hidden shadow-md group border border-border/80",
         bannerLink && "cursor-pointer"
       )}
     >

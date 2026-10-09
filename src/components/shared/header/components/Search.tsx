@@ -88,7 +88,7 @@ const Search = () => {
           value={searchValue}
           onChange={handleInputChange}
           placeholder={typingPlaceholder}
-          className="w-full h-[44px] px-4 text-[13px] outline-none border border-primary bg-background rounded-full pr-12 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300"
+          className="w-full h-[42px] px-4 text-[13px] outline-none border border-transparent bg-white text-gray-900 rounded-full pr-12 focus:ring-2 focus:ring-white/40 transition-all duration-300 placeholder:text-gray-400 shadow-sm"
           aria-label="Search products"
         />
 
@@ -96,7 +96,7 @@ const Search = () => {
           <button
             type="button"
             onClick={handleClearSearch}
-            className="absolute right-10 text-primary/60 hover:text-primary transition-colors p-1"
+            className="absolute right-10 text-gray-400 hover:text-gray-600 transition-colors p-1"
             aria-label="Clear search"
           >
             <FaTimes className="size-3" />
@@ -106,10 +106,10 @@ const Search = () => {
         <Button
           type="submit"
           variant="ghost"
-          className="absolute right-0.5 top-1/2 -translate-y-1/2 h-[34px] w-[34px] rounded-full flex items-center justify-center bg-transparent text-primary hover:text-primary hover:bg-muted transition-all duration-300 p-0"
+          className="absolute right-1 top-1/2 -translate-y-1/2 h-[34px] w-[34px] rounded-full flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 p-0 shadow-xs"
           aria-label="Submit search"
         >
-          <FaSearch className="text-[14px]" />
+          <FaSearch className="text-[13px]" />
         </Button>
       </div>
 

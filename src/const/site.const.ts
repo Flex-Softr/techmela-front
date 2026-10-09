@@ -1,23 +1,24 @@
-/** Site-wide cosmetics store branding */
+/** Site-wide TechMela branding and contact */
 export const SITE = {
-  nameBn: "ShajGhor",
-  nameEn: "ShajGhor",
-  taglineBn: "Premium Cosmetics & Beauty Products",
+  nameBn: "TechMela",
+  nameEn: "TechMela",
+  taglineBn: "Premium Gadgets & Electronics",
   descriptionBn:
-    "ShajGhor is a trusted online cosmetics shop in Bangladesh. Shop quality skincare, makeup, haircare, perfume, and beauty accessories.",
+    "TechMela is a trusted online shop in Bangladesh. Shop quality gadgets, electronics, and accessories.",
   shortDescriptionBn:
-    "A trusted online shop for quality skincare, makeup, haircare, and beauty products.",
-  mottoBn: "Beauty care you can trust",
-  baseUrl: "https://shajghor.com",
-  apiUrl: "https://api.shajghor.com",
-  email: "contact@shajghor.com",
-  phone: "+01710020030",
-  phoneDisplay: "01339-955155",
-  logoPath: "/logo/logo.webp",
+    "A trusted online shop for quality tech, gadgets, and electronics.",
+  mottoBn: "Tech you can trust",
+  baseUrl: "https://techmela.com.bd",
+  apiUrl: "https://api.techmela.com.bd",
+  email: "support@techmela.com.bd",
+  phone: "+8801772065894",
+  phoneDisplay: "+8801772065894",
+  address: "Shop No- 369, Motalib Plaza, Hatirpool, Dhaka-1205",
+  logoPath: "/logo/techmela-lightlogo.png",
   social: {
-    facebook: "https://www.facebook.com/shajghor",
-    youtube: "https://www.youtube.com/@ShajGhor",
-    instagram: "https://www.instagram.com/shajghor",
-    tiktok: "https://www.tiktok.com/@shajghor",
+    facebook: "https://www.facebook.com/techmela",
+    youtube: "https://www.youtube.com/@techmela",
+    instagram: "https://www.instagram.com/techmela",
+    tiktok: "https://www.tiktok.com/@techmela",
   },
 } as const;

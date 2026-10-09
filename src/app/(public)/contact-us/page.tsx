@@ -60,7 +60,7 @@ const ContactUsPage = () => {
               name: "Where is the showroom for in-person purchases?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Our showroom is in Boxnagar, Sarulia, Demra, Dhaka. See the store location page for the full address.",
+                text: "Our showroom is at Shop No- 369, Motalib Plaza, Hatirpool, Dhaka-1205. See the store location page for the full address.",
               },
             },
             {
@@ -68,7 +68,7 @@ const ContactUsPage = () => {
               name: "What is your helpline number?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Our helpline numbers are 01710020030 and 01710020030. Call us whenever you need help.",
+                text: "Our helpline number is +8801772065894. Call us whenever you need help.",
               },
             },
           ],
@@ -129,7 +129,9 @@ const ContactUsPage = () => {
                       Phone
                     </h4>
                     <p className="text-xl font-bold text-foreground">
-                      01710020030, 01710020030
+                      <a href="tel:+8801772065894" className="hover:text-primary transition-colors">
+                        +8801772065894
+                      </a>
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
                       10 AM – 10 PM (24/7 support)
@@ -147,7 +149,9 @@ const ContactUsPage = () => {
                       Email
                     </h4>
                     <p className="text-lg font-bold text-foreground break-all">
-                      {SITE.email}
+                      <a href={`mailto:${SITE.email}`} className="hover:text-primary transition-colors">
+                        {SITE.email}
+                      </a>
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
                       Online support
@@ -165,7 +169,7 @@ const ContactUsPage = () => {
                       Address
                     </h4>
                     <p className="text-foreground font-bold leading-relaxed">
-                      Surmela Goli, East Boxnagar, Sarulia, Demra, Dhaka-1361
+                      Shop No- 369, Motalib Plaza, Hatirpool, Dhaka-1205
                     </p>
                   </div>
                 </div>

@@ -13,12 +13,12 @@ import {
 
 export const metadata: Metadata = {
   title: "Store location",
-  description: `${SITE.nameBn} showroom address and map location. Visit us in Demra, Dhaka to collect your favorite cosmetics and beauty products in person.`,
+  description: `${SITE.nameBn} showroom address and map location. Visit us at Motalib Plaza, Hatirpool, Dhaka-1205 to collect your favorite tech products in person.`,
   keywords: [
     `${SITE.nameBn} showroom`,
-    "Store Location ShajGhor",
-    "Demra Cosmetics Shop",
-    "Boxnagar Sarulia Demra Dhaka",
+    "Store Location TechMela",
+    "Hatirpool Tech Shop",
+    "Motalib Plaza Hatirpool Dhaka",
   ].join(", "),
   alternates: {
     canonical: `${SITE.baseUrl}/store-location`,
@@ -86,10 +86,10 @@ const StoreLocationPage = () => {
                 <div className="h-[300px] sm:h-[400px] lg:h-[500px] relative">
                   <iframe
                     className="w-full h-full grayscale-[0.2] contrast-[1.1] transition-all duration-700 group-hover:grayscale-0"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.9931714529966!2d90.48777747362271!3d23.711937890255083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b70009c04db1%3A0x814b3a09778a03cf!2sSurmela%20bari!5e0!3m2!1sen!2sbd!4v1773033356114!5m2!1sen!2sbd"
+                    src="https://maps.google.com/maps?q=Motalib+Plaza,+Hatirpool,+Dhaka-1205&t=&z=16&ie=UTF8&iwloc=&output=embed"
                     allowFullScreen
                     loading="lazy"
-                    title="Google Map - ShajGhor"
+                    title="Google Map - TechMela"
                   ></iframe>
                 </div>
               </div>
@@ -119,7 +119,7 @@ const StoreLocationPage = () => {
                         Showroom address
                       </p>
                       <p className="text-xl text-foreground leading-relaxed font-medium">
-                        Surmela Goli, East Boxnagar, Sarulia, Demra, Dhaka-1361
+                        Shop No- 369, Motalib Plaza, Hatirpool, Dhaka-1205
                       </p>
                     </div>
 
@@ -131,25 +131,14 @@ const StoreLocationPage = () => {
                       </p>
                       <div className="space-y-4">
                         <a
-                          href="tel:+01710020030"
+                          href="tel:+8801772065894"
                           className="inline-flex items-center gap-4 group"
                         >
                           <div className="w-12 h-12 bg-success/10 rounded-2xl flex items-center justify-center text-success transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                             <FaHeadset size={22} />
                           </div>
                           <span className="text-2xl font-black text-foreground group-hover:text-primary transition-colors">
-                            01710020030
-                          </span>
-                        </a>
-                        <a
-                          href="tel:+8801718634508"
-                          className="inline-flex items-center gap-4 group"
-                        >
-                          <div className="w-12 h-12 bg-success/10 rounded-2xl flex items-center justify-center text-success transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                            <FaHeadset size={22} />
-                          </div>
-                          <span className="text-2xl font-black text-foreground group-hover:text-primary transition-colors">
-                            01710020030
+                            +8801772065894
                           </span>
                         </a>
                       </div>

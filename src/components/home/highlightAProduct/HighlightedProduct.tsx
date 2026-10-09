@@ -1,41 +1,61 @@
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
+import { Button } from "@/components/ui/button";
 import { getImageSrc } from "@/lib/utils";
 import { TProduct } from "@/types/products/product";
+import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const HighlightAProduct = ({ product }: { product: TProduct | null }) => {
+  if (!product) return null;
+
   return (
-    <section className="pt-20">
+    <section className="py-8 md:py-12">
       <ContainerMax>
         <Link
           href={`/product/${product?.slug}`}
-          className="grid grid-cols-8 md:px-10 md:py-8 px-5 py-4 rounded-md justify-center md:justify-between items-center shadow-md ring-1 ring-base-100 group gap-5 w-full relative overflow-hidden"
+          className="relative block overflow-hidden rounded-2xl md:rounded-3xl border border-border/80 bg-gradient-to-r from-accent/50 via-card to-accent/30 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 group"
         >
-          <div className="absolute top-0 z-[-2] h-screen w-screen bg-background bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-          <h2 className="col-span-4 md:col-span-5 text-xs md:text-xl font-light text-end">
-            Shop now and save big on our{" "}
-            <span className="font-bold text-secondary text-sm md:text-2xl">
-              {" "}
-              {product?.title}
-            </span>
-          </h2>
-          <div className="col-span-2 md:col-span-1 flex justify-center">
-            <div className="bg-muted text-primary-foreground group-hover:bg-primary font-bold rounded-md px-2 py-2 text-center transition-all text-xs md:text-sm max-w-24 md:max-w-32 w-full">
-              Starting at
-              <br />
-              &#2547;{" "}
-              {product?.salePrice ? product.salePrice : product?.regularPrice}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="max-w-xl space-y-2 text-center md:text-left">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                <Sparkles className="size-3 text-warning fill-warning" />
+                <span>Editorial Spotlight</span>
+              </div>
+              <h2 className="text-lg md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                {product?.title}
+              </h2>
+              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                Handcrafted formulation tested for quality, purity, and long-lasting vitality.
+              </p>
+              <div className="pt-2 flex items-center justify-center md:justify-start gap-3">
+                <span className="text-lg md:text-xl font-bold text-primary">
+                  ৳{product?.salePrice || product?.regularPrice}
+                </span>
+                {product?.salePrice && (
+                  <span className="text-xs md:text-sm text-muted-foreground line-through">
+                    ৳{product?.regularPrice}
+                  </span>
+                )}
+                <Button
+                  size="sm"
+                  className="rounded-full px-5 ml-2 bg-primary hover:bg-secondary text-primary-foreground pointer-events-none"
+                >
+                  <span>Order Now</span>
+                  <ArrowRight className="size-3.5 ml-1" />
+                </Button>
+              </div>
             </div>
-          </div>
-          <div className="mx-auto col-span-2">
-            <Image
-              src={getImageSrc(product?.image?.src)}
-              alt={product?.image?.alt || ""}
-              width={200}
-              height={200}
-              className="w-20 h-20"
-            />
+
+            <div className="shrink-0 relative size-28 sm:size-36 md:size-44 rounded-2xl bg-card border border-border/60 p-3 shadow-inner flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              <Image
+                src={getImageSrc(product?.image?.src || product?.thumbnail?.src)}
+                alt={product?.image?.alt || product?.title || ""}
+                width={180}
+                height={180}
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
         </Link>
       </ContainerMax>

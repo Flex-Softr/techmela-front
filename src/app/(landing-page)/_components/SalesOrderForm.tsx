@@ -328,10 +328,10 @@ const SalesOrderForm = ({
                   If you have trouble ordering, call the number below
                 </p>
                 <a
-                  href="tel:+01710020030"
+                  href="tel:+8801772065894"
                   className="inline-flex items-center justify-center gap-3 bg-background text-primary font-black px-8 py-3 rounded-xl border border-primary/10 shadow-lg hover:shadow-xl hover:bg-muted transition-all text-lg lg:text-xl"
                 >
-                  01710020030
+                  +8801772065894
                 </a>
               </div>
             </div>

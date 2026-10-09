@@ -1,30 +1,42 @@
 "use client";
 import { getImageSrc } from "@/lib/utils";
 import TCategory from "@/types/categories/categories";
+import { LayoutGrid } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const CategoryCard = ({ category }: { category: TCategory }) => {
+  const [imageError, setImageError] = useState(false);
+  const imageSrc = category?.image?.src ? getImageSrc(category.image.src) : null;
+
   return (
     <Link
       href={`/category/${category.slug}`}
-      className="text-center mx-auto flex flex-col justify-center items-center group transition-all duration-300"
+      className="bg-card rounded-2xl border border-border/80 shadow-sm p-3 sm:p-4 flex flex-col items-center justify-center text-center hover:shadow-md hover:-translate-y-1 hover:border-primary/30 transition-all duration-200 cursor-pointer group w-full h-full min-h-[112px] sm:min-h-[124px]"
     >
-      <div className="size-20 sm:size-24 md:size-32 rounded-full flex justify-center items-center bg-muted border border-border group-hover:bg-primary/5 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-300 overflow-hidden shadow-sm">
-        <Image
-          src={getImageSrc(category?.image?.src)}
-          alt={category?.image?.alt || category.name}
-          width={80}
-          height={80}
-          className="mx-auto transition-all object-contain p-3 w-full h-full"
-        />
+      <div className="h-10 w-10 sm:h-11 sm:w-11 mb-2.5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-200">
+        {imageSrc && !imageError ? (
+          <Image
+            src={imageSrc}
+            alt={category?.image?.alt || category.name}
+            width={44}
+            height={44}
+            className="w-full h-full object-contain"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="size-10 rounded-xl bg-accent/60 flex items-center justify-center text-primary">
+            <LayoutGrid className="size-5 stroke-[1.75]" />
+          </div>
+        )}
       </div>
-      <span className="mt-2 text-xs md:text-sm font-bold block text-foreground group-hover:text-primary transition-colors line-clamp-1 px-1">
+      <span className="text-[12px] sm:text-[13px] font-medium leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-2 px-0.5">
         {category.name}
       </span>
       {category.productCount !== undefined && (
-        <span className="text-[10px] md:text-xs text-foreground font-medium bg-muted px-2 py-0.5 rounded-full mt-1">
-          {category.productCount} products
+        <span className="mt-1 text-[10px] text-muted-foreground font-normal">
+          {category.productCount} items
         </span>
       )}
     </Link>

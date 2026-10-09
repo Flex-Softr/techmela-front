@@ -4,110 +4,42 @@ import CategoryCard from "@/components/home/category/CategoryCard";
 import SectionSubtitle from "@/components/SectionSubtitle";
 import SectionTitle from "@/components/SectionTitle";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import TCategory from "@/types/categories/categories";
-import Autoplay from "embla-carousel-autoplay";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const CategorySection = ({ categories }: { categories: TCategory[] }) => {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
+  const [showAll, setShowAll] = useState(false);
+  const displayCategories = showAll ? categories : categories.slice(0, 16);
 
-  const plugin = useRef(
-    Autoplay({
-      delay: 3000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    })
-  );
-
-  useEffect(() => {
-    if (!api) return;
-
-    setCurrent(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
+  if (!categories || categories.length === 0) return null;
 
   return (
-    <section className="pt-4 md:pt-6">
+    <section className="py-6 md:py-10">
       <div className="mb-6 px-4 text-center md:mb-8">
-        <SectionTitle title="Our Product Categories" className="text-primary" />
-        <SectionSubtitle text="Find products by your favorite category" />
+        <SectionTitle title="Featured Category" className="text-primary" />
+        <SectionSubtitle text="Get Your Desired Product from Featured Category!" />
       </div>
 
       <ContainerMax>
-        <div
-          className="relative group/category px-1 md:px-0"
-          onMouseEnter={() => {
-            if (plugin?.current) plugin?.current?.stop?.();
-          }}
-          onMouseLeave={() => {
-            if (plugin && plugin?.current) {
-              plugin?.current?.play?.();
-            }
-          }}
-        >
-          <Carousel
-            setApi={setApi}
-            plugins={[plugin.current]}
-            className="w-full relative"
-          >
-            <CarouselContent
-              className={cn(
-                "-ml-2 md:-ml-3 py-4",
-                categories.length < 4 && "justify-center",
-                categories.length < 6 && "md:justify-center",
-                categories.length < 8 && "lg:justify-center"
-              )}
-            >
-              {categories.map((category) => (
-                <CarouselItem
-                  key={category._id}
-                  className="basis-1/4 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 xl:basis-[12.5%] pl-2 md:pl-3"
-                >
-                  <CategoryCard category={category} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-
-            {categories.length > 3 && (
-              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none z-30">
-                <CarouselPrevious className="pointer-events-auto relative -left-2 md:-left-4 bg-background hover:bg-background text-primary border border-primary/50 h-8 w-8 md:h-10 md:w-10 shadow-lg transition-all flex items-center justify-center ring-2 ring-primary/5" />
-                <CarouselNext className="pointer-events-auto relative -right-2 md:-right-4 left-auto md:left-auto bg-background hover:bg-background text-primary border border-primary/50 h-8 w-8 md:h-10 md:w-10 shadow-lg transition-all flex items-center justify-center ring-2 ring-primary/5" />
-              </div>
-            )}
-          </Carousel>
-
-          {/* Pagination Dots */}
-          {categories.length > 5 && (
-            <div className="flex justify-center items-center gap-2 mt-2">
-              {api?.scrollSnapList().map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => api?.scrollTo(index)}
-                  className={cn(
-                    "h-1 rounded-full transition-all duration-300 border border-primary/10",
-                    current === index
-                      ? "w-6 bg-primary"
-                      : "w-1.5 bg-primary/40 md:bg-primary/20 md:hover:bg-primary/40"
-                  )}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
+        <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5 sm:gap-3 md:gap-4">
+          {displayCategories.map((category) => (
+            <CategoryCard key={category._id} category={category} />
+          ))}
         </div>
+
+        {categories.length > 16 && (
+          <div className="flex justify-center mt-6">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowAll((prev) => !prev)}
+              className="rounded-full px-6 border-primary/20 hover:bg-primary/5 hover:border-primary/40 text-primary"
+            >
+              {showAll ? "Show Less" : "View All Categories"}
+            </Button>
+          </div>
+        )}
       </ContainerMax>
     </section>
   );

@@ -92,7 +92,7 @@ export default function HowToOrderModal({ isOpen, onOpenChange }: Props) {
 
         <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
           <p className="text-sm font-bold text-primary">
-            For any issues, call us at: 01710020030
+            For any issues, call us at: +8801772065894
           </p>
         </div>
       </div>

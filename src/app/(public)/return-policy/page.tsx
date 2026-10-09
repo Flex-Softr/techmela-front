@@ -156,12 +156,15 @@ const ReturnPolicyPage = () => {
           <p className="text-muted-foreground text-sm uppercase tracking-[0.3em]">
             For more information
           </p>
-          <div className="inline-flex items-center gap-4 py-3 px-8 bg-background rounded-full shadow-lg border border-border">
+          <a
+            href="tel:+8801772065894"
+            className="inline-flex items-center gap-4 py-3 px-8 bg-background rounded-full shadow-lg border border-border hover:border-primary transition-colors"
+          >
             <FaPhoneAlt className="text-primary" />
             <span className="text-2xl font-black text-foreground tracking-wider">
-              01710020030
+              +8801772065894
             </span>
-          </div>
+          </a>
         </div>
       </div>
     </div>

@@ -184,11 +184,14 @@ const DeliveryPolicyPage = async () => {
           <h3 className="text-xl md:text-2xl font-bold mb-4">
             Contact our helpline for more information
           </h3>
-          <div className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-md px-8 py-3 rounded-full border border-primary-foreground/20">
+          <a
+            href="tel:+8801772065894"
+            className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-md px-8 py-3 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-colors"
+          >
             <span className="text-2xl md:text-3xl font-black tracking-widest">
-              01710020030
+              +8801772065894
             </span>
-          </div>
+          </a>
         </div>
       </div>
     </div>

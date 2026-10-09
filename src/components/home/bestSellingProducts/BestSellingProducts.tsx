@@ -37,9 +37,9 @@ const BestSellingProducts = async ({
               </div>
             </div>
             {bestSellingProducts.length > 5 && (
-              <div className="flex justify-center mt-5">
-                <Button asChild size={"sm"} className="px-6">
-                  <Link href={"/best-selling-products"}>View All</Link>
+              <div className="flex justify-center mt-6">
+                <Button asChild size="sm" className="rounded-full px-7 bg-primary hover:bg-secondary text-primary-foreground shadow-sm">
+                  <Link href={"/best-selling-products"}>View All Best Sellers</Link>
                 </Button>
               </div>
             )}
