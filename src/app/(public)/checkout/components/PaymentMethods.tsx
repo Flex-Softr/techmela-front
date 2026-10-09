@@ -160,13 +160,22 @@ const PaymentMethods = ({
   }, [selectedMethod, dispatch]);
 
   return (
-    <Box className="p-0 md:p-4">
-      <BoxHeading className="flex items-center gap-2">
-        <Banknote className="text-lg text-primary" />
-        <span className="text-lg">Payment Method</span>
-      </BoxHeading>
+    <div className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200/80 shadow-xs">
+      <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+        <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+          <Banknote className="size-5" />
+        </div>
+        <div>
+          <h2 className="text-base sm:text-lg font-bold text-slate-900">
+            Payment Method
+          </h2>
+          <p className="text-xs text-slate-500">
+            Choose your preferred payment method
+          </p>
+        </div>
+      </div>
 
-      <div className="mt-3">
+      <div>
         {/* Hidden input for RHF registration */}
         <input
           type="hidden"
@@ -175,55 +184,62 @@ const PaymentMethods = ({
           })}
         />
         <div className="space-y-4">
-          <div className="grid grid-cols-1 gap-2">
-            {paymentMethods.map((method) => (
-              <div
-                key={method._id}
-                className={`flex items-center p-3 rounded-md border transition-all cursor-pointer ${
-                  paymentMethodId === method._id
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/30"
-                } ${method?.logo?.src && "py-1 pr-1"}`}
-                onClick={() => {
-                  setValue("paymentMethod", method._id, {
-                    shouldValidate: true,
-                  });
-                  clearErrors("paymentDetails");
-                  setValue("paymentDetails", {});
-                }}
-              >
-                <input
-                  type="radio"
-                  id={`${idPrefix}-${method._id}`}
-                  name={`payment_method_${idPrefix}`}
-                  value={method._id}
-                  checked={paymentMethodId === method._id}
-                  onChange={() => {
+          <div className="grid grid-cols-1 gap-2.5">
+            {paymentMethods.map((method) => {
+              const isSelected = paymentMethodId === method._id;
+              return (
+                <div
+                  key={method._id}
+                  className={`flex items-center p-3.5 sm:p-4 rounded-xl border transition-all cursor-pointer ${
+                    isSelected
+                      ? "border-primary bg-primary/5 shadow-xs ring-2 ring-primary/20"
+                      : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50"
+                  }`}
+                  onClick={() => {
                     setValue("paymentMethod", method._id, {
                       shouldValidate: true,
                     });
                     clearErrors("paymentDetails");
                     setValue("paymentDetails", {});
                   }}
-                  className="w-4 h-4 text-primary focus:ring-primary cursor-pointer"
-                />
-                <label
-                  htmlFor={`${idPrefix}-${method._id}`}
-                  className="ml-3 flex-grow flex justify-between items-center cursor-pointer select-none"
                 >
-                  <span className="font-semibold text-sm">{method.name}</span>
-                  {method.logo?.src && (
-                    <Image
-                      src={getImageSrc(method?.logo?.src)}
-                      alt={method?.logo?.alt || method?.name}
-                      width={40}
-                      height={40}
-                      className="w-10 h-10 rounded-md object-contain"
-                    />
-                  )}
-                </label>
-              </div>
-            ))}
+                  <input
+                    type="radio"
+                    id={`${idPrefix}-${method._id}`}
+                    name={`payment_method_${idPrefix}`}
+                    value={method._id}
+                    checked={isSelected}
+                    onChange={() => {
+                      setValue("paymentMethod", method._id, {
+                        shouldValidate: true,
+                      });
+                      clearErrors("paymentDetails");
+                      setValue("paymentDetails", {});
+                    }}
+                    className="w-4 h-4 text-primary accent-[#0F7641] focus:ring-primary cursor-pointer shrink-0"
+                  />
+                  <label
+                    htmlFor={`${idPrefix}-${method._id}`}
+                    className="ml-3 flex-grow flex justify-between items-center cursor-pointer select-none"
+                  >
+                    <span className="font-semibold text-sm text-slate-800">
+                      {method.name}
+                    </span>
+                    {method.logo?.src && (
+                      <div className="size-10 rounded-lg border border-slate-200/80 bg-white p-1 flex items-center justify-center shadow-2xs">
+                        <Image
+                          src={getImageSrc(method?.logo?.src)}
+                          alt={method?.logo?.alt || method?.name}
+                          width={36}
+                          height={36}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
+                  </label>
+                </div>
+              );
+            })}
             {errors.paymentMethod && (
               <ErrorMessage message={errors.paymentMethod.message as string} />
             )}
@@ -233,9 +249,9 @@ const PaymentMethods = ({
           {selectedMethod && (
             <div className="mt-4">
               {selectedMethod.description && (
-                <h2 className="font-bold text-sm mb-2">
+                <h3 className="font-bold text-sm mb-2 text-slate-800">
                   {selectedMethod.description}
-                </h2>
+                </h3>
               )}
 
               {(selectedMethod.isPaymentDetailsNeeded ||
@@ -243,33 +259,38 @@ const PaymentMethods = ({
                 selectedMethod.merchantACInfo ||
                 (selectedMethod.required_inputs &&
                   selectedMethod.required_inputs.length > 0)) && (
-                <div className="p-4 border rounded-md bg-muted/50 space-y-4">
+                <div className="p-4 sm:p-5 border border-slate-200 rounded-xl bg-slate-50/70 space-y-4">
                   {selectedMethod.merchantACInfo && (
-                    <div className="text-sm bg-background p-2 rounded border border-border mb-2">
+                    <div className="text-sm bg-white p-3 rounded-lg border border-slate-200 space-y-1">
                       <p>
-                        <span className="font-semibold text-muted-foreground">
+                        <span className="font-semibold text-slate-500">
                           Account Type:
                         </span>{" "}
-                        {selectedMethod.merchantACInfo.accountType}
+                        <span className="font-medium text-slate-800">
+                          {selectedMethod.merchantACInfo.accountType}
+                        </span>
                       </p>
                       <p>
-                        <span className="font-semibold text-muted-foreground">
+                        <span className="font-semibold text-slate-500">
                           Account No:
                         </span>{" "}
-                        {selectedMethod.merchantACInfo.accountNo}
+                        <span className="font-bold text-slate-900">
+                          {selectedMethod.merchantACInfo.accountNo}
+                        </span>
                       </p>
                     </div>
                   )}
 
                   {selectedMethod.instructions && (
-                    <p className="text-sm text-muted-foreground italic">
-                      Note: {selectedMethod.instructions}
+                    <p className="text-xs sm:text-sm text-slate-600 bg-amber-50/80 border border-amber-200/80 p-3 rounded-lg leading-relaxed">
+                      <span className="font-semibold text-amber-800">Note:</span>{" "}
+                      {selectedMethod.instructions}
                     </p>
                   )}
 
                   {selectedMethod.required_inputs &&
                     selectedMethod.required_inputs.length > 0 && (
-                      <div className="grid grid-cols-1 gap-4">
+                      <div className="grid grid-cols-1 gap-4 pt-1">
                         {selectedMethod.required_inputs.map((input, idx) => (
                           <SinglePaymentInput key={idx} input={input} />
                         ))}
@@ -281,7 +302,7 @@ const PaymentMethods = ({
           )}
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

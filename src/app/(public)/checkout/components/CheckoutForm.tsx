@@ -101,14 +101,14 @@ const CheckoutForm = ({
     <>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(handlePlaceOrder)}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            <div className="lg:col-span-7 space-y-6">
               <ShippingAddress />
-              <div className="hidden lg:block mt-3 lg:mt-5 lg:border lg:rounded-md">
+              <div className="hidden lg:block">
                 {paymentMethodsDesktopSlot}
               </div>
             </div>
-            <div className="order-4 lg:order-3">
+            <div className="lg:col-span-5 lg:sticky lg:top-24">
               <OrderNow
                 costLoading={cartCostLoading}
                 errorMessages={errorMessages}

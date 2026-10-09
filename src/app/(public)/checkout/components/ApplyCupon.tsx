@@ -123,14 +123,16 @@ export default function ApplyCupon() {
   };
 
   return (
-    <div className="mb-5">
-      <div className="flex items-center space-x-2 md:space-x-6">
+    <div className="pt-1">
+      <div className="flex items-center gap-2">
         <div className="w-full">
           <Input
             disabled={applied ? true : false}
             type="text"
-            placeholder="If you have a promo code, enter it here..."
-            className={`w-full ${errors.promoCode ? "ring-destructive" : ""}`}
+            placeholder="Promo code (if any)..."
+            className={`w-full h-11 rounded-xl bg-slate-50/70 border-slate-200 text-sm focus-visible:bg-white focus-visible:ring-primary/20 focus-visible:border-primary ${
+              errors.promoCode ? "ring-destructive" : ""
+            }`}
             {...register("promoCode")}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -143,15 +145,15 @@ export default function ApplyCupon() {
         <Button
           type="button"
           onClick={handleSubmit(onSubmit)}
-          className="bg-primary text-primary-foreground flex items-center"
+          className="h-11 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm flex items-center shrink-0"
           disabled={loading || applied}
         >
           {applied ? "Applied" : "Apply"}
-          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {loading && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
         </Button>
       </div>
       {errors.promoCode && (
-        <span className="text-destructive text-sm">
+        <span className="text-destructive text-xs mt-1 block">
           {errors.promoCode.message}
         </span>
       )}

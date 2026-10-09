@@ -1,15 +1,13 @@
 "use client";
 import ApplyCupon from "@/app/(public)/checkout/components/ApplyCupon";
 import CartTotalCalculations from "@/components/cart/CartTotalCalculations";
+import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
-import Box from "@/components/ui/ec/Box";
-import BoxHeading from "@/components/ui/ec/BoxHeading";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
+import { ShieldCheck, ShoppingBag, Truck } from "lucide-react";
+import { ReactNode } from "react";
 import { useFormContext } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
-import { ShoppingBag } from "lucide-react";
-import { ReactNode } from "react";
-import EcButton from "@/components/shared/EcButton/EcButton";
 
 const OrderNow = ({
   errorMessages,
@@ -37,16 +35,23 @@ const OrderNow = ({
     formState: { errors },
   } = useFormContext();
 
-  // No local click handler needed, form submit handles it.
-
   return (
-    <Box className="bg-background px-4 py-2 border">
-      <BoxHeading className="flex items-center gap-2 mb-1">
-        <ShoppingBag className="text-lg text-primary" />
-        <span className="text-lg">Order Summary</span>
-      </BoxHeading>
+    <div className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200/80 shadow-xs space-y-4">
+      <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+        <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+          <ShoppingBag className="size-5" />
+        </div>
+        <div>
+          <h2 className="text-base sm:text-lg font-bold text-slate-900">
+            Order Summary
+          </h2>
+          <p className="text-xs text-slate-500">
+            Review items, delivery charge & total
+          </p>
+        </div>
+      </div>
 
-      {children}
+      <div className="divide-y divide-slate-100">{children}</div>
 
       <CartTotalCalculations
         totalCost={totalCost}
@@ -54,24 +59,26 @@ const OrderNow = ({
         hideSubtotal={true}
         shippingAreaSlot={shippingAreaSlot}
       />
+
       <div className="order-3 lg:order-4 lg:hidden">
         {paymentMethodsMobileSlot}
       </div>
+
       {/* Apply Coupon Section */}
-      <div className="py-2">
+      <div className="pt-1">
         <ApplyCupon />
       </div>
 
       {/* Error Messages */}
       {errorMessages.length > 0 && (
-        <div className="py-1">
+        <div className="space-y-1">
           {errorMessages.map((message, index) => (
             <div
               key={index}
-              className="flex gap-1 items-center text-destructive text-sm"
+              className="flex gap-2 items-center text-destructive text-sm bg-destructive/10 p-2.5 rounded-xl border border-destructive/20"
             >
-              <MdErrorOutline />
-              <ErrorMessage message={message} className="!mt-0" />
+              <MdErrorOutline className="shrink-0 text-base" />
+              <ErrorMessage message={message} className="!mt-0 font-medium" />
             </div>
           ))}
         </div>
@@ -79,24 +86,36 @@ const OrderNow = ({
 
       {/* Validation Error Message */}
       {Object.keys(errors).length > 0 && (
-        <div className="py-2 px-3 mb-2 bg-destructive/10 border border-destructive/25 rounded text-destructive font-medium text-sm flex items-center gap-2">
-          <MdErrorOutline className="text-lg flex-shrink-0" />
-          <span>Please fill in all required information correctly.</span>
+        <div className="py-2.5 px-3 bg-destructive/10 border border-destructive/25 rounded-xl text-destructive font-medium text-xs sm:text-sm flex items-center gap-2">
+          <MdErrorOutline className="text-base shrink-0" />
+          <span>Please fill in all required delivery fields correctly.</span>
         </div>
       )}
 
-      {/* Order Now Button with ultimateTotalCost */}
+      {/* Order Now Button with calculatedTotal */}
       <EcButton
-        className="w-full font-bold text-primary-foreground mt-2 flex items-center gap-2 lg:gap-4"
+        className="w-full font-bold text-white bg-primary hover:bg-primary/95 text-base sm:text-lg h-12 sm:h-13 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-between px-6 mt-3"
         type="submit"
         loading={isLoading || isSuccess}
         disabled={isLoading || isSuccess}
         loadingText="Placing order..."
       >
-        <span className="text-lg">Place Order </span>
-        <span className="text-lg">{calculatedTotal} Tk.</span>
+        <span>Place Order</span>
+        <span className="font-extrabold">{calculatedTotal} Tk.</span>
       </EcButton>
-    </Box>
+
+      {/* Trust & Assurance Badges */}
+      <div className="pt-3 border-t border-slate-100 grid grid-cols-2 gap-2 text-[11px] text-slate-500 font-medium">
+        <div className="flex items-center gap-1.5">
+          <ShieldCheck className="size-3.5 text-primary shrink-0" />
+          <span>100% Authentic</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <Truck className="size-3.5 text-primary shrink-0" />
+          <span>Cash On Delivery</span>
+        </div>
+      </div>
+    </div>
   );
 };
 

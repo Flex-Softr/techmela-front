@@ -1,9 +1,8 @@
 "use client";
-import Box from "@/components/ui/ec/Box";
-import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { setShipping } from "@/redux/features/shippingClasses/shippingClass";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import TShippingCharges from "@/types/shippingCharge";
+import { Truck } from "lucide-react";
 import { useEffect } from "react";
 
 const SelectShippingMethod = ({
@@ -33,44 +32,63 @@ const SelectShippingMethod = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedShipping._id, shippingCharges]);
+
   return (
-    <Box className="px-0 md:py-2 lg:pb-6">
-      <BoxHeading>Delivery Area</BoxHeading>
+    <div className="my-3 p-4 sm:p-5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-3">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Truck className="size-4 text-primary" />
+          <span className="text-sm font-bold text-slate-800">Delivery Area</span>
+        </div>
+        <span className="text-xs text-slate-500 font-medium">Select location</span>
+      </div>
+
       <div className="space-y-2">
-        {shippingCharges?.map((item) => (
-          <div
-            key={item?._id}
-            className={`flex items-center p-3 rounded-md border transition-all cursor-pointer ${
-              selectedShipping._id === item?._id
-                ? "border-primary bg-primary/5"
-                : "border-border hover:border-primary/30"
-            }`}
-            onClick={() => handleShippingChargeChange(item?._id, item?.amount)}
-          >
-            <input
-              type="radio"
-              id={item?._id}
-              name="shipping_name"
-              value={item?._id}
-              checked={selectedShipping._id === item?._id}
-              onChange={() =>
-                handleShippingChargeChange(item?._id, item?.amount)
-              }
-              className="w-4 h-4 text-primary focus:ring-primary cursor-pointer"
-            />
-            <label
-              htmlFor={item?._id}
-              className="ml-3 flex-grow flex justify-between items-center cursor-pointer select-none"
+        {shippingCharges?.map((item) => {
+          const isSelected = selectedShipping._id === item?._id;
+          return (
+            <div
+              key={item?._id}
+              className={`flex items-center justify-between p-3.5 rounded-xl border transition-all cursor-pointer ${
+                isSelected
+                  ? "border-primary bg-white shadow-xs ring-2 ring-primary/20"
+                  : "border-slate-200 bg-white/70 hover:bg-white hover:border-slate-300"
+              }`}
+              onClick={() => handleShippingChargeChange(item?._id, item?.amount)}
             >
-              <span className="font-semibold text-sm">{item?.name}</span>
-              <span className="font-bold text-sm text-primary">
+              <div className="flex items-center gap-3">
+                <input
+                  type="radio"
+                  id={item?._id}
+                  name="shipping_name"
+                  value={item?._id}
+                  checked={isSelected}
+                  onChange={() =>
+                    handleShippingChargeChange(item?._id, item?.amount)
+                  }
+                  className="w-4 h-4 text-primary accent-[#0F7641] focus:ring-primary cursor-pointer shrink-0"
+                />
+                <label
+                  htmlFor={item?._id}
+                  className="font-semibold text-sm text-slate-800 cursor-pointer select-none"
+                >
+                  {item?.name}
+                </label>
+              </div>
+              <span
+                className={`font-bold text-xs sm:text-sm px-2.5 py-1 rounded-lg transition-colors ${
+                  isSelected
+                    ? "bg-primary text-white"
+                    : "bg-slate-100 text-slate-700"
+                }`}
+              >
                 {item.amount} &#2547;
               </span>
-            </label>
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
-    </Box>
+    </div>
   );
 };
 

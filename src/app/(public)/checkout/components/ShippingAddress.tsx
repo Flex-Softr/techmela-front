@@ -95,25 +95,35 @@ const ShippingAddress = ({
   }, [dispatch]);
 
   return (
-    <Box className="bg-background px-4 py-2 border">
-      <BoxHeading className="flex items-center gap-2">
-        <Truck className="text-lg text-primary" />
-        <span className="text-lg">Delivery Address</span>
-      </BoxHeading>
+    <div className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200/80 shadow-xs">
+      <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+        <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+          <Truck className="size-5" />
+        </div>
+        <div>
+          <h2 className="text-base sm:text-lg font-bold text-slate-900">
+            Delivery Information
+          </h2>
+          <p className="text-xs text-slate-500">
+            Please provide your contact and delivery address
+          </p>
+        </div>
+      </div>
+
       {customerHasAccount && (
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle className="text-xl">Default Shipping Address</CardTitle>
-            <CardDescription>
+        <Card className="w-full mb-5">
+          <CardHeader className="p-4">
+            <CardTitle className="text-sm font-bold">Default Shipping Address</CardTitle>
+            <CardDescription className="text-xs mt-1">
               {shippingAddress
                 ? `Address: ${shippingAddress?.fullAddress}`
                 : "You have not set a default shipping address."}
             </CardDescription>
           </CardHeader>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="p-4 pt-0 flex justify-between">
             <Link href="/my-account/add-shipping-address">
               <div
-                className="cursor-pointer text-primary"
+                className="cursor-pointer text-xs font-semibold text-primary hover:underline"
                 title="Edit shipping address"
               >
                 Edit address
@@ -122,18 +132,21 @@ const ShippingAddress = ({
           </CardFooter>
         </Card>
       )}
-      <div id="shipping-address-form" className="space-y-3">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <div id="shipping-address-form" className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <Label
               htmlFor="shipping.fullName"
-              className="font-bold pl-1 mb-1.5 block"
+              className="text-xs sm:text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1"
             >
-              Full Name <span className="text-destructive">*</span>
+              <span>Full Name</span>
+              <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.fullName"
-              placeholder="Enter your full name"
+              placeholder="e.g. John Doe"
+              className="h-11 rounded-xl border-slate-200 bg-slate-50/50 focus-visible:bg-white focus-visible:ring-primary/20 focus-visible:border-primary text-sm"
               {...register("shipping.fullName", {
                 required: "Please enter your full name",
                 maxLength: {
@@ -149,16 +162,19 @@ const ShippingAddress = ({
               />
             )}
           </div>
+
           <div>
             <Label
               htmlFor="shipping.phoneNumber"
-              className="font-bold pl-1 mb-1.5 block"
+              className="text-xs sm:text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1"
             >
-              Phone <span className="text-destructive">*</span>
+              <span>Phone Number</span>
+              <span className="text-destructive">*</span>
             </Label>
             <Input
               id="shipping.phoneNumber"
-              placeholder="Enter your phone number"
+              placeholder="01XXXXXXXXX"
+              className="h-11 rounded-xl border-slate-200 bg-slate-50/50 focus-visible:bg-white focus-visible:ring-primary/20 focus-visible:border-primary text-sm"
               {...register("shipping.phoneNumber", {
                 required: "Please enter your phone number",
                 pattern: {
@@ -175,16 +191,19 @@ const ShippingAddress = ({
             )}
           </div>
         </div>
+
         <div>
           <Label
             htmlFor="shipping.fullAddress"
-            className="font-bold pl-1 mb-1.5 block"
+            className="text-xs sm:text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1"
           >
-            Full Address <span className="text-destructive">*</span>
+            <span>Full Address</span>
+            <span className="text-destructive">*</span>
           </Label>
           <Input
             id="shipping.fullAddress"
-            placeholder="Landmark/house number, road/village/area..."
+            placeholder="House/Apartment, Road, Area, Thana, District"
+            className="h-11 rounded-xl border-slate-200 bg-slate-50/50 focus-visible:bg-white focus-visible:ring-primary/20 focus-visible:border-primary text-sm"
             {...register("shipping.fullAddress", {
               required: "Please enter your full address",
             })}
@@ -196,18 +215,19 @@ const ShippingAddress = ({
             />
           )}
         </div>
+
         <div>
           <Label
             htmlFor="shipping.notes"
-            className="font-bold pl-1 mb-1.5 block"
+            className="text-xs sm:text-sm font-semibold text-slate-700 mb-1.5 block"
           >
             Additional Note (optional)
           </Label>
           <textarea
             id="shipping.notes"
-            placeholder="Add any special delivery instructions or notes..."
+            placeholder="Add special delivery instructions, landmark, preferred time, etc..."
             {...register("shipping.notes")}
-            className="w-full h-20 ring-1 ring-gray-200 rounded-md p-2 text-sm focus:ring-2 focus:ring-primary outline-none"
+            className="w-full h-22 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white p-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400 resize-none"
           ></textarea>
           {errors.shipping?.notes && (
             <ErrorMessage
@@ -217,7 +237,7 @@ const ShippingAddress = ({
           )}
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
 
