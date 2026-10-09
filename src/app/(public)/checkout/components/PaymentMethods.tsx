@@ -1,7 +1,5 @@
 "use client";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
-import Box from "@/components/ui/ec/Box";
-import BoxHeading from "@/components/ui/ec/BoxHeading";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getImageSrc } from "@/lib/utils";
