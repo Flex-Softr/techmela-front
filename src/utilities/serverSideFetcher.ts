@@ -44,7 +44,9 @@ const serverSideFetcher = async <T>({
   cache,
   revalidate,
 }: TProps): Promise<TGenericResponse<T>> => {
-  let apiUrl = `${config.api_base_url}/server-api/v1${url}`;
+  const rawBaseUrl = (config.api_base_url || "").trim().replace(/\/+$/, "");
+  const cleanBaseUrl = rawBaseUrl.replace(/\/server-api(\/v1)?$/i, "");
+  let apiUrl = `${cleanBaseUrl}/server-api/v1${url}`;
   const reqConfig = {
     cache: cache || "force-cache",
     next: { tags, revalidate },

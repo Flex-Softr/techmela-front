@@ -8,7 +8,9 @@ import { logOut, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store";
 
 // Define the base URL for your API
-const baseUrl = `${config.api_base_url}/server-api/v1`;
+const rawBaseUrl = (config.api_base_url || "").trim().replace(/\/+$/, "");
+const cleanBaseUrl = rawBaseUrl.replace(/\/server-api(\/v1)?$/i, "");
+const baseUrl = `${cleanBaseUrl}/server-api/v1`;
 
 // Create a base query using fetchBaseQuery
 const baseQuery = fetchBaseQuery({
