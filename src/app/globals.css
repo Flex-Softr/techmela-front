@@ -206,6 +206,19 @@
 }
 
 /* Fix for react-image-gallery mobile vertical scroll issue */
-.image-gallery-swipe {
+.image-gallery,
+.image-gallery-content,
+.image-gallery-slide-wrapper,
+.image-gallery-swipe,
+.image-gallery-slides,
+.image-gallery-slide,
+.image-gallery-image,
+.image-gallery-image img,
+.image-gallery-thumbnails-wrapper,
+.image-gallery-thumbnails,
+.image-gallery-thumbnail {
   touch-action: pan-y !important;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }

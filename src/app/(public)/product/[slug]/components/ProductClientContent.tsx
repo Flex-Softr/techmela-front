@@ -2,16 +2,16 @@
 
 import { toast } from "@/components/ui/use-toast";
 import { PRODUCT_TYPE, STOCK_STATUS } from "@/const/product.const";
+import { SITE } from "@/const/site.const";
 import PEventIdGenerator from "@/lib/ec/PEventIdGenerator";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
 import eventHandler from "@/tracking/eventHandler";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TGenericResponse from "@/types/response";
-import { HelpCircle, Phone, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { Phone, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import AddToCartAndBuyNow from "./AddToCartAndBuyNow";
-import HowToOrderModal from "./HowToOrderModal";
-import ProductSharing from "./ProductSharing";
 
 const ProductClientContent = ({
   product,
@@ -23,8 +23,14 @@ const ProductClientContent = ({
   onPreviewClick?: () => void;
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
   const [addToCart, { isLoading: isAddToCartLoading }] = useAddToCartMutation();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.href);
+    }
+  }, []);
 
   const addToCartHandler = async (): Promise<boolean> => {
     let success = false;
@@ -115,6 +121,36 @@ const ProductClientContent = ({
         ? "Out of Stock"
         : undefined;
 
+  const regularPrice = product?.price?.regularPrice ?? 0;
+  const salePrice = product?.price?.salePrice ?? regularPrice;
+  const currentItemPrice = selectedVariation
+    ? (selectedVariation.price?.salePrice ??
+      selectedVariation.price?.regularPrice ??
+      salePrice)
+    : salePrice;
+
+  const variantText = selectedVariation?.attributes
+    ? Object.entries(selectedVariation.attributes)
+        .map(([name, value]) => `${name}: ${value}`)
+        .join(", ")
+    : "";
+
+  const productUrl =
+    currentUrl ||
+    (product?.slug
+      ? `${SITE.baseUrl}/product/${product.slug}`
+      : SITE.baseUrl);
+
+  const whatsappMessage = `Hello TechMela, I would like to order:
+📦 Product: ${product?.title || "Product"}
+${variantText ? `🏷️ Variant: ${variantText}\n` : ""}💰 Price: ৳${currentItemPrice.toLocaleString()}
+🔢 Quantity: ${quantity}
+🔗 Link: ${productUrl}
+
+Please confirm availability and how to proceed.`;
+
+  const whatsappUrl = `https://wa.me/${SITE.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(whatsappMessage)}`;
+
   return (
     <div>
       {/* Add to Cart and Buy Now Button */}
@@ -127,57 +163,41 @@ const ProductClientContent = ({
         disabledReason={disabledReason}
       />
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mt-4">
-        {/* Large, Eye-catching Preview Button */}
-        {onPreviewClick && (
+      {/* Direct Order Actions: WhatsApp & Call */}
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 mt-3">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="h-[42px] sm:h-[46px] px-2 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all active:scale-[0.98] group"
+        >
+          <FaWhatsapp className="size-4 sm:size-5 shrink-0 group-hover:scale-110 transition-transform text-white" />
+          <span className="truncate">Order via WhatsApp</span>
+        </a>
+
+        <a
+          href={`tel:${SITE.phone}`}
+          className="h-[42px] sm:h-[46px] px-2 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl bg-[rgba(9,33,67,1)] hover:bg-[rgba(13,45,89,1)] text-white font-bold text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all active:scale-[0.98] group"
+        >
+          <Phone className="size-3.5 sm:size-4.5 shrink-0 group-hover:scale-110 transition-transform text-white" />
+          <span className="truncate">Call for Order</span>
+        </a>
+      </div>
+
+      {/* Large, Eye-catching Preview Button */}
+      {onPreviewClick && (
+        <div className="mt-3">
           <button
             onClick={onPreviewClick}
-            className="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3 bg-background text-primary border-2 border-primary text-sm sm:text-base font-black rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-2 sm:gap-3 group/preview shadow-sm tracking-wide shrink-0"
+            className="w-full px-6 py-2.5 bg-background text-primary border-2 border-primary text-sm sm:text-base font-black rounded-xl hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center gap-2 group/preview shadow-sm tracking-wide"
             id="bookPreview"
           >
-            <span className="text-lg sm:text-xl group-hover/preview:animate-bounce-subtle">
-              <Sparkles className="mr-0.5 sm:mr-1 h-5 w-5 sm:h-6 sm:w-6" />
-            </span>
+            <Sparkles className="h-5 w-5 group-hover/preview:animate-bounce-subtle" />
             View Details
           </button>
-        )}
-        <div className="flex justify-center sm:justify-end w-full sm:w-auto">
-          <ProductSharing />
         </div>
-      </div>
+      )}
 
-      <div className="mt-4 sm:mt-6">
-        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border-2 border-primary/10 bg-primary/5">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div className="bg-primary/10 p-2 sm:p-3 rounded-full">
-              <a href="tel:+8801772065894" aria-label="Call us">
-                <Phone className="text-primary h-5 w-5 sm:h-6 sm:w-6" />
-              </a>
-            </div>
-            <div>
-              <p className="font-bold text-base sm:text-lg text-primary leading-tight">
-                <a href="tel:+8801772065894">+8801772065894</a>
-              </p>
-              <p className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                Call us for any help
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => setIsOrderModalOpen(true)}
-            className="flex items-center gap-2 bg-background text-primary border border-primary/20 hover:border-primary/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 whitespace-nowrap"
-          >
-            <HelpCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-            How to order?
-          </button>
-        </div>
-      </div>
-
-      <HowToOrderModal
-        isOpen={isOrderModalOpen}
-        onOpenChange={setIsOrderModalOpen}
-      />
     </div>
   );
 };

@@ -35,6 +35,7 @@ const ProductImageGallery = ({
           className="w-full h-auto object-contain max-h-[500px]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={isFirstImage}
+          draggable={false}
         />
       </div>
     );
@@ -57,6 +58,19 @@ const ProductImageGallery = ({
 
   return (
     <div className="relative">
+      {/* Ensure touch gestures on mobile allow smooth vertical page scrolling */}
+      <style>{`
+        .product-image-gallery,
+        .product-image-gallery .image-gallery-content,
+        .product-image-gallery .image-gallery-slide-wrapper,
+        .product-image-gallery .image-gallery-swipe,
+        .product-image-gallery .image-gallery-slides,
+        .product-image-gallery .image-gallery-slide,
+        .product-image-gallery .image-gallery-image,
+        .product-image-gallery .image-gallery-image img {
+          touch-action: pan-y !important;
+        }
+      `}</style>
       <ImageGallery
         items={galleryImages}
         showNav={false}
@@ -64,6 +78,7 @@ const ProductImageGallery = ({
         infinite //TODO: enable this
         renderItem={renderItem}
         renderThumbInner={renderThumbInner}
+        additionalClass="product-image-gallery"
       />
       {discount > 0 && (
         <div className="absolute -top-3 -right-3 lg:-top-5 lg:-right-5 z-10 w-14 h-14 lg:w-20 lg:h-20 flex items-center justify-center pointer-events-none drop-shadow-xl transition-transform duration-300 hover:rotate-12">
