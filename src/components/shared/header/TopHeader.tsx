@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
-import { MdCall, MdDeliveryDining } from "react-icons/md";
+import { MdCall } from "react-icons/md";
 
 const announcements = [
   "Delivery across Bangladesh within 3 days, InshaAllah   ",
@@ -22,11 +22,6 @@ const TopHeader = () => {
   }, []);
 
   const links = [
-    {
-      href: "/track-your-order",
-      name: "Track Order",
-      icon: <MdDeliveryDining className="size-5" />,
-    },
     {
       href: "/shop",
       name: "All Products",

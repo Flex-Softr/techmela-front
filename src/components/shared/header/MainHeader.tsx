@@ -11,7 +11,7 @@ import Search from "./components/Search";
 const MainHeader = () => {
   return (
     <div className="bg-[rgba(9,33,67,1)] text-white shadow-md transition-colors">
-      <div className="flex gap-2 justify-between items-center px-4 lg:px-8 py-2 max-w-6xl mx-auto">
+      <div className="flex gap-2 md:gap-4 lg:gap-6 justify-between items-center px-4 sm:px-6 lg:px-8 py-2 md:py-3.5 lg:py-4 max-w-7xl mx-auto">
         <div className="order-2 lg:order-1 flex-shrink-0 transition-all duration-300 hover:scale-[1.03]">
           <Link href="/" className="flex items-center">
             <Image

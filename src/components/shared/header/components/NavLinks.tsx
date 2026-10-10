@@ -8,13 +8,14 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import TCategory from "@/types/categories/categories";
-import { UserRound, X } from "lucide-react";
+import { Star, UserRound, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname to get the current pathname
 import { useState } from "react";
 import { FaBars, FaWhatsapp } from "react-icons/fa";
-import { MdCall } from "react-icons/md";
+import { MdCall, MdDeliveryDining } from "react-icons/md";
+import { SITE } from "@/const/site.const";
 import logo from "../../../../../public/logo/techmela-lightlogo.png";
 import MenuBar from "./MenuBar";
 
@@ -91,30 +92,65 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
           </div>
 
           <div className="p-4 bg-muted border-t mt-auto">
-            <p className="text-xs font-bold text-primary uppercase tracking-wider mb-3">
-              Contact Us
+            <p className="text-xs font-bold text-primary uppercase tracking-wider mb-2.5">
+              Contact & Quick Links
             </p>
-            <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              {/* 1. WhatsApp */}
               <a
-                href="tel:+8801772065894"
-                className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
-              >
-                <div className="size-8 rounded-full bg-background flex items-center justify-center shadow-sm text-primary">
-                  <MdCall className="size-4" />
-                </div>
-                <span>+8801772065894</span>
-              </a>
-              <a
-                href="https://wa.me/8801772065894"
+                href={`https://wa.me/${SITE.phone.replace(/[^0-9]/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm font-semibold text-primary hover:text-primary transition-colors"
+                className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/70 hover:border-primary/40 hover:bg-accent/40 transition-all duration-200 group min-w-0"
               >
-                <div className="size-8 rounded-full bg-background flex items-center justify-center shadow-sm text-success">
-                  <FaWhatsapp className="size-5" />
+                <div className="size-7 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0 group-hover:scale-105 transition-transform">
+                  <FaWhatsapp className="size-3.5" />
                 </div>
-                <span>WhatsApp</span>
+                <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+                  WhatsApp
+                </span>
               </a>
+
+              {/* 2. Contact number */}
+              <a
+                href={`tel:${SITE.phone}`}
+                className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/70 hover:border-primary/40 hover:bg-accent/40 transition-all duration-200 group min-w-0"
+              >
+                <div className="size-7 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform">
+                  <MdCall className="size-3.5" />
+                </div>
+                <span className="text-[11px] font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+                  {SITE.phoneDisplay || SITE.phone}
+                </span>
+              </a>
+
+              {/* 3. Track order */}
+              <Link
+                href="/track-your-order"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/70 hover:border-primary/40 hover:bg-accent/40 transition-all duration-200 group min-w-0"
+              >
+                <div className="size-7 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform">
+                  <MdDeliveryDining className="size-4" />
+                </div>
+                <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+                  Track Order
+                </span>
+              </Link>
+
+              {/* 4. Blog (renamed to Reviews) */}
+              <Link
+                href="/blog"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/70 hover:border-primary/40 hover:bg-accent/40 transition-all duration-200 group min-w-0"
+              >
+                <div className="size-7 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 shrink-0 group-hover:scale-105 transition-transform">
+                  <Star className="size-3.5 fill-amber-500 text-amber-500" />
+                </div>
+                <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+                  Reviews
+                </span>
+              </Link>
             </div>
           </div>
         </SheetContent>

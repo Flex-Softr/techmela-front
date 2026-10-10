@@ -56,12 +56,6 @@ export default function MenuBar({
   const menuLinks: MenuLink[] = [
     { title: "Home", href: "/" },
     { title: "All Products", href: "/shop" },
-    { title: "Blog", href: "/blog" },
-    {
-      title: "Track Order",
-      href: "/track-your-order",
-      displayOnSmallScreenOnly: true,
-    },
   ];
 
   if (!isVertical && categoryItems.length > 5) {

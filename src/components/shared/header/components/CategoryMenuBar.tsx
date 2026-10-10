@@ -48,7 +48,6 @@ export default function CategoryMenuBar({
   const menuLinks = [
     { title: "Home", href: "/" },
     { title: "All Products", href: "/shop" },
-    { title: "Blog", href: "/blog" },
   ];
 
   // Recursive component for rendering category dropdowns
@@ -68,7 +67,7 @@ export default function CategoryMenuBar({
           <Link
             href={href}
             className={cn(
-              "flex items-center gap-1.5 px-4 pt-2 pb-0.5 text-[14px] font-bold transition-all hover:text-primary rounded-t-md whitespace-nowrap border-b-2",
+              "flex items-center gap-1.5 px-4 py-2 text-[14px] font-bold transition-all hover:text-primary rounded-t-md whitespace-nowrap border-b-2",
               active
                 ? "text-primary bg-primary/5 border-primary"
                 : "text-foreground hover:bg-primary/5 border-transparent"
@@ -140,7 +139,7 @@ export default function CategoryMenuBar({
 
   return (
     <nav className="w-full relative">
-      <div className="flex flex-wrap justify-center items-center gap-y-2 gap-x-1">
+      <div className="flex flex-wrap justify-center items-center gap-y-2 gap-x-1.5 md:gap-x-2">
         {menuLinks.map((link) => {
           const active = isActive(link.href);
           return (
@@ -148,7 +147,7 @@ export default function CategoryMenuBar({
               key={link.href}
               href={link.href}
               className={cn(
-                "flex items-center gap-1.5 px-4 pt-2 pb-0.5 text-[14px] font-bold transition-all hover:text-primary rounded-t-md whitespace-nowrap border-b-2",
+                "flex items-center gap-1.5 px-4 py-2 text-[14px] font-bold transition-all hover:text-primary rounded-t-md whitespace-nowrap border-b-2",
                 active
                   ? "text-primary bg-primary/5 border-primary"
                   : "text-foreground hover:bg-primary/5 border-transparent"
