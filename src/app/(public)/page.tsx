@@ -3,7 +3,6 @@ import BannerSkeleton from "@/components/home/Banner/BannerSkeleton";
 import BestSellingProducts from "@/components/home/bestSellingProducts/BestSellingProducts";
 import CategorySectionFetcher from "@/components/home/category/CategorySectionFetcher";
 import CategorySectionSkeleton from "@/components/home/category/CategorySectionSkeleton";
-import Facilities from "@/components/home/facilities/Facilities";
 import FeaturedProducts from "@/components/home/featuredProducts/FeaturedProducts";
 import HomepageSectionsFetcher from "@/components/home/homePageSections/HomepageSectionsFetcher";
 import HomepageSectionSkeleton from "@/components/home/homePageSections/HomepageSectionSkeleton";
@@ -148,7 +147,6 @@ const Home = async () => {
       <Suspense fallback={<BannerSkeleton />}>
         <Banner promise={sliderBannerPromise} />
       </Suspense>
-      <Facilities />
       <Suspense fallback={<CategorySectionSkeleton />}>
         <CategorySectionFetcher promise={categoryPromise} />
       </Suspense>

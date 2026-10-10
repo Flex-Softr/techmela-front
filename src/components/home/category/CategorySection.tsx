@@ -6,13 +6,13 @@ import SectionTitle from "@/components/SectionTitle";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import { Button } from "@/components/ui/button";
 import TCategory from "@/types/categories/categories";
-import { useState } from "react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const CategorySection = ({ categories }: { categories: TCategory[] }) => {
-  const [showAll, setShowAll] = useState(false);
-  const displayCategories = showAll ? categories : categories.slice(0, 16);
-
   if (!categories || categories.length === 0) return null;
+
+  const displayCategories = categories.slice(0, 16);
 
   return (
     <section className="py-6 md:py-10">
@@ -22,24 +22,25 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
       </div>
 
       <ContainerMax>
-        <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5 sm:gap-3 md:gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5 sm:gap-3 md:gap-4">
           {displayCategories.map((category) => (
             <CategoryCard key={category._id} category={category} />
           ))}
         </div>
 
-        {categories.length > 16 && (
-          <div className="flex justify-center mt-6">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowAll((prev) => !prev)}
-              className="rounded-full px-6 border-primary/20 hover:bg-primary/5 hover:border-primary/40 text-primary"
-            >
-              {showAll ? "Show Less" : "View All Categories"}
-            </Button>
-          </div>
-        )}
+        <div className="flex justify-center mt-6">
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="rounded-full px-7 border-primary/20 hover:bg-primary hover:text-primary-foreground text-primary font-medium transition-all duration-200 shadow-sm"
+          >
+            <Link href="/shop" className="flex items-center gap-1.5">
+              <span>View More</span>
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
       </ContainerMax>
     </section>
   );
