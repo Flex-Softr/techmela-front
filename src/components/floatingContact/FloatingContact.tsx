@@ -5,15 +5,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const FloatingContact = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [showJumpBtn, setShowJumpBtn] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos =
         window.pageYOffset || document.documentElement.scrollTop;
-      setShowJumpBtn(scrollPos > 300);
 
       // Bottom position detection
       const windowHeight = window.innerHeight;
@@ -29,98 +26,35 @@ const FloatingContact = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const contactOptions = [
-    {
-      name: "WhatsApp",
-      icon: "/images/social_icons/whatsapp.webp",
-      link: `https://wa.me/${SITE.phone.replace("+", "")}`,
-      bgColor: "bg-success",
-      hoverColor: "hover:bg-success/90",
-    },
-    {
-      name: "Facebook",
-      icon: "/images/social_icons/facebook.webp",
-      link: SITE.social.facebook,
-      bgColor: "bg-primary",
-      hoverColor: "hover:bg-primary/90",
-    },
-  ];
+  const whatsappNumber = SITE.phone.replace(/[^0-9]/g, "");
 
   return (
     <div
-      className={`fixed ${isAtBottom ? "bottom-[60px]" : "bottom-[20px]"} flex flex-col-reverse items-end gap-3 z-[1000] pointer-events-none transition-all duration-300 ${
-        showJumpBtn ? "right-[90px]" : "right-[20px]"
-      }`}
+      className={`fixed right-[20px] ${
+        isAtBottom ? "bottom-[60px]" : "bottom-[20px]"
+      } flex items-center z-[1000] pointer-events-none transition-all duration-300`}
     >
-      {/* Main Toggle Button */}
-      <button
-        onClick={toggleExpand}
-        className={`size-[50px] rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 flex items-center justify-center pointer-events-auto z-50 ${
-          isExpanded
-            ? "bg-destructive hover:bg-destructive/90 rotate-45"
-            : "bg-primary hover:bg-primary/90"
-        }`}
-        aria-label="Toggle contact options"
+      <a
+        href={`https://wa.me/${whatsappNumber}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="size-[50px] rounded-full shadow-lg bg-[#25D366] hover:bg-[#20ba5a] text-white flex items-center justify-center transition-all duration-300 transform hover:scale-110 pointer-events-auto z-50 group relative ring-2 ring-white/30"
       >
-        <svg
-          className="w-6 h-6 text-primary-foreground transition-transform duration-300"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          {isExpanded ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-            />
-          )}
-        </svg>
-      </button>
+        <div className="relative w-7 h-7">
+          <Image
+            src="/images/social_icons/whatsapp.webp"
+            alt="WhatsApp"
+            fill
+            className="object-contain"
+          />
+        </div>
 
-      {/* Contact Options - Appear when expanded */}
-      <div
-        className={`flex flex-col gap-3 transition-all duration-300 z-50 ${
-          isExpanded
-            ? "opacity-100 translate-y-0 pointer-events-auto visible"
-            : "opacity-0 translate-y-10 pointer-events-none invisible"
-        }`}
-      >
-        {contactOptions.map((option, index) => (
-          <a
-            key={option.name}
-            href={option.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex items-center gap-3 ${option.bgColor} ${option.hoverColor} text-primary-foreground px-4 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 group`}
-            style={{
-              transitionDelay: isExpanded ? `${index * 50}ms` : "0ms",
-            }}
-          >
-            <div className="relative w-6 h-6">
-              <Image
-                src={option.icon}
-                alt={option.name}
-                fill
-                className="object-contain"
-              />
-            </div>
-            <span className="font-medium pr-2">{option.name}</span>
-          </a>
-        ))}
-      </div>
+        {/* Tooltip on hover */}
+        <span className="absolute right-full mr-3 px-2.5 py-1 text-xs font-semibold bg-gray-900 text-white rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap hidden sm:block">
+          WhatsApp
+        </span>
+      </a>
     </div>
   );
 };

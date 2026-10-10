@@ -49,9 +49,10 @@ const JumpToTopBtn: React.FC = () => {
         <div
           style={{
             ...styles.jumpButton,
-            bottom: isAtBottom ? "60px" : "20px",
+            bottom: isAtBottom ? "120px" : "80px",
           }}
           onClick={scrollToTop}
+          title="Scroll to top"
         >
           <ChevronUp size={24} className="text-primary" />
         </div>
