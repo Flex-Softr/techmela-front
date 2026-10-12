@@ -5,7 +5,7 @@ const config = {
   tracking_api_url:
     process.env.NEXT_PUBLIC_TRACKING_API_URL ||
     "http://localhost:5001/api/v1/events",
-  gtm_id: process.env.GTM_ID || "",
+  gtm_id: process.env.NEXT_PUBLIC_GTM_ID || process.env.GTM_ID || "",
 };
 
 export default config;

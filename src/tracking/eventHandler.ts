@@ -1,11 +1,11 @@
-import config from "@/config/config";
+// import config from "@/config/config";
 import { CustomData, MetaCAPIEventPayload, UserData } from "./capi/capi.types";
 import {
   cleanObj,
   getFbc,
   getFbLoginId,
   getFbp,
-  getIP,
+  // getIP,
   getVisitorId,
   hashUserData,
   normalizeAlpha,
@@ -33,7 +33,10 @@ const eventHandler = async (eventData: EventParameter) => {
   const event_id = resolveEventId(event_name, eventData);
   const event_source_url = window.location.href;
   const client_user_agent = navigator.userAgent;
-  const client_ip_address = await getIP();
+  // IP lookup was previously used for Meta CAPI match quality (server-side).
+  // Disabled while server-side tracking is disabled to prevent unnecessary external network requests.
+  // const client_ip_address = await getIP();
+  const client_ip_address: string | undefined = undefined;
   const isCommerceEvent = [
     "view_content",
     "add_to_cart",
@@ -223,7 +226,11 @@ const eventHandler = async (eventData: EventParameter) => {
 
   // 5. Send to Google Tag Manager
   sendGTMEvent(gtmPayload);
-  // 5. Send to the server-side tracking endpoint for Meta CAPI
+  // ============================================================================
+  // Server-side tracking (Meta CAPI) - Temporarily disabled / Commented out
+  // Uncomment below when ready to resume server-side tracking via CAPI
+  // ============================================================================
+  /*
   try {
     await fetch(`${config.tracking_api_url}`, {
       method: "POST",
@@ -236,6 +243,7 @@ const eventHandler = async (eventData: EventParameter) => {
     // eslint-disable-next-line no-console
     console.log("CAPI error", error);
   }
+  */
 };
 
 export default eventHandler;
