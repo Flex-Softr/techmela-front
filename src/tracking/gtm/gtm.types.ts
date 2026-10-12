@@ -1,3 +1,5 @@
+import { Content } from "../event.types";
+
 export type GA4Address = {
   first_name?: string;
   last_name?: string;
@@ -30,8 +32,71 @@ export type GA4Item = {
   item_variant?: string;
 };
 
+export type DLVUserData = {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  phone_number?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    region?: string;
+    postal_code?: string;
+    country?: string;
+  };
+  external_id?: string;
+  fbc?: string;
+  fbp?: string;
+  // Hashed array fallbacks
+  em?: string[];
+  ph?: string[];
+  fn?: string[];
+  ln?: string[];
+  ct?: string[];
+  st?: string[];
+  zp?: string[];
+  country?: string[];
+};
+
+export type DLVCustomData = {
+  order_id?: string;
+  value?: number;
+  currency?: string;
+  contents?: Content[];
+  content_name?: string;
+  content_ids?: string[];
+  content_type?: string;
+  content_category?: string;
+  num_items?: number;
+  shipping?: number;
+  tax?: number;
+  discount_value?: number;
+  coupon?: string;
+  search_string?: string;
+  payment_method?: string;
+  status?: string;
+};
+
+export type DLVEcommerce = {
+  value?: number;
+  currency?: string;
+  transaction_id?: string;
+  items?: GA4Item[];
+};
+
 export type GTMEventPayload = {
   event: string;
+  // Top-level variables matching DLV - * in GTM Web Container
+  event_id?: string;
+  event_time?: number;
+  event_source_url?: string;
+  action_source?: string;
+  session_id?: string;
+  external_id?: string;
+  custom_data?: DLVCustomData;
+  ecommerce?: DLVEcommerce;
+  user_data?: DLVUserData;
+  // GA4 eventModel compatibility
   eventModel: {
     event_id: string;
     event_time: number;
