@@ -136,18 +136,8 @@
             "value": "{{Meta Pixel =}}"
           },
           {
-            "type": "TEMPLATE",
-            "key": "standardEventName",
-            "value": "AddToCart"
-          },
-          {
             "type": "BOOLEAN",
             "key": "disableAutoConfig",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "useGA4Ecommerce",
             "value": "false"
           },
           {
@@ -184,6 +174,132 @@
             "type": "BOOLEAN",
             "key": "optInMetaCAPI",
             "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "standardEventName",
+            "value": "AddToCart"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useGA4Ecommerce",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventId",
+            "value": "{{DLV - eventModel.event_id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "objectPropertyList",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_name}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_ids"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_ids}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_type"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_type}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_category"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_category}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "value"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.value}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "currency"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.currency}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "num_items"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.num_items}}"
+                  }
+                ]
+              }
+            ]
           }
         ],
         "fingerprint": "1788083844946",
@@ -216,18 +332,8 @@
             "value": "{{Meta Pixel =}}"
           },
           {
-            "type": "TEMPLATE",
-            "key": "standardEventName",
-            "value": "InitiateCheckout"
-          },
-          {
             "type": "BOOLEAN",
             "key": "disableAutoConfig",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "useGA4Ecommerce",
             "value": "false"
           },
           {
@@ -264,6 +370,102 @@
             "type": "BOOLEAN",
             "key": "optInMetaCAPI",
             "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "standardEventName",
+            "value": "InitiateCheckout"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useGA4Ecommerce",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventId",
+            "value": "{{DLV - eventModel.event_id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "objectPropertyList",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_ids"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_ids}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_type"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_type}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "value"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.value}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "currency"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.currency}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "num_items"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.num_items}}"
+                  }
+                ]
+              }
+            ]
           }
         ],
         "fingerprint": "1788083967012",
@@ -291,16 +493,6 @@
             "value": "false"
           },
           {
-            "type": "TEMPLATE",
-            "key": "standardEventName",
-            "value": "Purchase"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "useGA4Ecommerce",
-            "value": "false"
-          },
-          {
             "type": "BOOLEAN",
             "key": "objectPropertiesFromVariable",
             "value": "false"
@@ -319,42 +511,6 @@
             "type": "TEMPLATE",
             "key": "pixelId",
             "value": "{{Meta Pixel =}}"
-          },
-          {
-            "type": "LIST",
-            "key": "objectPropertyList",
-            "list": [
-              {
-                "type": "MAP",
-                "map": [
-                  {
-                    "type": "TEMPLATE",
-                    "key": "name",
-                    "value": "value"
-                  },
-                  {
-                    "type": "TEMPLATE",
-                    "key": "value",
-                    "value": "{{DLV - ecommerce.value}}"
-                  }
-                ]
-              },
-              {
-                "type": "MAP",
-                "map": [
-                  {
-                    "type": "TEMPLATE",
-                    "key": "name",
-                    "value": "currency"
-                  },
-                  {
-                    "type": "TEMPLATE",
-                    "key": "value",
-                    "value": "{{DLV - custom_data.currency}}"
-                  }
-                ]
-              }
-            ]
           },
           {
             "type": "BOOLEAN",
@@ -380,6 +536,132 @@
             "type": "BOOLEAN",
             "key": "advancedMatching",
             "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "standardEventName",
+            "value": "Purchase"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useGA4Ecommerce",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventId",
+            "value": "{{DLV - eventModel.event_id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "objectPropertyList",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "value"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.value}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "currency"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.currency}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_name}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_ids"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_ids}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_type"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_type}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "num_items"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.num_items}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "order_id"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.order_id}}"
+                  }
+                ]
+              }
+            ]
           }
         ],
         "fingerprint": "1788083952463",
@@ -412,18 +694,8 @@
             "value": "{{Meta Pixel =}}"
           },
           {
-            "type": "TEMPLATE",
-            "key": "standardEventName",
-            "value": "ViewContent"
-          },
-          {
             "type": "BOOLEAN",
             "key": "disableAutoConfig",
-            "value": "false"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "useGA4Ecommerce",
             "value": "false"
           },
           {
@@ -460,11 +732,379 @@
             "type": "BOOLEAN",
             "key": "optInMetaCAPI",
             "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "standardEventName",
+            "value": "ViewContent"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useGA4Ecommerce",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventId",
+            "value": "{{DLV - eventModel.event_id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "objectPropertyList",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_name}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_ids"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_ids}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_type"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_type}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_category"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_category}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "value"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.value}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "currency"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.currency}}"
+                  }
+                ]
+              }
+            ]
           }
         ],
         "fingerprint": "1788084038940",
         "firingTriggerId": [
           "6"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "tagId": "62",
+        "name": "Meta Pixel add_to_wishlist",
+        "type": "cvt_5RM3Q",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "disablePushState",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "pixelId",
+            "value": "{{Meta Pixel =}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "disableAutoConfig",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enhancedEcommerce",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "dpoLDU",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "standard"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "objectPropertiesFromVariable",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "consent",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "advancedMatching",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "optInMetaCAPI",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "standardEventName",
+            "value": "AddToWishlist"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useGA4Ecommerce",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventId",
+            "value": "{{DLV - eventModel.event_id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "objectPropertyList",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_name}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "content_ids"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.content_ids}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "value"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.value}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "currency"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.currency}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1788083844946",
+        "firingTriggerId": [
+          "48"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "tagId": "63",
+        "name": "Meta Pixel search",
+        "type": "cvt_5RM3Q",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "disablePushState",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "pixelId",
+            "value": "{{Meta Pixel =}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "disableAutoConfig",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enhancedEcommerce",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "dpoLDU",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "standard"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "objectPropertiesFromVariable",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "consent",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "advancedMatching",
+            "value": "false"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "optInMetaCAPI",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "standardEventName",
+            "value": "Search"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useGA4Ecommerce",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventId",
+            "value": "{{DLV - eventModel.event_id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "objectPropertyList",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "search_string"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - eventModel.search_term}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1788083844946",
+        "firingTriggerId": [
+          "33"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "monitoringMetadata": {
@@ -718,7 +1358,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.first_name"
+            "value": "eventModel.user_data.address.first_name"
           }
         ],
         "fingerprint": "1788083643634"
@@ -738,7 +1378,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "event_time"
+            "value": "eventModel.event_time"
           }
         ],
         "fingerprint": "1788083643634"
@@ -758,7 +1398,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "custom_data.order_id"
+            "value": "eventModel.order_id"
           }
         ],
         "fingerprint": "1788083643634"
@@ -778,7 +1418,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "ecommerce.transaction_id"
+            "value": "eventModel.transaction_id"
           }
         ],
         "fingerprint": "1788083643634"
@@ -798,7 +1438,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "custom_data.contents"
+            "value": "eventModel.items"
           }
         ],
         "fingerprint": "1788083643635"
@@ -818,7 +1458,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "external_id"
+            "value": "eventModel.user_data.external_id"
           }
         ],
         "fingerprint": "1788083643635"
@@ -838,7 +1478,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.email"
+            "value": "eventModel.user_data.email_address"
           }
         ],
         "fingerprint": "1788083643635"
@@ -858,7 +1498,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "custom_data.currency"
+            "value": "eventModel.currency"
           }
         ],
         "fingerprint": "1788083643635"
@@ -878,7 +1518,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.address.country"
+            "value": "eventModel.user_data.address.country"
           }
         ],
         "fingerprint": "1788083643635"
@@ -938,7 +1578,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "ecommerce.items"
+            "value": "eventModel.items"
           }
         ],
         "fingerprint": "1788083643636"
@@ -958,7 +1598,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "custom_data.content_name"
+            "value": "eventModel.content_name"
           }
         ],
         "fingerprint": "1788083643636"
@@ -998,7 +1638,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data"
+            "value": "eventModel.user_data"
           }
         ],
         "fingerprint": "1788083643636"
@@ -1038,7 +1678,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "ecommerce.value"
+            "value": "eventModel.value"
           }
         ],
         "fingerprint": "1788083643637"
@@ -1058,7 +1698,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "event_source_url"
+            "value": "eventModel.event_source_url"
           }
         ],
         "fingerprint": "1788083643637"
@@ -1078,7 +1718,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.last_name"
+            "value": "eventModel.user_data.address.last_name"
           }
         ],
         "fingerprint": "1788083643637"
@@ -1138,7 +1778,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.address.region"
+            "value": "eventModel.user_data.address.region"
           }
         ],
         "fingerprint": "1788083643638"
@@ -1158,7 +1798,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.external_id"
+            "value": "eventModel.user_data.external_id"
           }
         ],
         "fingerprint": "1788083643638"
@@ -1198,7 +1838,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.address.street"
+            "value": "eventModel.user_data.address.street"
           }
         ],
         "fingerprint": "1788083643638"
@@ -1218,7 +1858,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.address.city"
+            "value": "eventModel.user_data.address.city"
           }
         ],
         "fingerprint": "1788083643639"
@@ -1238,7 +1878,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.fbp"
+            "value": "eventModel.user_data.fbp"
           }
         ],
         "fingerprint": "1788083643639"
@@ -1258,7 +1898,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "custom_data.value"
+            "value": "eventModel.value"
           }
         ],
         "fingerprint": "1788083643639"
@@ -1298,7 +1938,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.phone_number"
+            "value": "eventModel.user_data.phone_number"
           }
         ],
         "fingerprint": "1788083643639"
@@ -1318,7 +1958,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.address.postal_code"
+            "value": "eventModel.user_data.address.postal_code"
           }
         ],
         "fingerprint": "1788083643640"
@@ -1358,7 +1998,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "event_id"
+            "value": "eventModel.event_id"
           }
         ],
         "fingerprint": "1788083643640"
@@ -1378,7 +2018,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "custom_data.content_ids"
+            "value": "eventModel.content_ids"
           }
         ],
         "fingerprint": "1788083643640"
@@ -1398,7 +2038,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "ecommerce.currency"
+            "value": "eventModel.currency"
           }
         ],
         "fingerprint": "1788083643641"
@@ -1458,7 +2098,7 @@
           {
             "type": "TEMPLATE",
             "key": "name",
-            "value": "user_data.fbc"
+            "value": "eventModel.user_data.fbc"
           }
         ],
         "fingerprint": "1788083643744"
@@ -1518,6 +2158,1026 @@
         ],
         "fingerprint": "1788083774793",
         "formatValue": {}
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "57",
+        "name": "DLV - eventModel.content_name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_name"
+          }
+        ],
+        "fingerprint": "1791786546964"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "58",
+        "name": "DLV - eventModel.content_ids",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_ids"
+          }
+        ],
+        "fingerprint": "1791786546965"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "59",
+        "name": "DLV - eventModel.content_type",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_type"
+          }
+        ],
+        "fingerprint": "1791786546966"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "60",
+        "name": "DLV - eventModel.content_category",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_category"
+          }
+        ],
+        "fingerprint": "1791786546967"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "61",
+        "name": "DLV - eventModel.num_items",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.num_items"
+          }
+        ],
+        "fingerprint": "1791786546968"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "62",
+        "name": "DLV - eventModel.value",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.value"
+          }
+        ],
+        "fingerprint": "1791786546969"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "63",
+        "name": "DLV - eventModel.currency",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.currency"
+          }
+        ],
+        "fingerprint": "1791786546970"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "64",
+        "name": "DLV - eventModel.items",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.items"
+          }
+        ],
+        "fingerprint": "1791786546971"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "65",
+        "name": "DLV - eventModel.event_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.event_id"
+          }
+        ],
+        "fingerprint": "1791786546972"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "66",
+        "name": "DLV - eventModel.event_time",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.event_time"
+          }
+        ],
+        "fingerprint": "1791786546973"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "67",
+        "name": "DLV - eventModel.event_source_url",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.event_source_url"
+          }
+        ],
+        "fingerprint": "1791786546974"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "68",
+        "name": "DLV - eventModel.transaction_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.transaction_id"
+          }
+        ],
+        "fingerprint": "1791786546975"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "69",
+        "name": "DLV - eventModel.order_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.order_id"
+          }
+        ],
+        "fingerprint": "1791786546976"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "70",
+        "name": "DLV - eventModel.shipping",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.shipping"
+          }
+        ],
+        "fingerprint": "1791786546977"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "71",
+        "name": "DLV - eventModel.tax",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.tax"
+          }
+        ],
+        "fingerprint": "1791786546978"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "72",
+        "name": "DLV - eventModel.discount_value",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.discount_value"
+          }
+        ],
+        "fingerprint": "1791786546979"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "73",
+        "name": "DLV - eventModel.coupon",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.coupon"
+          }
+        ],
+        "fingerprint": "1791786546980"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "74",
+        "name": "DLV - eventModel.payment_method",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.payment_method"
+          }
+        ],
+        "fingerprint": "1791786546981"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "75",
+        "name": "DLV - eventModel.search_term",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.search_term"
+          }
+        ],
+        "fingerprint": "1791786546982"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "76",
+        "name": "DLV - eventModel.status",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.status"
+          }
+        ],
+        "fingerprint": "1791786546983"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "77",
+        "name": "DLV - eventModel.user_data",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data"
+          }
+        ],
+        "fingerprint": "1791786546984"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "78",
+        "name": "DLV - eventModel.user_data.email_address",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.email_address"
+          }
+        ],
+        "fingerprint": "1791786546985"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "79",
+        "name": "DLV - eventModel.user_data.phone_number",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.phone_number"
+          }
+        ],
+        "fingerprint": "1791786546986"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "80",
+        "name": "DLV - eventModel.user_data.address.first_name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.address.first_name"
+          }
+        ],
+        "fingerprint": "1791786546987"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "81",
+        "name": "DLV - eventModel.user_data.address.last_name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.address.last_name"
+          }
+        ],
+        "fingerprint": "1791786546988"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "82",
+        "name": "DLV - eventModel.user_data.address.city",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.address.city"
+          }
+        ],
+        "fingerprint": "1791786546989"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "83",
+        "name": "DLV - eventModel.user_data.address.region",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.address.region"
+          }
+        ],
+        "fingerprint": "1791786546990"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "84",
+        "name": "DLV - eventModel.user_data.address.postal_code",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.address.postal_code"
+          }
+        ],
+        "fingerprint": "1791786546991"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "85",
+        "name": "DLV - eventModel.user_data.address.country",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.address.country"
+          }
+        ],
+        "fingerprint": "1791786546992"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "86",
+        "name": "DLV - eventModel.user_data.external_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.external_id"
+          }
+        ],
+        "fingerprint": "1791786546993"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "87",
+        "name": "DLV - eventModel.user_data.fbp",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.fbp"
+          }
+        ],
+        "fingerprint": "1791786546994"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "88",
+        "name": "DLV - eventModel.user_data.fbc",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.fbc"
+          }
+        ],
+        "fingerprint": "1791786546995"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "89",
+        "name": "DLV - eventModel.user_data.gender",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.gender"
+          }
+        ],
+        "fingerprint": "1791786546996"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "90",
+        "name": "DLV - eventModel.user_data.dob",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.dob"
+          }
+        ],
+        "fingerprint": "1791786546997"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "91",
+        "name": "DLV - eventModel.user_data.fb_login_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.user_data.fb_login_id"
+          }
+        ],
+        "fingerprint": "1791786546998"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "92",
+        "name": "DLV - content_name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_name"
+          }
+        ],
+        "fingerprint": "1791786546999"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "93",
+        "name": "DLV - content_ids",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_ids"
+          }
+        ],
+        "fingerprint": "1791786547000"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "94",
+        "name": "DLV - content_type",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_type"
+          }
+        ],
+        "fingerprint": "1791786547001"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "95",
+        "name": "DLV - content_category",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.content_category"
+          }
+        ],
+        "fingerprint": "1791786547002"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "96",
+        "name": "DLV - num_items",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.num_items"
+          }
+        ],
+        "fingerprint": "1791786547003"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "97",
+        "name": "DLV - value",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.value"
+          }
+        ],
+        "fingerprint": "1791786547004"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "98",
+        "name": "DLV - currency",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.currency"
+          }
+        ],
+        "fingerprint": "1791786547005"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "99",
+        "name": "DLV - items",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.items"
+          }
+        ],
+        "fingerprint": "1791786547006"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "100",
+        "name": "DLV - order_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.order_id"
+          }
+        ],
+        "fingerprint": "1791786547007"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "101",
+        "name": "DLV - shipping",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.shipping"
+          }
+        ],
+        "fingerprint": "1791786547008"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "102",
+        "name": "DLV - tax",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.tax"
+          }
+        ],
+        "fingerprint": "1791786547009"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "103",
+        "name": "DLV - discount_value",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.discount_value"
+          }
+        ],
+        "fingerprint": "1791786547010"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "104",
+        "name": "DLV - coupon",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.coupon"
+          }
+        ],
+        "fingerprint": "1791786547011"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "105",
+        "name": "DLV - payment_method",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.payment_method"
+          }
+        ],
+        "fingerprint": "1791786547012"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "106",
+        "name": "DLV - search_term",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.search_term"
+          }
+        ],
+        "fingerprint": "1791786547013"
+      },
+      {
+        "accountId": "6374103525",
+        "containerId": "262677160",
+        "variableId": "107",
+        "name": "DLV - status",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "eventModel.status"
+          }
+        ],
+        "fingerprint": "1791786547014"
       }
     ],
     "builtInVariable": [
