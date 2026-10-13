@@ -133,7 +133,7 @@ const HeroSection = ({
                 {/* Product Image Frame */}
                 <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-slate-950 border border-white/10 shadow-inner">
                   <Image
-                    src={thumbnailSrc || "/images/landing-page/sx21/1.webp"}
+                    src={"/images/landing-page/sx21/4.webp"}
                     alt={productTitle}
                     fill
                     sizes="(max-width: 768px) 100vw, 650px"
