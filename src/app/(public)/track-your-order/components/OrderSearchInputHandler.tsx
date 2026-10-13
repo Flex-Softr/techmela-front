@@ -31,10 +31,10 @@ const OrderSearchInputHandler = () => {
         <div className="max-w-xl mx-auto bg-background p-6 md:p-8 rounded-3xl shadow-sm border border-border/50">
           <div className="text-center mb-7">
             <h2 className="text-3xl font-bold text-foreground mb-3">
-              Track Your Order
+              অর্ডার ট্র্যাক করুন
             </h2>
             <p className="text-muted-foreground">
-              Use your order ID to check the latest status of your parcel
+              আপনার পার্সেলের বর্তমান অবস্থান জানতে অর্ডার আইডি লিখুন
             </p>
           </div>
 
@@ -44,18 +44,18 @@ const OrderSearchInputHandler = () => {
                 htmlFor="orderId"
                 className="block text-sm font-medium text-foreground px-1"
               >
-                Order ID
+                অর্ডার আইডি
               </label>
               <Input
                 {...register("orderId", { required: true })}
                 id="orderId"
                 className="w-full h-12 rounded-xl border-border/60 bg-muted/30 focus:bg-background transition-all text-lg font-mono placeholder:font-sans"
                 type="text"
-                placeholder="Enter the ID from your order confirmation message"
+                placeholder="অর্ডার কনফার্মেশনের মেসেজে প্রাপ্ত আইডি দিন"
               />
               {errors.orderId && (
                 <span className="text-destructive text-xs font-medium px-1">
-                  Please enter a valid order ID
+                  অনুগ্রহ করে একটি সঠিক অর্ডার আইডি লিখুন
                 </span>
               )}
             </div>
@@ -64,19 +64,19 @@ const OrderSearchInputHandler = () => {
               className="w-full h-12 text-primary-foreground text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
               type="submit"
             >
-              Start Tracking
+              ট্র্যাক করুন
             </EcButton>
           </form>
 
           <p className="mt-10 text-center text-xs text-muted-foreground">
-            Can&apos;t find your ID? Please contact our helpline.
+            অর্ডার আইডি খুঁজে পাচ্ছেন না? আমাদের হেল্পলাইনে যোগাযোগ করুন।
           </p>
 
           <div className="space-y-2 mt-5 text-center">
-            <p className="text-2xl font-bold">
-              Or check order status with your mobile number
+            <p className="text-lg md:text-xl font-bold text-foreground">
+              অথবা মোবাইল নম্বর দিয়ে অর্ডার চেক করুন
             </p>
-            <Button onClick={() => router.push("/orders")}>Check Orders</Button>
+            <Button onClick={() => router.push("/orders")}>সকল অর্ডার দেখুন</Button>
           </div>
         </div>
       </ContainerMax>

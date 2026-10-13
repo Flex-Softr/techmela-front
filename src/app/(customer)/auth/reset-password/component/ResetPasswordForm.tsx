@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,16 +31,16 @@ const ResetPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const schema = yup.object().shape({
-    email: yup.string().required("Email is required"),
+    email: yup.string().required("ইমেইল দেওয়া আবশ্যক"),
     otp: yup
       .string()
-      .required("OTP is required")
-      .length(6, "OTP must be 6 digits")
-      .matches(/^[0-9]+$/, "OTP must be numeric"),
+      .required("ওটিপি দেওয়া আবশ্যক")
+      .length(6, "ওটিপি ৬ ডিজিটের হতে হবে")
+      .matches(/^[0-9]+$/, "ওটিপি শুধুমাত্র সংখ্যা হতে হবে"),
     password: yup
       .string()
-      .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+      .required("পাসওয়ার্ড দেওয়া আবশ্যক")
+      .min(6, "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে"),
   });
 
   const {
@@ -81,8 +81,8 @@ const ResetPasswordForm = () => {
       if (res.success) {
         toast({
           className: "bg-success text-primary-foreground",
-          title: "Success",
-          description: "Your password has been changed successfully.",
+          title: "সফল হয়েছে",
+          description: "আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।",
         });
         router.push("/auth/login");
       }
@@ -97,11 +97,11 @@ const ResetPasswordForm = () => {
       const errorMessage =
         err?.data?.errorMessages?.[0]?.message ||
         err?.data?.message ||
-        "Failed to reset password";
+        "পাসওয়ার্ড রিসেট করতে ব্যর্থ হয়েছে";
 
       toast({
         variant: "destructive",
-        title: "Error",
+        title: "ত্রুটি",
         description: errorMessage,
       });
     }
@@ -114,10 +114,10 @@ const ResetPasswordForm = () => {
           <div className="text-center space-y-1">
             <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
               <Lock className="w-6 h-6 text-primary" />
-              Reset password
+              পাসওয়ার্ড রিসেট করুন
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Create a new secure password for your account
+              আপনার অ্যাকাউন্টের জন্য নতুন একটি নিরাপদ পাসওয়ার্ড দিন
             </CardDescription>
           </div>
         </CardHeader>
@@ -129,7 +129,7 @@ const ResetPasswordForm = () => {
                 htmlFor="email"
                 className="text-sm font-semibold text-foreground"
               >
-                Email
+                ইমেইল
               </Label>
               <Controller
                 name="email"
@@ -156,7 +156,7 @@ const ResetPasswordForm = () => {
                 htmlFor="otp"
                 className="text-sm font-semibold text-foreground"
               >
-                OTP code
+                ওটিপি কোড
               </Label>
               <Controller
                 name="otp"
@@ -166,7 +166,7 @@ const ResetPasswordForm = () => {
                     {...field}
                     id="otp"
                     type="text"
-                    placeholder="Enter 6-digit OTP"
+                    placeholder="৬ ডিজিটের ওটিপি লিখুন"
                     className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.otp ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   />
                 )}
@@ -183,7 +183,7 @@ const ResetPasswordForm = () => {
                 htmlFor="password"
                 className="text-sm font-semibold text-foreground"
               >
-                New password
+                নতুন পাসওয়ার্ড
               </Label>
               <div className="relative group">
                 <Controller
@@ -194,7 +194,7 @@ const ResetPasswordForm = () => {
                       {...field}
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="At least 6 characters"
+                      placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড"
                       className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                     />
                   )}
@@ -203,7 +203,7 @@ const ResetPasswordForm = () => {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground group-hover:text-muted-foreground transition-colors"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-label={showPassword ? "পাসওয়ার্ড লুকান" : "পাসওয়ার্ড দেখুন"}
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />
@@ -227,10 +227,10 @@ const ResetPasswordForm = () => {
               {isLoading ? (
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Updating...
+                  আপডেট হচ্ছে...
                 </div>
               ) : (
-                <span>Update password</span>
+                <span>পাসওয়ার্ড পরিবর্তন করুন</span>
               )}
             </Button>
           </form>
@@ -238,12 +238,12 @@ const ResetPasswordForm = () => {
 
         <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border text-sm text-muted-foreground">
           <p>
-            Remember your password?{" "}
+            পাসওয়ার্ড মনে পড়েছে?{" "}
             <Link
               href="/auth/login"
               className="font-bold text-primary hover:underline transition-all"
             >
-              Log in
+              লগইন করুন
             </Link>
           </p>
         </CardFooter>

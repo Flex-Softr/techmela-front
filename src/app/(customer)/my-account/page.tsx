@@ -2,7 +2,7 @@ import ContactInformation from "./components/ContactInformation";
 import DefaultShippingAddress from "./components/DefaultShippingAddress";
 
 export const metadata = {
-  title: "My account",
+  title: "আমার অ্যাকাউন্ট | TechMela",
 };
 
 const MyAccoutPage = () => {

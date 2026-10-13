@@ -4,96 +4,94 @@ export const getStatusDisplay = (status: string) => {
   switch (normalizedStatus) {
     case "pending":
       return {
-        label: "Pending",
-        banglaLabel: "Pending",
+        label: "অপেক্ষমাণ",
+        banglaLabel: "অপেক্ষমাণ",
         className: "bg-warning/10 text-warning border-warning/20",
         color: "hsl(var(--warning))",
       };
     case "confirmed":
       return {
-        label: "Confirmed",
-        banglaLabel: "Confirmed",
+        label: "নিশ্চিত হয়েছে",
+        banglaLabel: "নিশ্চিত হয়েছে",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
     case "processing":
       return {
-        label: "Processing",
-        banglaLabel: "Processing",
+        label: "প্রক্রিয়াধীন",
+        banglaLabel: "প্রক্রিয়াধীন",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
     case "warranty processing":
       return {
-        label: "Warranty Processing",
-        banglaLabel: "Warranty Processing",
+        label: "ওয়ারেন্টি প্রক্রিয়াধীন",
+        banglaLabel: "ওয়ারেন্টি প্রক্রিয়াধীন",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
     case "follow up":
       return {
-        label: "Follow Up",
-        banglaLabel: "Follow Up",
+        label: "ফলো-আপ",
+        banglaLabel: "ফলো-আপ",
         className: "bg-warning/10 text-warning border-warning/20",
         color: "hsl(var(--warning))",
       };
     case "processing done":
       return {
-        label: "Processing Done",
-        banglaLabel: "Processing Done",
+        label: "প্রক্রিয়াকরণ সম্পন্ন",
+        banglaLabel: "প্রক্রিয়াকরণ সম্পন্ন",
         className: "bg-success/10 text-success border-success/20",
         color: "hsl(var(--success))",
       };
     case "warranty added":
       return {
-        label: "Warranty Added",
-        banglaLabel: "Warranty Added",
+        label: "ওয়ারেন্টি যুক্ত হয়েছে",
+        banglaLabel: "ওয়ারেন্টি যুক্ত হয়েছে",
         className: "bg-success/10 text-success border-success/20",
         color: "hsl(var(--success))",
       };
     case "on courier":
       return {
-        label: "On Courier",
-        banglaLabel: "On Courier",
+        label: "কুরিয়ারে পাঠানো হয়েছে",
+        banglaLabel: "কুরিয়ারে পাঠানো হয়েছে",
         className: "bg-secondary text-secondary-foreground border-border",
         color: "hsl(var(--secondary-foreground))",
       };
     case "canceled":
     case "cancelled":
       return {
-        label: "Cancelled",
-        banglaLabel: "Cancelled",
+        label: "বাতিল",
+        banglaLabel: "বাতিল",
         className: "bg-destructive/10 text-destructive border-destructive/20",
         color: "hsl(var(--destructive))",
       };
     case "returned":
       return {
-        label: "Returned",
-        banglaLabel: "Returned",
+        label: "রিটার্ন হয়েছে",
+        banglaLabel: "রিটার্ন হয়েছে",
         className: "bg-destructive/10 text-destructive border-destructive/20",
         color: "hsl(var(--destructive))",
       };
     case "partial completed":
       return {
-        label: "Partial Completed",
-        banglaLabel: "Partial Completed",
+        label: "আংশিক সম্পন্ন",
+        banglaLabel: "আংশিক সম্পন্ন",
         className: "bg-primary/10 text-primary border-primary/20",
         color: "hsl(var(--primary))",
       };
     case "completed":
     case "delivered":
       return {
-        label: "Completed",
-        banglaLabel: "Completed",
+        label: "ডেলিভারি সম্পন্ন",
+        banglaLabel: "ডেলিভারি সম্পন্ন",
         className: "bg-success/10 text-success border-success/20",
         color: "hsl(var(--success))",
       };
     default:
       return {
-        label: status
-          ? status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
-          : "N/A",
-        banglaLabel: status || "N/A",
+        label: status || "অপেক্ষমাণ",
+        banglaLabel: status || "অপেক্ষমাণ",
         className: "bg-muted text-muted-foreground border-border",
         color: "hsl(var(--muted-foreground))",
       };

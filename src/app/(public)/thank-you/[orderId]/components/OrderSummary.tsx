@@ -35,7 +35,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
       <CardHeader className="bg-muted/50 border-b !pb-0 pt-4 px-5">
         <CardTitle className="flex items-center gap-2 text-lg mb-0">
           <ShoppingBag className="w-5 h-5 text-primary" />
-          Order Summary
+          অর্ডারের বিবরণ
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
@@ -72,7 +72,7 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
                   </div>
                 )}
                 <div className="mt-1 flex items-center text-sm text-muted-foreground">
-                  Qty: {item.quantity} × &#2547;{item.unitPrice}
+                  পরিমাণ: {item.quantity} &times; &#2547;{item.unitPrice}
                 </div>
               </div>
               <div className="text-right">
@@ -86,28 +86,28 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
 
         <div className="bg-muted/30 p-5 space-y-2">
           <div className="flex justify-between text-sm text-muted-foreground">
-            <span>Subtotal</span>
+            <span>সাবটোটাল</span>
             <span>&#2547;{orderInfo.subtotal}</span>
           </div>
           <div className="flex justify-between text-sm text-muted-foreground">
-            <span>Delivery Charge ({orderInfo.shippingCharge?.name})</span>
+            <span>ডেলিভারি চার্জ ({orderInfo.shippingCharge?.name})</span>
             <span>&#2547;{totalShippingCost}</span>
           </div>
           {orderInfo.discount > 0 && (
             <div className="flex justify-between text-sm text-success">
-              <span>Discount</span>
+              <span>ডিসকাউন্ট</span>
               <span>-&#2547;{orderInfo.discount}</span>
             </div>
           )}
           {orderInfo?.couponDiscount > 0 && (
             <div className="flex justify-between text-sm text-success">
-              <span>Coupon Discount</span>
+              <span>কুপন ছাড়</span>
               <span>-&#2547;{orderInfo?.couponDiscount}</span>
             </div>
           )}
           <Separator className="my-2" />
           <div className="flex justify-between text-base font-bold text-foreground">
-            <span>Total</span>
+            <span>সর্বমোট</span>
             <span>&#2547;{orderInfo.total}</span>
           </div>
         </div>

@@ -44,7 +44,7 @@ const OrderDetails = () => {
       <div className="flex items-center justify-center py-20 text-muted-foreground">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-lg font-medium">Loading order details...</span>
+          <span className="text-lg font-medium">অর্ডারের বিবরণ লোড হচ্ছে...</span>
         </div>
       </div>
     );
@@ -54,17 +54,17 @@ const OrderDetails = () => {
     return (
       <div className="text-center py-20">
         <h2 className="text-xl font-bold text-foreground">
-          Error fetching data
+          তথ্য লোড করতে সমস্যা হয়েছে
         </h2>
         <p className="text-muted-foreground mt-2">
-          We couldn&apos;t load the order details. Please try again later.
+          অর্ডারের বিবরণ প্রদর্শন করা সম্ভব হয়নি। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।
         </p>
         <Button
           onClick={() => router.back()}
           variant="outline"
           className="mt-6"
         >
-          Go Back
+          ফিরে যান
         </Button>
       </div>
     );
@@ -92,10 +92,10 @@ const OrderDetails = () => {
           className="group flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors text-sm h-9"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to orders
+          সকল অর্ডারে ফিরে যান
         </Button>
         <div className="text-sm font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-full">
-          Order ID: #{orderId}
+          অর্ডার নম্বর: #{orderId}
         </div>
       </div>
 
@@ -105,27 +105,29 @@ const OrderDetails = () => {
           <CardHeader className="py-3 px-4 border-b border-border">
             <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
               <Package className="w-5 h-5 text-primary" />
-              Order summary
+              অর্ডারের বিবরণ
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-2.5">
             <div className="flex justify-between">
               <span className="text-sm text-muted-foreground">
-                Payment method
+                পেমেন্ট পদ্ধতি
               </span>
               <span className="text-sm font-semibold text-foreground">
-                {payment?.paymentMethod?.name || "N/A"}
+                {payment?.paymentMethod?.name?.toLowerCase().includes("cash")
+                  ? "ক্যাশ অন ডেলিভারি"
+                  : payment?.paymentMethod?.name || "ক্যাশ অন ডেলিভারি"}
               </span>
             </div>
             <div className="flex justify-between border-t border-border pt-2.5">
-              <span className="text-sm text-muted-foreground">Subtotal</span>
+              <span className="text-sm text-muted-foreground">সাবটোটাল</span>
               <span className="text-sm font-semibold text-foreground">
                 &#2547;{subtotal}
               </span>
             </div>
             <div className="flex justify-between border-t border-border pt-2.5">
               <span className="text-sm text-muted-foreground">
-                Shipping charge ({shippingCharge?.name})
+                ডেলিভারি চার্জ ({shippingCharge?.name})
               </span>
               <span className="text-sm font-semibold text-foreground">
                 &#2547;{shippingCharge?.amount}
@@ -133,7 +135,7 @@ const OrderDetails = () => {
             </div>
             <div className="flex justify-between border-t border-border pt-2.5">
               <span className="text-foreground font-bold text-base">
-                Total amount
+                সর্বমোট
               </span>
               <span className="text-primary font-bold text-base">
                 &#2547;{total}
@@ -147,7 +149,7 @@ const OrderDetails = () => {
           <CardHeader className="py-3 px-4 border-b border-border">
             <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
               <MapPin className="w-5 h-5 text-primary" />
-              Shipping address
+              ডেলিভারির ঠিকানা
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-2">
@@ -158,17 +160,17 @@ const OrderDetails = () => {
               {shipping?.fullAddress}
             </p>
             <p className="text-sm text-muted-foreground">
-              Phone: {shipping?.phoneNumber}
+              ফোন: {shipping?.phoneNumber}
             </p>
             {shipping?.email && (
               <p className="text-sm text-muted-foreground">
-                Email: {shipping?.email}
+                ইমেইল: {shipping?.email}
               </p>
             )}
             <div className="pt-3 border-t border-border mt-2 flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  Order status
+                  অর্ডারের অবস্থা
                 </span>
                 {(() => {
                   const statusInfo = getStatusDisplay(data?.data?.status || "");
@@ -188,7 +190,7 @@ const OrderDetails = () => {
                 onClick={() => router.push(`/track-your-order/${orderId}`)}
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                Track order
+                অর্ডার ট্র্যাক করুন
               </Button>
             </div>
           </CardContent>
@@ -200,7 +202,7 @@ const OrderDetails = () => {
         <CardHeader className="py-3 px-4 border-b border-border bg-muted/30">
           <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-primary" />
-            Products in this order
+            অর্ডারের পণ্যসমূহ
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
@@ -209,16 +211,16 @@ const OrderDetails = () => {
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm">
-                    Product
+                    পণ্য
                   </TableHead>
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm">
-                    Quantity
+                    পরিমাণ
                   </TableHead>
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm text-right">
-                    Unit price
+                    মূল্য
                   </TableHead>
                   <TableHead className="font-bold text-foreground py-3 px-4 text-sm text-right">
-                    Total
+                    মোট
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -245,7 +247,7 @@ const OrderDetails = () => {
                           </div>
                           <div className="flex flex-col min-w-0">
                             <span className="text-sm font-medium text-foreground line-clamp-2">
-                              {item?.title || "Unknown Product"}
+                              {item?.title || "পণ্য"}
                             </span>
                             {variation && (
                               <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -292,7 +294,7 @@ const OrderDetails = () => {
           size="sm"
           className="px-8 h-9 border-primary/30 text-sm font-medium"
         >
-          Go back
+          ফিরে যান
         </Button>
       </div>
     </div>

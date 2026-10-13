@@ -120,18 +120,18 @@ const EditAccountForm = () => {
       if (Object.keys(payload).length > 0) {
         await updateUserData(payload).unwrap();
         toast({
-          description: "Information updated successfully",
+          description: "তথ্য সফলভাবে সংরক্ষণ করা হয়েছে",
           className: "text-success ",
         });
         router.push("/my-account");
       } else {
         toast({
-          description: "No changes to save",
+          description: "পরিবর্তন করার মতো কিছু নেই",
           className: "text-yellow-500 ",
         });
       }
     } catch (error: unknown) {
-      let errorMessage = "Failed to update information";
+      let errorMessage = "তথ্য আপডেট করতে ব্যর্থ হয়েছে";
       if (error instanceof Error) {
         errorMessage = error.message;
       } else if (
@@ -153,7 +153,7 @@ const EditAccountForm = () => {
       <CardHeader className="py-3 px-4 border-b border-border">
         <CardTitle className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
           <User className="w-5 h-5 text-primary" />
-          Edit account information
+          অ্যাকাউন্টের তথ্য পরিবর্তন করুন
         </CardTitle>
       </CardHeader>
 
@@ -165,13 +165,13 @@ const EditAccountForm = () => {
                 htmlFor="fullName"
                 className="text-sm font-semibold text-foreground"
               >
-                Full name
+                পূর্ণ নাম
               </label>
               <Input
                 type="text"
                 id="fullName"
                 {...register("fullName")}
-                placeholder="Enter your name"
+                placeholder="আপনার পূর্ণ নাম লিখুন"
                 className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
@@ -181,13 +181,13 @@ const EditAccountForm = () => {
                 htmlFor="phoneNumber"
                 className="text-sm font-semibold text-foreground"
               >
-                Phone number
+                ফোন নম্বর
               </label>
               <Input
                 type="tel"
                 id="phoneNumber"
                 {...register("phoneNumber")}
-                placeholder="Enter your phone number"
+                placeholder="আপনার ফোন নম্বর লিখুন"
                 className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
@@ -197,7 +197,7 @@ const EditAccountForm = () => {
                 htmlFor="email"
                 className="text-sm font-semibold text-foreground"
               >
-                Email
+                ইমেইল
               </label>
               <Input
                 type="email"
@@ -224,13 +224,13 @@ const EditAccountForm = () => {
                 htmlFor="fullAddress"
                 className="text-sm font-semibold text-foreground"
               >
-                Address
+                সম্পূর্ণ ঠিকানা
               </label>
               <Input
                 type="text"
                 id="fullAddress"
                 {...register("address.fullAddress")}
-                placeholder="Enter your current address"
+                placeholder="আপনার বিস্তারিত ঠিকানা লিখুন"
                 className="h-10 border-border focus:border-primary focus:ring-primary/20 transition-all rounded-lg text-sm"
               />
             </div>
@@ -247,11 +247,11 @@ const EditAccountForm = () => {
           className="w-full sm:w-auto h-10 px-8 flex items-center gap-2 font-bold"
         >
           {isSubmitting ? (
-            "Saving..."
+            "সংরক্ষণ করা হচ্ছে..."
           ) : (
             <>
               <Save className="w-4 h-4" />
-              Save information
+              তথ্য সংরক্ষণ করুন
             </>
           )}
         </Button>

@@ -46,9 +46,9 @@ const Sidebar = () => {
       <div className="space-y-5 bg-background p-3 md:p-4 rounded-xl border border-border shadow-sm h-full">
         <div className="px-1 border-b border-border pb-3">
           <h2 className="text-base font-bold text-foreground mb-0.5">
-            My account
+            আমার অ্যাকাউন্ট
           </h2>
-          <p className="text-sm text-muted-foreground">Loading...</p>
+          <p className="text-sm text-muted-foreground">লোড হচ্ছে...</p>
         </div>
       </div>
     );
@@ -63,10 +63,10 @@ const Sidebar = () => {
     <div className="space-y-5 bg-background p-3 md:p-4 rounded-xl border border-border shadow-sm h-full">
       <div className="px-1 border-b border-border pb-3">
         <h2 className="text-base font-bold text-foreground mb-0.5">
-          My account
+          আমার অ্যাকাউন্ট
         </h2>
         <p className="text-sm text-muted-foreground">
-          Manage your details and orders
+          আপনার প্রোফাইল ও অর্ডার পরিচালনা করুন
         </p>
       </div>
 
@@ -79,7 +79,7 @@ const Sidebar = () => {
               activeClassName={activeClass}
             >
               <LayoutDashboard size={16} className="shrink-0" />
-              <span>Dashboard</span>
+              <span>ড্যাশবোর্ড</span>
             </NavLink>
 
             <NavLink
@@ -88,7 +88,7 @@ const Sidebar = () => {
               activeClassName={activeClass}
             >
               <ShoppingBag size={16} className="shrink-0" />
-              <span>My orders</span>
+              <span>আমার অর্ডারসমূহ</span>
             </NavLink>
 
             <NavLink
@@ -97,7 +97,7 @@ const Sidebar = () => {
               activeClassName={activeClass}
             >
               <User size={16} className="shrink-0" />
-              <span>Personal information</span>
+              <span>ব্যক্তিগত তথ্য</span>
             </NavLink>
 
             <div className="pt-2 mt-1 border-t border-border">
@@ -106,7 +106,7 @@ const Sidebar = () => {
                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border border-transparent transition-all duration-200 text-destructive hover:bg-destructive/10 hover:border-destructive/20 text-base font-medium"
               >
                 <LogOut size={16} className="shrink-0" />
-                <span className="font-semibold">Log out</span>
+                <span className="font-semibold">লগআউট</span>
               </button>
             </div>
           </>
@@ -118,7 +118,7 @@ const Sidebar = () => {
               activeClassName={activeClass}
             >
               <LogIn size={16} className="shrink-0" />
-              <span>Log in</span>
+              <span>লগইন করুন</span>
             </NavLink>
             <NavLink
               href="/orders"
@@ -126,7 +126,7 @@ const Sidebar = () => {
               activeClassName={activeClass}
             >
               <ShoppingBag size={16} className="shrink-0" />
-              <span>Guest order check</span>
+              <span>অর্ডার চেক করুন</span>
             </NavLink>
           </>
         )}

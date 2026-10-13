@@ -39,19 +39,19 @@ const DashboardClient = () => {
 
   const stats = [
     {
-      label: "Total orders",
+      label: "মোট অর্ডার",
       value: orders.length,
       icon: <ShoppingBag size={18} />,
       color: "bg-primary/10 text-primary",
     },
     {
-      label: "Successful deliveries",
+      label: "সফল ডেলিভারি",
       value: successfulOrders,
       icon: <CheckCircle size={18} />,
       color: "bg-success/10 text-success",
     },
     {
-      label: "Pending orders",
+      label: "অপেক্ষমাণ অর্ডার",
       value: orders.length - successfulOrders,
       icon: <Clock size={18} />,
       color: "bg-warning/10 text-warning",
@@ -78,21 +78,21 @@ const DashboardClient = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <h1 className="text-xl md:text-2xl font-bold text-foreground mb-0.5">
-              Hello,{" "}
+              স্বাগতম,{" "}
               <span className="text-primary">
-                {fullName || "valued customer"}
+                {fullName || "সম্মানিত গ্রাহক"}
               </span>
               !
             </h1>
             <p className="text-muted-foreground text-sm">
-              Welcome to ShajGhor.
+              TechMela-তে আপনাকে স্বাগতম।
             </p>
           </div>
           <div className="hidden lg:block">
             <div className="bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20 flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
               <span className="text-primary font-semibold text-xs">
-                Active account
+                অ্যাক্টিভ অ্যাকাউন্ট
               </span>
             </div>
           </div>
@@ -126,38 +126,38 @@ const DashboardClient = () => {
           <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
             <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
               <User size={14} className="text-primary" />
-              Personal information
+              ব্যক্তিগত তথ্য
             </h3>
             <Link
               href="/my-account"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              Edit
+              পরিবর্তন
             </Link>
           </div>
           <div className="p-4 space-y-3">
             <div className="flex flex-col gap-0.5">
               <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                Name
+                নাম
               </span>
               <span className="text-base font-medium text-foreground">
-                {fullName || "Not available"}
+                {fullName || "যুক্ত করা হয়নি"}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
               <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                Email
+                ইমেইল
               </span>
               <span className="text-base font-medium text-foreground">
-                {email || "Not available"}
+                {email || "যুক্ত করা হয়নি"}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
               <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                Phone number
+                ফোন নম্বর
               </span>
               <span className="text-base font-medium text-foreground">
-                {phoneNumber || "Not available"}
+                {phoneNumber || "যুক্ত করা হয়নি"}
               </span>
             </div>
           </div>
@@ -168,20 +168,20 @@ const DashboardClient = () => {
           <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
             <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
               <MapPin size={14} className="text-primary" />
-              Shipping address
+              ডেলিভারির ঠিকানা
             </h3>
             <Link
               href="/my-account"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              Edit
+              পরিবর্তন
             </Link>
           </div>
           <div className="p-4">
             {address ? (
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  Address
+                  ঠিকানা
                 </span>
                 <p className="text-base font-medium text-foreground leading-relaxed">
                   {address.fullAddress}
@@ -192,7 +192,7 @@ const DashboardClient = () => {
             ) : (
               <div className="flex flex-col items-center justify-center py-6 opacity-40">
                 <MapPin size={28} className="mb-2" />
-                <p className="text-sm font-medium">No address added</p>
+                <p className="text-sm font-medium">কোনো ঠিকানা যুক্ত করা নেই</p>
               </div>
             )}
           </div>
@@ -204,28 +204,28 @@ const DashboardClient = () => {
         <div className="px-4 py-2.5 border-b border-border flex items-center justify-between bg-muted/50">
           <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
             <Package size={14} className="text-primary" />
-            Recent orders
+            সাম্প্রতিক অর্ডারসমূহ
           </h3>
           <Link
             href="/orders"
             className="text-sm font-semibold text-primary hover:underline"
           >
-            View all
+            সব দেখুন
           </Link>
         </div>
         <div className="overflow-x-auto">
           {isOrdersLoading ? (
             <div className="p-10 text-center text-muted-foreground text-sm">
-              Loading...
+              লোড হচ্ছে...
             </div>
           ) : orders.length > 0 ? (
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-muted text-muted-foreground uppercase text-xs font-bold tracking-widest">
-                  <th className="px-4 py-3">Order ID</th>
-                  <th className="px-4 py-3">Date</th>
-                  <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3 text-right">Amount</th>
+                  <th className="px-4 py-3">অর্ডার আইডি</th>
+                  <th className="px-4 py-3">তারিখ</th>
+                  <th className="px-4 py-3">অবস্থা</th>
+                  <th className="px-4 py-3 text-right">টাকা</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
@@ -263,7 +263,7 @@ const DashboardClient = () => {
             </table>
           ) : (
             <div className="p-10 text-center text-muted-foreground text-sm italic">
-              No orders yet.
+              এখনও কোনো অর্ডার করেননি।
             </div>
           )}
         </div>

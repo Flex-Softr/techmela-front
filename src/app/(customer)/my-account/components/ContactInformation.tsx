@@ -27,7 +27,7 @@ const ContactInformation = () => {
       <Card className="w-full h-full flex flex-col shadow-sm border-border animate-pulse">
         <CardHeader className="py-2.5 px-4 border-b border-border">
           <CardTitle className="text-sm font-semibold text-foreground">
-            Personal information
+            ব্যক্তিগত তথ্য
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 flex-1">
@@ -40,29 +40,29 @@ const ContactInformation = () => {
     <Card className="w-full h-full flex flex-col shadow-sm border-border">
       <CardHeader className="py-2.5 px-4 border-b border-border">
         <CardTitle className="text-sm font-semibold text-foreground">
-          Personal information
+          ব্যক্তিগত তথ্য
         </CardTitle>
       </CardHeader>
 
       <CardContent className="p-4 flex-1">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-3 gap-x-2">
-          <div className="text-xs text-muted-foreground font-medium ">Name</div>
+          <div className="text-xs text-muted-foreground font-medium ">নাম</div>
           <div className="sm:col-span-2 text-sm text-foreground font-medium">
-            {fullName || "Not available"}
+            {fullName || "যুক্ত করা হয়নি"}
           </div>
 
           <div className="text-xs text-muted-foreground font-medium ">
-            Email
+            ইমেইল
           </div>
           <div className="sm:col-span-2 text-sm text-foreground font-medium">
-            {email || "Not available"}
+            {email || "যুক্ত করা হয়নি"}
           </div>
 
           <div className="text-xs text-muted-foreground font-medium ">
-            Phone number
+            ফোন নম্বর
           </div>
           <div className="sm:col-span-2 text-sm text-foreground font-medium">
-            {phoneNumber || "Not available"}
+            {phoneNumber || "যুক্ত করা হয়নি"}
           </div>
         </div>
       </CardContent>
@@ -76,7 +76,7 @@ const ContactInformation = () => {
         >
           <Link href="/edit-account" className="flex items-center gap-1.5 ">
             <Edit className="w-3.5 h-3.5" />
-            Edit profile
+            প্রোফাইল এডিট করুন
           </Link>
         </Button>
         <Button
@@ -90,7 +90,7 @@ const ContactInformation = () => {
             className="flex items-center gap-1.5 "
           >
             <KeyRound className="w-3.5 h-3.5" />
-            Change password
+            পাসওয়ার্ড পরিবর্তন করুন
           </Link>
         </Button>
       </CardFooter>

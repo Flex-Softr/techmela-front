@@ -40,8 +40,8 @@ const TimelineEvent: React.FC<TimelineEventProps> = ({
           >
             {status}
             {isActive && (
-              <span className="ml-2 inline-flex items-center text-[10px] font-semibold uppercase tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-                Latest
+              <span className="ml-2 inline-flex items-center text-[10px] font-semibold tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                সর্বশেষ
               </span>
             )}
           </h3>

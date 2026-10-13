@@ -28,7 +28,7 @@ const DefaultShippingAddress = () => {
       <Card className="w-full h-full flex flex-col shadow-sm border-border animate-pulse">
         <CardHeader className="py-2.5 px-4 border-b border-border">
           <CardTitle className="text-sm font-semibold text-foreground">
-            Default shipping address
+            ডিফল্ট ডেলিভারি ঠিকানা
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 flex-1">
@@ -42,7 +42,7 @@ const DefaultShippingAddress = () => {
     <Card className="w-full h-full flex flex-col shadow-sm border-border">
       <CardHeader className="py-2.5 px-4 border-b border-border">
         <CardTitle className="text-sm font-semibold text-foreground">
-          Default shipping address
+          ডিফল্ট ডেলিভারি ঠিকানা
         </CardTitle>
       </CardHeader>
 
@@ -51,7 +51,7 @@ const DefaultShippingAddress = () => {
           <div className="space-y-3">
             <div>
               <div className="text-xs text-muted-foreground font-medium mb-0.5 ">
-                Full address
+                সম্পূর্ণ ঠিকানা
               </div>
               <div className="text-sm text-foreground">
                 {address.fullAddress}
@@ -60,13 +60,13 @@ const DefaultShippingAddress = () => {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <div className="text-xs text-muted-foreground font-medium mb-0.5 ">
-                  City
+                  শহর / জেলা
                 </div>
                 <div className="text-sm text-foreground">{address.city}</div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground font-medium mb-0.5 ">
-                  Country
+                  দেশ
                 </div>
                 <div className="text-sm text-foreground">{address.country}</div>
               </div>
@@ -78,7 +78,7 @@ const DefaultShippingAddress = () => {
               <MapPin className="w-5 h-5 text-muted-foreground" />
             </div>
             <p className="text-xs text-muted-foreground ">
-              You do not have a default shipping address.
+              আপনার কোনো ডেলিভারি ঠিকানা যুক্ত করা নেই।
             </p>
           </div>
         )}
@@ -96,7 +96,7 @@ const DefaultShippingAddress = () => {
             className="flex items-center justify-center gap-1.5 "
           >
             <MapPin className="w-3.5 h-3.5" />
-            {address ? "Edit address" : "Add address"}
+            {address ? "ঠিকানা পরিবর্তন করুন" : "ঠিকানা যুক্ত করুন"}
           </Link>
         </Button>
       </CardFooter>

@@ -29,31 +29,31 @@ import DivisionDistrictUpazilaSelector from "@/app/(public)/checkout/components/
 const schema = yup.object().shape({
   phoneNumber: yup
     .string()
-    .required("Phone number is required")
-    .matches(/^(?:\+88)?01[3-9]\d{8}$/, "Invalid phone number"),
+    .required("ফোন নম্বর দেওয়া আবশ্যক")
+    .matches(/^(?:\+88)?01[3-9]\d{8}$/, "সঠিক ১১ ডিজিটের ফোন নম্বর দিন"),
   password: yup
     .string()
-    .required("Password is required")
-    .min(4, "Password must be at least 4 characters"),
+    .required("পাসওয়ার্ড দেওয়া আবশ্যক")
+    .min(4, "পাসওয়ার্ড কমপক্ষে ৪ অক্ষরের হতে হবে"),
   address: yup
     .object()
     .shape({
-      division: yup.string().required("Division is required"),
-      district: yup.string().required("District is required"),
-      upazila: yup.string().required("Thana / Upazila is required"),
-      fullAddress: yup.string().required("Full address is required"),
+      division: yup.string().required("বিভাগ নির্বাচন করুন"),
+      district: yup.string().required("জেলা নির্বাচন করুন"),
+      upazila: yup.string().required("উপজেলা / থানা নির্বাচন করুন"),
+      fullAddress: yup.string().required("বিস্তারিত ঠিকানা লিখুন"),
     })
-    .required("Address is required"),
+    .required("ঠিকানা দেওয়া আবশ্যক"),
   personalInfo: yup
     .object()
     .shape({
-      fullName: yup.string().required("Full name is required"),
+      fullName: yup.string().required("পূর্ণ নাম দেওয়া আবশ্যক"),
       email: yup
         .string()
-        .email("Please enter a valid email")
-        .required("Email is required"),
+        .email("সঠিক ইমেইল ঠিকানা দিন")
+        .required("ইমেইল দেওয়া আবশ্যক"),
     })
-    .required("Personal information is required"),
+    .required("ব্যক্তিগত তথ্য আবশ্যক"),
 });
 
 const RegisterForm = () => {
@@ -95,7 +95,7 @@ const RegisterForm = () => {
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast({
         className: "bg-success/100 text-primary-foreground",
-        title: "Registration successful",
+        title: "অ্যাকাউন্ট তৈরি সফল হয়েছে",
         description: res.message,
       });
       router.push("/");
@@ -110,11 +110,11 @@ const RegisterForm = () => {
       const errorMessage =
         err?.data?.errorMessages?.[0]?.message ||
         err?.data?.message ||
-        "Please check your details and try again.";
+        "অনুগ্রহ করে আপনার তথ্য পরীক্ষা করে আবার চেষ্টা করুন।";
 
       toast({
         variant: "destructive",
-        title: "Registration failed",
+        title: "অ্যাকাউন্ট তৈরি ব্যর্থ হয়েছে",
         description: errorMessage,
       });
     }
@@ -127,10 +127,10 @@ const RegisterForm = () => {
           <div className="text-center space-y-1">
             <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
               <UserPlus className="w-6 h-6 text-primary" />
-              Create a new account
+              নতুন অ্যাকাউন্ট তৈরি করুন
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Join ShajGhor to start shopping
+              TechMela-তে কেনাকাটা শুরু করতে নিবন্ধন করুন
             </CardDescription>
           </div>
         </CardHeader>
@@ -147,12 +147,12 @@ const RegisterForm = () => {
                   htmlFor="fullName"
                   className="text-sm font-semibold text-foreground"
                 >
-                  Full name <span className="text-destructive">*</span>
+                  পূর্ণ নাম <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="fullName"
                   type="text"
-                  placeholder="Your name"
+                  placeholder="আপনার পূর্ণ নাম"
                   className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.fullName ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("personalInfo.fullName")}
                 />
@@ -168,12 +168,12 @@ const RegisterForm = () => {
                   htmlFor="email"
                   className="text-sm font-semibold text-foreground"
                 >
-                  Email <span className="text-destructive">*</span>
+                  ইমেইল <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Your email"
+                  placeholder="আপনার ইমেইল"
                   className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.personalInfo?.email ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("personalInfo.email")}
                 />
@@ -191,12 +191,12 @@ const RegisterForm = () => {
                   htmlFor="phoneNumber"
                   className="text-sm font-semibold text-foreground"
                 >
-                  Phone number <span className="text-destructive">*</span>
+                  ফোন নম্বর <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="phoneNumber"
                   type="tel"
-                  placeholder="01XXXXXXXXX"
+                  placeholder="০১XXXXXXXXX"
                   className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.phoneNumber ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("phoneNumber")}
                 />
@@ -207,18 +207,18 @@ const RegisterForm = () => {
                 )}
               </div>
 
-              <div className="space-y-2">
+            <div className="space-y-2">
                 <Label
                   htmlFor="password"
                   className="text-sm font-semibold text-foreground"
                 >
-                  Password <span className="text-destructive">*</span>
+                  পাসওয়ার্ড <span className="text-destructive">*</span>
                 </Label>
                 <div className="relative group">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Password"
+                    placeholder="পাসওয়ার্ড লিখুন"
                     className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                     {...register("password")}
                   />
@@ -227,7 +227,7 @@ const RegisterForm = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground group-hover:text-muted-foreground transition-colors"
                     aria-label={
-                      showPassword ? "Hide password" : "Show password"
+                      showPassword ? "পাসওয়ার্ড লুকান" : "পাসওয়ার্ড দেখুন"
                     }
                   >
                     {showPassword ? (
@@ -258,12 +258,12 @@ const RegisterForm = () => {
                 htmlFor="fullAddress"
                 className="text-sm font-semibold text-foreground"
               >
-                Address <span className="text-destructive">*</span>
+                সম্পূর্ণ ঠিকানা <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="fullAddress"
                 type="text"
-                placeholder="City, area, street..."
+                placeholder="বাড়ি/রোড নং, এলাকা, পোস্ট কোড..."
                 className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.address?.fullAddress ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                 {...register("address.fullAddress")}
               />
@@ -282,10 +282,10 @@ const RegisterForm = () => {
               {isLoading ? (
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Creating account...
+                  অ্যাকাউন্ট তৈরি হচ্ছে...
                 </div>
               ) : (
-                <span>Create account</span>
+                <span>অ্যাকাউন্ট তৈরি করুন</span>
               )}
             </Button>
           </form>
@@ -293,12 +293,12 @@ const RegisterForm = () => {
 
         <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border">
           <p className="text-sm text-muted-foreground">
-            Already have an account?{" "}
+            ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
             <Link
               href="/auth/login"
               className="font-bold text-primary hover:underline transition-all"
             >
-              Log in
+              লগইন করুন
             </Link>
           </p>
         </CardFooter>

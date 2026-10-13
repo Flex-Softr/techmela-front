@@ -43,8 +43,8 @@ const LoginForm = () => {
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast({
         className: "bg-success text-primary-foreground",
-        title: "Login successful",
-        description: "Welcome! You have logged in successfully.",
+        title: "লগইন সফল হয়েছে",
+        description: "স্বাগতম! আপনি সফলভাবে লগইন করেছেন।",
       });
       router.push("/dashboard");
     } catch (error: unknown) {
@@ -58,11 +58,11 @@ const LoginForm = () => {
       const errorMessage =
         err?.data?.errorMessages?.[0]?.message ||
         err?.data?.message ||
-        "Login failed. Please check your details and try again.";
+        "লগইন ব্যর্থ হয়েছে। সঠিক তথ্য দিয়ে আবার চেষ্টা করুন।";
 
       toast({
         variant: "destructive",
-        title: "Login failed",
+        title: "লগইন ব্যর্থ হয়েছে",
         description: errorMessage,
       });
     }
@@ -75,10 +75,10 @@ const LoginForm = () => {
           <div className="text-center space-y-1">
             <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
               <LogIn className="w-6 h-6 text-primary" />
-              Welcome back
+              লগইন করুন
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Enter your details to access your account
+              আপনার অ্যাকাউন্টে প্রবেশ করতে নিচের তথ্যগুলো দিন
             </CardDescription>
           </div>
         </CardHeader>
@@ -94,15 +94,15 @@ const LoginForm = () => {
                 htmlFor="phoneEmailOrUid"
                 className="text-sm font-semibold text-foreground"
               >
-                Email or phone number
+                ইমেইল অথবা ফোন নম্বর
               </Label>
               <Input
                 id="phoneEmailOrUid"
                 type="text"
-                placeholder="Email or phone number"
+                placeholder="আপনার ইমেইল বা ফোন নম্বর"
                 className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.phoneEmailOrUid ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                 {...register("phoneEmailOrUid", {
-                  required: "Email or phone number is required",
+                  required: "ইমেইল অথবা ফোন নম্বর আবশ্যক",
                 })}
               />
               {errors.phoneEmailOrUid && (
@@ -118,13 +118,13 @@ const LoginForm = () => {
                   htmlFor="password"
                   className="text-sm font-semibold text-foreground"
                 >
-                  Password
+                  পাসওয়ার্ড
                 </Label>
                 <Link
                   href="/auth/forget-password"
                   className="text-xs font-semibold text-primary hover:underline transition-all"
                 >
-                  Forgot password?
+                  পাসওয়ার্ড ভুলে গেছেন?
                 </Link>
               </div>
               <div className="relative group">
@@ -134,14 +134,14 @@ const LoginForm = () => {
                   placeholder="••••••••"
                   className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg pr-10 ${errors.password ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   {...register("password", {
-                    required: "Password is required",
+                    required: "পাসওয়ার্ড দেওয়া আবশ্যক",
                   })}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground group-hover:text-muted-foreground transition-colors"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-label={showPassword ? "পাসওয়ার্ড লুকান" : "পাসওয়ার্ড দেখুন"}
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />
@@ -165,10 +165,10 @@ const LoginForm = () => {
               {isLoading ? (
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Logging in...
+                  লগইন হচ্ছে...
                 </div>
               ) : (
-                <span>Log in</span>
+                <span>লগইন করুন</span>
               )}
             </Button>
           </form>
@@ -176,12 +176,12 @@ const LoginForm = () => {
 
         <CardFooter className="pb-6 pt-4 flex flex-col items-center gap-4 bg-muted/30 border-t border-border">
           <p className="text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
+            অ্যাকাউন্ট নেই?{" "}
             <Link
               href="/auth/registration"
               className="font-bold text-primary hover:underline transition-all"
             >
-              Create a new account
+              নতুন অ্যাকাউন্ট তৈরি করুন
             </Link>
           </p>
         </CardFooter>

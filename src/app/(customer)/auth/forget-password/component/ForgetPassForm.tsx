@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,8 +44,8 @@ const ForgetPasswordForm = () => {
       if (res.success) {
         toast({
           className: "bg-success text-primary-foreground",
-          title: "Success",
-          description: "An OTP has been sent to your email.",
+          title: "সফল হয়েছে",
+          description: "আপনার ইমেইলে একটি ওটিপি কোড পাঠানো হয়েছে।",
         });
         router.push(`/auth/reset-password?email=${data.email}`);
       }
@@ -60,11 +60,11 @@ const ForgetPasswordForm = () => {
       const errorMessage =
         err?.data?.errorMessages?.[0]?.message ||
         err?.data?.message ||
-        "Failed to send reset link";
+        "রিসেট কোড পাঠাতে সমস্যা হয়েছে";
 
       toast({
         variant: "destructive",
-        title: "Error",
+        title: "ত্রুটি",
         description: errorMessage,
       });
     }
@@ -77,11 +77,10 @@ const ForgetPasswordForm = () => {
           <div className="text-center space-y-1">
             <CardTitle className="text-2xl font-bold text-foreground flex items-center justify-center gap-2">
               <Fingerprint className="w-6 h-6 text-primary" />
-              Forgot password?
+              পাসওয়ার্ড ভুলে গেছেন?
             </CardTitle>
             <CardDescription className="text-muted-foreground px-4">
-              Enter the email linked to your account. We&apos;ll help you reset
-              your password.
+              আপনার অ্যাকাউন্টের সাথে যুক্ত ইমেইল দিন। পাসওয়ার্ড রিসেট করতে একটি কোড পাঠানো হবে।
             </CardDescription>
           </div>
         </CardHeader>
@@ -93,18 +92,18 @@ const ForgetPasswordForm = () => {
                 htmlFor="email"
                 className="text-sm font-semibold text-foreground"
               >
-                Email
+                ইমেইল
               </Label>
               <Controller
                 name="email"
                 control={control}
-                rules={{ required: "Email is required" }}
+                rules={{ required: "ইমেইল দেওয়া আবশ্যক" }}
                 render={({ field }) => (
                   <Input
                     {...field}
                     id="email"
                     type="email"
-                    placeholder="Your email"
+                    placeholder="আপনার ইমেইল ঠিকানা"
                     className={`h-11 border-border focus:ring-primary/20 transition-all rounded-lg ${errors.email ? "border-destructive focus:border-destructive" : "focus:border-primary"}`}
                   />
                 )}
@@ -124,10 +123,10 @@ const ForgetPasswordForm = () => {
               {isLoading ? (
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Sending...
+                  পাঠানো হচ্ছে...
                 </div>
               ) : (
-                <span>Reset password</span>
+                <span>ওটিপি পাঠান</span>
               )}
             </Button>
           </form>
@@ -139,7 +138,7 @@ const ForgetPasswordForm = () => {
             className="flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-all mt-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to login
+            লগইনে ফিরে যান
           </Link>
         </CardFooter>
       </Card>
