@@ -23,7 +23,7 @@ const videos: VideoItem[] = [
   {
     id: "video-2",
     youtubeId: "zgqkHu2FDKw",
-    title: "গান গাইলে কেমন শোনায়? (ইকো মোড)",
+    title: "গান গাইলে কেমন শোনায়? ",
     badge: "গান ও গজল টেস্ট",
   },
   {

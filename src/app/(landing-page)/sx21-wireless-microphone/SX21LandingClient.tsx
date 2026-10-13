@@ -1,32 +1,32 @@
 "use client";
 
+import { getImageSrc } from "@/lib/utils";
 import eventHandler from "@/tracking/eventHandler";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
 import { useEffect, useRef, useState } from "react";
-import { getImageSrc } from "@/lib/utils";
 
 // Scoped SolaimanLipi Font & Stylesheet
 import "./sx21.css";
 
 // Shared Landing Page Components
 import AnnouncementBar from "@/app/(landing-page)/_components/AnnouncementBar";
+import CTAButtonGroup from "@/app/(landing-page)/_components/CTAButtonGroup";
+import PricingDisplay from "@/app/(landing-page)/_components/PricingDisplay";
 import SalesHeader from "@/app/(landing-page)/_components/SalesHeader";
 import SalesOrderForm from "@/app/(landing-page)/_components/SalesOrderForm";
-import PricingDisplay from "@/app/(landing-page)/_components/PricingDisplay";
-import CTAButtonGroup from "@/app/(landing-page)/_components/CTAButtonGroup";
 
 // Modular Sections
-import HeroSection from "./components/HeroSection";
-import ComparisonSection from "./components/ComparisonSection";
-import VideoSection from "./components/VideoSection";
-import ProductCarousel from "./components/ProductCarousel";
-import FeatureHighlights from "./components/FeatureHighlights";
-import WhoIsItFor from "./components/WhoIsItFor";
 import BoxContents from "./components/BoxContents";
+import ComparisonSection from "./components/ComparisonSection";
 import FAQSection from "./components/FAQSection";
+import FeatureHighlights from "./components/FeatureHighlights";
+import HeroSection from "./components/HeroSection";
+import ProductCarousel from "./components/ProductCarousel";
 import TrustGuarantees from "./components/TrustGuarantees";
+import VideoSection from "./components/VideoSection";
+import WhoIsItFor from "./components/WhoIsItFor";
 
 type Props = {
   product: TSingleProduct | null;
@@ -72,7 +72,7 @@ const SX21LandingClient = ({
   paymentMethods,
   fallbackRegularPrice = 1030,
   fallbackSalePrice = 890,
-  defaultThumbnail = "/images/landing-page/sx21/2.webp",
+  defaultThumbnail = "/images/landing-page/sx21/4.webp",
 }: Props) => {
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);
