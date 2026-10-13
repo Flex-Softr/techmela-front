@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiZoomIn } from "react-icons/fi";
 
 type CarouselImage = {
@@ -30,6 +30,12 @@ const images: CarouselImage[] = [
     caption: "চার্জিং কেস খোলা অবস্থায় ২টি ওয়্যারলেস মাইক ও ১টি রিসিভার সুন্দরভাবে সংরক্ষিত",
     badge: "সম্পূর্ণ সেটআপ",
   },
+  {
+    src: "/images/landing-page/sx21/4.webp",
+    title: "ফুল সেটআপ: কেস, ট্রান্সমিটার ও টাইপ-সি রিসিভার",
+    caption: "চার্জিং কেস, ১টি বাটন মাইক এবং স্মার্টফোন টাইপ-সি রিসিভার একসাথে বাস্তব প্রদর্শনী",
+    badge: "কমপ্লিট প্যাকেজ",
+  },
 ];
 
 const ProductCarousel = () => {
@@ -50,7 +56,7 @@ const ProductCarousel = () => {
       {/* Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
@@ -66,29 +72,39 @@ const ProductCarousel = () => {
         </div>
 
         {/* Carousel Showcase */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           
           {/* Main Slide Card */}
-          <div className="relative rounded-3xl overflow-hidden bg-slate-800/90 border-2 border-white/10 shadow-2xl group">
+          <div className="relative rounded-3xl overflow-hidden bg-slate-800/95 border-2 border-white/10 shadow-2xl group">
             
-            {/* Image Container */}
-            <div className="relative w-full h-[380px] sm:h-[520px] bg-slate-950 flex items-center justify-center overflow-hidden">
+            {/* Image Container: 1:1 Aspect Ratio to match standard square product photos */}
+            <div className="relative w-full aspect-square bg-slate-950 flex items-center justify-center overflow-hidden">
+              {/* Subtle ambient blur behind non-square images for edge-to-edge aesthetics */}
+              <div className="absolute inset-0 scale-110 blur-2xl opacity-25 pointer-events-none">
+                <Image
+                  src={current.src}
+                  alt=""
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
               <Image
                 src={current.src}
                 alt={current.title}
                 fill
-                sizes="(max-width: 768px) 100vw, 900px"
-                className="object-contain transition-transform duration-500 group-hover:scale-102"
+                sizes="(max-width: 768px) 100vw, 672px"
+                className="object-contain transition-transform duration-500 group-hover:scale-102 relative z-10"
                 priority
               />
 
               {/* Angle Tag */}
-              <div className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md text-amber-300 text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full border border-white/10 shadow-md">
+              <div className="absolute top-4 left-4 z-20 bg-slate-950/80 backdrop-blur-md text-amber-300 text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full border border-white/10 shadow-md">
                 📷 {current.badge}
               </div>
 
               {/* Photo counter */}
-              <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md text-slate-200 text-xs font-bold px-3 py-1.5 rounded-full border border-white/10 shadow-md">
+              <div className="absolute top-4 right-4 z-20 bg-slate-950/80 backdrop-blur-md text-slate-200 text-xs font-bold px-3 py-1.5 rounded-full border border-white/10 shadow-md">
                 ছবি {currentIdx + 1} / {images.length}
               </div>
 
@@ -97,7 +113,7 @@ const ProductCarousel = () => {
                 type="button"
                 onClick={prev}
                 aria-label="Previous Image"
-                className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 size-10 sm:size-12 rounded-full bg-slate-950/70 hover:bg-primary text-white border border-white/20 flex items-center justify-center text-xl sm:text-2xl backdrop-blur-md transition-all active:scale-90 shadow-lg cursor-pointer"
+                className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 size-10 sm:size-12 rounded-full bg-slate-950/70 hover:bg-primary text-white border border-white/20 flex items-center justify-center text-xl sm:text-2xl backdrop-blur-md transition-all active:scale-90 shadow-lg cursor-pointer"
               >
                 <FiChevronLeft />
               </button>
@@ -106,23 +122,23 @@ const ProductCarousel = () => {
                 type="button"
                 onClick={next}
                 aria-label="Next Image"
-                className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 size-10 sm:size-12 rounded-full bg-slate-950/70 hover:bg-primary text-white border border-white/20 flex items-center justify-center text-xl sm:text-2xl backdrop-blur-md transition-all active:scale-90 shadow-lg cursor-pointer"
+                className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 size-10 sm:size-12 rounded-full bg-slate-950/70 hover:bg-primary text-white border border-white/20 flex items-center justify-center text-xl sm:text-2xl backdrop-blur-md transition-all active:scale-90 shadow-lg cursor-pointer"
               >
                 <FiChevronRight />
               </button>
             </div>
 
             {/* Bottom Caption Bar */}
-            <div className="p-4 sm:p-6 bg-slate-900 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="p-4 sm:p-5 bg-slate-900/95 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">
+                <h3 className="text-base sm:text-lg font-bold text-white">
                   {current.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
                   {current.caption}
                 </p>
               </div>
-              <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/30 px-3 py-1.5 rounded-xl self-start sm:self-auto">
+              <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/30 px-3 py-1.5 rounded-xl self-start sm:self-auto shrink-0">
                 <FiZoomIn className="text-sm" />
                 <span>বাস্তব প্রোডাক্ট ফটো</span>
               </div>
@@ -130,8 +146,8 @@ const ProductCarousel = () => {
 
           </div>
 
-          {/* Thumbnails Navigation Row */}
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mt-4 sm:mt-6">
+          {/* Thumbnails Navigation Row - 4 columns for 4 images */}
+          <div className="grid grid-cols-4 gap-2.5 sm:gap-3.5 mt-4 sm:mt-5">
             {images.map((img, idx) => {
               const isSelected = currentIdx === idx;
               return (
@@ -141,9 +157,9 @@ const ProductCarousel = () => {
                   onClick={() => {
                     setCurrentIdx(idx);
                   }}
-                  className={`relative rounded-2xl overflow-hidden aspect-square border-2 transition-all cursor-pointer bg-slate-950 ${
+                  className={`relative rounded-xl sm:rounded-2xl overflow-hidden aspect-square border-2 transition-all cursor-pointer bg-slate-950 ${
                     isSelected
-                      ? "border-amber-400 ring-2 ring-amber-400/30 scale-102 shadow-lg"
+                      ? "border-amber-400 ring-2 ring-amber-400/40 scale-102 shadow-lg"
                       : "border-white/15 opacity-60 hover:opacity-100 hover:border-white/40"
                   }`}
                 >
@@ -151,7 +167,7 @@ const ProductCarousel = () => {
                     src={img.src}
                     alt={img.title}
                     fill
-                    sizes="200px"
+                    sizes="160px"
                     className="object-cover"
                   />
                   {isSelected && (
