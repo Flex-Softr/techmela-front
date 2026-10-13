@@ -103,47 +103,38 @@ const VideoSection = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Simple Section Header with Navigation Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10 text-center sm:text-left">
-          <div>
-            <div className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/30 px-3.5 py-1 rounded-full text-red-400 font-bold text-xs mb-2">
-              <MdOutlineOndemandVideo className="text-sm" />
-              <span>রিলস ভিডিও রিভিউ</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
-              SX21 লাইভ সাউন্ড টেস্ট ও ভিডিও রিভিউ
-            </h2>
-            <p className="mt-1.5 text-slate-300 text-xs sm:text-sm">
-              স্বচক্ষে দেখে ও আসল সাউন্ড শুনে নিশ্চিত হয়ে অর্ডার করুন।
-            </p>
+        {/* Simple Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/30 px-3.5 py-1 rounded-full text-red-400 font-bold text-xs mb-2">
+            <MdOutlineOndemandVideo className="text-sm" />
+            <span>রিলস ভিডিও রিভিউ</span>
           </div>
-
-          {/* Prev / Next Arrows */}
-          <div className="flex items-center justify-center gap-2 shrink-0">
-            <button
-              type="button"
-              onClick={handlePrev}
-              aria-label="Previous video"
-              className="size-10 sm:size-11 rounded-full bg-slate-900 hover:bg-red-600 text-white border border-white/15 flex items-center justify-center text-lg transition-all active:scale-95 shadow-md cursor-pointer"
-            >
-              <FiChevronLeft />
-            </button>
-            <button
-              type="button"
-              onClick={handleNext}
-              aria-label="Next video"
-              className="size-10 sm:size-11 rounded-full bg-slate-900 hover:bg-red-600 text-white border border-white/15 flex items-center justify-center text-lg transition-all active:scale-95 shadow-md cursor-pointer"
-            >
-              <FiChevronRight />
-            </button>
-          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
+            SX21 লাইভ সাউন্ড টেস্ট ও ভিডিও রিভিউ
+          </h2>
+          <p className="mt-1.5 text-slate-300 text-xs sm:text-sm">
+            স্বচক্ষে দেখে ও আসল সাউন্ড শুনে নিশ্চিত হয়ে অর্ডার করুন।
+          </p>
         </div>
 
-        {/* Reels Video Carousel: Desktop 3 side-by-side, Mobile 1 per screen */}
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3 pt-1 scroll-smooth"
-        >
+        {/* Carousel Container with Centered Left/Right Navigation Arrows */}
+        <div className="relative group">
+          
+          {/* Previous Arrow Button (Middle of the Video like Product Carousel) */}
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Previous video"
+            className="absolute left-2 sm:left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-slate-950/80 hover:bg-red-600 text-white border border-white/20 flex items-center justify-center text-xl sm:text-2xl backdrop-blur-md transition-all active:scale-90 shadow-2xl cursor-pointer"
+          >
+            <FiChevronLeft />
+          </button>
+
+          {/* Reels Video Carousel: Desktop 3 side-by-side, Mobile 1 per screen */}
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3 pt-1 scroll-smooth"
+          >
           {videos.map((vid, idx) => {
             const isPlaying = playingId === vid.id;
 
@@ -220,6 +211,17 @@ const VideoSection = () => {
               </div>
             );
           })}
+        </div>
+
+          {/* Next Arrow Button (Middle of the Video like Product Carousel) */}
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Next video"
+            className="absolute right-2 sm:right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-30 size-11 sm:size-12 rounded-full bg-slate-950/80 hover:bg-red-600 text-white border border-white/20 flex items-center justify-center text-xl sm:text-2xl backdrop-blur-md transition-all active:scale-90 shadow-2xl cursor-pointer"
+          >
+            <FiChevronRight />
+          </button>
         </div>
 
         {/* Dots Indicators (Especially helpful on mobile) */}
