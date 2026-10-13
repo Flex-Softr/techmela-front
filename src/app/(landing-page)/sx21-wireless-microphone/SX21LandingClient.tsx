@@ -72,7 +72,7 @@ const SX21LandingClient = ({
   paymentMethods,
   fallbackRegularPrice = 1030,
   fallbackSalePrice = 890,
-  defaultThumbnail = "/images/sx21-microphone.jpg",
+  defaultThumbnail = "/images/landing-page/sx21/sx21-charging-case-open.jpg",
 }: Props) => {
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);

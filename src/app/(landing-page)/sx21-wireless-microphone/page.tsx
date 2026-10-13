@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const imageUrl =
     getImageSrc(product?.thumbnail?.src || product?.gallery?.[0]?.src) ||
-    "/images/sx21-microphone.jpg";
+    "/images/landing-page/sx21/sx21-charging-case-open.jpg";
 
   return {
     title,
@@ -121,7 +121,7 @@ const SX21MicrophonePage = async () => {
       paymentMethods={paymentMethods}
       fallbackRegularPrice={1030}
       fallbackSalePrice={890}
-      defaultThumbnail="/images/sx21-microphone.jpg"
+      defaultThumbnail="/images/landing-page/sx21/sx21-charging-case-open.jpg"
     />
   );
 };

@@ -13,28 +13,22 @@ type CarouselImage = {
 
 const images: CarouselImage[] = [
   {
-    src: "/images/sx21-microphone.jpg",
-    title: "SX21 কমপ্লিট সেটআপ",
-    caption: "ডুয়াল ট্রান্সমিটার ও রিসিভার — স্মার্টফোনে সংযোগ করার দৃশ্য",
-    badge: "মূল প্রোডাক্ট",
+    src: "/images/landing-page/sx21/sx21-box-case.jpg",
+    title: "SX21 বক্স ও ডিজিটাল ডিসপ্লে চার্জিং কেস",
+    caption: "আসল আনবক্সিং ভিউ — বক্সের সাথে ডিজিটাল এলইডি ব্যাটারি ইন্ডিকেটর চার্জিং কেস",
+    badge: "বক্স ও চার্জিং কেস",
   },
   {
-    src: "/images/sx21-handheld.jpg",
-    title: "ক্লোজ-আপ ডিটেইল শট",
-    caption: "হাতে ধরে দেখা যাচ্ছে ANC নয়েজ কাট ও MUTE বাটন এবং প্রিমিয়াম ফিনিশ",
-    badge: "বাটন ও কন্ট্রোল",
+    src: "/images/landing-page/sx21/sx21-charging-case-open.jpg",
+    title: "কেসের ভেতর ডুয়াল মাইক ও রিসিভার",
+    caption: "চার্জিং কেস খোলা অবস্থায় ২টি ওয়্যারলেস মাইক ও ১টি রিসিভার সুন্দরভাবে সংরক্ষিত",
+    badge: "সম্পূর্ণ সেটআপ",
   },
   {
-    src: "/images/sx21-collar-clip.jpg",
-    title: "কলারে ক্লিপ করে রেকর্ডিং",
-    caption: "সহজ ক্লিপ-অন ডিজাইন — মোবাইল ক্যামেরায় নিখুঁত সাউন্ড রেকর্ড হচ্ছে",
-    badge: "লাইভ ব্যবহার",
-  },
-  {
-    src: "/images/sx21-unboxing.jpg",
-    title: "আনবক্সিং ও এক্সেসরিজ",
-    caption: "২টি মাইক, ১টি রিসিভার, আইফোন ওটিজি অ্যাডাপ্টার ও টাইপ-সি চার্জিং ক্যাবল",
-    badge: "বক্সের ভেতরের সবকিছু",
+    src: "/images/landing-page/sx21/sx21-transmitter-mic.jpg",
+    title: "ক্লোজ-আপ বাটন ট্রান্সমিটার মাইক",
+    caption: "হাতে ধরে দেখানো রিয়াল শট — অত্যন্ত হালকা ও প্রিমিয়াম সার্কুলার ক্লিপ-অন মাইক",
+    badge: "ক্লোজ-আপ ডিটেইল",
   },
 ];
 
@@ -78,13 +72,13 @@ const ProductCarousel = () => {
           <div className="relative rounded-3xl overflow-hidden bg-slate-800/90 border-2 border-white/10 shadow-2xl group">
             
             {/* Image Container */}
-            <div className="relative aspect-square sm:aspect-16/10 w-full bg-slate-950 flex items-center justify-center overflow-hidden">
+            <div className="relative w-full h-[380px] sm:h-[520px] bg-slate-950 flex items-center justify-center overflow-hidden">
               <Image
                 src={current.src}
                 alt={current.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 900px"
-                className="object-contain sm:object-cover transition-transform duration-500 group-hover:scale-102"
+                className="object-contain transition-transform duration-500 group-hover:scale-102"
                 priority
               />
 
@@ -137,7 +131,7 @@ const ProductCarousel = () => {
           </div>
 
           {/* Thumbnails Navigation Row */}
-          <div className="grid grid-cols-4 gap-2.5 sm:gap-4 mt-4 sm:mt-6">
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mt-4 sm:mt-6">
             {images.map((img, idx) => {
               const isSelected = currentIdx === idx;
               return (
@@ -147,7 +141,7 @@ const ProductCarousel = () => {
                   onClick={() => {
                     setCurrentIdx(idx);
                   }}
-                  className={`relative rounded-2xl overflow-hidden aspect-square border-2 transition-all cursor-pointer ${
+                  className={`relative rounded-2xl overflow-hidden aspect-square border-2 transition-all cursor-pointer bg-slate-950 ${
                     isSelected
                       ? "border-amber-400 ring-2 ring-amber-400/30 scale-102 shadow-lg"
                       : "border-white/15 opacity-60 hover:opacity-100 hover:border-white/40"
@@ -157,7 +151,7 @@ const ProductCarousel = () => {
                     src={img.src}
                     alt={img.title}
                     fill
-                    sizes="120px"
+                    sizes="200px"
                     className="object-cover"
                   />
                   {isSelected && (
