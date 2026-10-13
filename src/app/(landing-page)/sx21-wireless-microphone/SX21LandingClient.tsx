@@ -37,6 +37,9 @@ type Props = {
   defaultThumbnail?: string;
 };
 
+// Curated hero shot (kept separate from the API product thumbnail on purpose)
+const SX21_HERO_IMAGE = "/images/landing-page/sx21/4.webp";
+
 const SX21_DETAILS = {
   title: "SX21 ওয়্যারলেস ম্যাজিক মাইক্রোফোন (ANC + ইকো মোড)",
   highlights: [
@@ -53,7 +56,8 @@ const SX21_DETAILS = {
     {
       icon: "✨",
       title: "ম্যাজিক ইকো মোড",
-      description: "কিরাত, নাত ও ইসলামী আলোচনায় দেয় মধুর স্টুডিও রিভার্ব সাউন্ড।",
+      description:
+        "কিরাত, নাত ও ইসলামী আলোচনায় দেয় মধুর স্টুডিও রিভার্ব সাউন্ড।",
     },
     {
       icon: "📱",
@@ -147,7 +151,7 @@ const SX21LandingClient = ({
       {/* 3. Hero Showcase Section (Focused on budget, ANC + Echo mode) */}
       <HeroSection
         onOrderClick={handleOrderNow}
-        thumbnailSrc={thumbnailSrc}
+        heroImageSrc={SX21_HERO_IMAGE}
         regularPrice={regularPrice}
         salePrice={salePrice}
         productTitle={productTitle}
@@ -175,7 +179,6 @@ const SX21LandingClient = ({
       <section className="py-16 sm:py-20 bg-slate-950 text-white relative overflow-hidden border-y border-white/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900/90 to-slate-950 border-2 border-emerald-500/30 p-8 sm:p-14 text-center shadow-2xl backdrop-blur-md">
-            
             {/* Background Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-emerald-500/15 rounded-full blur-[100px] pointer-events-none" />
 
@@ -212,7 +215,12 @@ const SX21LandingClient = ({
 
             {/* Explanatory Text */}
             <p className="relative z-10 text-slate-200 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
-              স্টক শেষ হওয়ার আগেই আপনার পছন্দের <strong className="text-white">SX21 ডুয়াল ওয়্যারলেস ম্যাজিক মাইক্রোফোনটি</strong> ক্যাশ অন ডেলিভারিতে অর্ডার করুন। কোনো অগ্রিম পেমেন্টের প্রয়োজন নেই।
+              স্টক শেষ হওয়ার আগেই আপনার পছন্দের{" "}
+              <strong className="text-white">
+                SX21 ডুয়াল ওয়্যারলেস ম্যাজিক মাইক্রোফোনটি
+              </strong>{" "}
+              ক্যাশ অন ডেলিভারিতে অর্ডার করুন। কোনো অগ্রিম পেমেন্টের প্রয়োজন
+              নেই।
             </p>
 
             {/* Trust Points */}
@@ -237,7 +245,6 @@ const SX21LandingClient = ({
                 className="justify-center"
               />
             </div>
-
           </div>
         </div>
       </section>
@@ -252,7 +259,6 @@ const SX21LandingClient = ({
         className="py-14 sm:py-20 bg-slate-100 border-t border-slate-300 relative"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
           {/* Form Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <div className="inline-flex flex-wrap items-center justify-center gap-2 mb-3">
@@ -268,7 +274,10 @@ const SX21LandingClient = ({
               অর্ডার করতে নিচের ফর্মটি সঠিকভাবে পূরণ করুন
             </h2>
             <p className="mt-2 text-slate-600 text-sm sm:text-base leading-relaxed">
-              পণ্য হাতে পেয়ে চেক করে মূল্য পরিশোধ করবেন। সাথে পাচ্ছেন সম্পূর্ণ <strong className="text-slate-900 font-bold">৩ মাসের ফ্রি রিপ্লেসমেন্ট সুবিধা!</strong>
+              পণ্য হাতে পেয়ে চেক করে মূল্য পরিশোধ করবেন। সাথে পাচ্ছেন সম্পূর্ণ{" "}
+              <strong className="text-slate-900 font-bold">
+                ৩ মাসের ফ্রি রিপ্লেসমেন্ট সুবিধা!
+              </strong>
             </p>
           </div>
 
@@ -295,7 +304,6 @@ const SX21LandingClient = ({
               isInStock={isInStock}
             />
           </div>
-
         </div>
       </section>
 
