@@ -64,30 +64,27 @@ const VideoSection = () => {
     scrollToIndex(nextIndex);
   };
 
-  // Update active index on user swipe/scroll
-  const handleScroll = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const scrollLeft = container.scrollLeft;
-    const cardWidth = container.firstElementChild
-      ? (container.firstElementChild as HTMLElement).offsetWidth
-      : container.offsetWidth;
-
-    if (cardWidth > 0) {
-      const newIndex = Math.round(scrollLeft / cardWidth);
-      if (newIndex >= 0 && newIndex < videos.length && newIndex !== activeIndex) {
-        setActiveIndex(newIndex);
-      }
-    }
-  };
-
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const cardWidth = container.firstElementChild
+        ? (container.firstElementChild as HTMLElement).offsetWidth
+        : container.offsetWidth;
+
+      if (cardWidth > 0) {
+        const newIndex = Math.round(scrollLeft / cardWidth);
+        if (newIndex >= 0 && newIndex < videos.length) {
+          setActiveIndex(newIndex);
+        }
+      }
+    };
+
     container.addEventListener("scroll", handleScroll, { passive: true });
     return () => container.removeEventListener("scroll", handleScroll);
-  }, [activeIndex]);
+  }, []);
 
   const scrollToOrderForm = () => {
     const el = document.getElementById("order-form");
