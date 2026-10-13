@@ -6,6 +6,7 @@ import Paginate from "@/components/shared/paginate/Paginate";
 import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
 import ProductGrid from "./ProductGrid";
 import ProductSorter from "./ProductSorter";
+import { SHOP_GRID_COLUMNS, SHOP_SKELETON_COUNT } from "./shopGrid.const";
 import { ShopFiltersProvider, useShopFilters } from "./ShopFiltersContext";
 
 type ShopContentProps = {
@@ -54,21 +55,13 @@ const ShopContentInner = ({
             <ProductSorter />
             {isLoading ? (
               <ProductGridSkeleton
-                count={10}
-                className={
-                  hideSidebar
-                    ? "lg:grid-cols-5"
-                    : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-                }
+                count={SHOP_SKELETON_COUNT}
+                className={SHOP_GRID_COLUMNS}
               />
             ) : (
               <ProductGrid
                 products={products}
-                gridClassName={
-                  hideSidebar
-                    ? "lg:grid-cols-5"
-                    : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-                }
+                gridClassName={SHOP_GRID_COLUMNS}
               />
             )}
 
