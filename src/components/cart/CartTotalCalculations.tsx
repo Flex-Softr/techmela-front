@@ -34,7 +34,7 @@ const CartTotalCalculations = ({
       {/* Subtotal Section */}
       {!hideSubtotal && (
         <div className="flex justify-between items-center py-2 text-sm text-slate-600 border-b border-slate-100">
-          <span className="font-medium">Subtotal</span>
+          <span className="font-medium">সাবটোটাল</span>
           <span className="font-semibold text-slate-900">
             {costLoading ? (
               <Skeleton className="h-4 w-[100px]" />
@@ -50,7 +50,7 @@ const CartTotalCalculations = ({
 
       {/* Total Section */}
       <div className="flex justify-between items-center py-2 border-t border-slate-100 text-slate-800">
-        <p className="font-semibold text-sm">Estimated Total</p>
+        <p className="font-semibold text-sm">সর্বমোট মূল্য</p>
         <span className="font-bold text-base text-slate-900">
           {costLoading ? (
             <Skeleton className="h-4 w-[100px]" />
@@ -63,7 +63,7 @@ const CartTotalCalculations = ({
       {/* Discount Section */}
       {discount > 0 && (
         <div className="flex justify-between items-center py-2 px-3 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-semibold border border-emerald-100">
-          <p>Coupon Discount</p>
+          <p>কুপন ছাড়</p>
           <span>- {discount} &#2547;</span>
         </div>
       )}
@@ -72,7 +72,7 @@ const CartTotalCalculations = ({
       {discount > 0 && (
         <div className="pt-2 border-t border-slate-200">
           <div className="flex justify-between items-center">
-            <p className="font-bold text-base text-slate-900">Grand Total (with coupon)</p>
+            <p className="font-bold text-base text-slate-900">সর্বমোট পরিশোধযোগ্য (কুপনসহ)</p>
             <span className="font-extrabold text-lg text-primary">
               {costLoading ? (
                 <Skeleton className="h-5 w-[100px]" />

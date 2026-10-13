@@ -32,7 +32,7 @@ const CartItems = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: "ত্রুটি",
         description: error.message,
         variant: "destructive",
       });
@@ -44,10 +44,10 @@ const CartItems = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-center">Product</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead className="text-center">Quantity</TableHead>
-            <TableHead className="text-right">Subtotal</TableHead>
+            <TableHead className="text-center">পণ্য</TableHead>
+            <TableHead>মূল্য</TableHead>
+            <TableHead className="text-center">পরিমাণ</TableHead>
+            <TableHead className="text-right">মোট</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

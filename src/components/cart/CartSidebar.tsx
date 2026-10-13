@@ -11,15 +11,15 @@ import {
 } from "@/components/ui/sheet";
 import { useToast } from "@/components/ui/use-toast";
 import useCart from "@/hooks/useCart";
-import { getImageSrc } from "@/lib/utils";
 import { useDeleteFromCartMutation } from "@/redux/features/cart/cartApi";
 import { TCartItemData } from "@/types/cart";
-import { X } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, ShoppingBag, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
+import SidebarCartItem from "./SidebarCartItem";
 import SidebarCartItemSkeleton from "./SidebarCartItemSkeleton";
+
 const CartSidebar = ({ children }: { children: ReactNode }) => {
   const { data: cartData, totalCost, isLoading } = useCart();
   const [deleteCartItem] = useDeleteFromCartMutation();
@@ -44,14 +44,26 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="flex flex-col h-full sm:max-w-md p-0">
-        <SheetHeader className="border-b px-5 py-3 flex flex-row items-center justify-between space-y-0 bg-background">
-          <SheetTitle className="text-lg font-bold">আমার কার্ট</SheetTitle>
+        <SheetHeader className="border-b px-5 py-4 flex flex-row items-center justify-between space-y-0 bg-background">
+          <div className="flex items-center gap-2">
+            <div className="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+              <ShoppingBag className="size-4" />
+            </div>
+            <SheetTitle className="text-base sm:text-lg font-bold text-foreground">
+              আমার কার্ট
+            </SheetTitle>
+            {cartItems && cartItems.length > 0 && (
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                {cartItems.length}
+              </span>
+            )}
+          </div>
           <SheetDescription className="hidden">
             আপনার কার্টের পণ্যসমূহ
           </SheetDescription>
           <button
             onClick={() => setOpen(false)}
-            className="rounded-full hover:bg-muted h-8 w-8 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            className="size-8 rounded-full hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
             aria-label="কার্ট বন্ধ করুন"
           >
             <X size={18} />
@@ -60,157 +72,71 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
 
         <div className="flex-1 overflow-y-auto px-5 bg-background">
           {isLoading ? (
-            <div className="space-y-3">
-              {[1, 2, 3, 4].map((i) => (
+            <div className="space-y-2.5 py-4">
+              {[1, 2, 3].map((i) => (
                 <SidebarCartItemSkeleton key={i} />
               ))}
             </div>
           ) : !cartItems || cartItems.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-4">
-              <p className="text-muted-foreground">আপনার কার্ট খালি রয়েছে</p>
+            <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-4 py-12">
+              <div className="size-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-1">
+                <ShoppingBag className="size-7" />
+              </div>
+              <p className="text-base font-bold text-slate-800">
+                আপনার কার্ট বর্তমানে খালি রয়েছে
+              </p>
+              <p className="text-xs text-slate-500 max-w-xs leading-relaxed">
+                পছন্দের পণ্য খুঁজে পেতে আমাদের শপে ঘুরে দেখুন এবং কার্টে যুক্ত করুন।
+              </p>
               <Button
                 onClick={() => {
                   setOpen(false);
                   router.push("/shop");
                 }}
-                variant="outline"
-                className="text-primary-foreground hover:text-primary-foreground bg-primary hover:bg-primary"
+                className="mt-2 rounded-xl px-6 h-10 font-bold text-xs sm:text-sm bg-primary hover:bg-primary/95 text-primary-foreground flex items-center gap-2"
               >
-                কেনাকাটা চালিয়ে যান
+                <span>কেনাকাটা চালিয়ে যান</span>
+                <ArrowRight className="size-4" />
               </Button>
             </div>
           ) : (
-            <div>
-              {cartItems.map((item) => {
-                const product = item.product;
-                const variation = item.variation;
-
-                // Extract variation price if it's an object
-                const variationPrice =
-                  typeof variation?.price === "object"
-                    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      (variation?.price as any)?.salePrice ||
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      (variation?.price as any)?.regularPrice
-                    : variation?.price;
-
-                // Logic to fallback to simple product price correctly
-                const price =
-                  variationPrice ||
-                  (typeof item.price === "object"
-                    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      (item.price as any)?.salePrice ||
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      (item.price as any)?.regularPrice
-                    : item.price) ||
-                  product?.salePrice ||
-                  product?.regularPrice ||
-                  0;
-
-                const variationRegularPrice =
-                  typeof variation?.price === "object"
-                    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      (variation?.price as any)?.regularPrice
-                    : variation?.regularPrice;
-
-                const itemRegularPrice =
-                  typeof item.price === "object"
-                    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      (item.price as any)?.regularPrice
-                    : undefined;
-
-                const originalPrice =
-                  variationRegularPrice ??
-                  itemRegularPrice ??
-                  product?.regularPrice;
-
-                return (
-                  <div
-                    key={item._id}
-                    className="flex items-center gap-3 py-2 relative group border-b border-border last:border-b-0"
-                  >
-                    <div className="relative size-16 flex-shrink-0 border border-border rounded-lg overflow-hidden bg-muted">
-                      <Image
-                        src={getImageSrc(product?.image?.src)}
-                        alt={
-                          product?.image?.alt ||
-                          product?.title ||
-                          "Product Image"
-                        }
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div className="flex-1 flex flex-col min-w-0 py-1">
-                      <div className="flex justify-between items-start gap-2">
-                        <h4 title={product?.title}>
-                          <Link
-                            href={`/product/${product?.slug}`}
-                            className="text-base font-bold text-foreground leading-tight line-clamp-2"
-                          >
-                            {product?.title}
-                          </Link>
-                        </h4>
-                        <button
-                          onClick={() => handleRemoveFromCart(item._id)}
-                          className="p-1 -mr-1 transition-colors text-destructive hover:text-destructive"
-                          aria-label="পণ্য বাদ দিন"
-                        >
-                          <X className="w-5 h-5" />
-                        </button>
-                      </div>
-
-                      {variation && variation.attributes && (
-                        <div className="text-xs text-muted-foreground mt-1">
-                          {Object.entries(variation.attributes)
-                            .map(([key, val]) => `${key}: ${val}`)
-                            .join(" | ")}
-                        </div>
-                      )}
-
-                      <div className="flex items-center justify-between mt-auto pt-1">
-                        <div className="flex items-center gap-1.5 text-sm font-medium text-foreground">
-                          {originalPrice && originalPrice > price && (
-                            <span className="text-muted-foreground line-through text-sm">
-                              &#2547;{originalPrice}
-                            </span>
-                          )}
-                          <div className="flex items-center gap-1">
-                            <span>&#2547;{price}</span>
-                            <span>x</span>
-                            <span>{item.quantity}</span>
-                          </div>
-                          {/* <span className="text-muted-foreground">=</span> */}
-                        </div>
-                        <span className="font-bold text-foreground">
-                          &#2547;{price * item.quantity}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="space-y-2.5 py-4">
+              {cartItems.map((item) => (
+                <SidebarCartItem
+                  key={item._id}
+                  item={item}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                  onItemClick={() => setOpen(false)}
+                />
+              ))}
             </div>
           )}
         </div>
 
         {cartItems && cartItems.length > 0 && (
-          <div className="border-t pt-4 mt-auto space-y-4 bg-background px-5 pb-6">
+          <div className="border-t pt-4 mt-auto space-y-3 bg-background px-5 pb-6">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-foreground uppercase tracking-wider">
-                সাবটোটাল
-              </span>
-              <span className="text-xl font-bold text-primary">
-                &#2547;{totalCost}
+              <div>
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+                  সাবটোটাল
+                </span>
+                <span className="text-[11px] text-slate-400">
+                  ডেলিভারি চার্জ চেকআউটে যোগ হবে
+                </span>
+              </div>
+              <span className="text-xl font-extrabold text-slate-900 tracking-tight">
+                &#2547;{totalCost.toLocaleString()}
               </span>
             </div>
             <Button
-              className="w-full h-12 rounded-xl text-base font-bold shadow-none"
+              className="w-full h-12 rounded-xl text-base font-bold bg-primary hover:bg-primary/95 text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
               asChild
               onClick={() => setOpen(false)}
             >
-              <Link href="/checkout">অর্ডার সম্পন্ন করুন</Link>
+              <Link href="/checkout">
+                <span>অর্ডার সম্পন্ন করুন</span>
+                <ArrowRight className="size-4" />
+              </Link>
             </Button>
           </div>
         )}

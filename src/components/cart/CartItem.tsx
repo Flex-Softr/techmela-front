@@ -109,7 +109,7 @@ const CartItem = ({
       </TableCell>
       <TableCell className="text-right min-w-24">
         {isLoading ? (
-          "Loading..."
+          "লোড হচ্ছে..."
         ) : (
           <>&#2547; {(price * cartItem?.quantity)?.toFixed(2)}</>
         )}
