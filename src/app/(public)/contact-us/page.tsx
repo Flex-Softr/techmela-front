@@ -3,13 +3,13 @@ import { SITE } from "@/const/site.const";
 import { Metadata } from "next";
 import Image from "next/image";
 import {
-  FaEnvelope,
-  FaFacebook,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaUsers,
-  FaWhatsapp,
-  FaYoutube,
+    FaEnvelope,
+    FaFacebook,
+    FaMapMarkerAlt,
+    FaPhoneAlt,
+    FaUsers,
+    FaWhatsapp,
+    FaYoutube,
 } from "react-icons/fa";
 import ContactForm from "./components/ContactForm";
 
@@ -68,7 +68,7 @@ const ContactUsPage = () => {
               name: "আপনাদের হেল্পলাইন নম্বর কত?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "আমাদের হেল্পলাইন নম্বর +8801772065894। যেকোনো প্রয়োজনে কল করতে পারেন।",
+                text: "আমাদের হেল্পলাইন নম্বর +8801744675030। যেকোনো প্রয়োজনে কল করতে পারেন।",
               },
             },
           ],
@@ -127,8 +127,8 @@ const ContactUsPage = () => {
                       ফোন নম্বর
                     </h4>
                     <p className="text-xl font-bold text-foreground">
-                      <a href="tel:+8801772065894" className="hover:text-primary transition-colors">
-                        +8801772065894
+                      <a href="tel:+8801744675030" className="hover:text-primary transition-colors">
+                        +8801744675030
                       </a>
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">

@@ -25,11 +25,11 @@ const SalesHeader = ({ onOrderClick }: Props) => {
 
       <div className="flex items-center gap-2 sm:gap-3">
         <a
-          href="tel:+8801772065894"
+          href="tel:+8801744675030"
           className="hidden sm:flex items-center gap-1.5 bg-white/10 text-white px-3 py-1.5 rounded-full border border-white/20 font-bold text-sm hover:bg-white/20 transition-all cursor-pointer"
         >
           <MdCall className="text-lg" />
-          <span>+8801772065894</span>
+          <span>+8801744675030</span>
         </a>
 
         <a

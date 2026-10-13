@@ -3,12 +3,12 @@ import { SITE } from "@/const/site.const";
 import { Metadata } from "next";
 import Image from "next/image";
 import {
-  FaFacebook,
-  FaHeadset,
-  FaMapMarkerAlt,
-  FaUsers,
-  FaWhatsapp,
-  FaYoutube,
+    FaFacebook,
+    FaHeadset,
+    FaMapMarkerAlt,
+    FaUsers,
+    FaWhatsapp,
+    FaYoutube,
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
@@ -131,14 +131,14 @@ const StoreLocationPage = () => {
                       </p>
                       <div className="space-y-4">
                         <a
-                          href="tel:+8801772065894"
+                          href="tel:+8801744675030"
                           className="inline-flex items-center gap-4 group"
                         >
                           <div className="w-12 h-12 bg-success/10 rounded-2xl flex items-center justify-center text-success transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                             <FaHeadset size={22} />
                           </div>
                           <span className="text-2xl font-black text-foreground group-hover:text-primary transition-colors">
-                            +8801772065894
+                            +8801744675030
                           </span>
                         </a>
                       </div>

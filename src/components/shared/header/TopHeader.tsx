@@ -35,11 +35,11 @@ const TopHeader = () => {
         {/* Left: Contact Info */}
         <div className="flex gap-3 items-center flex-1">
           <a
-            href="tel:+8801772065894"
+            href="tel:+8801744675030"
             className="flex gap-1.5 items-center text-[13px] hover:text-white transition-all underline-offset-4 hover:underline"
           >
             <MdCall className="size-4 text-emerald-300" />
-            <span>+8801772065894</span>
+            <span>+8801744675030</span>
           </a>
 
           <span className="text-white/20">|</span>
