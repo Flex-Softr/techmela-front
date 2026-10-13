@@ -1,7 +1,12 @@
 import ShopBanner from "@/app/(public)/shop/components/ShopBanner";
+import {
+  SHOP_GRID_COLUMNS,
+  SHOP_SKELETON_COUNT,
+} from "@/app/(public)/shop/components/shopGrid.const";
 import ProductGridSkeleton from "@/components/productCards/ProductGridSkeleton";
 import ContainerMax from "@/components/shared/containerMax/ContainerMax";
 import Box from "@/components/ui/ec/Box";
+import { cn } from "@/lib/utils";
 
 export default function ShopLoading() {
   return (
@@ -39,8 +44,8 @@ export default function ShopLoading() {
               </div>
 
               <ProductGridSkeleton
-                count={10}
-                className="mt-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 lg:mt-0"
+                count={SHOP_SKELETON_COUNT}
+                className={cn("mt-5 lg:mt-0", SHOP_GRID_COLUMNS)}
               />
             </div>
           </div>
