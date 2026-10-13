@@ -53,13 +53,13 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
             <div className="flex flex-wrap items-center gap-2">
               {/* Percentage Badge */}
               <span className="bg-destructive text-primary-foreground text-xs px-2.5 py-1 rounded-full font-extrabold shadow-sm whitespace-nowrap uppercase tracking-wider">
-                {Math.round(discountPercent)}% OFF
+                {Math.round(discountPercent)}% ছাড়
               </span>
 
               {/* Savings Information */}
               {/* {priceSave && (
                 <span className="bg-success/15 text-success text-xs px-2.5 py-1 rounded-full font-bold border border-success/25 flex items-center gap-1 whitespace-nowrap">
-                  <span className="opacity-70 font-medium">Save</span>
+                  <span className="opacity-70 font-medium">সাশ্রয়</span>
                   <span>&#2547;{priceSave}</span>
                 </span>
               )} */}
@@ -86,7 +86,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Price Section */}
           <div className="flex items-center gap-3">
             <span className="text-muted-foreground font-medium shrink-0">
-              Price:
+              মূল্য:
             </span>
             {priceDisplay}
           </div>
@@ -94,7 +94,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
           {/* Status Chip */}
           <div className="px-4 py-1.5 bg-muted rounded-full flex items-center gap-2 text-sm">
             <span className="text-muted-foreground font-medium shrink-0">
-              Status:
+              স্টক:
             </span>
             <span className={`${stockStatusColor(stockStatus)} font-bold`}>
               {stockStatus !== STOCK_STATUS.OUT_OF_STOCK &&
@@ -151,7 +151,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         {/* Warranty Info */}
         {warranty && warrantyInfo && (
           <div className="flex items-center gap-2 text-sm pt-2 border-t border-dashed border-border">
-            <span className="text-foreground font-bold">Warranty:</span>
+            <span className="text-foreground font-bold">ওয়ারেন্টি:</span>
             <WarrantyInfo warrantyInfo={warrantyInfo} />
           </div>
         )}
@@ -165,7 +165,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
       {/* Price Section */}
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-muted-foreground font-medium text-lg">
-          Price:
+          মূল্য:
         </span>
         {priceDisplay}
       </div>
@@ -175,7 +175,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         {/* Status */}
         <div className="flex justify-between items-center text-sm">
           <span className="text-muted-foreground font-medium w-24">
-            Status:
+            স্টক:
           </span>
           <div className="flex-1">
             <span
@@ -227,7 +227,7 @@ const ProductMainInfo = ({ product, selectedVariation }: TProps) => {
         {/* Warranty Info (Moved here for better context) */}
         {/* {warranty && warrantyInfo && (
           <div className="flex items-center gap-2 text-sm pt-2 border-t border-dashed border-border mt-2">
-            <span className="text-foreground font-bold w-24">Warranty:</span>
+            <span className="text-foreground font-bold w-24">ওয়ারেন্টি:</span>
             <div className="flex-1">
               <WarrantyInfo warrantyInfo={warrantyInfo} />
             </div>

@@ -19,7 +19,7 @@ const ProductDescription = ({ product }: { product?: TSingleProduct }) => {
               value="description"
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-0 pb-2 text-lg font-semibold text-muted-foreground data-[state=active]:text-foreground transition-all"
             >
-              Description
+              পণ্যের বিবরণ
             </TabsTrigger>
           )}
           {hasUsageGuidelines && (
@@ -27,7 +27,7 @@ const ProductDescription = ({ product }: { product?: TSingleProduct }) => {
               value="usage"
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-0 pb-2 text-lg font-semibold text-muted-foreground data-[state=active]:text-foreground transition-all"
             >
-              Usage guidelines
+              ব্যবহারবিধি
             </TabsTrigger>
           )}
         </TabsList>

@@ -60,7 +60,7 @@ const ProductDetailsPage = async ({ params }: TProps) => {
   if (!product) {
     return (
       <ErrorMessage
-        message="No product found"
+        message="কোনো পণ্য পাওয়া যায়নি"
         className="text-center text-2xl py-5"
       />
     );
@@ -80,15 +80,15 @@ const ProductDetailsPage = async ({ params }: TProps) => {
   const breadcrumbJsonLd = generateBreadcrumbSchema(product);
 
   return (
-    <section>
+    <section className="py-6 md:py-8 lg:py-10">
       <JsonLd data={productJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
       <ContainerMax>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
-          <Box className="shadow-none ring-2 lg:mt-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+          <Box className="shadow-none ring-1 border-border/80">
             <ProductImageGallery gallery={gallery} discount={discount} />
           </Box>
-          <Box className="p-4 space-y-4 shadow-none ring-0">
+          <Box className="p-4 sm:p-6 space-y-4 shadow-none ring-0">
             <h1 className="font-semibold text-xl lg:text-2xl text-foreground">
               {product.title}
             </h1>

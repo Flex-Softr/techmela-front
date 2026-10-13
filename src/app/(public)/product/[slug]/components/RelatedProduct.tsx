@@ -22,9 +22,9 @@ const RelatedProduct = async ({ slug }: TRelatedProductProps) => {
   return (
     <div className="col-span-1 lg:col-span-2 mt-5">
       <SectionTitle
-        title="You may also like"
+        title="সম্পর্কিত আরও পণ্য"
         href="/shop"
-        linkText="View all"
+        linkText="সবগুলো দেখুন"
       />
       <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 lg:gap-3">
         {products?.map((product) => (

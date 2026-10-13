@@ -38,96 +38,73 @@ const WarrantyInfo: React.FC<WarrantyInfoProps> = ({ warrantyInfo }) => {
         </span>
       ) : (
         <span className="text-muted-foreground text-sm italic">
-          No warranty available
+          কোনো ওয়ারেন্টি নেই
         </span>
       )}
       <button
         className="px-3 py-0.5 text-xs font-semibold text-secondary bg-transparent hover:bg-secondary hover:text-primary-foreground rounded-md transition-colors border border-secondary"
         onClick={openModal}
       >
-        View Details
+        বিস্তারিত দেখুন
       </button>
 
       {/* Modal */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="w-[90%] lg:w-[80%] max-w-4xl h-[80vh] md:h-[90vh] overflow-hidden rounded-lg shadow-lg">
-          <DialogHeader className="flex items-center justify-between  border-b">
+          <DialogHeader className="flex items-center justify-between border-b">
             <DialogTitle className="text-xl font-semibold text-foreground">
-              Warranty Information
+              ওয়ারেন্টি সংক্রান্ত তথ্য
             </DialogTitle>
           </DialogHeader>
 
           <div className="h-full overflow-y-auto space-y-2">
             {/* Warranty Description */}
             <DialogDescription>
-              <div className="space-y-4 text-foreground">
+              <div className="space-y-4 text-foreground text-base leading-relaxed">
                 <p>
-                  Dear customer, <br />
-                  Building your trust and satisfaction with our products is{" "}
-                  {SITE.nameBn}&apos;s primary goal. Every product includes a
-                  warranty code number. If your product is damaged within the
-                  warranty period, follow the steps below to claim your warranty
-                  easily:
+                  সম্মানিত গ্রাহক, <br />
+                  আমাদের পণ্যের মান ও আপনার সন্তুষ্টিই {SITE.nameBn}-এর মূল লক্ষ্য। প্রতিটি পণ্যের সাথে একটি ওয়ারেন্টি কোড নম্বর প্রদান করা হয়। ওয়ারেন্টি মেয়াদের মধ্যে পণ্যে কোনো ত্রুটি দেখা দিলে খুব সহজেই ওয়ারেন্টি ক্লেইম করতে পারবেন:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
-                    Contact us via our hotline number, Facebook page, or
-                    website.
+                    আমাদের হটলাইন নম্বর, ফেসবুক পেজ বা ওয়েবসাইটের মাধ্যমে যোগাযোগ করুন।
                   </li>
                   <li>
-                    Share the product code number and the mobile number used for
-                    the order.
+                    পণ্যের ওয়ারেন্টি কোড নম্বর এবং অর্ডার করার সময় ব্যবহৃত মোবাইল নম্বরটি আমাদের জানান।
                   </li>
                   <li>
-                    Our representative will review the issue and quickly send
-                    you a replacement product.
+                    আমাদের প্রতিনিধি সমস্যাটি যাচাই করে দ্রুত একটি রিপ্লেসমেন্ট পণ্য পাঠিয়ে দেবেন।
                   </li>
                   <li>
-                    Simply hand the damaged product to the delivery person and
-                    receive the new one with ease.
+                    ডেলিভারি ম্যানের কাছে সমস্যাযুক্ত পণ্যটি হস্তান্তর করে সহজেই নতুন পণ্যটি গ্রহণ করুন।
                   </li>
                   <li>
-                    In courier terms, this process is called an
-                    &quot;exchange.&quot;
+                    কুরিয়ার সার্ভিসের ভাষায় এই প্রক্রিয়াকে &quot;এক্সচেঞ্জ&quot; বলা হয়।
                   </li>
                 </ul>
                 <p>
-                  <strong>Note:</strong> <br />
-                  Your code number and mobile number will be registered under
-                  your name in our system, so you can use our service with
-                  confidence.
+                  <strong>বিশেষ দ্রষ্টব্য:</strong> <br />
+                  আপনার কোড নম্বর এবং মোবাইল নম্বর আমাদের সিস্টেমে আপনার নামেই সংরক্ষিত থাকে, তাই নিশ্চিন্তে যেকোনো প্রয়োজনে আমাদের সেবা গ্রহণ করতে পারেন।
                 </p>
               </div>
             </DialogDescription>
 
             {/* Video Section */}
             <div>
-              <p className="text-sm md:text-lg font-medium text-foreground mb-2">
-                You can also claim your warranty easily through our website by
-                clicking the link below.
+              <p className="text-sm md:text-base font-medium text-foreground mb-2">
+                নিচের বাটনে ক্লিক করে খুব সহজে আমাদের ওয়েবসাইট থেকেও সরাসরি ওয়ারেন্টি ক্লেইম করতে পারেন:
               </p>
               <Link href="/warranty/find-your-product" target="_blank">
                 <EcButton className="bg-secondary text-primary-foreground flex items-center gap-2 mt-4 hover:bg-secondary/90 transition-all font-semibold px-6 py-2 h-auto text-base">
-                  Claim Warranty <FaArrowRight size={16} />
+                  ওয়ারেন্টি ক্লেইম করুন <FaArrowRight size={16} />
                 </EcButton>
               </Link>
-              {/* video if need  */}
-              {/* <div className="w-full border rounded-lg overflow-hidden">
-                <iframe
-                  className="w-full aspect-video"
-                  src="https://www.youtube.com/embed/YjhiCrCmpwY"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
-              </div> */}
-              <div className="text-center mt-7 ">
+              <div className="text-center mt-7">
                 <p className="text-base md:text-lg">
-                  Your satisfaction is our inspiration.
+                  আপনার সন্তুষ্টিই আমাদের অনুপ্রেরণা।
                 </p>
-                <p className="font-bold text-base">ShajGhor</p>
-                <p className="font-semibold">&quot;A Symbol of Trust&quot;</p>
+                <p className="font-bold text-base">{SITE.nameBn}</p>
+                <p className="font-semibold">&quot;বিশ্বাসের প্রতীক&quot;</p>
               </div>
             </div>
           </div>

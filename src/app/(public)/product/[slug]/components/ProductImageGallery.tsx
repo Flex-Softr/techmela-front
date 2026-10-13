@@ -16,8 +16,8 @@ const ProductImageGallery = ({
   const galleryImages = gallery?.map((image) => ({
     original: getImageSrc(image?.src),
     thumbnail: getImageSrc(image?.src),
-    originalAlt: image?.alt || "Product image",
-    thumbnailAlt: image?.alt || "Product thumbnail",
+    originalAlt: image?.alt || "পণ্যের ছবি",
+    thumbnailAlt: image?.alt || "পণ্যের থাম্বনেইল",
     crossOrigin: "anonymous",
   }));
 
@@ -102,7 +102,7 @@ const ProductImageGallery = ({
               {Math.round(discount)}%
             </span>
             <span className="text-[8px] lg:text-[10px] font-black uppercase tracking-wider">
-              OFF
+              ছাড়
             </span>
           </div>
         </div>

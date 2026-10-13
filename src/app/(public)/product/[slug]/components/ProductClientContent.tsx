@@ -95,7 +95,7 @@ const ProductClientContent = ({
         (e: any) => e.message
       );
       toast({
-        title: errors?.[0] || "Failed to add to cart",
+        title: errors?.[0] || "কার্টে যোগ করা যায়নি",
         variant: "destructive",
       });
       success = false;
@@ -116,9 +116,9 @@ const ProductClientContent = ({
 
   const disabledReason =
     isVariableProduct && !isVariationSelected
-      ? "Please select a variation"
+      ? "অনুগ্রহ করে একটি ভেরিয়েন্ট বেছে নিন"
       : !isStockAvailable
-        ? "Out of Stock"
+        ? "স্টক শেষ"
         : undefined;
 
   const regularPrice = product?.price?.regularPrice ?? 0;
@@ -141,13 +141,13 @@ const ProductClientContent = ({
       ? `${SITE.baseUrl}/product/${product.slug}`
       : SITE.baseUrl);
 
-  const whatsappMessage = `Hello TechMela, I would like to order:
-📦 Product: ${product?.title || "Product"}
-${variantText ? `🏷️ Variant: ${variantText}\n` : ""}💰 Price: ৳${currentItemPrice.toLocaleString()}
-🔢 Quantity: ${quantity}
-🔗 Link: ${productUrl}
+  const whatsappMessage = `আসসালামু আলাইকুম ${SITE.nameBn}, আমি এই পণ্যটি অর্ডার করতে চাই:
+📦 পণ্য: ${product?.title || "পণ্য"}
+${variantText ? `🏷️ ভেরিয়েন্ট: ${variantText}\n` : ""}💰 মূল্য: ৳${currentItemPrice.toLocaleString()}
+🔢 পরিমাণ: ${quantity}
+🔗 লিংক: ${productUrl}
 
-Please confirm availability and how to proceed.`;
+দয়া করে স্টক আছে কি না এবং কীভাবে অর্ডার নিশ্চিত করব জানাবেন।`;
 
   const whatsappUrl = `https://wa.me/${SITE.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -164,7 +164,7 @@ Please confirm availability and how to proceed.`;
       />
 
       {/* Direct Order Actions: WhatsApp & Call */}
-      <div className="grid grid-cols-2 gap-2 sm:gap-3 mt-3">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 mt-2.5 sm:mt-3">
         <a
           href={whatsappUrl}
           target="_blank"
@@ -172,7 +172,7 @@ Please confirm availability and how to proceed.`;
           className="h-[42px] sm:h-[46px] px-2 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all active:scale-[0.98] group"
         >
           <FaWhatsapp className="size-4 sm:size-5 shrink-0 group-hover:scale-110 transition-transform text-white" />
-          <span className="truncate">Order via WhatsApp</span>
+          <span className="truncate">WhatsApp-এ অর্ডার</span>
         </a>
 
         <a
@@ -180,7 +180,7 @@ Please confirm availability and how to proceed.`;
           className="h-[42px] sm:h-[46px] px-2 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl bg-[rgba(9,33,67,1)] hover:bg-[rgba(13,45,89,1)] text-white font-bold text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all active:scale-[0.98] group"
         >
           <Phone className="size-3.5 sm:size-4.5 shrink-0 group-hover:scale-110 transition-transform text-white" />
-          <span className="truncate">Call for Order</span>
+          <span className="truncate">কল করে অর্ডার</span>
         </a>
       </div>
 
@@ -193,7 +193,7 @@ Please confirm availability and how to proceed.`;
             id="bookPreview"
           >
             <Sparkles className="h-5 w-5 group-hover/preview:animate-bounce-subtle" />
-            View Details
+            বিস্তারিত দেখুন
           </button>
         </div>
       )}
