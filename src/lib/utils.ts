@@ -86,3 +86,5 @@ export function getImageSrc(src: string | undefined | null): string {
   // For backend relative storage keys (e.g. "general/...", "products/...")
   return `${origin}/server-api/uploads/public/${cleanSrc}`;
 }
+
+

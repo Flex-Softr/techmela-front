@@ -1,10 +1,10 @@
 import Image from "next/image";
 import {
-  FaCheckCircle,
-  FaClock,
-  FaPhoneAlt,
-  FaTimesCircle,
-  FaUndoAlt,
+    FaCheckCircle,
+    FaClock,
+    FaPhoneAlt,
+    FaTimesCircle,
+    FaUndoAlt,
 } from "react-icons/fa";
 
 export const metadata = {
@@ -157,12 +157,12 @@ const ReturnPolicyPage = () => {
             যেকোনো তথ্যের জন্য
           </p>
           <a
-            href="tel:+8801772065894"
+            href="tel:+8801744675030"
             className="inline-flex items-center gap-4 py-3 px-8 bg-background rounded-full shadow-lg border border-border hover:border-primary transition-colors"
           >
             <FaPhoneAlt className="text-primary" />
             <span className="text-2xl font-black text-foreground tracking-wider">
-              +8801772065894
+              +8801744675030
             </span>
           </a>
         </div>

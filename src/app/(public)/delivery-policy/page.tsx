@@ -3,12 +3,12 @@ import serverSideFetcher from "@/utilities/serverSideFetcher";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  FaBoxOpen,
-  FaCheckCircle,
-  FaClock,
-  FaMapMarkedAlt,
-  FaSearchLocation,
-  FaTruck,
+    FaBoxOpen,
+    FaCheckCircle,
+    FaClock,
+    FaMapMarkedAlt,
+    FaSearchLocation,
+    FaTruck,
 } from "react-icons/fa";
 
 export const metadata = {
@@ -183,11 +183,11 @@ const DeliveryPolicyPage = async () => {
             যেকোনো তথ্যের জন্য আমাদের হেল্পলাইনে যোগাযোগ করুন
           </h3>
           <a
-            href="tel:+8801772065894"
+            href="tel:+8801744675030"
             className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-md px-8 py-3 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-colors"
           >
             <span className="text-2xl md:text-3xl font-black tracking-widest">
-              +8801772065894
+              +8801744675030
             </span>
           </a>
         </div>

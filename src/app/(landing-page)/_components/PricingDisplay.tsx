@@ -3,6 +3,9 @@ type Props = {
   salePrice: number;
   className?: string;
   isLarge?: boolean;
+  priceColor?: string;
+  regularPriceColor?: string;
+  discountColor?: string;
 };
 
 const PricingDisplay = ({
@@ -10,6 +13,9 @@ const PricingDisplay = ({
   salePrice,
   className = "",
   isLarge = false,
+  priceColor,
+  regularPriceColor,
+  discountColor,
 }: Props) => {
   const discount =
     regularPrice > salePrice
@@ -23,7 +29,9 @@ const PricingDisplay = ({
       <div className="flex items-baseline gap-3">
         {/* Sale Price */}
         <span
-          className={`${isLarge ? "text-5xl lg:text-7xl" : "text-4xl lg:text-5xl"} font-black text-primary`}
+          className={`${isLarge ? "text-5xl lg:text-7xl" : "text-4xl lg:text-5xl"} font-black ${
+            priceColor || "text-primary"
+          }`}
         >
           &#2547;{salePrice}
         </span>
@@ -31,7 +39,9 @@ const PricingDisplay = ({
         {/* Regular Price */}
         {regularPrice > salePrice && (
           <span
-            className={`${isLarge ? "text-2xl lg:text-3xl" : "text-xl lg:text-2xl"} text-slate-400 line-through decoration-2`}
+            className={`${isLarge ? "text-2xl lg:text-3xl" : "text-xl lg:text-2xl"} ${
+              regularPriceColor || "text-slate-400"
+            } line-through decoration-2`}
           >
             &#2547;{regularPrice}
           </span>
@@ -41,7 +51,9 @@ const PricingDisplay = ({
       {/* Discount Badge/Text */}
       {discount > 0 && (
         <div
-          className={`mt-1 font-bold text-primary ${isLarge ? "text-lg lg:text-xl" : "text-sm lg:text-base"} animate-pulse`}
+          className={`mt-1 font-bold ${
+            discountColor || "text-primary"
+          } ${isLarge ? "text-lg lg:text-xl" : "text-sm lg:text-base"} animate-pulse`}
         >
           {discount}% ছাড় পাচ্ছেন!
         </div>

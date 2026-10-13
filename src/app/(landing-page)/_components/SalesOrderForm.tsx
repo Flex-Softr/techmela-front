@@ -328,10 +328,10 @@ const SalesOrderForm = ({
                   অর্ডার করতে সমস্যা হলে নিচের নম্বরে কল করুন
                 </p>
                 <a
-                  href="tel:+8801772065894"
+                  href="tel:+8801744675030"
                   className="inline-flex items-center justify-center gap-3 bg-background text-primary font-black px-8 py-3 rounded-xl border border-primary/10 shadow-lg hover:shadow-xl hover:bg-muted transition-all text-lg lg:text-xl"
                 >
-                  +8801772065894
+                  +8801744675030
                 </a>
               </div>
             </div>

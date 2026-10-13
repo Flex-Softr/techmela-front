@@ -11,8 +11,8 @@ export const SITE = {
   baseUrl: "https://techmela.com.bd",
   apiUrl: "https://api.techmela.com.bd",
   email: "support@techmela.com.bd",
-  phone: "+8801772065894",
-  phoneDisplay: "+8801772065894",
+  phone: "+8801744675030",
+  phoneDisplay: "+8801744675030",
   address: "দোকান নং- ৩৬৯, মোতালিব প্লাজা, হাতিরপুল, ঢাকা-১২০৫",
   logoPath: "/logo/techmela-lightlogo.png",
   social: {
