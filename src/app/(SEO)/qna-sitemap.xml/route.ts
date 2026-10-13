@@ -1,3 +1,4 @@
+import { SITE } from "@/const/site.const";
 import { TQnA } from "@/types/blog-qna";
 import { TPaginatedData } from "@/types/response";
 import serverSideFetcher from "@/utilities/serverSideFetcher";
@@ -12,7 +13,7 @@ const sanitize = (value: string) =>
     .replace(/'/g, "&apos;");
 
 export async function GET() {
-  const baseUrl = "https://shajghor.com";
+  const baseUrl = SITE.baseUrl;
   const qnaRes = await serverSideFetcher<TPaginatedData<TQnA[]>>({
     url: "/qna",
     tags: ["qna"],

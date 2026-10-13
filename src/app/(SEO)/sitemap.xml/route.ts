@@ -1,7 +1,8 @@
+import { SITE } from "@/const/site.const";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://shajghor.com";
+  const baseUrl = SITE.baseUrl;
 
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

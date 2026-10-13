@@ -1,7 +1,8 @@
+import { SITE } from "@/const/site.const";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://shajghor.com";
+  const baseUrl = SITE.baseUrl;
   const staticPages = [
     "",
     "/shop",
