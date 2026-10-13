@@ -6,7 +6,8 @@ import { FaFire } from "react-icons/fa";
 
 type Props = {
   onOrderClick: () => void;
-  thumbnailSrc: string;
+  /** Hero showcase image — a curated marketing shot, independent of the product thumbnail. */
+  heroImageSrc: string;
   regularPrice: number;
   salePrice: number;
   productTitle: string;
@@ -14,7 +15,7 @@ type Props = {
 
 const HeroSection = ({
   onOrderClick,
-  thumbnailSrc,
+  heroImageSrc,
   regularPrice,
   salePrice,
   productTitle,
@@ -27,10 +28,8 @@ const HeroSection = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
           {/* Left Column: Headline, Selling Points & Price */}
           <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
-            
             {/* Urgency & Problem-Focus Badges */}
             <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2">
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/20 to-amber-500/20 border border-amber-500/30 px-4 py-2 rounded-full text-amber-300 font-bold text-xs sm:text-sm animate-pulse">
@@ -54,21 +53,35 @@ const HeroSection = ({
 
             {/* Sub-headline */}
             <p className="text-slate-300 text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              একটি দামি মাইক্রোফোন কিনতে না পারার আক্ষেপ আর নয়! স্বল্প বাজেটে মাত্র ৮৯০ টাকায় আমরা দিচ্ছি বেস্ট কোয়ালিটির <strong className="text-white font-bold">{productTitle}</strong> — যাতে রয়েছে পাওয়ারফুল <span className="text-amber-300 font-bold">ANC (অ্যাক্টিভ নয়েজ ক্যান্সেলেশন)</span> এবং আকর্ষণীয় <span className="text-amber-300 font-bold">ইকো (Echo) মোড</span>।
+              একটি দামি মাইক্রোফোন কিনতে না পারার আক্ষেপ আর নয়! স্বল্প বাজেটে
+              মাত্র ৮৯০ টাকায় আমরা দিচ্ছি বেস্ট কোয়ালিটির{" "}
+              <strong className="text-white font-bold">{productTitle}</strong> —
+              যাতে রয়েছে পাওয়ারফুল{" "}
+              <span className="text-amber-300 font-bold">
+                ANC (অ্যাক্টিভ নয়েজ ক্যান্সেলেশন)
+              </span>{" "}
+              এবং আকর্ষণীয়{" "}
+              <span className="text-amber-300 font-bold">ইকো (Echo) মোড</span>।
             </p>
 
             {/* Short & Punchy 2-Line Hook */}
             <div className="p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xs text-sm sm:text-base text-slate-200 text-left space-y-2.5 max-w-xl mx-auto lg:mx-0">
               <div className="flex items-start gap-2.5">
-                <span className="text-amber-400 text-lg flex-shrink-0 mt-0.5">💡</span>
+                <span className="text-amber-400 text-lg flex-shrink-0 mt-0.5">
+                  💡
+                </span>
                 <span className="leading-relaxed">
-                  <strong>ভিডিওর চেয়ে অডিও জরুরি:</strong> ভিডিও সাধারণ হলেও মানুষ দেখে, কিন্তু সাউন্ডে নয়েজ থাকলে ৫ সেকেন্ডেই স্কিপ করে!
+                  <strong>ভিডিওর চেয়ে অডিও জরুরি:</strong> ভিডিও সাধারণ হলেও
+                  মানুষ দেখে, কিন্তু সাউন্ডে নয়েজ থাকলে ৫ সেকেন্ডেই স্কিপ করে!
                 </span>
               </div>
               <div className="flex items-start gap-2.5 pt-2 border-t border-white/10">
-                <span className="text-emerald-400 text-lg flex-shrink-0 mt-0.5">🌙</span>
+                <span className="text-emerald-400 text-lg flex-shrink-0 mt-0.5">
+                  🌙
+                </span>
                 <span className="leading-relaxed">
-                  <strong>সামনে মাহে রমজান:</strong> এখন থেকেই কিরাত, গজল, ওয়াজ রেকর্ড করে ফেসবুক পেইজে দ্রুত ফলোয়ার ও রিচ বাড়ানোর সেরা সুযোগ।
+                  <strong>সামনে মাহে রমজান:</strong> এখন থেকেই কিরাত, গজল, ওয়াজ
+                  রেকর্ড করে ফেসবুক পেইজে দ্রুত ফলোয়ার ও রিচ বাড়ানোর সেরা সুযোগ।
                 </span>
               </div>
             </div>
@@ -116,8 +129,8 @@ const HeroSection = ({
                 </span>
                 <span className="text-slate-500">•</span>
                 <span className="flex items-center gap-1.5 font-bold text-amber-300">
-                  <span className="size-2 rounded-full bg-amber-400"></span>
-                  ৩ মাসের রিপ্লেসমেন্ট গ্যারান্টি
+                  <span className="size-2 rounded-full bg-amber-400"></span>৩
+                  মাসের রিপ্লেসমেন্ট গ্যারান্টি
                 </span>
               </div>
             </div>
@@ -126,21 +139,19 @@ const HeroSection = ({
           {/* Right Column: High Quality Product Showcase */}
           <div className="lg:col-span-6 flex justify-center w-full">
             <div className="w-full max-w-lg lg:max-w-xl">
-              
               {/* Product Showcase Card Frame */}
               <div className="relative rounded-3xl overflow-hidden border border-white/20 bg-gradient-to-b from-slate-800/80 via-slate-900/90 to-slate-950/95 p-3.5 sm:p-5 shadow-2xl backdrop-blur-xl">
-                
                 {/* Product Image Frame */}
                 <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-slate-950 border border-white/10 shadow-inner">
                   <Image
-                    src={"/images/landing-page/sx21/4.webp"}
+                    src={heroImageSrc}
                     alt={productTitle}
                     fill
                     sizes="(max-width: 768px) 100vw, 650px"
                     className="object-cover object-center transform hover:scale-105 transition-transform duration-500"
                     priority
                   />
-                  
+
                   {/* Floating Best Seller Badge */}
                   <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-xs sm:text-sm font-black px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
                     <span>★</span>
@@ -150,7 +161,10 @@ const HeroSection = ({
                   {/* Floating Discount Tag */}
                   {regularPrice > salePrice && (
                     <div className="absolute top-3 right-3 bg-red-600 text-white text-xs sm:text-sm font-black px-3.5 py-1.5 rounded-full shadow-lg">
-                      {Math.round(((regularPrice - salePrice) / regularPrice) * 100)}% ছাড়
+                      {Math.round(
+                        ((regularPrice - salePrice) / regularPrice) * 100
+                      )}
+                      % ছাড়
                     </div>
                   )}
                 </div>
@@ -163,8 +177,12 @@ const HeroSection = ({
                       ANC
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm sm:text-base font-bold text-white leading-snug">অ্যাক্টিভ নয়েজ কাট</p>
-                      <p className="text-xs text-slate-200 leading-snug mt-0.5">বাইরের সব শব্দ ব্লক</p>
+                      <p className="text-sm sm:text-base font-bold text-white leading-snug">
+                        অ্যাক্টিভ নয়েজ কাট
+                      </p>
+                      <p className="text-xs text-slate-200 leading-snug mt-0.5">
+                        বাইরের সব শব্দ ব্লক
+                      </p>
                     </div>
                   </div>
 
@@ -174,8 +192,12 @@ const HeroSection = ({
                       ECHO
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm sm:text-base font-bold text-white leading-snug">ম্যাজিক ইকো মোড</p>
-                      <p className="text-xs text-slate-200 leading-snug mt-0.5">মধুর কিরাত ও ওয়াজ</p>
+                      <p className="text-sm sm:text-base font-bold text-white leading-snug">
+                        ম্যাজিক ইকো মোড
+                      </p>
+                      <p className="text-xs text-slate-200 leading-snug mt-0.5">
+                        মধুর কিরাত ও ওয়াজ
+                      </p>
                     </div>
                   </div>
 
@@ -185,8 +207,12 @@ const HeroSection = ({
                       DUAL
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm sm:text-base font-bold text-white leading-snug">ডুয়াল মাইক</p>
-                      <p className="text-xs text-slate-200 leading-snug mt-0.5">একসাথে ২ জন রেকর্ডিং</p>
+                      <p className="text-sm sm:text-base font-bold text-white leading-snug">
+                        ডুয়াল মাইক
+                      </p>
+                      <p className="text-xs text-slate-200 leading-snug mt-0.5">
+                        একসাথে ২ জন রেকর্ডিং
+                      </p>
                     </div>
                   </div>
 
@@ -196,16 +222,18 @@ const HeroSection = ({
                       OTG
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm sm:text-base font-bold text-white leading-snug">Android + iPhone</p>
-                      <p className="text-xs text-slate-200 leading-snug mt-0.5">প্লাগ অ্যান্ড প্লে সাপোর্ট</p>
+                      <p className="text-sm sm:text-base font-bold text-white leading-snug">
+                        Android + iPhone
+                      </p>
+                      <p className="text-xs text-slate-200 leading-snug mt-0.5">
+                        প্লাগ অ্যান্ড প্লে সাপোর্ট
+                      </p>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

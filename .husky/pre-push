@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Same lint + type checks that `next build` runs in Docker.
+# Blocks the push if they fail, so a broken build never reaches the server.
+npm run check
