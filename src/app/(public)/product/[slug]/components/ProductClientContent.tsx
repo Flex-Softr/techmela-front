@@ -61,6 +61,8 @@ const ProductClientContent = ({
 
         eventHandler({
           event_name: "add_to_cart",
+          // Same ID that was sent to the cart API, so browser & server events deduplicate
+          event_id: eventId,
           content_name: product?.title,
           content_ids: currentId ? [currentId] : [],
           content_type: "product",

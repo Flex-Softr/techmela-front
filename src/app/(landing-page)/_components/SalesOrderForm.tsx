@@ -3,20 +3,22 @@
 import PaymentMethods from "@/app/(public)/checkout/components/PaymentMethods";
 import SelectShippingArea from "@/app/(public)/checkout/components/SelectShippingArea";
 import ShippingAddress from "@/app/(public)/checkout/components/ShippingAddress";
+import VariationSelector from "@/app/(public)/product/[slug]/components/VariationSelector";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
 import EcButton from "@/components/shared/EcButton/EcButton";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
+import { TCheckoutCustomer } from "@/app/(landing-page)/_hooks/useLandingPageTracking";
+import { isValidBdPhone } from "@/const/validation.const";
 import useCheckoutLogic from "@/hooks/useCheckoutLogic";
 import useSalesOrderSubmit from "@/hooks/useSalesOrderSubmit";
+import { getVariantLabel } from "@/lib/ec/variation";
 import { getImageSrc } from "@/lib/utils";
-import eventHandler from "@/tracking/eventHandler";
 import { TShippingInfo } from "@/types/order/shippingInfo";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct, TVariations } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
-import BdAddress from "@/utilities/bdAddress/bdAddress";
 import Image from "next/image";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdCall, MdErrorOutline, MdShoppingBag } from "react-icons/md";
@@ -53,6 +55,15 @@ type Props = {
   product: TSingleProduct | null;
   salePrice: number;
   regularPrice: number;
+  /** Fired (repeatedly — caller de-dupes) once name + a valid phone are entered. Used for initiate_checkout. */
+  // eslint-disable-next-line no-unused-vars
+  onCheckoutStart?: (customer: TCheckoutCustomer) => void;
+  /** Variable products only — leave empty for simple products. */
+  variations?: TVariations[];
+  selectedVariation?: TVariations | null;
+  // eslint-disable-next-line no-unused-vars
+  onVariationChange?: (variation: TVariations) => void;
+  isInStock?: boolean;
 };
 
 const SalesOrderForm = ({
@@ -69,6 +80,11 @@ const SalesOrderForm = ({
   product,
   salePrice,
   regularPrice,
+  onCheckoutStart,
+  variations = [],
+  selectedVariation = null,
+  onVariationChange,
+  isInStock = true,
 }: Props) => {
   const methods = useForm<TCheckoutFormData>({ mode: "all" });
 
@@ -76,14 +92,15 @@ const SalesOrderForm = ({
     if (cartItems.length === 0) return fallbackPrice || salePrice;
     return cartItems.reduce((acc, item) => {
       const price =
-        item.variation?.price?.salePrice ??
-        item.variation?.price?.regularPrice ??
-        (salePrice || fallbackPrice);
+        item.variation?.price?.salePrice ||
+        item.variation?.price?.regularPrice ||
+        salePrice ||
+        fallbackPrice;
       return acc + price * item.quantity;
     }, 0);
   }, [cartItems, fallbackPrice, salePrice]);
 
-  const { calculatedTotal, shippingChange } = useCheckoutLogic({
+  const { calculatedTotal } = useCheckoutLogic({
     totalCost,
   });
 
@@ -109,75 +126,40 @@ const SalesOrderForm = ({
     lpNo: lpNo,
     productName: product?.title || productTitle,
     productCategory: product?.category?.[0]?.name,
+    productBrand: product?.brand?.name,
+    productVariant: getVariantLabel(selectedVariation),
+    unitPrice: salePrice || fallbackPrice,
   });
 
-  const initiateCheckoutTracked = useRef(false);
+  const hasVariations = variations.length > 0 && !!onVariationChange;
+  const variantLabel = getVariantLabel(selectedVariation);
+
+  // Same rules as the main product page — never let an invalid line item reach the order API
+  const blockReason =
+    hasVariations && !selectedVariation
+      ? "অনুগ্রহ করে একটি ভেরিয়েন্ট বেছে নিন"
+      : !isInStock
+        ? "দুঃখিত, নির্বাচিত পণ্যটি এখন স্টকে নেই"
+        : undefined;
+
+  const onSubmit = (data: TCheckoutFormData) => {
+    if (blockReason) return;
+    return handlePlaceOrder(data);
+  };
+
   const shippingValues = useWatch({
     control: methods.control,
     name: "shipping",
   });
+  const { fullName, phoneNumber, email } = shippingValues || {};
 
-  const { fullName, phoneNumber, division, district, upazila, email } =
-    shippingValues || {};
-
-  // Fire InitiateCheckout when user starts filling the form
+  // Same rule as the main checkout: customer has started checkout once name + valid phone exist
   useEffect(() => {
-    const isCheckTracked =
-      cartItems.length > 0 &&
-      !initiateCheckoutTracked.current &&
-      fullName &&
-      phoneNumber &&
-      division &&
-      district &&
-      upazila;
+    if (!onCheckoutStart || !fullName?.trim() || !isValidBdPhone(phoneNumber))
+      return;
 
-    if (isCheckTracked) {
-      initiateCheckoutTracked.current = true;
-
-      const divisionName = BdAddress.divisionNameById(division, "en").name;
-      const districtName = BdAddress.districtNameById(district, "en").name;
-
-      eventHandler({
-        event_name: "initiate_checkout",
-        fn: fullName || undefined,
-        ph: phoneNumber || undefined,
-        em: email || undefined,
-        st: divisionName || undefined,
-        ct: districtName || undefined,
-        upazila_id: upazila || undefined,
-        content_name: productTitle,
-        content_ids: cartItems.map((item) => item.productId),
-        content_type: "product",
-        content_category: product?.category?.[0]?.name,
-        contents: cartItems.map((item) => ({
-          id: item.productId,
-          quantity: item.quantity,
-          item_price: salePrice || fallbackPrice,
-          name: product?.title,
-          brand: product?.brand?.name,
-          category: product?.category?.[0]?.name,
-        })),
-        value: totalCost,
-      });
-    }
-  }, [
-    product?.brand?.name,
-    productTitle,
-    cartItems,
-    totalCost,
-    salePrice,
-    fallbackPrice,
-    calculatedTotal,
-    shippingChange,
-    product?.category,
-    product?.title,
-    fullName,
-    phoneNumber,
-    division,
-    district,
-    upazila,
-    email,
-  ]);
+    onCheckoutStart({ fullName, phoneNumber, email });
+  }, [onCheckoutStart, fullName, phoneNumber, email]);
 
   const actualThumbnail = getImageSrc(thumbnailSrc || product?.thumbnail?.src);
 
@@ -185,7 +167,7 @@ const SalesOrderForm = ({
     <>
       <FormProvider {...methods}>
         <form
-          onSubmit={methods.handleSubmit(handlePlaceOrder)}
+          onSubmit={methods.handleSubmit(onSubmit)}
           className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start"
         >
           {/* Left Column: Form Inputs */}
@@ -230,6 +212,11 @@ const SalesOrderForm = ({
                   <h4 className="font-black text-foreground text-sm lg:text-base leading-[1.3] lg:leading-tight">
                     {product?.title || bookDetails.title}
                   </h4>
+                  {variantLabel && (
+                    <p className="text-xs font-semibold text-muted-foreground">
+                      {variantLabel}
+                    </p>
+                  )}
                   <div className="flex items-center gap-2">
                     <p className="text-xs text-primary font-bold italic">
                       বিশেষ মূল্যছাড়!
@@ -271,6 +258,17 @@ const SalesOrderForm = ({
                   </div>
                 </div>
               </div>
+              {/* Variation picker (variable products only) */}
+              {hasVariations && (
+                <div className="relative z-10 mb-4 rounded-xl border border-border bg-muted/40 px-3 py-1">
+                  <VariationSelector
+                    variations={variations}
+                    initialPrice={{ regularPrice, salePrice }}
+                    onVariationChange={onVariationChange}
+                  />
+                </div>
+              )}
+
               {/* Shipping Area */}
               <SelectShippingArea shippingCharges={shippingCharges} />
             </div>
@@ -302,11 +300,17 @@ const SalesOrderForm = ({
 
             {/* Submit Button */}
             <div className="space-y-3">
+              {blockReason && (
+                <p className="flex items-center justify-center gap-2 text-sm font-bold text-destructive">
+                  <MdErrorOutline className="text-lg" />
+                  {blockReason}
+                </p>
+              )}
               <EcButton
                 className="w-full py-6 text-xl lg:text-2xl font-black bg-primary hover:bg-primary/95 text-primary-foreground rounded-full transition-all shadow-[0_15px_35px_-5px_hsla(var(--primary)/0.4)] active:scale-[0.98] relative overflow-hidden group"
                 type="submit"
                 loading={isLoading || isSuccess}
-                disabled={isLoading || isSuccess}
+                disabled={isLoading || isSuccess || !!blockReason}
                 loadingText="অর্ডার প্রসেস হচ্ছে..."
               >
                 <span className="relative z-10">

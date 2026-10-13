@@ -19,8 +19,8 @@ import {
 } from "./event.helpers";
 import { EventParameter } from "./event.types";
 import { buildGTMEventPayload } from "./gtm/gtm.builder";
+import { pushGTMEvent } from "./gtm/gtm.push";
 import { GTMEventPayload } from "./gtm/gtm.types";
-import { sendGTMEvent } from "@next/third-parties/google";
 import BdAddress from "@/utilities/bdAddress/bdAddress";
 
 // eslint-disable-next-line no-unused-vars
@@ -225,7 +225,7 @@ const eventHandler = async (eventData: EventParameter) => {
   const gtmPayload: GTMEventPayload = buildGTMEventPayload(payload, eventData);
 
   // 5. Send to Google Tag Manager
-  sendGTMEvent(gtmPayload);
+  pushGTMEvent(gtmPayload);
   // ============================================================================
   // Server-side tracking (Meta CAPI) - Temporarily disabled / Commented out
   // Uncomment below when ready to resume server-side tracking via CAPI

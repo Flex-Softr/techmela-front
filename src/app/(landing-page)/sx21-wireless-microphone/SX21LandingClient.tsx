@@ -1,11 +1,11 @@
 "use client";
 
-import { getImageSrc } from "@/lib/utils";
-import eventHandler from "@/tracking/eventHandler";
+import useLandingPageTracking from "@/app/(landing-page)/_hooks/useLandingPageTracking";
+import useLandingProduct from "@/app/(landing-page)/_hooks/useLandingProduct";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import TShippingCharges from "@/types/shippingCharge";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 // Scoped SolaimanLipi Font & Stylesheet
 import "./sx21.css";
@@ -76,56 +76,35 @@ const SX21LandingClient = ({
 }: Props) => {
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);
-  const [lastTrackedCart, setLastTrackedCart] = useState<string>("");
   const [showStickyBar, setShowStickyBar] = useState(false);
 
-  // Dynamic Pricing from product data with fallbacks
-  const productPricing = product as unknown as {
-    pricing?: { regularPrice?: number; salePrice?: number };
-  } | null;
+  // Price / variation / stock / image — simple & variable products alike
+  const {
+    productId,
+    title: productTitle,
+    variations,
+    selectedVariation,
+    setSelectedVariation,
+    regularPrice,
+    salePrice,
+    isInStock,
+    thumbnailSrc,
+    trackingProduct,
+  } = useLandingProduct(product, {
+    id: "sx21-wireless-microphone",
+    title: SX21_DETAILS.title,
+    regularPrice: fallbackRegularPrice,
+    salePrice: fallbackSalePrice,
+    thumbnail: defaultThumbnail,
+    brand: "SX21",
+    category: "Wireless Microphones",
+  });
 
-  const regularPrice =
-    product?.price?.regularPrice ||
-    productPricing?.pricing?.regularPrice ||
-    fallbackRegularPrice ||
-    1030;
-  const salePrice =
-    product?.price?.salePrice ||
-    productPricing?.pricing?.salePrice ||
-    fallbackSalePrice ||
-    890;
-
-  const thumbnailSrc =
-    getImageSrc(product?.thumbnail?.src) || defaultThumbnail;
-
-  const productTitle = product?.title || SX21_DETAILS.title;
-  const productId = product?._id || "sx21-wireless-microphone";
-
-  // Track ViewContent
-  const hasTrackedViewRef = useRef(false);
-  useEffect(() => {
-    if (!hasTrackedViewRef.current) {
-      hasTrackedViewRef.current = true;
-      eventHandler({
-        event_name: "view_content",
-        content_name: productTitle,
-        content_ids: [productId],
-        content_type: "product",
-        content_category: product?.category?.[0]?.name || "Microphones",
-        contents: [
-          {
-            id: productId,
-            quantity: 1,
-            item_price: salePrice,
-            name: productTitle,
-            brand: product?.brand?.name || "SX21",
-            category: product?.category?.[0]?.name || "Wireless Microphones",
-          },
-        ],
-        value: salePrice,
-      });
-    }
-  }, [productId, productTitle, salePrice, product]);
+  // Funnel tracking: view_content → add_to_cart → initiate_checkout (purchase is in useSalesOrderSubmit)
+  const { trackAddToCart, trackInitiateCheckout } = useLandingPageTracking(
+    trackingProduct,
+    quantity
+  );
 
   // Show/hide floating mobile order button on scroll
   useEffect(() => {
@@ -148,38 +127,14 @@ const SX21LandingClient = ({
   };
 
   const handleOrderNow = () => {
-    const currentKey = `${productId}-simple-${quantity}`;
-    if (currentKey !== lastTrackedCart) {
-      eventHandler({
-        event_name: "add_to_cart",
-        content_name: productTitle,
-        content_ids: [productId],
-        content_type: "product",
-        content_category: product?.category?.[0]?.name || "Microphones",
-        contents: [
-          {
-            id: productId,
-            quantity,
-            item_price: salePrice,
-            name: productTitle,
-            brand: product?.brand?.name || "SX21",
-            category: product?.category?.[0]?.name || "Wireless Microphones",
-          },
-        ],
-        value: salePrice * quantity,
-      });
-      setLastTrackedCart(currentKey);
-    }
+    trackAddToCart();
     scrollToOrder();
   };
 
-  const cartItems = [
-    {
-      productId: productId,
-      variation: null,
-      quantity: quantity,
-    },
-  ];
+  const cartItems = useMemo(
+    () => [{ productId, variation: selectedVariation, quantity }],
+    [productId, selectedVariation, quantity]
+  );
 
   return (
     <div className="sx21-page min-h-screen bg-white selection:bg-primary/20 selection:text-primary">
@@ -333,6 +288,11 @@ const SX21LandingClient = ({
               product={product}
               salePrice={salePrice}
               regularPrice={regularPrice}
+              onCheckoutStart={trackInitiateCheckout}
+              variations={variations}
+              selectedVariation={selectedVariation}
+              onVariationChange={setSelectedVariation}
+              isInStock={isInStock}
             />
           </div>
 

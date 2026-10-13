@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { BD_PHONE_REGEX } from "@/const/validation.const";
 import {
   setShippingInfo,
   setShippingInfoError,
@@ -111,7 +112,9 @@ const ShippingAddress = ({
       {customerHasAccount && (
         <Card className="w-full mb-5">
           <CardHeader className="p-4">
-            <CardTitle className="text-sm font-bold">ডিফল্ট ডেলিভারি ঠিকানা</CardTitle>
+            <CardTitle className="text-sm font-bold">
+              ডিফল্ট ডেলিভারি ঠিকানা
+            </CardTitle>
             <CardDescription className="text-xs mt-1">
               {shippingAddress
                 ? `ঠিকানা: ${shippingAddress?.fullAddress}`
@@ -176,7 +179,7 @@ const ShippingAddress = ({
               {...register("shipping.phoneNumber", {
                 required: "আপনার মোবাইল নম্বরটি লিখুন",
                 pattern: {
-                  value: /^(?:\+88)?01[3-9]\d{8}$/,
+                  value: BD_PHONE_REGEX,
                   message: "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন",
                 },
               })}
