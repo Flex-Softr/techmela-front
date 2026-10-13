@@ -7,8 +7,7 @@ const AnnouncementBar = () => {
         {[...Array(10)].map((_, i) => (
           <span key={i} className="flex items-center gap-2">
             <MdCampaign className="text-lg" />
-            Order now to get the best discount — easy return policy — free
-            delivery on orders over ৳2000
+            সেরা ছাড়ে এখনই অর্ডার করুন — সহজ রিটার্ন পলিসি — ২,০০০ টাকার বেশি অর্ডারে ফ্রি ডেলিভারি
           </span>
         ))}
       </div>

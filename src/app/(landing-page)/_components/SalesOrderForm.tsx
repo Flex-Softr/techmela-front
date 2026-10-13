@@ -212,14 +212,14 @@ const SalesOrderForm = ({
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                   <MdShoppingBag className="text-primary text-xl" />
                 </div>
-                Your order
+                আপনার অর্ডার
               </h3>
 
               <div className="flex gap-4 mb-4 relative z-10">
                 <div className="w-20 h-28 bg-muted rounded-xl overflow-hidden flex-shrink-0 shadow-md border border-border p-0.5">
                   <Image
                     src={actualThumbnail ?? "/placeholder.webp"}
-                    alt="Thumbnail"
+                    alt={product?.title || bookDetails.title || "প্রোডাক্ট"}
                     width={80}
                     height={112}
                     className="w-full h-full object-cover rounded-lg"
@@ -232,12 +232,12 @@ const SalesOrderForm = ({
                   </h4>
                   <div className="flex items-center gap-2">
                     <p className="text-xs text-primary font-bold italic">
-                      Huge discount available!
+                      বিশেষ মূল্যছাড়!
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-muted-foreground font-black uppercase tracking-widest">
-                      Quantity:
+                      পরিমাণ:
                     </span>
                     <div className="flex items-center border border-primary/10 rounded-lg overflow-hidden bg-background shadow-sm ring-1 ring-primary/5">
                       <button
@@ -294,7 +294,7 @@ const SalesOrderForm = ({
                 {Object.keys(methods.formState.errors).length > 0 && (
                   <div className="flex gap-2 items-start text-destructive font-bold text-sm">
                     <MdErrorOutline className="text-lg flex-shrink-0 mt-0.5" />
-                    <span>Please fill in all details correctly.</span>
+                    <span>অনুগ্রহ করে সব তথ্য সঠিকভাবে পূরণ করুন।</span>
                   </div>
                 )}
               </div>
@@ -307,10 +307,10 @@ const SalesOrderForm = ({
                 type="submit"
                 loading={isLoading || isSuccess}
                 disabled={isLoading || isSuccess}
-                loadingText="Processing order..."
+                loadingText="অর্ডার প্রসেস হচ্ছে..."
               >
                 <span className="relative z-10">
-                  Confirm order — &#2547;{calculatedTotal}
+                  অর্ডার কনফার্ম করুন — &#2547;{calculatedTotal}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
               </EcButton>
@@ -322,10 +322,10 @@ const SalesOrderForm = ({
 
               <div className="relative z-10 text-center">
                 <h4 className="font-black text-lg mb-0.5 flex items-center justify-center gap-2 text-primary">
-                  <MdCall /> Talk to us directly
+                  <MdCall /> সরাসরি কথা বলুন
                 </h4>
                 <p className="text-sm font-bold text-muted-foreground mb-4 px-4 leading-relaxed">
-                  If you have trouble ordering, call the number below
+                  অর্ডার করতে সমস্যা হলে নিচের নম্বরে কল করুন
                 </p>
                 <a
                   href="tel:+8801772065894"

@@ -37,7 +37,7 @@ const CTAButtonGroup = ({
         onClick={onOrderClick}
         className="w-full sm:w-auto px-7 py-3 bg-primary text-primary-foreground text-base font-black rounded-full hover:bg-primary/90 transition-all shadow-lg active:scale-95 flex items-center justify-center gap-3 group relative overflow-hidden animate-pulse-glow tracking-wide"
       >
-        <span className="relative z-10">Order now</span>
+        <span className="relative z-10">অর্ডার করুন</span>
         <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform relative z-10" />
         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:animate-shimmer"></div>
       </button>
@@ -50,7 +50,7 @@ const CTAButtonGroup = ({
           <span className="text-xl group-hover/preview:animate-bounce-subtle">
             ✨
           </span>
-          See details
+          বিস্তারিত দেখুন
         </button>
       )}
 

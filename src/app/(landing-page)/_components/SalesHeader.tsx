@@ -49,7 +49,7 @@ const SalesHeader = ({ onOrderClick }: Props) => {
           onClick={onOrderClick}
           className="bg-white text-primary text-sm sm:text-base px-5 py-2 sm:px-6 sm:py-2.5 rounded-full font-bold shadow-md hover:bg-white/90 transition-all active:scale-95 animate-pulse-gentle whitespace-nowrap"
         >
-          Order now
+          অর্ডার করুন
         </button>
       </div>
 

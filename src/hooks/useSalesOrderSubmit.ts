@@ -115,7 +115,7 @@ const useSalesOrderSubmit = ({
       !shippingData.fullName ||
       !shippingData.fullAddress
     ) {
-      setErrorMessages(["Please fill out all required shipping details."]);
+      setErrorMessages(["অনুগ্রহ করে শিপিংয়ের প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করুন।"]);
       return;
     }
 
@@ -190,7 +190,7 @@ const useSalesOrderSubmit = ({
         });
 
         toast({
-          title: "Thank you! Your order was successfully placed",
+          title: "ধন্যবাদ! আপনার অর্ডারটি সফলভাবে সম্পন্ন হয়েছে।",
           className: "bg-success text-primary-foreground",
         });
 
