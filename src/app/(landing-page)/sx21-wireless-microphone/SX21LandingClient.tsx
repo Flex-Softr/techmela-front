@@ -72,7 +72,7 @@ const SX21LandingClient = ({
   paymentMethods,
   fallbackRegularPrice = 1030,
   fallbackSalePrice = 890,
-  defaultThumbnail = "/images/landing-page/sx21/sx21-charging-case-open.jpg",
+  defaultThumbnail = "/images/landing-page/sx21/2.webp",
 }: Props) => {
   const orderFormRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);

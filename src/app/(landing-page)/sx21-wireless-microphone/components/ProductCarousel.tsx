@@ -13,22 +13,22 @@ type CarouselImage = {
 
 const images: CarouselImage[] = [
   {
-    src: "/images/landing-page/sx21/sx21-box-case.jpg",
+    src: "/images/landing-page/sx21/1.webp",
+    title: "ক্লোজ-আপ বাটন ট্রান্সমিটার মাইক",
+    caption: "হাতে ধরে দেখানো রিয়াল শট — হালকা ও প্রিমিয়াম সার্কুলার ক্লিপ-অন মাইক",
+    badge: "ক্লোজ-আপ ডিটেইল",
+  },
+  {
+    src: "/images/landing-page/sx21/2.webp",
     title: "SX21 বক্স ও ডিজিটাল ডিসপ্লে চার্জিং কেস",
     caption: "আসল আনবক্সিং ভিউ — বক্সের সাথে ডিজিটাল এলইডি ব্যাটারি ইন্ডিকেটর চার্জিং কেস",
     badge: "বক্স ও চার্জিং কেস",
   },
   {
-    src: "/images/landing-page/sx21/sx21-charging-case-open.jpg",
+    src: "/images/landing-page/sx21/3.webp",
     title: "কেসের ভেতর ডুয়াল মাইক ও রিসিভার",
     caption: "চার্জিং কেস খোলা অবস্থায় ২টি ওয়্যারলেস মাইক ও ১টি রিসিভার সুন্দরভাবে সংরক্ষিত",
     badge: "সম্পূর্ণ সেটআপ",
-  },
-  {
-    src: "/images/landing-page/sx21/sx21-transmitter-mic.jpg",
-    title: "ক্লোজ-আপ বাটন ট্রান্সমিটার মাইক",
-    caption: "হাতে ধরে দেখানো রিয়াল শট — অত্যন্ত হালকা ও প্রিমিয়াম সার্কুলার ক্লিপ-অন মাইক",
-    badge: "ক্লোজ-আপ ডিটেইল",
   },
 ];
 
