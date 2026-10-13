@@ -1,5 +1,6 @@
 "use client";
 
+import { getDefaultVariation } from "@/lib/ec/variation";
 import { TSingleProduct } from "@/types/products/singleProduct";
 import { useEffect, useState } from "react";
 
@@ -27,9 +28,7 @@ const VariationSelector = ({
   useEffect(() => {
     if (variations?.length > 0 && Object.keys(selectedOptions).length === 0) {
       // Default selection: Find the first variation with available stock, or fallback to the first one
-      const defaultVar =
-        variations.find((v) => (v.inventory?.stockAvailable ?? 0) > 0) ||
-        variations[0];
+      const defaultVar = getDefaultVariation(variations);
 
       if (defaultVar?.attributes) {
         setSelectedOptions(defaultVar.attributes);
@@ -96,6 +95,7 @@ const VariationSelector = ({
 
                       return (
                         <button
+                          type="button"
                           key={value}
                           onClick={() => handleAttributeSelection(key, value)}
                           className={`relative py-1 px-2.5 border rounded-md text-sm font-medium transition-all h-7 flex justify-center items-center ${

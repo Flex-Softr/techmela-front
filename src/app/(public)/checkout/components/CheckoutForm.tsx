@@ -1,6 +1,7 @@
 "use client";
 import CheckoutCartItems from "@/components/cart/CheckoutCartItems";
 import OrderLimit from "@/components/orderLimit/OrderLimit";
+import { isValidBdPhone } from "@/const/validation.const";
 import useCart from "@/hooks/useCart";
 import useOrderSubmit from "@/hooks/useOrderSubmit";
 import eventHandler from "@/tracking/eventHandler";
@@ -58,8 +59,8 @@ const CheckoutForm = ({
     const isCheckTracked =
       cartData?.data?.length > 0 &&
       !initiateCheckoutTracked.current &&
-      fullName &&
-      phoneNumber;
+      fullName?.trim() &&
+      isValidBdPhone(phoneNumber);
 
     if (isCheckTracked) {
       initiateCheckoutTracked.current = true;
@@ -104,9 +105,7 @@ const CheckoutForm = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
             <div className="lg:col-span-7 space-y-6">
               <ShippingAddress />
-              <div className="hidden lg:block">
-                {paymentMethodsDesktopSlot}
-              </div>
+              <div className="hidden lg:block">{paymentMethodsDesktopSlot}</div>
             </div>
             <div className="lg:col-span-5 lg:sticky lg:top-24">
               <OrderNow

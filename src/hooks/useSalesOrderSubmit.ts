@@ -14,6 +14,7 @@ import { TShippingInfo } from "@/types/order/shippingInfo";
 import { TPaymentMethod } from "@/types/paymentMethod";
 import { TGenericErrorResponse } from "@/types/response";
 import BdAddress from "@/utilities/bdAddress/bdAddress";
+import { getTrackingItemId } from "@/lib/ec/variation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,6 +29,8 @@ type TOrderItem = {
   variation?: string;
   quantity: number;
 };
+
+type TOrderedProductRes = TOrderItem & { unitPrice?: number };
 
 type TOrderData = {
   payment: {
@@ -59,6 +62,9 @@ const useSalesOrderSubmit = ({
   lpNo,
   productName,
   productCategory,
+  productBrand,
+  productVariant,
+  unitPrice,
 }: {
   paymentMethods: TPaymentMethod[];
   totalCost: number;
@@ -66,6 +72,9 @@ const useSalesOrderSubmit = ({
   lpNo: string;
   productName: string;
   productCategory?: string;
+  productBrand?: string;
+  productVariant?: string;
+  unitPrice?: number; // Fallback unit price if the API response lacks orderedProducts
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -93,7 +102,6 @@ const useSalesOrderSubmit = ({
     setErrorMessages([]);
 
     // 1. Construct Shipping Data
-    // 1. Construct Shipping Data
     const shippingData = {
       fullName: data.shipping.fullName,
       phoneNumber: data.shipping.phoneNumber,
@@ -115,7 +123,9 @@ const useSalesOrderSubmit = ({
       !shippingData.fullName ||
       !shippingData.fullAddress
     ) {
-      setErrorMessages(["অনুগ্রহ করে শিপিংয়ের প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করুন।"]);
+      setErrorMessages([
+        "অনুগ্রহ করে শিপিংয়ের প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করুন।",
+      ]);
       return;
     }
 
@@ -167,22 +177,18 @@ const useSalesOrderSubmit = ({
           order_id: result?.data?.orderId,
           content_type: "product",
           content_category: productCategory,
-          contents: result?.data?.orderedProducts?.map(
-            (product: {
-              product: string;
-              variation?: string;
-              quantity: number;
-              unitPrice: number;
-            }) => ({
-              id: product?.variation
-                ? `${product.product}-${product.variation}`
-                : product.product,
-              name: productName,
-              category: productCategory,
-              quantity: product.quantity,
-              item_price: product.unitPrice,
-            })
-          ),
+          contents: (
+            (result?.data?.orderedProducts as TOrderedProductRes[]) ||
+            orderedProducts.map((item) => ({ ...item, unitPrice }))
+          ).map((item) => ({
+            id: getTrackingItemId(item.product, item.variation),
+            name: productName,
+            brand: productBrand,
+            category: productCategory,
+            variant: item.variation ? productVariant : undefined,
+            quantity: item.quantity,
+            item_price: item.unitPrice,
+          })),
           value: result?.data?.subtotal || totalCost,
           discount_value: result?.data?.discount,
           coupon: couponInfo.coupon ?? undefined,
