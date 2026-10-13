@@ -36,7 +36,7 @@ const SectionTitle = ({
             href={href}
             className="group inline-flex shrink-0 items-center gap-1.5 self-start rounded-full border border-primary/15 bg-primary/5 px-3 py-1.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:self-auto"
           >
-            {linkText ?? "See all"}
+            {linkText ?? "সবগুলো দেখুন"}
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         ) : null}

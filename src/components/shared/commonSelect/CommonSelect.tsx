@@ -33,7 +33,7 @@ export default function CommonSelect({
   options,
   value,
   onChange,
-  placeholder = "Select an option",
+  placeholder = "নির্বাচন করুন",
   className = "",
   disabled = false,
   size,

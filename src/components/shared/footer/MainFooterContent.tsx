@@ -117,14 +117,14 @@ const MainFooterContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-muted p-2.5 rounded-full text-foreground hover:bg-primary hover:text-primary-foreground hover:-translate-y-1 transition-all duration-300 shadow-sm"
-                  aria-label="Facebook Page"
+                  aria-label="ফেসবুক পেজ"
                 >
                   <FaFacebookF size={18} />
                 </a>
                 <a
                   href="#"
                   className="bg-muted p-2.5 rounded-full text-foreground hover:bg-primary hover:text-primary-foreground hover:-translate-y-1 transition-all duration-300 shadow-sm"
-                  aria-label="Dummy Link"
+                  aria-label="কমিউনিটি গ্রুপ"
                 >
                   <FaUsers size={18} />
                 </a>
@@ -133,7 +133,7 @@ const MainFooterContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-muted p-2.5 rounded-full text-foreground hover:bg-success hover:text-success-foreground hover:-translate-y-1 transition-all duration-300 shadow-sm"
-                  aria-label="WhatsApp"
+                  aria-label="হোয়াটসঅ্যাপ"
                 >
                   <FaWhatsapp size={18} />
                 </a>
@@ -142,7 +142,7 @@ const MainFooterContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-muted p-2.5 rounded-full text-foreground hover:bg-destructive hover:text-destructive-foreground hover:-translate-y-1 transition-all duration-300 shadow-sm"
-                  aria-label="YouTube Channel"
+                  aria-label="ইউটিউব চ্যানেল"
                 >
                   <FaYoutube size={18} />
                 </a>

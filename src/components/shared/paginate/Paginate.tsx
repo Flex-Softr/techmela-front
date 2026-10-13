@@ -67,7 +67,7 @@ const Paginate = ({
     >
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center w-full md:w-auto">
         <div className="flex gap-2 items-center">
-          <span className="text-sm font-medium">Show:</span>
+          <span className="text-sm font-medium">প্রদর্শন:</span>
           <CommonSelect
             size="sm"
             value={perPage.toString()}
@@ -75,11 +75,11 @@ const Paginate = ({
               setParam({ limit: val, page: "1" });
             }}
             options={[
-              { value: "12", label: "12" },
-              { value: "24", label: "24" },
-              { value: "36", label: "36" },
-              { value: "48", label: "48" },
-              { value: "60", label: "60" },
+              { value: "12", label: "১২" },
+              { value: "24", label: "২৪" },
+              { value: "36", label: "৩৬" },
+              { value: "48", label: "৪৮" },
+              { value: "60", label: "৬০" },
             ]}
             className="rounded-lg w-[70px]"
           />
@@ -87,10 +87,9 @@ const Paginate = ({
         <div className="hidden sm:block h-4 w-px bg-border" />
         <div>
           <p className="text-sm text-muted-foreground whitespace-nowrap">
-            Showing{" "}
-            <span className="font-medium text-foreground">{showingFrom}</span>{" "}
-            to <span className="font-medium text-foreground">{showingTo}</span>{" "}
-            of <span className="font-medium text-foreground">{totalItems}</span>
+            মোট <span className="font-medium text-foreground">{totalItems}</span> টির মধ্যে{" "}
+            <span className="font-medium text-foreground">{showingFrom}</span> -{" "}
+            <span className="font-medium text-foreground">{showingTo}</span> দেখানো হচ্ছে
           </p>
         </div>
       </div>

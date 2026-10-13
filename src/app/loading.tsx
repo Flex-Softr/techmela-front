@@ -9,7 +9,7 @@ const Loading = () => {
         <Image src={logo} alt="TechMela Logo" width={160} height={48} className="h-10 w-auto" />
       </div>
       <h1 className="xms:text-lg xls:text-xl sm:text-2xl md:text-4xl text-foreground font-semibold">
-        Welcome to TechMela
+        TechMela-তে স্বাগতম
       </h1>
       {/* Animated shimmer bar */}
       <div className="relative w-64 h-2 overflow-hidden rounded bg-muted">

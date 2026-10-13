@@ -37,7 +37,7 @@ export default function PdfViewer({ url }: Props) {
       {isLoading && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-muted-foreground bg-muted z-20">
           <Loader2 className="animate-spin text-primary" size={32} />
-          <p className="font-semibold text-sm">Loading preview...</p>
+          <p className="font-semibold text-sm">প্রিভিউ লোড হচ্ছে...</p>
         </div>
       )}
 
@@ -46,7 +46,7 @@ export default function PdfViewer({ url }: Props) {
           src={pdfUrl}
           className="w-full h-full border-none z-10"
           onLoad={() => setIsLoading(false)}
-          title="PDF Preview"
+          title="পিডিএফ প্রিভিউ"
         />
       )}
 
