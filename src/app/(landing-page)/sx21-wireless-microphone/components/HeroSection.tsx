@@ -153,12 +153,6 @@ const HeroSection = ({
                       {Math.round(((regularPrice - salePrice) / regularPrice) * 100)}% ছাড়
                     </div>
                   )}
-
-                  {/* Compatibility & OTG Note Pill on bottom of image */}
-                  <div className="absolute bottom-3 inset-x-3 bg-slate-950/90 backdrop-blur-md border border-white/15 rounded-xl px-3.5 py-2.5 flex items-center justify-between text-xs sm:text-sm">
-                    <span className="font-semibold text-slate-200">ডিভাইস সাপোর্ট:</span>
-                    <span className="text-emerald-400 font-bold">Android Type-C + iPhone (OTG সহ)</span>
-                  </div>
                 </div>
 
                 {/* 4 Feature Highlights Cards — Clean 2x2 Grid Directly Under Image (NO OVERLAPS) */}
