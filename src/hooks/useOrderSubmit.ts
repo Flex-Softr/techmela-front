@@ -49,10 +49,10 @@ const useOrderSubmit = ({
 
     // 0. Check for Empty Cart
     if (!cartData?.data || cartData.data.length === 0) {
-      const message = "Your cart is empty. Please add items to your cart.";
+      const message = "আপনার কার্ট খালি রয়েছে। অনুগ্রহ করে পণ্য যোগ করুন।";
       setErrorMessages([message]);
       toast({
-        title: "Your cart is empty",
+        title: "আপনার কার্ট খালি রয়েছে",
         className: "bg-destructive/100 text-primary-foreground",
       });
       return;
@@ -75,7 +75,7 @@ const useOrderSubmit = ({
 
     // We can simulate the check from createOrderFN if needed, but RHF is primary.
     if (!shippingData.phoneNumber) {
-      setErrorMessages(["Please fill out shipping address details."]);
+      setErrorMessages(["অনুগ্রহ করে ডেলিভারির ঠিকানা সঠিকভাবে লিখুন।"]);
       return;
     }
 
@@ -166,7 +166,7 @@ const useOrderSubmit = ({
         });
 
         toast({
-          title: "Thank you! Your order was successfully placed",
+          title: "ধন্যবাদ! আপনার অর্ডারটি সফলভাবে সম্পন্ন হয়েছে",
           className: "bg-success text-primary-foreground",
         });
 

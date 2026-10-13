@@ -38,9 +38,9 @@ const SelectShippingMethod = ({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Truck className="size-4 text-primary" />
-          <span className="text-sm font-bold text-slate-800">Delivery Area</span>
+          <span className="text-sm font-bold text-slate-800">ডেলিভারি এলাকা</span>
         </div>
-        <span className="text-xs text-slate-500 font-medium">Select location</span>
+        <span className="text-xs text-slate-500 font-medium">লোকেশন নির্বাচন করুন</span>
       </div>
 
       <div className="space-y-2">

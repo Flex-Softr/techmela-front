@@ -1,3 +1,4 @@
+import { SITE } from "@/const/site.const";
 import { Dispatch, SetStateAction } from "react";
 import CommonModal from "../shared/commonModal/CommonModal";
 
@@ -16,22 +17,29 @@ const OrderLimit = ({
       <CommonModal
         open={limitModalStatus}
         handleOpen={handleLimitModal}
-        modalTitle="Reached order limit"
-        className="min-h-[400px] w-[320px]"
+        modalTitle="অর্ডার সংক্রান্ত তথ্য"
+        className="min-h-[380px] w-[340px]"
       >
-        <p className="text-justify">
-          <p>Dear customer,</p>
-          Thank you for trying to place another order! One of your orders has
-          already been completed successfully. Please wait — our representative
-          will call you within the scheduled time to confirm the order. If you
-          need any assistance or would like to place another order soon, please
-          contact us at the number below.
+        <div className="text-justify space-y-2 text-sm text-slate-700 leading-relaxed">
+          <p className="font-semibold text-slate-900">সম্মানিত গ্রাহক,</p>
+          <p>
+            আমাদের ওয়েবসাইট থেকে অর্ডার করার জন্য ধন্যবাদ! আপনার একটি অর্ডার ইতোমধ্যে গ্রহণ করা হয়েছে। অনুগ্রহ করে কিছুক্ষণ অপেক্ষা করুন — আমাদের প্রতিনিধি দ্রুত সময়ের মধ্যে কল করে আপনার অর্ডারটি নিশ্চিত করবেন।
+          </p>
+          <p>
+            জরুরি প্রয়োজনে অথবা নতুন অর্ডার সংক্রান্ত যেকোনো তথ্যের জন্য সরাসরি আমাদের হেল্পলাইনে যোগাযোগ করতে পারেন:
+          </p>
+        </div>
+        <p className="text-center font-semibold text-slate-800 mt-4 text-sm">
+          হটলাইন: <br />{" "}
+          <a
+            href={`tel:${SITE.phone}`}
+            className="text-primary font-bold text-base hover:underline"
+          >
+            {SITE.phone}
+          </a>
         </p>
-        <p className="text-center">
-          Contact: <br /> +8801967214215
-        </p>
-        <p className="text-center">
-          Thank you for staying with us. We look forward to serving you!
+        <p className="text-center text-xs text-slate-500 mt-3 font-medium">
+          {SITE.nameBn}-এর সাথে থাকার জন্য ধন্যবাদ!
         </p>
       </CommonModal>
     </div>

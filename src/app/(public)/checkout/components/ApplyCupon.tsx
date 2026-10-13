@@ -81,8 +81,8 @@ export default function ApplyCupon() {
         setApplied(true);
 
         toast({
-          title: "Coupon applied successfully",
-          action: <ToastAction altText="Thanks">Thanks</ToastAction>,
+          title: "কুপন কোড সফলভাবে যুক্ত হয়েছে",
+          action: <ToastAction altText="ধন্যবাদ">ধন্যবাদ</ToastAction>,
           className: "bg-success text-success-foreground border-none",
         });
       } else {
@@ -92,8 +92,8 @@ export default function ApplyCupon() {
           variant: "destructive",
           title: errorMessage,
           action: (
-            <ToastAction onClick={() => reset()} altText="Try again">
-              Try again
+            <ToastAction onClick={() => reset()} altText="আবার চেষ্টা করুন">
+              আবার চেষ্টা করুন
             </ToastAction>
           ),
         });
@@ -105,15 +105,15 @@ export default function ApplyCupon() {
       const errorMessage =
         error?.data?.errorMessages?.[0]?.message ||
         error?.data?.message ||
-        "Something went wrong!";
+        "কোথাও কোনো সমস্যা হয়েছে!";
 
       setApplied(false);
       toast({
         variant: "destructive",
         title: errorMessage,
         action: (
-          <ToastAction onClick={() => reset()} altText="Try again">
-            Try again
+          <ToastAction onClick={() => reset()} altText="আবার চেষ্টা করুন">
+            আবার চেষ্টা করুন
           </ToastAction>
         ),
       });
@@ -129,7 +129,7 @@ export default function ApplyCupon() {
           <Input
             disabled={applied ? true : false}
             type="text"
-            placeholder="Promo code (if any)..."
+            placeholder="প্রোমো / কুপন কোড (যদি থাকে)..."
             className={`w-full h-11 rounded-xl bg-slate-50/70 border-slate-200 text-sm focus-visible:bg-white focus-visible:ring-primary/20 focus-visible:border-primary ${
               errors.promoCode ? "ring-destructive" : ""
             }`}
@@ -148,7 +148,7 @@ export default function ApplyCupon() {
           className="h-11 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm flex items-center shrink-0"
           disabled={loading || applied}
         >
-          {applied ? "Applied" : "Apply"}
+          {applied ? "যুক্ত হয়েছে" : "প্রয়োগ করুন"}
           {loading && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
         </Button>
       </div>

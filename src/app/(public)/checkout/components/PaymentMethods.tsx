@@ -40,12 +40,12 @@ const SinglePaymentInput = ({
 
   useEffect(() => {
     register(`paymentDetails.${input.name}`, {
-      required: input.is_required ? `${input.name} is required` : false,
+      required: input.is_required ? `${input.name} আবশ্যক` : false,
       ...(input.name.toLowerCase().includes("phone")
         ? {
             pattern: {
               value: /^(?!.*[a-zA-Z])01\d{9}$/,
-              message: "Please provide a valid 11-digit mobile number.",
+              message: "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন।",
             },
           }
         : {}),
@@ -74,7 +74,7 @@ const SinglePaymentInput = ({
           }}
           className="w-full h-10 px-3 border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary text-sm"
         >
-          <option value="">Select {input.name}</option>
+          <option value="">{input.name} নির্বাচন করুন</option>
           {input.enums?.split(",").map((opt) => (
             <option key={opt.trim()} value={opt.trim()}>
               {opt.trim()}
@@ -91,7 +91,7 @@ const SinglePaymentInput = ({
             });
             clearErrors(`paymentDetails.${input.name}`);
           }}
-          placeholder={`Enter ${input.name}`}
+          placeholder={`${input.name} লিখুন`}
           className="focus-visible:ring-primary"
         />
       )}
@@ -165,10 +165,10 @@ const PaymentMethods = ({
         </div>
         <div>
           <h2 className="text-base sm:text-lg font-bold text-slate-900">
-            Payment Method
+            পেমেন্ট পদ্ধতি
           </h2>
           <p className="text-xs text-slate-500">
-            Choose your preferred payment method
+            আপনার সুবিধাজনক পেমেন্ট পদ্ধতি বেছে নিন
           </p>
         </div>
       </div>
@@ -178,7 +178,7 @@ const PaymentMethods = ({
         <input
           type="hidden"
           {...register("paymentMethod", {
-            required: "Please select a payment method",
+            required: "একটি পেমেন্ট পদ্ধতি নির্বাচন করুন",
           })}
         />
         <div className="space-y-4">
@@ -262,7 +262,7 @@ const PaymentMethods = ({
                     <div className="text-sm bg-white p-3 rounded-lg border border-slate-200 space-y-1">
                       <p>
                         <span className="font-semibold text-slate-500">
-                          Account Type:
+                          অ্যাকাউন্টের ধরন:
                         </span>{" "}
                         <span className="font-medium text-slate-800">
                           {selectedMethod.merchantACInfo.accountType}
@@ -270,7 +270,7 @@ const PaymentMethods = ({
                       </p>
                       <p>
                         <span className="font-semibold text-slate-500">
-                          Account No:
+                          অ্যাকাউন্ট নম্বর:
                         </span>{" "}
                         <span className="font-bold text-slate-900">
                           {selectedMethod.merchantACInfo.accountNo}
@@ -281,7 +281,7 @@ const PaymentMethods = ({
 
                   {selectedMethod.instructions && (
                     <p className="text-xs sm:text-sm text-slate-600 bg-amber-50/80 border border-amber-200/80 p-3 rounded-lg leading-relaxed">
-                      <span className="font-semibold text-amber-800">Note:</span>{" "}
+                      <span className="font-semibold text-amber-800">বিশেষ দ্রষ্টব্য:</span>{" "}
                       {selectedMethod.instructions}
                     </p>
                   )}

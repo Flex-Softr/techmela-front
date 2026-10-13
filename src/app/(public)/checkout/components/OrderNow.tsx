@@ -43,15 +43,15 @@ const OrderNow = ({
         </div>
         <div>
           <h2 className="text-base sm:text-lg font-bold text-slate-900">
-            Order Summary
+            অর্ডারের সারসংক্ষেপ
           </h2>
           <p className="text-xs text-slate-500">
-            Review items, delivery charge & total
+            পণ্য, ডেলিভারি চার্জ ও মোট মূল্য যাচাই করুন
           </p>
         </div>
       </div>
 
-      <div className="divide-y divide-slate-100">{children}</div>
+      <div className="space-y-3">{children}</div>
 
       <CartTotalCalculations
         totalCost={totalCost}
@@ -88,7 +88,7 @@ const OrderNow = ({
       {Object.keys(errors).length > 0 && (
         <div className="py-2.5 px-3 bg-destructive/10 border border-destructive/25 rounded-xl text-destructive font-medium text-xs sm:text-sm flex items-center gap-2">
           <MdErrorOutline className="text-base shrink-0" />
-          <span>Please fill in all required delivery fields correctly.</span>
+          <span>অনুগ্রহ করে ডেলিভারির প্রয়োজনীয় তথ্যগুলো সঠিকভাবে পূরণ করুন।</span>
         </div>
       )}
 
@@ -98,21 +98,21 @@ const OrderNow = ({
         type="submit"
         loading={isLoading || isSuccess}
         disabled={isLoading || isSuccess}
-        loadingText="Placing order..."
+        loadingText="অর্ডার কনফার্ম হচ্ছে..."
       >
-        <span>Place Order</span>
-        <span className="font-extrabold">{calculatedTotal} Tk.</span>
+        <span>অর্ডার কনফার্ম করুন</span>
+        <span className="font-extrabold">&#2547;{calculatedTotal}</span>
       </EcButton>
 
       {/* Trust & Assurance Badges */}
       <div className="pt-3 border-t border-slate-100 grid grid-cols-2 gap-2 text-[11px] text-slate-500 font-medium">
         <div className="flex items-center gap-1.5">
           <ShieldCheck className="size-3.5 text-primary shrink-0" />
-          <span>100% Authentic</span>
+          <span>১০০% অরিজিনাল পণ্য</span>
         </div>
         <div className="flex items-center gap-1.5">
           <Truck className="size-3.5 text-primary shrink-0" />
-          <span>Cash On Delivery</span>
+          <span>ক্যাশ অন ডেলিভারি</span>
         </div>
       </div>
     </div>

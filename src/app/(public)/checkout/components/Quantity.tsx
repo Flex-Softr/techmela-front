@@ -1,6 +1,6 @@
 "use client";
+import { Minus, Plus } from "lucide-react";
 import { ChangeEvent } from "react";
-import { FiMinus, FiPlus } from "react-icons/fi";
 
 type TProps = {
   quantity: number;
@@ -18,7 +18,9 @@ const Quantity = ({ quantity, setQuantity, callBack }: TProps) => {
       await callBack(newQuantity);
     }
   };
+
   const handleDecrement = async () => {
+    if (quantity <= 1) return;
     const newQuantity = quantity - 1;
     setQuantity(newQuantity);
     if (callBack) {
@@ -27,45 +29,43 @@ const Quantity = ({ quantity, setQuantity, callBack }: TProps) => {
   };
 
   return (
-    <div className="flex justify-center items-center md:gap-3 gap-1.5">
+    <div className="inline-flex items-center bg-slate-50 border border-slate-200/90 rounded-lg p-0.5 shadow-3xs hover:border-slate-300 transition-colors">
       <button
+        type="button"
         onClick={handleDecrement}
-        disabled={quantity == 1 ? true : false}
-        className="xms:text-sm xls:text-base sm:text-lg md:text-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-100 transition-colors px-1.5 md:px-2 py-1 rounded text-slate-700"
-        aria-label="Decrease quantity"
+        disabled={quantity <= 1}
+        className="size-6 sm:size-7 rounded-md bg-white hover:bg-slate-100 text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white flex items-center justify-center border border-slate-200/80 shadow-3xs transition-all active:scale-95"
+        aria-label="পরিমাণ কমান"
       >
-        <FiMinus />
+        <Minus className="size-3 sm:size-3.5" strokeWidth={2.5} />
       </button>
       <input
         type="number"
         min={1}
         max={9999}
-        value={quantity || ""}
+        value={quantity || 1}
         onChange={async (e: ChangeEvent<HTMLInputElement>) => {
           const value = parseInt(e.target.value, 10);
           const maxValue = 9999;
-          let newQuantity = 9999;
-          if (!isNaN(value) && value > maxValue) {
-            setQuantity(maxValue);
-            newQuantity = maxValue;
-          } else {
-            newQuantity = Math.max(1, value);
-            setQuantity(newQuantity);
-            // setQuantity(Math.max(1, value));
+          let newQuantity = 1;
+          if (!isNaN(value)) {
+            newQuantity = Math.min(maxValue, Math.max(1, value));
           }
+          setQuantity(newQuantity);
           if (callBack) {
             await callBack(newQuantity);
           }
         }}
-        className="text-base sm:text-lg border border-slate-200 text-center w-[28px] md:w-[40px] h-[28px] md:h-[32px] rounded focus:outline-slate-100  [appearance:textfield][&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none font-medium text-slate-800"
-        aria-label="Product quantity"
+        className="w-8 sm:w-10 text-center font-bold text-xs sm:text-sm text-slate-900 bg-transparent focus:outline-none [appearance:textfield][&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none select-all"
+        aria-label="পণ্যের পরিমাণ"
       />
       <button
+        type="button"
         onClick={handleIncrement}
-        className="xms:text-sm xls:text-base sm:text-lg md:text-xl bg-slate-100 hover:bg-slate-200 transition-colors px-1.5 md:px-2 py-1 rounded text-slate-700"
-        aria-label="Increase quantity"
+        className="size-6 sm:size-7 rounded-md bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200/80 shadow-3xs transition-all active:scale-95"
+        aria-label="পরিমাণ বাড়ান"
       >
-        <FiPlus />
+        <Plus className="size-3 sm:size-3.5" strokeWidth={2.5} />
       </button>
     </div>
   );

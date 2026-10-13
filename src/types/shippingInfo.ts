@@ -2,15 +2,15 @@ import * as Yup from "yup";
 
 export const shippingInfo = Yup.object({
   fullName: Yup.string()
-    .required("Name is required")
-    .max(20, "Name can not be greater than 20 character."),
+    .required("আপনার নাম লিখুন")
+    .max(50, "নাম সর্বোচ্চ ৫০ অক্ষরের হতে পারবে।"),
   phoneNumber: Yup.string()
-    .required("Phone number is required.")
+    .required("মোবাইল নম্বর আবশ্যক।")
     .matches(
       /^(?!.*[a-zA-Z])01\d{9}$/,
-      "Please provide a valid mobile number starting with 01 and with a total of 11 digits."
+      "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 01xxxxxxxxx)"
     ),
-  fullAddress: Yup.string().required("Full address is required"),
-  email: Yup.string().email("Invalid email address").optional().nullable(),
+  fullAddress: Yup.string().required("পূর্ণাঙ্গ ঠিকানা লিখুন"),
+  email: Yup.string().email("সঠিক ইমেইল অ্যাড্রেস লিখুন").optional().nullable(),
   notes: Yup.string().optional().nullable(),
 });
