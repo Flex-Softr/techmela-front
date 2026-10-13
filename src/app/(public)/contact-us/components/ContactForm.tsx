@@ -10,29 +10,29 @@ import * as yup from "yup";
 const schema = yup.object().shape({
   name: yup
     .string()
-    .required("Please enter your name")
-    .min(2, "Name must be at least 2 characters")
-    .max(50, "Name can be at most 50 characters"),
+    .required("আপনার নাম লিখুন")
+    .min(2, "নাম কমপক্ষে ২ অক্ষরের হতে হবে")
+    .max(50, "নাম সর্বোচ্চ ৫০ অক্ষরের হতে পারে"),
   email: yup
     .string()
-    .email("Please enter a valid email")
-    .required("Please enter your email")
-    .max(100, "Email can be at most 100 characters"),
+    .email("সঠিক ইমেইল ঠিকানা দিন")
+    .required("আপনার ইমেইল লিখুন")
+    .max(100, "ইমেইল সর্বোচ্চ ১০০ অক্ষরের হতে পারে"),
   phone: yup
     .string()
-    .required("Please enter your phone number")
-    .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number can be at most 15 digits"),
+    .required("আপনার ফোন নম্বর লিখুন")
+    .min(10, "সঠিক ফোন নম্বর দিন")
+    .max(15, "ফোন নম্বর সর্বোচ্চ ১৫ ডিজিটের হতে পারে"),
   subject: yup
     .string()
-    .required("Please enter a subject")
-    .min(3, "Subject must be at least 3 characters")
-    .max(200, "Subject can be at most 200 characters"),
+    .required("বার্তার বিষয় লিখুন")
+    .min(3, "বিষয় কমপক্ষে ৩ অক্ষরের হতে হবে")
+    .max(200, "বিষয় সর্বোচ্চ ২০০ অক্ষরের হতে পারে"),
   message: yup
     .string()
-    .required("Please enter your message")
-    .min(10, "Message must be at least 10 characters")
-    .max(2000, "Message can be at most 2000 characters"),
+    .required("আপনার বার্তাটি লিখুন")
+    .min(10, "বার্তা কমপক্ষে ১০ অক্ষরের হতে হবে")
+    .max(2000, "বার্তা সর্বোচ্চ ২০০০ অক্ষরের হতে পারে"),
 });
 
 const ContactForm = () => {
@@ -57,17 +57,17 @@ const ContactForm = () => {
 
       toast({
         variant: "success",
-        title: "Success",
+        title: "সফল হয়েছে",
         description:
-          "Your message has been sent successfully. We will contact you soon.",
+          "আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।",
       });
 
       reset();
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Failed",
-        description: "Sorry, we couldn't send your message. Please try again.",
+        title: "ব্যর্থ হয়েছে",
+        description: "দুঃখিত, বার্তা পাঠানো যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
       });
     }
   };
@@ -75,18 +75,18 @@ const ContactForm = () => {
   return (
     <div className="bg-background p-6 md:p-10 rounded-3xl shadow-sm border border-border">
       <h3 className="text-2xl font-bold text-foreground mb-6">
-        Send us a message
+        আমাদের বার্তা পাঠান
       </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">
-              Name *
+              নাম *
             </label>
             <input
               {...register("name")}
               type="text"
-              placeholder="Your name"
+              placeholder="আপনার পূর্ণ নাম"
               maxLength={50}
               className={`w-full px-4 py-3 rounded-xl border ${
                 errors.name ? "border-destructive" : "border-border"
@@ -100,12 +100,12 @@ const ContactForm = () => {
           </div>
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">
-              Phone number *
+              ফোন নম্বর *
             </label>
             <input
               {...register("phone")}
               type="text"
-              placeholder="Your phone number"
+              placeholder="০১XXXXXXXXX"
               maxLength={15}
               className={`w-full px-4 py-3 rounded-xl border ${
                 errors.phone ? "border-destructive" : "border-border"
@@ -121,12 +121,12 @@ const ContactForm = () => {
 
         <div>
           <label className="block text-sm font-semibold text-foreground mb-2">
-            Email *
+            ইমেইল *
           </label>
           <input
             {...register("email")}
             type="email"
-            placeholder="Your email"
+            placeholder="আপনার ইমেইল"
             maxLength={100}
             className={`w-full px-4 py-3 rounded-xl border ${
               errors.email ? "border-destructive" : "border-border"
@@ -141,12 +141,12 @@ const ContactForm = () => {
 
         <div>
           <label className="block text-sm font-semibold text-foreground mb-2">
-            Subject *
+            বিষয় *
           </label>
           <input
             {...register("subject")}
             type="text"
-            placeholder="Message subject"
+            placeholder="বার্তার বিষয়"
             maxLength={200}
             className={`w-full px-4 py-3 rounded-xl border ${
               errors.subject ? "border-destructive" : "border-border"
@@ -162,7 +162,7 @@ const ContactForm = () => {
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="block text-sm font-semibold text-foreground">
-              Message *
+              বার্তা *
             </label>
             <span
               className={`text-xs ${
@@ -179,7 +179,7 @@ const ContactForm = () => {
           <textarea
             {...register("message")}
             rows={4}
-            placeholder="Write your message here..."
+            placeholder="আপনার বার্তাটি বিস্তারিত লিখুন..."
             maxLength={2000}
             className={`w-full px-4 py-3 rounded-xl border ${
               errors.message ? "border-destructive" : "border-border"
@@ -198,10 +198,10 @@ const ContactForm = () => {
           className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-70"
         >
           {isLoading ? (
-            "Sending..."
+            "পাঠানো হচ্ছে..."
           ) : (
             <>
-              Send message <FaPaperPlane className="text-sm" />
+              বার্তা পাঠান <FaPaperPlane className="text-sm" />
             </>
           )}
         </button>

@@ -13,14 +13,13 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "About us",
-  description: `${SITE.nameBn} is a trusted online cosmetics brand in Bangladesh. We provide quality skincare, makeup, haircare, perfume, and beauty accessories.`,
+  title: "আমাদের সম্পর্কে | TechMela",
+  description: `${SITE.nameBn} বাংলাদেশের একটি বিশ্বস্ত গ্যাজেট ও টেক এক্সেসরিজ ব্র্যান্ড। আমরা গুণগত মানসম্পন্ন ও অথেনটিক প্রযুক্তি পণ্য সরবরাহ করি।`,
   keywords: [
     SITE.nameBn,
-    "Cosmetics brand Bangladesh",
-    "Beauty product shop",
-    "About ShajGhor",
-    "Cosmetics Brand Bangladesh",
+    "টেক শপ বাংলাদেশ",
+    "স্মার্ট গ্যাজেট শপ",
+    "About TechMela",
   ].join(", "),
   alternates: {
     canonical: `${SITE.baseUrl}/about-us`,
@@ -38,13 +37,13 @@ const AboutPage: React.FC = () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Home",
+              name: "হোম",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "About us",
+              name: "আমাদের সম্পর্কে",
               item: `${SITE.baseUrl}/about-us`,
             },
           ],
@@ -57,18 +56,18 @@ const AboutPage: React.FC = () => {
           mainEntity: [
             {
               "@type": "Question",
-              name: `What types of products does ${SITE.nameBn} sell?`,
+              name: `${SITE.nameBn}-এ কী ধরণের পণ্য পাওয়া যায়?`,
               acceptedAnswer: {
                 "@type": "Answer",
-                text: `${SITE.nameBn} sells quality skincare, makeup, haircare, perfume, and beauty accessories.`,
+                text: `${SITE.nameBn}-এ প্রিমিয়াম কোয়ালিটির গ্যাজেট, স্মার্ট এক্সেসরিজ ও প্রযুক্তি পণ্য পাওয়া যায়।`,
               },
             },
             {
               "@type": "Question",
-              name: `Are ${SITE.nameBn} products authentic?`,
+              name: `${SITE.nameBn}-এর পণ্যগুলো কি অরিজিনাল?`,
               acceptedAnswer: {
                 "@type": "Answer",
-                text: `Yes, ${SITE.nameBn} supplies only authentic, quality cosmetics sourced from trusted suppliers.`,
+                text: `হ্যাঁ, ${SITE.nameBn} শুধুমাত্র অথেনটিক ও ব্র্যান্ডের আসল পণ্য সরবরাহ করে।`,
               },
             },
           ],
@@ -79,7 +78,7 @@ const AboutPage: React.FC = () => {
         {/* Bespoke Brand Image with Overlay */}
         <Image
           src="/images/about_hero_new.webp"
-          alt="About us"
+          alt="আমাদের সম্পর্কে"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -93,7 +92,7 @@ const AboutPage: React.FC = () => {
 
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            About us
+            আমাদের সম্পর্কে
           </h1>
           <div className="h-1.5 w-24 bg-background/30 mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
@@ -109,7 +108,7 @@ const AboutPage: React.FC = () => {
             <div className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/about_journey_new.webp"
-                alt={`${SITE.nameBn}'s journey`}
+                alt={`${SITE.nameBn}-এর পথচলা`}
                 fill
                 className="object-cover"
               />
@@ -117,17 +116,14 @@ const AboutPage: React.FC = () => {
             </div>
             <div className="space-y-6">
               <h2 className="text-sm uppercase tracking-[0.4em] text-primary font-black">
-                Our journey
+                আমাদের পথচলা
               </h2>
               <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                Authentic beauty <br />
-                <span className="text-primary">delivered to everyone</span>
+                সেরা প্রযুক্তি ও গ্যাজেট <br />
+                <span className="text-primary">পৌঁছে যাক সবার কাছে</span>
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed font-light">
-                {SITE.nameBn} is a trusted name in Bangladesh&apos;s cosmetics
-                and beauty industry. Our goal is to make authentic, quality
-                skincare, makeup, and beauty products accessible, and to make
-                every customer&apos;s beauty routine safe and enjoyable.
+                {SITE.nameBn} বাংলাদেশের একটি আস্থার প্রতীক। আমাদের মূল লক্ষ্য হলো সেরা মানের অরিজিনাল টেক প্রোডাক্ট ও গ্যাজেট সবার কাছে পৌঁছে দেওয়া এবং গ্রাহকদের কেনাকাটাকে নিরাপদ ও নির্ভরযোগ্য রাখা।
               </p>
             </div>
           </div>
@@ -135,31 +131,29 @@ const AboutPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
             <div className="space-y-6">
               <h2 className="text-sm uppercase tracking-[0.4em] text-primary font-black">
-                Our story
+                আমাদের গল্প
               </h2>
               <p className="text-2xl md:text-4xl font-light leading-tight text-foreground">
-                We put customer trust first and are dedicated to supplying{" "}
-                <span className="text-primary font-medium">quality</span> and
-                authentic products.
+                গ্রাহকের সন্তুষ্টি ও আস্থাই আমাদের মূল চালিকাশক্তি। আমরা সর্বদা{" "}
+                <span className="text-primary font-medium">গুণগত মানসম্পন্ন</span> ও
+                আসল পণ্য সরবরাহে অবিচল।
               </p>
             </div>
             <div className="space-y-10">
               <div className="space-y-3">
                 <h3 className="text-lg font-bold text-foreground border-l-4 border-primary pl-4">
-                  Our mission
+                  আমাদের লক্ষ্য
                 </h3>
                 <p className="text-base text-muted-foreground font-light leading-relaxed">
-                  Our main purpose is to deliver authentic cosmetics and beauty
-                  products to every customer at affordable prices.
+                  সবার জন্য সাশ্রয়ী মূল্যে অথেনটিক ও সেরা টেক গ্যাজেট নিশ্চিত করা।
                 </p>
               </div>
               <div className="space-y-3">
                 <h3 className="text-lg font-bold text-foreground border-l-4 border-primary pl-4">
-                  Purity & reliability
+                  নির্ভরযোগ্যতা ও সততা
                 </h3>
                 <p className="text-base text-muted-foreground font-light leading-relaxed">
-                  We source from trusted suppliers and deliver pure, quality
-                  cosmetics.
+                  আমরা বিশ্বস্ত প্রস্তুতকারকদের থেকে পণ্য সংগ্রহ করি এবং শতভাগ যাচাই করে গ্রাহকের কাছে পৌঁছে দিই।
                 </p>
               </div>
             </div>
@@ -175,11 +169,10 @@ const AboutPage: React.FC = () => {
               <FaGlobe className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  Purity
+                  শতভাগ আসল
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  We are uncompromising when selecting products with safe,
-                  quality ingredients for skin and hair.
+                  আমরা শুধুমাত্র অথেনটিক ও অফিসিয়াল পণ্য সরবরাহে অঙ্গীকারবদ্ধ।
                 </p>
               </div>
             </div>
@@ -187,10 +180,10 @@ const AboutPage: React.FC = () => {
               <FaAward className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  Quality
+                  গুণগত মান
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  Every product is selected through expert review.
+                  প্রতিটি পণ্য দক্ষ টিম দ্বারা মান যাচাই করে স্টকে রাখা হয়।
                 </p>
               </div>
             </div>
@@ -198,11 +191,10 @@ const AboutPage: React.FC = () => {
               <FaHandsHelping className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  Trust
+                  গ্রাহকের আস্থা
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  Earning and keeping customer trust is the foundation of our
-                  business.
+                  গ্রাহকের সন্তুষ্টি ও ভালোবাসাই আমাদের ব্যবসার মূল ভিত।
                 </p>
               </div>
             </div>
@@ -210,11 +202,10 @@ const AboutPage: React.FC = () => {
               <FaLightbulb className="text-3xl text-primary mt-1 shrink-0" />
               <div className="space-y-2">
                 <h4 className="text-lg font-black uppercase tracking-widest text-primary">
-                  Excellence
+                  সেরা সেবা
                 </h4>
                 <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                  Our goal is quality service with modern packaging and safe
-                  delivery.
+                  নিরাপদ প্যাকেজিং ও দ্রুততম ডেলিভারির মাধ্যমে নিরবচ্ছিন্ন সেবা।
                 </p>
               </div>
             </div>
@@ -226,9 +217,9 @@ const AboutPage: React.FC = () => {
       <section className="py-8 md:pb-20 text-center">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-10 tracking-tight">
-            Join us on your beauty{" "}
+            আপনার পছন্দের গ্যাজেট খুঁজে নিন{" "}
             <span className="text-primary font-semibold underline decoration-primary/20 underline-offset-8">
-              journey
+              আজই
             </span>
           </h2>
           <Link
@@ -236,7 +227,7 @@ const AboutPage: React.FC = () => {
             className="group relative inline-flex items-center bg-primary px-14 py-4 text-primary-foreground transition-all hover:bg-foreground rounded-full shadow-lg shadow-primary/20 hover:shadow-none"
           >
             <span className="text-sm font-black tracking-widest">
-              Browse products
+              পণ্যসমূহ দেখুন
             </span>
             <FaArrowRight className="ml-4 text-sm transition-transform group-hover:translate-x-2" />
           </Link>

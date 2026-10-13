@@ -14,9 +14,9 @@ import { getImageSrc } from "@/lib/utils";
 type TSearchParams = Record<string, string | string[] | undefined>;
 
 export const metadata: Metadata = {
-  title: "Beauty guides",
+  title: "ফ্রি পিডিএফ গাইড | TechMela",
   description:
-    "Welcome to ShajGhor beauty guides! Download free guides on skincare, makeup, and haircare.",
+    "TechMela-র বিশেষ ফ্রি গাইড ও ক্যাটালগ! সহজে ডাউনলোড করে পড়ুন।",
   alternates: {
     canonical: `${SITE_URL}/free-pdfs`,
   },
@@ -61,7 +61,7 @@ function FreePdfCard({ item }: { item: TBookPreview }) {
               {item.alt}
             </h2>
             <p className="text-xs text-muted-foreground">
-              {new Date(item.createdAt).toLocaleDateString("en-US", {
+              {new Date(item.createdAt).toLocaleDateString("bn-BD", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
@@ -77,7 +77,7 @@ function FreePdfCard({ item }: { item: TBookPreview }) {
             className="flex w-full items-center justify-center gap-2 rounded-md bg-primary/5 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             <Download className="h-4 w-4" />
-            Download
+            ডাউনলোড করুন
           </a>
         </div>
       </CardContent>
@@ -97,7 +97,7 @@ export default async function FreePdfsPage({
   const collectionJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Free PDFs",
+    name: "ফ্রি পিডিএফ",
     url: `${SITE_URL}/free-pdfs`,
   };
 
@@ -112,14 +112,13 @@ export default async function FreePdfsPage({
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
                 <Sparkles className="h-4 w-4" />
-                Beauty guides
+                ফ্রি গাইড
               </div>
               <h1 className="text-3xl font-bold tracking-tight text-primary md:text-4xl">
-                Beauty guide collection
+                ফ্রি গাইড ও ক্যাটালগ
               </h1>
               <p className="text-base leading-7 text-muted-foreground md:text-lg">
-                Special free beauty guides from ShajGhor. Download, read, and
-                share them with others.
+                TechMela-র পক্ষ থেকে বিশেষ ফ্রি গাইড। ডাউনলোড করুন, পড়ুন এবং শেয়ার করুন।
               </p>
             </div>
           </ContainerMax>
@@ -136,7 +135,7 @@ export default async function FreePdfsPage({
                 <input
                   name="search"
                   defaultValue={search}
-                  placeholder="Search PDFs..."
+                  placeholder="পিডিএফ খুঁজুন..."
                   className="h-10 w-full rounded-md border bg-background pl-9 pr-3 text-sm outline-none focus:border-primary"
                 />
               </label>
@@ -151,7 +150,7 @@ export default async function FreePdfsPage({
                 ))
               ) : (
                 <div className="md:col-span-2 xl:col-span-3">
-                  <EmptyState label="No PDFs found." />
+                  <EmptyState label="কোনো পিডিএফ পাওয়া যায়নি।" />
                 </div>
               )}
             </div>

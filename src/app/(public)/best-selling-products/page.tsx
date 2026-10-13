@@ -6,13 +6,13 @@ import { Metadata } from "next";
 import BestSellingContent from "./components/BestSellingContent";
 
 export const metadata: Metadata = {
-  title: "Best Selling Products",
-  description: `Discover ${SITE.nameBn}'s most popular and best-selling cosmetics and beauty products. Shop the top picks loved by our customers.`,
+  title: "সেরা বিক্রিত পণ্যসমূহ | TechMela",
+  description: `${SITE.nameBn}-এর সবচেয়ে জনপ্রিয় এবং সর্বাধিক বিক্রিত গ্যাজেট ও প্রযুক্তি পণ্য। গ্রাহকদের পছন্দের সেরা কালেকশন দেখুন।`,
   keywords: [
-    "Best Selling Cosmetics",
-    "Popular Beauty Products",
-    "Top Selling Beauty Products",
-    `Hit products ${SITE.nameBn}`,
+    "সেরা বিক্রিত গ্যাজেট",
+    "জনপ্রিয় টেক পণ্য",
+    "Best Selling Products",
+    `জনপ্রিয় পণ্য ${SITE.nameBn}`,
   ].join(", "),
   alternates: {
     canonical: `${SITE.baseUrl}/best-selling-products`,
@@ -30,13 +30,13 @@ const BestSellingPage = () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Home",
+              name: "হোম",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "Best Selling Products",
+              name: "সেরা বিক্রিত পণ্যসমূহ",
               item: `${SITE.baseUrl}/best-selling-products`,
             },
           ],
@@ -54,11 +54,10 @@ const BestSellingPage = () => {
               </div>
               <div>
                 <h1 className="text-lg sm:text-2xl md:text-3xl font-bold leading-snug">
-                  Best Selling Products
+                  সেরা বিক্রিত পণ্যসমূহ
                 </h1>
                 <p className="text-xs sm:text-sm text-primary-foreground/80 mt-1 leading-relaxed max-w-lg">
-                  Choose what you need from our customers&apos; most loved and
-                  popular products
+                  আমাদের গ্রাহকদের সবচেয়ে পছন্দের এবং সর্বাধিক বিক্রিত পণ্যের কালেকশন
                 </p>
               </div>
             </div>
@@ -66,7 +65,7 @@ const BestSellingPage = () => {
             <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
               <div className="flex items-center gap-1.5 bg-primary-foreground/10 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-medium border border-primary-foreground/10 shadow-lg">
                 <Sparkles className="w-4 h-4" />
-                <span>Popular collection</span>
+                <span>জনপ্রিয় কালেকশন</span>
               </div>
             </div>
           </div>

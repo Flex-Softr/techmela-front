@@ -12,10 +12,10 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Store location",
-  description: `${SITE.nameBn} showroom address and map location. Visit us at Motalib Plaza, Hatirpool, Dhaka-1205 to collect your favorite tech products in person.`,
+  title: "দোকানের ঠিকানা | TechMela",
+  description: `${SITE.nameBn}-এর শোরুমের ঠিকানা ও গুগল ম্যাপ লোকেশন। সরাসরি এসে পছন্দের পণ্য সংগ্রহ করতে পারেন মোতালিব প্লাজা, হাতিরপুল, ঢাকা-১২০৫ থেকে।`,
   keywords: [
-    `${SITE.nameBn} showroom`,
+    `${SITE.nameBn} শোরুম`,
     "Store Location TechMela",
     "Hatirpool Tech Shop",
     "Motalib Plaza Hatirpool Dhaka",
@@ -36,13 +36,13 @@ const StoreLocationPage = () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Home",
+              name: "হোম",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "Store location",
+              name: "দোকানের ঠিকানা",
               item: `${SITE.baseUrl}/store-location`,
             },
           ],
@@ -53,7 +53,7 @@ const StoreLocationPage = () => {
         {/* Custom Brand Image with Overlay */}
         <Image
           src="/images/store_hero_new.webp"
-          alt="Store location"
+          alt="দোকানের ঠিকানা"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -67,11 +67,11 @@ const StoreLocationPage = () => {
 
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            Store location
+            দোকানের ঠিকানা
           </h1>
           <div className="h-1.5 w-24 bg-background/30 mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
-            Visit our address to collect {SITE.nameBn} products in person.
+            সরাসরি পণ্য দেখে ও যাচাই করে কিনতে {SITE.nameBn}-এর শোরুমে আসুন।
           </p>
         </div>
       </section>
@@ -109,17 +109,17 @@ const StoreLocationPage = () => {
                       <FaMapMarkerAlt size={22} />
                     </div>
                     <h2 className="text-3xl font-black text-foreground">
-                      Our address
+                      আমাদের ঠিকানা
                     </h2>
                   </div>
 
                   <div className="space-y-8">
                     <div>
                       <p className="text-sm font-bold text-primary uppercase tracking-widest mb-3">
-                        Showroom address
+                        শোরুমের ঠিকানা
                       </p>
                       <p className="text-xl text-foreground leading-relaxed font-medium">
-                        Shop No- 369, Motalib Plaza, Hatirpool, Dhaka-1205
+                        দোকান নং- ৩৬৯, মোতালিব প্লাজা, হাতিরপুল, ঢাকা-১২০৫
                       </p>
                     </div>
 
@@ -127,7 +127,7 @@ const StoreLocationPage = () => {
 
                     <div>
                       <p className="text-sm font-bold text-primary uppercase tracking-widest mb-4">
-                        Helpline
+                        হেল্পলাইন
                       </p>
                       <div className="space-y-4">
                         <a
@@ -146,7 +146,7 @@ const StoreLocationPage = () => {
 
                     <div className="pt-4">
                       <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-6">
-                        Social media
+                        সোশ্যাল মিডিয়া
                       </p>
                       <div className="flex flex-wrap gap-4">
                         {[
@@ -181,7 +181,7 @@ const StoreLocationPage = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`w-12 h-12 ${social.bg} ${social.color} rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg`}
-                            aria-label="Social Link"
+                            aria-label="সোশ্যাল মিডিয়া"
                           >
                             <social.icon size={22} />
                           </a>

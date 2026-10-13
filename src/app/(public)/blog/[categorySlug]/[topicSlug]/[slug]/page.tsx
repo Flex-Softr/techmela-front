@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const post = await getPost(params.slug).catch(() => null);
 
   if (!post || post.status !== "published") {
-    return { title: "Blog post not found" };
+    return { title: "ব্লগ পোস্টটি পাওয়া যায়নি | TechMela" };
   }
 
   const url = `${SITE_URL}/blog/${params.categorySlug}/${params.topicSlug}/${post.slug}`;
@@ -134,14 +134,14 @@ export default async function BlogPostPage({ params }: TProps) {
                     className="inline-flex items-center gap-1 hover:text-primary transition-colors font-medium"
                   >
                     <BookOpen className="h-4 w-4" />
-                    Blog
+                    ব্লগ
                   </Link>
                   <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
                   <Link
                     href={categoryHref}
                     className="hover:text-primary transition-colors font-medium"
                   >
-                    {getRefLabel(post.category) || "Article"}
+                    {getRefLabel(post.category) || "নিবন্ধ"}
                   </Link>
                   {post.topic ? (
                     <>
@@ -157,7 +157,7 @@ export default async function BlogPostPage({ params }: TProps) {
                 </div>
                 <BackButton className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-full bg-primary/5 font-semibold text-primary transition-colors hover:bg-primary/10 border border-primary/10">
                   <ArrowLeft className="h-4 w-4" />
-                  Go back
+                  ফিরে যান
                 </BackButton>
               </div>
               <div className="space-y-2">
@@ -178,7 +178,7 @@ export default async function BlogPostPage({ params }: TProps) {
                 {post.readTime ? (
                   <span className="inline-flex items-center gap-1.5">
                     <Clock className="h-4 w-4" />
-                    {post.readTime} min
+                    {post.readTime} মিনিট
                   </span>
                 ) : null}
                 <ViewCount
@@ -212,7 +212,7 @@ export default async function BlogPostPage({ params }: TProps) {
             {post.faqs?.length ? (
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-4 p-4 md:p-6">
-                  <h2 className="text-2xl font-bold text-primary">FAQ</h2>
+                  <h2 className="text-2xl font-bold text-primary">সাধারণ প্রশ্নোত্তর</h2>
                   {post.faqs.map((faq, index) => (
                     <div
                       key={`${faq.question}-${index}`}
@@ -234,7 +234,7 @@ export default async function BlogPostPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
-                    Tags
+                    ট্যাগ
                   </h2>
                   <div className="flex flex-wrap gap-1.5">
                     {(post.tags || []).map((tag) => {
@@ -262,7 +262,7 @@ export default async function BlogPostPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    Related articles
+                    সম্পর্কিত ব্লগ
                   </h2>
                   {post.relatedBlogs.map((related) => {
                     const linkedPost = related as string | TLinkedRef;

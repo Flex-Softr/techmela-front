@@ -84,7 +84,7 @@ export function BlogQnaListShell({
               <input
                 name="search"
                 defaultValue={search}
-                placeholder="Search..."
+                placeholder="অনুসন্ধান করুন..."
                 className="h-10 w-full rounded-md border bg-background pl-9 pr-3 text-sm outline-none focus:border-primary"
               />
             </label>
@@ -96,12 +96,12 @@ export function BlogQnaListShell({
             )}
           </form>
 
-          <FilterBlock title="Category">
+          <FilterBlock title="ক্যাটাগরি">
             <FilterLink
               href={baseHref}
               active={!selectedCategory && !selectedTag}
             >
-              All
+              সকল
             </FilterLink>
             {categories.map((category) => {
               const categoryTopics = topics.filter((t) =>
@@ -122,7 +122,7 @@ export function BlogQnaListShell({
             })}
           </FilterBlock>
 
-          <FilterBlock title="Tags">
+          <FilterBlock title="ট্যাগ">
             {tags.map((tag) => (
               <FilterLink
                 key={tag._id}
@@ -215,9 +215,9 @@ export function BlogCard({ post }: { post: TBlogPost }) {
           <div className="flex items-center justify-between">
             <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               <Badge variant="outline">
-                {getRefLabel(post.category) || "Article"}
+                {getRefLabel(post.category) || "নিবন্ধ"}
               </Badge>
-              {post.readTime ? <span>{post.readTime} min</span> : null}
+              {post.readTime ? <span>{post.readTime} মিনিট</span> : null}
               {post.publishedAt ? (
                 <span className="inline-flex items-center gap-1">
                   <CalendarDays className="h-3.5 w-3.5" />
@@ -226,7 +226,7 @@ export function BlogCard({ post }: { post: TBlogPost }) {
               ) : null}
             </div>
             <div className="flex items-center justify-between text-sm font-semibold text-primary">
-              <span>Read more</span>
+              <span>আরও পড়ুন</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </div>
           </div>
@@ -254,7 +254,7 @@ export function QuestionCard({ item }: { item: TQnA }) {
           <div className="flex items-center justify-between">
             <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               <Badge variant="outline">
-                {getRefLabel(item.category) || "Q&A"}
+                {getRefLabel(item.category) || "প্রশ্নোত্তর"}
               </Badge>
               {item.createdAt ? (
                 <span className="inline-flex items-center gap-1">
@@ -264,7 +264,7 @@ export function QuestionCard({ item }: { item: TQnA }) {
               ) : null}
             </div>
             <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-              <span>Read answer</span>
+              <span>উত্তর দেখুন</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </div>
           </div>
@@ -311,18 +311,18 @@ export function Pagination({
           className="rounded-md border bg-background px-3 py-2 text-sm font-semibold text-primary"
           href={makeHref(page - 1)}
         >
-          Previous
+          পূর্ববর্তী
         </Link>
       )}
       <span className="text-sm text-muted-foreground">
-        Page {page} / {meta.totalPage}
+        পৃষ্ঠা {page} / {meta.totalPage}
       </span>
       {page < meta.totalPage && (
         <Link
           className="rounded-md border bg-background px-3 py-2 text-sm font-semibold text-primary"
           href={makeHref(page + 1)}
         >
-          Next
+          পরবর্তী
         </Link>
       )}
     </div>

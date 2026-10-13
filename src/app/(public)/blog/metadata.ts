@@ -2,7 +2,7 @@ import { SITE_URL } from "@/app/(public)/_components/blog-qna/utils";
 import { SITE } from "@/const/site.const";
 import { Metadata } from "next";
 
-export const BLOG_DESCRIPTION = `Welcome to the ${SITE.nameBn} blog! Find beauty tips, product reviews, and informative articles on skincare, makeup, haircare, and perfume.`;
+export const BLOG_DESCRIPTION = `${SITE.nameBn} ব্লগে আপনাকে স্বাগতম! সেরা টেক গ্যাজেট, ইলেকট্রনিক্স পণ্য, ব্যবহারের সঠিক নিয়ম ও রিভিউ নিয়ে তথ্যবহুল ব্লগ।`;
 
 export const blogJsonLd = {
   "@context": "https://schema.org",
@@ -10,7 +10,7 @@ export const blogJsonLd = {
   name: `${SITE.nameBn} Blog`,
   description: BLOG_DESCRIPTION,
   url: `${SITE_URL}/blog`,
-  inLanguage: "en-US",
+  inLanguage: "bn-BD",
   publisher: {
     "@type": "Organization",
     name: SITE.nameBn,
@@ -20,34 +20,30 @@ export const blogJsonLd = {
     },
   },
   about: [
-    { "@type": "Thing", name: "Skincare" },
-    { "@type": "Thing", name: "Makeup" },
-    { "@type": "Thing", name: "Haircare" },
-    { "@type": "Thing", name: "Perfume" },
-    { "@type": "Thing", name: "Beauty tips" },
+    { "@type": "Thing", name: "Gadgets" },
+    { "@type": "Thing", name: "Electronics" },
+    { "@type": "Thing", name: "Reviews" },
+    { "@type": "Thing", name: "Tech Tips" },
   ],
 };
 
 export const blogMetadata: Metadata = {
-  title: "Blog | Beauty tips & guides",
+  title: `ব্লগ ও টেক গাইড | ${SITE.nameBn}`,
   description: BLOG_DESCRIPTION,
   keywords: [
-    "Beauty blog",
-    "Cosmetics articles",
-    "Product reviews",
-    "Skincare tips",
-    "Makeup guides",
-    "Haircare articles",
-    "Beauty blog Bangladesh",
-    "Bangla cosmetics articles",
+    "Tech blog",
+    "Electronics articles",
+    "Gadget reviews",
+    "Tech tips Bangladesh",
+    "Bangla tech blog",
     `${SITE.nameBn} Blog`,
   ].join(", "),
   openGraph: {
-    title: `Blog | ${SITE.nameBn}`,
+    title: `ব্লগ | ${SITE.nameBn}`,
     description: BLOG_DESCRIPTION,
     url: `${SITE_URL}/blog`,
     siteName: SITE.nameBn,
-    locale: "en_US",
+    locale: "bn_BD",
     type: "website",
     images: [
       {
@@ -58,7 +54,7 @@ export const blogMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Blog | ${SITE.nameBn}`,
+    title: `ব্লগ | ${SITE.nameBn}`,
     description: BLOG_DESCRIPTION,
     images: [`${SITE.baseUrl}${SITE.logoPath}`],
   },

@@ -13,9 +13,9 @@ import { Metadata } from "next";
 type TSearchParams = Record<string, string | string[] | undefined>;
 
 export const metadata: Metadata = {
-  title: "Questions & answers",
+  title: "প্রশ্নোত্তর | TechMela",
   description:
-    "Welcome to ShajGhor Q&A! Find clear, concise answers about cosmetics and beauty products, organized by topic. Check back regularly for new questions and updates.",
+    "TechMela প্রশ্নোত্তর পর্বে আপনাকে স্বাগতম! গ্যাজেট ও ইলেকট্রনিক্স পণ্য সংক্রান্ত আপনার সাধারণ প্রশ্নের উত্তর জেনে নিন।",
   alternates: {
     canonical: `${SITE_URL}/questions`,
   },
@@ -75,7 +75,7 @@ export default async function QuestionsPage({
   const collectionJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "QnA",
+    name: "প্রশ্নোত্তর",
     url: `${SITE_URL}/questions`,
   };
 
@@ -84,8 +84,8 @@ export default async function QuestionsPage({
       <JsonLd data={collectionJsonLd} />
       <BlogQnaListShell
         type="questions"
-        title="Questions & answers"
-        description="Welcome to ShajGhor Q&A! Find clear, concise answers about cosmetics and beauty products, organized by topic. Check back regularly for new questions and updates."
+        title="প্রশ্ন ও উত্তর"
+        description="TechMela প্রশ্নোত্তর পর্বে আপনাকে স্বাগতম! টেক গ্যাজেট ও ইলেকট্রনিক্স সম্পর্কিত প্রয়োজনীয় সকল প্রশ্নের নির্ভরযোগ্য উত্তর এখানে পেয়ে যাবেন।"
         categories={filters.categories}
         tags={filters.tags}
         searchParams={searchParams}
@@ -95,7 +95,7 @@ export default async function QuestionsPage({
             qnaList.map((item) => <QuestionCard key={item._id} item={item} />)
           ) : (
             <div className="md:col-span-2">
-              <EmptyState label="No questions found." />
+              <EmptyState label="কোনো প্রশ্ন পাওয়া যায়নি।" />
             </div>
           )}
         </div>

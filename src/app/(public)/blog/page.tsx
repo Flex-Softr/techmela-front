@@ -81,8 +81,8 @@ export default async function BlogPage({
     <>
       <JsonLd data={blogJsonLd} />
       <BlogQnaListShell
-        title="Blog"
-        description="Welcome to the ShajGhor blog! Find tips, product guides, and informative articles on skincare, makeup, haircare, and perfume. Check back regularly for new posts and updates."
+        title="ব্লগ"
+        description="TechMela ব্লগে আপনাকে স্বাগতম! সেরা টেক গ্যাজেট, ইলেকট্রনিক্স পণ্য, গ্যাজেট রিভিউ ও প্রয়োজনীয় টেক টিপস সম্পর্কে জানুন।"
         type="blog"
         categories={filters.categories}
         topics={filters.topics}
@@ -93,7 +93,7 @@ export default async function BlogPage({
           {posts.length ? (
             posts.map((post) => <BlogCard key={post._id} post={post} />)
           ) : (
-            <EmptyState label="No blog posts found." />
+            <EmptyState label="কোনো ব্লগ পোস্ট পাওয়া যায়নি।" />
           )}
         </div>
         <Pagination meta={meta} basePath="/blog" searchParams={searchParams} />

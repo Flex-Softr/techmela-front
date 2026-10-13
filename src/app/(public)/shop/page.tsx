@@ -11,14 +11,13 @@ import ShopFilters from "./components/ShopFilters";
 import { SITE } from "@/const/site.const";
 
 export const metadata: Metadata = {
-  title: "Huge Collection of Cosmetics & Beauty Products",
-  description: `Welcome to the ${SITE.nameBn} online shop. Discover thousands of skincare, makeup, haircare, perfume, and beauty accessories from local and international brands.`,
+  title: "সকল পণ্য | TechMela",
+  description: `${SITE.nameBn} অনলাইন শপে আপনাকে স্বাগতম। সকল প্রিমিয়াম গ্যাজেট ও ইলেকট্রনিক্স অ্যাকসেসরিজ সেরা মূল্যে অর্ডার করুন।`,
   keywords: [
-    "Online Cosmetics Shop",
-    "Cosmetics & Beauty Product Collection",
-    "Buy Skincare Makeup",
-    "Cosmetics Shop Bangladesh",
-    "Buy Beauty Products Online",
+    "অনলাইন গ্যাজেট শপ",
+    "ইলেকট্রনিক্স কালেকশন",
+    "স্মার্ট গ্যাজেট বাংলাদেশ",
+    "TechMela Shop",
   ].join(", "),
   alternates: {
     canonical: `${SITE.baseUrl}/shop`,
@@ -62,13 +61,13 @@ const ShopPage = async () => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Home",
+              name: "হোম",
               item: SITE.baseUrl,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "All Products",
+              name: "সকল পণ্য",
               item: `${SITE.baseUrl}/shop`,
             },
           ],

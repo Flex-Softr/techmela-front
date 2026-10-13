@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const item = await getQuestion(params.slug).catch(() => null);
 
   if (!item || item.status !== "published") {
-    return { title: "Question not found" };
+    return { title: "প্রশ্নটি পাওয়া যায়নি | TechMela" };
   }
 
   const url = `${SITE_URL}/questions/${params.topicSlug}/${item.slug}`;
@@ -122,14 +122,14 @@ export default async function QuestionPage({ params }: TProps) {
                     className="inline-flex items-center gap-1 hover:text-primary transition-colors font-medium"
                   >
                     <HelpCircle className="h-4 w-4" />
-                    Q&A
+                    প্রশ্নোত্তর
                   </Link>
                   <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
                   <Link
                     href={categoryHref}
                     className="hover:text-primary transition-colors font-medium"
                   >
-                    {getRefLabel(item.category) || "Question"}
+                    {getRefLabel(item.category) || "প্রশ্নোত্তর"}
                   </Link>
                   {item.topic ? (
                     <>
@@ -145,7 +145,7 @@ export default async function QuestionPage({ params }: TProps) {
                 </div>
                 <BackButton className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-full bg-primary/5 font-semibold text-primary transition-colors hover:bg-primary/10 border border-primary/10">
                   <ArrowLeft className="h-4 w-4" />
-                  Go back
+                  ফিরে যান
                 </BackButton>
               </div>
               <div className="space-y-2">
@@ -182,7 +182,7 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="p-4">
                   <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
-                    Tags
+                    ট্যাগ
                   </h2>
                   <div className="flex flex-wrap gap-1.5">
                     {(item.tags || []).map((tag) => {
@@ -210,7 +210,7 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    Related articles
+                    সম্পর্কিত ব্লগ
                   </h2>
                   {item.relatedBlogs.map((post) => {
                     const linkedPost = post as string | TLinkedRef;
@@ -250,7 +250,7 @@ export default async function QuestionPage({ params }: TProps) {
               <Card className="rounded-lg border bg-background">
                 <CardContent className="space-y-2 p-4">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-primary">
-                    Related questions
+                    সম্পর্কিত প্রশ্নসমূহ
                   </h2>
                   {item.relatedQuestions.map((question) => {
                     const linkedQuestion = question as string | TLinkedRef;

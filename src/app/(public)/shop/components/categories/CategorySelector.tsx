@@ -11,7 +11,7 @@ const CategorySelector = ({ categories }: { categories: TCategory[] }) => {
 
   return (
     <GenericFilterPropsSelector
-      title="Category"
+      title="ক্যাটাগরি"
       items={categories as unknown as TGenericItem[]}
       selectedValues={contextSelected}
       setSelectedValues={contextSet}

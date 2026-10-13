@@ -58,19 +58,19 @@ const ShopFilters = ({
       {/* Header with title + clear button (Desktop Only) */}
       <div className="hidden lg:flex items-center justify-between px-3 pt-2 pb-2.5 border-b border-border/40">
         <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-          Filters
+          ফিল্টার
         </p>
         <button
           onClick={clearAllFilters}
           disabled={activeFilterCount === 0}
           className="text-xs text-destructive hover:text-destructive disabled:opacity-30 disabled:cursor-not-allowed font-medium transition-colors"
         >
-          Clear all
+          মুছে ফেলুন
         </button>
       </div>
 
       <div className="pt-0 lg:pt-2">
-        <CollapsibleFilterSection title="Price range">
+        <CollapsibleFilterSection title="মূল্যের সীমা">
           <div className="px-1">
             <PriceRangeSliderWrapper
               min={priceRange.minPrice}
@@ -86,12 +86,12 @@ const ShopFilters = ({
 
       <CollectionSelectorWrapper collections={collections} />
 
-      <CollapsibleFilterSection title="Stock status">
+      <CollapsibleFilterSection title="স্টকের অবস্থা">
         <div className="px-2 py-1 space-y-2">
           {[
-            { label: "In stock", value: "in_stock" },
-            { label: "Out of stock", value: "out_of_stock" },
-            { label: "Low stock", value: "low_stock" },
+            { label: "স্টকে আছে", value: "in_stock" },
+            { label: "স্টক শেষ", value: "out_of_stock" },
+            { label: "সীমিত স্টক", value: "low_stock" },
           ].map((status) => (
             <label
               key={status.value}
@@ -142,7 +142,7 @@ const ShopFilters = ({
           variant="outline"
           disabled={activeFilterCount === 0}
         >
-          Clear all filters
+          সব ফিল্টার মুছুন
         </EcButton>
       </div>
     </Box>
@@ -159,7 +159,7 @@ const ShopFilters = ({
             >
               <div className="flex items-center gap-2.5">
                 <FaBarsStaggered className="text-primary w-4 h-4" />
-                <span className="font-semibold text-foreground">Filters</span>
+                <span className="font-semibold text-foreground">ফিল্টার</span>
               </div>
               <div className="flex items-center gap-2">
                 {activeFilterCount > 0 && (
@@ -174,7 +174,7 @@ const ShopFilters = ({
                   >
                     <X className="size-3" />
                     <span className="text-[10px] font-bold uppercase tracking-wider">
-                      Clear
+                      মুছুন
                     </span>
                   </div>
                 )}
@@ -194,13 +194,13 @@ const ShopFilters = ({
               <div className="flex items-center justify-between">
                 <SheetTitle className="text-base font-bold flex items-center gap-2">
                   <FaBarsStaggered className="text-primary w-4 h-4" />
-                  Filters
+                  ফিল্টার
                 </SheetTitle>
                 <SheetClose asChild>
                   <button
                     ref={sheetCloseRef}
                     className="p-1.5 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-                    aria-label="Close filter"
+                    aria-label="ফিল্টার বন্ধ করুন"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -217,9 +217,9 @@ const ShopFilters = ({
                 className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl flex justify-between items-center px-6"
                 onClick={() => sheetCloseRef.current?.click()}
               >
-                <span>Show results</span>
+                <span>ফলাফল দেখুন</span>
                 <span className="bg-background/20 px-2 py-0.5 rounded-lg text-xs">
-                  {totalProducts} products
+                  {totalProducts} টি পণ্য
                 </span>
               </Button>
             </div>

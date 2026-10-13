@@ -14,7 +14,7 @@ const CollectionSelectorWrapper = ({
 
   return (
     <GenericFilterPropsSelector
-      title="Collection"
+      title="কালেকশন"
       items={collections as unknown as TGenericItem[]}
       selectedValues={selectedCollections}
       setSelectedValues={setSelectedCollections}

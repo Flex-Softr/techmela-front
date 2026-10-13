@@ -11,6 +11,11 @@ import {
   FaTruck,
 } from "react-icons/fa";
 
+export const metadata = {
+  title: "ডেলিভারি পলিসি | TechMela",
+  description: "TechMela-র ডেলিভারি পলিসি, ডেলিভারি চার্জ ও সময়সীমা সম্পর্কে জানুন। সারা বাংলাদেশে দ্রুত ও নিরাপদ হোম ডেলিভারি।",
+};
+
 const DeliveryPolicyPage = async () => {
   const { data: shippingCharges = [] } = await serverSideFetcher<
     TShippingCharges[]
@@ -25,7 +30,7 @@ const DeliveryPolicyPage = async () => {
       <section className="relative h-[200px] md:h-[300px] flex items-center justify-center overflow-hidden bg-primary">
         <Image
           src="/images/delivery_hero_new.webp"
-          alt="Delivery policy"
+          alt="ডেলিভারি পলিসি"
           fill
           className="object-cover opacity-50 mix-blend-overlay"
           priority
@@ -37,12 +42,11 @@ const DeliveryPolicyPage = async () => {
 
         <div className="relative text-center z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-black text-primary-foreground mb-4 tracking-tight">
-            Delivery policy
+            ডেলিভারি পলিসি
           </h1>
           <div className="h-1.5 w-16 bg-background/30 mx-auto rounded-full mb-4" />
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light leading-relaxed">
-            Fast and safe delivery is our promise. Learn more about our shipping
-            policy.
+            দ্রুত ও নিরাপদ ডেলিভারিই আমাদের অঙ্গীকার। আমাদের ডেলিভারি পলিসি সম্পর্কে বিস্তারিত জানুন।
           </p>
         </div>
       </section>
@@ -57,13 +61,11 @@ const DeliveryPolicyPage = async () => {
               <FaTruck size={24} />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              Delivery areas
+              ডেলিভারি এলাকা
             </h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed font-light">
-            ShajGhor currently offers home delivery across Bangladesh. Inside
-            and outside Dhaka, we deliver products safely through trusted
-            courier services.
+            TechMela বর্তমানে সমগ্র বাংলাদেশে হোম ডেলিভারি সুবিধা প্রদান করছে। ঢাকা সিটি এবং ঢাকার বাইরে বিশ্বস্ত কুরিয়ার সার্ভিসের মাধ্যমে পণ্য নিরাপদে আপনার ঠিকানায় পৌঁছে দেওয়া হয়।
           </p>
         </section>
 
@@ -76,7 +78,7 @@ const DeliveryPolicyPage = async () => {
                 <FaMapMarkedAlt size={22} />
               </div>
               <h3 className="text-xl font-bold text-foreground">
-                Delivery charges
+                ডেলিভারি চার্জ
               </h3>
             </div>
             <ul className="space-y-4">
@@ -98,7 +100,7 @@ const DeliveryPolicyPage = async () => {
             </ul>
             <p className="mt-4 text-xs text-muted-foreground italic flex items-center gap-2">
               <FaCheckCircle className="text-primary/40 shrink-0" />
-              Delivery charges may change during special offers or promotions.
+              বিশেষ অফার বা ক্যাম্পেইন চলাকালীন ডেলিভারি চার্জ পরিবর্তিত হতে পারে।
             </p>
           </section>
 
@@ -109,29 +111,28 @@ const DeliveryPolicyPage = async () => {
                 <FaClock size={22} />
               </div>
               <h3 className="text-xl font-bold text-foreground">
-                Delivery timeline
+                ডেলিভারির সময়সীমা
               </h3>
             </div>
             <div className="space-y-4">
               <div className="flex justify-between items-center bg-muted/50 p-3 rounded-xl border border-border">
                 <span className="font-medium text-foreground">
-                  Inside Dhaka:
+                  ঢাকা সিটির ভেতরে:
                 </span>
-                <span className="font-bold text-primary">24 – 48 hours</span>
+                <span className="font-bold text-primary">২৪ – ৪৮ ঘণ্টা</span>
               </div>
               <div className="flex justify-between items-center bg-muted/50 p-3 rounded-xl border border-border">
                 <span className="font-medium text-foreground">
-                  Outside Dhaka:
+                  ঢাকা সিটির বাইরে:
                 </span>
                 <span className="font-bold text-primary">
-                  3 – 5 business days
+                  ৩ – ৫ কার্যদিবস
                 </span>
               </div>
             </div>
             <p className="mt-4 text-xs text-muted-foreground italic flex items-center gap-2">
               <FaCheckCircle className="text-primary/40 shrink-0" />
-              Delivery may take longer due to unforeseen circumstances or severe
-              weather.
+              প্রাকৃতিক দুর্যোগ বা বিশেষ পরিস্থিতির কারণে ডেলিভারিতে কিছুটা অতিরিক্ত সময় লাগতে পারে।
             </p>
           </section>
         </div>
@@ -145,12 +146,10 @@ const DeliveryPolicyPage = async () => {
             </div>
             <div>
               <h4 className="text-lg font-bold text-primary mb-2">
-                Secure packaging
+                নিরাপদ প্যাকেজিং
               </h4>
               <p className="text-primary/80 leading-relaxed font-light text-sm">
-                We use international-standard packaging so your products arrive
-                safe and intact. Every item is packed with bubble wrap in a
-                sturdy box.
+                আপনার পছন্দের গ্যাজেটটি সম্পূর্ণ অক্ষতভাবে পৌঁছে দিতে আমরা প্রিমিয়াম বাবল র‍্যাপ ও মজবুত বক্স ব্যবহার করি।
               </p>
             </div>
           </div>
@@ -162,17 +161,16 @@ const DeliveryPolicyPage = async () => {
             </div>
             <div>
               <h4 className="text-lg font-bold text-primary mb-2">
-                Order tracking
+                অর্ডার ট্র্যাকিং
               </h4>
               <p className="text-foreground leading-relaxed font-light text-sm mb-3">
-                Use our tracking system anytime to check your order status, or
-                call our helpline.
+                আপনার অর্ডারটি কোথায় আছে তা যেকোনো সময় আমাদের ওয়েবসাইট থেকে লাইভ ট্র্যাক করুন।
               </p>
               <Link
                 href="/track-your-order"
                 className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
               >
-                Track order →
+                অর্ডার ট্র্যাক করুন →
               </Link>
             </div>
           </div>
@@ -182,7 +180,7 @@ const DeliveryPolicyPage = async () => {
         <div className="bg-primary rounded-[1.5rem] p-6 md:p-8 text-center text-primary-foreground relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <h3 className="text-xl md:text-2xl font-bold mb-4">
-            Contact our helpline for more information
+            যেকোনো তথ্যের জন্য আমাদের হেল্পলাইনে যোগাযোগ করুন
           </h3>
           <a
             href="tel:+8801772065894"

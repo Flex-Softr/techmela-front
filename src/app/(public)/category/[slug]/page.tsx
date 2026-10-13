@@ -38,23 +38,22 @@ export async function generateMetadata({
   const categories = await fetchCategories();
   const category = categories.find((cat) => cat.slug === decodedSlug);
 
-  if (!category) return { title: "Category Not Found" };
+  if (!category) return { title: "ক্যাটাগরি পাওয়া যায়নি | TechMela" };
 
-  const title = `${category.name} Cosmetics & Beauty Products`;
+  const title = `${category.name} | TechMela`;
   const description =
     category.description ||
-    `Shop the best ${category.name} cosmetics and beauty products from ${SITE.nameBn}. Thousands of products on one platform.`;
+    `${SITE.nameBn} থেকে সেরা মানের ${category.name} পণ্য কিনুন। হাজারো পণ্যের সমাহার এক প্ল্যাটফর্মে।`;
   const imageUrl = category.image ? getImageSrc(category.image.src) : undefined;
 
   return {
     title,
     description,
     keywords: [
-      `${category.name} products`,
-      `${category.name} cosmetics`,
-      `${category.name} beauty products`,
+      `${category.name} পণ্য`,
+      `${category.name} TechMela`,
+      category.name,
       SITE.nameBn,
-      "Cosmetics Bangladesh",
     ].join(", "),
     alternates: {
       canonical: `${BASE_URL}/category/${decodedSlug}`,
@@ -82,7 +81,7 @@ export default async function CategoryPage({
   if (!category) {
     return (
       <div className="py-20 text-center text-xl text-primary font-semibold">
-        Category not found
+        ক্যাটাগরি পাওয়া যায়নি
       </div>
     );
   }
@@ -94,7 +93,7 @@ export default async function CategoryPage({
       {
         "@type": "ListItem",
         position: 1,
-        name: "Home",
+        name: "হোম",
         item: BASE_URL,
       },
       {
@@ -140,7 +139,7 @@ export default async function CategoryPage({
                 </h1>
                 <p className="text-xs sm:text-sm text-primary-foreground/80 mt-0.5 leading-relaxed">
                   {category.description ||
-                    `Shop the best ${category.name} cosmetics and beauty products from ${SITE.nameBn}.`}
+                    `${SITE.nameBn} থেকে সেরা মানের ${category.name} পণ্য কিনুন।`}
                 </p>
               </div>
             </div>
@@ -149,7 +148,7 @@ export default async function CategoryPage({
             <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
               <div className="flex items-center gap-1.5 bg-primary-foreground/15 backdrop-blur-sm px-3 py-1.5 rounded-xl text-sm font-medium">
                 <Sparkles className="w-4 h-4" />
-                <span>Category collection</span>
+                <span>ক্যাটাগরি কালেকশন</span>
               </div>
             </div>
           </div>
