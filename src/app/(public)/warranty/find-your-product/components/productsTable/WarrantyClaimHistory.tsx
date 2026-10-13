@@ -41,7 +41,7 @@ const WarrantyClaimHistory = ({
       <CommonModal
         open={open}
         handleOpen={handleOpen}
-        modalTitle="Warranty Claim History"
+        modalTitle="ওয়ারেন্টি ক্লেম হিস্ট্রি"
         className="min-h-[300px] w-[400px]"
       >
         <div>
@@ -50,17 +50,17 @@ const WarrantyClaimHistory = ({
               {/* <caption className="py-2">Warranty claim history</caption> */}
               <tbody>
                 <tr>
-                  <th className="border-2 px-5 py-3">S/N</th>
-                  <th className="border-2 px-5 py-3">Date</th>
-                  <th className="border-2 px-5 py-3">Claimed Codes</th>
+                  <th className="border-2 px-5 py-3">ক্রম</th>
+                  <th className="border-2 px-5 py-3">তারিখ</th>
+                  <th className="border-2 px-5 py-3">ক্লেমকৃত কোড</th>
                 </tr>
                 {warrantyClaimHistory?.claims?.map((claim, index) => (
                   <tr key={claim._id}>
                     <td className="border-2 px-5 py-3">{index + 1}</td>
                     <td className="border-2 px-5 py-3">
-                      {new Intl.DateTimeFormat("en-US", {
-                        month: "long",
+                      {new Intl.DateTimeFormat("bn-BD", {
                         day: "numeric",
+                        month: "long",
                         year: "numeric",
                       }).format(new Date(claim?.createdAt))}
                     </td>
@@ -72,8 +72,8 @@ const WarrantyClaimHistory = ({
               </tbody>
             </table>
           ) : (
-            <h2 className="text-success font-bold">
-              No previous warranty claims.
+            <h2 className="text-success font-bold text-center">
+              পূর্বে কোনো ওয়ারেন্টি ক্লেম করা হয়নি।
             </h2>
           )}
         </div>

@@ -39,7 +39,7 @@ const ProductTable = ({
   // Split products based on warranty status
   searchResult.forEach((order, orderIndex) => {
     order.products.forEach((product, index) => {
-      let warrantyStatus = "No Warranty";
+      let warrantyStatus = "ওয়ারেন্টি প্রযোজ্য নয়";
       let remainingDays: number = -1;
 
       if (product.warranty) {
@@ -49,7 +49,7 @@ const ProductTable = ({
           (endDate?.getTime() - currentDate?.getTime()) / (1000 * 3600 * 24)
         );
         warrantyStatus =
-          remainingDays < 0 ? "Warranty Expired" : `${remainingDays} days left`;
+          remainingDays < 0 ? "মেয়াদ শেষ" : `${remainingDays} দিন বাকি`;
       }
 
       const warrantyStatusClass =
@@ -126,7 +126,7 @@ const ProductTable = ({
                 onClick={handleSingleClaimClick}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground text-[10px] md:text-xs font-bold py-1.5 px-3 md:px-4 rounded transition-colors shadow-sm"
               >
-                Claim
+                ক্লেম করুন
               </button>
             )}
           </TableCell>
@@ -145,20 +145,20 @@ const ProductTable = ({
 
   const renderTableHeader = () => (
     <TableRow className="bg-primary/5 font-bold text-xs md:text-sm text-primary">
-      <TableCell className="px-2 md:px-4 py-3">Image</TableCell>
-      <TableCell className="px-2 md:px-4 py-3">Product Name</TableCell>
+      <TableCell className="px-2 md:px-4 py-3">ছবি</TableCell>
+      <TableCell className="px-2 md:px-4 py-3">পণ্যের নাম</TableCell>
       <TableCell className="px-2 md:px-4 py-3 text-center">
-        Unit Price
+        মূল্য
       </TableCell>
       <TableCell className="px-2 md:px-4 py-3 text-center">
-        Warranty Period
+        ওয়ারেন্টির মেয়াদ
       </TableCell>
-      <TableCell className="px-2 md:px-4 py-3 text-center">Status</TableCell>
+      <TableCell className="px-2 md:px-4 py-3 text-center">অবস্থা</TableCell>
       <TableCell className="px-2 md:px-4 py-3 text-center">
-        Claim History
+        ক্লেম হিস্ট্রি
       </TableCell>
       <TableCell className="px-2 md:px-4 py-3 text-right pr-6">
-        Action
+        অ্যাকশন
       </TableCell>
     </TableRow>
   );
@@ -177,7 +177,7 @@ const ProductTable = ({
         </div>
       ) : (
         <p className="text-center text-destructive">
-          No products with warranty available.
+          ওয়ারেন্টিযুক্ত কোনো পণ্য পাওয়া যায়নি।
         </p>
       )}
 
@@ -189,7 +189,7 @@ const ProductTable = ({
           </Table>
           <div className="w-[90%] sm:w-[85%] mx-auto">
             <p className="w-full p-2 font-bold text-sm md:text-xl text-destructive text-center">
-              This product has no warranty
+              এই পণ্যটিতে কোনো ওয়ারেন্টি সুবিধা নেই
             </p>
           </div>
         </>

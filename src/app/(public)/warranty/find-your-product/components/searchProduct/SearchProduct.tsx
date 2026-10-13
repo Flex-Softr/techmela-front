@@ -42,7 +42,7 @@ const SearchProduct = () => {
     const phoneNumber = e.target.value.trim();
 
     if (!/^\d+$/.test(phoneNumber)) {
-      setPhoneNumberError("Phone number must contain only digits");
+      setPhoneNumberError("ফোন নম্বর শুধুমাত্র সংখ্যা হতে হবে");
       setOrderedPhoneNumber(phoneNumber);
       return;
     }
@@ -51,7 +51,7 @@ const SearchProduct = () => {
     setPhoneNumberError("");
 
     if (phoneNumber?.length !== 11) {
-      setPhoneNumberError("Phone number must be 11 digits");
+      setPhoneNumberError("ফোন নম্বর ১১ ডিজিটের হতে হবে");
     }
   };
 
@@ -75,12 +75,12 @@ const SearchProduct = () => {
     }
 
     if (currentCodes?.length === 0) {
-      setError("Enter the product warranty codes");
+      setError("পণ্যের ওয়ারেন্টি কোড লিখুন");
       return;
     }
 
     if (orderedPhoneNumber?.length !== 11) {
-      setPhoneNumberError("Enter the phone number used for the order");
+      setPhoneNumberError("অর্ডারে ব্যবহৃত ১১ ডিজিটের ফোন নম্বরটি দিন");
       return;
     }
 
@@ -149,7 +149,7 @@ const SearchProduct = () => {
       );
 
       if (found.length === 0) {
-        setError("No information found");
+        setError("কোনো তথ্য পাওয়া যায়নি");
       } else {
         setError("");
       }
@@ -163,7 +163,7 @@ const SearchProduct = () => {
     if (isError && apiError) {
       const errorMessage =
         (apiError as ApiError).data?.errorMessages?.[0]?.message ||
-        "Unknown error";
+        "একটি সমস্যা হয়েছে, অনুগ্রহ করে আবার চেষ্টা করুন";
       setError(errorMessage);
     }
   }, [searched, isError, searchResultData, warrantyCodes, apiError]);
@@ -172,10 +172,10 @@ const SearchProduct = () => {
     <div className="w-full">
       <div className="text-center mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-          Select your product
+          আপনার পণ্যটি নির্বাচন করুন
         </h1>
         <p className="text-muted-foreground text-sm md:text-base">
-          Find your product using the warranty code on the package
+          প্যাকেজে থাকা ওয়ারেন্টি কোড ও ফোন নম্বর দিয়ে আপনার পণ্যটি খুঁজুন
         </p>
       </div>
 
@@ -187,7 +187,7 @@ const SearchProduct = () => {
                 className="block text-foreground text-sm font-medium mb-2"
                 htmlFor="warrantyCode"
               >
-                Product warranty code
+                প্রোডাক্ট ওয়ারেন্টি কোড
               </label>
               <div className="relative">
                 <input
@@ -196,7 +196,7 @@ const SearchProduct = () => {
                   className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   id="warrantyCode"
                   type="text"
-                  placeholder="e.g. CODE1, CODE2"
+                  placeholder="যেমন: CODE1, CODE2"
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
                 />
@@ -204,7 +204,7 @@ const SearchProduct = () => {
               {(isFocused || newWarrantyCode.trim() !== "") &&
               warrantyCodes.length === 0 ? (
                 <p className="text-muted-foreground text-xs mt-1">
-                  Use commas (,) for multiple codes and click "Search"
+                  একাধিক কোডের জন্য কমা (,) ব্যবহার করুন এবং "খুঁজুন"-এ চাপুন
                 </p>
               ) : null}
 
@@ -226,7 +226,7 @@ const SearchProduct = () => {
                       &#10005;
                     </button>
                     {notFoundProducts.includes(code) && (
-                      <p className="text-destructive text-xs ml-2">Invalid</p>
+                      <p className="text-destructive text-xs ml-2">অকার্যকর কোড</p>
                     )}
                   </div>
                 ))}
@@ -237,7 +237,7 @@ const SearchProduct = () => {
                 className="block text-foreground text-sm font-medium mb-2"
                 htmlFor="orderedPhoneNumber"
               >
-                Order phone number
+                অর্ডারকৃত ফোন নম্বর
               </label>
               <input
                 value={orderedPhoneNumber}
@@ -245,7 +245,7 @@ const SearchProduct = () => {
                 className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 id="orderedPhoneNumber"
                 type="text"
-                placeholder="01xxxxxxxxx"
+                placeholder="০১XXXXXXXXX"
               />
               {phoneNumberError && (
                 <p className="text-destructive text-xs mt-1">
@@ -260,7 +260,7 @@ const SearchProduct = () => {
               type="submit"
               className="bg-primary text-primary-foreground rounded-lg py-3 px-8 hover:bg-primary/90 transition-all shadow-sm font-medium text-sm md:text-base"
             >
-              Search
+              খুঁজুন
             </button>
           </div>
         </form>
@@ -268,7 +268,7 @@ const SearchProduct = () => {
         <div className="mt-6">
           {isLoading && (
             <p className="text-center text-muted-foreground text-sm">
-              Loading...
+              লোড হচ্ছে...
             </p>
           )}
           {error && (

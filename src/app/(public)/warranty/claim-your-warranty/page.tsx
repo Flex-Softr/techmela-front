@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import WarrantyForm from "./components/WarrantyForm";
+
+export const metadata: Metadata = {
+  title: "ওয়ারেন্টি ক্লেম | TechMela",
+  description: "আপনার পণ্যের ওয়ারেন্টি ক্লেম করার আবেদন ফর্ম পূরণ করুন।",
+};
 
 const ClaimYourWarrantyPage = () => {
   return (

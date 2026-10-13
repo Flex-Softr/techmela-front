@@ -124,7 +124,7 @@ const WarrantyForm = () => {
       setIsFormSubmitted(true);
     } catch (error: unknown) {
       toast({
-        description: "Error submitting warranty claim request",
+        description: "ওয়ারেন্টি ক্লেম সাবমিট করতে সমস্যা হয়েছে, আবার চেষ্টা করুন",
         className: "text-destructive",
       });
     }
@@ -236,7 +236,7 @@ const WarrantyForm = () => {
                   type="button"
                   onClick={() => handleDeleteFile(index)}
                   className="p-1.5 bg-destructive/100 text-primary-foreground rounded-full hover:bg-destructive transition-colors shadow-sm"
-                  title="Remove file"
+                  title="ফাইল মুছে ফেলুন"
                 >
                   <FaTrashAlt size={12} />
                 </button>
@@ -252,17 +252,17 @@ const WarrantyForm = () => {
     <div className="my-10 max-w-4xl mx-auto">
       <div className="text-center mb-8">
         <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-2">
-          Warranty claim form
+          ওয়ারেন্টি ক্লেম ফর্ম
         </h2>
         <p className="text-muted-foreground text-sm md:text-base">
-          Describe your product issue in detail
+          আপনার পণ্যের সমস্যা বিস্তারিতভাবে উল্লেখ করুন
         </p>
       </div>
 
       <div className="bg-background shadow-sm border border-border p-6 md:p-8 rounded-xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3 className="text-lg font-medium text-foreground mb-6 border-b pb-2">
-            Purchase information
+            ক্রয় সংক্রান্ত তথ্য
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -271,7 +271,7 @@ const WarrantyForm = () => {
                 htmlFor="orderedPhoneNumber"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                Order phone number
+                অর্ডারের ফোন নম্বর
               </label>
               <input
                 type="text"
@@ -286,7 +286,7 @@ const WarrantyForm = () => {
                 htmlFor="warrantyCodes"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                Product warranty code
+                প্রোডাক্ট ওয়ারেন্টি কোড
               </label>
               <input
                 type="text"
@@ -303,24 +303,24 @@ const WarrantyForm = () => {
               htmlFor="issueDescription"
               className="block mb-2 text-sm font-medium text-muted-foreground"
             >
-              Describe the issue
+              সমস্যার বিবরণ
             </label>
             <textarea
               id="issueDescription"
               {...register("issueDescription", { required: true })}
               className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm h-[120px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
-              placeholder="Write a detailed description..."
+              placeholder="সমস্যাটি বিস্তারিতভাবে লিখুন..."
             />
             {errors.issueDescription && (
               <p className="text-destructive text-xs mt-1">
-                Issue description is required
+                সমস্যার বিবরণ উল্লেখ করা আবশ্যক
               </p>
             )}
           </div>
 
           <div className="mb-8">
             <span className="block mb-2 text-sm font-medium text-muted-foreground">
-              Evidence (photos/videos)
+              প্রমাণক (ছবি অথবা ভিডিও)
             </span>
             <div
               className={`relative border-2 border-dashed ${
@@ -338,7 +338,7 @@ const WarrantyForm = () => {
                   required: false,
                   validate: (value) =>
                     (value && value.length > 0) ||
-                    "Please select at least one file.",
+                    "অনুগ্রহ করে অন্তত একটি ছবি বা ভিডিও সিলেক্ট করুন।",
                 })}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 onChange={handleFileInputChange}
@@ -350,12 +350,12 @@ const WarrantyForm = () => {
                 </div>
                 <p className="text-sm text-muted-foreground">
                   <span className="font-medium text-primary">
-                    Click to upload
+                    ফাইল আপলোড করতে ক্লিক করুন
                   </span>{" "}
-                  or drag and drop
+                  বা টেনে এনে ছাড়ুন
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Images or Videos
+                  ছবি বা ভিডিও ফাইল
                 </p>
               </div>
             </div>
@@ -369,7 +369,7 @@ const WarrantyForm = () => {
           </div>
 
           <h3 className="text-lg font-medium text-foreground mb-6 border-b pb-2">
-            Customer information
+            গ্রাহকের তথ্য
           </h3>
 
           <div className="mb-6 p-4 bg-muted rounded-lg">
@@ -402,7 +402,7 @@ const WarrantyForm = () => {
                   htmlFor="keepAddress"
                   className="ml-2 text-sm font-medium text-foreground cursor-pointer"
                 >
-                  Use previous address
+                  আগের ঠিকানা ব্যবহার করুন
                 </label>
               </div>
               <div className="flex items-center">
@@ -424,7 +424,7 @@ const WarrantyForm = () => {
                   htmlFor="changeAddress"
                   className="ml-2 text-sm font-medium text-foreground cursor-pointer"
                 >
-                  Enter a new address
+                  নতুন ঠিকানা দিন
                 </label>
               </div>
             </div>
@@ -436,19 +436,19 @@ const WarrantyForm = () => {
                 htmlFor="fullName"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                Name
+                পূর্ণ নাম
               </label>
               <input
                 type="text"
                 id="fullName"
                 {...register("fullName", { required: true })}
                 className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                placeholder="Your name"
+                placeholder="আপনার নাম"
                 readOnly={addressOption === "keep"}
               />
               {errors.fullName && (
                 <p className="text-destructive text-xs mt-1">
-                  Name is required
+                  নাম দেওয়া আবশ্যক
                 </p>
               )}
             </div>
@@ -457,7 +457,7 @@ const WarrantyForm = () => {
                 htmlFor="phoneNumber"
                 className="block mb-2 text-sm font-medium text-muted-foreground"
               >
-                Mobile number
+                মোবাইল নম্বর
               </label>
               <input
                 type="text"
@@ -467,12 +467,12 @@ const WarrantyForm = () => {
                   pattern: /^[0-9]*$/,
                 })}
                 className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                placeholder="01xxxxxxxxx"
+                placeholder="০১XXXXXXXXX"
                 readOnly={addressOption === "keep"}
               />
               {errors.phoneNumber && (
                 <p className="text-destructive text-xs mt-1">
-                  Mobile number is required
+                  মোবাইল নম্বর দেওয়া আবশ্যক
                 </p>
               )}
             </div>
@@ -483,19 +483,19 @@ const WarrantyForm = () => {
               htmlFor="fullAddress"
               className="block mb-2 text-sm font-medium text-muted-foreground"
             >
-              Address
+              সম্পূর্ণ ঠিকানা
             </label>
             <input
               type="text"
               id="fullAddress"
               {...register("fullAddress", { required: true })}
               className="w-full border border-border bg-muted/30 rounded-lg p-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-              placeholder="Full address"
+              placeholder="আপনার বিস্তারিত ঠিকানা"
               readOnly={addressOption === "keep"}
             />
             {errors.fullAddress && (
               <p className="text-destructive text-xs mt-1">
-                Address is required
+                ঠিকানা দেওয়া আবশ্যক
               </p>
             )}
           </div>
@@ -506,7 +506,7 @@ const WarrantyForm = () => {
                 className="text-primary-foreground"
                 disabled={isLoading}
               >
-                {isLoading ? "Submitting..." : "Submit"}
+                {isLoading ? "পাঠানো হচ্ছে..." : "সাবমিট করুন"}
               </EcButton>
             )}
             {isFormSubmitted && (
@@ -515,7 +515,7 @@ const WarrantyForm = () => {
                 className="text-primary-foreground"
                 disabled
               >
-                Form Submitted
+                ফর্ম জমা দেওয়া হয়েছে
               </EcButton>
             )}
           </div>
@@ -531,17 +531,16 @@ const WarrantyForm = () => {
             <DialogContent className="w-11/12 max-w-[630px] mx-auto p-4">
               <DialogHeader>
                 <DialogTitle className="text-center my-2 xms:text-xs xls:text-xs sm:text-sm md:text-lg font-bold">
-                  Request received successfully
+                  আবেদনটি সফলভাবে জমা হয়েছে
                 </DialogTitle>
                 <DialogDescription className="text-center p-3 text-sm">
-                  Your request has been received. Our technical team will
-                  contact you. Please wait. Thank you.
+                  আপনার ওয়ারেন্টি ক্লেমের আবেদনটি গ্রহণ করা হয়েছে। আমাদের টেকনিক্যাল টিম খুব শীঘ্রই আপনার সাথে যোগাযোগ করবে। TechMela-র সাথে থাকার জন্য ধন্যবাদ।
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter className="mx-auto my-1">
                 <Link href="/">
                   <EcButton className="text-primary-foreground">
-                    Go back home
+                    হোমে ফিরে যান
                   </EcButton>
                 </Link>
               </DialogFooter>
