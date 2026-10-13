@@ -38,13 +38,13 @@ const FloatingContact = () => {
         href={`https://wa.me/${whatsappNumber}`}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
+        aria-label="হোয়াটসঅ্যাপে যোগাযোগ করুন"
         className="size-[50px] rounded-full shadow-lg bg-[#25D366] hover:bg-[#20ba5a] text-white flex items-center justify-center transition-all duration-300 transform hover:scale-110 pointer-events-auto z-50 group relative ring-2 ring-white/30"
       >
         <div className="relative w-7 h-7">
           <Image
             src="/images/social_icons/whatsapp.webp"
-            alt="WhatsApp"
+            alt="হোয়াটসঅ্যাপ"
             fill
             className="object-contain"
           />
@@ -52,7 +52,7 @@ const FloatingContact = () => {
 
         {/* Tooltip on hover */}
         <span className="absolute right-full mr-3 px-2.5 py-1 text-xs font-semibold bg-gray-900 text-white rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap hidden sm:block">
-          WhatsApp
+          হোয়াটসঅ্যাপ
         </span>
       </a>
     </div>

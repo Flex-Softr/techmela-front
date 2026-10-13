@@ -20,13 +20,13 @@ const HighlightAProduct = ({ product }: { product: TProduct | null }) => {
             <div className="max-w-xl space-y-2 text-center md:text-left">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
                 <Sparkles className="size-3 text-warning fill-warning" />
-                <span>Editorial Spotlight</span>
+                <span>স্পেশাল সিলেকশন</span>
               </div>
               <h2 className="text-lg md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
                 {product?.title}
               </h2>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                Handcrafted formulation tested for quality, purity, and long-lasting vitality.
+                ১০০% অরিজিনাল এবং প্রিমিয়াম কোয়ালিটির নিশ্চয়তা।
               </p>
               <div className="pt-2 flex items-center justify-center md:justify-start gap-3">
                 <span className="text-lg md:text-xl font-bold text-primary">
@@ -41,7 +41,7 @@ const HighlightAProduct = ({ product }: { product: TProduct | null }) => {
                   size="sm"
                   className="rounded-full px-5 ml-2 bg-primary hover:bg-secondary text-primary-foreground pointer-events-none"
                 >
-                  <span>Order Now</span>
+                  <span>অর্ডার করুন</span>
                   <ArrowRight className="size-3.5 ml-1" />
                 </Button>
               </div>

@@ -7,8 +7,8 @@ import { FaBagShopping } from "react-icons/fa6";
 import { MdCall } from "react-icons/md";
 
 const announcements = [
-  "Delivery across Bangladesh within 3 days, InshaAllah   ",
-  "Hassle-free return policy  ",
+  "ইনশাআল্লাহ ৩ দিনের মধ্যে সারা দেশে দ্রুত ডেলিভারি",
+  "সহজ ও ঝামেলামুক্ত রিটার্ন পলিসি",
 ];
 
 const TopHeader = () => {
@@ -24,7 +24,7 @@ const TopHeader = () => {
   const links = [
     {
       href: "/shop",
-      name: "All Products",
+      name: "সব পণ্য",
       icon: <FaBagShopping className="size-4" />,
     },
   ];

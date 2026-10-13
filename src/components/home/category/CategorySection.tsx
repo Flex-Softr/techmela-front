@@ -17,8 +17,8 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
   return (
     <section className="py-6 md:py-10">
       <div className="mb-6 px-4 text-center md:mb-8">
-        <SectionTitle title="Featured Category" className="text-primary" />
-        <SectionSubtitle text="Get Your Desired Product from Featured Category!" />
+        <SectionTitle title="জনপ্রিয় ক্যাটাগরি" className="text-primary" />
+        <SectionSubtitle text="পছন্দের ক্যাটাগরি থেকে খুঁজে নিন আপনার প্রয়োজনীয় গ্যাজেট" />
       </div>
 
       <ContainerMax>
@@ -36,7 +36,7 @@ const CategorySection = ({ categories }: { categories: TCategory[] }) => {
             className="rounded-full px-7 border-primary/20 hover:bg-primary hover:text-primary-foreground text-primary font-medium transition-all duration-200 shadow-sm"
           >
             <Link href="/shop" className="flex items-center gap-1.5">
-              <span>View More</span>
+              <span>সব ক্যাটাগরি দেখুন</span>
               <ArrowRight className="size-4" />
             </Link>
           </Button>

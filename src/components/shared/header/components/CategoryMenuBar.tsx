@@ -46,8 +46,8 @@ export default function CategoryMenuBar({
   };
 
   const menuLinks = [
-    { title: "Home", href: "/" },
-    { title: "All Products", href: "/shop" },
+    { title: "হোম", href: "/" },
+    { title: "সব পণ্য", href: "/shop" },
   ];
 
   // Recursive component for rendering category dropdowns

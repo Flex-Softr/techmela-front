@@ -34,7 +34,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
       await deleteCartItem({ itemId: id }).unwrap();
     } catch (error) {
       toast({
-        title: "Failed to remove item from cart.",
+        title: "কার্ট থেকে পণ্য সরানো যায়নি।",
         variant: "destructive",
       });
     }
@@ -45,14 +45,14 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="flex flex-col h-full sm:max-w-md p-0">
         <SheetHeader className="border-b px-5 py-3 flex flex-row items-center justify-between space-y-0 bg-background">
-          <SheetTitle className="text-lg font-bold">My Cart</SheetTitle>
+          <SheetTitle className="text-lg font-bold">আমার কার্ট</SheetTitle>
           <SheetDescription className="hidden">
-            Your cart items are shown here
+            আপনার কার্টের পণ্যসমূহ
           </SheetDescription>
           <button
             onClick={() => setOpen(false)}
             className="rounded-full hover:bg-muted h-8 w-8 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Close cart"
+            aria-label="কার্ট বন্ধ করুন"
           >
             <X size={18} />
           </button>
@@ -67,7 +67,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
             </div>
           ) : !cartItems || cartItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-4">
-              <p className="text-muted-foreground">Your cart is empty</p>
+              <p className="text-muted-foreground">আপনার কার্ট খালি রয়েছে</p>
               <Button
                 onClick={() => {
                   setOpen(false);
@@ -76,7 +76,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                 variant="outline"
                 className="text-primary-foreground hover:text-primary-foreground bg-primary hover:bg-primary"
               >
-                Continue Shopping
+                কেনাকাটা চালিয়ে যান
               </Button>
             </div>
           ) : (
@@ -155,7 +155,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
                         <button
                           onClick={() => handleRemoveFromCart(item._id)}
                           className="p-1 -mr-1 transition-colors text-destructive hover:text-destructive"
-                          aria-label="Remove item"
+                          aria-label="পণ্য বাদ দিন"
                         >
                           <X className="w-5 h-5" />
                         </button>
@@ -199,7 +199,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
           <div className="border-t pt-4 mt-auto space-y-4 bg-background px-5 pb-6">
             <div className="flex justify-between items-center">
               <span className="text-sm font-semibold text-foreground uppercase tracking-wider">
-                Subtotal
+                সাবটোটাল
               </span>
               <span className="text-xl font-bold text-primary">
                 &#2547;{totalCost}
@@ -210,7 +210,7 @@ const CartSidebar = ({ children }: { children: ReactNode }) => {
               asChild
               onClick={() => setOpen(false)}
             >
-              <Link href="/checkout">Checkout</Link>
+              <Link href="/checkout">অর্ডার সম্পন্ন করুন</Link>
             </Button>
           </div>
         )}

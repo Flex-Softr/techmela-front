@@ -20,7 +20,7 @@ const TrendingProducts = async () => {
   return (
     <section className="pt-20">
       <ContainerMax>
-        <SectionTitle title="Trending products" href="/shop" />
+        <SectionTitle title="বর্তমানে জনপ্রিয় পণ্য" href="/shop" />
         <div>
           <Carousel>
             <CarouselContent className="p-4">

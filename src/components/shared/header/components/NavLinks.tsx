@@ -37,7 +37,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
         >
           <Button
             variant={"outline"}
-            aria-label="Open menu"
+            aria-label="মেনু খুলুন"
             className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
           >
             <FaBars />
@@ -66,7 +66,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                 href="/my-account"
                 onClick={() => setIsOpen(false)}
                 className="size-10 rounded-full border border-primary/20 text-primary flex items-center justify-center hover:bg-primary/5 transition-all duration-300"
-                aria-label="My Account"
+                aria-label="আমার অ্যাকাউন্ট"
               >
                 <UserRound className="size-5" />
               </Link>
@@ -75,7 +75,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                   variant="ghost"
                   size="icon"
                   className="size-10 rounded-full text-primary hover:bg-primary/5 hover:text-primary transition-all duration-300"
-                  aria-label="Close menu"
+                  aria-label="মেনু বন্ধ করুন"
                 >
                   <X className="size-5" />
                 </Button>
@@ -93,7 +93,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
 
           <div className="p-4 bg-muted border-t mt-auto">
             <p className="text-xs font-bold text-primary uppercase tracking-wider mb-2.5">
-              Contact & Quick Links
+              যোগাযোগ ও প্রয়োজনীয় লিংক
             </p>
             <div className="grid grid-cols-2 gap-2">
               {/* 1. WhatsApp */}
@@ -134,7 +134,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                   <MdDeliveryDining className="size-4" />
                 </div>
                 <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors truncate">
-                  Track Order
+                  অর্ডার ট্র্যাক করুন
                 </span>
               </Link>
 
@@ -148,7 +148,7 @@ const NavLinks = ({ categories }: { categories?: TCategory[] }) => {
                   <Star className="size-3.5 fill-amber-500 text-amber-500" />
                 </div>
                 <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors truncate">
-                  Reviews
+                  কাস্টমার রিভিউ
                 </span>
               </Link>
             </div>

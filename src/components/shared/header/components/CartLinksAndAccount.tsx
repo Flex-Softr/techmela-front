@@ -97,7 +97,7 @@ const CartLinksAndAccount = () => {
             variant={"ghost"}
             onClick={toggleSearchBar}
             className="size-9 rounded-full text-white hover:text-white hover:bg-white/15 transition-all duration-300"
-            aria-label="Open search"
+            aria-label="সার্চ খুলুন"
           >
             <FaSearch className="size-4" />
           </Button>
@@ -119,18 +119,18 @@ const CartLinksAndAccount = () => {
               <div className="relative flex-1 h-11">
                 <input
                   type="text"
-                  placeholder="Search your favorite products..."
+                  placeholder="পছন্দের পণ্য খুঁজুন..."
                   className="w-full h-full rounded-full border border-border bg-muted pr-12 outline-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pl-5 placeholder:text-sm transition-all"
                   name="searchValue"
                   value={searchValue}
                   onChange={handleInputChange}
                   onFocus={() => setShowSuggestions(true)}
-                  aria-label="Search products"
+                  aria-label="পণ্য সার্চ করুন"
                 />
                 <button
                   className="absolute right-1 top-1/2 -translate-y-1/2"
                   type="submit"
-                  aria-label="Submit search"
+                  aria-label="সার্চ করুন"
                 >
                   <div className="h-9 w-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
                     <FaSearch className="text-sm" />
@@ -141,7 +141,7 @@ const CartLinksAndAccount = () => {
                 <div className="absolute mt-2 top-full left-1/2 transform -translate-x-1/2 w-[95%] max-w-md bg-background border border-border rounded-xl shadow-xl z-50 overflow-y-auto max-h-80">
                   {isLoading && (
                     <p className="p-4 text-sm text-center text-primary/70 animate-pulse">
-                      Searching...
+                      খোঁজা হচ্ছে...
                     </p>
                   )}
 
@@ -203,7 +203,7 @@ const CartLinksAndAccount = () => {
 
                               {isVariable && (
                                 <p className="text-[10px] text-primary/80 font-medium uppercase tracking-wider mt-0.5">
-                                  Multiple options
+                                  একাধিক অপশন
                                 </p>
                               )}
                             </div>
@@ -212,7 +212,7 @@ const CartLinksAndAccount = () => {
                       })
                     : !isLoading && (
                         <p className="p-4 text-sm text-center text-primary/70">
-                          No products found.
+                          কোনো পণ্য পাওয়া যায়নি
                         </p>
                       )}
                 </div>
@@ -223,7 +223,7 @@ const CartLinksAndAccount = () => {
                   variant={"ghost"}
                   className="h-9 w-9 aspect-square rounded-full hover:bg-muted text-primary/80 hover:text-primary transition-colors"
                   onClick={toggleSearchBar}
-                  aria-label="Close search"
+                  aria-label="সার্চ বন্ধ করুন"
                 >
                   <FaTimes />
                 </Button>
@@ -238,7 +238,7 @@ const CartLinksAndAccount = () => {
         variant={"ghost"}
         className="rounded-full size-9 p-0 border border-white/25 bg-white/10 text-white hover:text-white hover:bg-white/20 transition-all duration-300 hidden sm:flex items-center justify-center shadow-xs overflow-hidden"
       >
-        <Link href="/my-account" aria-label="My Account">
+        <Link href="/my-account" aria-label="আমার অ্যাকাউন্ট">
           {user?.data?._id ? (
             <div className="w-full h-full flex items-center justify-center bg-white/20 text-white">
               <span className="font-bold text-[15px] uppercase">
@@ -255,7 +255,7 @@ const CartLinksAndAccount = () => {
         <Button
           variant={"ghost"}
           className="rounded-full size-9 relative border border-white/25 bg-white/10 text-white hover:text-white hover:bg-white/20 transition-all duration-300 flex items-center justify-center p-0 shadow-xs"
-          aria-label="Shopping Cart"
+          aria-label="শপিং কার্ট"
         >
           <ShoppingCart className="size-5" />
           <Badge className="bg-amber-400 text-slate-950 font-bold size-5 flex items-center justify-center text-[10px] absolute -top-1.5 -right-1.5 pointer-events-none rounded-full border-2 border-[rgba(9,33,67,1)] shadow-xs">

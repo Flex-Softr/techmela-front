@@ -5,9 +5,15 @@ import { Toaster } from "@/components/ui/toaster";
 import { SITE } from "@/const/site.const";
 import StoreProvider from "@/redux/StoreProvider";
 import { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Hind_Siliguri, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { ReactNode, Suspense } from "react";
 import "./globals.css";
+
+const hindSiliguri = Hind_Siliguri({
+  subsets: ["bengali", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-hind-siliguri",
+});
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -67,13 +73,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="bn">
       <head>
         <link rel="preconnect" href={SITE.apiUrl} />
         <link rel="dns-prefetch" href={SITE.apiUrl} />
       </head>
       <body
-        className={`${plusJakartaSans.variable} ${inter.variable} ${plusJakartaSans.className} antialiased`}
+        className={`${hindSiliguri.variable} ${plusJakartaSans.variable} ${inter.variable} ${hindSiliguri.className} antialiased`}
       >
         <JsonLd
           data={{

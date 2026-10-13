@@ -7,7 +7,6 @@ import FeaturedProducts from "@/components/home/featuredProducts/FeaturedProduct
 import HomepageSectionsFetcher from "@/components/home/homePageSections/HomepageSectionsFetcher";
 import HomepageSectionSkeleton from "@/components/home/homePageSections/HomepageSectionSkeleton";
 import JsonLd from "@/components/shared/JsonLd";
-import SustainabilityBanner from "@/components/home/sustainability/SustainabilityBanner";
 import { SITE } from "@/const/site.const";
 import TCategory from "@/types/categories/categories";
 import { THomePageSection } from "@/types/homepageSection";
@@ -19,39 +18,32 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: SITE.taglineBn,
-  description: `Welcome to ${SITE.nameBn}. ${SITE.descriptionBn}`,
+  title: `${SITE.nameBn} | ${SITE.taglineBn}`,
+  description: `${SITE.nameBn}-এ আপনাকে স্বাগতম। ${SITE.descriptionBn}`,
   keywords: [
     SITE.nameBn,
     SITE.nameEn,
-    "Buy cosmetics",
-    "Online cosmetics",
-    "Bangla Cosmetics",
-    "Cosmetics Bangladesh",
-    "Online Cosmetics Shop Bangladesh",
-    "Skincare",
-    "Makeup",
-    "Haircare",
-    "Perfume",
-    "Face wash",
-    "Moisturizer",
-    "Lipstick",
-    "Foundation",
-    "Sunscreen",
-    "Hair oil",
-    "Body lotion",
-    "Beauty accessories",
-    "Organic cosmetics",
-    "Cosmetics delivery in Bangladesh",
-    "Cash on delivery cosmetics",
-    "Buy cosmetics online Bangladesh",
+    "টেকমেল্লা",
+    "TechMela",
+    "অনলাইন গ্যাজেট শপ",
+    "স্মার্ট গ্যাজেট বাংলাদেশ",
+    "ইলেকট্রনিক্স বাংলাদেশ",
+    "হেডফোন",
+    "ইয়ারবাড",
+    "স্মার্টওয়াচ",
+    "মাইক্রোফোন",
+    "পাওয়ার ব্যাংক",
+    "ব্লুটুথ স্পিকার",
+    "মোবাইল এক্সেসরিজ",
+    "ক্যাশ অন ডেলিভারি গ্যাজেট",
+    "অনলাইন শপিং বাংলাদেশ",
   ].join(", "),
   openGraph: {
     title: `${SITE.nameBn} | ${SITE.taglineBn}`,
-    description: `Welcome to ${SITE.nameBn}. ${SITE.descriptionBn}`,
+    description: `${SITE.nameBn}-এ আপনাকে স্বাগতম। ${SITE.descriptionBn}`,
     url: SITE.baseUrl,
     siteName: SITE.nameBn,
-    locale: "en_BD",
+    locale: "bn_BD",
     type: "website",
     images: [
       {
@@ -63,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: `${SITE.nameBn} | ${SITE.taglineBn}`,
-    description: `Welcome to ${SITE.nameBn}. ${SITE.descriptionBn}`,
+    description: `${SITE.nameBn}-এ আপনাকে স্বাগতম। ${SITE.descriptionBn}`,
     images: [`${SITE.baseUrl}${SITE.logoPath}`],
   },
 };
@@ -94,7 +86,7 @@ const Home = async () => {
     "@context": "https://schema.org",
     "@type": ["Store", "OnlineStore"],
     name: SITE.nameBn,
-    description: `Welcome to ${SITE.nameBn}. ${SITE.descriptionBn}`,
+    description: `${SITE.nameBn}-এ আপনাকে স্বাগতম। ${SITE.descriptionBn}`,
     url: SITE.baseUrl,
     image: `${SITE.baseUrl}${SITE.logoPath}`,
     telephone: SITE.phone,
@@ -103,7 +95,7 @@ const Home = async () => {
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.address,
-      addressLocality: "Hatirpool, Dhaka",
+      addressLocality: "হাতিরপুল, ঢাকা",
       postalCode: "1205",
       addressCountry: "BD",
     },
@@ -129,7 +121,7 @@ const Home = async () => {
     "@type": "WebSite",
     name: SITE.nameBn,
     url: SITE.baseUrl,
-    inLanguage: "en-BD",
+    inLanguage: "bn-BD",
     potentialAction: {
       "@type": "SearchAction",
       target: `${SITE.baseUrl}/shop?search={search_term_string}`,
@@ -156,7 +148,6 @@ const Home = async () => {
       <Suspense fallback={<HomepageSectionSkeleton />}>
         <HomepageSectionsFetcher promise={homepageSectionsPromise} />
       </Suspense>
-      <SustainabilityBanner />
       <Suspense fallback={<HomepageSectionSkeleton />}>
         <BestSellingProducts promise={bestSellingProductsPromise} />
       </Suspense>

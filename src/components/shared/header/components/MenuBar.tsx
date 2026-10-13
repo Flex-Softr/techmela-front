@@ -54,13 +54,13 @@ export default function MenuBar({
   const categoryItems: MenuLink[] = categories.map(mapCategoryToMenuLink);
 
   const menuLinks: MenuLink[] = [
-    { title: "Home", href: "/" },
-    { title: "All Products", href: "/shop" },
+    { title: "হোম", href: "/" },
+    { title: "সব পণ্য", href: "/shop" },
   ];
 
   if (!isVertical && categoryItems.length > 5) {
     menuLinks.push({
-      title: "All Categories",
+      title: "সকল ক্যাটাগরি",
       href: "/shop",
       subMenus: categoryItems,
     });

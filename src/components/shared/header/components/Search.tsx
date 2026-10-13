@@ -36,8 +36,8 @@ const Search = () => {
   const [showSuggestions, setShowSuggestions] = useState(true);
 
   const placeholders = [
-    "Search your favorite products...",
-    "Search by product name...",
+    "পছন্দের পণ্য খুঁজুন...",
+    "পণ্যের নাম লিখে সার্চ করুন...",
   ];
 
   const typingPlaceholder = useTypingPlaceholder(placeholders);
@@ -89,7 +89,7 @@ const Search = () => {
           onChange={handleInputChange}
           placeholder={typingPlaceholder}
           className="w-full h-[42px] px-4 text-[13px] outline-none border border-transparent bg-white text-gray-900 rounded-full pr-12 focus:ring-2 focus:ring-white/40 transition-all duration-300 placeholder:text-gray-400 shadow-sm"
-          aria-label="Search products"
+          aria-label="পণ্য সার্চ করুন"
         />
 
         {searchValue && (
@@ -97,7 +97,7 @@ const Search = () => {
             type="button"
             onClick={handleClearSearch}
             className="absolute right-10 text-gray-400 hover:text-gray-600 transition-colors p-1"
-            aria-label="Clear search"
+            aria-label="সার্চ ক্লিয়ার করুন"
           >
             <FaTimes className="size-3" />
           </button>
@@ -107,7 +107,7 @@ const Search = () => {
           type="submit"
           variant="ghost"
           className="absolute right-1 top-1/2 -translate-y-1/2 h-[34px] w-[34px] rounded-full flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 p-0 shadow-xs"
-          aria-label="Submit search"
+          aria-label="সার্চ করুন"
         >
           <FaSearch className="text-[13px]" />
         </Button>
@@ -115,7 +115,7 @@ const Search = () => {
 
       {showSuggestions && debouncedSearchValue.trim() !== "" && (
         <div className="absolute top-full mt-2 w-full bg-background border border-border rounded-lg shadow-lg z-[100] max-h-[400px] overflow-y-auto">
-          {isLoading && <p className="p-3 text-sm">Loading...</p>}
+          {isLoading && <p className="p-3 text-sm">লোড হচ্ছে...</p>}
 
           {!isLoading && !isError && products.length > 0
             ? products.map((product) => {
@@ -175,7 +175,7 @@ const Search = () => {
 
                       {isVariable && (
                         <p className="text-[11px] text-primary">
-                          Multiple options
+                          একাধিক অপশন রয়েছে
                         </p>
                       )}
                     </div>
@@ -183,7 +183,7 @@ const Search = () => {
                 );
               })
             : !isLoading && (
-                <p className="p-3 text-sm text-primary/70">No results found.</p>
+                <p className="p-3 text-sm text-primary/70">কোনো পণ্য খুঁজে পাওয়া যায়নি</p>
               )}
         </div>
       )}

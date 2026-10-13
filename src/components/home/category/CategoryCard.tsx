@@ -36,7 +36,7 @@ const CategoryCard = ({ category }: { category: TCategory }) => {
       </span>
       {category.productCount !== undefined && (
         <span className="mt-1 text-[10px] text-muted-foreground font-normal">
-          {category.productCount} items
+          {category.productCount}টি পণ্য
         </span>
       )}
     </Link>

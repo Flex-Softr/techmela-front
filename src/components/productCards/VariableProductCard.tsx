@@ -91,7 +91,7 @@ const VariableProductCard = ({
               </div>
             ) : (
               <span className="text-sm font-bold text-muted-foreground">
-                Unavailable
+                মূল্য নির্ধারিত নয়
               </span>
             )}
           </div>
@@ -113,7 +113,7 @@ const VariableProductCard = ({
       >
         <Link href={`/product/${productSlug}`}>
           <Layers className="!size-3.5 mr-1" />
-          View Options
+          অপশন দেখুন
         </Link>
       </Button>
     </article>

@@ -30,7 +30,7 @@ const HomepageSectionContent = async ({
   const sectionImageAlt =
     typeof content?.image === "object" && content?.image?.alt
       ? content.image.alt
-      : content?.title || "Section banner";
+      : content?.title || "সেকশন ব্যানার";
 
   return (
     <>
@@ -103,7 +103,7 @@ const HomepageSectionContent = async ({
                             : content?.collectionId
                         }`}
                       >
-                        View All
+                        সবগুলো দেখুন
                       </Link>
                     </Button>
                   </div>

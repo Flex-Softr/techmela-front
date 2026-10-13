@@ -7,19 +7,19 @@ import { FaFacebookF, FaUsers, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import logo from "../../../../public/logo/techmela-lightlogo.png";
 
 const companyLinks = [
-  { name: "All Products", url: "/shop" },
-  { name: "About Us", url: "/about-us" },
-  { name: "Contact Us", url: "/contact-us" },
-  { name: "Store Location", url: "/store-location" },
+  { name: "সকল পণ্য", url: "/shop" },
+  { name: "আমাদের সম্পর্কে", url: "/about-us" },
+  { name: "যোগাযোগ", url: "/contact-us" },
+  { name: "দোকানের ঠিকানা", url: "/store-location" },
 ];
 
 const customerCareLinks = [
-  { name: "Order Tracking", url: "/track-your-order" },
+  { name: "অর্ডার ট্র্যাকিং", url: "/track-your-order" },
   // { name: "warranty claim", url: "/warranty/claim-your-warranty" },
   // { name: "Warranty Claim", url: "/warranty/find-your-product" },
-  { name: "My Account", url: "/my-account" },
-  { name: "Delivery Policy", url: "/delivery-policy" },
-  { name: "Return Policy", url: "/return-policy" },
+  { name: "আমার অ্যাকাউন্ট", url: "/my-account" },
+  { name: "ডেলিভারি পলিসি", url: "/delivery-policy" },
+  { name: "রিটার্ন পলিসি", url: "/return-policy" },
 ];
 
 const MainFooterContent = () => {
@@ -43,16 +43,16 @@ const MainFooterContent = () => {
               </div>
             </Link>
             <p className="text-sm font-medium leading-relaxed text-foreground">
-              ❝TechMela❞ is a trusted online shop in Bangladesh, providing
-              authentic products with fast delivery and dedicated customer
-              support.
+              ❝টেকমেল্লা❞ বাংলাদেশের একটি নির্ভরযোগ্য অনলাইন শপ, যা শতভাগ আসল
+              প্রোডাক্ট, দ্রুত ডেলিভারি ও আন্তরিক কাস্টমার সাপোর্টের নিশ্চয়তা
+              দেয়।
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
             <h3 className="font-bold text-lg mb-2.5 text-foreground">
-              Useful Links
+              প্রয়োজনীয় লিংক
             </h3>
             <ul className="space-y-1">
               {companyLinks.map((link) => (
@@ -71,7 +71,7 @@ const MainFooterContent = () => {
           {/* Column 3: Customer Care */}
           <div>
             <h3 className="font-bold text-lg mb-2.5 text-foreground">
-              Customer Care
+              কাস্টমার কেয়ার
             </h3>
             <ul className="space-y-1">
               {customerCareLinks.map((link) => (
@@ -90,28 +90,26 @@ const MainFooterContent = () => {
           {/* Column 4: Contact */}
           <div>
             <h3 className="font-bold text-lg mb-2.5 text-foreground">
-              Contact
+              যোগাযোগ
             </h3>
             <div className="space-y-2.5">
               <a
-                href="tel:+8801772065894"
+                href={`tel:${SITE.phone}`}
                 className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 <Phone className="size-4 text-foreground" />
-                +8801772065894
+                {SITE.phoneDisplay || SITE.phone}
               </a>
               <a
-                href="mailto:support@techmela.com.bd"
+                href={`mailto:${SITE.email}`}
                 className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 <Mail className="size-4 text-foreground" />
-                support@techmela.com.bd
+                {SITE.email}
               </a>
               <div className="flex items-start gap-2 text-sm font-medium text-foreground">
                 <MapPin className="size-4 mt-1 shrink-0 text-foreground" />
-                <span>
-                  Shop No- 369, Motalib Plaza, Hatirpool, Dhaka-1205
-                </span>
+                <span>{SITE.address}</span>
               </div>
               <div className="flex gap-3 pt-2">
                 <a

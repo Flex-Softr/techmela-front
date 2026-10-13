@@ -10,9 +10,9 @@ export const STOCK_STATUS = {
 } as const;
 
 export const STOCK_STATUS_LABEL = {
-  [STOCK_STATUS.IN_STOCK]: "In stock",
-  [STOCK_STATUS.LOW_STOCK]: "Low stock",
-  [STOCK_STATUS.OUT_OF_STOCK]: "Out of stock",
+  [STOCK_STATUS.IN_STOCK]: "স্টকে আছে",
+  [STOCK_STATUS.LOW_STOCK]: "সীমিত স্টক",
+  [STOCK_STATUS.OUT_OF_STOCK]: "স্টক শেষ",
 } as const;
 
 export type TStockStatus = (typeof STOCK_STATUS)[keyof typeof STOCK_STATUS];
