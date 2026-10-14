@@ -86,8 +86,10 @@ const ProductTable = ({
               <Image
                 layout="fill"
                 objectFit="contain"
-                src={getImageSrc(product?.image?.src)}
-                alt={product?.image?.alt || ""}
+                src={getImageSrc(
+                  product?.image?.src || product?.thumbnail?.src
+                )}
+                alt={product?.image?.alt || product?.thumbnail?.alt || ""}
                 className="p-1"
               />
             </div>
@@ -147,9 +149,7 @@ const ProductTable = ({
     <TableRow className="bg-primary/5 font-bold text-xs md:text-sm text-primary">
       <TableCell className="px-2 md:px-4 py-3">ছবি</TableCell>
       <TableCell className="px-2 md:px-4 py-3">পণ্যের নাম</TableCell>
-      <TableCell className="px-2 md:px-4 py-3 text-center">
-        মূল্য
-      </TableCell>
+      <TableCell className="px-2 md:px-4 py-3 text-center">মূল্য</TableCell>
       <TableCell className="px-2 md:px-4 py-3 text-center">
         ওয়ারেন্টির মেয়াদ
       </TableCell>

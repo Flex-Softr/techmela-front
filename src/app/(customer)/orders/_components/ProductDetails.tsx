@@ -44,7 +44,9 @@ const OrderDetails = () => {
       <div className="flex items-center justify-center py-20 text-muted-foreground">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-lg font-medium">অর্ডারের বিবরণ লোড হচ্ছে...</span>
+          <span className="text-lg font-medium">
+            অর্ডারের বিবরণ লোড হচ্ছে...
+          </span>
         </div>
       </div>
     );
@@ -57,7 +59,8 @@ const OrderDetails = () => {
           তথ্য লোড করতে সমস্যা হয়েছে
         </h2>
         <p className="text-muted-foreground mt-2">
-          অর্ডারের বিবরণ প্রদর্শন করা সম্ভব হয়নি। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।
+          অর্ডারের বিবরণ প্রদর্শন করা সম্ভব হয়নি। অনুগ্রহ করে কিছুক্ষণ পর আবার
+          চেষ্টা করুন।
         </p>
         <Button
           onClick={() => router.back()}
@@ -240,8 +243,15 @@ const OrderDetails = () => {
                           <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-border bg-muted shrink-0">
                             <Image
                               fill
-                              src={getImageSrc(item?.image?.src)}
-                              alt={item?.image?.alt || item?.title || "Product"}
+                              src={getImageSrc(
+                                item?.image?.src || item?.thumbnail?.src
+                              )}
+                              alt={
+                                item?.image?.alt ||
+                                item?.thumbnail?.alt ||
+                                item?.title ||
+                                "Product"
+                              }
                               className="object-cover"
                             />
                           </div>

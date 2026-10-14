@@ -8,18 +8,38 @@ import Image from "next/image";
 
 const ProductImageGallery = ({
   gallery,
+  thumbnail,
   discount,
 }: {
-  gallery: TGalleryImage[];
+  gallery?: TGalleryImage[];
+  thumbnail?: TGalleryImage;
   discount: number;
 }) => {
-  const galleryImages = gallery?.map((image) => ({
-    original: getImageSrc(image?.src),
-    thumbnail: getImageSrc(image?.src),
-    originalAlt: image?.alt || "পণ্যের ছবি",
-    thumbnailAlt: image?.alt || "পণ্যের থাম্বনেইল",
-    crossOrigin: "anonymous",
-  }));
+  const images =
+    gallery && gallery.length > 0
+      ? gallery
+      : thumbnail
+      ? [thumbnail]
+      : [];
+
+  const galleryImages =
+    images.length > 0
+      ? images.map((image) => ({
+          original: getImageSrc(image?.src),
+          thumbnail: getImageSrc(image?.src),
+          originalAlt: image?.alt || "পণ্যের ছবি",
+          thumbnailAlt: image?.alt || "পণ্যের থাম্বনেইল",
+          crossOrigin: "anonymous",
+        }))
+      : [
+          {
+            original: "/placeholder.webp",
+            thumbnail: "/placeholder.webp",
+            originalAlt: "পণ্যের ছবি",
+            thumbnailAlt: "পণ্যের থাম্বনেইল",
+            crossOrigin: "anonymous",
+          },
+        ];
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderItem = (item: any) => {

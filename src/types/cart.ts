@@ -7,7 +7,8 @@ type TImage = {
 type TProduct = {
   _id: string;
   title: string;
-  image: TImage;
+  image?: TImage;
+  thumbnail?: TImage;
   slug: string;
   salePrice?: number;
   regularPrice?: number;

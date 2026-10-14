@@ -47,8 +47,13 @@ const OrderSummary = ({ orderInfo }: TOrderSummaryProps) => {
             >
               <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border bg-muted">
                 <Image
-                  src={getImageSrc(item?.image?.src)}
-                  alt={item?.image?.alt || item?.title}
+                  src={getImageSrc(item?.image?.src || item?.thumbnail?.src)}
+                  alt={
+                    item?.image?.alt ||
+                    item?.thumbnail?.alt ||
+                    item?.title ||
+                    "Product"
+                  }
                   fill
                   className="object-cover object-center"
                 />

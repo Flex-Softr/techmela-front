@@ -35,7 +35,12 @@ export type TVariableProduct = {
     _id: string;
     name: string;
   };
-  thumbnail: {
+  thumbnail?: {
+    _id: string;
+    src: string;
+    alt: string;
+  };
+  image?: {
     _id: string;
     src: string;
     alt: string;

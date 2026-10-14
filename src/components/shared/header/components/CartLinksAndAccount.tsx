@@ -166,8 +166,15 @@ const CartLinksAndAccount = () => {
                             <Image
                               width={48}
                               height={48}
-                              src={getImageSrc(product.thumbnail.src)}
-                              alt={product.thumbnail.alt || ""}
+                              src={getImageSrc(
+                                product?.thumbnail?.src || product?.image?.src
+                              )}
+                              alt={
+                                product?.thumbnail?.alt ||
+                                product?.image?.alt ||
+                                product?.title ||
+                                ""
+                              }
                               className="rounded-md object-cover shadow-sm border border-border"
                             />
 

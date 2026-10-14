@@ -71,7 +71,8 @@ export type ProductItem = {
   productId: string; // Product's unique identifier
   title: string; // Title of the product
   type: string;
-  image: ImageInfo; // Product image details
+  image?: ImageInfo; // Product image details
+  thumbnail?: ImageInfo;
   warranty: Warranty | null; // Warranty details (can be null if no warranty)
   variation?: string;
   attributes?: { [key: string]: string };

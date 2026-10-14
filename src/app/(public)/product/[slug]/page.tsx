@@ -66,7 +66,7 @@ const ProductDetailsPage = async ({ params }: TProps) => {
     );
   }
 
-  const { gallery, price, variations = [] } = product;
+  const { gallery, thumbnail, price, variations = [] } = product;
 
   // Determine the default variation if available
   const defaultVariation = variations[0] || null;
@@ -86,7 +86,11 @@ const ProductDetailsPage = async ({ params }: TProps) => {
       <ContainerMax>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           <Box className="shadow-none ring-1 border-border/80">
-            <ProductImageGallery gallery={gallery} discount={discount} />
+            <ProductImageGallery
+              gallery={gallery}
+              thumbnail={thumbnail}
+              discount={discount}
+            />
           </Box>
           <Box className="p-4 sm:p-6 space-y-4 shadow-none ring-0">
             <h1 className="font-semibold text-xl lg:text-2xl text-foreground">

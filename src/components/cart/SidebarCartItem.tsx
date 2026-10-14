@@ -105,8 +105,13 @@ const SidebarCartItem = ({
           className="relative size-16 sm:size-18 flex-shrink-0 rounded-xl overflow-hidden bg-white border border-slate-200/90 shadow-2xs group/img"
         >
           <Image
-            src={getImageSrc(product?.image?.src)}
-            alt={product?.image?.alt || product?.title || "Product"}
+            src={getImageSrc(product?.image?.src || product?.thumbnail?.src)}
+            alt={
+              product?.image?.alt ||
+              product?.thumbnail?.alt ||
+              product?.title ||
+              "Product"
+            }
             width={72}
             height={72}
             className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300"
@@ -196,7 +201,9 @@ const SidebarCartItem = ({
                     &#2547;{originalPrice}
                   </span>
                 )}
-                <span className="text-slate-600 font-semibold">&#2547;{price}</span>
+                <span className="text-slate-600 font-semibold">
+                  &#2547;{price}
+                </span>
               </div>
             </div>
           </div>

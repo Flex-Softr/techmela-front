@@ -47,9 +47,11 @@ const serverSideFetcher = async <T>({
   const rawBaseUrl = (config.api_base_url || "").trim().replace(/\/+$/, "");
   const cleanBaseUrl = rawBaseUrl.replace(/\/server-api(\/v1)?$/i, "");
   let apiUrl = `${cleanBaseUrl}/server-api/v1${url}`;
+  const defaultCache: RequestCache =
+    config.env === "development" ? "no-store" : "force-cache";
   const reqConfig = {
-    cache: cache || "force-cache",
-    next: { tags, revalidate },
+    cache: cache || defaultCache,
+    next: { tags, ...(revalidate ? { revalidate } : {}) },
   };
 
   if (Object.keys(params || {}).length) {

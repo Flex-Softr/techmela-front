@@ -6,7 +6,8 @@ export type TOrderedProducts = {
   productId: string;
   title: string;
   slug: string;
-  image: TImage;
+  image?: TImage;
+  thumbnail?: TImage;
   unitPrice: number;
   quantity: number;
   total: number;

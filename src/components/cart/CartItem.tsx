@@ -62,8 +62,17 @@ const CartItem = ({
           className="hover:text-secondary flex-grow flex flex-row gap-3 items-center font-semibold text-left"
         >
           <Image
-            src={getImageSrc(cartItem?.product?.image?.src || "")}
-            alt={cartItem?.product?.image?.alt || ""}
+            src={getImageSrc(
+              cartItem?.product?.image?.src ||
+                cartItem?.product?.thumbnail?.src ||
+                ""
+            )}
+            alt={
+              cartItem?.product?.image?.alt ||
+              cartItem?.product?.thumbnail?.alt ||
+              cartItem?.product?.title ||
+              ""
+            }
             height={200}
             width={200}
             className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0"

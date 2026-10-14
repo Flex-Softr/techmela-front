@@ -38,8 +38,8 @@ const ProductCardPrimary = ({
         className="relative block overflow-hidden bg-gradient-to-b from-muted/30 to-transparent"
       >
         <Image
-          src={getImageSrc(product?.thumbnail?.src)}
-          alt={product?.thumbnail?.alt || title}
+          src={getImageSrc(product?.thumbnail?.src || product?.image?.src)}
+          alt={product?.thumbnail?.alt || product?.image?.alt || title}
           height={320}
           width={320}
           className="aspect-square w-full object-contain p-3 transition-transform duration-500 group-hover/card:scale-105"

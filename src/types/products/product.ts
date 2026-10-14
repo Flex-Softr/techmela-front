@@ -9,7 +9,7 @@ type TProductBrand = {
 type TProductCategory = { _id: string; name: string };
 
 export type TProduct = {
-  thumbnail: TImage;
+  thumbnail?: TImage;
   stockStatus: TStockStatus;
   _id: string;
   title: string;
@@ -17,7 +17,7 @@ export type TProduct = {
   shortDescription: string;
   regularPrice: number;
   salePrice: number;
-  image: TImage;
+  image?: TImage;
   discountPercent: number;
   priceSave: number;
   type?: string;

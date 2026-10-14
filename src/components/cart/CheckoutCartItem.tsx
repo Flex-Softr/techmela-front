@@ -66,8 +66,15 @@ const CheckoutCartItem = ({
           className="relative flex-shrink-0 size-16 sm:size-20 rounded-xl overflow-hidden bg-white border border-slate-200/90 shadow-2xs group/img"
         >
           <Image
-            src={getImageSrc(cartItem?.product?.image?.src)}
-            alt={cartItem?.product?.image?.alt || cartItem?.product?.title || "Product"}
+            src={getImageSrc(
+              cartItem?.product?.image?.src || cartItem?.product?.thumbnail?.src
+            )}
+            alt={
+              cartItem?.product?.image?.alt ||
+              cartItem?.product?.thumbnail?.alt ||
+              cartItem?.product?.title ||
+              "Product"
+            }
             width={80}
             height={80}
             className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300"
@@ -98,15 +105,19 @@ const CheckoutCartItem = ({
           {/* Variation attributes pills */}
           {cartItem?.variation?.attributes && (
             <div className="flex flex-wrap gap-1.5 mt-1.5">
-              {Object.entries(cartItem.variation.attributes).map(([key, value]) => (
-                <span
-                  key={key}
-                  className="inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-md bg-white border border-slate-200/80 text-slate-600 shadow-3xs"
-                >
-                  <span className="text-slate-400 mr-1">{key}:</span>
-                  <span className="font-semibold text-slate-800">{value}</span>
-                </span>
-              ))}
+              {Object.entries(cartItem.variation.attributes).map(
+                ([key, value]) => (
+                  <span
+                    key={key}
+                    className="inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-md bg-white border border-slate-200/80 text-slate-600 shadow-3xs"
+                  >
+                    <span className="text-slate-400 mr-1">{key}:</span>
+                    <span className="font-semibold text-slate-800">
+                      {value}
+                    </span>
+                  </span>
+                )
+              )}
             </div>
           )}
 
@@ -157,7 +168,9 @@ const CheckoutCartItem = ({
                     &#2547;{cartItem.price.regularPrice}
                   </span>
                 )}
-                <span className="text-slate-600 font-semibold">&#2547;{price}</span>
+                <span className="text-slate-600 font-semibold">
+                  &#2547;{price}
+                </span>
               </div>
             </div>
           </div>

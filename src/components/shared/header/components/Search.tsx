@@ -138,8 +138,15 @@ const Search = () => {
                     <Image
                       width={55}
                       height={55}
-                      src={getImageSrc(product.thumbnail.src)}
-                      alt={product.thumbnail.alt || ""}
+                      src={getImageSrc(
+                        product?.thumbnail?.src || product?.image?.src
+                      )}
+                      alt={
+                        product?.thumbnail?.alt ||
+                        product?.image?.alt ||
+                        product?.title ||
+                        ""
+                      }
                       className="rounded"
                     />
 
@@ -183,7 +190,9 @@ const Search = () => {
                 );
               })
             : !isLoading && (
-                <p className="p-3 text-sm text-primary/70">কোনো পণ্য খুঁজে পাওয়া যায়নি</p>
+                <p className="p-3 text-sm text-primary/70">
+                  কোনো পণ্য খুঁজে পাওয়া যায়নি
+                </p>
               )}
         </div>
       )}
